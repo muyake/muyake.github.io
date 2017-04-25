@@ -3,7 +3,7 @@ var canvas = document.getElementById('mycanvas'),
 	w,
 	h,
 	maxCloudVelocity = 1,
-	FRAMESPEED = 16;
+	FRAMESPEED = 10;
 var TOTALFRAME = 176;
 var TOTALTIME = FRAMESPEED * TOTALFRAME;
 
@@ -434,7 +434,6 @@ function init() {
 	canvas.height = 750 * canvasParentHeight / canvasParentWidth;
 	w = 750;
 	h = canvas.height;
-
 	var planetframeStart = 0;
 	var planetframeEnd = 40;
 	var planetframeDuringTime = (planetframeEnd - planetframeStart) * FRAMESPEED;
