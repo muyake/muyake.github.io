@@ -1,7 +1,7 @@
 var canvas = document.getElementById('mycanvas'),
 	ctx = canvas.getContext('2d'),
-	w = canvas.width,
-	h = canvas.height,
+	w,
+	h,
 	maxCloudVelocity = 1,
 	FRAMESPEED = 16;
 var TOTALFRAME = 176;
@@ -428,6 +428,13 @@ function animation() {
 }
 
 function init() {
+	var canvasParentWidth = canvas.parentNode.clientWidth;
+	var canvasParentHeight = canvas.parentNode.clientHeight;
+	canvas.width = 750;
+	canvas.height = 750 * canvasParentHeight / canvasParentWidth;
+	w = 750;
+	h = canvas.height;
+
 	var planetframeStart = 0;
 	var planetframeEnd = 40;
 	var planetframeDuringTime = (planetframeEnd - planetframeStart) * FRAMESPEED;
@@ -472,6 +479,7 @@ function init() {
 		var startTime = FRAMESPEED * item.startframe;
 		var duringTime = FRAMESPEED * (item.endframe - item.startframe);
 		var sprite = new Sprite('气球' + index, new ImagePainter(item.url, item.balloon.imgx, item.balloon.imgy, item.balloon.width, item.balloon.height), [new balloonMoveBottomToTop(duringTime, startTime)]);
+		item.top = h;
 		sprite.top = item.top;
 		sprite.left = item.left;
 		sprite.width = item.balloon.width * item.scale;
