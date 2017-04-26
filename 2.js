@@ -3,10 +3,9 @@ var canvas = document.getElementById('mycanvas'),
 	w,
 	h,
 	maxCloudVelocity = 1,
-	FRAMESPEED = 10;
+	FRAMESPEED = 16;
 var TOTALFRAME = 176;
 var TOTALTIME = FRAMESPEED * TOTALFRAME;
-
 var totalProgress = 0;
 var spriteOption = {
 	planet: {
@@ -72,8 +71,23 @@ var spriteOption = {
 		imgy: 0,
 		x: 0,
 		y: 0
+	},
+	totalcloud: {
+		width: 750,
+		height: 604,
+		imgx: 0,
+		imgy: 0,
+		x: 0,
+		y: 0
+	},
+	totalcloud2: {
+		width: 750,
+		height: 456,
+		imgx: 0,
+		imgy: 0,
+		x: 0,
+		y: 0
 	}
-
 };
 var starSpriteOption = [{
 	left: 558,
@@ -149,6 +163,8 @@ var ImageUrlList = {
 	balloon5: "balloon5.png",
 	star: "star.png",
 	cloud: "cloud.png",
+	//totalcloud: "./img/cloud.png",
+	totalcloud: "./img/yanwu.png",
 };
 var balloonSpriteOption = [{
 	url: "balloon1.png",
@@ -316,6 +332,8 @@ var balloonSpriteOption = [{
 var imgageObjList = [];
 var balloonList = [];
 var planetSprite;
+var cloudSprite1;
+var cloudSprite2;
 var moveBottomToTop = function(progress, startTime) {
 	this.progress = progress;
 	this.startTime = startTime;
@@ -363,15 +381,30 @@ var moveLeftToRight = function(progress, startTime) {
 			}
 
 			// 是否上边缘
-			else if (sprite.top <= h - planetSprite.height) {
+			else if (sprite.top <= h - sprite.height) {
 				sprite.velocityY = -sprite.velocityY;
-				sprite.top = h - planetSprite.height;
+				sprite.top = h - sprite.height;
 			}
-			sprite.alpha = (h - sprite.top) / planetSprite.height;
+			sprite.alpha = (h - sprite.top) / sprite.height;
 			sprite.left -= sprite.velocityX;
 			sprite.top -= sprite.velocityY;
 		}
 		sprite.progress--;
+	}
+}
+var totalLeftToRight = function(progress, startTime) {
+	this.progress = progress;
+	this.startTime = startTime;
+	this.execute = function(sprite, context, currentTime) {
+
+		if (currentTime > this.startTime && this.progress >= 0) {
+			// 如果到了右边缘			
+			sprite.left -= sprite.velocityX;
+			sprite.width += 0.1;
+			sprite.height += 0.1;
+			//sprite.top -= sprite.velocityY;
+		}
+		this.progress--;
 	}
 }
 var flash = function(progress, startTime, flashCount) {
@@ -382,7 +415,9 @@ var flash = function(progress, startTime, flashCount) {
 	this.execute = function(sprite, context, currentTime) {
 		if (currentTime > this.startTime && this.progress >= 0) {
 			sprite.visible = true;
-			sprite.alpha = Math.abs(curveFunction.sineEaseOut(currentTime - this.startTime, 0, 1, this.duringTime / flashCount));
+			sprite.alpha = getalpha(currentTime, this.startTime, this.duringTime, flashCount);
+
+			//sprite.alpha = Math.abs(curveFunction.sineEaseOut(currentTime - this.startTime, 0, 1, this.duringTime / flashCount));
 			this.progress--;
 		} else {
 			sprite.visible = false;
@@ -390,6 +425,19 @@ var flash = function(progress, startTime, flashCount) {
 	}
 }
 
+function getalpha(currentTime, startTime, duringTime, flashCount) {
+	var x = currentTime - startTime;
+	var everyDuringTime = duringTime / (flashCount / 2);
+	var m = x % everyDuringTime;
+	var result = 0;
+	var n = everyDuringTime / 2;
+	if (m > n) {
+		result = curveFunction.linear((m - n), 1, -1, n);
+	} else {
+		result = curveFunction.linear(m, 0, 1, n);
+	}
+	return result;
+}
 var cloudSpriteList = [];
 
 //星星的闪烁
@@ -397,7 +445,7 @@ var starSpriteList = [];
 //气球
 var balloonSpriteList = [];
 
-loadImg(ImageUrlList, init, imgageObjList);
+// loadImg(ImageUrlList, init, imgageObjList);
 
 function animation() {
 	if (totalProgress < TOTALTIME) {
@@ -405,9 +453,9 @@ function animation() {
 		ctx.globalCompositeOperation = "source-over";
 		ctx.clearRect(0, 0, w, h);
 		ctx.save();
+
 		planetSprite.update(ctx, totalProgress);
 		planetSprite.paint(ctx);
-
 		starSpriteList.forEach(function(item, index) {
 			item.update(ctx, totalProgress);
 			item.paint(ctx, totalProgress);
@@ -416,10 +464,8 @@ function animation() {
 			item.update(ctx, totalProgress);
 			item.paint(ctx, totalProgress);
 		});
-		cloudSpriteList.forEach(function(item, index) {
-			item.update(ctx, totalProgress);
-			item.paint(ctx);
-		});
+		cloudSprite1.update(ctx, totalProgress);
+		cloudSprite1.paint(ctx);
 		ctx.restore();
 		requestAnimFrame(animation);
 	} else {
@@ -434,19 +480,33 @@ function init() {
 	canvas.height = 750 * canvasParentHeight / canvasParentWidth;
 	w = 750;
 	h = canvas.height;
-	var planetframeStart = 0;
-	var planetframeEnd = 40;
+	var planetframeStart = 5;
+	var planetframeEnd = 30;
 	var planetframeDuringTime = (planetframeEnd - planetframeStart) * FRAMESPEED;
 	planetSprite = new Sprite('星球', new ImagePainter(ImageUrlList.planet, spriteOption.planet.imgx, spriteOption.planet.imgy, spriteOption.planet.width, spriteOption.planet.height), [new moveBottomToTop(planetframeDuringTime, 0)]);
 	planetSprite.init = function() {
 		planetSprite.width = spriteOption.planet.width;
 		planetSprite.height = spriteOption.planet.height;
-		planetSprite.top = h;
+		planetSprite.top = (h + 100);
 		planetSprite.left = 0;
-		//planetSprite.velocityY = 1;
-		planetSprite.velocityY = planetSprite.height / planetframeDuringTime;
+		planetSprite.velocityY = (planetSprite.height + 100) / planetframeDuringTime;
 	}
 	planetSprite.init();
+
+
+	var cloudframeDuringTime = (20 - 0) * FRAMESPEED;
+	cloudSprite1 = new Sprite('yun1', new ImagePainter(ImageUrlList.totalcloud, spriteOption.totalcloud.imgx, spriteOption.totalcloud.imgy, spriteOption.totalcloud.width, spriteOption.totalcloud.height), [new moveBottomToTop(cloudframeDuringTime, 0), new totalLeftToRight(4540, 0)]);
+	cloudSprite1.init = function() {
+		cloudSprite1.width = spriteOption.totalcloud.width * 5.5;
+		cloudSprite1.height = spriteOption.totalcloud.height * 2;
+		cloudSprite1.top = h + 50;
+		cloudSprite1.left = -spriteOption.totalcloud.width * 2.5;
+		cloudSprite1.velocityX = 0.5;
+		cloudSprite1.velocityY = cloudSprite1.height / 2 / cloudframeDuringTime;
+	}
+	cloudSprite1.init();
+
+
 	for (var i = 0; i < 10; i++) {
 		var cloudSprite = new Sprite('cloud' + i, new ImagePainter(ImageUrlList.cloud, spriteOption.cloud.imgx, spriteOption.cloud.imgy, spriteOption.cloud.width, spriteOption.cloud.height), [new moveLeftToRight(4540, 0)]);
 		cloudSprite.init = function() {
