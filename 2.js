@@ -3,7 +3,7 @@ var canvas = document.getElementById('mycanvas'),
 	w,
 	h,
 	maxCloudVelocity = 1,
-	FRAMESPEED = 16;
+	FRAMESPEED = 10;
 var TOTALFRAME = 176;
 var TOTALTIME = FRAMESPEED * TOTALFRAME;
 var totalProgress = 0;
