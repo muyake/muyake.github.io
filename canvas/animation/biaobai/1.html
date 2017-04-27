@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    body {
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        background: rgba(0, 0, 0, 1);
+    }
+    
+    #mycanvas {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+    </style>
+    <script>
+    function r(resizeNum) {
+        var winW = window.innerWidth;
+        document.getElementsByTagName('html')[0].style.fontSize = winW / 6.4 + 'px';
+        if (winW > window.screen.width && resizeNum <= 10) {
+            setTimeout(function() {
+                r(++resizeNum);
+            }, 100)
+        } else {
+            document.getElementsByTagName("body")[0].style.opacity = 1;
+        }
+    }
+    setTimeout(function() {
+        r(0);
+    }, 100);
+    </script>
+</head>
+</script>
+</head>
+<body style="height: 100%;">
+    <canvas id='mycanvas'>
+    </canvas>
+    <script src='../public/public.js'></script>
+    <script src='2.js'>
+    </script>
+    <script>
+    loadImg(ImageUrlList, init, imgageObjList);
+    </script>
+</body>
+
+</html>
