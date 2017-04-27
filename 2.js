@@ -184,7 +184,7 @@ var balloonSpriteOption = [{
 		endLeft: 326,
 		scale: 1,
 		startframe: 13,
-		endframe: 178,
+		endframe: 158,
 	}, {
 		url: "balloon1.png",
 		balloon: spriteOption.balloon1,
@@ -241,7 +241,7 @@ var balloonSpriteOption = [{
 		endLeft: 640,
 		scale: 0.9,
 		startframe: 48,
-		endframe: 174,
+		endframe: 154,
 	},
 	//  {
 	// 	url: "balloon2.png",
@@ -463,8 +463,9 @@ function animation() {
 		ctx.restore();
 		requestAnimFrame(animation);
 	} else {
+		ctx.clearRect(0, 0, w, h);
 		entTime = Date.now();
-		console.log((entTime - startTime) / 1000);
+		alert((entTime - startTime) / 1000);
 		console.log("动画结束");
 	}
 }
