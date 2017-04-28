@@ -48,10 +48,7 @@ Sprite.prototype = {
 
   paint: function(context) {
     if (this.painter !== undefined && this.visible) {
-      context.save();
-      context.globalAlpha = this.alpha;
       this.painter.paint(this, context);
-      context.restore();
     }
   },
 
@@ -62,9 +59,8 @@ Sprite.prototype = {
   }
 };
 
-var ImagePainter = function(imageUrl, imgX, imgY, imgW, imgH) {
-  this.image = new Image;
-  this.image.src = imageUrl;
+var ImagePainter = function(imageObj, imgX, imgY, imgW, imgH) {
+  this.image = imageObj;
   this.imgX = imgX;
   this.imgY = imgY;
   this.imgW = imgW;
@@ -74,19 +70,8 @@ var ImagePainter = function(imageUrl, imgX, imgY, imgW, imgH) {
 ImagePainter.prototype = {
   image: undefined,
   paint: function(sprite, context) {
-    if (this.image !== undefined) {
-      if (!this.image.complete) {
-        this.image.onload = function(e) {
-          sprite.width = this.width;
-          sprite.height = this.height;
-          context.drawImage(this.image, this.imgX, this.imgY, this.imgW, this.imgH, sprite.left, sprite.top,
-            sprite.width, sprite.height);
-        };
-      } else {
-        context.drawImage(this.image, this.imgX, this.imgY, this.imgW, this.imgH, sprite.left, sprite.top,
-          sprite.width, sprite.height);
-      }
-    }
+    context.drawImage(this.image, this.imgX, this.imgY, this.imgW, this.imgH, sprite.left, sprite.top,
+      sprite.width, sprite.height);
   }
 };
 window.requestAnimFrame = (function() {
@@ -96,7 +81,7 @@ window.requestAnimFrame = (function() {
     function(callback) {
       window.setTimeout(callback, 1000 / 60);
     };
-})();
+  })();
 
 // 生成一个min,max大小之间的随机数
 function generateRandom(min, max) {

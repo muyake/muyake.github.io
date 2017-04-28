@@ -7,6 +7,11 @@ var canvas = document.getElementById('mycanvas'),
 var TOTALFRAME = 276;
 var TOTALTIME = FRAMESPEED * TOTALFRAME;
 var totalProgress = 0;
+
+var imgageObjList = [];
+var balloonList = [];
+var planetSprite;
+var cloudSprite1;
 var spriteOption = {
 	planet: {
 		width: 750,
@@ -137,61 +142,46 @@ var ImageUrlList = {
 	totalcloud: "./total/yanwu.png"
 };
 var balloonSpriteOption = [{
-	url: "./total/spritesheetBalloons.png",
 	balloon: spriteOption.balloon1,
 	top: h,
 	left: 220,
 	endLeft: 220,
 	scale: 1,
 	startframe: 0,
-	endframe: 72,
+	endframe: 102,
 }, {
-	url: "./total/spritesheetBalloons.png",
 	balloon: spriteOption.balloon5,
 	top: h,
 	left: -5,
 	endLeft: -25,
 	scale: 1,
 	startframe: 8,
-	endframe: 66,
+	endframe: 110,
 }, {
-	url: "./total/spritesheetBalloons.png",
 	balloon: spriteOption.balloon4,
 	top: h,
 	left: 326,
 	endLeft: 326,
 	scale: 1,
 	startframe: 13,
-	endframe: 158,
+	endframe: 102,
 }, {
-	url: "./total/spritesheetBalloons.png",
 	balloon: spriteOption.balloon1,
 	top: h,
 	left: 308,
 	endLeft: 489,
 	scale: 1.3,
 	startframe: 27,
-	endframe: 90,
+	endframe: 120,
 }, {
-	url: "./total/spritesheetBalloons.png",
-	balloon: spriteOption.balloon3,
-	top: h,
-	left: 161,
-	endLeft: 278,
-	scale: 0.8,
-	startframe: 38,
-	endframe: 128,
-}, {
-	url: "./total/spritesheetBalloons.png",
 	balloon: spriteOption.balloon2,
 	top: h,
 	left: -40,
 	endLeft: 114,
 	scale: 0.9,
 	startframe: 45,
-	endframe: 117,
+	endframe: 147,
 }, {
-	url: "./total/spritesheetBalloons.png",
 	balloon: spriteOption.balloon4,
 	top: h,
 	left: 126,
@@ -200,7 +190,6 @@ var balloonSpriteOption = [{
 	startframe: 48,
 	endframe: 154,
 }, {
-	url: "./total/spritesheetBalloons.png",
 	balloon: spriteOption.balloon2,
 	top: h,
 	left: 358,
@@ -209,7 +198,6 @@ var balloonSpriteOption = [{
 	startframe: 53,
 	endframe: 140,
 }, {
-	url: "./total/spritesheetBalloons.png",
 	balloon: spriteOption.balloon4,
 	top: h,
 	left: 306,
@@ -218,29 +206,15 @@ var balloonSpriteOption = [{
 	startframe: 59,
 	endframe: 120,
 }, {
-	url: "./total/spritesheetBalloons.png",
-	balloon: spriteOption.balloon4,
+	balloon: spriteOption.balloon3,
 	top: h,
-	left: 311,
-	endLeft: 176,
-	scale: 1.2,
-	startframe: 59,
-	endframe: 150,
-}, {
-	url: "./total/spritesheetBalloons.png",
-	balloon: spriteOption.balloon2,
-	top: h,
-	left: 427,
-	endLeft: 176,
-	scale: 1.2,
-	startframe: 79,
-	endframe: 166,
+	left: 161,
+	endLeft: 278,
+	scale: 0.8,
+	startframe: 38,
+	endframe: 158,
 }]
-var imgageObjList = [];
-var balloonList = [];
-var planetSprite;
-var cloudSprite1;
-var cloudSprite2;
+
 var moveBottomToTop = function(progress, startTime) {
 	this.progress = progress;
 	this.startTime = startTime;
@@ -252,51 +226,16 @@ var moveBottomToTop = function(progress, startTime) {
 	}
 }
 var balloonMoveBottomToTop = function(progress, startTime) {
-		this.progress = progress;
-		this.startTime = startTime;
-		this.execute = function(sprite, context, currentTime) {
-			if (currentTime > this.startTime && sprite.top > -sprite.height) {
-				sprite.visible = true;
-				sprite.top -= sprite.velocityY;
-				sprite.left += sprite.velocityX;
-			} else {
-				sprite.visible = false;
-			}
-		}
-	}
-	//云彩的运动
-var moveLeftToRight = function(progress, startTime) {
 	this.progress = progress;
 	this.startTime = startTime;
 	this.execute = function(sprite, context, currentTime) {
-
-		if (currentTime > this.startTime && this.progress >= 0) {
-			// 如果到了右边缘
-			if (sprite.left >= w) {
-				sprite.velocityX = -sprite.velocityX;
-				sprite.left = w;
-			}
-			// 检测是否到了左边缘
-			else if (sprite.left <= 0) {
-				sprite.velocityX = -sprite.velocityX;
-				sprite.left = 0;
-			}
-			// 底边缘
-			if (sprite.top >= h) {
-				sprite.velocityY = -sprite.velocityY;
-				sprite.top = h;
-			}
-
-			// 是否上边缘
-			else if (sprite.top <= h - sprite.height) {
-				sprite.velocityY = -sprite.velocityY;
-				sprite.top = h - sprite.height;
-			}
-			sprite.alpha = (h - sprite.top) / sprite.height;
-			sprite.left -= sprite.velocityX;
+		if (currentTime > this.startTime && sprite.top > -sprite.height) {
+			sprite.visible = true;
 			sprite.top -= sprite.velocityY;
+			sprite.left += sprite.velocityX;
+		} else {
+			sprite.visible = false;
 		}
-		sprite.progress--;
 	}
 }
 var totalLeftToRight = function(progress, startTime) {
@@ -312,6 +251,7 @@ var totalLeftToRight = function(progress, startTime) {
 			//sprite.top -= sprite.velocityY;
 		}
 		this.progress--;
+
 	}
 }
 var flash = function(progress, startTime, flashCount) {
@@ -322,9 +262,8 @@ var flash = function(progress, startTime, flashCount) {
 	this.execute = function(sprite, context, currentTime) {
 		if (currentTime > this.startTime && this.progress >= 0) {
 			sprite.visible = true;
-			sprite.alpha = getalpha(currentTime, this.startTime, this.duringTime, flashCount);
-
-			//sprite.alpha = Math.abs(curveFunction.sineEaseOut(currentTime - this.startTime, 0, 1, this.duringTime / flashCount));
+			sprite.alpha = Math.abs(curveFunction.sineEaseOut(currentTime - this.startTime, 0, 1, this.duringTime / flashCount));
+			context.globalAlpha = sprite.alpha;
 			this.progress--;
 		} else {
 			sprite.visible = false;
@@ -332,37 +271,28 @@ var flash = function(progress, startTime, flashCount) {
 	}
 }
 
-function getalpha(currentTime, startTime, duringTime, flashCount) {
-	var x = currentTime - startTime;
-	var everyDuringTime = duringTime / (flashCount / 2);
-	var m = x % everyDuringTime;
-	var result = 0;
-	var n = everyDuringTime / 2;
-	if (m > n) {
-		result = curveFunction.linear((m - n), 1, -1, n);
-	} else {
-		result = curveFunction.linear(m, 0, 1, n);
-	}
-	return result;
-}
 var cloudSpriteList = [];
 
 //星星的闪烁
 var starSpriteList = [];
 //气球
 var balloonSpriteList = [];
+var startTime = Date.now();
+var endTime;
 
 function animation() {
 	if (totalProgress < TOTALTIME) {
 		totalProgress++;
-		ctx.globalCompositeOperation = "source-over";
 		ctx.clearRect(0, 0, w, h);
-		// planetSprite.update(ctx, totalProgress);
-		// planetSprite.paint(ctx);
-		// starSpriteList.forEach(function(item, index) {
-		// 	item.update(ctx, totalProgress);
-		// 	item.paint(ctx, totalProgress);
-		// });
+		planetSprite.update(ctx, totalProgress);
+		planetSprite.paint(ctx);
+		starSpriteList.forEach(function(item, index) {
+			ctx.save();
+			item.update(ctx, totalProgress);
+			item.paint(ctx, totalProgress);
+			console.log();
+			ctx.restore();
+		});
 		balloonSpriteList.forEach(function(item, index) {
 			item.update(ctx, totalProgress);
 			item.paint(ctx, totalProgress);
@@ -371,6 +301,8 @@ function animation() {
 		cloudSprite1.paint(ctx);
 		requestAnimFrame(animation);
 	} else {
+		endTime = Date.now();
+		alert((endTime - startTime) / 1000)
 		ctx.clearRect(0, 0, w, h);
 	}
 }
@@ -385,7 +317,7 @@ function init() {
 	var planetframeStart = 5;
 	var planetframeEnd = 60;
 	var planetframeDuringTime = (planetframeEnd - planetframeStart) * FRAMESPEED;
-	planetSprite = new Sprite('星球', new ImagePainter(ImageUrlList.planet, spriteOption.planet.imgx, spriteOption.planet.imgy, spriteOption.planet.width, spriteOption.planet.height), [new moveBottomToTop(planetframeDuringTime, 0)]);
+	planetSprite = new Sprite('星球', new ImagePainter(imgageObjList.planet, spriteOption.planet.imgx, spriteOption.planet.imgy, spriteOption.planet.width, spriteOption.planet.height), [new moveBottomToTop(planetframeDuringTime, 0)]);
 	planetSprite.init = function() {
 		planetSprite.width = spriteOption.planet.width;
 		planetSprite.height = spriteOption.planet.height;
@@ -397,7 +329,7 @@ function init() {
 
 
 	var cloudframeDuringTime = (40 - 0) * FRAMESPEED;
-	cloudSprite1 = new Sprite('yun1', new ImagePainter(ImageUrlList.totalcloud, spriteOption.totalcloud.imgx, spriteOption.totalcloud.imgy, spriteOption.totalcloud.width, spriteOption.totalcloud.height), [new moveBottomToTop(cloudframeDuringTime, 0), new totalLeftToRight(4540, 0)]);
+	cloudSprite1 = new Sprite('yun1', new ImagePainter(imgageObjList.totalcloud, spriteOption.totalcloud.imgx, spriteOption.totalcloud.imgy, spriteOption.totalcloud.width, spriteOption.totalcloud.height), [new moveBottomToTop(cloudframeDuringTime, 0), new totalLeftToRight(4540, 0)]);
 	cloudSprite1.init = function() {
 		cloudSprite1.width = spriteOption.totalcloud.width * 5.5;
 		cloudSprite1.height = spriteOption.totalcloud.height * 2;
@@ -407,16 +339,11 @@ function init() {
 		cloudSprite1.velocityY = cloudSprite1.height / 2 / cloudframeDuringTime;
 	}
 	cloudSprite1.init();
-
-	cloudSpriteList.forEach(function(item, index) {
-		item.init();
-	});
-
 	starSpriteOption.forEach(function(item, index) {
 		var startTime = FRAMESPEED * (item.startframe + 50);
 		var flashCount = item.flashCount || 6;
 		var duringTime = FRAMESPEED * ((item.endframe + 50) - item.startframe);
-		var sprite = new Sprite('星星' + index, new ImagePainter(ImageUrlList.spritesheetBalloons, spriteOption.star.imgx, spriteOption.star.imgy, spriteOption.star.width, spriteOption.star.height), [new flash(duringTime, startTime, flashCount)]);
+		var sprite = new Sprite('星星' + index, new ImagePainter(imgageObjList.spritesheetBalloons, spriteOption.star.imgx, spriteOption.star.imgy, spriteOption.star.width, spriteOption.star.height), [new flash(duringTime, startTime, flashCount)]);
 		sprite.top = item.top;
 		sprite.left = item.left;
 		sprite.width = spriteOption.star.width * item.scale;
@@ -424,9 +351,9 @@ function init() {
 		starSpriteList.push(sprite);
 	});
 	balloonSpriteOption.forEach(function(item, index) {
-		var startTime = FRAMESPEED * (item.startframe + 60);
-		var duringTime = FRAMESPEED * ((item.endframe + 60) - item.startframe);
-		var sprite = new Sprite('气球' + index, new ImagePainter(item.url, item.balloon.imgx, item.balloon.imgy, item.balloon.width, item.balloon.height), [new balloonMoveBottomToTop(duringTime, startTime)]);
+		var startTime = FRAMESPEED * (item.startframe + 50);
+		var duringTime = FRAMESPEED * ((item.endframe + 30 + 50) - item.startframe);
+		var sprite = new Sprite('气球' + index, new ImagePainter(imgageObjList.spritesheetBalloons, item.balloon.imgx, item.balloon.imgy, item.balloon.width, item.balloon.height), [new balloonMoveBottomToTop(duringTime, startTime)]);
 		item.top = h;
 		sprite.top = item.top;
 		sprite.left = item.left;
