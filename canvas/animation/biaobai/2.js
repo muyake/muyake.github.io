@@ -357,22 +357,18 @@ function animation() {
 		totalProgress++;
 		ctx.globalCompositeOperation = "source-over";
 		ctx.clearRect(0, 0, w, h);
-		ctx.save();
-
-
-		planetSprite.update(ctx, totalProgress);
-		planetSprite.paint(ctx);
-		starSpriteList.forEach(function(item, index) {
-			item.update(ctx, totalProgress);
-			item.paint(ctx, totalProgress);
-		});
+		// planetSprite.update(ctx, totalProgress);
+		// planetSprite.paint(ctx);
+		// starSpriteList.forEach(function(item, index) {
+		// 	item.update(ctx, totalProgress);
+		// 	item.paint(ctx, totalProgress);
+		// });
 		balloonSpriteList.forEach(function(item, index) {
 			item.update(ctx, totalProgress);
 			item.paint(ctx, totalProgress);
 		});
 		cloudSprite1.update(ctx, totalProgress);
 		cloudSprite1.paint(ctx);
-		ctx.restore();
 		requestAnimFrame(animation);
 	} else {
 		ctx.clearRect(0, 0, w, h);
@@ -412,19 +408,6 @@ function init() {
 	}
 	cloudSprite1.init();
 
-
-	// for (var i = 0; i < 10; i++) {
-	// 	var cloudSprite = new Sprite('cloud' + i, new ImagePainter(ImageUrlList.cloud, spriteOption.cloud.imgx, spriteOption.cloud.imgy, spriteOption.cloud.width, spriteOption.cloud.height), [new moveLeftToRight(4540, 0)]);
-	// 	cloudSprite.init = function() {
-	// 		this.width = spriteOption.cloud.width * generateRandom(0.5, 1);
-	// 		this.height = spriteOption.cloud.height * generateRandom(0.5, 1);
-	// 		this.left = generateRandom(0, w);
-	// 		this.velocityX = generateRandom(0.5, 1);
-	// 		this.velocityY = generateRandom(0.5, 1);
-	// 		this.top = h + this.height * generateRandom(0.5, 1);
-	// 	}
-	// 	cloudSpriteList.push(cloudSprite);
-	// }
 	cloudSpriteList.forEach(function(item, index) {
 		item.init();
 	});
