@@ -1,17 +1,26 @@
-var canvas = document.getElementById('mycanvas'),
+var canvasID = 'mycanvas';
+var canvas = document.getElementById(canvasID),
 	ctx = canvas.getContext('2d'),
 	w,
 	h,
 	maxCloudVelocity = 1,
 	FRAMESPEED = 4;
+var cloneCanvas;
+var cloneCanvasHide = true;
 var TOTALFRAME = 276;
 var TOTALTIME = FRAMESPEED * TOTALFRAME;
+var DELAYFRAME = 50;
+var STARANDBALLOON = FRAMESPEED * DELAYFRAME;
 var totalProgress = 0;
 
+var planetframeStart = 0;
+var planetframeEnd = 55;
+var planetframeDuringTime = (planetframeEnd - planetframeStart) * FRAMESPEED;
 var imgageObjList = [];
 var balloonList = [];
 var planetSprite;
 var cloudSprite1;
+
 var spriteOption = {
 	planet: {
 		width: 750,
@@ -284,25 +293,36 @@ function animation() {
 	if (totalProgress < TOTALTIME) {
 		totalProgress++;
 		ctx.clearRect(0, 0, w, h);
-		planetSprite.update(ctx, totalProgress);
-		planetSprite.paint(ctx);
-		starSpriteList.forEach(function(item, index) {
+		if (planetframeDuringTime >= totalProgress) {
+			planetSprite.update(ctx, totalProgress);
+			planetSprite.paint(ctx);
+		} else if (cloneCanvasHide) {
+			var cloneCtx = cloneCanvas.getContext('2d');
+			planetSprite.update(cloneCtx, totalProgress);
+			planetSprite.paint(cloneCtx);
+			cloneCanvas.style.display = 'block';
+			//canvas.style.display = 'none';
+			cloneCanvasHide = false;
+		}
+
+		if (totalProgress > STARANDBALLOON) {
 			ctx.save();
-			item.update(ctx, totalProgress);
-			item.paint(ctx, totalProgress);
-			console.log();
+			starSpriteList.forEach(function(item, index) {
+				item.update(ctx, totalProgress);
+				item.paint(ctx, totalProgress);
+			});
 			ctx.restore();
-		});
-		balloonSpriteList.forEach(function(item, index) {
-			item.update(ctx, totalProgress);
-			item.paint(ctx, totalProgress);
-		});
+			balloonSpriteList.forEach(function(item, index) {
+				item.update(ctx, totalProgress);
+				item.paint(ctx, totalProgress);
+			});
+		}
 		cloudSprite1.update(ctx, totalProgress);
 		cloudSprite1.paint(ctx);
 		requestAnimFrame(animation);
 	} else {
-		endTime = Date.now();
-		alert((endTime - startTime) / 1000)
+		//endTime = Date.now();
+		//alert((endTime - startTime) / 1000)
 		ctx.clearRect(0, 0, w, h);
 	}
 }
@@ -314,9 +334,10 @@ function init() {
 	canvas.height = 750 * canvasParentHeight / canvasParentWidth;
 	w = 750;
 	h = canvas.height;
-	var planetframeStart = 5;
-	var planetframeEnd = 60;
-	var planetframeDuringTime = (planetframeEnd - planetframeStart) * FRAMESPEED;
+	cloneCanvas();
+
+
+
 	planetSprite = new Sprite('星球', new ImagePainter(imgageObjList.planet, spriteOption.planet.imgx, spriteOption.planet.imgy, spriteOption.planet.width, spriteOption.planet.height), [new moveBottomToTop(planetframeDuringTime, 0)]);
 	planetSprite.init = function() {
 		planetSprite.width = spriteOption.planet.width;
@@ -326,8 +347,6 @@ function init() {
 		planetSprite.velocityY = (planetSprite.height + 95) / planetframeDuringTime;
 	}
 	planetSprite.init();
-
-
 	var cloudframeDuringTime = (40 - 0) * FRAMESPEED;
 	cloudSprite1 = new Sprite('yun1', new ImagePainter(imgageObjList.totalcloud, spriteOption.totalcloud.imgx, spriteOption.totalcloud.imgy, spriteOption.totalcloud.width, spriteOption.totalcloud.height), [new moveBottomToTop(cloudframeDuringTime, 0), new totalLeftToRight(4540, 0)]);
 	cloudSprite1.init = function() {
@@ -364,4 +383,17 @@ function init() {
 		balloonSpriteList.push(sprite);
 	})
 	animation();
+}
+
+function cloneCanvas() {
+	cloneCanvas = canvas.cloneNode();
+	cloneCanvas.id = 'cloneCanvas';
+	cloneCanvas.innerHTML = 'cloneCanvas';
+	cloneCanvas.style.position = 'absolute';
+	cloneCanvas.style.left = canvas.offsetLeft + 'px';
+	cloneCanvas.style.top = canvas.offsetTop + 'px';
+	cloneCanvas.style.zIndex = -1;
+	cloneCanvas.style.display = "none";
+	var parentCanvas = canvas.parentNode;
+	parentCanvas.insertBefore(cloneCanvas, canvas);
 }
