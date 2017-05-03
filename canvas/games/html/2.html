@@ -32,28 +32,11 @@
         top:0.2rem;
         z-index: 1;
     }
-    </style>
-    <meta name="viewport" content='width=device-width,initial-scale=1.0,minimum-scale=1.0'>
-    <script>
-    function r(resizeNum) {
-        var winW = window.innerWidth;
-        document.getElementsByTagName('html')[0].style.fontSize = winW / 6.4 + 'px';
-        if (winW > window.screen.width&& resizeNum <= 10) {
-            setTimeout(function() {
-                r(++resizeNum);
-            }, 100)
-        } else {
-            document.getElementsByTagName("body")[0].style.opacity = 1;
-        }
-    }
-    setTimeout(function(){
-    	r(0);
-    },100);
-    </script>
+    </style>  
 </head>
 <body>	
-	<canvas id='mycanvas' width='640' height='1250'>		
-	</canvas>    
-    <script src='drawReact.js'></script>
+	<div class="div1">
+     asdf   
+    </div>
 </body>
 </html>
