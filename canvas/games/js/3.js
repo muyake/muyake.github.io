@@ -132,6 +132,18 @@ var moveTopToBottom = function() {
 		this.lastMove = time;
 	}
 }
+var moveBottomToTop = function() {
+	this.lastMove = 0;
+	this.execute = function(sprite, context, time) {
+		if (this.lastMove !== 0) {
+			sprite.top -= sprite.velocityY * ((time - this.lastMove) / 1000);
+			// if (sprite.top > h) {
+			// 	removeByValue(dropbombList, sprite.name)
+			// }
+		}
+		this.lastMove = time;
+	}
+}
 var yePainter = function() {
 	this.lastMove = 0;
 	this.execute = function(sprite, context, time) {
@@ -168,6 +180,7 @@ var bomb = new Sprite('bomb', bombPainter, [new moveLetfToRight()]);
 var fallBomb;
 var fuseBurningPainters = [];
 var explosionPainters = [];
+var peopleFace;
 
 
 function bombbaoza(bomb) {
@@ -225,6 +238,7 @@ function originalYe() {
 
 var manRunLeftToRight = new moveLetfToRight();
 var manRunRightToLeft = new moveRightToLeft();
+var manJump = new moveBottomToTop();
 var fromleftRun
 var fromrightRun;
 
@@ -236,8 +250,10 @@ function init() {
 	});
 	fromleftRun = new SpriteSheetPainter(runnerCells, imgList['runpeople'], true);
 	fromrightRun = new SpriteSheetPainter(runnerCells, imgList['runpeople'], false);
+	peopleFace = fromleftRun;
 	spritePeople = new Sprite('runner', fromleftRun);
 	spritePeople.velocityX = 50;
+	spritePeople.velocityY = 50;
 	spritePeople.width = 35;
 	spritePeople.top = 500;
 	spritePeople.height = 64;
@@ -279,10 +295,6 @@ function animate(time) {
 		item.update(ctx, time);
 		item.paint(ctx);
 	});
-	// if (bomb) {
-	// 	bomb.update(ctx, time);
-	// 	bomb.paint(ctx);
-	// }
 	window.requestNextAnimationFrame(animate);
 }
 var dropbombList = [];
@@ -296,7 +308,6 @@ document.querySelector('#mycanvas').addEventListener('click', function(e) {
 	dropbomb.top = position.y - dropbomb.width / 2;
 	dropbomb.left = position.x - dropbomb.height / 2;
 	dropbomb.velocityY = 50;
-
 	var explosionAnimatoritem = new SpriteAnimator(
 		explosionPainters,
 		bombover.bind(dropbomb));
@@ -325,44 +336,123 @@ function removeByValue(arr, val) {
 		}
 	}
 }
+var leftFlag = false;
+
 window.document.onkeydown = leftDownFun;
 window.document.onkeyup = leftUpFun;
-var leftFlag = false;
+
+
+var map = {
+	38: false,
+	40: false,
+	37: false,
+	39: false
+};
+window.document.onkeydown = leftDownFun;
+window.document.onkeyup = leftUpFun;
+var div1 = document.querySelector('.div1');
 
 function leftDownFun(evt) {
 	evt = (evt) ? evt : window.event
-
-	switch (evt.keyCode) {
-		case 37:
-			{
-				manRunRightToLeft.lastMove = 0;
-				spritePeople.painter = fromleftRun;
-				spritePeople.behaviors = [runInPlace, manRunRightToLeft];
-			}
-			break;
-		case 39:
-			{
-				manRunLeftToRight.lastMove = 0;
-				spritePeople.painter = fromrightRun;
-				spritePeople.behaviors = [runInPlace, manRunLeftToRight];
-			}
-			break;
+	map[evt.keyCode] = true;
+	if (map[38] && !map[40] && !map[37] && !map[39]) {
+		manJump.lastMove = 0;
+		spritePeople.velocityY = 50;
+		spritePeople.painter = peopleFace;
+		spritePeople.behaviors = [manJump];
+	}
+	if (!map[38] && map[40] && !map[37] && !map[39]) {
+		manJump.lastMove = 0;
+		spritePeople.velocityY = -50;
+		spritePeople.painter = peopleFace;
+		spritePeople.behaviors = [manJump];
+	}
+	if (!map[38] && !map[40] && map[37] && !map[39]) {
+		// div1.innerHTML = '左';
+		manRunRightToLeft.lastMove = 0;
+		spritePeople.painter = fromleftRun;
+		spritePeople.velocityY = 0;
+		peopleFace = fromleftRun;
+		spritePeople.behaviors = [runInPlace, manRunRightToLeft];
+	}
+	if (!map[38] && !map[40] && !map[37] && map[39]) {
+		spritePeople.velocityY = 0;
+		manRunLeftToRight.lastMove = 0;
+		spritePeople.painter = fromrightRun;
+		peopleFace = fromrightRun;
+		spritePeople.behaviors = [runInPlace, manRunLeftToRight];
+	}
+	if (map[38] && !map[40] && map[37] && !map[39]) {
+		spritePeople.velocityY = 50;
+		manRunRightToLeft.lastMove = 0;
+		manJump.lastMove = 0;
+		spritePeople.painter = fromleftRun;
+		peopleFace = fromleftRun;
+		spritePeople.behaviors = [runInPlace, manRunRightToLeft, manJump];
+	}
+	if (map[38] && !map[40] && !map[37] && map[39]) {
+		spritePeople.velocityY = 50;
+		manRunLeftToRight.lastMove = 0;
+		manJump.lastMove = 0;
+		spritePeople.painter = fromrightRun;
+		peopleFace = fromrightRun;
+		spritePeople.behaviors = [runInPlace, manRunLeftToRight, manJump];
+	}
+	if (!map[38] && map[40] && map[37] && !map[39]) {
+		spritePeople.velocityY = -50;
+		manRunRightToLeft.lastMove = 0;
+		manJump.lastMove = 0;
+		spritePeople.painter = fromleftRun;
+		peopleFace = fromleftRun;
+		spritePeople.behaviors = [runInPlace, manRunRightToLeft, manJump];
+	}
+	if (!map[38] && map[40] && !map[37] && map[39]) {
+		spritePeople.velocityY = -50;
+		manRunLeftToRight.lastMove = 0;
+		manJump.lastMove = 0;
+		spritePeople.painter = fromrightRun;
+		peopleFace = fromrightRun;
+		spritePeople.behaviors = [runInPlace, manRunLeftToRight, manJump];
 	}
 }
 
-function leftUpFun(evt) {
-	evt = (evt) ? evt : window.event
-	switch (evt.keyCode) {
-		case 37:
-			{
-				spritePeople.behaviors = [];
-			}
-			break;
-		case 39:
-			{
-				spritePeople.behaviors = [];
-			}
-			break;
-	}
 
+
+// function leftDownFun(evt) {
+//     evt = (evt) ? evt : window.event
+
+//     switch (evt.keyCode) {
+//         case 37:
+//             {
+//                 manRunRightToLeft.lastMove = 0;
+//                 spritePeople.painter = fromleftRun;
+//                 spritePeople.behaviors = [runInPlace, manRunRightToLeft];
+//             }
+//             break;
+//         case 39:
+//             {
+//                 manRunLeftToRight.lastMove = 0;
+//                 spritePeople.painter = fromrightRun;
+//                 spritePeople.behaviors = [runInPlace, manRunLeftToRight];
+//             }
+//             break;
+//     }
+// }
+
+function leftUpFun(evt) {
+	evt = (evt) ? evt : window.event;
+	spritePeople.behaviors = [];
+	map[evt.keyCode] = false;
+	// switch (evt.keyCode) {
+	//     case 37:
+	//         {
+	//             spritePeople.behaviors = [];
+	//         }
+	//         break;
+	//     case 39:
+	//         {
+	//             spritePeople.behaviors = [];
+	//         }
+	//         break;
+	// }
 }
