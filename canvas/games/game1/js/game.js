@@ -1,5 +1,7 @@
+var loadDiv = document.getElementById('load');
+
 function progressBar(num) {
-    console.log(num);
+    loadDiv.innerHTML = num;
 }
 
 function progressOver() {
