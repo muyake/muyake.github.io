@@ -1,8 +1,9 @@
-var progressBar = document.getElementById('progress');
+var progressDiv = document.getElementById('load');
+//progressDiv.appendChild(progressbar.domElement);
+var progressbar = new COREHTML5.Progressbar(progressDiv, 'rgba(0,0,0,0.5)', 100, 130, 250);
 
 function progressCallback(num) {
-    progressBar.style.width = num + '%';
-    //loadDiv.innerHTML = num;
+    progressbar.draw(num);
 }
 
 function progressOver() {
@@ -27,5 +28,3 @@ imageList.forEach(function(item, index, arr) {
     l.queueImage(item);
 })
 l.loadImages();
-var arch = l.getImage('./shared/images/arch.png');
-var camp = l.getImage('./shared/images/camp.png');
