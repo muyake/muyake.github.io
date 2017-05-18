@@ -16,8 +16,8 @@
        border:1px solid red;
        position: absolute;
        left: 50%;
-       top:50%;
-       transform: translate3d(-50%,-50%,0);       
+       top:50%;     
+       transform: translate3d(-50%,-50%,0);
     }
     .progress{
         width:0%;
@@ -29,11 +29,20 @@
         display: block;
         margin-bottom: 10px;
         width: 30%;
-    }    
+    }  
+    #mycanvas{
+        background: rgba(0,0,0,1);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate3d(-50%,-50%,0);
+        display: none;
+    }  
     </style>
 </head>
 
 <body>
+    <canvas id="mycanvas" width="800" height="500"></canvas>
     <div id="load" class="load">        
     </div>
     <script src = './js/libs/requestNextAnimationFrame.js'></script>

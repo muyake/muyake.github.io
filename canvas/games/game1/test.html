@@ -8,25 +8,25 @@
 
 <body>
     <script>
-    var arrList=[];
-    for (var j = 0; j < 10000; j++) {
-        var arr = [];
-        for (var i = 0; i < 10; i++) {
-            arr.push(i);
-        }
-        arr.sort(function() {
-            return 0.5 - Math.random();
-        });  
-        arrList.push(arr);      
+    function Person(name) {
+        this.name = name;
     }
-    var num=0;
-    for (var j = 0; j < 10000; j++) {
-    	if(arrList[j][0]==9){
-    		num++;
-    	}
-    }
-    console.log(num);
 
+    function sk(age) {
+        this.age = age;
+    }
+    var sc = {
+        name: 'asdf',
+        people: new Person('小明'),
+        test:function () {
+            alert(this.ss.age);  
+        },
+        sayHello: function() {
+            this.ss = new sk(12);
+            this.test();
+        }
+    };
+    sc.sayHello();
     </script>
 </body>
 
