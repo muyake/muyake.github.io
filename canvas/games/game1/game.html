@@ -9,32 +9,37 @@
     p {
         margin: 0;
         padding: 0;
-    }
-    
+    }    
     .load {
-        height: 5px;
-        font-size: 12px;
-        background: #109874;
-        text-align: center;
-        color: #ddd;
-        width: 0;
-        margin-bottom: 10px;
-        position: fixed;
-        left: 0;
-        top: 0;
+       width: 200px;
+       height: 20px;
+       border:1px solid red;
+       position: absolute;
+       left: 50%;
+       top:50%;
+       transform: translate3d(-50%,-50%,0);       
     }
-    
+    .progress{
+        width:0%;
+        height: 100%;
+        background: green;
+        transition: all 0.2s linear;
+    }
     img {
         display: block;
         margin-bottom: 10px;
         width: 30%;
-    }
+    }    
     </style>
 </head>
 
 <body>
-    <div id="load" class="load"></div>
-
+    <div id="load" class="load">
+        <div class="progress" id="progress">
+            
+        </div>    
+    </div>
+   <!--  <script src = './js/libs/requestNextAnimationFrame.js'></script> -->
      <script src='./js/libs/imageLoad.js'> 
     </script>
    <script src='./js/game.js'> 

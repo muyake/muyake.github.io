@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <script>
+    var arrList=[];
+    for (var j = 0; j < 10000; j++) {
+        var arr = [];
+        for (var i = 0; i < 10; i++) {
+            arr.push(i);
+        }
+        arr.sort(function() {
+            return 0.5 - Math.random();
+        });  
+        arrList.push(arr);      
+    }
+    var num=0;
+    for (var j = 0; j < 10000; j++) {
+    	if(arrList[j][0]==9){
+    		num++;
+    	}
+    }
+    console.log(num);
+
+    </script>
+</body>
+
+</html>

@@ -1,13 +1,14 @@
-var loadDiv = document.getElementById('load');
+var progressBar = document.getElementById('progress');
 
-function progressBar(num) {
-    loadDiv.innerHTML = num;
+function progressCallback(num) {
+    progressBar.style.width = num + '%';
+    //loadDiv.innerHTML = num;
 }
 
 function progressOver() {
     console.log('加载完成');
 }
-var l = new Loading(progressBar, progressOver);
+var l = new Loading(progressCallback, progressOver);
 var imageList = [
     './image/grass/grass.png',
     './image/runpeople.png',
