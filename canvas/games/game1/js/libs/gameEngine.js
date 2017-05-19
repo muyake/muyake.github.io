@@ -74,6 +74,16 @@ Game.prototype = {
 			}
 		}
 	},
+	togglePaused: function() {
+		var now = getTimeNow();
+		this.paused = !this.paused;
+		if (this.paused) {
+			this.startedPauseAt = now;
+		} else {
+			this.startTime = this.startTime + now - this.startedPauseAt;
+			this.lastTime = now;
+		}
+	},
 	startAnimate: function(time) {
 
 	},

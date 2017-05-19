@@ -54,3 +54,11 @@ gameControl.startAnimate = function(time) {
 };
 gameControl.start();
 game.init();
+document.querySelector('#startBtn').addEventListener('click', function() {
+    if (gameControl.paused) {
+        this.value = '暂停';
+    } else {
+        this.value = '开始';
+    }
+    gameControl.togglePaused();
+}, true);
