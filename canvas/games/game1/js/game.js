@@ -34,13 +34,15 @@ var game = {
 };
 
 var gameControl = new Game('倒计时', 'mycanvas');
-gameControl.startAnimate = function(argument) {
+gameControl.startAnimate = function(time) {
     var strTime = (new Date()).Format("yyyy-MM-dd hh:mm:ss.S").split(' ');
     var can = game.mycanvas;
     var cans = can.getContext('2d');
+
     cans.font = 'bold 100px arial';
     cans.fillStyle = 'red';
-    cans.fillText(this.fps >> 0, 80, 20);
+    cans.fillText(this.fps.num >> 0, 80, 20);
+
     cans.font = 'bold 100px consolas';
     cans.textAlign = 'left';
     cans.textBaseline = 'top';

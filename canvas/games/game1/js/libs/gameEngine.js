@@ -17,7 +17,11 @@ var Game = function(gameName, canvasId) {
 	this.startTime = 0;
 	this.lastTime = 0;
 	this.gameTime = 0;
-	this.fps = 0;
+	this.fps = {
+		num: 0,
+		interval: 1000,
+		lastTime: 0
+	};
 	this.STARTING_FPS = 60;
 
 	this.paused = false;
@@ -62,9 +66,12 @@ Game.prototype = {
 	},
 	updateFrameRate: function(time) {
 		if (this.lastTime === 0) {
-			this.fps = this.STARTING_FPS;
+			this.fps.num = this.STARTING_FPS;
 		} else {
-			this.fps = 1000 / (time - this.lastTime);
+			if ((time - this.fps.lastTime) > this.fps.interval) {
+				this.fps.num = 1000 / (time - this.lastTime);
+				this.fps.lastTime = time;
+			}
 		}
 	},
 	startAnimate: function(time) {
