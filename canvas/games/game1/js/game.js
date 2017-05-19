@@ -30,12 +30,17 @@ var game = {
         });
         l.loadImages();
     },
+
 };
 
-function pageLoad() {
+var gameControl = new Game('倒计时', 'mycanvas');
+gameControl.startAnimate = function(argument) {
     var strTime = (new Date()).Format("yyyy-MM-dd hh:mm:ss.S").split(' ');
     var can = game.mycanvas;
     var cans = can.getContext('2d');
+    cans.font = 'bold 100px arial';
+    cans.fillStyle = 'red';
+    cans.fillText(this.fps >> 0, 80, 20);
     cans.font = 'bold 100px consolas';
     cans.textAlign = 'left';
     cans.textBaseline = 'top';
@@ -44,9 +49,6 @@ function pageLoad() {
     cans.font = 'bold 100px arial';
     cans.fillStyle = 'red';
     cans.fillText(strTime[1], 80, 300);
-}
-
-var gameControl = new Game('倒计时', 'mycanvas');
-gameControl.startAnimate = pageLoad;
+};
 gameControl.start();
 game.init();

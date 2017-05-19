@@ -43,9 +43,10 @@ Game.prototype = {
 				});
 			}, this.PAUSE_TIMEOUT);
 		} else {
+			this.tick(time);
 			this.clearScreen();
 			this.startAnimate(time);
-
+			this.lastTime = time;
 			window.requestNextAnimationFrame(function(time) {
 				self.animate.call(self, time);
 			});
@@ -55,7 +56,17 @@ Game.prototype = {
 		this.context.clearRect(0, 0,
 			this.context.canvas.width, this.context.canvas.height);
 	},
-
+	tick: function(time) {
+		this.updateFrameRate(time);
+		this.gameTime = (getTimeNow()) - this.startTime;
+	},
+	updateFrameRate: function(time) {
+		if (this.lastTime === 0) {
+			this.fps = this.STARTING_FPS;
+		} else {
+			this.fps = 1000 / (time - this.lastTime);
+		}
+	},
 	startAnimate: function(time) {
 
 	},
