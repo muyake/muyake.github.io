@@ -3,30 +3,28 @@
 
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>
+        
+    </title>
 </head>
 
 <body>
     <script>
-    function Person(name) {
-        this.name = name;
+    var arr=[];
+    for(var i=0;i<10000;i++){
+        var num=Math.random()*10>>1;
+        arr.push(num);
     }
+    var result=[];
+    for(var i=0;i<10;i++){
+        result[i]=0;
+    }
+    arr.forEach(function (item) {
+        console.log(item);
+        result[item]++;
+    });
+    console.log(arr);
 
-    function sk(age) {
-        this.age = age;
-    }
-    var sc = {
-        name: 'asdf',
-        people: new Person('小明'),
-        test:function () {
-            alert(this.ss.age);  
-        },
-        sayHello: function() {
-            this.ss = new sk(12);
-            this.test();
-        }
-    };
-    sc.sayHello();
     </script>
 </body>
 

@@ -43,12 +43,19 @@ Game.prototype = {
 				});
 			}, this.PAUSE_TIMEOUT);
 		} else {
+			this.clearScreen();
 			this.startAnimate(time);
+
 			window.requestNextAnimationFrame(function(time) {
 				self.animate.call(self, time);
 			});
 		}
 	},
+	clearScreen: function() {
+		this.context.clearRect(0, 0,
+			this.context.canvas.width, this.context.canvas.height);
+	},
+
 	startAnimate: function(time) {
 
 	},

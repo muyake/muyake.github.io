@@ -29,6 +29,24 @@ var game = {
             l.queueImage(item);
         });
         l.loadImages();
-    }
+    },
 };
+
+function pageLoad() {
+    var strTime = (new Date()).Format("yyyy-MM-dd hh:mm:ss.S").split(' ');
+    var can = game.mycanvas;
+    var cans = can.getContext('2d');
+    cans.font = 'bold 100px consolas';
+    cans.textAlign = 'left';
+    cans.textBaseline = 'top';
+    cans.strokeStyle = '#DF5326';
+    cans.strokeText(strTime[0], 80, 100);
+    cans.font = 'bold 100px arial';
+    cans.fillStyle = 'red';
+    cans.fillText(strTime[1], 80, 300);
+}
+
+var gameControl = new Game('倒计时', 'mycanvas');
+gameControl.startAnimate = pageLoad;
+gameControl.start();
 game.init();
