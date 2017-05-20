@@ -5,13 +5,10 @@ var canvas = document.getElementById('mycanvas'),
 	ANIMATION_DURATION = 20000,
 	pushTimer = new AnimationTimer(ANIMATION_DURATION);
 var NUM_EXPLOSION_PAINTERS = 9,
-<<<<<<< HEAD
-	NUM_FUSE_PAINTERS = 9;
-=======
 	NUM_FUSE_PAINTERS = 9,
 	GRAVITY_FORCE = 9.81;
 var jumbFlag = false;
->>>>>>> gh-pages
+
 var imgUrlList = {
 	ye1: '../img/ye1.png',
 	ye2: '../img/ye2.png',
@@ -165,10 +162,6 @@ var yePainter = function() {
 		if (this.lastMove !== 0) {
 			sprite.speed = (time - this.lastMove) / 500;
 			sprite.left = sprite.left + sprite.velocityX * sprite.speed;
-<<<<<<< HEAD
-=======
-
->>>>>>> gh-pages
 			sprite.top = sprite.top + sprite.velocityY * sprite.speed;
 			if ((pushTimer.isOver())) {
 				pushTimer.stop();
@@ -280,13 +273,6 @@ function init() {
 	bomb.height = 130;
 	bomb.velocityX = 50;
 	BoomFunc(bomb);
-<<<<<<< HEAD
-	// setInterval(function() {
-	// 	fuseBurningAnimator.start(bomb, 2000);
-	// }, 10000);
-
-=======
->>>>>>> gh-pages
 	window.requestNextAnimationFrame(animate);
 }
 

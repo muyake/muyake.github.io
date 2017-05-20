@@ -84,7 +84,5 @@ Game.prototype = {
 			this.lastTime = now;
 		}
 	},
-	startAnimate: function(time) {
-
-	},
+	startAnimate: function(time) {},
 }
