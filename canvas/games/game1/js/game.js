@@ -1,6 +1,7 @@
 var game = {
     imageList: [
         './image/grass/grass.png',
+        './image/grass/grass2.png',
         './image/runpeople.png',
         './image/sky.png',
         './image/tree/smalltree.png',
@@ -45,8 +46,8 @@ var game = {
 
 var gameControl = new Game('game', 'mycanvas');
 gameControl.startAnimate = function(time) {
-
     animateList.drawSky(time);
+    animateList.drawTree(time);
     animateList.countDown(time);
 };
 
@@ -55,7 +56,7 @@ var behaviorList = {
     moveLeftToRight: function() {
         this.lastMove = 0;
         this.execute = function(sprite, context, time) {
-            sprite.left += sprite.velocityX * (time - this.lastMove) / 1000;
+            sprite.left += sprite.velocityX / gameControl.fps.num;
             this.lastMove = time;
         }
     },
@@ -65,22 +66,40 @@ var spriteList = {
     skySpriteList: [new Sprite('sky1', new ImagePainter('./image/sky.png'), [new behaviorList.moveLeftToRight()]),
         new Sprite('sky2', new ImagePainter('./image/sky.png'), [new behaviorList.moveLeftToRight()])
     ],
+    treeList: {
+        smallTree: new Sprite('sky1', new ImagePainter('./image/tree/smalltree.png'), [new behaviorList.moveLeftToRight()]),
+        bigTree: new Sprite('sky1', new ImagePainter('./image/tree/tree.png'), [new behaviorList.moveLeftToRight()]),
+        twotrunksTree: new Sprite('sky1', new ImagePainter('./image/tree/tree-twotrunks.png'), [new behaviorList.moveLeftToRight()]),
+    },
     spriteInit: function() {
         this.skySpriteList[0].width = 1000;
         this.skySpriteList[0].height = 500;
-        this.skySpriteList[0].velocityX = 100;
+        this.skySpriteList[0].velocityX = 20;
         this.skySpriteList[0].top = 0;
         this.skySpriteList[0].left = 0;
         this.skySpriteList[1].top = 0;
-        this.skySpriteList[1].left = -this.skySpriteList[0].width;
-        this.skySpriteList[1].velocityX = 100;
-        this.skySpriteList[1].width = 1000;
-        this.skySpriteList[1].height = 500;
+        if (this.skySpriteList[0].velocityX > 0) {
+            this.skySpriteList[1].left = -this.skySpriteList[0].width;
+        } else {
+            this.skySpriteList[1].left = this.skySpriteList[0].width;
+        }
+
+        this.skySpriteList[1].velocityX = this.skySpriteList[0].velocityX;
+        this.skySpriteList[1].width = this.skySpriteList[0].width;
+        this.skySpriteList[1].height = this.skySpriteList[0].height;
+
+        //treeinit
+        this.treeList.smallTree.width = 224;
+        this.treeList.smallTree.height = 224;
+        this.treeList.smallTree.top = 345;
+        this.treeList.smallTree.left = 0;
+        this.treeList.smallTree.velocityX = -100;
     }
 };
 
 var animateList = {
     //倒计时
+    ctx: gameControl.context,
     countDown: function() {
         var strTime = (new Date()).Format("yyyy-MM-dd hh:mm:ss.S").split(' ');
         var can = game.mycanvas;
@@ -98,16 +117,70 @@ var animateList = {
         cans.fillText(strTime[1], 80, 300);
     },
     drawSky: function(time) {
-        var ctx = gameControl.context;
+        var self = this;
         spriteList.skySpriteList.forEach(function(item, index, arr) {
-            if (item.left > game.mycanvas.width) {
-                var preSky = (index == 0) ? arr[1] : arr[0];
-                item.left = preSky.left - item.width;
+            if (item.velocityX > 0) {
+                if (item.left > game.mycanvas.width) {
+                    var preSky = (index == 0) ? arr[1] : arr[0];
+                    item.left = preSky.left - item.width;
+                }
+            } else {
+                if ((item.left + item.width) < 0) {
+                    var preSky = (index == 0) ? arr[1] : arr[0];
+                    item.left = preSky.left + preSky.width;
+                }
             }
-            item.update(ctx, time);
-            item.paint(ctx);
+            item.update(self.ctx, time);
+            item.paint(self.ctx);
         });
     },
+    drawGrass: function() {
+
+    },
+    drawTree: function(time) {
+        var scaleNum = 0.7;
+        this.ctx.save();
+        this.ctx.scale(scaleNum, scaleNum);
+        spriteList.treeList.smallTree.update(this.ctx, time);
+        var totalTreeCount = 7;
+        var leftOffset = spriteList.treeList.smallTree.left;
+        var loop = 0;
+        var canvasWidth = game.mycanvas.width / scaleNum;
+        var treeInteval = (canvasWidth + spriteList.treeList.smallTree.width) / totalTreeCount;
+        if (spriteList.treeList.smallTree.velocityX > 0) {
+            for (var i = 0; i < totalTreeCount; i++) {
+                if ((leftOffset + i * treeInteval) <= canvasWidth) {
+                    spriteList.treeList.smallTree.left = leftOffset + treeInteval * i;
+                    loop++;
+                } else {
+                    spriteList.treeList.smallTree.left = leftOffset - treeInteval * (i - loop + 1);
+                }
+                spriteList.treeList.smallTree.paint(this.ctx);
+            }
+            if ((leftOffset) >= canvasWidth) {
+                spriteList.treeList.smallTree.left = -spriteList.treeList.smallTree.width;
+            } else {
+                spriteList.treeList.smallTree.left = leftOffset;
+            }
+        } else {
+
+            for (var i = 0; i < totalTreeCount; i++) {
+                if ((leftOffset + spriteList.treeList.smallTree.width - i * treeInteval) >= 0) {
+                    spriteList.treeList.smallTree.left = leftOffset - treeInteval * i;
+                    loop++;
+                } else {
+                    spriteList.treeList.smallTree.left = leftOffset + treeInteval * (i - loop + 1);
+                }
+                spriteList.treeList.smallTree.paint(this.ctx);
+            }
+            if ((leftOffset + spriteList.treeList.smallTree.width) < 0) {
+                spriteList.treeList.smallTree.left = canvasWidth;
+            } else {
+                spriteList.treeList.smallTree.left = leftOffset;
+            }
+        }
+        this.ctx.restore();
+    }
 }
 
 

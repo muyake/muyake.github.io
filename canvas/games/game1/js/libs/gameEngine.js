@@ -39,6 +39,7 @@ Game.prototype = {
 	},
 	animate: function(time) {
 		var self = this;
+		//this.updateFrameRate(time);
 		if (this.paused) {
 			//每隔100ms，看看是否还处于暂停状态，不需要太频繁。
 			setTimeout(function() {
@@ -70,15 +71,20 @@ Game.prototype = {
 		} else {
 			if ((time - this.fps.lastTime) > this.fps.interval) {
 				this.fps.num = 1000 / (time - this.lastTime);
-				this.fps.lastTime = time;
+				this.fps.lastTime = time;;
 			}
+
 		}
+	},
+	paintUnderSprites: function(time) {
+
 	},
 	togglePaused: function() {
 		var now = getTimeNow();
 		this.paused = !this.paused;
 		if (this.paused) {
 			this.startedPauseAt = now;
+			this.fps.lastTime = now;;
 		} else {
 			this.startTime = this.startTime + now - this.startedPauseAt;
 			this.lastTime = now;

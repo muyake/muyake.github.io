@@ -7,7 +7,10 @@ var Sprite = function(name, painter, behaviors) {
 	}
 	if (!!behaviors) {
 		this.behaviors = behaviors;
+	} else {
+		this.behaviors = [];
 	}
+
 	return this;
 }
 Sprite.prototype = {
@@ -28,7 +31,7 @@ Sprite.prototype = {
 			this.behaviors[i - 1].execute(this, context, time);
 		}
 	}
-}
+};
 
 var ImagePainter = function(imageUrl) {
 	this.image = new Image();
