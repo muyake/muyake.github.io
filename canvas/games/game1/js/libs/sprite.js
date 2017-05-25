@@ -21,6 +21,7 @@ Sprite.prototype = {
 	visible: true,
 	velocityX: 0,
 	velocityY: 0,
+	initialVelocity:0,
 	paint: function(context) {
 		if (this.painter !== undefined && this.visible) {
 			this.painter.paint(this, context);
