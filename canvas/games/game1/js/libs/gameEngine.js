@@ -4,7 +4,7 @@ var getTimeNow = function() {
 var Game = function(gameName, canvasId) {
 	var canvas = document.getElementById(canvasId),
 		self = this; // Used by key event handlers below
-
+	this.speed=1;
 	// General
 
 	this.context = canvas.getContext('2d');
