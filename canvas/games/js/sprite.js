@@ -87,6 +87,7 @@ SpriteSheetPainter.prototype = {
     if (this.isReverse) {
       context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, cell.width * 2, cell.height * 2);
 
+
     } else {
       context.translate(canvas.width, 0);
       context.scale(-1, 1)

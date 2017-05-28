@@ -56,7 +56,7 @@ var GrassImagePainter=function(imageUrl){
 }
 
 GrassImagePainter.prototype= Object.create(ImagePainter.prototype);
- 
+
 
 GrassImagePainter.prototype.constructor = GrassImagePainter; 
 GrassImagePainter.prototype.paint= function(sprite, context) {
@@ -67,10 +67,12 @@ GrassImagePainter.prototype.paint= function(sprite, context) {
 	}
 };
 
-SpriteSheetPainter =function(cells,spritesheet){
+SpriteSheetPainter =function(cells,spritesheeturl,mycanvas){
 	this.cells=cells||[];
-	this.spritesheet=spritesheet||0;
-
+	this.spritesheet=new Image();
+	this.spritesheet.src=spritesheeturl;
+	 this.cellIndex = 0;
+	 this.mycanvas=mycanvas;
 },
 
 SpriteSheetPainter.prototype={
@@ -87,16 +89,19 @@ SpriteSheetPainter.prototype={
 	}
 }
 
-PeopleSpriteSheetPainter=function(cells,spritesheet,isReverse){
-	SpriteSheetPainter.call(this,cells,spritesheet);
-	this.isReverse=isReverse||true;
+PeopleSpriteSheetPainter=function(cells,spritesheeturl,mycanvas,isReverse){
+	SpriteSheetPainter.call(this,cells,spritesheeturl,mycanvas);
+	this.isReverse=isReverse;
 }
-PeopleSpriteSheetPainter.prototype=new SpriteSheetPainter();
-PeopleSpriteSheetPainter.prototype.paint=function(){
+PeopleSpriteSheetPainter.prototype=Object.create(SpriteSheetPainter.prototype);
+PeopleSpriteSheetPainter.prototype.paint=function(sprite,context){
 	var cell = this.cells[this.cellIndex];	
 	if(this.isReverse){
-		context.drawImage(this.spritesheet.cell.left,cell.top,cell.width,cell.heightsprite.left, sprite.top, cell.width * 2, cell.height * 2);
-	}else{
+		
+		context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, cell.width * 2, cell.height * 2);
+ 
+ 	}else{
+ 	var canvas=	this.mycanvas;
 		context.translate(canvas.width, 0);
 		context.scale(-1, 1)
 		context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, canvas.width - sprite.width * 2 - sprite.left, sprite.top, cell.width * 2, cell.height * 2);

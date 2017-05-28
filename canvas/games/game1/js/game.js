@@ -139,6 +139,7 @@ gameControl.startAnimate = function(time) {
    animateList.drawTree(time,spriteList.treeList.smallTree,5);
    animateList.drawTree(time,spriteList.treeList.twotrunksTree,4); 
    animateList.drawGrass();  
+    animateList.drawPeople(gameControl.context,time);  
    animateList.countDown(time);
 };
 
@@ -183,7 +184,6 @@ gameControl.addKeyListener(
             game.lastKeyListenerTime = now;
         } 
     } else{
-
         game.setDirection(0); 
     }  
 }
@@ -212,8 +212,9 @@ var spriteList = {
        GRASS_VELOCITX:0,
        grassOffset : 0
    },
-   people:undefined,
-   spriteInit: function() {
+// SpriteSheetPainter:new PeopleSpriteSheetPainter(config.runnerCells,'./image/runpeople.png', true),
+peopleSprite:new Sprite('runner', new PeopleSpriteSheetPainter(config.runnerCells,'./image/runpeople.png', game.mycanvas, false)),
+spriteInit: function() {
 
 
     this.skySprite.width = game.mycanvas.width;
@@ -221,15 +222,12 @@ var spriteList = {
     this.skySprite.velocityX = 8*gameControl.speed;
     this.skySprite.top = 0;
     this.skySprite.left = 0;
-
-
-
-        //treeinit
-        this.treeList.smallTree.width = 137;
-        this.treeList.smallTree.height = 165;
-        this.treeList.smallTree.top = 232;
-        this.treeList.smallTree.left = 0;
-        this.treeList.smallTree.initialVelocitX = 20*gameControl.speed;
+    //treeinit
+    this.treeList.smallTree.width = 137;
+    this.treeList.smallTree.height = 165;
+    this.treeList.smallTree.top = 232;
+    this.treeList.smallTree.left = 0;
+    this.treeList.smallTree.initialVelocitX = 20*gameControl.speed;
 
         //bigtreeinit
         this.treeList.twotrunksTree.width = 224;
@@ -244,11 +242,15 @@ var spriteList = {
         this.grassList.grass.height = 52;
         this.grassList.grass.top = game.mycanvas.height-spriteList.grassList.grass.height;
 
-
-
-        //people
-        this.people=new SpriteSheetPainter(config.runnerCells,game.loadImg.getImage('./image/runpeople.png'), true);
-    }
+       //people
+       this.peopleSprite.velocityX = 50;
+       //this.peopleSprite.velocityY = 50;
+       this.peopleSprite.width = 35;
+       this.peopleSprite.top = 0;
+       this.peopleSprite.left = 0;
+       this.peopleSprite.height = 64;
+       this.peopleSprite.behaviors = [runInPlace];
+   }
 };
 
 
@@ -343,13 +345,24 @@ drawTree: function(time,sprite,totalTreeCount) {
             }
         }       
     },
-    drawPeople:function(){
-
-    },
+    drawPeople:function(ctx,time,canvas){
+     spriteList.peopleSprite.update(ctx, time);
+     spriteList.peopleSprite.paint(ctx);
+ },
 
 }
 
 
+var runInPlace = {
+    lastAdvance: 0,
+    PAGEFLIP_INTERVAL: 100,
+    execute: function(sprite, context, time) {
+        if (time - this.lastAdvance > this.PAGEFLIP_INTERVAL) {
+            sprite.painter.advance();
+            this.lastAdvance = time;
+        }
+    }
+};
 
 game.init();
 
