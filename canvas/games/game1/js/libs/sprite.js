@@ -98,13 +98,13 @@ PeopleSpriteSheetPainter.prototype.paint=function(sprite,context){
 	var cell = this.cells[this.cellIndex];	
 	if(this.isReverse){
 		
-		context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, cell.width * 2, cell.height * 2);
+		context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width , sprite.height );
  
  	}else{
  	var canvas=	this.mycanvas;
 		context.translate(canvas.width, 0);
 		context.scale(-1, 1)
-		context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, canvas.width - sprite.width * 2 - sprite.left, sprite.top, cell.width * 2, cell.height * 2);
+		context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, canvas.width - sprite.width  - sprite.left, sprite.top, cell.width * 2, cell.height * 2);
 		context.translate(canvas.width, 0);
 		context.scale(-1, 1);
 	}

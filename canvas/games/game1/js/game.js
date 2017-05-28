@@ -162,12 +162,15 @@ gameControl.addKeyListener(
      var now = +new Date();
      if(status==1){
         if (now - game.lastKeyListenerTime > 200) { // throttle
-            game.setDirection(-1); 
+            game.setDirection(1); 
             game.lastKeyListenerTime = now;
+            spriteList.peopleSprite.behaviors = [runInPlace];
+            peopleSpriteSheetPainter.isReverse=false;
         } 
     }else{
 
         game.setDirection(0); 
+        spriteList.peopleSprite.behaviors = [];
     }  
 }
 }
@@ -180,11 +183,14 @@ gameControl.addKeyListener(
      var now = +new Date();
      if(status==1){
         if (now - game.lastKeyListenerTime > 200) { // throttle
-            game.setDirection(1); 
+            game.setDirection(-1); 
             game.lastKeyListenerTime = now;
+             spriteList.peopleSprite.behaviors = [runInPlace];
+             peopleSpriteSheetPainter.isReverse=true;
         } 
     } else{
         game.setDirection(0); 
+         spriteList.peopleSprite.behaviors = [];
     }  
 }
 }
@@ -200,7 +206,7 @@ var behaviorList = {
         }
     },
 }
-
+var peopleSpriteSheetPainter=new PeopleSpriteSheetPainter(config.runnerCells,'./image/runpeople.png', game.mycanvas, true);
 var spriteList = {   
     skySprite:new Sprite('sky2', new ImagePainter('./image/sky.png'), [new behaviorList.moveLeftToRight()]),
     treeList: {
@@ -213,10 +219,8 @@ var spriteList = {
        grassOffset : 0
    },
 // SpriteSheetPainter:new PeopleSpriteSheetPainter(config.runnerCells,'./image/runpeople.png', true),
-peopleSprite:new Sprite('runner', new PeopleSpriteSheetPainter(config.runnerCells,'./image/runpeople.png', game.mycanvas, false)),
+peopleSprite:new Sprite('runner',peopleSpriteSheetPainter ),
 spriteInit: function() {
-
-
     this.skySprite.width = game.mycanvas.width;
     this.skySprite.height = 500;
     this.skySprite.velocityX = 8*gameControl.speed;
@@ -243,13 +247,13 @@ spriteInit: function() {
         this.grassList.grass.top = game.mycanvas.height-spriteList.grassList.grass.height;
 
        //people
+       var size=2;
        this.peopleSprite.velocityX = 50;
        //this.peopleSprite.velocityY = 50;
-       this.peopleSprite.width = 35;
-       this.peopleSprite.top = 0;
-       this.peopleSprite.left = 0;
-       this.peopleSprite.height = 64;
-       this.peopleSprite.behaviors = [runInPlace];
+       this.peopleSprite.width = 35*size;
+       this.peopleSprite.height = 64*size;
+       this.peopleSprite.top = game.mycanvas.height- this.peopleSprite.height;
+       this.peopleSprite.left = game.mycanvas.width/2- this.peopleSprite.width/2;  
    }
 };
 
@@ -261,17 +265,11 @@ var animateList = {
         var strTime = (new Date()).Format("yyyy-MM-dd hh:mm:ss.S").split(' ');
         var can = game.mycanvas;
         var cans = can.getContext('2d');
-        cans.font = 'bold 100px arial';
+        cans.font = 'bold 14px arial';
         cans.fillStyle = 'red';
-        cans.fillText(gameControl.fps.num >> 0, 80, 20);
-        cans.font = 'bold 100px consolas';
-        cans.textAlign = 'left';
-        cans.textBaseline = 'top';
-        cans.strokeStyle = '#DF5326';
-        cans.strokeText(strTime[0], 80, 100);
-        cans.font = 'bold 100px arial';
-        cans.fillStyle = 'red';
-        cans.fillText(strTime[1], 80, 300);
+        cans.fillText(gameControl.fps.num >> 0, 80, 20);    
+        cans.fillText(strTime[0], 110, 20);      
+        cans.fillText(strTime[1], 200, 20);
     },
     drawSkySingle:function(time){
         var self=this;
@@ -355,7 +353,7 @@ drawTree: function(time,sprite,totalTreeCount) {
 
 var runInPlace = {
     lastAdvance: 0,
-    PAGEFLIP_INTERVAL: 100,
+    PAGEFLIP_INTERVAL: 80,
     execute: function(sprite, context, time) {
         if (time - this.lastAdvance > this.PAGEFLIP_INTERVAL) {
             sprite.painter.advance();
