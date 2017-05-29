@@ -46,7 +46,7 @@ var config={
     height: 64
 }],
 //重力加速度
-GRAVITY_FORCE : 9.81,
+GRAVITY_FORCE : 9.81*2,
 }
 
 var behaviorList = {
@@ -153,35 +153,66 @@ var game = {
            spriteList.grassList.GRASS_VELOCITX =-spriteList.grassList.GRASS_VELOCITX;
        }, true);
     },
-    setDirection:function(status){
-        switch(status){
-            case 0:{
-               spriteList.treeList.smallTree.velocityX =0;
-               spriteList.treeList.twotrunksTree.velocityX =0;
-               spriteList.grassList.GRASS_VELOCITX =0;
-           }
-           break;
-           case 1:{
+    activeEventCallback:function(mapKeyArr){
+       var now = +new Date();
+       if(((mapKeyArr[37]&&!mapKeyArr[39]&&!mapKeyArr[32])||(!mapKeyArr[37]&&mapKeyArr[39]&&!mapKeyArr[32]))&&(now - game.lastKeyListenerTime > 200)){   
 
-               spriteList.treeList.smallTree.velocityX =-spriteList.treeList.smallTree.initialVelocitX;
-               spriteList.treeList.twotrunksTree.velocityX =-spriteList.treeList.twotrunksTree.initialVelocitX;
-               spriteList.grassList.GRASS_VELOCITX =-spriteList.grassList.initialGRASS_VELOCITX;
-           }
-           break;
-           case -1:{
-               spriteList.treeList.smallTree.velocityX =spriteList.treeList.smallTree.initialVelocitX;
-               spriteList.treeList.twotrunksTree.velocityX =spriteList.treeList.twotrunksTree.initialVelocitX;
-               spriteList.grassList.GRASS_VELOCITX =spriteList.grassList.initialGRASS_VELOCITX;
-           }
-           break;
-       }
+        if((mapKeyArr[37]&&!mapKeyArr[39]&&!mapKeyArr[32])){
+             game.setDirection(-1);
+             peopleSpriteSheetPainter.isReverse=true;
+         // console.log("按左键");    
+        }else{
+        // console.log("按右键");
+            peopleSpriteSheetPainter.isReverse=false;
+            game.setDirection(1);  
+     }                  
+    game.lastKeyListenerTime = now;
+    spriteList.peopleSprite.behaviors =behaviorList.jump.isJump?[behaviorList.jump]:[behaviorList.runInPlace];
+}
+       // console.log("按右键和空格键或按左键和空格键或按只空格键");       
+       if(mapKeyArr[32]){
+        if (!behaviorList.jump.isJump) { // throttle
+            behaviorList.jump.velocityY=-200;
+        }         
+        spriteList.peopleSprite.behaviors = [behaviorList.jump];
+
+    }    
+    if((!mapKeyArr[37]&&!mapKeyArr[39])||(mapKeyArr[37]&&mapKeyArr[39])){
+       // console.log('不按键或左右都按');
+       game.setDirection(0); 
+       spriteList.peopleSprite.behaviors = [behaviorList.jump];     
    }
+},
+
+setDirection:function(status){
+    switch(status){
+        case 0:{
+           spriteList.treeList.smallTree.velocityX =0;
+           spriteList.treeList.twotrunksTree.velocityX =0;
+           spriteList.grassList.GRASS_VELOCITX =0;
+       }
+       break;
+       case 1:{
+
+           spriteList.treeList.smallTree.velocityX =-spriteList.treeList.smallTree.initialVelocitX;
+           spriteList.treeList.twotrunksTree.velocityX =-spriteList.treeList.twotrunksTree.initialVelocitX;
+           spriteList.grassList.GRASS_VELOCITX =-spriteList.grassList.initialGRASS_VELOCITX;
+       }
+       break;
+       case -1:{
+           spriteList.treeList.smallTree.velocityX =spriteList.treeList.smallTree.initialVelocitX;
+           spriteList.treeList.twotrunksTree.velocityX =spriteList.treeList.twotrunksTree.initialVelocitX;
+           spriteList.grassList.GRASS_VELOCITX =spriteList.grassList.initialGRASS_VELOCITX;
+       }
+       break;
+   }
+}
 };
 
 var gameControl = new Game('game', 'mycanvas');
-gameControl.speed=4;
+gameControl.speed=2;
 gameControl.startAnimate = function(time) {
-    activeEventCallback(gameControl.mapKey);
+    game.activeEventCallback(gameControl.mapKey);
     animateList.drawSkySingle(time);
     animateList.drawTree(time,spriteList.treeList.smallTree,5);
     animateList.drawTree(time,spriteList.treeList.twotrunksTree,4); 
@@ -210,13 +241,8 @@ gameControl.addKeyListener(
       gameControl.mapKey[32]=true;
   }else{
      gameControl.mapKey[32]=false;
- }
-     // var now = +new Date();
-     //    if (now - game.lastKeyListenerTime > 200&&!behaviorList.jump.isJump&&status==1) { // throttle
-     //        behaviorList.jump.velocityY=-200;
-     //    }         
-     //    spriteList.peopleSprite.behaviors = [behaviorList.jump];
- }
+ }     
+}
 }
 );
 gameControl.addKeyListener(
@@ -228,25 +254,6 @@ gameControl.addKeyListener(
     }else{
         gameControl.mapKey[39]=false;
     }
-
-
-//      var now = +new Date();
-//      if(status==1){
-//         if (now - game.lastKeyListenerTime > 200) { // throttle
-//             game.setDirection(1); 
-//             game.lastKeyListenerTime = now;
-//             if(behaviorList.jump.isJump){
-//              spriteList.peopleSprite.behaviors = [behaviorList.jump];
-//          }else{
-//              spriteList.peopleSprite.behaviors = [behaviorList.jump,behaviorList.runInPlace];
-//          }
-
-//          peopleSpriteSheetPainter.isReverse=false;
-//      } 
-//  }else{
-//     game.setDirection(0); 
-//     spriteList.peopleSprite.behaviors = [behaviorList.jump];
-// }  
 }
 }
 );
@@ -261,89 +268,9 @@ gameControl.addKeyListener(
     }else{
         gameControl.mapKey[37]=false;
     }
-
-     // var now = +new Date();
-     // console.log("按左键中");
-    //  if(status==1){
-    //     if (now - game.lastKeyListenerTime > 200) { // throttle
-    //         game.setDirection(-1); 
-    //         game.lastKeyListenerTime = now;
-
-    //         if(behaviorList.jump.isJump){
-    //             console.log("跳跃中");
-    //             spriteList.peopleSprite.behaviors = [behaviorList.jump];
-    //         }else{
-    //             console.log('继续跑');
-    //             spriteList.peopleSprite.behaviors = [behaviorList.jump,behaviorList.runInPlace];
-    //         }
-    //         peopleSpriteSheetPainter.isReverse=true;
-    //     } 
-    // } else{
-    //     game.setDirection(0); 
-    //     spriteList.peopleSprite.behaviors = [];
-    // }  
 }
 }
 );
-//gameControl.activeEventCallback=function(mapKeyArr,status){
-    function activeEventCallback(mapKeyArr){
-       var now = +new Date();
-       if(mapKeyArr[37]&&!mapKeyArr[39]&&!mapKeyArr[32]){   
-          console.log("按左键");     
-              if (now - game.lastKeyListenerTime > 200) { // throttle
-                game.setDirection(-1); 
-                console.log('起作用');
-                game.lastKeyListenerTime = now;
-
-                if(behaviorList.jump.isJump){
-                   spriteList.peopleSprite.behaviors = [behaviorList.jump];
-               }else{
-                spriteList.peopleSprite.behaviors = [behaviorList.runInPlace];
-            }
-            peopleSpriteSheetPainter.isReverse=true;
-       }
-    }
-    if(!mapKeyArr[37]&&mapKeyArr[39]&&!mapKeyArr[32]){
-        console.log("按右键");
-             if (now - game.lastKeyListenerTime > 200) { // throttle
-                game.setDirection(1); 
-                game.lastKeyListenerTime = now;
-
-                if(behaviorList.jump.isJump){
-                   spriteList.peopleSprite.behaviors = [behaviorList.jump];
-               }else{
-                spriteList.peopleSprite.behaviors = [behaviorList.runInPlace];
-            }
-            peopleSpriteSheetPainter.isReverse=false;
-        }
-    }
-    if(!mapKeyArr[37]&&mapKeyArr[39]&&mapKeyArr[32]){
-        console.log("按右键和空格键");       
-        if (!behaviorList.jump.isJump) { // throttle
-            behaviorList.jump.velocityY=-200;
-        }         
-        spriteList.peopleSprite.behaviors = [behaviorList.jump];
-
-    }
-    if(mapKeyArr[37]&&!mapKeyArr[39]&&mapKeyArr[32]){
-         if (!behaviorList.jump.isJump) { // throttle
-            behaviorList.jump.velocityY=-200;
-        }         
-        spriteList.peopleSprite.behaviors = [behaviorList.jump];
-    }
-    if(!mapKeyArr[37]&&!mapKeyArr[39]&&mapKeyArr[32]){
-        if (!behaviorList.jump.isJump) { // throttle
-            behaviorList.jump.velocityY=-200;
-        }         
-        spriteList.peopleSprite.behaviors = [behaviorList.jump];
-    }
-    if(!mapKeyArr[37]&&!mapKeyArr[39]&&!mapKeyArr[32]){
-        console.log('不按键');
-        game.setDirection(0); 
-        spriteList.peopleSprite.behaviors = [behaviorList.jump];
-      //  game.lastKeyListenerTime = now;
-  }
-}
 
 
 var peopleSpriteSheetPainter=new PeopleSpriteSheetPainter(config.runnerCells,'./image/runpeople.png', game.mycanvas, true);
