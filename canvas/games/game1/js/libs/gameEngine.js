@@ -4,7 +4,7 @@ var getTimeNow = function() {
 var Game = function(gameName, canvasId) {
 	var canvas = document.getElementById(canvasId),
 		self = this; // Used by key event handlers below
-	this.speed=1;
+		this.speed=1;
 	// General
 
 	this.context = canvas.getContext('2d');
@@ -30,10 +30,16 @@ var Game = function(gameName, canvasId) {
 	this.PAUSE_TIMEOUT = 100;
 
 
-	window.onkeypress=function(e){ self.activeEvent(e,1)};
-window.onkeydown=function(e){ self.activeEvent(e,1)};
-	window.onkeyup=function(e){ self.activeEvent(e,0)};
- return this;
+	window.onkeypress=function(e){
+		self.activeEvent(e,1)
+	};
+	window.onkeydown=function(e){
+		self.activeEvent(e,1)
+	};
+	window.onkeyup=function(e){ 
+		self.activeEvent(e,0)
+	};
+	return this;
 }
 Game.prototype = {
 	start: function() {
@@ -79,7 +85,6 @@ Game.prototype = {
 				this.fps.num = 1000 / (time - this.lastTime);
 				this.fps.lastTime = time;;
 			}
-
 		}
 	},
 	paintUnderSprites: function(time) {
@@ -101,6 +106,17 @@ Game.prototype = {
 		}
 		return listener;
 	},
+	mapKey: {
+		// 38: false,
+		// 40: false,
+		37: false,	//left
+		39: false,//right
+		32: false 
+	},
+	activeEventCallback:function(mapKeyArr){
+		
+	},
+
 	activeEvent:function(e,status){
 		var listener=undefined;
 		var key=undefined;
@@ -119,6 +135,7 @@ Game.prototype = {
 		if(listener){
 			listener(status);
 		}
+		//this.activeEventCallback(this.mapKey,status);
 	},
 	togglePaused: function() {
 		var now = getTimeNow();
