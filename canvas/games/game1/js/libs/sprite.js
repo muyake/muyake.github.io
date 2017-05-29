@@ -110,6 +110,50 @@ PeopleSpriteSheetPainter.prototype.paint=function(sprite,context){
 	}
 }
 
+var SpriteAnimator=function(painters,elapsedCallback){
+	this.painters=painters;
+	if(elapsedCallback){
+		this.elapsedCallback=elapsedCallback;
+	}
+};
+SpriteAnimator.prototype={
+	painters:[],
+	duration:1000,
+	startTime:0,
+	index:0,
+	elapsedCallback:undefined,
+	end:function(sprite,originalPainter){
+		sprite.animating=false;
+		if(this.elapsedCallback){
+			this.elapsedCallback(sprite);
+		}else{
+			sprite.painter=originalPainter;
+		}
+	},
+	start:function(sprite,duration){
+		var endTime=+new Date()+duration;
+		var periond=duration/(this.painters.length);
+		var interval=undefined;
+		var animator=this;
+		var originalPainter=sprite.painters;
+		this.index=0;
+		sprite.animating=true;
+		sprite.painter=this.painters[this.index];
+		interval=setInterval(function(){
+			if(+new Date()<endTime){
+				sprite.painter=animator.painters[++animator.index];
+
+			}else{
+				animator.end(sprite,originalPainter);
+				clearInterval(interval);
+			}
+		},period);
+
+	}
+
+}
+
+
 
 var Behavior = function() {}
 Behavior.prototype.execute = function(sprite, context, time) {

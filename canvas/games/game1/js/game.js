@@ -1,5 +1,5 @@
 var config={
- runnerCells: [{
+   runnerCells: [{
     left: 0,
     top: 0,
     width: 47,
@@ -44,7 +44,55 @@ var config={
     top: 0,
     width: 35,
     height: 64
-}]
+}],
+//重力加速度
+GRAVITY_FORCE : 9.81,
+}
+
+var behaviorList = {
+    moveLeftToRight: function() {
+        this.behaviorName='moveLeftToRight';
+        this.lastMove = 0;
+        this.execute = function(sprite, context, time) {
+            sprite.left += sprite.velocityX / gameControl.fps.num;
+            this.lastMove = time;
+        }
+    },
+    //小人跑动动画
+    runInPlace : {
+        lastAdvance: 0,
+        PAGEFLIP_INTERVAL: 80,
+        behaviorName:'runInPlace',
+        execute: function(sprite, context, time) {
+            if (time - this.lastAdvance > this.PAGEFLIP_INTERVAL) {
+                sprite.painter.advance();
+                this.lastAdvance = time;
+            }
+        }
+    },
+    //小人跳动
+    jump:{
+        velocityY:0,
+        lastAdvance: 0,
+        isJump:false,
+        initialTop:0,
+        behaviorName:'jump',
+        execute: function(sprite, context, time) {
+            if(this.lastAdvance!==0){
+                if(this.velocityY<200){
+                  this.velocityY=this.velocityY+config.GRAVITY_FORCE/ gameControl.fps.num*18;
+                  sprite.top+= this.velocityY / gameControl.fps.num;
+                  sprite.top=sprite.top<this.initialTop?sprite.top:this.initialTop;
+                  this.isJump=true;
+              }else{
+                this.isJump=false;
+                console.log("蹦跳结束");
+            }
+        }
+        this.lastAdvance=time;
+    }
+}
+
 }
 
 var game = {
@@ -98,49 +146,47 @@ var game = {
             gameControl.togglePaused();
         }, true);
         document.querySelector('#revertBtn').addEventListener('click', function() {
-           spriteList.skySpriteList[0].velocityX =-spriteList.skySpriteList[0].velocityX;
-           spriteList.skySpriteList[1].velocityX =-spriteList.skySpriteList[1].velocityX;
-           spriteList.treeList.smallTree.velocityX =-spriteList.treeList.smallTree.velocityX;
-           spriteList.treeList.twotrunksTree.velocityX =-spriteList.treeList.twotrunksTree.velocityX;
-           spriteList.grassList.GRASS_VELOCITX =-spriteList.grassList.GRASS_VELOCITX;
-       }, true);
+         spriteList.skySpriteList[0].velocityX =-spriteList.skySpriteList[0].velocityX;
+         spriteList.skySpriteList[1].velocityX =-spriteList.skySpriteList[1].velocityX;
+         spriteList.treeList.smallTree.velocityX =-spriteList.treeList.smallTree.velocityX;
+         spriteList.treeList.twotrunksTree.velocityX =-spriteList.treeList.twotrunksTree.velocityX;
+         spriteList.grassList.GRASS_VELOCITX =-spriteList.grassList.GRASS_VELOCITX;
+     }, true);
     },
     setDirection:function(status){
         switch(status){
             case 0:{
-               spriteList.treeList.smallTree.velocityX =0;
-               spriteList.treeList.twotrunksTree.velocityX =0;
-               spriteList.grassList.GRASS_VELOCITX =0;
-           }
-           break;
-           case 1:{
+             spriteList.treeList.smallTree.velocityX =0;
+             spriteList.treeList.twotrunksTree.velocityX =0;
+             spriteList.grassList.GRASS_VELOCITX =0;
+         }
+         break;
+         case 1:{
 
-               spriteList.treeList.smallTree.velocityX =-spriteList.treeList.smallTree.initialVelocitX;
-               spriteList.treeList.twotrunksTree.velocityX =-spriteList.treeList.twotrunksTree.initialVelocitX;
-               spriteList.grassList.GRASS_VELOCITX =-spriteList.grassList.initialGRASS_VELOCITX;
-           }
-           break;
-           case -1:{
-               spriteList.treeList.smallTree.velocityX =spriteList.treeList.smallTree.initialVelocitX;
-               spriteList.treeList.twotrunksTree.velocityX =spriteList.treeList.twotrunksTree.initialVelocitX;
-               spriteList.grassList.GRASS_VELOCITX =spriteList.grassList.initialGRASS_VELOCITX;
-           }
-           break;
-       }
-   }
+             spriteList.treeList.smallTree.velocityX =-spriteList.treeList.smallTree.initialVelocitX;
+             spriteList.treeList.twotrunksTree.velocityX =-spriteList.treeList.twotrunksTree.initialVelocitX;
+             spriteList.grassList.GRASS_VELOCITX =-spriteList.grassList.initialGRASS_VELOCITX;
+         }
+         break;
+         case -1:{
+             spriteList.treeList.smallTree.velocityX =spriteList.treeList.smallTree.initialVelocitX;
+             spriteList.treeList.twotrunksTree.velocityX =spriteList.treeList.twotrunksTree.initialVelocitX;
+             spriteList.grassList.GRASS_VELOCITX =spriteList.grassList.initialGRASS_VELOCITX;
+         }
+         break;
+     }
+ }
 };
 
 var gameControl = new Game('game', 'mycanvas');
 gameControl.speed=4;
 gameControl.startAnimate = function(time) {
-
-   animateList.drawSkySingle(time);
-
-   animateList.drawTree(time,spriteList.treeList.smallTree,5);
-   animateList.drawTree(time,spriteList.treeList.twotrunksTree,4); 
-   animateList.drawGrass();  
-    animateList.drawPeople(gameControl.context,time);  
-   animateList.countDown(time);
+ animateList.drawSkySingle(time);
+ animateList.drawTree(time,spriteList.treeList.smallTree,5);
+ animateList.drawTree(time,spriteList.treeList.twotrunksTree,4); 
+ animateList.drawGrass();  
+ animateList.drawPeople(gameControl.context,time);  
+ animateList.countDown(time);
 };
 
 
@@ -150,62 +196,79 @@ gameControl.addKeyListener(
 {
   key: 'p',
   listener: function () {
-     gameControl.togglePaused();
- }
+   gameControl.togglePaused();
+}
 }
 );
 
 gameControl.addKeyListener(
 {
+  key: 'space',
+  listener: function (status) {
+   var now = +new Date();
+        if (now - game.lastKeyListenerTime > 200&&!behaviorList.jump.isJump&&status==1) { // throttle
+            behaviorList.jump.velocityY=-200;
+        }         
+        spriteList.peopleSprite.behaviors = [behaviorList.jump];
+    }
+}
+);
+gameControl.addKeyListener(
+{
   key: 'right arrow',
   listener: function (status) {
-     var now = +new Date();
-     if(status==1){
+   var now = +new Date();
+   if(status==1){
         if (now - game.lastKeyListenerTime > 200) { // throttle
             game.setDirection(1); 
             game.lastKeyListenerTime = now;
-            spriteList.peopleSprite.behaviors = [runInPlace];
-            peopleSpriteSheetPainter.isReverse=false;
-        } 
-    }else{
+            if(behaviorList.jump.isJump){
+               spriteList.peopleSprite.behaviors = [behaviorList.jump];
+           }else{
+               spriteList.peopleSprite.behaviors = [behaviorList.jump,behaviorList.runInPlace];
+           }
 
-        game.setDirection(0); 
-        spriteList.peopleSprite.behaviors = [];
-    }  
+           peopleSpriteSheetPainter.isReverse=false;
+       } 
+   }else{
+    game.setDirection(0); 
+    spriteList.peopleSprite.behaviors = [behaviorList.jump];
+}  
 }
 }
 );
+
 
 gameControl.addKeyListener(
 {
   key: 'left arrow',
   listener: function (status) {
-     var now = +new Date();
-     if(status==1){
+   var now = +new Date();
+    console.log("按左键中");
+   if(status==1){
         if (now - game.lastKeyListenerTime > 200) { // throttle
             game.setDirection(-1); 
             game.lastKeyListenerTime = now;
-             spriteList.peopleSprite.behaviors = [runInPlace];
-             peopleSpriteSheetPainter.isReverse=true;
-        } 
-    } else{
-        game.setDirection(0); 
-         spriteList.peopleSprite.behaviors = [];
-    }  
+             
+            if(behaviorList.jump.isJump){
+                console.log("跳跃中");
+               spriteList.peopleSprite.behaviors = [behaviorList.jump];
+           }else{
+                console.log('继续跑');
+               spriteList.peopleSprite.behaviors = [behaviorList.jump,behaviorList.runInPlace];
+           }
+           peopleSpriteSheetPainter.isReverse=true;
+       } 
+   } else{
+    game.setDirection(0); 
+    spriteList.peopleSprite.behaviors = [];
+}  
 }
 }
 );
 
 
-var behaviorList = {
-    moveLeftToRight: function() {
-        this.lastMove = 0;
-        this.execute = function(sprite, context, time) {
-            sprite.left += sprite.velocityX / gameControl.fps.num;
-            this.lastMove = time;
-        }
-    },
-}
+
 var peopleSpriteSheetPainter=new PeopleSpriteSheetPainter(config.runnerCells,'./image/runpeople.png', game.mycanvas, true);
 var spriteList = {   
     skySprite:new Sprite('sky2', new ImagePainter('./image/sky.png'), [new behaviorList.moveLeftToRight()]),
@@ -214,10 +277,10 @@ var spriteList = {
         twotrunksTree: new Sprite('sky1', new ImagePainter('./image/tree/tree-twotrunks.png'), [new behaviorList.moveLeftToRight()]),
     },
     grassList:{
-       grass: new Sprite('grass1', new GrassImagePainter('./image/grass/grass.png'), [new behaviorList.moveLeftToRight()]),
-       GRASS_VELOCITX:0,
-       grassOffset : 0
-   },
+     grass: new Sprite('grass1', new GrassImagePainter('./image/grass/grass.png'), [new behaviorList.moveLeftToRight()]),
+     GRASS_VELOCITX:0,
+     grassOffset : 0
+ },
 // SpriteSheetPainter:new PeopleSpriteSheetPainter(config.runnerCells,'./image/runpeople.png', true),
 peopleSprite:new Sprite('runner',peopleSpriteSheetPainter ),
 spriteInit: function() {
@@ -254,6 +317,8 @@ spriteInit: function() {
        this.peopleSprite.height = 64*size;
        this.peopleSprite.top = game.mycanvas.height- this.peopleSprite.height;
        this.peopleSprite.left = game.mycanvas.width/2- this.peopleSprite.width/2;  
+       // this.peopleSprite.behaviors = [behaviorList.jump];
+       behaviorList.jump.initialTop=this.peopleSprite.top;
    }
 };
 
@@ -276,33 +341,33 @@ var animateList = {
         spriteList.skySprite.update(self.ctx, time);
         var left=spriteList.skySprite.left;
         if(spriteList.skySprite.velocityX>0){
-           left = left < game.mycanvas.width ?left +  spriteList.skySprite.velocityX/gameControl.fps.num : 0;
-       }else{
-           left = left >- game.mycanvas.width ?left +  spriteList.skySprite.velocityX/gameControl.fps.num : 0;
-       }
-
-       spriteList.skySprite.left=left;
-       spriteList.skySprite.paint(self.ctx);      
-       spriteList.skySprite.left=left-spriteList.skySprite.width;
-       spriteList.skySprite.paint(self.ctx);       
-       spriteList.skySprite.left=left+spriteList.skySprite.width;
-       spriteList.skySprite.paint(self.ctx);      
-       spriteList.skySprite.left=left;
-   },
-
-   drawGrass: function() {
-     this.ctx.save();
-     var grassImage=game.loadImg.getImage('./image/grass/grass.png');
-     var width=spriteList.grassList.grass.width;
-     var height=spriteList.grassList.grass.height;
-     if(spriteList.grassList.GRASS_VELOCITX>=0){
-         spriteList.grassList.grassOffset = spriteList.grassList.grassOffset < game.mycanvas.width ?spriteList.grassList.grassOffset +  spriteList.grassList.GRASS_VELOCITX/gameControl.fps.num : 0;
+         left = left < game.mycanvas.width ?left +  spriteList.skySprite.velocityX/gameControl.fps.num : 0;
      }else{
-        spriteList.grassList.grassOffset = spriteList.grassList.grassOffset  >-spriteList.grassList.grass.width ?spriteList.grassList.grassOffset + spriteList.grassList.GRASS_VELOCITX/gameControl.fps.num : 0;
-    }
-    this.ctx.translate(-spriteList.grassList.grassOffset, 0);
-    spriteList.grassList.grass.paint(this.ctx);
-    this.ctx.restore();
+         left = left >- game.mycanvas.width ?left +  spriteList.skySprite.velocityX/gameControl.fps.num : 0;
+     }
+
+     spriteList.skySprite.left=left;
+     spriteList.skySprite.paint(self.ctx);      
+     spriteList.skySprite.left=left-spriteList.skySprite.width;
+     spriteList.skySprite.paint(self.ctx);       
+     spriteList.skySprite.left=left+spriteList.skySprite.width;
+     spriteList.skySprite.paint(self.ctx);      
+     spriteList.skySprite.left=left;
+ },
+
+ drawGrass: function() {
+   this.ctx.save();
+   var grassImage=game.loadImg.getImage('./image/grass/grass.png');
+   var width=spriteList.grassList.grass.width;
+   var height=spriteList.grassList.grass.height;
+   if(spriteList.grassList.GRASS_VELOCITX>=0){
+       spriteList.grassList.grassOffset = spriteList.grassList.grassOffset < game.mycanvas.width ?spriteList.grassList.grassOffset +  spriteList.grassList.GRASS_VELOCITX/gameControl.fps.num : 0;
+   }else{
+    spriteList.grassList.grassOffset = spriteList.grassList.grassOffset  >-spriteList.grassList.grass.width ?spriteList.grassList.grassOffset + spriteList.grassList.GRASS_VELOCITX/gameControl.fps.num : 0;
+}
+this.ctx.translate(-spriteList.grassList.grassOffset, 0);
+spriteList.grassList.grass.paint(this.ctx);
+this.ctx.restore();
 },
 drawTree: function(time,sprite,totalTreeCount) {        
     sprite.update(this.ctx, time);
@@ -343,24 +408,17 @@ drawTree: function(time,sprite,totalTreeCount) {
             }
         }       
     },
-    drawPeople:function(ctx,time,canvas){
-     spriteList.peopleSprite.update(ctx, time);
-     spriteList.peopleSprite.paint(ctx);
- },
+    drawPeople:function(ctx,time){
+       spriteList.peopleSprite.update(ctx, time);
+       spriteList.peopleSprite.paint(ctx);
+   },
 
 }
 
 
-var runInPlace = {
-    lastAdvance: 0,
-    PAGEFLIP_INTERVAL: 80,
-    execute: function(sprite, context, time) {
-        if (time - this.lastAdvance > this.PAGEFLIP_INTERVAL) {
-            sprite.painter.advance();
-            this.lastAdvance = time;
-        }
-    }
-};
+
+
+
 
 game.init();
 
