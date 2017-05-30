@@ -5,34 +5,11 @@
 	<title></title>
 </head>
 <body>
-	<script>
-// 	window.onkeypress=function(e){console.log("onkeypress")};
-// window.onkeydown=function(e){ console.log("onkeydown")};
-// 	window.onkeyup=function(e){ console.log("onkeyup")};
 
-var People=function(name){
-	this.name=name;
-}
-People.prototype={
-	sayhello:function(){
-		console.log('我是'+this.name);
-	}
-}
-var Student=function(name,age){
-	People.call(this,name);
-	this.age=age;
-}
-var Obj={
-	st1:{
-		config:{name:'xiangming',age:12}
-	},
-	names:'name2',
-	//stu:new Student(Obj.st1.config.name,Obj.st1.config.age)
-	//stu:new Student(this.names,12)
-	stu:this
-}
-console.log(Obj.stu);
-
-	</script>
+  <audio id='BGM' controls="controls" preload='auto'>       
+         <source src='sounds/mario/bag.mp3' type='audio/mp3'>
+      </audio>
+	
+</audio>
 </body>
 </html>
