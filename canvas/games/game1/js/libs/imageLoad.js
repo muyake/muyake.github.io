@@ -1,4 +1,4 @@
- function Loading(progressCallback, finishCallback) {
+ function imageLoading(progressCallback, finishCallback) {
      this.imageLoadingProgressCallback = progressCallback ? progressCallback : function() {
 
      };
@@ -11,7 +11,7 @@
      this.imagesFailedToLoad = 0;
      this.imagesIndex = 0;
  }
- Loading.prototype = {
+ imageLoading.prototype = {
      // 根据url获取image对象
 
      getImage: function(imageUrl) {
@@ -24,12 +24,11 @@
          this.imageProgress();
      },
      imageProgress: function() {
-         var percentage = (this.imagesLoaded + this.imagesFailedToLoad) /
-             this.imageUrls.length * 100;
-         this.imageLoadingProgressCallback(percentage);
-         if ((this.imagesLoaded + this.imagesFailedToLoad) == this.imageUrls.length) {
-             this.imageLoadingFinishCallback();
-         }
+         //var imagecount = (this.imagesLoaded + this.imagesFailedToLoad) ;
+         this.imageLoadingProgressCallback();
+         // if ((this.imagesLoaded + this.imagesFailedToLoad) == this.imageUrls.length) {
+         //     this.imageLoadingFinishCallback();
+         // }
      },
 
      //图片加载错误的回调函数

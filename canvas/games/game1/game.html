@@ -37,15 +37,19 @@
         transform: translate3d(-50%,-50%,0);
         display: none;
     }  
+    .tip{
+        display: none;
+    }
     </style>
 </head>
 
 <body>
-    <input type="button" value='暂停' id='startBtn'><input type="button" value="反向" id='revertBtn'>
+   <!--  <input type="button" value='暂停' id='startBtn'><input type="button" value="反向" id='revertBtn'> -->
+   <div class='tip'>左右键是跑动，空格键是跳跃，p键是暂停</div>
     <canvas id="mycanvas" width="1000" height="420"></canvas>
     <div id="load" class="load">        
     </div>
-         <audio id='BGM' preload='auto'>
+        <!--  <audio id='BGM' preload='auto'>
          <source src='sounds/mario/bag.mp3' type='audio/ogg'>
          <source src='sounds/mario/bag.mp3' type='audio/mp3'>
       </audio>
@@ -53,10 +57,12 @@
       <audio id='jump' preload='auto'>
          <source src='sounds/mario/whoosh.ogg' type='audio/ogg'>
          <source src='sounds/mario/whoosh.mp3' type='audio/mp3'>
-      </audio>
+      </audio> -->
         <script src='./js/libs/public.js'> </script>
     <script src = './js/libs/requestNextAnimationFrame.js'></script>
     <script src='./js/libs/imageLoad.js'>
+    </script>
+    <script src='./js/libs/loadMp3.js'>
     </script>
     <script src='./js/progressbar.js'> 
     </script>
