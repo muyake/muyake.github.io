@@ -5,10 +5,32 @@
 	<title></title>
 </head>
 <body>
-
-  <audio id='BGM' controls="controls" preload='auto'>       
+	<input type="button" value="-" id="minuteBtn">
+	<input type="button" value="+" id="addBtn">
+ <!--  <audio id='BGM' >       
          <source src='sounds/mario/bag.mp3' type='audio/mp3'>
-      </audio>
+         </audio> -->
+         <script>
+      	// var myaudio = document.getElementById("BGM");
+      	//   myaudio.autoplay = true;  
+      	//   myaudio.play()
+      	var audio = document.createElement("audio");
+      	audio.src = "sounds/mario/bag.mp3";
+      	audio.autoplay=true;
+      	audio.currentTime=10;
+		audio.play();
+		//
+		var end = 15;
+		audio.addEventListener('timeupdate', function () { 
+			if(audio.currentTime>end){
+				audio.pause();
+			}
+		}, false);  
+		audio.addEventListener('loadedmetadata', function () { 
+			audio.play();  
+		}, false); 
+
+	</script>
 	
 </audio>
 </body>
