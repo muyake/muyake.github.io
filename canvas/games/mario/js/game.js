@@ -200,6 +200,7 @@ var game = {
       case 0:
         {
           spriteList.treeList.smallTree.velocityX = 0;
+          spriteList.skySprite.velocityX = 0;
           spriteList.treeList.twotrunksTree.velocityX = 0;
           spriteList.grassList.GRASS_VELOCITX = 0;
         }
@@ -208,6 +209,7 @@ var game = {
         {
 
           spriteList.treeList.smallTree.velocityX = -spriteList.treeList.smallTree.initialVelocitX;
+          spriteList.skySprite.velocityX = -spriteList.skySprite.initialVelocitX;
           spriteList.treeList.twotrunksTree.velocityX = -spriteList.treeList.twotrunksTree.initialVelocitX;
           spriteList.grassList.GRASS_VELOCITX = -spriteList.grassList.initialGRASS_VELOCITX;
         }
@@ -215,6 +217,7 @@ var game = {
       case -1:
         {
           spriteList.treeList.smallTree.velocityX = spriteList.treeList.smallTree.initialVelocitX;
+          spriteList.skySprite.velocityX = spriteList.skySprite.initialVelocitX;
           spriteList.treeList.twotrunksTree.velocityX = spriteList.treeList.twotrunksTree.initialVelocitX;
           spriteList.grassList.GRASS_VELOCITX = spriteList.grassList.initialGRASS_VELOCITX;
         }
@@ -313,8 +316,8 @@ var spriteList = {
   peopleSprite: new Sprite('runner', peopleSpriteSheetPainter),
   spriteInit: function() {
     this.skySprite.width = game.mycanvas.width;
-    this.skySprite.height = 728;
-    this.skySprite.velocityX = 8 * gameControl.speed;
+    this.skySprite.height = game.mycanvas.height;
+    this.skySprite.initialVelocitX = 8 * gameControl.speed;
     this.skySprite.top = 0;
     this.skySprite.left = 0;
     //treeinit
