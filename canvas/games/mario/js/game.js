@@ -1,3 +1,163 @@
+var mario = {
+  leftConfig: {
+    totalCount: 21,
+    sprite_0: {
+      width: 50,
+      height: 62,
+      left: 5,
+      top: 5,
+    },
+
+    sprite_1: {
+      width: 53,
+      height: 68,
+      left: 65,
+      top: 5,
+    },
+
+    sprite_10: {
+      width: 50,
+      height: 64,
+      left: 128,
+      top: 5,
+    },
+
+    sprite_11: {
+      width: 50,
+      height: 67,
+      left: 188,
+      top: 5,
+    },
+
+    sprite_12: {
+      width: 39,
+      height: 68,
+      left: 248,
+      top: 5,
+    },
+
+    sprite_13: {
+      width: 35,
+      height: 68,
+      left: 5,
+      top: 83,
+    },
+
+    sprite_14: {
+      width: 32,
+      height: 68,
+      left: 50,
+      top: 83,
+    },
+
+    sprite_15: {
+      width: 33,
+      height: 68,
+      left: 92,
+      top: 83,
+    },
+
+    sprite_16: {
+      width: 32,
+      height: 68,
+      left: 135,
+      top: 83,
+    },
+
+    sprite_17: {
+      width: 35,
+      height: 72,
+      left: 177,
+      top: 83,
+    },
+
+    sprite_18: {
+      width: 36,
+      height: 73,
+      left: 222,
+      top: 83,
+    },
+
+    sprite_19: {
+      width: 44,
+      height: 69,
+      left: 5,
+      top: 166,
+    },
+
+    sprite_2: {
+      width: 48,
+      height: 68,
+      left: 59,
+      top: 166,
+    },
+
+    sprite_20: {
+      width: 48,
+      height: 65,
+      left: 117,
+      top: 166,
+    },
+
+    sprite_21: {
+      width: 49,
+      height: 63,
+      left: 175,
+      top: 166,
+    },
+
+    sprite_3: {
+      width: 48,
+      height: 69,
+      left: 234,
+      top: 166,
+    },
+
+    sprite_4: {
+      width: 44,
+      height: 68,
+      left: 297,
+      top: 5,
+    },
+
+    sprite_5: {
+      width: 39,
+      height: 72,
+      left: 268,
+      top: 83,
+    },
+
+    sprite_6: {
+      width: 40,
+      height: 71,
+      left: 292,
+      top: 165,
+    },
+
+    sprite_7: {
+      width: 44,
+      height: 68,
+      left: 5,
+      top: 246,
+    },
+
+    sprite_8: {
+      width: 50,
+      height: 63,
+      left: 59,
+      top: 246,
+    },
+    sprite_9: {
+      width: 53,
+      height: 63,
+      left: 119,
+      top: 246,
+    }
+  }
+};
+
+
+
 var config = {
   runnerCells: [{
     left: 0,
@@ -58,14 +218,22 @@ var behaviorList = {
       this.lastMove = time;
     }
   },
+  // peopleMoveLeftToRight {
+  //     this.behaviorName = 'peopleMoveLeftToRight';
+  //     this.lastMove = 0;
+  //     this.execute = function(sprite, context, time) {
+  //         sprite.left += sprite.velocityX / gameControl.fps.num;
+  //         this.lastMove = time;
+  //     }
+  // },
   //小人跑动动画
   runInPlace: {
     lastAdvance: 0,
-    PAGEFLIP_INTERVAL: 80,
+    PAGEFLIP_INTERVAL: 30,
     behaviorName: 'runInPlace',
     execute: function(sprite, context, time) {
       if (time - this.lastAdvance > this.PAGEFLIP_INTERVAL) {
-        sprite.painter.advance();
+        sprite.painter.advance(sprite);
         this.lastAdvance = time;
       }
     }
@@ -108,6 +276,7 @@ var game = {
     // './images/imgBoom/bomb.png',
     // './images/imgBoom/bomb-no-fuse.png',
   ],
+  scale: 0.5,
   audioList: [
     './sounds/mario/jump_big.mp3',
     './sounds/mario/bag.mp3',
@@ -140,13 +309,18 @@ var game = {
     this.audioObjList.bgm.play();
   },
   loadImg: undefined,
+  addImgList: function() {
+    // for (var i = 0; i < 21; i++) {
+    //   this.imageList.push("./images/mario/smallmario/marioR/" + i + ".png");
+    // };
+    this.imageList.push("./images/mario/smallmario/marioR/spritesrun.png");
+    this.imageList.push("./images/mario/smallmario/marioR/jump.png");
+    this.imageList.push("./images/mario/smallmario/marioR/stand.png");
+  },
   init: function() {
     this.progressbar = new COREHTML5.Progressbar(this.progressDiv, 'rgba(0,0,0,0.5)', 100, 130, 250);
     this.loadImg = new imageLoading(this.progressCallback.bind(this), this.progressOver.bind(this));
-    for (var i = 0; i < 9; i++) {
-      this.imageList.push("./image/imgBoom/explosion-0" + i + ".png");
-      this.imageList.push("./image/imgBoom/fuse-0" + i + ".png");
-    };
+    this.addImgList();
     this.loadSourceCount = this.imageList.length + this.audioList.length;
     var self = this;
     this.imageList.forEach(function(item, index, arr) {
@@ -231,9 +405,9 @@ gameControl.speed = 2;
 gameControl.startAnimate = function(time) {
   game.activeEventCallback(gameControl.mapKey);
   animateList.drawSkySingle(time);
-  animateList.drawTree(time, spriteList.treeList.smallTree, 5);
-  animateList.drawTree(time, spriteList.treeList.twotrunksTree, 4);
-  animateList.drawGrass();
+  // animateList.drawTree(time, spriteList.treeList.smallTree, 5);
+  // animateList.drawTree(time, spriteList.treeList.twotrunksTree, 4);
+  //animateList.drawGrass();
   animateList.drawPeople(gameControl.context, time);
   animateList.countDown(time);
 };
@@ -300,7 +474,7 @@ gameControl.addKeyListener({
 });
 
 
-var peopleSpriteSheetPainter = new PeopleSpriteSheetPainter(config.runnerCells, './image/runpeople.png', game.mycanvas, false);
+var peopleSpriteSheetPainter = new PeopleSpriteSheetPainter(mario.leftConfig, './images/mario/smallmario/marioR/spritesrun.png', game.mycanvas, mario.leftConfig.totalCount);
 var spriteList = {
   skySprite: new Sprite('sky2', new ImagePainter('./images/background.png'), [new behaviorList.moveLeftToRight()]),
   treeList: {
@@ -316,7 +490,7 @@ var spriteList = {
   peopleSprite: new Sprite('runner', peopleSpriteSheetPainter),
   spriteInit: function() {
     this.skySprite.width = game.mycanvas.width;
-    this.skySprite.height = game.mycanvas.height;
+    this.skySprite.height = game.mycanvas.height + game.mycanvas.height * 0.02;
     this.skySprite.initialVelocitX = 8 * gameControl.speed;
     this.skySprite.top = 0;
     this.skySprite.left = 0;
@@ -340,13 +514,12 @@ var spriteList = {
     this.grassList.grass.height = 52;
     this.grassList.grass.top = game.mycanvas.height - spriteList.grassList.grass.height;
 
-    //people
-    var size = 2;
+    //people 
     this.peopleSprite.velocityX = 50;
     //this.peopleSprite.velocityY = 50;
-    this.peopleSprite.width = 35 * size;
-    this.peopleSprite.height = 64 * size;
-    this.peopleSprite.top = game.mycanvas.height - this.peopleSprite.height;
+    this.peopleSprite.width = 33;
+    this.peopleSprite.height = 68;
+    this.peopleSprite.top = game.mycanvas.height - this.peopleSprite.height * 1.2;
     this.peopleSprite.left = game.mycanvas.width / 2 - this.peopleSprite.width / 2;
     // this.peopleSprite.behaviors = [behaviorList.jump];
     behaviorList.jump.initialTop = this.peopleSprite.top;

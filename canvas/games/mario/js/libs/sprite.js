@@ -21,7 +21,7 @@ Sprite.prototype = {
 	visible: true,
 	velocityX: 0,
 	velocityY: 0,
-	initialVelocity:0,
+	initialVelocity: 0,
 	paint: function(context) {
 		if (this.painter !== undefined && this.visible) {
 			this.painter.paint(this, context);
@@ -35,7 +35,7 @@ Sprite.prototype = {
 };
 
 var ImagePainter = function(imageUrl) {
-	if(!!imageUrl){
+	if (!!imageUrl) {
 		this.image = new Image();
 		this.image.src = imageUrl;
 	}
@@ -49,105 +49,101 @@ ImagePainter.prototype = {
 	}
 }
 
-var GrassImagePainter=function(imageUrl){
-	ImagePainter.call(this,imageUrl);
+var GrassImagePainter = function(imageUrl) {
+	ImagePainter.call(this, imageUrl);
 	// this.image=new Image();
 	// this.image.src = imageUrl;
 }
 
-GrassImagePainter.prototype= Object.create(ImagePainter.prototype);
+GrassImagePainter.prototype = Object.create(ImagePainter.prototype);
 
 
-GrassImagePainter.prototype.constructor = GrassImagePainter; 
-GrassImagePainter.prototype.paint= function(sprite, context) {
+GrassImagePainter.prototype.constructor = GrassImagePainter;
+GrassImagePainter.prototype.paint = function(sprite, context) {
 	if (!!this.image) {
-		context.drawImage(this.image, 0, sprite.top,sprite.width,sprite.height);
-		context.drawImage(this.image, sprite.width-5,sprite.top,sprite.width,sprite.height);
-		context.drawImage(this.image, -sprite.width+5,sprite.top,sprite.width,sprite.height);
+		context.drawImage(this.image, 0, sprite.top, sprite.width, sprite.height);
+		context.drawImage(this.image, sprite.width - 5, sprite.top, sprite.width, sprite.height);
+		context.drawImage(this.image, -sprite.width + 5, sprite.top, sprite.width, sprite.height);
 	}
 };
 
-SpriteSheetPainter =function(cells,spritesheeturl,mycanvas){
-	this.cells=cells||[];
-	this.spritesheet=new Image();
-	this.spritesheet.src=spritesheeturl;
-	 this.cellIndex = 0;
-	 this.mycanvas=mycanvas;
-},
-
-SpriteSheetPainter.prototype={
-	advance:function(){
-		if(this.cellIndex==this.cells.length-1){
-			this.cellIndex=0;
-		}else{
-			this.cellIndex++;
-		}
+SpriteSheetPainter = function(cells, spritesheeturl, mycanvas) {
+		this.cells = cells || [];
+		this.spritesheet = new Image();
+		this.spritesheet.src = spritesheeturl;
+		this.cellIndex = 0;
+		this.mycanvas = mycanvas;
 	},
-	paint:function(sprite,context){
-		var cell=this.cells[this.cellIndex];
-		context.drawImage(this.spritesheet.cell.left,cell.top,cell.width,cell.heightsprite.left, sprite.top, cell.width , cell.height);
+
+	SpriteSheetPainter.prototype = {
+		advance: function() {
+			if (this.cellIndex == this.cells.length - 1) {
+				this.cellIndex = 0;
+			} else {
+				this.cellIndex++;
+			}
+		},
+		paint: function(sprite, context) {
+			var cell = this.cells[this.cellIndex];
+			context.drawImage(this.spritesheet.cell.left, cell.top, cell.width, cell.heightsprite.left, sprite.top, cell.width, cell.height);
+		}
+	}
+
+PeopleSpriteSheetPainter = function(cells, spritesheeturl, mycanvas, imgcount) {
+	SpriteSheetPainter.call(this, cells, spritesheeturl, mycanvas);
+	this.imgcount = imgcount;
+}
+PeopleSpriteSheetPainter.prototype = Object.create(SpriteSheetPainter.prototype);
+PeopleSpriteSheetPainter.prototype.paint = function(sprite, context) {
+	var cell = this.cells['sprite_' + this.cellIndex];
+	context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
+}
+PeopleSpriteSheetPainter.prototype.advance = function(sprite, context) {
+	if (this.cellIndex == this.imgcount) {
+		this.cellIndex = 0;
+	} else {
+		this.cellIndex++;
 	}
 }
 
-PeopleSpriteSheetPainter=function(cells,spritesheeturl,mycanvas,isReverse){
-	SpriteSheetPainter.call(this,cells,spritesheeturl,mycanvas);
-	this.isReverse=isReverse;
-}
-PeopleSpriteSheetPainter.prototype=Object.create(SpriteSheetPainter.prototype);
-PeopleSpriteSheetPainter.prototype.paint=function(sprite,context){
-	var cell = this.cells[this.cellIndex];	
-	if(this.isReverse){
-		
-		context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width , sprite.height );
- 
- 	}else{
- 	var canvas=	this.mycanvas;
-		context.translate(canvas.width, 0);
-		context.scale(-1, 1)
-		context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, canvas.width - sprite.width  - sprite.left, sprite.top, cell.width * 2, cell.height * 2);
-		context.translate(canvas.width, 0);
-		context.scale(-1, 1);
-	}
-}
-
-var SpriteAnimator=function(painters,elapsedCallback){
-	this.painters=painters;
-	if(elapsedCallback){
-		this.elapsedCallback=elapsedCallback;
+var SpriteAnimator = function(painters, elapsedCallback) {
+	this.painters = painters;
+	if (elapsedCallback) {
+		this.elapsedCallback = elapsedCallback;
 	}
 };
-SpriteAnimator.prototype={
-	painters:[],
-	duration:1000,
-	startTime:0,
-	index:0,
-	elapsedCallback:undefined,
-	end:function(sprite,originalPainter){
-		sprite.animating=false;
-		if(this.elapsedCallback){
+SpriteAnimator.prototype = {
+	painters: [],
+	duration: 1000,
+	startTime: 0,
+	index: 0,
+	elapsedCallback: undefined,
+	end: function(sprite, originalPainter) {
+		sprite.animating = false;
+		if (this.elapsedCallback) {
 			this.elapsedCallback(sprite);
-		}else{
-			sprite.painter=originalPainter;
+		} else {
+			sprite.painter = originalPainter;
 		}
 	},
-	start:function(sprite,duration){
-		var endTime=+new Date()+duration;
-		var periond=duration/(this.painters.length);
-		var interval=undefined;
-		var animator=this;
-		var originalPainter=sprite.painters;
-		this.index=0;
-		sprite.animating=true;
-		sprite.painter=this.painters[this.index];
-		interval=setInterval(function(){
-			if(+new Date()<endTime){
-				sprite.painter=animator.painters[++animator.index];
+	start: function(sprite, duration) {
+		var endTime = +new Date() + duration;
+		var periond = duration / (this.painters.length);
+		var interval = undefined;
+		var animator = this;
+		var originalPainter = sprite.painters;
+		this.index = 0;
+		sprite.animating = true;
+		sprite.painter = this.painters[this.index];
+		interval = setInterval(function() {
+			if (+new Date() < endTime) {
+				sprite.painter = animator.painters[++animator.index];
 
-			}else{
-				animator.end(sprite,originalPainter);
+			} else {
+				animator.end(sprite, originalPainter);
 				clearInterval(interval);
 			}
-		},period);
+		}, period);
 
 	}
 
