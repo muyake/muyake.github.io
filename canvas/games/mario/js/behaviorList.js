@@ -46,8 +46,14 @@ var behaviorList = {
         if (this.velocityY < 200) {
           this.velocityY = this.velocityY + publicConfig.GRAVITY_FORCE / gameControl.fps.num;
           sprite.top += this.velocityY / gameControl.fps.num;
-          sprite.top = sprite.top < this.initialTop ? sprite.top : this.initialTop;
-          this.isJump = true;
+          // sprite.top = sprite.top < this.initialTop ? sprite.top : this.initialTop;
+          // this.isJump = true;
+          if (sprite.top < this.initialTop) {
+            this.isJump = true;
+          } else {
+            sprite.top = this.initialTop;
+          }
+
         } else {
           this.isJump = false;
           //callback();

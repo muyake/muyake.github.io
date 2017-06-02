@@ -79,7 +79,6 @@ var game = {
       if ((mapKeyArr[37] && !mapKeyArr[39] && !mapKeyArr[32])) {
         game.setDirection(-1);
         spriteList.peopleSprite.isReverse = false;
-        //spriteList.peopleSprite.painter = peoplePainter.run;
         // console.log("按左键");    
       } else {
         // console.log("按右键");
@@ -276,12 +275,12 @@ var spriteList = {
     this.peopleSprite.top = game.mycanvas.height - this.peopleSprite.height * 1.2;
     this.peopleSprite.left = game.mycanvas.width / 2 - this.peopleSprite.width / 2;
     this.peopleSprite.behaviorStatus = {
-      runInPlace: new behaviorList.runInPlace(),
-      jump: new behaviorList.jump({
-        initialTop: this.peopleSprite.top
-      }),
-    }
-    spriteList.peopleSprite.behaviors = [spriteList.peopleSprite.behaviorStatus.runInPlace];
+        runInPlace: new behaviorList.runInPlace(),
+        jump: new behaviorList.jump({
+          initialTop: this.peopleSprite.top
+        }),
+      }
+      //spriteList.peopleSprite.behaviors = [spriteList.peopleSprite.behaviorStatus.runInPlace];
     spriteList.peopleSprite.painter = peoplePainter.stand;
   }
 };
