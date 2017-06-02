@@ -1,268 +1,3 @@
-var mario = {
-  leftConfig: {
-    totalCount: 21,
-    sprite_0: {
-      width: 50,
-      height: 62,
-      left: 5,
-      top: 5,
-    },
-
-    sprite_1: {
-      width: 53,
-      height: 68,
-      left: 65,
-      top: 5,
-    },
-
-    sprite_10: {
-      width: 50,
-      height: 64,
-      left: 128,
-      top: 5,
-    },
-
-    sprite_11: {
-      width: 50,
-      height: 67,
-      left: 188,
-      top: 5,
-    },
-
-    sprite_12: {
-      width: 39,
-      height: 68,
-      left: 248,
-      top: 5,
-    },
-
-    sprite_13: {
-      width: 35,
-      height: 68,
-      left: 5,
-      top: 83,
-    },
-
-    sprite_14: {
-      width: 32,
-      height: 68,
-      left: 50,
-      top: 83,
-    },
-
-    sprite_15: {
-      width: 33,
-      height: 68,
-      left: 92,
-      top: 83,
-    },
-
-    sprite_16: {
-      width: 32,
-      height: 68,
-      left: 135,
-      top: 83,
-    },
-
-    sprite_17: {
-      width: 35,
-      height: 72,
-      left: 177,
-      top: 83,
-    },
-
-    sprite_18: {
-      width: 36,
-      height: 73,
-      left: 222,
-      top: 83,
-    },
-
-    sprite_19: {
-      width: 44,
-      height: 69,
-      left: 5,
-      top: 166,
-    },
-
-    sprite_2: {
-      width: 48,
-      height: 68,
-      left: 59,
-      top: 166,
-    },
-
-    sprite_20: {
-      width: 48,
-      height: 65,
-      left: 117,
-      top: 166,
-    },
-
-    sprite_21: {
-      width: 49,
-      height: 63,
-      left: 175,
-      top: 166,
-    },
-
-    sprite_3: {
-      width: 48,
-      height: 69,
-      left: 234,
-      top: 166,
-    },
-
-    sprite_4: {
-      width: 44,
-      height: 68,
-      left: 297,
-      top: 5,
-    },
-
-    sprite_5: {
-      width: 39,
-      height: 72,
-      left: 268,
-      top: 83,
-    },
-
-    sprite_6: {
-      width: 40,
-      height: 71,
-      left: 292,
-      top: 165,
-    },
-
-    sprite_7: {
-      width: 44,
-      height: 68,
-      left: 5,
-      top: 246,
-    },
-
-    sprite_8: {
-      width: 50,
-      height: 63,
-      left: 59,
-      top: 246,
-    },
-    sprite_9: {
-      width: 53,
-      height: 63,
-      left: 119,
-      top: 246,
-    }
-  }
-};
-
-
-
-var config = {
-  runnerCells: [{
-    left: 0,
-    top: 0,
-    width: 47,
-    height: 64
-  }, {
-    left: 55,
-    top: 0,
-    width: 44,
-    height: 64
-  }, {
-    left: 107,
-    top: 0,
-    width: 39,
-    height: 64
-  }, {
-    left: 150,
-    top: 0,
-    width: 46,
-    height: 64
-  }, {
-    left: 208,
-    top: 0,
-    width: 49,
-    height: 64
-  }, {
-    left: 265,
-    top: 0,
-    width: 46,
-    height: 64
-  }, {
-    left: 320,
-    top: 0,
-    width: 42,
-    height: 64
-  }, {
-    left: 380,
-    top: 0,
-    width: 35,
-    height: 64
-  }, {
-    left: 425,
-    top: 0,
-    width: 35,
-    height: 64
-  }],
-  //重力加速度
-  GRAVITY_FORCE: 9.81 * 2,
-}
-
-var behaviorList = {
-  moveLeftToRight: function() {
-    this.behaviorName = 'moveLeftToRight';
-    this.lastMove = 0;
-    this.execute = function(sprite, context, time) {
-      sprite.left += sprite.velocityX / gameControl.fps.num;
-      this.lastMove = time;
-    }
-  },
-  // peopleMoveLeftToRight {
-  //     this.behaviorName = 'peopleMoveLeftToRight';
-  //     this.lastMove = 0;
-  //     this.execute = function(sprite, context, time) {
-  //         sprite.left += sprite.velocityX / gameControl.fps.num;
-  //         this.lastMove = time;
-  //     }
-  // },
-  //小人跑动动画
-  runInPlace: {
-    lastAdvance: 0,
-    PAGEFLIP_INTERVAL: 30,
-    behaviorName: 'runInPlace',
-    execute: function(sprite, context, time) {
-      if (time - this.lastAdvance > this.PAGEFLIP_INTERVAL) {
-        sprite.painter.advance(sprite);
-        this.lastAdvance = time;
-      }
-    }
-  },
-  //小人跳动
-  jump: {
-    velocityY: 0,
-    lastAdvance: 0,
-    isJump: false,
-    initialTop: 0,
-    behaviorName: 'jump',
-    execute: function(sprite, context, time) {
-      if (this.lastAdvance !== 0) {
-        if (this.velocityY < 200) {
-          this.velocityY = this.velocityY + config.GRAVITY_FORCE / gameControl.fps.num * 18;
-          sprite.top += this.velocityY / gameControl.fps.num;
-          sprite.top = sprite.top < this.initialTop ? sprite.top : this.initialTop;
-          this.isJump = true;
-        } else {
-          this.isJump = false;
-          //   console.log("蹦跳结束");
-        }
-      }
-      this.lastAdvance = time;
-    }
-  }
-
-}
-
 var game = {
   lastKeyListenerTime: 0,
   imageList: [
@@ -341,31 +76,43 @@ var game = {
   activeEventCallback: function(mapKeyArr) {
     var now = +new Date();
     if (((mapKeyArr[37] && !mapKeyArr[39] && !mapKeyArr[32]) || (!mapKeyArr[37] && mapKeyArr[39] && !mapKeyArr[32])) && (now - game.lastKeyListenerTime > 200)) {
-
       if ((mapKeyArr[37] && !mapKeyArr[39] && !mapKeyArr[32])) {
         game.setDirection(-1);
-        peopleSpriteSheetPainter.isReverse = true;
+        spriteList.peopleSprite.isReverse = false;
+        //spriteList.peopleSprite.painter = peoplePainter.run;
         // console.log("按左键");    
       } else {
         // console.log("按右键");
-        peopleSpriteSheetPainter.isReverse = false;
+        spriteList.peopleSprite.isReverse = true;
         game.setDirection(1);
       }
       game.lastKeyListenerTime = now;
-      spriteList.peopleSprite.behaviors = behaviorList.jump.isJump ? [behaviorList.jump] : [behaviorList.runInPlace];
+      if (spriteList.peopleSprite.behaviorStatus.jump.isJump) {
+        spriteList.peopleSprite.painter = peoplePainter.jump;
+      } else {
+        spriteList.peopleSprite.painter = peoplePainter.run;
+      }
+      spriteList.peopleSprite.behaviors = spriteList.peopleSprite.behaviorStatus.jump.isJump ? [spriteList.peopleSprite.behaviorStatus.jump] : [spriteList.peopleSprite.behaviorStatus.runInPlace];
     }
     // console.log("按右键和空格键或按左键和空格键或按只空格键");       
     if (mapKeyArr[32]) {
-      if (!behaviorList.jump.isJump) { // throttle
-        behaviorList.jump.velocityY = -200;
+      if (!spriteList.peopleSprite.behaviorStatus.jump.isJump) { // throttle
+        spriteList.peopleSprite.behaviorStatus.jump.velocityY = -200;
       }
-      spriteList.peopleSprite.behaviors = [behaviorList.jump];
+      spriteList.peopleSprite.painter = peoplePainter.jump;
+      spriteList.peopleSprite.behaviors = [spriteList.peopleSprite.behaviorStatus.jump];
 
     }
     if ((!mapKeyArr[37] && !mapKeyArr[39]) || (mapKeyArr[37] && mapKeyArr[39])) {
       // console.log('不按键或左右都按');
       game.setDirection(0);
-      spriteList.peopleSprite.behaviors = [behaviorList.jump];
+      //  spriteList.peopleSprite.painter = peoplePainter.stand;
+      if (spriteList.peopleSprite.behaviorStatus.jump.isJump) {
+        spriteList.peopleSprite.painter = peoplePainter.jump;
+      } else {
+        spriteList.peopleSprite.painter = peoplePainter.stand;
+      }
+      spriteList.peopleSprite.behaviors = [spriteList.peopleSprite.behaviorStatus.jump];
     }
   },
 
@@ -441,7 +188,7 @@ gameControl.addKeyListener({
   listener: function(status) {
     if (status == 1) {
       gameControl.mapKey[32] = true;
-      if (!behaviorList.jump.isJump && !gameControl.paused) {
+      if (!spriteList.peopleSprite.behaviorStatus.jump && !gameControl.paused) {
         game.audioObjList.bigJump.currentTime = 0.7;
         game.audioObjList.bigJump.play();
       }
@@ -473,8 +220,13 @@ gameControl.addKeyListener({
   }
 });
 
+var peoplePainter = {
+    run: new PeopleRunSpriteSheetPainter(mario.config, './images/mario/smallmario/marioR/spritesrun.png', game.mycanvas, mario.config.totalCount),
+    jump: new CharacterImagePainter('./images/mario/smallmario/marioR/jump.png'),
+    stand: new CharacterImagePainter('./images/mario/smallmario/marioR/stand.png'),
+  }
+  //var peopleRunSpriteSheetPainter = new PeopleRunSpriteSheetPainter(mario.config, './images/mario/smallmario/marioR/spritesrun.png', game.mycanvas, mario.config.totalCount);
 
-var peopleSpriteSheetPainter = new PeopleSpriteSheetPainter(mario.leftConfig, './images/mario/smallmario/marioR/spritesrun.png', game.mycanvas, mario.leftConfig.totalCount);
 var spriteList = {
   skySprite: new Sprite('sky2', new ImagePainter('./images/background.png'), [new behaviorList.moveLeftToRight()]),
   treeList: {
@@ -486,8 +238,8 @@ var spriteList = {
     GRASS_VELOCITX: 0,
     grassOffset: 0
   },
-  // SpriteSheetPainter:new PeopleSpriteSheetPainter(config.runnerCells,'./image/runpeople.png', true),
-  peopleSprite: new Sprite('runner', peopleSpriteSheetPainter),
+  // SpriteSheetPainter:new PeopleRunSpriteSheetPainter(config.runnerCells,'./image/runpeople.png', true),
+  peopleSprite: new Character('mario', peoplePainter.stand, [], true, game.mycanvas),
   spriteInit: function() {
     this.skySprite.width = game.mycanvas.width;
     this.skySprite.height = game.mycanvas.height + game.mycanvas.height * 0.02;
@@ -514,6 +266,8 @@ var spriteList = {
     this.grassList.grass.height = 52;
     this.grassList.grass.top = game.mycanvas.height - spriteList.grassList.grass.height;
 
+
+
     //people 
     this.peopleSprite.velocityX = 50;
     //this.peopleSprite.velocityY = 50;
@@ -521,9 +275,14 @@ var spriteList = {
     this.peopleSprite.height = 68;
     this.peopleSprite.top = game.mycanvas.height - this.peopleSprite.height * 1.2;
     this.peopleSprite.left = game.mycanvas.width / 2 - this.peopleSprite.width / 2;
-    // this.peopleSprite.behaviors = [behaviorList.jump];
-    behaviorList.jump.initialTop = this.peopleSprite.top;
-    spriteList.peopleSprite.behaviors = [behaviorList.runInPlace];
+    this.peopleSprite.behaviorStatus = {
+      runInPlace: new behaviorList.runInPlace(),
+      jump: new behaviorList.jump({
+        initialTop: this.peopleSprite.top
+      }),
+    }
+    spriteList.peopleSprite.behaviors = [spriteList.peopleSprite.behaviorStatus.runInPlace];
+    spriteList.peopleSprite.painter = peoplePainter.stand;
   }
 };
 

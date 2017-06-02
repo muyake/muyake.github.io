@@ -104,7 +104,7 @@ PeopleSpriteSheetPainter.prototype.paint=function(sprite,context){
  	var canvas=	this.mycanvas;
 		context.translate(canvas.width, 0);
 		context.scale(-1, 1)
-		context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, canvas.width - sprite.width  - sprite.left, sprite.top, cell.width * 2, cell.height * 2);
+		context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, canvas.width - sprite.width - sprite.left, sprite.top, cell.width * 2, cell.height * 2);
 		context.translate(canvas.width, 0);
 		context.scale(-1, 1);
 	}

@@ -34,6 +34,8 @@ Sprite.prototype = {
 	}
 };
 
+
+//Character.prototype.
 var ImagePainter = function(imageUrl) {
 	if (!!imageUrl) {
 		this.image = new Image();
@@ -88,23 +90,6 @@ SpriteSheetPainter = function(cells, spritesheeturl, mycanvas) {
 			context.drawImage(this.spritesheet.cell.left, cell.top, cell.width, cell.heightsprite.left, sprite.top, cell.width, cell.height);
 		}
 	}
-
-PeopleSpriteSheetPainter = function(cells, spritesheeturl, mycanvas, imgcount) {
-	SpriteSheetPainter.call(this, cells, spritesheeturl, mycanvas);
-	this.imgcount = imgcount;
-}
-PeopleSpriteSheetPainter.prototype = Object.create(SpriteSheetPainter.prototype);
-PeopleSpriteSheetPainter.prototype.paint = function(sprite, context) {
-	var cell = this.cells['sprite_' + this.cellIndex];
-	context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
-}
-PeopleSpriteSheetPainter.prototype.advance = function(sprite, context) {
-	if (this.cellIndex == this.imgcount) {
-		this.cellIndex = 0;
-	} else {
-		this.cellIndex++;
-	}
-}
 
 var SpriteAnimator = function(painters, elapsedCallback) {
 	this.painters = painters;
