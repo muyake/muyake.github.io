@@ -1,10 +1,16 @@
+
+//游戏所有元素的动作对象
+
+
 //所有行为
 var behaviorList = {
   moveLeftToRight: function() {
     this.behaviorName = 'moveLeftToRight';
     this.lastMove = 0;
-    this.execute = function(sprite, context, time) {
-      sprite.left += sprite.velocityX / gameControl.fps.num;
+    this.fpsNum=60;
+    this.execute = function(sprite, context, time,fpsNum) {
+     this.fpsNum=(fpsNum==0)?0:(fpsNum||this.fpsNum);
+      sprite.left += sprite.velocityX / this.fpsNum;
       this.lastMove = time;
     }
   },
@@ -34,6 +40,7 @@ var behaviorList = {
       isJump: false,
       initialTop: 0,
       behaviorName: 'jump',
+      GRAVITY_FORCE:9.8,
     };
     lib.jQueryExtend(defaultSetting, setting);
     this.lastAdvance = defaultSetting.lastAdvance;
@@ -41,23 +48,21 @@ var behaviorList = {
     this.isJump = defaultSetting.isJump;
     this.initialTop = defaultSetting.initialTop;
     this.behaviorName = defaultSetting.behaviorName;
-    this.execute = function(sprite, context, time) {
+    this.GRAVITY_FORCE=defaultSetting.GRAVITY_FORCE;
+    this.fpsNum=60;
+    this.execute = function(sprite, context, time,fpsNum) {
       if (this.lastAdvance !== 0) {
         if (this.velocityY < 200) {
-          this.velocityY = this.velocityY + publicConfig.GRAVITY_FORCE / gameControl.fps.num;
-          sprite.top += this.velocityY / gameControl.fps.num;
-          // sprite.top = sprite.top < this.initialTop ? sprite.top : this.initialTop;
-          // this.isJump = true;
+            this.fpsNum=(fpsNum==0)?0:(fpsNum||this.fpsNum);
+          this.velocityY = this.velocityY + this.GRAVITY_FORCE / gameControl.fps.num;
+          sprite.top += this.velocityY / this.fpsNum;          
           if (sprite.top < this.initialTop) {
             this.isJump = true;
           } else {
             sprite.top = this.initialTop;
           }
-
         } else {
-          this.isJump = false;
-          //callback();
-          //   console.log("蹦跳结束");
+          this.isJump = false;        
         }
       }
       this.lastAdvance = time;

@@ -1,25 +1,9 @@
 var game = {
-  lastKeyListenerTime: 0,
-  imageList: [
-    './images/background.png',
-    // './images/grass/grass2.png',
-    // './images/runpeople.png',
-    // './images/sky.png',
-    // './images/tree/smalltree.png',
-    // './images/tree/tree.png',
-    // './images/tree/tree-twotrunks.png',
-    // './images/imgBoom/bomb.png',
-    // './images/imgBoom/bomb-no-fuse.png',
-  ],
-  scale: 0.5,
-  audioList: [
-    './sounds/mario/jump_big.mp3',
-    './sounds/mario/bag.mp3',
-  ],
+  lastKeyListenerTime: 0, 
   loadSourceNum: 0,
   audioObjList: {
-    bgm: new Audio('./sounds/mario/bag.mp3'),
-    bigJump: new Audio('./sounds/mario/jump_big.mp3'),
+    bgm: new Audio(gameSourceUrl.audioList.BGM),
+    bigJump: new Audio(gameSourceUrl.audioList.bigJump),
   },
   mycanvas: document.getElementById('mycanvas'),
   progressDiv: document.getElementById('load'),
@@ -48,9 +32,9 @@ var game = {
     // for (var i = 0; i < 21; i++) {
     //   this.imageList.push("./images/mario/smallmario/marioR/" + i + ".png");
     // };
-    this.imageList.push("./images/mario/smallmario/marioR/spritesrun.png");
-    this.imageList.push("./images/mario/smallmario/marioR/jump.png");
-    this.imageList.push("./images/mario/smallmario/marioR/stand.png");
+    // this.imageList.push("./images/mario/smallmario/marioR/spritesrun.png");
+    // this.imageList.push("./images/mario/smallmario/marioR/jump.png");
+    // this.imageList.push("./images/mario/smallmario/marioR/stand.png");
   },
   init: function() {
     this.progressbar = new COREHTML5.Progressbar(this.progressDiv, 'rgba(0,0,0,0.5)', 100, 130, 250);
@@ -119,27 +103,27 @@ var game = {
     switch (status) {
       case 0:
         {
-          spriteList.treeList.smallTree.velocityX = 0;
-          spriteList.skySprite.velocityX = 0;
-          spriteList.treeList.twotrunksTree.velocityX = 0;
-          spriteList.grassList.GRASS_VELOCITX = 0;
+          // spriteList.treeList.smallTree.velocityX = 0;
+           spriteList.skySprite.velocityX = 0;
+          // spriteList.treeList.twotrunksTree.velocityX = 0;
+          // spriteList.grassList.GRASS_VELOCITX = 0;
         }
         break;
       case 1:
         {
 
-          spriteList.treeList.smallTree.velocityX = -spriteList.treeList.smallTree.initialVelocitX;
-          spriteList.skySprite.velocityX = -spriteList.skySprite.initialVelocitX;
-          spriteList.treeList.twotrunksTree.velocityX = -spriteList.treeList.twotrunksTree.initialVelocitX;
-          spriteList.grassList.GRASS_VELOCITX = -spriteList.grassList.initialGRASS_VELOCITX;
+          // spriteList.treeList.smallTree.velocityX = -spriteList.treeList.smallTree.initialVelocitX;
+           spriteList.skySprite.velocityX = -spriteList.skySprite.initialVelocitX;
+          // spriteList.treeList.twotrunksTree.velocityX = -spriteList.treeList.twotrunksTree.initialVelocitX;
+          // spriteList.grassList.GRASS_VELOCITX = -spriteList.grassList.initialGRASS_VELOCITX;
         }
         break;
       case -1:
         {
-          spriteList.treeList.smallTree.velocityX = spriteList.treeList.smallTree.initialVelocitX;
-          spriteList.skySprite.velocityX = spriteList.skySprite.initialVelocitX;
-          spriteList.treeList.twotrunksTree.velocityX = spriteList.treeList.twotrunksTree.initialVelocitX;
-          spriteList.grassList.GRASS_VELOCITX = spriteList.grassList.initialGRASS_VELOCITX;
+          // spriteList.treeList.smallTree.velocityX = spriteList.treeList.smallTree.initialVelocitX;
+           spriteList.skySprite.velocityX = spriteList.skySprite.initialVelocitX;
+          // spriteList.treeList.twotrunksTree.velocityX = spriteList.treeList.twotrunksTree.initialVelocitX;
+          // spriteList.grassList.GRASS_VELOCITX = spriteList.grassList.initialGRASS_VELOCITX;
         }
         break;
     }
@@ -227,16 +211,16 @@ var peoplePainter = {
   //var peopleRunSpriteSheetPainter = new PeopleRunSpriteSheetPainter(mario.config, './images/mario/smallmario/marioR/spritesrun.png', game.mycanvas, mario.config.totalCount);
 
 var spriteList = {
-  skySprite: new Sprite('sky2', new ImagePainter('./images/background.png'), [new behaviorList.moveLeftToRight()]),
-  treeList: {
-    smallTree: new Sprite('sky1', new ImagePainter('./image/tree/smalltree.png'), [new behaviorList.moveLeftToRight()]),
-    twotrunksTree: new Sprite('sky1', new ImagePainter('./image/tree/tree-twotrunks.png'), [new behaviorList.moveLeftToRight()]),
-  },
-  grassList: {
-    grass: new Sprite('grass1', new GrassImagePainter('./image/grass/grass.png'), [new behaviorList.moveLeftToRight()]),
-    GRASS_VELOCITX: 0,
-    grassOffset: 0
-  },
+  skySprite: new SceneSprite('sky2', new ImagePainter('./images/background.png'), [new behaviorList.moveLeftToRight()]),
+  // treeList: {
+  //   smallTree: new SceneSprite('sky1', new ImagePainter('./image/tree/smalltree.png'), [new behaviorList.moveLeftToRight()]),
+  //   twotrunksTree: new SceneSprite('sky1', new ImagePainter('./image/tree/tree-twotrunks.png'), [new behaviorList.moveLeftToRight()]),
+  // },
+  // grassList: {
+  //   grass: new SceneSprite('grass1', new GrassImagePainter('./image/grass/grass.png'), [new behaviorList.moveLeftToRight()]),
+  //   GRASS_VELOCITX: 0,
+  //   grassOffset: 0
+  // },
   // SpriteSheetPainter:new PeopleRunSpriteSheetPainter(config.runnerCells,'./image/runpeople.png', true),
   peopleSprite: new Character('mario', peoplePainter.stand, [], true, game.mycanvas),
   spriteInit: function() {
@@ -245,25 +229,25 @@ var spriteList = {
     this.skySprite.initialVelocitX = 8 * gameControl.speed;
     this.skySprite.top = 0;
     this.skySprite.left = 0;
-    //treeinit
-    this.treeList.smallTree.width = 137;
-    this.treeList.smallTree.height = 165;
-    this.treeList.smallTree.top = 232;
-    this.treeList.smallTree.left = 0;
-    this.treeList.smallTree.initialVelocitX = 20 * gameControl.speed;
+    // //treeinit
+    // this.treeList.smallTree.width = 137;
+    // this.treeList.smallTree.height = 165;
+    // this.treeList.smallTree.top = 232;
+    // this.treeList.smallTree.left = 0;
+    // this.treeList.smallTree.initialVelocitX = 20 * gameControl.speed;
 
-    //bigtreeinit
-    this.treeList.twotrunksTree.width = 224;
-    this.treeList.twotrunksTree.height = 224;
-    this.treeList.twotrunksTree.top = 185;
-    this.treeList.twotrunksTree.left = 0;
-    this.treeList.twotrunksTree.initialVelocitX = 40 * gameControl.speed;
+    // //bigtreeinit
+    // this.treeList.twotrunksTree.width = 224;
+    // this.treeList.twotrunksTree.height = 224;
+    // this.treeList.twotrunksTree.top = 185;
+    // this.treeList.twotrunksTree.left = 0;
+    // this.treeList.twotrunksTree.initialVelocitX = 40 * gameControl.speed;
 
-    //grass
-    this.grassList.initialGRASS_VELOCITX = -75 * gameControl.speed;
-    this.grassList.grass.width = game.mycanvas.width;
-    this.grassList.grass.height = 52;
-    this.grassList.grass.top = game.mycanvas.height - spriteList.grassList.grass.height;
+    // //grass
+    // this.grassList.initialGRASS_VELOCITX = -75 * gameControl.speed;
+    // this.grassList.grass.width = game.mycanvas.width;
+    // this.grassList.grass.height = 52;
+    // this.grassList.grass.top = game.mycanvas.height - spriteList.grassList.grass.height;
 
 
 
@@ -277,7 +261,8 @@ var spriteList = {
     this.peopleSprite.behaviorStatus = {
         runInPlace: new behaviorList.runInPlace(),
         jump: new behaviorList.jump({
-          initialTop: this.peopleSprite.top
+          initialTop: this.peopleSprite.top,
+          GRAVITY_FORCE:publicConfig.GRAVITY_FORCE
         }),
       }
       //spriteList.peopleSprite.behaviors = [spriteList.peopleSprite.behaviorStatus.runInPlace];
@@ -301,7 +286,7 @@ var animateList = {
   },
   drawSkySingle: function(time) {
     var self = this;
-    spriteList.skySprite.update(self.ctx, time);
+    spriteList.skySprite.update(self.ctx, time,gameControl.fps.num);
     var left = spriteList.skySprite.left;
     if (spriteList.skySprite.velocityX > 0) {
       left = left < game.mycanvas.width ? left + spriteList.skySprite.velocityX / gameControl.fps.num : 0;
@@ -318,61 +303,61 @@ var animateList = {
     spriteList.skySprite.left = left;
   },
 
-  drawGrass: function() {
-    this.ctx.save();
-    var grassImage = game.loadImg.getImage('./image/grass/grass.png');
-    var width = spriteList.grassList.grass.width;
-    var height = spriteList.grassList.grass.height;
-    if (spriteList.grassList.GRASS_VELOCITX >= 0) {
-      spriteList.grassList.grassOffset = spriteList.grassList.grassOffset < game.mycanvas.width ? spriteList.grassList.grassOffset + spriteList.grassList.GRASS_VELOCITX / gameControl.fps.num : 0;
-    } else {
-      spriteList.grassList.grassOffset = spriteList.grassList.grassOffset > -spriteList.grassList.grass.width ? spriteList.grassList.grassOffset + spriteList.grassList.GRASS_VELOCITX / gameControl.fps.num : 0;
-    }
-    this.ctx.translate(-spriteList.grassList.grassOffset, 0);
-    spriteList.grassList.grass.paint(this.ctx);
-    this.ctx.restore();
-  },
-  drawTree: function(time, sprite, totalTreeCount) {
-    sprite.update(this.ctx, time);
-    // var totalTreeCount = 5;
-    var leftOffset = sprite.left;
-    var loop = 0;
-    var canvasWidth = game.mycanvas.width;
-    var treeInteval = (canvasWidth + sprite.width) / totalTreeCount;
-    if (sprite.velocityX > 0) {
-      for (var i = 0; i < totalTreeCount; i++) {
-        if ((leftOffset + i * treeInteval) <= canvasWidth) {
-          sprite.left = leftOffset + treeInteval * i;
-          loop++;
-        } else {
-          sprite.left = leftOffset - treeInteval * (i - loop + 1);
-        }
-        sprite.paint(this.ctx);
-      }
-      if ((leftOffset) >= canvasWidth) {
-        sprite.left = -sprite.width;
-      } else {
-        sprite.left = leftOffset;
-      }
-    } else {
-      for (var i = 0; i < totalTreeCount; i++) {
-        if ((leftOffset + sprite.width - i * treeInteval) >= 0) {
-          sprite.left = leftOffset - treeInteval * i;
-          loop++;
-        } else {
-          sprite.left = leftOffset + treeInteval * (i - loop + 1);
-        }
-        sprite.paint(this.ctx);
-      }
-      if ((leftOffset + sprite.width) < 0) {
-        sprite.left = canvasWidth;
-      } else {
-        sprite.left = leftOffset;
-      }
-    }
-  },
+  // drawGrass: function() {
+  //   this.ctx.save();
+  //   var grassImage = game.loadImg.getImage('./image/grass/grass.png');
+  //   var width = spriteList.grassList.grass.width;
+  //   var height = spriteList.grassList.grass.height;
+  //   if (spriteList.grassList.GRASS_VELOCITX >= 0) {
+  //     spriteList.grassList.grassOffset = spriteList.grassList.grassOffset < game.mycanvas.width ? spriteList.grassList.grassOffset + spriteList.grassList.GRASS_VELOCITX / gameControl.fps.num : 0;
+  //   } else {
+  //     spriteList.grassList.grassOffset = spriteList.grassList.grassOffset > -spriteList.grassList.grass.width ? spriteList.grassList.grassOffset + spriteList.grassList.GRASS_VELOCITX / gameControl.fps.num : 0;
+  //   }
+  //   this.ctx.translate(-spriteList.grassList.grassOffset, 0);
+  //   spriteList.grassList.grass.paint(this.ctx);
+  //   this.ctx.restore();
+  // },
+  // drawTree: function(time, sprite, totalTreeCount) {
+  //   sprite.update(this.ctx, time);
+  //   // var totalTreeCount = 5;
+  //   var leftOffset = sprite.left;
+  //   var loop = 0;
+  //   var canvasWidth = game.mycanvas.width;
+  //   var treeInteval = (canvasWidth + sprite.width) / totalTreeCount;
+  //   if (sprite.velocityX > 0) {
+  //     for (var i = 0; i < totalTreeCount; i++) {
+  //       if ((leftOffset + i * treeInteval) <= canvasWidth) {
+  //         sprite.left = leftOffset + treeInteval * i;
+  //         loop++;
+  //       } else {
+  //         sprite.left = leftOffset - treeInteval * (i - loop + 1);
+  //       }
+  //       sprite.paint(this.ctx);
+  //     }
+  //     if ((leftOffset) >= canvasWidth) {
+  //       sprite.left = -sprite.width;
+  //     } else {
+  //       sprite.left = leftOffset;
+  //     }
+  //   } else {
+  //     for (var i = 0; i < totalTreeCount; i++) {
+  //       if ((leftOffset + sprite.width - i * treeInteval) >= 0) {
+  //         sprite.left = leftOffset - treeInteval * i;
+  //         loop++;
+  //       } else {
+  //         sprite.left = leftOffset + treeInteval * (i - loop + 1);
+  //       }
+  //       sprite.paint(this.ctx);
+  //     }
+  //     if ((leftOffset + sprite.width) < 0) {
+  //       sprite.left = canvasWidth;
+  //     } else {
+  //       sprite.left = leftOffset;
+  //     }
+  //   }
+  // },
   drawPeople: function(ctx, time) {
-    spriteList.peopleSprite.update(ctx, time);
+    spriteList.peopleSprite.update(ctx, time,gameControl.fps.num);
     spriteList.peopleSprite.paint(ctx);
   },
 

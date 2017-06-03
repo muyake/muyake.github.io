@@ -1,7 +1,8 @@
-//角色公共函数
-// var gameSpriteLib = {
 
-// };
+
+
+//游戏所有元素的sprite
+
 //角色
 var Character = function(name, painter, behaviors, isReverse, mycanvas) {
 	Sprite.call(this, name, painter, behaviors);
@@ -9,10 +10,16 @@ var Character = function(name, painter, behaviors, isReverse, mycanvas) {
 	this.mycanvas = mycanvas;
 }
 Character.prototype = Object.create(Sprite.prototype);
+Character.prototype.constructor = Character; 
+Character.prototype.update=function(context, time,fpsNum) {
+	for (var i = this.behaviors.length; i > 0; --i) {
+		this.behaviors[i - 1].execute(this, context, time,fpsNum);
+	}
+}
 var CharacterImagePainter = function(imageUrl) {
 	ImagePainter.call(this, imageUrl);
 }
-
+CharacterImagePainter.prototype.constructor = CharacterImagePainter; 
 //角色画笔必须有isReverse属性。
 CharacterImagePainter.prototype.paint = function(characterSprite, context, mycanvas) {
 	//isReverse代表正。
@@ -27,13 +34,12 @@ CharacterImagePainter.prototype.paint = function(characterSprite, context, mycan
 		context.scale(-1, 1);
 	}
 };
-
-
 PeopleRunSpriteSheetPainter = function(cells, spritesheeturl, mycanvas, imgcount) {
 	SpriteSheetPainter.call(this, cells, spritesheeturl, mycanvas);
 	this.imgcount = imgcount;
 }
 PeopleRunSpriteSheetPainter.prototype = Object.create(SpriteSheetPainter.prototype);
+PeopleRunSpriteSheetPainter.prototype.constructor = PeopleRunSpriteSheetPainter; 
 PeopleRunSpriteSheetPainter.prototype.paint = function(sprite, context) {
 	var cell = this.cells['sprite_' + this.cellIndex];
 	if (sprite.isReverse) {
@@ -53,5 +59,18 @@ PeopleRunSpriteSheetPainter.prototype.advance = function(sprite, context) {
 		this.cellIndex = 0;
 	} else {
 		this.cellIndex++;
+	}
+}
+
+
+//场景Sprite
+var SceneSprite=function(name, painter, behaviors) {
+	Sprite.call(this,name, painter, behaviors);	
+}
+SceneSprite.prototype=Object.create(Sprite.prototype);
+SceneSprite.prototype.constructor=SceneSprite;
+SceneSprite.prototype.update= function(context, time,fpsNum) {
+	for (var i = this.behaviors.length; i > 0; --i) {
+		this.behaviors[i - 1].execute(this, context, time,fpsNum);
 	}
 }
