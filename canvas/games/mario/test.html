@@ -7,18 +7,44 @@
 <body>
 	<input type="button" value="大跳" id="minuteBtn">
 	<input type="button" value="小跳" id="addBtn">
- <!--  <audio id='BGM' >       
-         <source src='sounds/mario/bag.mp3' type='audio/mp3'>
-         </audio> -->
-         <script>      
-      document.addEventListener("DOMContentLoaded", function() {
-      	alert(1);
-      });
-      document.addEventListener("DOMContentLoaded", function() {
-      	alert(2);
-      })
-	</script>
-	
-</audio>
+
+	<script src='./js/public.js'></script>
+   <script>
+      var gameSourceUrl={
+       imageList: {
+        //背景
+        BG:'./images/background.png',
+        //马里奥
+        mario:{
+         run:"./images/mario/smallmario/marioR/spritesrun.png",
+         jump:"./images/mario/smallmario/marioR/jump.png",
+         stand:"./images/mario/smallmario/marioR/stand.png",
+      }
+   },
+   audioList: {
+     bigJump:'./sounds/mario/jump_big.mp3',
+     BGM:'./sounds/mario/bag.mp3',
+  }
+};
+function allPrpos(obj){
+ var props='';
+ for(var p in obj){
+  console.log(p);
+}
+}
+var sourceLoadObj={
+   sourceNum:0,
+   currentNum:0,
+   loadedCallback:function(){
+      console.log(this.currentNum)
+   }
+}
+
+var newgame= lib.convertToobject(gameSourceUrl,sourceLoadObj);
+var a=2;
+// newgame.imageList.BG='sdfsdf';
+// console.log(gameSourceUrl.imageList.BG);
+// console.log(newgame.imageList.BG);
+</script>
 </body>
 </html>

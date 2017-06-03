@@ -159,3 +159,10 @@ var mario = {
     }
   }
 };
+var element={
+  mycanvas: document.getElementById('mycanvas'),
+  progressDiv: document.getElementById('load'),
+  tipDiv:document.querySelector('.tip'),
+};
+
+

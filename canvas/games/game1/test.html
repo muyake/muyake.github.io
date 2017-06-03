@@ -8,34 +8,33 @@
 
 <body>
   <script type="text/javascript">
-   var gameSourceUrl={
-    imageList: {
-        //背景
-        BG:'./images/background.png',
-        //马里奥
-        mario:{
-            run:"./images/mario/smallmario/marioR/spritesrun.png",
-            jump:"./images/mario/smallmario/marioR/jump.png",
-            stand:"./images/mario/smallmario/marioR/stand.png",
+    var sourceLoadObj={
+        sourceNum:0,
+        currentNum:0,
+        progressbar:new COREHTML5.Progressbar(element.progressDiv, 'rgba(0,0,0,0.5)', 100, 130, 250),
+        loadedCallback:function(){
+          var percent = this.currentNum / this.sourceNum * 100;
+          this.progressbar.draw(percent);
+          if(this.currentNum==this.sourceNum){   
+           this.progressOver();
+       }
+   },
+   progressOver: function() {
+      element.mycanvas.style.display = 'block';
+      element.progressDiv.style.display = 'none';
+      element.tipDiv.style.display = 'block';
+                //加载图片完成后执行。
+                game.init();
+                spriteList.spriteInit();
+                gameControl.start();
+                //背景音乐响起
+                gameSourceObj.audioList.BGM.loop = true;
+                gameSourceObj.audioList.BGM.volume = 0.2;
+                //gameSourceObj.audioList.BGM.play();
+            }
         }
-    },
-    audioList: {
-        bigJump:'./sounds/mario/jump_big.mp3',
-        BGM:'./sounds/mario/bag.mp3',
-    }
-};
-function allPrpos(obj){
-    var props='';
-    for(var p in obj){
-        console.log(p);
-    }
-}
 
-allPrpos(gameSourceUrl);
-
-alert(11);
-
-</script>
+    </script>
 </body>
 
 </html>
