@@ -29,7 +29,6 @@ var sourceLoadObj = {
     }
 }
 
-
 //gameSourceUrl来自gameSourceUrl.js
 var gameSourceObj = lib.convertToObject(gameSourceUrl, sourceLoadObj);
 
@@ -41,12 +40,10 @@ var game = {
         this.bindEvent();
     },
     mapKey: {
-        // 38: false,
-        // 40: false,
         "left": false, //left
         "right": false, //right
         "s": false,
-        "s": false,
+        "w": false,
         "space": false
     },
     bindEvent: function() {
@@ -120,7 +117,6 @@ var game = {
         gameControl.addKeyListener({
             key: 'left',
             listener: function(status) {
-                console.log('left');
                 if (status == 1) {
                     self.mapKey['left'] = true;
                 } else {
@@ -132,8 +128,8 @@ var game = {
     activeEventCallback: function() {
         var now = +new Date();
         var jumpKey = this.mapKey["s"] || this.mapKey["w"];
-        if (((this.mapKey["left"] && !this.mapKey["right"] && !jumpKey) || (!this.mapKey["left"] && this.mapKey["right"] && !jumpKey)) && (now - game.lastKeyListenerTime > 200)) {
-            if ((this.mapKey["left"] && !this.mapKey["right"] && !jumpKey)) {
+        if (((this.mapKey["left"] && !this.mapKey["right"]) || (!this.mapKey["left"] && this.mapKey["right"])) && (now - game.lastKeyListenerTime > 200)) {
+            if ((this.mapKey["left"] && !this.mapKey["right"])) {
                 game.setDirection(-1);
                 spriteList.peopleSprite.isReverse = false;
                 // console.log("按左键");    
@@ -210,20 +206,22 @@ gameControl.speed = 2;
 gameControl.startAnimate = function(time) {
     game.activeEventCallback();
     animateList.drawSkySingle(time);
+    animateList.drawWall(time);
     animateList.drawPeople(gameControl.context, time);
     animateList.countDown(time);
 }
 
 var peoplePainter = {
-    run: new PeopleRunSpriteSheetPainter(mario.config, './images/mario/smallmario/marioR/spritesrun.png', element.mycanvas, mario.config.totalCount),
-    jump: new CharacterImagePainter('./images/mario/smallmario/marioR/jump.png'),
-    stand: new CharacterImagePainter('./images/mario/smallmario/marioR/stand.png'),
-}
+    run: new PeopleRunSpriteSheetPainter(mario.config, gameSourceUrl.imageList.mario.run, element.mycanvas, mario.config.totalCount),
+    jump: new CharacterImagePainter(gameSourceUrl.imageList.mario.jump),
+    stand: new CharacterImagePainter(gameSourceUrl.imageList.mario.stand),
+};
+
 
 
 var spriteList = {
-    skySprite: new SceneSprite('sky2', new ImagePainter('./images/background.png'), [new behaviorList.moveLeftToRight()]),
-
+    skySprite: new SceneSprite('sky2', new ImagePainter(gameSourceUrl.imageList.BG), [new behaviorList.moveLeftToRight()]),
+    normalwall: new SceneSprite('wall', new ImagePainter(gameSourceUrl.imageList.wall.normalwall), [new behaviorList.moveLeftToRight()]),
     peopleSprite: new Character('mario', peoplePainter.stand, [], true, element.mycanvas),
     spriteInit: function() {
         this.skySprite.width = element.mycanvas.width;
@@ -256,6 +254,13 @@ var spriteList = {
             }),
         }
         spriteList.peopleSprite.painter = peoplePainter.stand;
+
+
+        //wall
+        this.normalwall.width = 50;
+        this.normalwall.height = 50;
+        this.normalwall.top = 100;
+        this.normalwall.left = 100;
     }
 };
 
@@ -294,5 +299,10 @@ var animateList = {
     drawPeople: function(ctx, time) {
         spriteList.peopleSprite.update(ctx, time, gameControl.fps.num);
         spriteList.peopleSprite.paint(ctx);
+    },
+    drawWall: function(time) {
+        var self = this;
+        spriteList.normalwall.update(self.ctx);
+        spriteList.normalwall.paint(self.ctx);
     },
 }
