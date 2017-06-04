@@ -11,7 +11,8 @@ var gameSourceUrl={
 		}
 	},
 	audioList: {
-		bigJump:'./sounds/mario/jump_big.mp3',
+		//bigJump:'./sounds/mario/jump_big.mp3',
 		BGM:'./sounds/mario/bag.mp3',
+		jumpAll:'./sounds/mario/jumpAll.mp3',
 	}
 }

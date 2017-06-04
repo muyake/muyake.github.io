@@ -49,33 +49,24 @@
 </head>
 
 <body>
-    <!--  <input type="button" value='暂停' id='startBtn'><input type="button" value="反向" id='revertBtn'> -->
-    <div class='tip'>左右键是跑动，空格键是跳跃，p键是暂停</div>
+     <input type="button" value='小蹦' id='smallBtn'>
+     <input type="button" value="大崩" id='bigBtn'>
+    <div class='tip'>左右键是跑动，s键是小蹦，w是大蹦，p键是暂停</div>
     <canvas id="mycanvas" width="666" height="364"></canvas>
     <div id="load" class="load">
     </div>
-    <!--  <audio id='BGM' preload='auto'>
-         <source src='sounds/mario/bag.mp3' type='audio/ogg'>
-         <source src='sounds/mario/bag.mp3' type='audio/mp3'>
-      </audio>
-
-      <audio id='jump' preload='auto'>
-         <source src='sounds/mario/whoosh.ogg' type='audio/ogg'>
-         <source src='sounds/mario/whoosh.mp3' type='audio/mp3'>
-         </audio> -->
+  
          <script src='./js/public.js'>
          </script>
-         <script src='./js/libs/requestNextAnimationFrame.js'></script>
-         <script src='./js/libs/imageLoad.js'>
-         </script>
-         <script src='./js/libs/loadMp3.js'>
-         </script>
+         <script src='./js/libs/requestNextAnimationFrame.js'></script>     
          <script src='./js/libs/sprite.js'></script>
          <script src='./js/libs/gameEngine.js'>
          </script>
          <script src='./js/config.js'>
          </script>
          <script src='./js/gameSource.js'>
+         </script>
+            <script src='./js/audioControl.js'>
          </script>
          <script src='./js/progressbar.js'>
          </script>

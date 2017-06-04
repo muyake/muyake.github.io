@@ -162,21 +162,21 @@ var game = {
     this.bindEvent();
   },
   bindEvent: function() {
-    document.querySelector('#startBtn').addEventListener('click', function() {
-      if (gameControl.paused) {
-        this.value = '暂停';
-      } else {
-        this.value = '开始';
-      }
-      gameControl.togglePaused();
-    }, true);
-    document.querySelector('#revertBtn').addEventListener('click', function() {
-      spriteList.skySpriteList[0].velocityX = -spriteList.skySpriteList[0].velocityX;
-      spriteList.skySpriteList[1].velocityX = -spriteList.skySpriteList[1].velocityX;
-      spriteList.treeList.smallTree.velocityX = -spriteList.treeList.smallTree.velocityX;
-      spriteList.treeList.twotrunksTree.velocityX = -spriteList.treeList.twotrunksTree.velocityX;
-      spriteList.grassList.GRASS_VELOCITX = -spriteList.grassList.GRASS_VELOCITX;
-    }, true);
+    // document.querySelector('#startBtn').addEventListener('click', function() {
+    //   if (gameControl.paused) {
+    //     this.value = '暂停';
+    //   } else {
+    //     this.value = '开始';
+    //   }
+    //   gameControl.togglePaused();
+    // }, true);
+    // document.querySelector('#revertBtn').addEventListener('click', function() {
+    //   spriteList.skySpriteList[0].velocityX = -spriteList.skySpriteList[0].velocityX;
+    //   spriteList.skySpriteList[1].velocityX = -spriteList.skySpriteList[1].velocityX;
+    //   spriteList.treeList.smallTree.velocityX = -spriteList.treeList.smallTree.velocityX;
+    //   spriteList.treeList.twotrunksTree.velocityX = -spriteList.treeList.twotrunksTree.velocityX;
+    //   spriteList.grassList.GRASS_VELOCITX = -spriteList.grassList.GRASS_VELOCITX;
+    // }, true);
   },
   activeEventCallback: function(mapKeyArr) {
     var now = +new Date();

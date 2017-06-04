@@ -123,13 +123,12 @@ var moveRightToLeft = function() {
 	}
 }
 
-<<<<<<< HEAD
-=======
+
 function applyGravity(sprite, elapsed) {
 	sprite.velocityY = (GRAVITY_FORCE * elapsed) - 9.8;
-},
+}
 
->>>>>>> gh-pages
+
 var moveTopToBottom = function() {
 	this.lastMove = 0;
 	this.execute = function(sprite, context, time) {
@@ -352,12 +351,12 @@ var map = {
 	38: false,
 	40: false,
 	37: false,
-<<<<<<< HEAD
-	39: false
-=======
+
+
+
 	39: false,
 	32: false //空格
->>>>>>> gh-pages
+
 };
 window.document.onkeydown = leftDownFun;
 window.document.onkeyup = leftUpFun;
@@ -366,29 +365,29 @@ var div1 = document.querySelector('.div1');
 function leftDownFun(evt) {
 	evt = (evt) ? evt : window.event
 	map[evt.keyCode] = true;
-<<<<<<< HEAD
-=======
+
+
 	var behaviorArray = [];
->>>>>>> gh-pages
+
 	if (map[38] && !map[40] && !map[37] && !map[39]) {
 		manJump.lastMove = 0;
 		spritePeople.velocityY = 50;
 		spritePeople.painter = peopleFace;
-<<<<<<< HEAD
+
 		spritePeople.behaviors = [manJump];
-=======
+
 		behaviorArray = [manJump];
->>>>>>> gh-pages
+
 	}
 	if (!map[38] && map[40] && !map[37] && !map[39]) {
 		manJump.lastMove = 0;
 		spritePeople.velocityY = -50;
 		spritePeople.painter = peopleFace;
-<<<<<<< HEAD
+
 		spritePeople.behaviors = [manJump];
-=======
+
 		behaviorArray = [manJump];
->>>>>>> gh-pages
+
 	}
 	if (!map[38] && !map[40] && map[37] && !map[39]) {
 		// div1.innerHTML = '左';
@@ -396,22 +395,22 @@ function leftDownFun(evt) {
 		spritePeople.painter = fromleftRun;
 		spritePeople.velocityY = 0;
 		peopleFace = fromleftRun;
-<<<<<<< HEAD
+
 		spritePeople.behaviors = [runInPlace, manRunRightToLeft];
-=======
+
 		behaviorArray = [runInPlace, manRunRightToLeft];
->>>>>>> gh-pages
+
 	}
 	if (!map[38] && !map[40] && !map[37] && map[39]) {
 		spritePeople.velocityY = 0;
 		manRunLeftToRight.lastMove = 0;
 		spritePeople.painter = fromrightRun;
 		peopleFace = fromrightRun;
-<<<<<<< HEAD
+
 		spritePeople.behaviors = [runInPlace, manRunLeftToRight];
-=======
+
 		behaviorArray = [runInPlace, manRunLeftToRight];
->>>>>>> gh-pages
+
 	}
 	if (map[38] && !map[40] && map[37] && !map[39]) {
 		spritePeople.velocityY = 50;
@@ -419,11 +418,11 @@ function leftDownFun(evt) {
 		manJump.lastMove = 0;
 		spritePeople.painter = fromleftRun;
 		peopleFace = fromleftRun;
-<<<<<<< HEAD
+
 		spritePeople.behaviors = [runInPlace, manRunRightToLeft, manJump];
-=======
+
 		behaviorArray = [runInPlace, manRunRightToLeft, manJump];
->>>>>>> gh-pages
+
 	}
 	if (map[38] && !map[40] && !map[37] && map[39]) {
 		spritePeople.velocityY = 50;
@@ -431,11 +430,11 @@ function leftDownFun(evt) {
 		manJump.lastMove = 0;
 		spritePeople.painter = fromrightRun;
 		peopleFace = fromrightRun;
-<<<<<<< HEAD
+
 		spritePeople.behaviors = [runInPlace, manRunLeftToRight, manJump];
-=======
+
 		behaviorArray = [runInPlace, manRunLeftToRight, manJump];
->>>>>>> gh-pages
+
 	}
 	if (!map[38] && map[40] && map[37] && !map[39]) {
 		spritePeople.velocityY = -50;
@@ -443,11 +442,11 @@ function leftDownFun(evt) {
 		manJump.lastMove = 0;
 		spritePeople.painter = fromleftRun;
 		peopleFace = fromleftRun;
-<<<<<<< HEAD
+
 		spritePeople.behaviors = [runInPlace, manRunRightToLeft, manJump];
-=======
+
 		behaviorArray = [runInPlace, manRunRightToLeft, manJump];
->>>>>>> gh-pages
+
 	}
 	if (!map[38] && map[40] && !map[37] && map[39]) {
 		spritePeople.velocityY = -50;
@@ -455,7 +454,7 @@ function leftDownFun(evt) {
 		manJump.lastMove = 0;
 		spritePeople.painter = fromrightRun;
 		peopleFace = fromrightRun;
-<<<<<<< HEAD
+
 		spritePeople.behaviors = [runInPlace, manRunLeftToRight, manJump];
 	}
 }
@@ -482,15 +481,15 @@ function leftDownFun(evt) {
 //             break;
 //     }
 // }
-=======
-		behaviorArray = [runInPlace, manRunLeftToRight, manJump];
-	}
-	console.log(evt.keyCode);
-	if (map[38] && !jumbFlag) {
 
-	}
-	spritePeople.behaviors = behaviorArray;
-}
+// 		behaviorArray = [runInPlace, manRunLeftToRight, manJump];
+// 	}
+// 	console.log(evt.keyCode);
+// 	if (map[38] && !jumbFlag) {
+
+// 	}
+// 	spritePeople.behaviors = behaviorArray;
+// }
 // canvas.onmousedown = function(e) {
 //   var rect;
 
@@ -505,13 +504,13 @@ function leftDownFun(evt) {
 //   }
 // };
 
->>>>>>> gh-pages
+
 
 function leftUpFun(evt) {
 	evt = (evt) ? evt : window.event;
 	spritePeople.behaviors = [];
 	map[evt.keyCode] = false;
-<<<<<<< HEAD
+
 	// switch (evt.keyCode) {
 	//     case 37:
 	//         {
@@ -524,6 +523,6 @@ function leftUpFun(evt) {
 	//         }
 	//         break;
 	// }
-=======
->>>>>>> gh-pages
+
+
 }

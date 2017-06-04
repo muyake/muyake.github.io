@@ -106,16 +106,7 @@ Game.prototype = {
 		}
 		return listener;
 	},
-	mapKey: {
-		// 38: false,
-		// 40: false,
-		37: false,	//left
-		39: false,//right
-		32: false 
-	},
-	activeEventCallback:function(mapKeyArr){
-		
-	},
+
 
 	activeEvent:function(e,status){
 		var listener=undefined;
@@ -123,19 +114,19 @@ Game.prototype = {
 		switch(e.keyCode){
 			case 32:key='space';break;
 			case 68:key='d';break;
+			case 87:key='w';break;
 			case 75:key='k';break;
 			case 83:key='s';break;
 			case 80:key='p';break;
-			case 37:key='left arrow';break;
-			case 39:key='right arrow';break;
-			case 38:key='up arrow';break;
-			case 40:key='down arrow';break;
+			case 37:key='left';break;
+			case 39:key='right';break;
+			case 38:key='up';break;
+			case 40:key='down';break;
 		}
 		listener=this.findKeyListener(key);
 		if(listener){
 			listener(status);
-		}
-		//this.activeEventCallback(this.mapKey,status);
+		}		
 	},
 	togglePaused: function() {
 		var now = getTimeNow();
