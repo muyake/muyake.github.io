@@ -1,50 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title></title>
+  <title>Canvas</title>
 </head>
+
 <body>
-	<input type="button" value="大跳" id="minuteBtn">
-	<input type="button" value="小跳" id="addBtn">
+  <canvas id="canvas" width="1000" height="1000"></canvas>
 
-	<script src='./js/public.js'></script>
-   <script>
-      var gameSourceUrl={
-       imageList: {
-        //背景
-        BG:'./images/background.png',
-        //马里奥
-        mario:{
-         run:"./images/mario/smallmario/marioR/spritesrun.png",
-         jump:"./images/mario/smallmario/marioR/jump.png",
-         stand:"./images/mario/smallmario/marioR/stand.png",
+  <script type="text/javascript">
+
+    var currentSeconds = 10;
+    var countDownSeconds = 10;
+
+    var interval_id = setInterval("drawDoubleCircle()", 1000);
+
+    function drawDoubleCircle() {
+      if (currentSeconds <= 0) {
+        clearInterval(interval_id);
       }
-   },
-   audioList: {
-     bigJump:'./sounds/mario/jump_big.mp3',
-     BGM:'./sounds/mario/bag.mp3',
-  }
-};
-function allPrpos(obj){
- var props='';
- for(var p in obj){
-  console.log(p);
-}
-}
-var sourceLoadObj={
-   sourceNum:0,
-   currentNum:0,
-   loadedCallback:function(){
-      console.log(this.currentNum)
-   }
-}
+      var canvasElement = document.getElementById('canvas');
+      var context = canvasElement.getContext('2d');
+      progress = 360 * currentSeconds / countDownSeconds;
+      progress_pi = Math.PI * (progress / 180 - 1 / 2);
+      context.beginPath();
+      context.moveTo(700, 400);
+      context.arc(700, 400, 80, 0, Math.PI * 2, false);
+      context.closePath();
+      context.fillStyle = '#4BF41B';
+      context.fill();
 
-var newgame= lib.convertToobject(gameSourceUrl,sourceLoadObj);
-var a=2;
-// newgame.imageList.BG='sdfsdf';
-// console.log(gameSourceUrl.imageList.BG);
-// console.log(newgame.imageList.BG);
-</script>
+      context.beginPath();
+      context.moveTo(700, 400);
+      context.arc(700, 400, 80, -Math.PI * 1 / 2, progress_pi, false);
+      context.closePath();
+      context.fillStyle = 'red'
+      context.lineCap = 'round';
+      context.fill();
+
+      context.beginPath();
+      context.arc(700, 400, 65, 0, Math.PI * 2, false);
+      context.closePath();
+      context.fillStyle = 'white';
+      context.fill();
+
+      context.font = "bold 40pt Arial";
+      context.fillStyle = "red";
+      context.textAlign = "center";
+      context.textBaseline = 'middle';
+      context.fillText(currentSeconds, 700, 400);
+      // 抗锯齿
+      context.globalCompositeOperation = 'source-atop';
+      currentSeconds--;
+    }
+    </script>
+
 </body>
 </html>
