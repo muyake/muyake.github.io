@@ -8,8 +8,7 @@ var gameSourceUrl={
 			abnormalwall:'./images/wall/abnormalwall.png',
 			afterabnormalwall:'./images/wall/afterabnormalwall.png',
 
-		},
-		
+		},		
 		//马里奥
 		mario:{
 			run:"./images/mario/smallmario/marioR/spritesrun.png",

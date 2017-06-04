@@ -159,6 +159,10 @@ var mario = {
     }
   }
 };
+var marioGameConfig={
+  bigJumpV:320,
+  smallJumpV:220,
+}
 var element={
   mycanvas: document.getElementById('mycanvas'),
   progressDiv: document.getElementById('load'),

@@ -150,8 +150,8 @@ var game = {
         if (jumpKey) {
             if (!spriteList.peopleSprite.behaviorStatus.jump.isJump) { // throttle
 
-                spriteList.peopleSprite.behaviorStatus.jump.startVelocityY = this.mapKey["s"] ? 200 : 250;
-                spriteList.peopleSprite.behaviorStatus.jump.velocityY = this.mapKey["s"] ? -200 : -250;
+                spriteList.peopleSprite.behaviorStatus.jump.startVelocityY = this.mapKey["s"] ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
+                spriteList.peopleSprite.behaviorStatus.jump.velocityY = this.mapKey["s"] ? -marioGameConfig.smallJumpV : -marioGameConfig.bigJumpV;
             }
 
             spriteList.peopleSprite.painter = peoplePainter.jump;
@@ -176,6 +176,7 @@ var game = {
                 {
                     // spriteList.treeList.smallTree.velocityX = 0;
                     spriteList.skySprite.velocityX = 0;
+                       spriteList.normalwall.velocityX = 0;
                     // spriteList.treeList.twotrunksTree.velocityX = 0;
                     // spriteList.grassList.GRASS_VELOCITX = 0;
                 }
@@ -185,16 +186,15 @@ var game = {
 
                     // spriteList.treeList.smallTree.velocityX = -spriteList.treeList.smallTree.initialVelocitX;
                     spriteList.skySprite.velocityX = -spriteList.skySprite.initialVelocitX;
+                        spriteList.normalwall.velocityX = -spriteList.normalwall.initialVelocitX;
                     // spriteList.treeList.twotrunksTree.velocityX = -spriteList.treeList.twotrunksTree.initialVelocitX;
                     // spriteList.grassList.GRASS_VELOCITX = -spriteList.grassList.initialGRASS_VELOCITX;
                 }
                 break;
             case -1:
                 {
-                    // spriteList.treeList.smallTree.velocityX = spriteList.treeList.smallTree.initialVelocitX;
                     spriteList.skySprite.velocityX = spriteList.skySprite.initialVelocitX;
-                    // spriteList.treeList.twotrunksTree.velocityX = spriteList.treeList.twotrunksTree.initialVelocitX;
-                    // spriteList.grassList.GRASS_VELOCITX = spriteList.grassList.initialGRASS_VELOCITX;
+                    spriteList.normalwall.velocityX = spriteList.normalwall.initialVelocitX;
                 }
                 break;
         }
@@ -202,7 +202,7 @@ var game = {
 };
 
 var gameControl = new Game('game', 'mycanvas');
-gameControl.speed = 2;
+gameControl.speed = 1;
 gameControl.startAnimate = function(time) {
     game.activeEventCallback();
     animateList.drawSkySingle(time);
@@ -226,7 +226,7 @@ var spriteList = {
     spriteInit: function() {
         this.skySprite.width = element.mycanvas.width;
         this.skySprite.height = element.mycanvas.height + element.mycanvas.height * 0.02;
-        this.skySprite.initialVelocitX = 8 * gameControl.speed;
+        this.skySprite.initialVelocitX = 32 * gameControl.speed;
         this.skySprite.top = 0;
         this.skySprite.left = 0;
 
@@ -257,10 +257,11 @@ var spriteList = {
 
 
         //wall
-        this.normalwall.width = 50;
-        this.normalwall.height = 50;
-        this.normalwall.top = 100;
-        this.normalwall.left = 100;
+        this.normalwall.width = 35;
+        this.normalwall.height = 35;
+        this.normalwall.top = 220;
+        this.normalwall.left = 500;
+        this.normalwall.initialVelocitX =45 * gameControl.speed;
     }
 };
 
@@ -283,9 +284,9 @@ var animateList = {
         spriteList.skySprite.update(self.ctx, time, gameControl.fps.num);
         var left = spriteList.skySprite.left;
         if (spriteList.skySprite.velocityX > 0) {
-            left = left < element.mycanvas.width ? left + spriteList.skySprite.velocityX / gameControl.fps.num : 0;
+            left = left < element.mycanvas.width ? left : 0;
         } else {
-            left = left > -element.mycanvas.width ? left + spriteList.skySprite.velocityX / gameControl.fps.num : 0;
+            left = left > -element.mycanvas.width ? left : 0;
         }
 
         spriteList.skySprite.left = left;
@@ -302,7 +303,7 @@ var animateList = {
     },
     drawWall: function(time) {
         var self = this;
-        spriteList.normalwall.update(self.ctx);
+        spriteList.normalwall.update(self.ctx, time, gameControl.fps.num);
         spriteList.normalwall.paint(self.ctx);
     },
 }
