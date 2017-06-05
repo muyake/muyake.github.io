@@ -73,9 +73,9 @@ window.requestNextAnimationFrame =
       // Define the wrapper
 
       wrapper = function(time) {
-        if (time === undefined) {
+       // if (time === undefined) {
           time = +new Date();
-        }
+       // }
         self.callback(time);
       };
 

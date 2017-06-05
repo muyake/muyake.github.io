@@ -48,15 +48,25 @@ var game = {
         "space": false
       },
       bindEvent: function() {
+        var self = this;
         document.querySelector('#smallBtn').addEventListener('click', function() {
+           if (!spriteList.peopleSprite.isJump) { // throttle
+             // spriteList.peopleSprite.startJumpTime=time;
+              spriteList.peopleSprite.startVelocityY = self.mapKey["s"] ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
+              spriteList.peopleSprite.velocityY = self.mapKey["s"] ? -marioGameConfig.smallJumpV : -marioGameConfig.bigJumpV;
+            spriteList.peopleSprite.painter = peoplePainter.jump;
+          SpriteAnimatorList.marioSpriteAnimatorJump.start(spriteList.peopleSprite);
 
+            }
+
+            
         }, false);
 
         document.querySelector('#bigBtn').addEventListener('click', function() {
           audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
         }, false);
 
-        var self = this;
+        
         // Key Listeners..............................................
         gameControl.addKeyListener({
           key: 'p',
@@ -91,6 +101,7 @@ var game = {
               self.mapKey['s'] = true;
               if (!spriteList.peopleSprite.isJump && !gameControl.paused) {
                 audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.smallJump);
+                 spriteList.peopleSprite.startJumpTime=+new Date;
               }
             } else {
               self.mapKey['s'] = false;
@@ -132,7 +143,7 @@ var game = {
           }
         });
       },
-      activeEventCallback: function() {
+      activeEventCallback: function(time) {
         var now = +new Date();
         var jumpKey = this.mapKey["s"] || this.mapKey["w"];
         if (((this.mapKey["left"] && !this.mapKey["right"]) || (!this.mapKey["left"] && this.mapKey["right"])) && (now - game.lastKeyListenerTime > 200)) {
@@ -156,25 +167,24 @@ var game = {
         // console.log("按右键和空格键或按左键和空格键或按只空格键");       
         if (jumpKey) {
             if (!spriteList.peopleSprite.isJump) { // throttle
-
+             // spriteList.peopleSprite.startJumpTime=time;
               spriteList.peopleSprite.startVelocityY = this.mapKey["s"] ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
               spriteList.peopleSprite.velocityY = this.mapKey["s"] ? -marioGameConfig.smallJumpV : -marioGameConfig.bigJumpV;
             }
 
-            spriteList.peopleSprite.painter = peoplePainter.jump;
-            spriteList.peopleSprite.behaviors = [spriteList.peopleSprite.behaviorStatus.jump];
+            // spriteList.peopleSprite.painter = peoplePainter.jump;
+            // spriteList.peopleSprite.behaviors = [spriteList.peopleSprite.behaviorStatus.jump];
 
           }
           if ((!this.mapKey["left"] && !this.mapKey["right"]) || (this.mapKey["left"] && this.mapKey["right"])) {
             // console.log('不按键或左右都按');
-            game.setDirection(0);
-            //  spriteList.peopleSprite.painter = peoplePainter.stand;
+            game.setDirection(0);           
             if (spriteList.peopleSprite.isJump) {
               spriteList.peopleSprite.painter = peoplePainter.jump;
             } else {
               spriteList.peopleSprite.painter = peoplePainter.stand;
             }
-            spriteList.peopleSprite.behaviors = [spriteList.peopleSprite.behaviorStatus.jump];
+           // spriteList.peopleSprite.behaviors = [spriteList.peopleSprite.behaviorStatus.jump];
           }
         },
         setDirection: function(status) {
@@ -209,7 +219,7 @@ var game = {
       var gameControl = new Game('game', 'mycanvas');
       gameControl.speed = 1;
       gameControl.startAnimate = function(time) {
-        game.activeEventCallback();
+        game.activeEventCallback(time);
         animateList.drawSkySingle(time);
         animateList.drawWall(time);
         animateList.drawPeople(gameControl.context, time);
@@ -272,6 +282,10 @@ var game = {
       }
     };
 
+var SpriteAnimatorList={
+  marioSpriteAnimatorJump:new marioSpriteAnimator(function(){console.log('蹦跳结束')})
+
+}
 
     var animateList = {
     //倒计时
@@ -309,6 +323,7 @@ var game = {
       spriteList.skySprite.left = left;
     },
     drawPeople: function(ctx, time) {
+       spriteList.peopleSprite.fpsNum=gameControl.fps.num;//给marioSpriteAnimator传递fpsnum
       spriteList.peopleSprite.update(ctx, time, gameControl.fps.num);
       spriteList.peopleSprite.paint(ctx);
     },

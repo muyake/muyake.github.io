@@ -1,5 +1,6 @@
 var publicConfig = {
   GRAVITY_FORCE: 353 //9.8 * 2 * 18,
+  //pixelsPerMeter : element.width / ARENA_LENGTH_IN_METERS,
 };
 //马里奥动画配置参数
 var mario = {
