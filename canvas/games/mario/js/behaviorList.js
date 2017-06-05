@@ -33,44 +33,39 @@ var behaviorList = {
     },
     //小人跳动
     jump: function(setting) {
-        var defaultSetting = {
-            velocityY: 0,
+        var defaultSetting = {          
             lastAdvance: 0,
             isJump: false,
-            initialTop: 0,
+         
             behaviorName: 'jump',
-            GRAVITY_FORCE: 9.8,
-            startVelocityY: 0,
+            
             jumpOverCallback: function() {
 
             },
             status: 0, //0是不跳，1是小跳，2是大跳。
         };
         lib.jQueryExtend(defaultSetting, setting);
-        this.lastAdvance = defaultSetting.lastAdvance;
-        this.velocityY = defaultSetting.velocityY;
-        this.isJump = defaultSetting.isJump;
-        this.initialTop = defaultSetting.initialTop;
+        this.lastAdvance = defaultSetting.lastAdvance;        
         this.behaviorName = defaultSetting.behaviorName;
-        this.GRAVITY_FORCE = defaultSetting.GRAVITY_FORCE;
+      
         this.fpsNum = 60;
         this.status = defaultSetting.status;
         this.jumpOverCallback = defaultSetting.jumpOverCallback;
         this.execute = function(sprite, context, time, fpsNum) {
             if (this.lastAdvance !== 0) {
-                if (this.velocityY < this.startVelocityY) {
+                if (sprite.velocityY < sprite.startVelocityY) {
                     this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
-                    this.velocityY = this.velocityY + this.GRAVITY_FORCE / this.fpsNum;
-                    sprite.top += this.velocityY / this.fpsNum;
-                    if (sprite.top < this.initialTop) {
-                        this.isJump = true;
+                    sprite.velocityY = sprite.velocityY + sprite.GRAVITY_FORCE / this.fpsNum;
+                    sprite.top += sprite.velocityY / this.fpsNum;
+                    if (sprite.top < sprite.initialTop) {
+                        sprite.isJump = true;
                     } else {
-                        sprite.top = this.initialTop;
-                        this.isJump = false;
+                        sprite.top = sprite.initialTop;
+                        sprite.isJump = false;
                         this.jumpOverCallback();
                     }
                 } else {
-                    this.isJump = false;
+                    sprite.isJump = false;
                 }
             }
             this.lastAdvance = time;

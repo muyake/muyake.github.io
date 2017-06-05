@@ -19,7 +19,7 @@ var sourceLoadObj = {
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
-        audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+      audioControl.BGMPlay(gameSourceObj.audioList.BGM);
 
         gameSourceObj.audioList.jumpAll.addEventListener('timeupdate', function() {
           if (this.currentTime > this.endTime) {
@@ -89,7 +89,7 @@ var game = {
           listener: function(status) {
             if (status == 1) {
               self.mapKey['s'] = true;
-              if (!spriteList.peopleSprite.behaviorStatus.jump.isJump && !gameControl.paused) {
+              if (!spriteList.peopleSprite.isJump && !gameControl.paused) {
                 audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.smallJump);
               }
             } else {
@@ -102,7 +102,7 @@ var game = {
           listener: function(status) {
             if (status == 1) {
               self.mapKey['w'] = true;
-              if (!spriteList.peopleSprite.behaviorStatus.jump.isJump && !gameControl.paused) {
+              if (!spriteList.peopleSprite.isJump && !gameControl.paused) {
                 audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
               }
             } else {
@@ -146,19 +146,19 @@ var game = {
                 game.setDirection(1);
               }
               game.lastKeyListenerTime = now;
-              if (spriteList.peopleSprite.behaviorStatus.jump.isJump) {
+              if (spriteList.peopleSprite.isJump) {
                 spriteList.peopleSprite.painter = peoplePainter.jump;
               } else {
                 spriteList.peopleSprite.painter = peoplePainter.run;
               }
-              spriteList.peopleSprite.behaviors = spriteList.peopleSprite.behaviorStatus.jump.isJump ? [spriteList.peopleSprite.behaviorStatus.jump] : [spriteList.peopleSprite.behaviorStatus.runInPlace];
+              spriteList.peopleSprite.behaviors = spriteList.peopleSprite.isJump ? [spriteList.peopleSprite.behaviorStatus.jump] : [spriteList.peopleSprite.behaviorStatus.runInPlace];
             }
         // console.log("按右键和空格键或按左键和空格键或按只空格键");       
         if (jumpKey) {
-            if (!spriteList.peopleSprite.behaviorStatus.jump.isJump) { // throttle
+            if (!spriteList.peopleSprite.isJump) { // throttle
 
-              spriteList.peopleSprite.behaviorStatus.jump.startVelocityY = this.mapKey["s"] ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
-              spriteList.peopleSprite.behaviorStatus.jump.velocityY = this.mapKey["s"] ? -marioGameConfig.smallJumpV : -marioGameConfig.bigJumpV;
+              spriteList.peopleSprite.startVelocityY = this.mapKey["s"] ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
+              spriteList.peopleSprite.velocityY = this.mapKey["s"] ? -marioGameConfig.smallJumpV : -marioGameConfig.bigJumpV;
             }
 
             spriteList.peopleSprite.painter = peoplePainter.jump;
@@ -169,7 +169,7 @@ var game = {
             // console.log('不按键或左右都按');
             game.setDirection(0);
             //  spriteList.peopleSprite.painter = peoplePainter.stand;
-            if (spriteList.peopleSprite.behaviorStatus.jump.isJump) {
+            if (spriteList.peopleSprite.isJump) {
               spriteList.peopleSprite.painter = peoplePainter.jump;
             } else {
               spriteList.peopleSprite.painter = peoplePainter.stand;
@@ -242,11 +242,13 @@ var game = {
         this.peopleSprite.height = 68;
         this.peopleSprite.top = element.mycanvas.height - this.peopleSprite.height * 1.2;
         this.peopleSprite.left = element.mycanvas.width / 3 - this.peopleSprite.width / 2;
+        this.peopleSprite.GRAVITY_FORCE= publicConfig.GRAVITY_FORCE;
+        this.peopleSprite.isJump=false;
+         this.peopleSprite.startVelocityY=0;
+            this.peopleSprite.initialTop=this.peopleSprite.top;
         this.peopleSprite.behaviorStatus = {
           runInPlace: new behaviorList.runInPlace(),
           jump: new behaviorList.jump({
-            initialTop: this.peopleSprite.top,
-            GRAVITY_FORCE: publicConfig.GRAVITY_FORCE,
             jumpOverCallback: function() {
                     //console.log('蹦跳结束');           
                     if (game.mapKey["s"]) {
@@ -281,8 +283,8 @@ var game = {
       cans.font = 'bold 14px arial';
       cans.fillStyle = 'red';
       cans.fillText((gameControl.fps.num >> 0) + 'fps', 50, 20);
-      cans.fillText(strTime[0], 110, 20);
-      cans.fillText(strTime[1], 200, 20);
+      // cans.fillText(strTime[0], 110, 20);
+      // cans.fillText(strTime[1], 200, 20);
       progressObj.mileageNumUpdate(gameControl.fps.num);
           progressObj.countDownNumUpdate();
       cans.fillText("行程:"+(progressObj.mileageNum>>0)+"m", 400, 20);

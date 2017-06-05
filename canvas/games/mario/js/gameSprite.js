@@ -62,6 +62,33 @@ PeopleRunSpriteSheetPainter.prototype.advance = function(sprite, context) {
 	}
 }
 
+var marioSpriteAnimator=function(elapsedCallback){
+	if (elapsedCallback) {
+		this.elapsedCallback = elapsedCallback;
+	}
+}
+marioSpriteAnimator.prototype=Object.create(SpriteAnimator.prototype);
+marioSpriteAnimator.prototype.start=function(marioSprite, duration) {
+		var endTime = +new Date() + duration;
+		var periond = marioSprite.startVelocityY / (this.painters.length);
+		var interval = undefined;
+		var animator = this;
+		var originalPainter = sprite.painters;
+		this.index = 0;
+		sprite.animating = true;
+		sprite.painter = this.painters[this.index];
+		interval = setInterval(function() {
+			if (+new Date() < endTime) {
+				sprite.painter = animator.painters[++animator.index];
+
+			} else {
+				animator.end(sprite, originalPainter);
+				clearInterval(interval);
+			}
+		}, period);
+
+	};
+
 
 //场景Sprite
 var SceneSprite=function(name, painter, behaviors) {
