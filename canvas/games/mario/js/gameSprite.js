@@ -91,10 +91,13 @@ marioSpriteAnimator.prototype.start = function(marioSprite, duration) {
             } else {
                 marioSprite.top = marioSprite.initialTop;
                 marioSprite.isJump = false;
+                clearInterval(interval);
+                animator.end(marioSprite);
             }
             // requestNextAnimationFrame(spriteAnimatorAnimate);     
         } else {
-        	  marioSprite.isJump = false;
+            marioSprite.top = marioSprite.initialTop;
+            marioSprite.isJump = false;
             animator.end(marioSprite);
             clearInterval(interval);
         }
@@ -119,8 +122,6 @@ marioSpriteAnimator.prototype.start = function(marioSprite, duration) {
     // 		 animator.end(marioSprite);
     // 	}
     // })
-
-
 
 
 
