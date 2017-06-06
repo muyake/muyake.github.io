@@ -1,6 +1,6 @@
 var publicConfig = {
   GRAVITY_FORCE: 353 //9.8 * 2 * 18,
-  //pixelsPerMeter : element.width / ARENA_LENGTH_IN_METERS,
+    //pixelsPerMeter : element.width / ARENA_LENGTH_IN_METERS,
 };
 //马里奥动画配置参数
 var mario = {
@@ -160,14 +160,12 @@ var mario = {
     }
   }
 };
-var marioGameConfig={
-  bigJumpV:320,
-  smallJumpV:220,
+var marioGameConfig = {
+  bigJumpV: 320,
+  smallJumpV: 220,
 }
-var element={
+var element = {
   mycanvas: document.getElementById('mycanvas'),
   progressDiv: document.getElementById('load'),
-  tipDiv:document.querySelector('.tip'),
+  tipDiv: document.querySelector('.tip'),
 };
-
-

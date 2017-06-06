@@ -63,6 +63,8 @@ var marioSpriteAnimator = function(elapsedCallback) {
     if (elapsedCallback) {
         this.elapsedCallback = elapsedCallback;
     }
+    this.isRunning = false;
+
 }
 marioSpriteAnimator.prototype = Object.create(SpriteAnimator.prototype);
 marioSpriteAnimator.prototype.end = function(sprite) {
@@ -70,81 +72,37 @@ marioSpriteAnimator.prototype.end = function(sprite) {
     if (this.elapsedCallback) {
         this.elapsedCallback(sprite);
     }
-    // else {
-    // 	sprite.painter = originalPainter;
-    // }
 };
-marioSpriteAnimator.prototype.start = function(marioSprite, duration) {
-    //var endTime = +new Date() + 2* marioSprite.startVelocityY / (this.GRAVITY_FORCE);
+marioSpriteAnimator.prototype.start = function(marioSprite) {
+    this.marioSprite = marioSprite;
+    this.isRunning = true;
+};
+marioSpriteAnimator.prototype.execute = function() {
     var animator = this;
-    var interval = undefined;
-    marioSprite.animating = true;
-    interval = setInterval(function() {
-        if (marioSprite.velocityY < marioSprite.startVelocityY) {
-            //marioSprite.top+=sprite.velocityY + sprite.GRAVITY_FORCE / this.fpsNum;
-            //marioSprite.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
-            marioSprite.velocityY = marioSprite.velocityY + marioSprite.GRAVITY_FORCE / marioSprite.fpsNum;
-            marioSprite.top += marioSprite.velocityY / marioSprite.fpsNum;
-            if (marioSprite.top < marioSprite.initialTop) {
-                marioSprite.isJump = true;
-                marioSprite.painter = peoplePainter.jump;
+    if (animator.isRunning) {
+        if (this.marioSprite.velocityY < this.marioSprite.startVelocityY) {
+            this.marioSprite.velocityY = this.marioSprite.velocityY + this.marioSprite.GRAVITY_FORCE / this.marioSprite.fpsNum;
+            this.marioSprite.top += this.marioSprite.velocityY / this.marioSprite.fpsNum;
+            if (this.marioSprite.top < this.marioSprite.initialTop) {
+                this.marioSprite.isJump = true;
+                this.marioSprite.painter = peoplePainter.jump;
             } else {
-                marioSprite.top = marioSprite.initialTop;
-                marioSprite.isJump = false;
-                clearInterval(interval);
-                animator.end(marioSprite);
+                this.marioSprite.top = this.marioSprite.initialTop;
+                this.marioSprite.isJump = false;
+                animator.isRunning = false;
+                animator.end(this.marioSprite); //一定要放到isRunning = false;下面
+
             }
-            // requestNextAnimationFrame(spriteAnimatorAnimate);     
         } else {
-            marioSprite.top = marioSprite.initialTop;
-            marioSprite.isJump = false;
-            animator.end(marioSprite);
-            clearInterval(interval);
+
+            this.marioSprite.top = this.marioSprite.initialTop;
+            this.marioSprite.isJump = false;
+            animator.isRunning = false;
+            animator.end(this.marioSprite); //一定要放到isRunning = false;下面
+
         }
-    }, 16);
-
-    // requestNextAnimationFrame(function spriteAnimatorAnimate(time){
-    // 	if(marioSprite.velocityY < marioSprite.startVelocityY){
-    // 		//marioSprite.top+=sprite.velocityY + sprite.GRAVITY_FORCE / this.fpsNum;
-    // 	  //marioSprite.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
-    //                   marioSprite.velocityY = marioSprite.velocityY + marioSprite.GRAVITY_FORCE / marioSprite.fpsNum;
-    //                   marioSprite.top += marioSprite.velocityY / marioSprite.fpsNum;
-    //              if (marioSprite.top < marioSprite.initialTop) {
-    //                       marioSprite.isJump = true;
-    //                       marioSprite.painter = peoplePainter.jump;
-    //                   } else {
-    //                       marioSprite.top = marioSprite.initialTop;
-    //                       marioSprite.isJump = false;
-
-    //                   }
-    //              requestNextAnimationFrame(spriteAnimatorAnimate);     
-    // 	}else{
-    // 		 animator.end(marioSprite);
-    // 	}
-    // })
-
-
-
-    //var periond =2* marioSprite.startVelocityY / (this.GRAVITY_FORCE);
-
-    // var animator = this;
-    // var originalPainter = sprite.painters;
-    // this.index = 0;
-    // sprite.animating = true;
-    // sprite.painter = this.painters[this.index];
-    // var interval = undefined;
-    // interval = setInterval(function() {
-    // 	if (+new Date() < endTime) {
-    // 		sprite.painter = animator.painters[++animator.index];
-
-    // 	} else {
-    // 		animator.end(sprite, originalPainter);
-    // 		clearInterval(interval);
-    // 	}
-    // }, period);
-
-};
-
+    }
+}
 
 //场景Sprite
 var SceneSprite = function(name, painter, behaviors) {

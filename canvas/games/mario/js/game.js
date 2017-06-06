@@ -96,12 +96,12 @@ var game = {
             audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.smallJump);
             if (!spriteList.peopleSprite.isJump) { // throttle      
               spriteList.peopleSprite.jump(1);
-              console.log("小跳");
             }
           }
         } else {
           self.mapKey['s'] = false;
         }
+        game.activeEventCallback();
       }
     });
     gameControl.addKeyListener({
@@ -112,12 +112,12 @@ var game = {
           if (!spriteList.peopleSprite.isJump && !gameControl.paused) {
             if (!spriteList.peopleSprite.isJump) { // throttle      
               spriteList.peopleSprite.jump(2);
-              console.log("大跳");
             }
           }
         } else {
           self.mapKey['w'] = false;
         }
+        game.activeEventCallback();
       }
     });
     gameControl.addKeyListener({
@@ -128,6 +128,7 @@ var game = {
         } else {
           self.mapKey['right'] = false;
         }
+        game.activeEventCallback();
       }
     });
     gameControl.addKeyListener({
@@ -138,6 +139,7 @@ var game = {
         } else {
           self.mapKey['left'] = false;
         }
+        game.activeEventCallback();
       }
     });
   },
@@ -156,21 +158,27 @@ var game = {
       }
       game.lastKeyListenerTime = now;
       if (spriteList.peopleSprite.isJump) {
-        spriteList.peopleSprite.painter = peoplePainter.jump;
+        //spriteList.peopleSprite.painter = peoplePainter.jump;
         spriteList.peopleSprite.behaviors = [];
       } else {
         spriteList.peopleSprite.painter = peoplePainter.run;
         spriteList.peopleSprite.behaviors = [spriteList.peopleSprite.behaviorStatus.runInPlace];
       }
     }
+    if (jumpKey && !spriteList.peopleSprite.isJump) {
+      var status = this.mapKey["s"] ? 1 : 2;
+      spriteList.peopleSprite.jump(status);
+    }
     // console.log("按右键和空格键或按左键和空格键或按只空格键");       
     if ((!this.mapKey["left"] && !this.mapKey["right"]) || (this.mapKey["left"] && this.mapKey["right"])) {
       // console.log('不按键或左右都按');
       game.setDirection(0);
+
       if (spriteList.peopleSprite.isJump) {
         spriteList.peopleSprite.painter = peoplePainter.jump;
       } else {
         spriteList.peopleSprite.painter = peoplePainter.stand;
+
       }
       spriteList.peopleSprite.behaviors = [];
     }
@@ -182,7 +190,6 @@ var game = {
           spriteList.skySprite.velocityX = 0;
           spriteList.normalwall.velocityX = 0;
           progressObj.velocityX = 0;
-
         }
         break;
       case 1:
@@ -190,7 +197,6 @@ var game = {
           spriteList.skySprite.velocityX = -spriteList.skySprite.initialVelocitX;
           spriteList.normalwall.velocityX = -spriteList.normalwall.initialVelocitX;
           progressObj.velocityX = -progressObj.initialVelocitX;
-
         }
         break;
       case -1:
@@ -207,9 +213,10 @@ var game = {
 var gameControl = new Game('game', 'mycanvas');
 gameControl.speed = 1;
 gameControl.startAnimate = function(time) {
-  game.activeEventCallback(time);
+  //game.activeEventCallback(time);
   animateList.drawSkySingle(time);
   animateList.drawWall(time);
+  SpriteAnimatorList.marioSpriteAnimatorJump.execute();
   animateList.drawPeople(gameControl.context, time);
   animateList.countDown(time);
 }
@@ -252,7 +259,6 @@ var spriteList = {
     this.peopleSprite.jump = function(status) { //status为2时，为大蹦，1时为小蹦
         this.startVelocityY = status == 1 ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
         this.velocityY = status == 1 ? -marioGameConfig.smallJumpV : -marioGameConfig.bigJumpV;
-        this.isJump = true;
         this.behaviors = [];
         SpriteAnimatorList.marioSpriteAnimatorJump.start(spriteList.peopleSprite);
       }
@@ -271,18 +277,24 @@ var SpriteAnimatorList = {
     sprite.startVelocityY = 0;
     sprite.velocityY = 0;
     sprite.isJump = false;
-    //按左键，或按右键
-    if (game.mapKey["s"] || game.mapKey["w"]) {
-      var status = game.mapKey["s"] ? 1 : 2;
-      sprite.jump(status);
-    } else {
-      if ((game.mapKey["left"] && !game.mapKey["right"]) || (!game.mapKey["left"] && game.mapKey["right"])) {
-        sprite.painter = peoplePainter.run;
+    game.activeEventCallback();
 
-      } else {
-        sprite.painter = peoplePainter.stand;
-      }
-    }
+    //按左键，或按右键
+    // if (game.mapKey["s"] || game.mapKey["w"]) {
+    //   var status = game.mapKey["s"] ? 1 : 2;
+    //   sprite.jump(status);
+
+
+    // } else {
+    //   if ((game.mapKey["left"] && !game.mapKey["right"]) || (!game.mapKey["left"] && game.mapKey["right"])) {
+    //     sprite.painter = peoplePainter.run;
+
+    //   } else {
+    //     sprite.painter = peoplePainter.stand;
+
+    //   }
+    // }
+
 
   })
 }

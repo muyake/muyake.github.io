@@ -70,26 +70,26 @@ GrassImagePainter.prototype.paint = function(sprite, context) {
 };
 
 SpriteSheetPainter = function(cells, spritesheeturl, mycanvas) {
-	this.cells = cells || [];
-	this.spritesheet = new Image();
-	this.spritesheet.src = spritesheeturl;
-	this.cellIndex = 0;
-	this.mycanvas = mycanvas;
-},
-
-SpriteSheetPainter.prototype = {
-	advance: function() {
-		if (this.cellIndex == this.cells.length - 1) {
-			this.cellIndex = 0;
-		} else {
-			this.cellIndex++;
-		}
+		this.cells = cells || [];
+		this.spritesheet = new Image();
+		this.spritesheet.src = spritesheeturl;
+		this.cellIndex = 0;
+		this.mycanvas = mycanvas;
 	},
-	paint: function(sprite, context) {
-		var cell = this.cells[this.cellIndex];
-		context.drawImage(this.spritesheet.cell.left, cell.top, cell.width, cell.heightsprite.left, sprite.top, cell.width, cell.height);
+
+	SpriteSheetPainter.prototype = {
+		advance: function() {
+			if (this.cellIndex == this.cells.length - 1) {
+				this.cellIndex = 0;
+			} else {
+				this.cellIndex++;
+			}
+		},
+		paint: function(sprite, context) {
+			var cell = this.cells[this.cellIndex];
+			context.drawImage(this.spritesheet.cell.left, cell.top, cell.width, cell.heightsprite.left, sprite.top, cell.width, cell.height);
+		}
 	}
-}
 
 var SpriteAnimator = function(painters, elapsedCallback) {
 	this.painters = painters;
@@ -129,7 +129,6 @@ SpriteAnimator.prototype = {
 				clearInterval(interval);
 			}
 		}, period);
-
 	}
 
 }
