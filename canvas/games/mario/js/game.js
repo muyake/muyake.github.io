@@ -144,9 +144,9 @@ var game = {
     });
   },
   activeEventCallback: function(time) {
-    var now = +new Date();
+    //  var now = +new Date();
     var jumpKey = this.mapKey["s"] || this.mapKey["w"];
-    if (((this.mapKey["left"] && !this.mapKey["right"]) || (!this.mapKey["left"] && this.mapKey["right"])) && (now - game.lastKeyListenerTime > 200)) {
+    if (((this.mapKey["left"] && !this.mapKey["right"]) || (!this.mapKey["left"] && this.mapKey["right"]))) {
       if ((this.mapKey["left"] && !this.mapKey["right"])) {
         game.setDirection(-1);
         spriteList.peopleSprite.isReverse = false;
@@ -156,9 +156,8 @@ var game = {
         spriteList.peopleSprite.isReverse = true;
         game.setDirection(1);
       }
-      game.lastKeyListenerTime = now;
+      // game.lastKeyListenerTime = now;
       if (spriteList.peopleSprite.isJump) {
-        //spriteList.peopleSprite.painter = peoplePainter.jump;
         spriteList.peopleSprite.behaviors = [];
       } else {
         spriteList.peopleSprite.painter = peoplePainter.run;
@@ -168,7 +167,16 @@ var game = {
     if (jumpKey && !spriteList.peopleSprite.isJump) {
       var status = this.mapKey["s"] ? 1 : 2;
       spriteList.peopleSprite.jump(status);
+    } else {
+      if ((game.mapKey["left"] && !game.mapKey["right"]) || (!game.mapKey["left"] && game.mapKey["right"])) {
+        spriteList.peopleSprite.painter = peoplePainter.run;
+      } else {
+        spriteList.peopleSprite.painter = peoplePainter.stand;
+      }
     }
+
+
+
     // console.log("按右键和空格键或按左键和空格键或按只空格键");       
     if ((!this.mapKey["left"] && !this.mapKey["right"]) || (this.mapKey["left"] && this.mapKey["right"])) {
       // console.log('不按键或左右都按');
