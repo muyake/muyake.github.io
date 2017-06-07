@@ -1,7 +1,7 @@
 var publicConfig = {
   GRAVITY_FORCE: 353 //9.8 * 2 * 18,
     //pixelsPerMeter : element.width / ARENA_LENGTH_IN_METERS,
-};
+  };
 //马里奥动画配置参数
 var mario = {
   config: {
@@ -170,7 +170,22 @@ var element = {
   tipDiv: document.querySelector('.tip'),
 };
 var gameConfig={
-  moneySpeed:90,
-  wallSpeed: 90,
+  // moneySpeed:90,
+  // wallSpeed: 90,
+  objectSpeed:90,
+  progressObjSpeed:-2,
+  skySpeed:32,
+  setSpeedDefault:function(){
+this.objectSpeed=90;
+   this.progressObjSpeed=-2;
+    this.skySpeed=32;
+  },
+  setSpeedZero:function(){
+   this.objectSpeed=0;
+   this.progressObjSpeed=0;
+    this.skySpeed=0;
+  },
+
   roadHeight:10,
+
 }

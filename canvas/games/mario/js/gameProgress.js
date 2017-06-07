@@ -3,8 +3,7 @@ var progressObj={
     totaltime:300,//游戏倒计时
     velocityX:0,
     currentTime:300,
-     fpsNum : 60,
-     initialVelocitX:-2,
+     fpsNum : 60,     
      countDownWatch:new Stopwatch(),
    mileageNumUpdate:function(fpsNum){
        this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
