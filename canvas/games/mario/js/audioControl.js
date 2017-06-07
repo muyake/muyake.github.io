@@ -6,6 +6,10 @@ var gameAudio={
     bigJump:{
         startTime:3.2,
         endTime:4,
+    },
+    eatMoney:{
+        startTime:7,
+        endTime:7.5,
     }
 }
 
@@ -23,6 +27,12 @@ var audioControl={
     },
     BGMPause:function(audioObj){
         audioObj.pause();
+    },
+    timeupdateAddEventListener:function(audioObj){
+    audioObj.addEventListener('timeupdate', function() {
+      if (this.currentTime > this.endTime) {
+        this.pause();
+      }
+    }, false);
     }
-
 }

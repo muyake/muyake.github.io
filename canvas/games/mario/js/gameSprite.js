@@ -77,6 +77,7 @@ marioSpriteAnimator.prototype.start = function(marioSprite) {
     this.marioSprite = marioSprite;
     this.isRunning = true;
 };
+
 marioSpriteAnimator.prototype.execute = function() {
     var animator = this;
     if (animator.isRunning) {

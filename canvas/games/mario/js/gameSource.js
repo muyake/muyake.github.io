@@ -8,7 +8,8 @@ var gameSourceUrl={
 			abnormalwall:'./images/wall/abnormalwall.png',
 			afterabnormalwall:'./images/wall/afterabnormalwall.png',
 
-		},		
+		},	
+		money:'./images/money.png',	
 		//马里奥
 		mario:{
 			run:"./images/mario/smallmario/marioR/spritesrun.png",
@@ -20,5 +21,6 @@ var gameSourceUrl={
 		//bigJump:'./sounds/mario/jump_big.mp3',
 		BGM:'./sounds/mario/bag.mp3',
 		jumpAll:'./sounds/mario/jumpAll.mp3',
+		collision:'./sounds/mario/mariocollision.mp3',
 	}
 }

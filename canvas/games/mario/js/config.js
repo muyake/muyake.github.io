@@ -169,3 +169,8 @@ var element = {
   progressDiv: document.getElementById('load'),
   tipDiv: document.querySelector('.tip'),
 };
+var gameConfig={
+  moneySpeed:90,
+  wallSpeed: 90,
+  roadHeight:10,
+}

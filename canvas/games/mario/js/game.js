@@ -20,12 +20,8 @@ var sourceLoadObj = {
     progressObj.countDownStart();
     //背景音乐响起     
     audioControl.BGMPlay(gameSourceObj.audioList.BGM);
-    gameSourceObj.audioList.jumpAll.addEventListener('timeupdate', function() {
-      if (this.currentTime > this.endTime) {
-        this.pause();
-      }
-    }, false);
-
+ audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
+ audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
   }
 }
 
@@ -90,6 +86,9 @@ var game = {
     gameControl.addKeyListener({
       key: 's',
       listener: function(status) {
+        if(gameControl.paused){
+          return;
+        }
         if (status == 1) {
           self.mapKey['s'] = true;
           if (!spriteList.peopleSprite.isJump && !gameControl.paused) {
@@ -107,9 +106,13 @@ var game = {
     gameControl.addKeyListener({
       key: 'w',
       listener: function(status) {
+        if(gameControl.paused){
+          return;
+        }
         if (status == 1) {
           self.mapKey['w'] = true;
           if (!spriteList.peopleSprite.isJump && !gameControl.paused) {
+              audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
             if (!spriteList.peopleSprite.isJump) { // throttle      
               spriteList.peopleSprite.jump(2);
             }
@@ -197,6 +200,7 @@ var game = {
         {
           spriteList.skySprite.velocityX = 0;
           spriteList.normalwall.velocityX = 0;
+           spriteList.money.velocityX = 0;
           progressObj.velocityX = 0;
         }
         break;
@@ -205,6 +209,7 @@ var game = {
           spriteList.skySprite.velocityX = -spriteList.skySprite.initialVelocitX;
           spriteList.normalwall.velocityX = -spriteList.normalwall.initialVelocitX;
           progressObj.velocityX = -progressObj.initialVelocitX;
+            spriteList.money.velocityX = -spriteList.money.initialVelocitX;
         }
         break;
       case -1:
@@ -212,6 +217,7 @@ var game = {
           spriteList.skySprite.velocityX = spriteList.skySprite.initialVelocitX;
           spriteList.normalwall.velocityX = spriteList.normalwall.initialVelocitX;
           progressObj.velocityX = progressObj.initialVelocitX;
+           spriteList.money.velocityX = spriteList.money.initialVelocitX;
         }
         break;
     }
@@ -224,6 +230,7 @@ gameControl.startAnimate = function(time) {
   //game.activeEventCallback(time);
   animateList.drawSkySingle(time);
   animateList.drawWall(time);
+  animateList.drawMoney(time);
   SpriteAnimatorList.marioSpriteAnimatorJump.execute();
   animateList.drawPeople(gameControl.context, time);
   animateList.countDown(time);
@@ -240,6 +247,7 @@ var peoplePainter = {
 var spriteList = {
   skySprite: new SceneSprite('sky2', new ImagePainter(gameSourceUrl.imageList.BG), [new behaviorList.moveLeftToRight()]),
   normalwall: new SceneSprite('wall', new ImagePainter(gameSourceUrl.imageList.wall.normalwall), [new behaviorList.moveLeftToRight()]),
+  money: new SceneSprite('money', new ImagePainter(gameSourceUrl.imageList.money), [new behaviorList.moveLeftToRight()]),
   peopleSprite: new Character('mario', peoplePainter.stand, [], true, element.mycanvas),
   spriteInit: function() {
     this.skySprite.width = element.mycanvas.width;
@@ -253,7 +261,7 @@ var spriteList = {
     //this.peopleSprite.velocityY = 50;
     this.peopleSprite.width = 33;
     this.peopleSprite.height = 68;
-    this.peopleSprite.top = element.mycanvas.height - this.peopleSprite.height * 1.2;
+    this.peopleSprite.top = element.mycanvas.height - this.peopleSprite.height -gameConfig.roadHeight;
     this.peopleSprite.left = element.mycanvas.width / 3 - this.peopleSprite.width / 2;
     this.peopleSprite.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.peopleSprite.isJump = false;
@@ -275,7 +283,13 @@ var spriteList = {
     this.normalwall.height = 35;
     this.normalwall.top = 220;
     this.normalwall.left = 500;
-    this.normalwall.initialVelocitX = 45 * gameControl.speed;
+    this.normalwall.initialVelocitX = gameConfig.moneySpeed * gameControl.speed;
+
+    this.money.width = 35;
+    this.money.height = 35;
+    this.money.top = element.mycanvas.height - this.money.height -gameConfig.roadHeight;
+    this.money.left = 300;
+    this.money.initialVelocitX = gameConfig.moneySpeed * gameControl.speed;
   }
 };
 
@@ -288,22 +302,13 @@ var SpriteAnimatorList = {
     game.activeEventCallback();
 
     //按左键，或按右键
-    // if (game.mapKey["s"] || game.mapKey["w"]) {
-    //   var status = game.mapKey["s"] ? 1 : 2;
-    //   sprite.jump(status);
-
-
-    // } else {
-    //   if ((game.mapKey["left"] && !game.mapKey["right"]) || (!game.mapKey["left"] && game.mapKey["right"])) {
-    //     sprite.painter = peoplePainter.run;
-
-    //   } else {
-    //     sprite.painter = peoplePainter.stand;
-
-    //   }
-    // }
-
-
+    if (game.mapKey["s"] || game.mapKey["w"]) {
+      if(game.mapKey["s"]){
+          audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.smallJump);
+        }else{
+          audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
+        }
+    }    
   })
 }
 
@@ -346,10 +351,19 @@ var animateList = {
     spriteList.peopleSprite.fpsNum = gameControl.fps.num; //给marioSpriteAnimator传递fpsnum
     spriteList.peopleSprite.update(ctx, time, gameControl.fps.num);
     spriteList.peopleSprite.paint(ctx);
+    CD.judgeMM(spriteList.peopleSprite,spriteList.money,function(){
+      spriteList.money.visible=false;     
+      audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+    });
   },
   drawWall: function(time) {
     var self = this;
     spriteList.normalwall.update(self.ctx, time, gameControl.fps.num);
     spriteList.normalwall.paint(self.ctx);
+  },
+   drawMoney: function(time) {
+    var self = this;
+    spriteList.money.update(self.ctx, time, gameControl.fps.num);
+    spriteList.money.paint(self.ctx);
   },
 }
