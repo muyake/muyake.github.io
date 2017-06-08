@@ -81,7 +81,7 @@ marioSpriteAnimator.prototype.start = function(marioSprite) {
 marioSpriteAnimator.prototype.execute = function() {
     var animator = this;
     if (animator.isRunning) {
-        if (this.marioSprite.velocityY < this.marioSprite.startVelocityY) {
+        if (this.marioSprite.velocityY < this.marioSprite.startVelocityY||this.marioSprite.top < this.marioSprite.initialTop) {
             this.marioSprite.velocityY = this.marioSprite.velocityY + this.marioSprite.GRAVITY_FORCE / this.marioSprite.fpsNum;
             this.marioSprite.top += this.marioSprite.velocityY / this.marioSprite.fpsNum;
             if (this.marioSprite.top < this.marioSprite.initialTop) {
