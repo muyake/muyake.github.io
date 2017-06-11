@@ -86,7 +86,7 @@ marioSpriteAnimator.prototype.execute = function() {
         if (this.marioSprite.top < this.marioSprite.initialTop) {
            
             this.marioSprite.isJump = true;
-            this.marioSprite.painter = marioPainter.jump;
+            this.marioSprite.painter = this.marioSprite.jumpPainter;
 
         } else {
 
@@ -109,4 +109,21 @@ SceneSprite.prototype.update = function(context, time, fpsNum) {
     for (var i = this.behaviors.length; i > 0; --i) {
         this.behaviors[i - 1].execute(this, context, time, fpsNum);
     }
+}
+var SceneImagePainter = function(imageUrl) {
+	ImagePainter.call(this,imageUrl);
+}
+SceneImagePainter.prototype = {
+	paint: function(sprite, context) {
+		if (!!this.image) {
+			if(sprite.imgwidth){
+				context.drawImage(this.image,sprite.imgleft, sprite.imgtop,sprite.imgwidth, sprite.imgheight, sprite.left, sprite.top,
+				sprite.width, sprite.height);
+			}else{
+				context.drawImage(this.image, sprite.left, sprite.top,
+				sprite.width, sprite.height);
+			}
+			
+		}
+	}
 }

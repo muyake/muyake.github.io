@@ -21,13 +21,13 @@ var CD = {
         // 两个矩形检测
         if ((mario.left + mario.width) < normalwall.left || (normalwall.left + normalwall.width) < mario.left || (mario.top + mario.height) < normalwall.top || (normalwall.top + normalwall.height) < mario.top) {
             gameConfig.setSpeedDefault();
-            mario.initialTop = element.mycanvas.height - mario.height -gameConfig.roadHeight;
+            mario.initialTop = element.mycanvas.height - mario.height - gameConfig.roadHeight;
             //如果下方有墙且不是在蹦跳中，则从墙上走下，否则如果在蹦跳中，则 mario.velocityY =0，蹦不起来。
-            if(mario.upColliding&&!mario.isJump){
+            if (mario.upColliding && !mario.isJump) {
                 mario.jump(0);
-                mario.isJump=true;
-                mario.upColliding=null;
-            }            
+                mario.isJump = true;
+                mario.upColliding = null;
+            }
             return true
         } else {
             var standardChangeX = mario.width + normalwall.width;
@@ -38,33 +38,39 @@ var CD = {
             var changeY = (mario.top + mario.height / 2) - (normalwall.top + normalwall.height / 2);
             var sinNum = changeY / Math.sqrt(changeX * changeX + changeY * changeY);
 
-            if (changeX > 0) {              
-                if(Math.abs(sinNum)< standardChangeSinNum)
-                 {
-                    console.log("mario在墙的右侧");
+            if (changeX > 0) {
+                if (Math.abs(sinNum) < standardChangeSinNum) {
                     mario.left = normalwall.left + normalwall.width;
                     gameConfig.setSpeedZero();
                 } else if (sinNum > 0) {
-                    console.log("mario在墙的下侧");
-
+                    // console.log("mario在墙的下侧");
+                    // normalwall.visible=false;
+                    mario.velocityY = -mario.velocityY;
+                    if (!normalwall.isJump) {
+                        normalwall.up(60);
+                    }
                 } else {
-                    console.log("mario在墙的上侧");
-                      mario.initialTop = normalwall.top - mario.height;
+                    mario.initialTop = normalwall.top - mario.height;
                     mario.upColliding = normalwall;
                 }
 
             } else {
-                if(Math.abs(sinNum)< standardChangeSinNum){
-                    console.log("mario在墙的左侧");
-                     mario.left = normalwall.left - mario.width;
-                     gameConfig.setSpeedZero();
-                
+                if (Math.abs(sinNum) < standardChangeSinNum) {
+
+                    mario.left = normalwall.left - mario.width;
+                    gameConfig.setSpeedZero();
+
                 } else if (sinNum > 0) {
-                    console.log("mario在墙的下侧");
+                    // console.log("mario在墙的下侧");
+                    // normalwall.visible=false;
+                    if (!normalwall.isJump) {
+                        normalwall.up(60);
+                    }
+                    mario.velocityY = -mario.velocityY;
                 } else {
-                    console.log("mario在墙的上侧");
-                     mario.initialTop = normalwall.top - mario.height;
-                     mario.upColliding = normalwall;
+
+                    mario.initialTop = normalwall.top - mario.height;
+                    mario.upColliding = normalwall;
                 }
 
             }

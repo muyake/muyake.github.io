@@ -3,12 +3,9 @@ var gameSourceUrl={
 	imageList: {
 		//背景
 		BG:'./images/background.png',
-		wall:{
-			normalwall:'./images/wall/normalwall.png',
-			abnormalwall:'./images/wall/abnormalwall.png',
-			afterabnormalwall:'./images/wall/afterabnormalwall.png',
-
-		},	
+		wall:'./images/wall/wall.png',
+			
+		
 		money:'./images/money.png',	
 		//马里奥
 		mario:{

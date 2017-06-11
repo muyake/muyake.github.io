@@ -53,8 +53,7 @@ ImagePainter.prototype = {
 
 var GrassImagePainter = function(imageUrl) {
 	ImagePainter.call(this, imageUrl);
-	// this.image=new Image();
-	// this.image.src = imageUrl;
+	
 }
 
 GrassImagePainter.prototype = Object.create(ImagePainter.prototype);

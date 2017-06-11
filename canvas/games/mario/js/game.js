@@ -46,9 +46,10 @@ var game = {
     bindEvent: function() {
         var self = this;
         document.querySelector('#smallBtn').addEventListener('click', function() {
-            if (!spriteList.marioSprite.isJump) { // throttle      
-                spriteList.marioSprite.jump(marioGameConfig.smallJumpV);
-            }
+            // if (!spriteList.marioSprite.isJump) { // throttle      
+            //     spriteList.marioSprite.jump(marioGameConfig.smallJumpV);
+            // }
+           spriteList.normalwall.up(60); 
         }, false);
 
         document.querySelector('#bigBtn').addEventListener('click', function() {
@@ -240,9 +241,12 @@ gameControl.speed = 1;
 gameControl.startAnimate = function(time) {
     //game.activeEventCallback(time);
     animateList.drawSkySingle(time);
-    animateList.drawWall(time);
+    
     animateList.drawMoney(time);
-    SpriteAnimatorList.marioSpriteAnimatorJump.execute();
+  
+      SpriteAnimatorList.wallSpriteAnimatorUp.execute();
+      animateList.drawWall(time);
+        SpriteAnimatorList.marioSpriteAnimatorJump.execute();
     animateList.drawPeople(gameControl.context, time);
     animateList.countDown(time);
 }
@@ -253,11 +257,14 @@ var marioPainter = {
     stand: new CharacterImagePainter(gameSourceUrl.imageList.mario.stand),
 };
 
+var wallPainter={
+    jump: new SceneImagePainter(gameSourceUrl.imageList.wall),
+}
 
 
 var spriteList = {
     skySprite: new SceneSprite('sky2', new ImagePainter(gameSourceUrl.imageList.BG), [new behaviorList.moveLeftToRight()]),
-    normalwall: new SceneSprite('wall', new ImagePainter(gameSourceUrl.imageList.wall.normalwall), [new behaviorList.moveLeftToRight()]),
+    normalwall: new SceneSprite('normalwall', new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.moveLeftToRight()]),
     money: new SceneSprite('money', new ImagePainter(gameSourceUrl.imageList.money), [new behaviorList.moveLeftToRight()]),
     marioSprite: new Character('mario', marioPainter.stand, [], true, element.mycanvas),
     spriteInit: function() {
@@ -277,9 +284,8 @@ var spriteList = {
         this.marioSprite.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
         this.marioSprite.isJump = false;
         this.marioSprite.startVelocityY = 0;
-
+        this.marioSprite.jumpPainter=marioPainter.jump;
         this.marioSprite.upColliding = null;
-
         this.marioSprite.initialTop = this.marioSprite.top;
         this.marioSprite.behaviorStatus = {
             runInPlace: new behaviorList.runInPlace(),
@@ -290,13 +296,29 @@ var spriteList = {
                 this.startVelocityY = VY;
                 this.velocityY =  -this.startVelocityY;
                 this.behaviors = [];              
-                SpriteAnimatorList.marioSpriteAnimatorJump.start(spriteList.marioSprite);
+                SpriteAnimatorList.marioSpriteAnimatorJump.start(this);
             }
             //wall
         this.normalwall.width = 35;
         this.normalwall.height = 35;
-        this.normalwall.top = element.mycanvas.height - this.normalwall.height - gameConfig.roadHeight;
+        this.normalwall.top = element.mycanvas.height - this.normalwall.height - gameConfig.roadHeight-100;
         this.normalwall.left = 500;
+        this.normalwall.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
+        this.normalwall.initialTop = this.normalwall.top;
+        this.normalwall.jumpPainter=wallPainter.jump;
+        this.normalwall.imgwidth = wall.normalSprite.width;
+        this.normalwall.imgheight = wall.normalSprite.height;
+        this.normalwall.imgleft = wall.normalSprite.left;
+        this.normalwall.imgtop = wall.normalSprite.top;
+        this.normalwall.mycanvas=element.mycanvas;
+
+        this.normalwall.up = function(VY) { //status为2时，为大蹦，1时为小蹦
+                this.startVelocityY = VY;
+                this.velocityY =  -this.startVelocityY;
+               // this.behaviors = [];              
+                SpriteAnimatorList.wallSpriteAnimatorUp.start(this);
+        }
+
 
         this.money.width = 35;
         this.money.height = 35;
@@ -321,7 +343,15 @@ var SpriteAnimatorList = {
                 audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
             }
         }
-    })
+    }),
+    wallSpriteAnimatorUp: new marioSpriteAnimator(function(sprite) {
+        sprite.isJump = false;
+        sprite.startVelocityY = 0;
+        sprite.velocityY = 0;
+        sprite.isJump = false;
+        console.log(111);
+       // game.activeEventCallback();        
+    }),
 }
 
 var animateList = {
@@ -374,6 +404,7 @@ var animateList = {
     },
     drawWall: function(time) {
         var self = this;
+         spriteList.normalwall.fpsNum = gameControl.fps.num; 
         spriteList.normalwall.update(self.ctx, time, gameControl.fps.num);
         spriteList.normalwall.paint(self.ctx);
     },
