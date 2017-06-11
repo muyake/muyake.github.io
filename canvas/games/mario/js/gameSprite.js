@@ -31,13 +31,13 @@ CharacterImagePainter.prototype.paint = function(characterSprite, context, mycan
         context.scale(-1, 1);
     }
 };
-PeopleRunSpriteSheetPainter = function(cells, spritesheeturl, mycanvas, imgcount) {
+MarioRunSpriteSheetPainter = function(cells, spritesheeturl, mycanvas, imgcount) {
     SpriteSheetPainter.call(this, cells, spritesheeturl, mycanvas);
     this.imgcount = imgcount;
 }
-PeopleRunSpriteSheetPainter.prototype = Object.create(SpriteSheetPainter.prototype);
-PeopleRunSpriteSheetPainter.prototype.constructor = PeopleRunSpriteSheetPainter;
-PeopleRunSpriteSheetPainter.prototype.paint = function(sprite, context) {
+MarioRunSpriteSheetPainter.prototype = Object.create(SpriteSheetPainter.prototype);
+MarioRunSpriteSheetPainter.prototype.constructor = MarioRunSpriteSheetPainter;
+MarioRunSpriteSheetPainter.prototype.paint = function(sprite, context) {
     var cell = this.cells['sprite_' + this.cellIndex];
     if (sprite.isReverse) {
         context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
@@ -51,7 +51,7 @@ PeopleRunSpriteSheetPainter.prototype.paint = function(sprite, context) {
     }
     //context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
 }
-PeopleRunSpriteSheetPainter.prototype.advance = function(sprite, context) {
+MarioRunSpriteSheetPainter.prototype.advance = function(sprite, context) {
     if (this.cellIndex == this.imgcount) {
         this.cellIndex = 0;
     } else {
@@ -81,19 +81,13 @@ marioSpriteAnimator.prototype.start = function(marioSprite) {
 marioSpriteAnimator.prototype.execute = function() {
     var animator = this;
     if (animator.isRunning) {
-        if (this.marioSprite.velocityY < this.marioSprite.startVelocityY||this.marioSprite.top < this.marioSprite.initialTop) {
-            this.marioSprite.velocityY = this.marioSprite.velocityY + this.marioSprite.GRAVITY_FORCE / this.marioSprite.fpsNum;
-            this.marioSprite.top += this.marioSprite.velocityY / this.marioSprite.fpsNum;
-            if (this.marioSprite.top < this.marioSprite.initialTop) {
-                this.marioSprite.isJump = true;
-                this.marioSprite.painter = peoplePainter.jump;
-            } else {
-                this.marioSprite.top = this.marioSprite.initialTop;
-                this.marioSprite.isJump = false;
-                animator.isRunning = false;
-                animator.end(this.marioSprite); //一定要放到isRunning = false;下面
+    	 this.marioSprite.velocityY = this.marioSprite.velocityY + this.marioSprite.GRAVITY_FORCE / this.marioSprite.fpsNum;
+         this.marioSprite.top += this.marioSprite.velocityY / this.marioSprite.fpsNum;
+        if (this.marioSprite.top < this.marioSprite.initialTop) {
+           
+            this.marioSprite.isJump = true;
+            this.marioSprite.painter = marioPainter.jump;
 
-            }
         } else {
 
             this.marioSprite.top = this.marioSprite.initialTop;

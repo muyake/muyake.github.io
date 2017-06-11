@@ -46,8 +46,8 @@ var game = {
     bindEvent: function() {
         var self = this;
         document.querySelector('#smallBtn').addEventListener('click', function() {
-            if (!spriteList.peopleSprite.isJump) { // throttle      
-                spriteList.peopleSprite.jump(2);
+            if (!spriteList.marioSprite.isJump) { // throttle      
+                spriteList.marioSprite.jump(marioGameConfig.smallJumpV);
             }
         }, false);
 
@@ -91,10 +91,11 @@ var game = {
                 }
                 if (status == 1) {
                     self.mapKey['s'] = true;
-                    if (!spriteList.peopleSprite.isJump && !gameControl.paused) {
+                    if (!spriteList.marioSprite.isJump && !gameControl.paused) {
                         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.smallJump);
-                        if (!spriteList.peopleSprite.isJump) { // throttle      
-                            spriteList.peopleSprite.jump(1);
+                        if (!spriteList.marioSprite.isJump) { // throttle      
+                         
+                            spriteList.marioSprite.jump(marioGameConfig.smallJumpV);
                         }
                     }
                 } else {
@@ -111,10 +112,11 @@ var game = {
                 }
                 if (status == 1) {
                     self.mapKey['w'] = true;
-                    if (!spriteList.peopleSprite.isJump && !gameControl.paused) {
+                    if (!spriteList.marioSprite.isJump && !gameControl.paused) {
                         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
-                        if (!spriteList.peopleSprite.isJump) { // throttle      
-                            spriteList.peopleSprite.jump(2);
+                        if (!spriteList.marioSprite.isJump) { // throttle      
+                         
+                            spriteList.marioSprite.jump(marioGameConfig.bigJumpV);
                         }
                     }
                 } else {
@@ -127,7 +129,7 @@ var game = {
             key: 'right',
             listener: function(status) {
 
-                if (!spriteList.peopleSprite.isReverse) {
+                if (!spriteList.marioSprite.isReverse) {
                     gameConfig.setSpeedDefault();
                 }
 
@@ -143,7 +145,7 @@ var game = {
             key: 'left',
             listener: function(status) {
                 //gameConfig.setSpeedDefault();
-                if (spriteList.peopleSprite.isReverse) {
+                if (spriteList.marioSprite.isReverse) {
                     gameConfig.setSpeedDefault();
                 }
                 if (status == 1) {
@@ -161,29 +163,29 @@ var game = {
         if (((this.mapKey["left"] && !this.mapKey["right"]) || (!this.mapKey["left"] && this.mapKey["right"]))) {
             if ((this.mapKey["left"] && !this.mapKey["right"])) {
                 game.setDirection(-1);
-                spriteList.peopleSprite.isReverse = false;
+                spriteList.marioSprite.isReverse = false;
                 // console.log("按左键");    
             } else {
                 // console.log("按右键");
-                spriteList.peopleSprite.isReverse = true;
+                spriteList.marioSprite.isReverse = true;
                 game.setDirection(1);
             }
             // game.lastKeyListenerTime = now;
-            if (spriteList.peopleSprite.isJump) {
-                spriteList.peopleSprite.behaviors = [];
+            if (spriteList.marioSprite.isJump) {
+                spriteList.marioSprite.behaviors = [];
             } else {
-                spriteList.peopleSprite.painter = peoplePainter.run;
-                spriteList.peopleSprite.behaviors = [spriteList.peopleSprite.behaviorStatus.runInPlace];
+                spriteList.marioSprite.painter = marioPainter.run;
+                spriteList.marioSprite.behaviors = [spriteList.marioSprite.behaviorStatus.runInPlace];
             }
         }
-        if (jumpKey && !spriteList.peopleSprite.isJump) {
-            var status = this.mapKey["s"] ? 1 : 2;
-            spriteList.peopleSprite.jump(status);
+        if (jumpKey && !spriteList.marioSprite.isJump) {
+            var status = this.mapKey["s"] ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
+            spriteList.marioSprite.jump(status);
         } else {
             if ((game.mapKey["left"] && !game.mapKey["right"]) || (!game.mapKey["left"] && game.mapKey["right"])) {
-                spriteList.peopleSprite.painter = peoplePainter.run;
+                spriteList.marioSprite.painter = marioPainter.run;
             } else {
-                spriteList.peopleSprite.painter = peoplePainter.stand;
+                spriteList.marioSprite.painter = marioPainter.stand;
             }
         }
 
@@ -194,13 +196,13 @@ var game = {
             // console.log('不按键或左右都按');
             game.setDirection(0);
 
-            if (spriteList.peopleSprite.isJump) {
-                spriteList.peopleSprite.painter = peoplePainter.jump;
+            if (spriteList.marioSprite.isJump) {
+                spriteList.marioSprite.painter = marioPainter.jump;
             } else {
-                spriteList.peopleSprite.painter = peoplePainter.stand;
+                spriteList.marioSprite.painter = marioPainter.stand;
 
             }
-            spriteList.peopleSprite.behaviors = [];
+            spriteList.marioSprite.behaviors = [];
         }
     },
     setDirection: function(status) {
@@ -245,8 +247,8 @@ gameControl.startAnimate = function(time) {
     animateList.countDown(time);
 }
 
-var peoplePainter = {
-    run: new PeopleRunSpriteSheetPainter(mario.config, gameSourceUrl.imageList.mario.run, element.mycanvas, mario.config.totalCount),
+var marioPainter = {
+    run: new MarioRunSpriteSheetPainter(mario.config, gameSourceUrl.imageList.mario.run, element.mycanvas, mario.config.totalCount),
     jump: new CharacterImagePainter(gameSourceUrl.imageList.mario.jump),
     stand: new CharacterImagePainter(gameSourceUrl.imageList.mario.stand),
 };
@@ -257,7 +259,7 @@ var spriteList = {
     skySprite: new SceneSprite('sky2', new ImagePainter(gameSourceUrl.imageList.BG), [new behaviorList.moveLeftToRight()]),
     normalwall: new SceneSprite('wall', new ImagePainter(gameSourceUrl.imageList.wall.normalwall), [new behaviorList.moveLeftToRight()]),
     money: new SceneSprite('money', new ImagePainter(gameSourceUrl.imageList.money), [new behaviorList.moveLeftToRight()]),
-    peopleSprite: new Character('mario', peoplePainter.stand, [], true, element.mycanvas),
+    marioSprite: new Character('mario', marioPainter.stand, [], true, element.mycanvas),
     spriteInit: function() {
         this.skySprite.width = element.mycanvas.width;
         this.skySprite.height = element.mycanvas.height + element.mycanvas.height * 0.02;
@@ -266,26 +268,29 @@ var spriteList = {
         this.skySprite.left = 0;
 
         //people 
-        this.peopleSprite.velocityX = 50;
-        //this.peopleSprite.velocityY = 50;
-        this.peopleSprite.width = 33;
-        this.peopleSprite.height = 68;
-        this.peopleSprite.top = element.mycanvas.height - this.peopleSprite.height - gameConfig.roadHeight;
-        this.peopleSprite.left = element.mycanvas.width / 3 - this.peopleSprite.width / 2;
-        this.peopleSprite.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
-        this.peopleSprite.isJump = false;
-        this.peopleSprite.startVelocityY = 0;
-        this.peopleSprite.initialTop = this.peopleSprite.top;
-        this.peopleSprite.behaviorStatus = {
+        this.marioSprite.velocityX = 50;
+        //this.marioSprite.velocityY = 50;
+        this.marioSprite.width = 33;
+        this.marioSprite.height = 68;
+        this.marioSprite.top = element.mycanvas.height - this.marioSprite.height - gameConfig.roadHeight;
+        this.marioSprite.left = element.mycanvas.width / 3 - this.marioSprite.width / 2;
+        this.marioSprite.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
+        this.marioSprite.isJump = false;
+        this.marioSprite.startVelocityY = 0;
+
+        this.marioSprite.upColliding = null;
+
+        this.marioSprite.initialTop = this.marioSprite.top;
+        this.marioSprite.behaviorStatus = {
             runInPlace: new behaviorList.runInPlace(),
         };
-        spriteList.peopleSprite.painter = peoplePainter.stand;
+        spriteList.marioSprite.painter = marioPainter.stand;
 
-        this.peopleSprite.jump = function(status) { //status为2时，为大蹦，1时为小蹦
-                this.startVelocityY = status == 1 ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
-                this.velocityY = status == 1 ? -marioGameConfig.smallJumpV : -marioGameConfig.bigJumpV;
-                this.behaviors = [];
-                SpriteAnimatorList.marioSpriteAnimatorJump.start(spriteList.peopleSprite);
+        this.marioSprite.jump = function(VY) { //status为2时，为大蹦，1时为小蹦
+                this.startVelocityY = VY;
+                this.velocityY =  -this.startVelocityY;
+                this.behaviors = [];              
+                SpriteAnimatorList.marioSpriteAnimatorJump.start(spriteList.marioSprite);
             }
             //wall
         this.normalwall.width = 35;
@@ -355,14 +360,14 @@ var animateList = {
         spriteList.skySprite.left = left;
     },
     drawPeople: function(ctx, time) {
-        spriteList.peopleSprite.fpsNum = gameControl.fps.num; //给marioSpriteAnimator传递fpsnum
-        spriteList.peopleSprite.update(ctx, time, gameControl.fps.num);
-        spriteList.peopleSprite.paint(ctx);
-        CD.judgeMM(spriteList.peopleSprite, spriteList.money, function() {
+        spriteList.marioSprite.fpsNum = gameControl.fps.num; //给marioSpriteAnimator传递fpsnum
+        spriteList.marioSprite.update(ctx, time, gameControl.fps.num);
+        spriteList.marioSprite.paint(ctx);
+        CD.judgeMM(spriteList.marioSprite, spriteList.money, function() {
             spriteList.money.visible = false;
             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
         });
-        CD.judgeMNormalWall(spriteList.peopleSprite, spriteList.normalwall, function() {
+        CD.judgeMNormalWall(spriteList.marioSprite, spriteList.normalwall, function() {
             // spriteList.normalwall.visible=false;     
             // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
         });

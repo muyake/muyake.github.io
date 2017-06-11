@@ -22,6 +22,12 @@ var CD = {
         if ((mario.left + mario.width) < normalwall.left || (normalwall.left + normalwall.width) < mario.left || (mario.top + mario.height) < normalwall.top || (normalwall.top + normalwall.height) < mario.top) {
             gameConfig.setSpeedDefault();
             mario.initialTop = element.mycanvas.height - mario.height -gameConfig.roadHeight;
+            //如果下方有墙且不是在蹦跳中，则从墙上走下，否则如果在蹦跳中，则 mario.velocityY =0，蹦不起来。
+            if(mario.upColliding&&!mario.isJump){
+                mario.jump(0);
+                mario.isJump=true;
+                mario.upColliding=null;
+            }            
             return true
         } else {
             var standardChangeX = mario.width + normalwall.width;
@@ -44,6 +50,7 @@ var CD = {
                 } else {
                     console.log("mario在墙的上侧");
                       mario.initialTop = normalwall.top - mario.height;
+                    mario.upColliding = normalwall;
                 }
 
             } else {
@@ -57,6 +64,7 @@ var CD = {
                 } else {
                     console.log("mario在墙的上侧");
                      mario.initialTop = normalwall.top - mario.height;
+                     mario.upColliding = normalwall;
                 }
 
             }
