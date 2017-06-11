@@ -3,7 +3,7 @@ var publicConfig = {
     //pixelsPerMeter : element.width / ARENA_LENGTH_IN_METERS,
   };
 //马里奥动画配置参数
-var mario = {
+var marioConfig = {
   config: {
     totalCount: 21,
     sprite_0: {

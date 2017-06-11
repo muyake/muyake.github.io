@@ -75,34 +75,6 @@ var CD = {
 
             }
 
-
-
-            // var topChange = mario.velocityY / this.marioSprite.fpsNum;
-            // var leftChange = normalwall.velocityY / this.marioSprite.fpsNum;
-            // if (topChange < leftChange) {
-
-            // } else {
-
-            // }
-            // if ((mario.left + mario.width) > normalwall.left) {
-
-            // }
-
-            // //马里奥在墙的左侧
-            // if ((((mario.left + mario.width) > normalwall.left) && mario.left < normalwall.left) && (mario.height + mario.top > normalwall.top) && (mario.top < normalwall.top + normalwall.height)) {
-            //     mario.left = normalwall.left - mario.width;
-            //     gameConfig.setSpeedZero();
-            //     // normalwall.
-            // }
-            // if ((normalwall.left + normalwall.width > mario.left && mario.left > normalwall.left) && (mario.height + mario.top > normalwall.top) && (mario.top < normalwall.top + normalwall.height)) {
-            //     mario.left = normalwall.left + normalwall.width;
-            //     gameConfig.setSpeedZero();
-            // }
-            // if ((normalwall.top + normalwall.height > mario.top && mario.top > normalwall.top) && (mario.left + mario.width > normalwall.left) && (mario.left < normalwall.left + normalwall.width)) {
-            //     mario.top = normalwall.top + normalwall.height;
-            //     gameConfig.setSpeedZero();
-            // }
-            // callback();
         }
 
     }

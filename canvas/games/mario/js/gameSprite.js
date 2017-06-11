@@ -1,18 +1,7 @@
 //游戏所有元素的sprite
 
-//角色
-var Character = function(name, painter, behaviors, isReverse, mycanvas) {
-    Sprite.call(this, name, painter, behaviors);
-    this.isReverse = isReverse;
-    this.mycanvas = mycanvas;
-}
-Character.prototype = Object.create(Sprite.prototype);
-Character.prototype.constructor = Character;
-Character.prototype.update = function(context, time, fpsNum) {
-    for (var i = this.behaviors.length; i > 0; --i) {
-        this.behaviors[i - 1].execute(this, context, time, fpsNum);
-    }
-}
+
+
 var CharacterImagePainter = function(imageUrl) {
     ImagePainter.call(this, imageUrl);
 }
@@ -81,10 +70,10 @@ marioSpriteAnimator.prototype.start = function(marioSprite) {
 marioSpriteAnimator.prototype.execute = function() {
     var animator = this;
     if (animator.isRunning) {
-    	 this.marioSprite.velocityY = this.marioSprite.velocityY + this.marioSprite.GRAVITY_FORCE / this.marioSprite.fpsNum;
-         this.marioSprite.top += this.marioSprite.velocityY / this.marioSprite.fpsNum;
+        this.marioSprite.velocityY = this.marioSprite.velocityY + this.marioSprite.GRAVITY_FORCE / this.marioSprite.fpsNum;
+        this.marioSprite.top += this.marioSprite.velocityY / this.marioSprite.fpsNum;
         if (this.marioSprite.top < this.marioSprite.initialTop) {
-           
+
             this.marioSprite.isJump = true;
             this.marioSprite.painter = this.marioSprite.jumpPainter;
 
@@ -99,6 +88,60 @@ marioSpriteAnimator.prototype.execute = function() {
     }
 }
 
+var Mario = function(setting) {
+    Sprite.call(this, setting.name);
+    this.isReverse = setting.isReverse;
+    this.mycanvas = setting.canvas;
+    this.velocityX = setting.velocityX;
+    this.width = setting.width;
+    this.height = setting.height;
+    this.top = this.mycanvas.height - this.height - gameConfig.roadHeight;
+    this.left = this.mycanvas.width / 3 - this.width / 2;
+    this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
+    this.isJump = false;
+    this.startVelocityY = 0;
+    this.jumpPainter = this.painters.jump;
+    this.upColliding = null;
+    this.initialTop = this.top;
+    this.behaviorStatus = {
+        runInPlace: new behaviorList.runInPlace(),
+    };
+    this.painter = this.painters.stand;
+};
+Mario.prototype = Object.create(Sprite.prototype);
+Mario.prototype.constructor = Mario;
+Mario.prototype.painters = {
+    run: new MarioRunSpriteSheetPainter(marioConfig.config, gameSourceUrl.imageList.mario.run, element.mycanvas, marioConfig.config.totalCount),
+    jump: new CharacterImagePainter(gameSourceUrl.imageList.mario.jump),
+    stand: new CharacterImagePainter(gameSourceUrl.imageList.mario.stand),
+}
+Mario.prototype.jump = function(VY) {
+    this.startVelocityY = VY;
+    this.velocityY = -this.startVelocityY;
+    this.behaviors = [];
+    SpriteAnimatorList.marioSpriteAnimatorJump.start(this);
+
+}
+Mario.prototype.run = function() {
+
+}
+Mario.prototype.draw = function(ctx,time,fpsNum) {
+ 		this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
+        this.update(ctx,time,fpsNum);
+        this.paint(ctx);
+        // CD.judgeMM(this, spriteList.money, function() {
+        //     spriteList.money.visible = false;
+        //     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+        // });
+        // CD.judgeMNormalWall(this, spriteList.normalwall, function() {
+        //     // spriteList.normalwall.visible=false;     
+        //     // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+        // });
+}
+
+
+
+
 //场景Sprite
 var SceneSprite = function(name, painter, behaviors) {
     Sprite.call(this, name, painter, behaviors);
@@ -111,19 +154,19 @@ SceneSprite.prototype.update = function(context, time, fpsNum) {
     }
 }
 var SceneImagePainter = function(imageUrl) {
-	ImagePainter.call(this,imageUrl);
+    ImagePainter.call(this, imageUrl);
 }
 SceneImagePainter.prototype = {
-	paint: function(sprite, context) {
-		if (!!this.image) {
-			if(sprite.imgwidth){
-				context.drawImage(this.image,sprite.imgleft, sprite.imgtop,sprite.imgwidth, sprite.imgheight, sprite.left, sprite.top,
-				sprite.width, sprite.height);
-			}else{
-				context.drawImage(this.image, sprite.left, sprite.top,
-				sprite.width, sprite.height);
-			}
-			
-		}
-	}
+    paint: function(sprite, context) {
+        if (!!this.image) {
+            if (sprite.imgwidth) {
+                context.drawImage(this.image, sprite.imgleft, sprite.imgtop, sprite.imgwidth, sprite.imgheight, sprite.left, sprite.top,
+                    sprite.width, sprite.height);
+            } else {
+                context.drawImage(this.image, sprite.left, sprite.top,
+                    sprite.width, sprite.height);
+            }
+
+        }
+    }
 }
