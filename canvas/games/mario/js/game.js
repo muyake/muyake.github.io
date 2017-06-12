@@ -14,8 +14,7 @@ var sourceLoadObj = {
         element.progressDiv.style.display = 'none';
         element.tipDiv.style.display = 'block';
         //加载图片完成后执行。
-        game.init();
-        spriteList.spriteInit();
+        game.init();        
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
@@ -49,7 +48,7 @@ var game = {
             // if (!spriteList.marioSprite.isJump) { // throttle      
             //     spriteList.marioSprite.jump(marioGameConfig.smallJumpV);
             // }
-           spriteList.normalwall.up(60); 
+            spriteList.normalwall.up(60);
         }, false);
 
         document.querySelector('#bigBtn').addEventListener('click', function() {
@@ -95,7 +94,7 @@ var game = {
                     if (!spriteList.mario.isJump && !gameControl.paused) {
                         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.smallJump);
                         if (!spriteList.mario.isJump) { // throttle      
-                         
+
                             spriteList.mario.jump(marioGameConfig.smallJumpV);
                         }
                     }
@@ -116,7 +115,7 @@ var game = {
                     if (!spriteList.mario.isJump && !gameControl.paused) {
                         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
                         if (!spriteList.mario.isJump) { // throttle      
-                         
+
                             spriteList.mario.jump(marioGameConfig.bigJumpV);
                         }
                     }
@@ -210,7 +209,7 @@ var game = {
         switch (status) {
             case 0:
                 {
-                    spriteList.skySprite.velocityX = 0;
+                    spriteList.bg.velocityX = 0;
                     spriteList.normalwall.velocityX = 0;
                     spriteList.money.velocityX = 0;
                     progressObj.velocityX = 0;
@@ -218,7 +217,7 @@ var game = {
                 break;
             case 1:
                 {
-                    spriteList.skySprite.velocityX = -gameConfig.skySpeed;
+                    spriteList.bg.velocityX = -gameConfig.skySpeed;
                     spriteList.normalwall.velocityX = -gameConfig.objectSpeed;
                     progressObj.velocityX = -gameConfig.progressObjSpeed;
                     spriteList.money.velocityX = -gameConfig.objectSpeed;
@@ -226,7 +225,7 @@ var game = {
                 break;
             case -1:
                 {
-                    spriteList.skySprite.velocityX = gameConfig.skySpeed;
+                    spriteList.bg.velocityX = gameConfig.skySpeed;
                     spriteList.normalwall.velocityX = gameConfig.objectSpeed;
                     progressObj.velocityX = gameConfig.progressObjSpeed;
                     spriteList.money.velocityX = gameConfig.objectSpeed;
@@ -238,81 +237,21 @@ var game = {
 
 var gameControl = new Game('game', 'mycanvas');
 gameControl.speed = 1;
-gameControl.startAnimate = function(time) {
-    //game.activeEventCallback(time);
-    animateList.drawSkySingle(time);
-    
-    animateList.drawMoney(time);
-  
-      SpriteAnimatorList.wallSpriteAnimatorUp.execute();
-      animateList.drawWall(time);
-        SpriteAnimatorList.marioSpriteAnimatorJump.execute();
-   // animateList.drawPeople(gameControl.context, time);
-
-    spriteList.mario.draw(gameControl.context,time,gameControl.fps.num);
-
+gameControl.startAnimate = function(time) {  
+     spriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
+     spriteList.money.draw(gameControl.context, time, gameControl.fps.num);  
+    spriteList.normalwall.draw(gameControl.context, time, gameControl.fps.num);  
+    spriteList.mario.draw(gameControl.context, time, gameControl.fps.num);
     animateList.countDown(time);
 }
 
-// var marioPainter = {
-//     run: new MarioRunSpriteSheetPainter(mario.config, gameSourceUrl.imageList.mario.run, element.mycanvas, mario.config.totalCount),
-//     jump: new CharacterImagePainter(gameSourceUrl.imageList.mario.jump),
-//     stand: new CharacterImagePainter(gameSourceUrl.imageList.mario.stand),
-// };
-
-var wallPainter={
-    jump: new SceneImagePainter(gameSourceUrl.imageList.wall),
-}
-
-
-var spriteList = {
-    skySprite: new SceneSprite('sky2', new ImagePainter(gameSourceUrl.imageList.BG), [new behaviorList.moveLeftToRight()]),
-    normalwall: new SceneSprite('normalwall', new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.moveLeftToRight()]),
-    money: new SceneSprite('money', new ImagePainter(gameSourceUrl.imageList.money), [new behaviorList.moveLeftToRight()]),
-    mario:new Mario({name:"mario",velocityX:50,width:33,height:68,canvas:element.mycanvas}),
-    spriteInit: function() {
-        this.skySprite.width = element.mycanvas.width;
-        this.skySprite.height = element.mycanvas.height + element.mycanvas.height * 0.02;
-
-        this.skySprite.top = 0;
-        this.skySprite.left = 0;       
-            //wall
-        this.normalwall.width = 35;
-        this.normalwall.height = 35;
-        this.normalwall.top = element.mycanvas.height - this.normalwall.height - gameConfig.roadHeight-100;
-        this.normalwall.left = 500;
-        this.normalwall.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
-        this.normalwall.initialTop = this.normalwall.top;
-        this.normalwall.jumpPainter=wallPainter.jump;
-        this.normalwall.imgwidth = wall.normalSprite.width;
-        this.normalwall.imgheight = wall.normalSprite.height;
-        this.normalwall.imgleft = wall.normalSprite.left;
-        this.normalwall.imgtop = wall.normalSprite.top;
-        this.normalwall.mycanvas=element.mycanvas;
-
-        this.normalwall.up = function(VY) { //status为2时，为大蹦，1时为小蹦
-                this.startVelocityY = VY;
-                this.velocityY =  -this.startVelocityY;
-               // this.behaviors = [];              
-                SpriteAnimatorList.wallSpriteAnimatorUp.start(this);
-        }
-
-
-        this.money.width = 35;
-        this.money.height = 35;
-        this.money.top = element.mycanvas.height - this.money.height - gameConfig.roadHeight;
-        this.money.left = 300;
-    }
-};
-
-var SpriteAnimatorList = {
-    marioSpriteAnimatorJump: new marioSpriteAnimator(function(sprite) {
+var SpriteAnimatorEndCallbackList = {
+    marioJumpend:function(sprite) {
         sprite.isJump = false;
         sprite.startVelocityY = 0;
         sprite.velocityY = 0;
         sprite.isJump = false;
         game.activeEventCallback();
-
         //按左键，或按右键
         if (game.mapKey["s"] || game.mapKey["w"]) {
             if (game.mapKey["s"]) {
@@ -321,16 +260,21 @@ var SpriteAnimatorList = {
                 audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
             }
         }
-    }),
-    wallSpriteAnimatorUp: new marioSpriteAnimator(function(sprite) {
+    },
+    wallUpend:function(sprite) {
         sprite.isJump = false;
         sprite.startVelocityY = 0;
         sprite.velocityY = 0;
-        sprite.isJump = false;
-        console.log(111);
-       // game.activeEventCallback();        
-    }),
+        sprite.isJump = false;                  
+    },
 }
+var spriteList = {    
+    bg:new BG({ name: "BG", width: element.mycanvas.width, height: element.mycanvas.height + element.mycanvas.height * 0.02, top:0,left:0}),
+    normalwall: new Normalwall({ name: "normalwall", width: 35,jumpEndCallback:SpriteAnimatorEndCallbackList.wallUpend, height: 35, top:element.mycanvas.height - 35 - gameConfig.roadHeight-100,left:500}),
+    money: new Money({ name: "normalwall", width: 35, height: 35, top:element.mycanvas.height - 35 - gameConfig.roadHeight - 100,left:300}),
+    mario: new Mario({ name: "mario",jumpEndCallback:SpriteAnimatorEndCallbackList.marioJumpend, velocityX: 50, width: 33, height: 68, canvas: element.mycanvas }),    
+};
+
 
 var animateList = {
     //倒计时
@@ -348,47 +292,5 @@ var animateList = {
         progressObj.countDownNumUpdate();
         cans.fillText("行程:" + (progressObj.mileageNum >> 0) + "m", 400, 20);
         cans.fillText("倒计时:" + (progressObj.currentTime >> 0) + "s", 500, 20);
-    },
-    drawSkySingle: function(time) {
-        var self = this;
-        spriteList.skySprite.update(self.ctx, time, gameControl.fps.num);
-        var left = spriteList.skySprite.left;
-        if (spriteList.skySprite.velocityX > 0) {
-            left = left < element.mycanvas.width ? left : 0;
-        } else {
-            left = left > -element.mycanvas.width ? left : 0;
-        }
-
-        spriteList.skySprite.left = left;
-        spriteList.skySprite.paint(self.ctx);
-        spriteList.skySprite.left = left - spriteList.skySprite.width;
-        spriteList.skySprite.paint(self.ctx);
-        spriteList.skySprite.left = left + spriteList.skySprite.width;
-        spriteList.skySprite.paint(self.ctx);
-        spriteList.skySprite.left = left;
-    },
-    drawPeople: function(ctx, time) {
-        spriteList.marioSprite.fpsNum = gameControl.fps.num; //给marioSpriteAnimator传递fpsnum
-        spriteList.marioSprite.update(ctx, time, gameControl.fps.num);
-        spriteList.marioSprite.paint(ctx);
-        CD.judgeMM(spriteList.marioSprite, spriteList.money, function() {
-            spriteList.money.visible = false;
-            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-        });
-        CD.judgeMNormalWall(spriteList.marioSprite, spriteList.normalwall, function() {
-            // spriteList.normalwall.visible=false;     
-            // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-        });
-    },
-    drawWall: function(time) {
-        var self = this;
-         spriteList.normalwall.fpsNum = gameControl.fps.num; 
-        spriteList.normalwall.update(self.ctx, time, gameControl.fps.num);
-        spriteList.normalwall.paint(self.ctx);
-    },
-    drawMoney: function(time) {
-        var self = this;
-        spriteList.money.update(self.ctx, time, gameControl.fps.num);
-        spriteList.money.paint(self.ctx);
-    },
+    },    
 }

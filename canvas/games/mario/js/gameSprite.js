@@ -20,13 +20,13 @@ CharacterImagePainter.prototype.paint = function(characterSprite, context, mycan
         context.scale(-1, 1);
     }
 };
-MarioRunSpriteSheetPainter = function(cells, spritesheeturl, mycanvas, imgcount) {
+CharacterRunSpriteSheetPainter = function(cells, spritesheeturl, mycanvas, imgcount) {
     SpriteSheetPainter.call(this, cells, spritesheeturl, mycanvas);
     this.imgcount = imgcount;
 }
-MarioRunSpriteSheetPainter.prototype = Object.create(SpriteSheetPainter.prototype);
-MarioRunSpriteSheetPainter.prototype.constructor = MarioRunSpriteSheetPainter;
-MarioRunSpriteSheetPainter.prototype.paint = function(sprite, context) {
+CharacterRunSpriteSheetPainter.prototype = Object.create(SpriteSheetPainter.prototype);
+CharacterRunSpriteSheetPainter.prototype.constructor = CharacterRunSpriteSheetPainter;
+CharacterRunSpriteSheetPainter.prototype.paint = function(sprite, context) {
     var cell = this.cells['sprite_' + this.cellIndex];
     if (sprite.isReverse) {
         context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
@@ -40,7 +40,7 @@ MarioRunSpriteSheetPainter.prototype.paint = function(sprite, context) {
     }
     //context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
 }
-MarioRunSpriteSheetPainter.prototype.advance = function(sprite, context) {
+CharacterRunSpriteSheetPainter.prototype.advance = function(sprite, context) {
     if (this.cellIndex == this.imgcount) {
         this.cellIndex = 0;
     } else {
@@ -48,96 +48,46 @@ MarioRunSpriteSheetPainter.prototype.advance = function(sprite, context) {
     }
 }
 
-var marioSpriteAnimator = function(elapsedCallback) {
+var CharacterSpriteAnimator = function(elapsedCallback,sprite) {
     if (elapsedCallback) {
         this.elapsedCallback = elapsedCallback;
     }
+    this.sprite = sprite;
     this.isRunning = false;
 
 }
-marioSpriteAnimator.prototype = Object.create(SpriteAnimator.prototype);
-marioSpriteAnimator.prototype.end = function(sprite) {
+CharacterSpriteAnimator.prototype = Object.create(SpriteAnimator.prototype);
+CharacterSpriteAnimator.prototype.end = function(sprite) {
     sprite.animating = false;
     if (this.elapsedCallback) {
         this.elapsedCallback(sprite);
     }
 };
-marioSpriteAnimator.prototype.start = function(marioSprite) {
-    this.marioSprite = marioSprite;
+CharacterSpriteAnimator.prototype.start = function() {
+   
     this.isRunning = true;
 };
 
-marioSpriteAnimator.prototype.execute = function() {
+CharacterSpriteAnimator.prototype.execute = function() {
     var animator = this;
     if (animator.isRunning) {
-        this.marioSprite.velocityY = this.marioSprite.velocityY + this.marioSprite.GRAVITY_FORCE / this.marioSprite.fpsNum;
-        this.marioSprite.top += this.marioSprite.velocityY / this.marioSprite.fpsNum;
-        if (this.marioSprite.top < this.marioSprite.initialTop) {
+        this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
+        this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;
+        if (this.sprite.top < this.sprite.initialTop) {
 
-            this.marioSprite.isJump = true;
-            this.marioSprite.painter = this.marioSprite.jumpPainter;
+            this.sprite.isJump = true;
+            this.sprite.painter = this.sprite.jumpPainter;
 
         } else {
 
-            this.marioSprite.top = this.marioSprite.initialTop;
-            this.marioSprite.isJump = false;
+            this.sprite.top = this.sprite.initialTop;
+            this.sprite.isJump = false;
             animator.isRunning = false;
-            animator.end(this.marioSprite); //一定要放到isRunning = false;下面
-
+            animator.end(this.sprite); //一定要放到isRunning = false;下面
         }
     }
 }
 
-var Mario = function(setting) {
-    Sprite.call(this, setting.name);
-    this.isReverse = setting.isReverse;
-    this.mycanvas = setting.canvas;
-    this.velocityX = setting.velocityX;
-    this.width = setting.width;
-    this.height = setting.height;
-    this.top = this.mycanvas.height - this.height - gameConfig.roadHeight;
-    this.left = this.mycanvas.width / 3 - this.width / 2;
-    this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
-    this.isJump = false;
-    this.startVelocityY = 0;
-    this.jumpPainter = this.painters.jump;
-    this.upColliding = null;
-    this.initialTop = this.top;
-    this.behaviorStatus = {
-        runInPlace: new behaviorList.runInPlace(),
-    };
-    this.painter = this.painters.stand;
-};
-Mario.prototype = Object.create(Sprite.prototype);
-Mario.prototype.constructor = Mario;
-Mario.prototype.painters = {
-    run: new MarioRunSpriteSheetPainter(marioConfig.config, gameSourceUrl.imageList.mario.run, element.mycanvas, marioConfig.config.totalCount),
-    jump: new CharacterImagePainter(gameSourceUrl.imageList.mario.jump),
-    stand: new CharacterImagePainter(gameSourceUrl.imageList.mario.stand),
-}
-Mario.prototype.jump = function(VY) {
-    this.startVelocityY = VY;
-    this.velocityY = -this.startVelocityY;
-    this.behaviors = [];
-    SpriteAnimatorList.marioSpriteAnimatorJump.start(this);
-
-}
-Mario.prototype.run = function() {
-
-}
-Mario.prototype.draw = function(ctx,time,fpsNum) {
- 		this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
-        this.update(ctx,time,fpsNum);
-        this.paint(ctx);
-        // CD.judgeMM(this, spriteList.money, function() {
-        //     spriteList.money.visible = false;
-        //     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-        // });
-        // CD.judgeMNormalWall(this, spriteList.normalwall, function() {
-        //     // spriteList.normalwall.visible=false;     
-        //     // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-        // });
-}
 
 
 
@@ -170,3 +120,126 @@ SceneImagePainter.prototype = {
         }
     }
 }
+
+
+//马里奥对象
+var Mario = function(setting) {
+    Sprite.call(this, setting.name);
+    this.isReverse = setting.isReverse;
+    this.mycanvas = setting.canvas;
+    this.velocityX = setting.velocityX;
+    this.width = setting.width;
+    this.height = setting.height;
+    this.top = this.mycanvas.height - this.height - gameConfig.roadHeight;
+    this.left = this.mycanvas.width / 3 - this.width / 2;
+    this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
+    this.isJump = false;
+    this.startVelocityY = 0;
+    this.jumpPainter = this.painters.jump;
+    this.upColliding = null;
+    this.initialTop = this.top;
+    this.behaviorStatus = {
+        runInPlace: new behaviorList.runInPlace(),
+    };
+    this.painter = this.painters.stand;
+    this.marioSpriteAnimatorJump= new CharacterSpriteAnimator(setting.jumpEndCallback,this);
+};
+Mario.prototype = Object.create(Sprite.prototype);
+Mario.prototype.constructor = Mario;
+Mario.prototype.painters = {
+    run: new CharacterRunSpriteSheetPainter(marioConfig.config, gameSourceUrl.imageList.mario.run, element.mycanvas, marioConfig.config.totalCount),
+    jump: new CharacterImagePainter(gameSourceUrl.imageList.mario.jump),
+    stand: new CharacterImagePainter(gameSourceUrl.imageList.mario.stand),
+}
+Mario.prototype.jump = function(VY) {
+    this.startVelocityY = VY;
+    this.velocityY = -this.startVelocityY;
+    this.behaviors = [];
+   this.marioSpriteAnimatorJump.start();
+}
+Mario.prototype.run = function() {
+
+}
+Mario.prototype.draw = function(ctx, time, fpsNum) {
+    this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
+   this.marioSpriteAnimatorJump.execute();
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
+    CD.judgeMM(this, spriteList.money, function() {
+        spriteList.money.visible = false;
+        audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+    });
+    CD.judgeMNormalWall(this, spriteList.normalwall, function() {
+        // spriteList.normalwall.visible=false;     
+        // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+    });
+}
+//普通墙对象
+var Normalwall = function(setting) {
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.moveLeftToRight()]);
+    this.width = setting.width;
+    this.height = setting.height;
+    this.top = setting.top;
+    this.left = setting.left;
+    this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
+    this.initialTop = this.top;
+    this.isJump=false;//判断是否为处于上下波动中
+    this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.wall);
+    this.imgwidth = wall.normalSprite.width;
+    this.imgheight = wall.normalSprite.height;
+    this.imgleft = wall.normalSprite.left;
+    this.imgtop = wall.normalSprite.top;
+    this.mycanvas = element.mycanvas;
+    this.NormalSpriteAnimatorUp= new CharacterSpriteAnimator(setting.jumpEndCallback,this);
+};
+Normalwall.prototype = Object.create(SceneSprite.prototype);
+Normalwall.prototype.draw = function(ctx, time, fpsNum) {
+    this.NormalSpriteAnimatorUp.execute();
+    this.fpsNum = fpsNum;
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
+};
+Normalwall.prototype.up = function(VY) { //status为2时，为大蹦，1时为小蹦
+            this.startVelocityY = VY;
+            this.velocityY = -this.startVelocityY;
+            // this.behaviors = [];              
+            this.NormalSpriteAnimatorUp.start();
+};
+//金币对象
+var Money = function(setting) {
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.money), [new behaviorList.moveLeftToRight()]);
+    this.width = setting.width;
+    this.height = setting.height;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - 100;
+    this.left = setting.left;
+};
+Money.prototype = Object.create(SceneSprite.prototype);
+Money.prototype.draw=function(ctx, time, fpsNum){
+    spriteList.money.update(ctx, time, fpsNum);
+    spriteList.money.paint(ctx);
+}
+
+var BG = function(setting) {
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.BG), [new behaviorList.moveLeftToRight()]);
+    this.width = setting.width;
+    this.height = setting.height;
+    this.top =  setting.top;
+    this.left = setting.left;
+};
+BG.prototype = Object.create(SceneSprite.prototype);
+BG.prototype.draw=function(ctx, time, fpsNum){
+     this.update(ctx, time, fpsNum);
+        var left = this.left;
+        if (this.velocityX > 0) {
+            left = left < element.mycanvas.width ? left : 0;
+        } else {
+            left = left > -element.mycanvas.width ? left : 0;
+        }
+        this.left = left;
+        this.paint(ctx);
+        this.left = left - this.width;
+        this.paint(ctx);
+        this.left = left + this.width;
+        this.paint(ctx);
+        this.left = left;
+} 
