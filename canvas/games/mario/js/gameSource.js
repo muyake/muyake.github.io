@@ -5,7 +5,7 @@ var gameSourceUrl={
 		BG:'./images/background.png',
 		wall:'./images/wall/wall.png',
 			
-		
+		pipe:'./images/pipe.png',
 		money:'./images/money.png',	
 		//马里奥
 		mario:{

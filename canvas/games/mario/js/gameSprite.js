@@ -173,6 +173,10 @@ Mario.prototype.draw = function(ctx, time, fpsNum) {
         // spriteList.normalwall.visible=false;     
         // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
     });
+     CD.judgeMPipe(this, spriteList.pipe, function() {
+        // spriteList.normalwall.visible=false;     
+        // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+    });
 }
 //普通墙对象
 var Normalwall = function(setting) {
@@ -210,15 +214,30 @@ var Money = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.money), [new behaviorList.moveLeftToRight()]);
     this.width = setting.width;
     this.height = setting.height;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - 100;
+    this.top = setting.top;
     this.left = setting.left;
 };
 Money.prototype = Object.create(SceneSprite.prototype);
 Money.prototype.draw=function(ctx, time, fpsNum){
-    spriteList.money.update(ctx, time, fpsNum);
-    spriteList.money.paint(ctx);
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
 }
 
+//管道对象
+var Pipe = function(setting) {
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.pipe), [new behaviorList.moveLeftToRight()]);
+    this.width = setting.width;
+    this.height = setting.height;
+    this.top = setting.top;
+    this.left = setting.left;
+};
+Pipe.prototype = Object.create(SceneSprite.prototype);
+Pipe.prototype.draw=function(ctx, time, fpsNum){
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
+}
+
+//背景
 var BG = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.BG), [new behaviorList.moveLeftToRight()]);
     this.width = setting.width;
