@@ -171,7 +171,11 @@ Mario.prototype.draw = function(ctx, time, fpsNum) {
     });
     CD.judgeMNormalWall(this, spriteList.normalwall, function() {
         // spriteList.normalwall.visible=false;     
-        // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+         audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
+    });
+    CD.judgeMNormalWall(this, spriteList.abnormalwall, function() {
+        // spriteList.normalwall.visible=false;     
+        audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
     });
      CD.judgeMPipe(this, spriteList.pipe, function() {
         // spriteList.normalwall.visible=false;     
@@ -209,6 +213,39 @@ Normalwall.prototype.up = function(VY) { //status为2时，为大蹦，1时为�
             // this.behaviors = [];              
             this.NormalSpriteAnimatorUp.start();
 };
+
+
+var Abnormalwall = function(setting) {
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.moveLeftToRight()]);
+    this.width = setting.width;
+    this.height = setting.height;
+    this.top = setting.top;
+    this.left = setting.left;
+    this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
+    this.initialTop = this.top;
+    this.isJump=false;//判断是否为处于上下波动中
+    this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.wall);
+    this.imgwidth = wall.abnormalwall.width;
+    this.imgheight = wall.abnormalwall.height;
+    this.imgleft = wall.abnormalwall.left;
+    this.imgtop = wall.abnormalwall.top;
+    this.mycanvas = element.mycanvas;
+    this.NormalSpriteAnimatorUp= new CharacterSpriteAnimator(setting.jumpEndCallback,this);
+};
+Abnormalwall.prototype = Object.create(SceneSprite.prototype);
+Abnormalwall.prototype.draw = function(ctx, time, fpsNum) {
+    this.NormalSpriteAnimatorUp.execute();
+    this.fpsNum = fpsNum;
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
+};
+Abnormalwall.prototype.up = function(VY) { //status为2时，为大蹦，1时为小蹦
+            this.startVelocityY = VY;
+            this.velocityY = -this.startVelocityY;
+            // this.behaviors = [];              
+            this.NormalSpriteAnimatorUp.start();
+};
+
 //金币对象
 var Money = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.money), [new behaviorList.moveLeftToRight()]);
@@ -216,13 +253,28 @@ var Money = function(setting) {
     this.height = setting.height;
     this.top = setting.top;
     this.left = setting.left;
+     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
+    this.initialTop = this.top;
+this.isJump=false;//判断是否为处于上下波动中
+    this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.money);
+  this.mycanvas = element.mycanvas;
+
+    this.NormalSpriteAnimatorUp= new CharacterSpriteAnimator(setting.jumpEndCallback,this);
 };
 Money.prototype = Object.create(SceneSprite.prototype);
 Money.prototype.draw=function(ctx, time, fpsNum){
+    // this.fpsNum = fpsNum;
+    // this.NormalSpriteAnimatorUp.execute();
+    
     this.update(ctx, time, fpsNum);
     this.paint(ctx);
 }
-
+Money.prototype.up = function(VY) { 
+            this.startVelocityY = VY;
+            this.velocityY = -this.startVelocityY;
+            // this.behaviors = [];              
+            this.NormalSpriteAnimatorUp.start();
+};
 //管道对象
 var Pipe = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.pipe), [new behaviorList.moveLeftToRight()]);

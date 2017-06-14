@@ -52,6 +52,7 @@ var CD = {
                     // console.log("mario在墙的下侧");
                     // normalwall.visible=false;
                     mario.velocityY = -mario.velocityY;
+                    callback();
                     if (!normalwall.isJump) {
                         normalwall.up(60);
                     }
@@ -68,11 +69,11 @@ var CD = {
                     gameConfig.setSpeedZero();
 
                 } else if (sinNum > 0) {
-                    // console.log("mario在墙的下侧");
-                    // normalwall.visible=false;
+                    
                     if (!normalwall.isJump) {
                         normalwall.up(60);
                     }
+                    callback();
                     mario.velocityY = -mario.velocityY;
                 } else {
 

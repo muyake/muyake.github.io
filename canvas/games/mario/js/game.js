@@ -18,7 +18,7 @@ var sourceLoadObj = {
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
-        audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+        //audioControl.BGMPlay(gameSourceObj.audioList.BGM);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
     }
@@ -27,7 +27,7 @@ var sourceLoadObj = {
 //gameSourceUrl来自gameSourceUrl.js
 var gameSourceObj = lib.convertToObject(gameSourceUrl, sourceLoadObj);
 
-
+var createSpriteList=[];
 
 var game = {
     lastKeyListenerTime: 0,
@@ -48,7 +48,12 @@ var game = {
             // if (!spriteList.marioSprite.isJump) { // throttle      
             //     spriteList.marioSprite.jump(marioGameConfig.smallJumpV);
             // }
-            spriteList.normalwall.up(60);
+             var createMoney= new Money({ name: "money2", width: 35, height: 35, top:element.mycanvas.height - 35 - gameConfig.roadHeight,left:100});
+            // createMoney.up(160);
+             createMoney.velocityX = 0;
+             spriteList.money.left=100;
+           createSpriteList.push(spriteList.money);
+           // spriteList.money.up(200);
         }, false);
 
         document.querySelector('#bigBtn').addEventListener('click', function() {
@@ -210,6 +215,7 @@ var game = {
             case 0:
                 {
                     spriteList.bg.velocityX = 0;
+                    spriteList.abnormalwall.velocityX = 0;
                     spriteList.normalwall.velocityX = 0;
                     spriteList.money.velocityX = 0;
                     spriteList.pipe.velocityX = 0;
@@ -219,6 +225,7 @@ var game = {
             case 1:
                 {
                     spriteList.bg.velocityX = -gameConfig.skySpeed;
+                    spriteList.abnormalwall.velocityX = -gameConfig.objectSpeed;
                     spriteList.normalwall.velocityX = -gameConfig.objectSpeed;
                     progressObj.velocityX = -gameConfig.progressObjSpeed;
                     spriteList.pipe.velocityX = -gameConfig.objectSpeed;
@@ -228,6 +235,7 @@ var game = {
             case -1:
                 {
                     spriteList.bg.velocityX = gameConfig.skySpeed;
+                      spriteList.abnormalwall.velocityX = gameConfig.objectSpeed;
                     spriteList.normalwall.velocityX = gameConfig.objectSpeed;
                     progressObj.velocityX = gameConfig.progressObjSpeed;
                     spriteList.money.velocityX = gameConfig.objectSpeed;
@@ -241,8 +249,12 @@ var game = {
 var gameControl = new Game('game', 'mycanvas');
 gameControl.speed = 1;
 gameControl.startAnimate = function(time) {  
+    for(var i=0;i<createSpriteList.length;i++){
+        createSpriteList[i].draw(gameControl.context, time, gameControl.fps.num);
+    }
      spriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
-     spriteList.money.draw(gameControl.context, time, gameControl.fps.num);  
+     //spriteList.money.draw(gameControl.context, time, gameControl.fps.num);  
+    spriteList.abnormalwall.draw(gameControl.context, time, gameControl.fps.num);  
     spriteList.normalwall.draw(gameControl.context, time, gameControl.fps.num);  
     spriteList.mario.draw(gameControl.context, time, gameControl.fps.num);
     spriteList.pipe.draw(gameControl.context, time, gameControl.fps.num)
@@ -274,7 +286,9 @@ var SpriteAnimatorEndCallbackList = {
 }
 var spriteList = {    
     bg:new BG({ name: "BG", width: element.mycanvas.width, height: element.mycanvas.height + element.mycanvas.height * 0.02, top:0,left:0}),
-    normalwall: new Normalwall({ name: "normalwall", width: 35,jumpEndCallback:SpriteAnimatorEndCallbackList.wallUpend, height: 35, top:element.mycanvas.height - 35 - gameConfig.roadHeight-100,left:400}),
+    abnormalwall: new Abnormalwall({ name: "abnormalwall", width: 35,jumpEndCallback:SpriteAnimatorEndCallbackList.wallUpend, height: 35, top:element.mycanvas.height - 35 - gameConfig.roadHeight-100,left:350}),
+   normalwall: new Normalwall({ name: "normalwall", width: 35,jumpEndCallback:SpriteAnimatorEndCallbackList.wallUpend, height: 35, top:element.mycanvas.height - 35 - gameConfig.roadHeight-100,left:400}),
+   
     money: new Money({ name: "money", width: 35, height: 35, top:element.mycanvas.height - 35 - gameConfig.roadHeight - 100,left:300}),
     pipe: new Pipe({ name: "Pipe", width: 45, height: 94, top:element.mycanvas.height-94,left:500}),
   

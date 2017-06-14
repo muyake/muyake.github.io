@@ -1,4 +1,5 @@
 var gameAudio={
+    //gameSourceObj.audioList.jumpAll
     smallJump:{
         startTime:0.5,
         endTime:2,
@@ -7,10 +8,29 @@ var gameAudio={
         startTime:3.2,
         endTime:4,
     },
+     eatMushroom:{
+        startTime:5,
+        endTime:7,
+    },
+    intoPipe:{
+        startTime:8,
+        endTime:9,
+    },
+    monsterDie:{
+        startTime:10,
+        endTime:11,
+    },
+
+    //gameSourceObj.audioList.collision
     eatMoney:{
         startTime:7,
         endTime:7.5,
-    }
+    },
+    hitwall:{
+        startTime:4.9,
+        endTime:5,
+    },
+    
 }
 
 //audioControl

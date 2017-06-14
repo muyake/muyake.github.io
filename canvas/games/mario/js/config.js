@@ -167,10 +167,17 @@ var wall={
     left:215,
     top:0
   },
+   abnormalwall:{
+    height:50,
+    width:50,
+    left: 115,
+    top:0
+  },
+
   afterabnormalSprite:{
     height:50,
     width:50,
-    left:215,
+    left:165,
     top:0
   },
   leftupSprite:{
