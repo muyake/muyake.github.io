@@ -160,7 +160,7 @@ var marioConfig = {
     }
   }
 };
-var wall={
+var wallConfig={
   normalSprite:{
     width:50,
     height:50,
