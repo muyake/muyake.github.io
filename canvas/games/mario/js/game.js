@@ -14,7 +14,7 @@ var sourceLoadObj = {
         element.progressDiv.style.display = 'none';
         element.tipDiv.style.display = 'block';
         //加载图片完成后执行。
-        game.init();        
+        game.init();
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
@@ -27,7 +27,7 @@ var sourceLoadObj = {
 //gameSourceUrl来自gameSourceUrl.js
 var gameSourceObj = lib.convertToObject(gameSourceUrl, sourceLoadObj);
 
-var createSpriteList=[];
+var createSpriteList = [];
 
 var game = {
     lastKeyListenerTime: 0,
@@ -48,12 +48,18 @@ var game = {
             // if (!spriteList.marioSprite.isJump) { // throttle      
             //     spriteList.marioSprite.jump(marioGameConfig.smallJumpV);
             // }
-             var createMoney= new Money({ name: "money2", width: 35, height: 35, top:element.mycanvas.height - 35 - gameConfig.roadHeight,left:100});
+            var createMoney = new Money({
+                name: "money2",
+                width: 35,
+                height: 35,
+                top: element.mycanvas.height - 35 - gameConfig.roadHeight,
+                left: 100
+            });
             // createMoney.up(160);
-             createMoney.velocityX = 0;
-             spriteList.money.left=100;
-           createSpriteList.push(spriteList.money);
-           // spriteList.money.up(200);
+            createMoney.velocityX = 0;
+            spriteList.money.left = 100;
+            createSpriteList.push(spriteList.money);
+            // spriteList.money.up(200);
         }, false);
 
         document.querySelector('#bigBtn').addEventListener('click', function() {
@@ -235,7 +241,7 @@ var game = {
             case -1:
                 {
                     spriteList.bg.velocityX = gameConfig.skySpeed;
-                      spriteList.abnormalwall.velocityX = gameConfig.objectSpeed;
+                    spriteList.abnormalwall.velocityX = gameConfig.objectSpeed;
                     spriteList.normalwall.velocityX = gameConfig.objectSpeed;
                     progressObj.velocityX = gameConfig.progressObjSpeed;
                     spriteList.money.velocityX = gameConfig.objectSpeed;
@@ -248,21 +254,21 @@ var game = {
 
 var gameControl = new Game('game', 'mycanvas');
 gameControl.speed = 1;
-gameControl.startAnimate = function(time) {  
-    for(var i=0;i<createSpriteList.length;i++){
+gameControl.startAnimate = function(time) {
+    for (var i = 0; i < createSpriteList.length; i++) {
         createSpriteList[i].draw(gameControl.context, time, gameControl.fps.num);
     }
-     spriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
-     //spriteList.money.draw(gameControl.context, time, gameControl.fps.num);  
-    spriteList.abnormalwall.draw(gameControl.context, time, gameControl.fps.num);  
-    spriteList.normalwall.draw(gameControl.context, time, gameControl.fps.num);  
+    spriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
+    //spriteList.money.draw(gameControl.context, time, gameControl.fps.num);  
+    spriteList.abnormalwall.draw(gameControl.context, time, gameControl.fps.num);
+    spriteList.normalwall.draw(gameControl.context, time, gameControl.fps.num);
     spriteList.mario.draw(gameControl.context, time, gameControl.fps.num);
     spriteList.pipe.draw(gameControl.context, time, gameControl.fps.num)
     animateList.countDown(time);
 }
 
 var SpriteAnimatorEndCallbackList = {
-    marioJumpend:function(sprite) {
+    marioJumpend: function(sprite) {
         sprite.isJump = false;
         sprite.startVelocityY = 0;
         sprite.velocityY = 0;
@@ -277,22 +283,61 @@ var SpriteAnimatorEndCallbackList = {
             }
         }
     },
-    wallUpend:function(sprite) {
+    wallUpend: function(sprite) {
         sprite.isJump = false;
         sprite.startVelocityY = 0;
         sprite.velocityY = 0;
-        sprite.isJump = false;                  
+        sprite.isJump = false;
     },
 }
-var spriteList = {    
-    bg:new BG({ name: "BG", width: element.mycanvas.width, height: element.mycanvas.height + element.mycanvas.height * 0.02, top:0,left:0}),
-    abnormalwall: new Abnormalwall({ name: "abnormalwall", width: 35,jumpEndCallback:SpriteAnimatorEndCallbackList.wallUpend, height: 35, top:element.mycanvas.height - 35 - gameConfig.roadHeight-100,left:350}),
-   normalwall: new Normalwall({ name: "normalwall", width: 35,jumpEndCallback:SpriteAnimatorEndCallbackList.wallUpend, height: 35, top:element.mycanvas.height - 35 - gameConfig.roadHeight-100,left:400}),
-   
-    money: new Money({ name: "money", width: 35, height: 35, top:element.mycanvas.height - 35 - gameConfig.roadHeight - 100,left:300}),
-    pipe: new Pipe({ name: "Pipe", width: 45, height: 94, top:element.mycanvas.height-94,left:500}),
-  
-    mario: new Mario({ name: "mario",jumpEndCallback:SpriteAnimatorEndCallbackList.marioJumpend, velocityX: 50, width: 33, height: 68, canvas: element.mycanvas }),    
+var spriteList = {
+    bg: new BG({
+        name: "BG",
+        width: element.mycanvas.width,
+        height: element.mycanvas.height + element.mycanvas.height * 0.02,
+        top: 0,
+        left: 0
+    }),
+    abnormalwall: new Abnormalwall({
+        name: "abnormalwall",
+        width: 35,
+        jumpEndCallback: SpriteAnimatorEndCallbackList.wallUpend,
+        height: 35,
+        top: element.mycanvas.height - 35 - gameConfig.roadHeight - 100,
+        left: 365
+    }),
+    normalwall: new Normalwall({
+        name: "normalwall",
+        width: 35,
+        jumpEndCallback: SpriteAnimatorEndCallbackList.wallUpend,
+        height: 35,
+        top: element.mycanvas.height - 35 - gameConfig.roadHeight - 100,
+        left: 400
+    }),
+
+    money: new Money({
+        name: "money",
+        width: 35,
+        height: 35,
+        top: element.mycanvas.height - 35 - gameConfig.roadHeight - 100,
+        left: 300
+    }),
+    pipe: new Pipe({
+        name: "Pipe",
+        width: 45,
+        height: 94,
+        top: element.mycanvas.height - 94,
+        left: 500
+    }),
+
+    mario: new Mario({
+        name: "mario",
+        jumpEndCallback: SpriteAnimatorEndCallbackList.marioJumpend,
+        velocityX: 50,
+        width: 33,
+        height: 68,
+        canvas: element.mycanvas
+    }),
 };
 
 
@@ -312,5 +357,5 @@ var animateList = {
         progressObj.countDownNumUpdate();
         cans.fillText("行程:" + (progressObj.mileageNum >> 0) + "m", 400, 20);
         cans.fillText("倒计时:" + (progressObj.currentTime >> 0) + "s", 500, 20);
-    },    
+    },
 }

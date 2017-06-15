@@ -46,37 +46,41 @@ var CD = {
 
             if (changeX > 0) {
                 if (Math.abs(sinNum) < standardChangeSinNum) {
-                    mario.left = normalwall.left + normalwall.width;
+                    mario.left = normalwall.left + normalwall.width + 1;
+                    console.log("右侧2");
                     gameConfig.setSpeedZero();
                 } else if (sinNum > 0) {
                     // console.log("mario在墙的下侧");
                     // normalwall.visible=false;
+                    console.log("下侧2");
                     mario.velocityY = -mario.velocityY;
                     callback();
                     if (!normalwall.isJump) {
+                        console.log("下侧调2");
                         normalwall.up(60);
                     }
                 } else {
-                    console.log();
+                    console.log("上侧2");
                     mario.initialTop = normalwall.top - mario.height;
                     mario.upColliding = normalwall;
                 }
 
             } else {
                 if (Math.abs(sinNum) < standardChangeSinNum) {
-
-                    mario.left = normalwall.left - mario.width;
+                    console.log("左侧1");
+                    mario.left = normalwall.left - mario.width - 1;
                     gameConfig.setSpeedZero();
 
                 } else if (sinNum > 0) {
-                    
+                    console.log("下侧1");
                     if (!normalwall.isJump) {
+                        console.log("下侧调1");
                         normalwall.up(60);
                     }
                     callback();
                     mario.velocityY = -mario.velocityY;
                 } else {
-
+                    console.log("上侧1");
                     mario.initialTop = normalwall.top - mario.height;
                     mario.upColliding = normalwall;
                 }
