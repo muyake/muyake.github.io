@@ -8,6 +8,7 @@ var progressObj = {
   mileageNumUpdate: function(fpsNum) {
     this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
     this.mileageNum += this.velocityX / this.fpsNum;
+
   },
   countDownNumUpdate: function() {
     //this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
@@ -20,4 +21,26 @@ var progressObj = {
     this.countDownWatch.stop();
     this.totaltime = this.currentTime;
   },
+};
+var totalProgress = {
+  wall: [{
+    status: 0,
+    positionmile: 8, //left=progressObj.mileageNum-positionmile   
+    top: 300,
+  }, {
+    status: 1,
+    positionmile: 6,
+    top: 300,
+  }],
+  money: [],
+  pipe: [],
+  fire: [],
+  badflower: [],
+  flower: [],
+  monster: [],
+  mushroom: [],
+  tortoise: [],
+  star: [],
+  tower: [],
+  hole: [],
 }
