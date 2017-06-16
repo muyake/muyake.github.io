@@ -48,7 +48,7 @@ CharacterRunSpriteSheetPainter.prototype.advance = function(sprite, context) {
     }
 }
 
-var CharacterSpriteAnimator = function(elapsedCallback,sprite) {
+var CharacterSpriteAnimator = function(elapsedCallback, sprite) {
     if (elapsedCallback) {
         this.elapsedCallback = elapsedCallback;
     }
@@ -64,7 +64,7 @@ CharacterSpriteAnimator.prototype.end = function(sprite) {
     }
 };
 CharacterSpriteAnimator.prototype.start = function() {
-   
+
     this.isRunning = true;
 };
 
@@ -74,7 +74,6 @@ CharacterSpriteAnimator.prototype.execute = function() {
         this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
         this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;
         if (this.sprite.top < this.sprite.initialTop) {
-
             this.sprite.isJump = true;
             this.sprite.painter = this.sprite.jumpPainter;
 
@@ -87,8 +86,6 @@ CharacterSpriteAnimator.prototype.execute = function() {
         }
     }
 }
-
-
 
 
 
@@ -142,7 +139,7 @@ var Mario = function(setting) {
         runInPlace: new behaviorList.runInPlace(),
     };
     this.painter = this.painters.stand;
-    this.marioSpriteAnimatorJump= new CharacterSpriteAnimator(setting.jumpEndCallback,this);
+    this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(setting.jumpEndCallback, this);
 };
 Mario.prototype = Object.create(Sprite.prototype);
 Mario.prototype.constructor = Mario;
@@ -155,52 +152,52 @@ Mario.prototype.jump = function(VY) {
     this.startVelocityY = VY;
     this.velocityY = -this.startVelocityY;
     this.behaviors = [];
-   this.marioSpriteAnimatorJump.start();
+    this.marioSpriteAnimatorJump.start();
 }
 Mario.prototype.run = function() {
 
 }
 Mario.prototype.draw = function(ctx, time, fpsNum) {
-    this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
-   this.marioSpriteAnimatorJump.execute();
-    
-    CD.judgeMM(this, spriteList.money, function() {
-        spriteList.money.visible = false;
-        audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-    });
-    CD.judgeMWall(this, spriteList.normalwall, function() {
-        // spriteList.normalwall.visible=false;     
-        
-    });
-    CD.judgeMWall(this, spriteList.abnormalwall, function() {
-        // spriteList.normalwall.visible=false;     
-        //audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-    });
-     CD.judgeMPipe(this, spriteList.pipe, function() {
-        // spriteList.normalwall.visible=false;     
-        // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-    });
-     this.update(ctx, time, fpsNum);
-    this.paint(ctx);
-}
-//普通墙对象
+        this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
+        this.marioSpriteAnimatorJump.execute();
+        //碰撞的向后顺序是先撞墙，再吃金币
+        CD.judgeMWall(this, spriteList.normalwall, function() {
+            // spriteList.normalwall.visible=false;     
+
+        });
+        CD.judgeMWall(this, spriteList.abnormalwall, function() {
+            // spriteList.normalwall.visible=false;     
+            //audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+        });
+        CD.judgeMPipe(this, spriteList.pipe, function() {
+            // spriteList.normalwall.visible=false;     
+            // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+        });
+        CD.judgeMM(this, spriteList.money, function() {
+            spriteList.money.visible = false;
+            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+        });
+        this.update(ctx, time, fpsNum);
+        this.paint(ctx);
+    }
+    //普通墙对象
 var Normalwall = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.moveLeftToRight()]);
     this.width = setting.width;
     this.height = setting.height;
     this.top = setting.top;
     this.left = setting.left;
-    this.status=0;//0是普通墙，1是问号墙，2是问号被撞后的墙。
+    this.status = 0; //0是普通墙，1是问号墙，2是问号被撞后的墙。
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.initialTop = this.top;
-    this.isJump=false;//判断是否为处于上下波动中
+    this.isJump = false; //判断是否为处于上下波动中
     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.wall);
     this.imgwidth = wallConfig.normalSprite.width;
     this.imgheight = wallConfig.normalSprite.height;
     this.imgleft = wallConfig.normalSprite.left;
     this.imgtop = wallConfig.normalSprite.top;
     this.mycanvas = element.mycanvas;
-    this.NormalSpriteAnimatorUp= new CharacterSpriteAnimator(setting.jumpEndCallback,this);
+    this.NormalSpriteAnimatorUp = new CharacterSpriteAnimator(setting.jumpEndCallback, this);
 };
 Normalwall.prototype = Object.create(SceneSprite.prototype);
 Normalwall.prototype.draw = function(ctx, time, fpsNum) {
@@ -210,10 +207,10 @@ Normalwall.prototype.draw = function(ctx, time, fpsNum) {
     this.paint(ctx);
 };
 Normalwall.prototype.up = function(VY) { //status为2时，为大蹦，1时为小蹦
-            this.startVelocityY = VY;
-            this.velocityY = -this.startVelocityY;
-            // this.behaviors = [];              
-            this.NormalSpriteAnimatorUp.start();
+    this.startVelocityY = VY;
+    this.velocityY = -this.startVelocityY;
+    // this.behaviors = [];              
+    this.NormalSpriteAnimatorUp.start();
 };
 
 
@@ -223,17 +220,17 @@ var Abnormalwall = function(setting) {
     this.height = setting.height;
     this.top = setting.top;
     this.left = setting.left;
-    this.status=1;//0是普通墙，1是问号墙，2是问号被撞后的墙。
+    this.status = 1; //0是普通墙，1是问号墙，2是问号被撞后的墙。
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.initialTop = this.top;
-    this.isJump=false;//判断是否为处于上下波动中
+    this.isJump = false; //判断是否为处于上下波动中
     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.wall);
     this.imgwidth = wallConfig.abnormalwall.width;
     this.imgheight = wallConfig.abnormalwall.height;
     this.imgleft = wallConfig.abnormalwall.left;
     this.imgtop = wallConfig.abnormalwall.top;
     this.mycanvas = element.mycanvas;
-    this.NormalSpriteAnimatorUp= new CharacterSpriteAnimator(setting.jumpEndCallback,this);
+    this.NormalSpriteAnimatorUp = new CharacterSpriteAnimator(setting.jumpEndCallback, this);
 };
 Abnormalwall.prototype = Object.create(SceneSprite.prototype);
 Abnormalwall.prototype.draw = function(ctx, time, fpsNum) {
@@ -242,18 +239,18 @@ Abnormalwall.prototype.draw = function(ctx, time, fpsNum) {
     this.update(ctx, time, fpsNum);
     this.paint(ctx);
 };
-Abnormalwall.prototype.changeToAA=function(){
+Abnormalwall.prototype.changeToAA = function() {
     this.imgwidth = wallConfig.afterabnormalSprite.width;
-                            this.imgheight = wallConfig.afterabnormalSprite.height;
-                            this.imgleft = wallConfig.afterabnormalSprite.left;
-                            this.imgtop = wallConfig.afterabnormalSprite.top;
-                            this.status=2;
+    this.imgheight = wallConfig.afterabnormalSprite.height;
+    this.imgleft = wallConfig.afterabnormalSprite.left;
+    this.imgtop = wallConfig.afterabnormalSprite.top;
+    this.status = 2;
 }
 Abnormalwall.prototype.up = function(VY) { //status为2时，为大蹦，1时为小蹦
-            this.startVelocityY = VY;
-            this.velocityY = -this.startVelocityY;
-            // this.behaviors = [];              
-            this.NormalSpriteAnimatorUp.start();
+    this.startVelocityY = VY;
+    this.velocityY = -this.startVelocityY;
+    // this.behaviors = [];              
+    this.NormalSpriteAnimatorUp.start();
 };
 
 //金币对象
@@ -263,26 +260,26 @@ var Money = function(setting) {
     this.height = setting.height;
     this.top = setting.top;
     this.left = setting.left;
-     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
+    this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.initialTop = this.top;
-this.isJump=false;//判断是否为处于上下波动中
+    this.isJump = false; //判断是否为处于上下波动中
     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.money);
-  this.mycanvas = element.mycanvas;
+    this.mycanvas = element.mycanvas;
 
-    this.NormalSpriteAnimatorUp= new CharacterSpriteAnimator(setting.jumpEndCallback,this);
+    this.NormalSpriteAnimatorUp = new CharacterSpriteAnimator(setting.jumpEndCallback, this);
 };
 Money.prototype = Object.create(SceneSprite.prototype);
-Money.prototype.draw=function(ctx, time, fpsNum){
+Money.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum;
-    this.NormalSpriteAnimatorUp.execute();    
+    this.NormalSpriteAnimatorUp.execute();
     this.update(ctx, time, fpsNum);
     this.paint(ctx);
 }
-Money.prototype.up = function(VY) { 
-            this.startVelocityY = VY;
-            this.velocityY = -this.startVelocityY;
-            // this.behaviors = [];              
-            this.NormalSpriteAnimatorUp.start();
+Money.prototype.up = function(VY) {
+    this.startVelocityY = VY;
+    this.velocityY = -this.startVelocityY;
+    // this.behaviors = [];              
+    this.NormalSpriteAnimatorUp.start();
 };
 //管道对象
 var Pipe = function(setting) {
@@ -293,7 +290,7 @@ var Pipe = function(setting) {
     this.left = setting.left;
 };
 Pipe.prototype = Object.create(SceneSprite.prototype);
-Pipe.prototype.draw=function(ctx, time, fpsNum){
+Pipe.prototype.draw = function(ctx, time, fpsNum) {
     this.update(ctx, time, fpsNum);
     this.paint(ctx);
 }
@@ -303,23 +300,23 @@ var BG = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.BG), [new behaviorList.moveLeftToRight()]);
     this.width = setting.width;
     this.height = setting.height;
-    this.top =  setting.top;
+    this.top = setting.top;
     this.left = setting.left;
 };
 BG.prototype = Object.create(SceneSprite.prototype);
-BG.prototype.draw=function(ctx, time, fpsNum){
-     this.update(ctx, time, fpsNum);
-        var left = this.left;
-        if (this.velocityX > 0) {
-            left = left < element.mycanvas.width ? left : 0;
-        } else {
-            left = left > -element.mycanvas.width ? left : 0;
-        }
-        this.left = left;
-        this.paint(ctx);
-        this.left = left - this.width;
-        this.paint(ctx);
-        this.left = left + this.width;
-        this.paint(ctx);
-        this.left = left;
-} 
+BG.prototype.draw = function(ctx, time, fpsNum) {
+    this.update(ctx, time, fpsNum);
+    var left = this.left;
+    if (this.velocityX > 0) {
+        left = left < element.mycanvas.width ? left : 0;
+    } else {
+        left = left > -element.mycanvas.width ? left : 0;
+    }
+    this.left = left;
+    this.paint(ctx);
+    this.left = left - this.width;
+    this.paint(ctx);
+    this.left = left + this.width;
+    this.paint(ctx);
+    this.left = left;
+}

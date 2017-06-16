@@ -40,7 +40,7 @@ var CD = {
             var standardChangeX = mario.width + wall.width;
             var standardChangeY = mario.height + wall.height;
             var standardChangeSinNum = standardChangeY / Math.sqrt(standardChangeX * standardChangeX + standardChangeY * standardChangeY);
-             var changeX = (mario.left + mario.width / 2) - (wall.left + wall.width / 2);
+            var changeX = (mario.left + mario.width / 2) - (wall.left + wall.width / 2);
             var changeY = (mario.top + mario.height / 2) - (wall.top + wall.height / 2);
             var sinNum = changeY / Math.sqrt(changeX * changeX + changeY * changeY);
             if (changeX > 0) {
@@ -51,19 +51,19 @@ var CD = {
                 } else if (sinNum > 0) {
                     // console.log("mario在墙的下侧");
                     // wall.visible=false;
-                    console.log(wall.name+"下侧2");
+                    console.log(wall.name + "下侧2");
                     mario.velocityY = -mario.velocityY;
-                    mario.top=wall.top+wall.height+1;
+                    mario.top = wall.top + wall.height + 1;
                     callback();
                     if (!wall.isJump) {
-                        console.log("下侧调2");                       
-                        if(wall.status==1){
+                        console.log("下侧调2");
+                        if (wall.status == 1) {
                             wall.up(60);
-                             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-                            createFactory.createMoney(wall.left,wall.top);
+                            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+                            createFactory.createMoney(wall.left, wall.top);
                             wall.changeToAA();
-                        }else{
-                             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
+                        } else {
+                            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
                         }
                     }
                 } else {
@@ -75,24 +75,24 @@ var CD = {
             } else {
                 if (Math.abs(sinNum) < standardChangeSinNum) {
                     console.log("左侧1");
-                    mario.left = wall.left - mario.width ;
+                    mario.left = wall.left - mario.width;
                     gameConfig.setSpeedZero();
 
                 } else if (sinNum > 0) {
-                    console.log(wall.name+"下侧1");
+                    console.log(wall.name + "下侧1");
                     if (!wall.isJump) {
-                        console.log("下侧调1");                       
-                        if(wall.status==1){
-                             wall.up(60);
-                              audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-                            createFactory.createMoney(wallConfig.left,wall.top);
-                            wall.changeToAA();                         
-                        }else{
-                             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
+                        console.log("下侧调1");
+                        if (wall.status == 1) {
+                            wall.up(60);
+                            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+                            createFactory.createMoney(wall.left, wall.top);
+                            wall.changeToAA();
+                        } else {
+                            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
                         }
                     }
                     callback();
-                      mario.top=wall.top+wall.height+1;
+                    mario.top = wall.top + wall.height + 1;
                     mario.velocityY = -mario.velocityY;
                 } else {
                     console.log("上侧1");
