@@ -126,6 +126,7 @@ var Mario = function(setting) {
     this.mycanvas = setting.canvas;
     this.velocityX = setting.velocityX;
     this.width = setting.width;
+    this.roleType = 'mairo';
     this.height = setting.height;
     this.top = this.mycanvas.height - this.height - gameConfig.roadHeight;
     this.left = this.mycanvas.width / 3 - this.width / 2;
@@ -183,10 +184,11 @@ Mario.prototype.draw = function(ctx, time, fpsNum) {
     //普通墙对象
 var Normalwall = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.moveLeftToRight()]);
-    this.width = setting.width;
-    this.height = setting.height;
-    this.top = setting.top;
+    this.width = setting.width || 35;
+    this.height = setting.height || 35;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - (setting.top || 0);
     this.left = setting.left;
+    this.roleType = 'wall';
     this.status = 0; //0是普通墙，1是问号墙，2是问号被撞后的墙。
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.initialTop = this.top;
@@ -197,7 +199,7 @@ var Normalwall = function(setting) {
     this.imgleft = wallConfig.normalSprite.left;
     this.imgtop = wallConfig.normalSprite.top;
     this.mycanvas = element.mycanvas;
-    this.NormalSpriteAnimatorUp = new CharacterSpriteAnimator(setting.jumpEndCallback, this);
+    this.NormalSpriteAnimatorUp = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.wallUpend, this);
 };
 Normalwall.prototype = Object.create(SceneSprite.prototype);
 Normalwall.prototype.draw = function(ctx, time, fpsNum) {
@@ -218,8 +220,9 @@ var Abnormalwall = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.moveLeftToRight()]);
     this.width = setting.width;
     this.height = setting.height;
-    this.top = setting.top;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - (setting.top || 0);
     this.left = setting.left;
+    this.roleType = 'wall';
     this.status = 1; //0是普通墙，1是问号墙，2是问号被撞后的墙。
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.initialTop = this.top;
@@ -258,14 +261,14 @@ var Money = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.money), [new behaviorList.moveLeftToRight()]);
     this.width = setting.width;
     this.height = setting.height;
-    this.top = setting.top;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - (setting.top || 0);
     this.left = setting.left;
+    this.roleType = 'money';
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.initialTop = this.top;
     this.isJump = false; //判断是否为处于上下波动中
     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.money);
     this.mycanvas = element.mycanvas;
-
     this.NormalSpriteAnimatorUp = new CharacterSpriteAnimator(setting.jumpEndCallback, this);
 };
 Money.prototype = Object.create(SceneSprite.prototype);
@@ -286,8 +289,9 @@ var Pipe = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.pipe), [new behaviorList.moveLeftToRight()]);
     this.width = setting.width;
     this.height = setting.height;
-    this.top = setting.top;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - (setting.top || 0);
     this.left = setting.left;
+    this.roleType = 'pipe';
 };
 Pipe.prototype = Object.create(SceneSprite.prototype);
 Pipe.prototype.draw = function(ctx, time, fpsNum) {

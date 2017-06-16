@@ -45,7 +45,7 @@ var game = {
     bindEvent: function() {
         var self = this;
         document.querySelector('#smallBtn').addEventListener('click', function() {
-            createFactory.createMoney(100, 100);
+            createFactory.createUpMoney(100, 100);
         }, false);
 
         document.querySelector('#bigBtn').addEventListener('click', function() {
@@ -240,7 +240,7 @@ var gameControl = new Game('game', 'mycanvas');
 gameControl.speed = 1;
 gameControl.startAnimate = function(time) {
 
-    // spriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
+    spriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
     var length = createFactory.createSpriteList.length;
     var createSpriteList = createFactory.createSpriteList;
     for (var i = length; i > 0; i--) {
@@ -250,8 +250,8 @@ gameControl.startAnimate = function(time) {
     spriteList.abnormalwall.draw(gameControl.context, time, gameControl.fps.num);
     spriteList.normalwall.draw(gameControl.context, time, gameControl.fps.num);
     spriteList.mario.draw(gameControl.context, time, gameControl.fps.num);
-    // spriteList.pipe.draw(gameControl.context, time, gameControl.fps.num)
-    //animateList.countDown(time);
+    spriteList.pipe.draw(gameControl.context, time, gameControl.fps.num)
+    animateList.countDown(time);
 }
 
 var SpriteAnimatorEndCallbackList = {
@@ -285,11 +285,27 @@ var SpriteAnimatorEndCallbackList = {
         sprite.isJump = false;
     },
 }
+
+var spriteList1 = {
+    wall: [],
+    money: [],
+    pipe: [],
+    fire: [],
+    badflower: [],
+    flower: [],
+    monster: [],
+    mushroom: [],
+    tortoise: [],
+    star: [],
+    tower: [],
+    hole: [],
+};
+
 var spriteList = {
     bg: new BG({
         name: "BG",
         width: element.mycanvas.width,
-        height: element.mycanvas.height + element.mycanvas.height * 0.02,
+        height: element.mycanvas.height,
         top: 0,
         left: 0
     }),
@@ -298,15 +314,12 @@ var spriteList = {
         width: 35,
         jumpEndCallback: SpriteAnimatorEndCallbackList.wallUpend,
         height: 35,
-        top: element.mycanvas.height - 35 - gameConfig.roadHeight - 100,
-        left: 350
+        top: 0,
+        left: 300
     }),
     normalwall: new Normalwall({
         name: "normalwall",
-        width: 35,
-        jumpEndCallback: SpriteAnimatorEndCallbackList.wallUpend,
-        height: 35,
-        top: element.mycanvas.height - 35 - gameConfig.roadHeight - 100,
+        top: 0,
         left: 400
     }),
 
@@ -314,17 +327,16 @@ var spriteList = {
         name: "money",
         width: 35,
         height: 35,
-        top: element.mycanvas.height - 35 - gameConfig.roadHeight - 100,
+        top: 100,
         left: 300
     }),
     pipe: new Pipe({
         name: "Pipe",
         width: 45,
         height: 94,
-        top: element.mycanvas.height - 94,
+        top: 0,
         left: 500
     }),
-
     mario: new Mario({
         name: "mario",
         jumpEndCallback: SpriteAnimatorEndCallbackList.marioJumpend,
