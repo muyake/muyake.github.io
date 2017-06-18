@@ -157,33 +157,14 @@ Mario.prototype.jump = function(VY) {
 }
 Mario.prototype.run = function() {
 
-}
+};
 Mario.prototype.draw = function(ctx, time, fpsNum) {
         this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
         this.marioSpriteAnimatorJump.execute();
-        // //碰撞的向后顺序是先撞墙，再吃金币
-        // CD.judgeMWall(this, spriteList.normalwall, function() {
-        //     // spriteList.normalwall.visible=false;     
-
-        // });
-        // CD.judgeMWall(this, spriteList.abnormalwall, function() {
-        //     // spriteList.normalwall.visible=false;     
-        //     //audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-        // });
-        // CD.judgeMPipe(this, spriteList.pipe, function() {
-        //     // spriteList.normalwall.visible=false;     
-        //     // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-        // });
-        // CD.judgeMM(this, spriteList.money, function() {
-        //     spriteList.money.visible = false;
-        //     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-        // });
-
-
-        
+        // //碰撞的向后顺序是先撞墙，再吃金币  l
         this.update(ctx, time, fpsNum);
         this.paint(ctx);
-    }
+    };
     //普通墙对象
 var Normalwall = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.moveLeftToRight()]);
