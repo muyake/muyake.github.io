@@ -18,12 +18,12 @@ var behaviorList = {
         var defaultSetting = {
             lastAdvance: 0,
             PAGEFLIP_INTERVAL: 30,
-            behaviorNam: 'runInPlace',
+            behaviorName: 'runInPlace',
         };
         lib.jQueryExtend(defaultSetting, setting);
         this.lastAdvance = defaultSetting.lastAdvance;
         this.PAGEFLIP_INTERVAL = defaultSetting.PAGEFLIP_INTERVAL;
-        this.behaviorNam = defaultSetting.behaviorNam;
+        this.behaviorName = defaultSetting.behaviorName;
         this.execute = function(sprite, context, time) {
             if (time - this.lastAdvance > this.PAGEFLIP_INTERVAL) {
                 sprite.painter.advance(sprite);
@@ -33,21 +33,16 @@ var behaviorList = {
     },
     //小人跳动
     jump: function(setting) {
-        var defaultSetting = {          
+        var defaultSetting = {
             lastAdvance: 0,
             isJump: false,
-         
             behaviorName: 'jump',
-            
-            jumpOverCallback: function() {
-
-            },
+            jumpOverCallback: function() {},
             status: 0, //0是不跳，1是小跳，2是大跳。
         };
         lib.jQueryExtend(defaultSetting, setting);
-        this.lastAdvance = defaultSetting.lastAdvance;        
+        this.lastAdvance = defaultSetting.lastAdvance;
         this.behaviorName = defaultSetting.behaviorName;
-      
         this.fpsNum = 60;
         this.status = defaultSetting.status;
         this.jumpOverCallback = defaultSetting.jumpOverCallback;
@@ -71,6 +66,6 @@ var behaviorList = {
             this.lastAdvance = time;
         }
     },
-    
+
 
 }

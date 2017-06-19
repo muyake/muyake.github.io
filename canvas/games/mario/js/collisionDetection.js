@@ -18,7 +18,6 @@ var CD = {
                 mario.isJump = true;
                 mario.upColliding = null;
             }
-
         },
         //马里奥在阻挡物左侧
         MleftBarrier: function(mario, barrier) {

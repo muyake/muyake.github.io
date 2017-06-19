@@ -92,7 +92,7 @@ var game = {
                 } else {
                     self.mapKey['s'] = false;
                 }
-                game.activeEventCallback();
+                self.activeEventCallback();
             }
         });
         gameControl.addKeyListener({
@@ -112,7 +112,7 @@ var game = {
                 } else {
                     self.mapKey['w'] = false;
                 }
-                game.activeEventCallback();
+                self.activeEventCallback();
             }
         });
         gameControl.addKeyListener({
@@ -123,7 +123,7 @@ var game = {
                 } else {
                     self.mapKey['right'] = false;
                 }
-                game.activeEventCallback();
+                self.activeEventCallback();
             }
         });
         gameControl.addKeyListener({
@@ -134,20 +134,22 @@ var game = {
                 } else {
                     self.mapKey['left'] = false;
                 }
-                game.activeEventCallback();
+                self.activeEventCallback();
             }
         });
     },
     activeEventCallback: function(time) {
-        //  var now = +new Date();
-        //  
-        var jumpKey = this.mapKey["s"] || this.mapKey["w"];
-        if (((this.mapKey["left"] && !this.mapKey["right"]) || (!this.mapKey["left"] && this.mapKey["right"]))) {
+        var jumpKey = this.mapKey["s"] || this.mapKey["w"]; //按蹦跳键
+        var runKey = ((this.mapKey["left"] && !this.mapKey["right"]) || (!this.mapKey["left"] && this.mapKey["right"])); //左右键中，只按了左键或只按了右键
+        //只按左键或只按右键(大蹦，小蹦不管)
+        if (runKey) {
+            //如果是左键
             if ((this.mapKey["left"] && !this.mapKey["right"])) {
+                //如果马里奥当前面向右，然后从右转向左，则设置初始化默认速度，以防当前面有墙，被墙挡住，速度为0，掉头后速度设为默认值。
                 if (drawSpriteList.mario.isReverse) {
                     gameConfig.setSpeedDefault();
                 }
-                game.setDirection(-1);
+                this.setDirection(-1);
                 drawSpriteList.mario.isReverse = false;
                 // console.log("按左键");    
             } else {
@@ -156,41 +158,39 @@ var game = {
                 }
                 // console.log("按右键");
                 drawSpriteList.mario.isReverse = true;
-                game.setDirection(1);
+                this.setDirection(1);
             }
-            // game.lastKeyListenerTime = now;
-            if (drawSpriteList.mario.isJump) {
-                drawSpriteList.mario.behaviors = [];
-            } else {
-                drawSpriteList.mario.painter = drawSpriteList.mario.painters.run;
-                drawSpriteList.mario.behaviors = [drawSpriteList.mario.behaviorStatus.runInPlace];
-            }
+        } else { //如果左右键都不按，或同时按，则背景速度为0
+            this.setDirection(0);
         }
-        if (jumpKey && !drawSpriteList.mario.isJump) {
-            var status = this.mapKey["s"] ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
-            drawSpriteList.mario.jump(status);
-        } else {
-            if ((game.mapKey["left"] && !game.mapKey["right"]) || (!game.mapKey["left"] && game.mapKey["right"])) {
-                drawSpriteList.mario.painter = drawSpriteList.mario.painters.run;
+        //根据按键设置，马里奥的画笔和行为。
+        //分为只按左右键，只按蹦跳键，同时按左键（或右键）和蹦跳键，还有其他不合理按键（例如同时按左右键），和都不按键
+        //只要按蹦跳键，则马里奥处于蹦跳状态或者如果不处于蹦跳状态则执行蹦跳动作，所以，蹦跳键的行为大于左右键的行为，因为如果同时按右键和蹦跳键，是处于蹦跳状态的。
+        if (jumpKey) { //如果按了蹦跳键
+            if (!drawSpriteList.mario.isJump) {
+                var status = this.mapKey["s"] ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
+                drawSpriteList.mario.jump(status);
             } else {
-                drawSpriteList.mario.painter = drawSpriteList.mario.painters.stand;
-            }
-        }
-
-
-
-        // console.log("按右键和空格键或按左键和空格键或按只空格键");       
-        if ((!this.mapKey["left"] && !this.mapKey["right"]) || (this.mapKey["left"] && this.mapKey["right"])) {
-            // console.log('不按键或左右都按');
-            game.setDirection(0);
-
-            if (drawSpriteList.mario.isJump) {
                 drawSpriteList.mario.painter = drawSpriteList.mario.painters.jump;
-            } else {
-                drawSpriteList.mario.painter = drawSpriteList.mario.painters.stand;
-
+                drawSpriteList.mario.behaviors = [];
             }
-            drawSpriteList.mario.behaviors = [];
+        } else { //没有按蹦跳键
+            if (runKey) { //只按了左键或只按右键
+                if (drawSpriteList.mario.isJump) {
+                    drawSpriteList.mario.painter = drawSpriteList.mario.painters.jump;
+                    drawSpriteList.mario.behaviors = [];
+                } else {
+                    drawSpriteList.mario.painter = drawSpriteList.mario.painters.run;
+                    drawSpriteList.mario.behaviors = [drawSpriteList.mario.behaviorStatus.runInPlace];
+                }
+            } else { //同时按了左键和右键，或者两者都没按
+                if (drawSpriteList.mario.isJump) {
+                    drawSpriteList.mario.painter = drawSpriteList.mario.painters.jump;
+                } else {
+                    drawSpriteList.mario.painter = drawSpriteList.mario.painters.stand;
+                }
+                drawSpriteList.mario.behaviors = [];
+            }
         }
     },
     setDirection: function(status) {
@@ -208,7 +208,6 @@ var game = {
             case -1:
                 {
                     drawSpriteList.goDirection(1);
-
                 }
                 break;
         }
@@ -295,13 +294,7 @@ var drawSpriteList = {
         var createSpriteList = this.createSpriteList;
         createSpriteList.forEach(function(item) {
             item.velocityX = gameConfig.objectSpeed * status;
-        })
-
-        // for (var item in createSpriteList) {
-        //     createSpriteList[item].forEach(function(itemDraw) {
-        //         itemDraw.velocityX = gameConfig.objectSpeed * status;
-        //     })
-        // }
+        });
     },
     drawOthersFunc: function(ctx, time, fpsNum) {
         var arrothers = this.arrayOthers;
