@@ -5,9 +5,11 @@ var progressObj = {
   currentTime: 300,
   fpsNum: 60,
   countDownWatch: new Stopwatch(),
+  createSpriteMileNum:0, 
   mileageNumUpdate: function(fpsNum) {
     this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
     this.mileageNum += this.velocityX / this.fpsNum;
+    this.createSpriteMileNum+= Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed) *this.velocityX / this.fpsNum;
   },
   countDownNumUpdate: function() {
     //this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
@@ -27,13 +29,13 @@ var createFactory = {
     wall: [{
       id: lib.newGuid(),
       status: 0,
-      positionmile: 7, //left=progressObj.mileageNum-positionmile   
+      positionmile: 670, //left=progressObj.mileageNum-positionmile   
       physicaltop: 100,
     }, {
       id: lib.newGuid(),
       status: 1,
-      positionmile: 400,
-      physicaltop: 0,
+      positionmile: 705,
+      physicaltop: 100,
     }],
     money: [{
       id: lib.newGuid(),
@@ -78,7 +80,7 @@ var createFactory = {
           wall = new Normalwall({
             id: setting.id,
             physicaltop: setting.physicaltop,
-            left: -gameConfig.progressObjSpeed * (setting.positionmile - progressObj.mileageNum),
+            left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
           });
         }
         break;
@@ -87,7 +89,7 @@ var createFactory = {
           wall = new Abnormalwall({
             id: setting.id,
             physicaltop: setting.physicaltop,
-            left: -gameConfig.progressObjSpeed * (setting.positionmile - progressObj.mileageNum),
+            left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
           });
         }
         break;
@@ -103,14 +105,14 @@ var createFactory = {
     return new Pipe({
       id: setting.id,
       physicaltop: setting.physicaltop,
-      left: -gameConfig.progressObjSpeed * (setting.positionmile - progressObj.mileageNum),
+      left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
     });
   },
   createMoney: function(setting) {
     return new Money({
       id: setting.id,
       physicaltop: setting.physicaltop,
-      left: -gameConfig.progressObjSpeed * (setting.positionmile - progressObj.mileageNum),
+      left:setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
     });
   },
   createFire: function(setting) {
@@ -163,8 +165,8 @@ var createFactory = {
     var self = this;
     var totalProgress = this.totalProgress;
     for (var item in totalProgress) {
-      totalProgress[item].forEach(function(itemDraw) {
-        if (-gameConfig.progressObjSpeed * (itemDraw.positionmile - progressObj.mileageNum) <= element.mycanvas.width) {
+      totalProgress[item].forEach(function(itemDraw) { 
+        if ( (itemDraw.positionmile - progressObj.createSpriteMileNum ) <= element.mycanvas.width) {
           var id = itemDraw.id;
           if (!self.hasId(id, drawSpriteList[item])) {
             drawSpriteList[item].push(self[self.nameToCreateFun[item]](itemDraw));

@@ -218,11 +218,11 @@ var gameConfig = {
   // moneySpeed:90,
   // wallSpeed: 90,
   objectSpeed: 90,
-  progressObjSpeed: -90,
+  progressObjSpeed: -2,
   skySpeed: 32,
   setSpeedDefault: function() {
     this.objectSpeed = 90;
-    this.progressObjSpeed = -90;
+    this.progressObjSpeed = -2;
     this.skySpeed = 32;
   },
   setSpeedZero: function() {
