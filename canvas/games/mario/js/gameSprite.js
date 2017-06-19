@@ -113,7 +113,6 @@ SceneImagePainter.prototype = {
                 context.drawImage(this.image, sprite.left, sprite.top,
                     sprite.width, sprite.height);
             }
-
         }
     }
 }
@@ -123,12 +122,13 @@ SceneImagePainter.prototype = {
 var Mario = function(setting) {
     Sprite.call(this, setting.name);
     this.isReverse = setting.isReverse;
-    this.mycanvas = setting.canvas;
+    this.mycanvas = element.mycanvas;
     this.velocityX = setting.velocityX;
-    this.width = setting.width;
+    this.width = setting.width || 33;
     this.roleType = 'mairo';
-    this.height = setting.height;
-    this.top = this.mycanvas.height - this.height - gameConfig.roadHeight;
+    this.height = setting.height || 68;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
     this.left = this.mycanvas.width / 3 - this.width / 2;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.isJump = false;
@@ -140,7 +140,7 @@ var Mario = function(setting) {
         runInPlace: new behaviorList.runInPlace(),
     };
     this.painter = this.painters.stand;
-    this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(setting.jumpEndCallback, this);
+    this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
 };
 Mario.prototype = Object.create(Sprite.prototype);
 Mario.prototype.constructor = Mario;
@@ -159,18 +159,20 @@ Mario.prototype.run = function() {
 
 };
 Mario.prototype.draw = function(ctx, time, fpsNum) {
-        this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
-        this.marioSpriteAnimatorJump.execute();
-        // //碰撞的向后顺序是先撞墙，再吃金币  l
-        this.update(ctx, time, fpsNum);
-        this.paint(ctx);
-    };
-    //普通墙对象
+    this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
+    this.marioSpriteAnimatorJump.execute();
+    // //碰撞的向后顺序是先撞墙，再吃金币  l
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
+};
+//普通墙对象
 var Normalwall = function(setting) {
+    setting.name = 'normalwall' + Date.now();
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.moveLeftToRight()]);
     this.width = setting.width || 35;
     this.height = setting.height || 35;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - (setting.top || 0);
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
     this.left = setting.left;
     this.roleType = 'wall';
     this.status = 0; //0是普通墙，1是问号墙，2是问号被撞后的墙。
@@ -199,12 +201,14 @@ Normalwall.prototype.up = function(VY) { //status为2时，为大蹦，1时为�
     this.NormalSpriteAnimatorUp.start();
 };
 
-
 var Abnormalwall = function(setting) {
+    setting.name = 'abnormalwall' + Date.now();
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.moveLeftToRight()]);
-    this.width = setting.width;
-    this.height = setting.height;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - (setting.top || 0);
+    this.width = setting.width || 35;
+    this.height = setting.height || 35;
+
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - (this.physicaltop || 0);
     this.left = setting.left;
     this.roleType = 'wall';
     this.status = 1; //0是普通墙，1是问号墙，2是问号被撞后的墙。
@@ -242,10 +246,12 @@ Abnormalwall.prototype.up = function(VY) { //status为2时，为大蹦，1时为
 
 //金币对象
 var Money = function(setting) {
+    setting.name = setting.name || 'money' + Date.now();
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.money), [new behaviorList.moveLeftToRight()]);
-    this.width = setting.width;
-    this.height = setting.height;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - (setting.top || 0);
+    this.width = setting.width || 35;
+    this.height = setting.height || 35;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.left = setting.left;
     this.roleType = 'money';
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
@@ -265,15 +271,16 @@ Money.prototype.draw = function(ctx, time, fpsNum) {
 Money.prototype.up = function(VY) {
     this.startVelocityY = VY;
     this.velocityY = -this.startVelocityY;
-    // this.behaviors = [];              
     this.NormalSpriteAnimatorUp.start();
 };
 //管道对象
 var Pipe = function(setting) {
+    setting.name = setting.name || 'money' + Date.now();
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.pipe), [new behaviorList.moveLeftToRight()]);
-    this.width = setting.width;
-    this.height = setting.height;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - (setting.top || 0);
+    this.width = setting.width || 45;
+    this.height = setting.height || 94;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - this.physicaltop;
     this.left = setting.left;
     this.roleType = 'pipe';
 };

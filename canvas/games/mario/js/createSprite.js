@@ -1,17 +1,13 @@
 var createFactory = {
-	createSpriteList: [],
-	createUpMoney: function(left, top) {
+	//createSpriteList: [],
+	createUpMoney: function(left, physicaltop) {
 		var createUpMoneyObj = new Money({
-			name: "money" + Date.now(),
-			width: 35,
-			height: 35,
-			top: top,
+			physicaltop: physicaltop,
 			left: left,
 			jumpEndCallback: SpriteAnimatorEndCallbackList.moneyupend
 		});
-		createUpMoneyObj.velocityX = 0;
 		createUpMoneyObj.up(200);
-		this.createSpriteList.push(createUpMoneyObj);
+		drawSpriteList.createSpriteList.push(createUpMoneyObj);
 	},
 
 }

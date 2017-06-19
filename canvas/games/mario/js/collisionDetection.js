@@ -49,7 +49,7 @@ var CD = {
                 if (wall.status == 1) {
                     wall.up(60);
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-                    createFactory.createUpMoney(wall.left, wall.top);
+                    createFactory.createUpMoney(wall.left, wall.physicaltop);
                     wall.changeToAA();
                 } else {
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
@@ -70,9 +70,9 @@ var CD = {
                     //this.CDFunc.MrightBarrier(A, B);
                     rightFun();
                 } else if (sinNum > 0) {
-                   // console.log("A在墙的下侧");                   
-                                    
-                    downFun();                 
+                    // console.log("A在墙的下侧");                   
+
+                    downFun();
                 } else {
                     // console.log("上侧2");                   
                     upFun();
@@ -87,7 +87,7 @@ var CD = {
 
                     downFun();
                     console.log(B.name + "下侧1");
-                   
+
                 } else {
                     //console.log("上侧1");
                     //this.CDFunc.MupBarrier(A, B);
@@ -113,16 +113,24 @@ var CD = {
         if (wall.visible == false) {
             return;
         }
-        var self=this;
+        var self = this;
         // 两个矩形检测
         if ((mario.left + mario.width) < wall.left || (wall.left + wall.width) < mario.left || (mario.top + mario.height) < wall.top || (wall.top + wall.height) < mario.top) {
             this.CDFunc.MOutCarrying(mario, wall);
         } else {
-            var leftfun =function(){self.CDFunc.MleftBarrier(mario, wall)} ;
-            var rightfun =function(){ self.CDFunc.MrightBarrier(mario, wall)};
-            var upfun =function(){self.CDFunc.MupBarrier(mario, wall)};
-            var downfun = function(){self.CDFunc.MdownWall(mario, wall,callback)};
-            self.CDFunc.Colliding(mario, wall, leftfun, rightfun, downfun, upfun);           
+            var leftfun = function() {
+                self.CDFunc.MleftBarrier(mario, wall)
+            };
+            var rightfun = function() {
+                self.CDFunc.MrightBarrier(mario, wall)
+            };
+            var upfun = function() {
+                self.CDFunc.MupBarrier(mario, wall)
+            };
+            var downfun = function() {
+                self.CDFunc.MdownWall(mario, wall, callback)
+            };
+            self.CDFunc.Colliding(mario, wall, leftfun, rightfun, downfun, upfun);
         }
 
     },
@@ -130,16 +138,22 @@ var CD = {
         if (pipe.visible == false) {
             return;
         }
-          var self=this;
+        var self = this;
         // 两个矩形检测
         if ((mario.left + mario.width) < pipe.left || (pipe.left + pipe.width) < mario.left || (mario.top + mario.height) < pipe.top || (pipe.top + pipe.height) < mario.top) {
             this.CDFunc.MOutCarrying(mario, pipe);
         } else {
-             var leftfun =function(){self.CDFunc.MleftBarrier(mario, pipe)} ;
-            var rightfun =function(){ self.CDFunc.MrightBarrier(mario, pipe)};
-            var upfun =function(){self.CDFunc.MupBarrier(mario, pipe)};
-            var downfun = function(){};
-            self.CDFunc.Colliding(mario, pipe, leftfun, rightfun, downfun, upfun);     
+            var leftfun = function() {
+                self.CDFunc.MleftBarrier(mario, pipe)
+            };
+            var rightfun = function() {
+                self.CDFunc.MrightBarrier(mario, pipe)
+            };
+            var upfun = function() {
+                self.CDFunc.MupBarrier(mario, pipe)
+            };
+            var downfun = function() {};
+            self.CDFunc.Colliding(mario, pipe, leftfun, rightfun, downfun, upfun);
 
         }
     }

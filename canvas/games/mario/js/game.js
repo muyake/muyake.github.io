@@ -105,8 +105,7 @@ var game = {
                     self.mapKey['w'] = true;
                     if (!drawSpriteList.mario.isJump && !gameControl.paused) {
                         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
-                        if (!drawSpriteList.mario.isJump) { // throttle      
-
+                        if (!drawSpriteList.mario.isJump) { // throttle 
                             drawSpriteList.mario.jump(marioGameConfig.bigJumpV);
                         }
                     }
@@ -119,9 +118,6 @@ var game = {
         gameControl.addKeyListener({
             key: 'right',
             listener: function(status) {
-                if (!drawSpriteList.mario.isReverse) {
-                   gameConfig.setSpeedDefault();
-                }
                 if (status == 1) {
                     self.mapKey['right'] = true;
                 } else {
@@ -133,10 +129,6 @@ var game = {
         gameControl.addKeyListener({
             key: 'left',
             listener: function(status) {
-                //gameConfig.setSpeedDefault();
-                if (drawSpriteList.mario.isReverse) {
-                    gameConfig.setSpeedDefault();
-                }
                 if (status == 1) {
                     self.mapKey['left'] = true;
                 } else {
@@ -152,10 +144,16 @@ var game = {
         var jumpKey = this.mapKey["s"] || this.mapKey["w"];
         if (((this.mapKey["left"] && !this.mapKey["right"]) || (!this.mapKey["left"] && this.mapKey["right"]))) {
             if ((this.mapKey["left"] && !this.mapKey["right"])) {
+                if (drawSpriteList.mario.isReverse) {
+                    gameConfig.setSpeedDefault();
+                }
                 game.setDirection(-1);
                 drawSpriteList.mario.isReverse = false;
                 // console.log("按左键");    
             } else {
+                if (!drawSpriteList.mario.isReverse) {
+                    gameConfig.setSpeedDefault();
+                }
                 // console.log("按右键");
                 drawSpriteList.mario.isReverse = true;
                 game.setDirection(1);
@@ -233,8 +231,8 @@ var SpriteAnimatorEndCallbackList = {
             }
         }
     },
-    moneyupend: function(sprite) {       
-        lib.removeByValue(createFactory.createSpriteList, 'name', sprite.name);
+    moneyupend: function(sprite) {
+        lib.removeByValue(drawSpriteList.createSpriteList, 'name', sprite.name);
         sprite = null;
     },
     wallUpend: function(sprite) {
@@ -256,40 +254,24 @@ var drawSpriteList = {
     }),
     mario: new Mario({
         name: "mario",
-        jumpEndCallback: SpriteAnimatorEndCallbackList.marioJumpend,
-        velocityX: 50,
-        width: 33,
-        height: 68,
-        canvas: element.mycanvas
     }),
     progressObj: progressObj,
     arrayOthers: {
         wall: [new Abnormalwall({
-            name: "abnormalwall",
-            width: 35,
-            jumpEndCallback: SpriteAnimatorEndCallbackList.wallUpend,
-            height: 35,
-            top: 100,
+            physicaltop: 100,
             left: 300
         }), new Normalwall({
-            name: "normalwall",
-            top: 0,
+            physicaltop: 0,
             left: 400
         }), ],
         money: [new Money({
-            name: "money",
-            width: 35,
-            height: 35,
-            top: 100,
+            physicaltop: 100,
             left: 200
         })],
         pipe: [new Pipe({
-            name: "Pipe",
-            width: 45,
-            height: 94,
-            top: 0,
+            physicaltop: 0,
             left: 500
-        }), ],
+        })],
         fire: [],
         badflower: [],
         flower: [],
@@ -300,6 +282,7 @@ var drawSpriteList = {
         tower: [],
         hole: [],
     },
+    createSpriteList: [],
     goDirection: function(status) {
         this.bg.velocityX = gameConfig.skySpeed * status;
         this.progressObj.velocityX = gameConfig.progressObjSpeed * status;
@@ -309,6 +292,16 @@ var drawSpriteList = {
                 itemDraw.velocityX = gameConfig.objectSpeed * status;
             })
         }
+        var createSpriteList = this.createSpriteList;
+        createSpriteList.forEach(function(item) {
+            item.velocityX = gameConfig.objectSpeed * status;
+        })
+
+        // for (var item in createSpriteList) {
+        //     createSpriteList[item].forEach(function(itemDraw) {
+        //         itemDraw.velocityX = gameConfig.objectSpeed * status;
+        //     })
+        // }
     },
     drawOthersFunc: function(ctx, time, fpsNum) {
         var arrothers = this.arrayOthers;
@@ -320,7 +313,9 @@ var drawSpriteList = {
     },
     judgeCD: {
         config: {
-            wall: { funcName: 'judgeMWall' },
+            wall: {
+                funcName: 'judgeMWall'
+            },
             money: {
                 funcName: 'judgeMM',
                 callback: function(moneySprite) {
@@ -328,10 +323,12 @@ var drawSpriteList = {
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
                 }
             },
-            pipe: { funcName: 'judgeMPipe' },
+            pipe: {
+                funcName: 'judgeMPipe'
+            },
         },
         cdfunc: function() {
-            var self=this;
+            var self = this;
             var arrothers = drawSpriteList.arrayOthers;
             gameConfig.setSpeedDefault();
             for (var item in arrothers) {
@@ -347,12 +344,12 @@ var gameControl = new Game('game', 'mycanvas');
 gameControl.speed = 1;
 gameControl.startAnimate = function(time) {
     drawSpriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
-    var length = createFactory.createSpriteList.length;
-    var createSpriteList = createFactory.createSpriteList;
+    var length = drawSpriteList.createSpriteList.length;
+    var createSpriteList = drawSpriteList.createSpriteList;
     for (var i = length; i > 0; i--) {
         createSpriteList[i - 1].draw(gameControl.context, time, gameControl.fps.num);
-    }  
-     
+    }
+
     //绘制其他的场景，例如墙，金币等。
     drawSpriteList.drawOthersFunc(gameControl.context, time, gameControl.fps.num);
     //碰撞检测
@@ -370,7 +367,7 @@ var animateList = {
         var cans = can.getContext('2d');
         cans.font = 'bold 14px arial';
         cans.fillStyle = 'red';
-        cans.fillText((gameControl.fps.num >> 0) + 'fps', 50, 20);        
+        cans.fillText((gameControl.fps.num >> 0) + 'fps', 50, 20);
         progressObj.mileageNumUpdate(gameControl.fps.num);
         progressObj.countDownNumUpdate();
         cans.fillText("行程:" + (progressObj.mileageNum >> 0) + "m", 400, 20);
