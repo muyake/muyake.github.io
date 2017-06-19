@@ -170,6 +170,7 @@ var Normalwall = function(setting) {
     setting.name = 'normalwall' + Date.now();
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.moveLeftToRight()]);
     this.width = setting.width || 35;
+    this.id = setting.id || 0;
     this.height = setting.height || 35;
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
@@ -206,7 +207,7 @@ var Abnormalwall = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.moveLeftToRight()]);
     this.width = setting.width || 35;
     this.height = setting.height || 35;
-
+    this.id = setting.id || 0;
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - (this.physicaltop || 0);
     this.left = setting.left;
@@ -252,6 +253,7 @@ var Money = function(setting) {
     this.height = setting.height || 35;
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    this.id = setting.id || 0;
     this.left = setting.left;
     this.roleType = 'money';
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
@@ -283,6 +285,7 @@ var Pipe = function(setting) {
     this.top = element.mycanvas.height - this.height - this.physicaltop;
     this.left = setting.left;
     this.roleType = 'pipe';
+    this.id = setting.id || 0;
 };
 Pipe.prototype = Object.create(SceneSprite.prototype);
 Pipe.prototype.draw = function(ctx, time, fpsNum) {

@@ -27,13 +27,23 @@ var lib = {
         if (o === undefined) return "Undefined";
         return Object.prototype.toString.call(o).slice(8, -1);
     },
-    removeByValue: function(arr,attrName, val) {
+    removeByValue: function(arr, attrName, val) {
         for (var i = 0; i < arr.length; i++) {
             if (arr[i][attrName] == val) {
                 arr.splice(i, 1);
                 break;
             }
         }
+    },
+    newGuid: function() {
+        var guid = "";
+        for (var i = 1; i <= 32; i++) {
+            var n = Math.floor(Math.random() * 16.0).toString(16);
+            guid += n;
+            // if ((i == 8) || (i == 12) || (i == 16) || (i == 20))
+            //     guid += "-";
+        }
+        return guid;
     },
     deepClone: function(obj) {
         var result, oClass = this.isClass(obj);
@@ -195,20 +205,11 @@ var lib = {
         return target;
     },
     Regexs: {
-        email: (/^[0-9a-z][0-9a-z\-\_\.]+@([0-9a-z][0-9a-z\-]*\.)+[a-z]{2,}$/i), //邮箱    
-        phone: (/^0[0-9]{2,3}[2-9][0-9]{6,7}$/), //座机手机号码    
-        ydphpne: (/^((13[4-9])|(15[012789])|147|182|187|188)[0-9]{8}$/), //移动手机号码    
-        allphpne: (/^((13[0-9])|(15[0-9])|(18[0-9]))[0-9]{8}$/), //所有手机号码    
-        ltphpne: (/^((13[0-2])|(15[56])|(186)|(145))[0-9]{8}$/), //联通手机号码    
-        dxphpne: (/^((133)|(153)|(180)|(189))[0-9]{8}$/), //电信手机号码    
-        phone1: (/^0[0-9]{2,3}-{0,1}[2-9][0-9]{6,7}$/), //区号中间的'-'座机号码  
-        url: (/^http:\/\/([0-9a-z][0-9a-z\-]*\.)+[a-z]{2,}(:\d+)?\/[0-9a-z%\-_\/\.]+/i), //网址    
-        num: (/[^0-9]/), //数字    
+        url: (/^http:\/\/([0-9a-z][0-9a-z\-]*\.)+[a-z]{2,}(:\d+)?\/[0-9a-z%\-_\/\.]+/i), //网址           
         cnum: (/[^0-9a-zA-Z_.-]/),
         img: (/\.jpg$|\.jpeg$|\.png$|\.gif$/i), //图片格式  
         audio: (/\.mp3$|\.wmv$/i), //图片格式   
-        photo1: (/\.(jpe?g|gif)$/i), //图片格式  
-        row: (/\n/ig)
+        photo1: (/\.(jpe?g|gif)$/i), //图片格式       
     },
     //判断是否为中文
     chkChinese: function(s) {

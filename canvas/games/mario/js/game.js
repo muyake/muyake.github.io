@@ -241,8 +241,6 @@ var SpriteAnimatorEndCallbackList = {
         sprite.isJump = false;
     },
 }
-
-
 var drawSpriteList = {
     bg: new BG({
         name: "BG",
@@ -256,21 +254,30 @@ var drawSpriteList = {
     }),
     progressObj: progressObj,
     arrayOthers: {
-        wall: [new Abnormalwall({
-            physicaltop: 100,
-            left: 300
-        }), new Normalwall({
-            physicaltop: 0,
-            left: 400
-        }), ],
-        money: [new Money({
-            physicaltop: 100,
-            left: 200
-        })],
-        pipe: [new Pipe({
-            physicaltop: 0,
-            left: 500
-        })],
+        wall: [
+            // new Abnormalwall({
+            //     physicaltop: 100,
+            //     left: 300
+            // }), new Normalwall({
+            //     physicaltop: 0,
+            //     left: 400
+            // }), 
+        ],
+        money: [
+            // new Money({
+            //     physicaltop: 100,
+            //     left: 200
+            // }), new Money({
+            //     physicaltop: 100,
+            //     left: 1000
+            // })
+        ],
+        pipe: [
+            // new Pipe({
+            //     physicaltop: 0,
+            //     left: 500
+            // })
+        ],
         fire: [],
         badflower: [],
         flower: [],
@@ -342,7 +349,7 @@ gameControl.startAnimate = function(time) {
     for (var i = length; i > 0; i--) {
         createSpriteList[i - 1].draw(gameControl.context, time, gameControl.fps.num);
     }
-
+    createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
     //绘制其他的场景，例如墙，金币等。
     drawSpriteList.drawOthersFunc(gameControl.context, time, gameControl.fps.num);
     //碰撞检测
@@ -350,7 +357,6 @@ gameControl.startAnimate = function(time) {
     drawSpriteList.mario.draw(gameControl.context, time, gameControl.fps.num);
     animateList.countDown(time);
 }
-
 var animateList = {
     //倒计时
     ctx: gameControl.context,

@@ -1,7 +1,7 @@
 var publicConfig = {
   GRAVITY_FORCE: 353 //9.8 * 2 * 18,
     //pixelsPerMeter : element.width / ARENA_LENGTH_IN_METERS,
-  };
+};
 //马里奥动画配置参数
 var marioConfig = {
   config: {
@@ -160,49 +160,49 @@ var marioConfig = {
     }
   }
 };
-var wallConfig={
-  normalSprite:{
-    width:50,
-    height:50,
-    left:215,
-    top:0
+var wallConfig = {
+  normalSprite: {
+    width: 50,
+    height: 50,
+    left: 215,
+    top: 0
   },
-   abnormalwall:{
-    height:50,
-    width:50,
+  abnormalwall: {
+    height: 50,
+    width: 50,
     left: 115,
-    top:0
+    top: 0
   },
 
-  afterabnormalSprite:{
-    height:50,
-    width:50,
-    left:165,
-    top:0
+  afterabnormalSprite: {
+    height: 50,
+    width: 50,
+    left: 165,
+    top: 0
   },
-  leftupSprite:{
-  height:23,
-    width:23,
-    left:0,
-    top:0
+  leftupSprite: {
+    height: 23,
+    width: 23,
+    left: 0,
+    top: 0
   },
-   leftdownSprite:{
-   height:30,
-    width:39,
-    left:51,
-    top:0
+  leftdownSprite: {
+    height: 30,
+    width: 39,
+    left: 51,
+    top: 0
   },
-   rightupSprite:{
-  height:33,
-    width:35,
-    left:80,
-    top:0
+  rightupSprite: {
+    height: 33,
+    width: 35,
+    left: 80,
+    top: 0
   },
-   rightdownSprite:{
-  height:30,
-    width:28,
-    left:23,
-    top:0
+  rightdownSprite: {
+    height: 30,
+    width: 28,
+    left: 23,
+    top: 0
   },
 }
 var marioGameConfig = {
@@ -214,23 +214,23 @@ var element = {
   progressDiv: document.getElementById('load'),
   tipDiv: document.querySelector('.tip'),
 };
-var gameConfig={
+var gameConfig = {
   // moneySpeed:90,
   // wallSpeed: 90,
-  objectSpeed:90,
-  progressObjSpeed:-2,
-  skySpeed:32,
-  setSpeedDefault:function(){
-this.objectSpeed=90;
-   this.progressObjSpeed=-2;
-    this.skySpeed=32;
+  objectSpeed: 90,
+  progressObjSpeed: -90,
+  skySpeed: 32,
+  setSpeedDefault: function() {
+    this.objectSpeed = 90;
+    this.progressObjSpeed = -90;
+    this.skySpeed = 32;
   },
-  setSpeedZero:function(){
-   this.objectSpeed=0;
-   this.progressObjSpeed=0;
-    this.skySpeed=0;
+  setSpeedZero: function() {
+    this.objectSpeed = 0;
+    this.progressObjSpeed = 0;
+    this.skySpeed = 0;
   },
 
-  roadHeight:10,
+  roadHeight: 10,
 
 }
