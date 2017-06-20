@@ -9,7 +9,13 @@ var progressObj = {
   mileageNumUpdate: function(fpsNum) {
     this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
     this.mileageNum += this.velocityX / this.fpsNum;
-    this.createSpriteMileNum+= Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed) *this.velocityX / this.fpsNum;
+    var temp=gameConfig.objectSpeed*lib.getSign(this.velocityX)/ this.fpsNum;
+    if(isNaN(temp)){
+        var i=33;
+    }else{
+         this.createSpriteMileNum+= temp;
+    }
+   
   },
   countDownNumUpdate: function() {
     //this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
@@ -29,12 +35,12 @@ var createFactory = {
     wall: [{
       id: lib.newGuid(),
       status: 0,
-      positionmile: 670, //left=progressObj.mileageNum-positionmile   
+      positionmile: 770, //left=progressObj.mileageNum-positionmile   
       physicaltop: 100,
     }, {
       id: lib.newGuid(),
       status: 1,
-      positionmile: 705,
+      positionmile: 805,
       physicaltop: 100,
     }],
     money: [{
@@ -80,7 +86,8 @@ var createFactory = {
           wall = new Normalwall({
             id: setting.id,
             physicaltop: setting.physicaltop,
-            left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
+            //left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
+            left:setting.positionmile - progressObj.createSpriteMileNum,
           });
         }
         break;
@@ -89,7 +96,8 @@ var createFactory = {
           wall = new Abnormalwall({
             id: setting.id,
             physicaltop: setting.physicaltop,
-            left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
+           // left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
+          left:setting.positionmile - progressObj.createSpriteMileNum,
           });
         }
         break;
@@ -105,14 +113,16 @@ var createFactory = {
     return new Pipe({
       id: setting.id,
       physicaltop: setting.physicaltop,
-      left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
+      //left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
+    left:setting.positionmile - progressObj.createSpriteMileNum,
     });
   },
   createMoney: function(setting) {
     return new Money({
       id: setting.id,
       physicaltop: setting.physicaltop,
-      left:setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
+     // left:setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
+    left:setting.positionmile - progressObj.createSpriteMileNum,
     });
   },
   createFire: function(setting) {
@@ -164,6 +174,7 @@ var createFactory = {
     // var drawSpriteList = {};
     var self = this;
     var totalProgress = this.totalProgress;
+   // console.log(progressObj.createSpriteMileNum);
     for (var item in totalProgress) {
       totalProgress[item].forEach(function(itemDraw) { 
         if ( (itemDraw.positionmile - progressObj.createSpriteMileNum ) <= element.mycanvas.width) {
@@ -176,4 +187,7 @@ var createFactory = {
 
     }
   },
+  setVisible:function(mileageNum,drawSpriteList){
+
+  }
 }

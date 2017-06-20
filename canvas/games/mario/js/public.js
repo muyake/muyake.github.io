@@ -35,6 +35,10 @@ var lib = {
             }
         }
     },
+    //整数返回1，负数返回-1，0返回0
+   getSign: function (n) {
+    return n === 0 ? 0 : n / Math.abs(n);
+},
     newGuid: function() {
         var guid = "";
         for (var i = 1; i <= 32; i++) {
