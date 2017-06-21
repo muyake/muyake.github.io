@@ -160,6 +160,12 @@ var marioConfig = {
     }
   }
 };
+var WH={
+  wall:{width:35,height:35},
+  money:{width:35,height:35},
+    mario:{width:33,height:68},
+    pipe:{width:45,height:94},
+}
 var wallConfig = {
   normalSprite: {
     width: 50,
@@ -205,6 +211,7 @@ var wallConfig = {
     top: 0
   },
 }
+
 var marioGameConfig = {
   bigJumpV: 320,
   smallJumpV: 220,
@@ -215,8 +222,8 @@ var element = {
   tipDiv: document.querySelector('.tip'),
 };
 var gameConfig = {
-  // moneySpeed:90,
-  // wallSpeed: 90,
+  // wallSpeed: 90,  // moneySpeed:90,
+
   objectSpeed: 90,
   progressObjSpeed: -2,
   skySpeed: 32,

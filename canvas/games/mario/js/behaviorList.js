@@ -13,6 +13,19 @@ var behaviorList = {
             this.lastMove = time;
         }
     },
+    SpriteLeftToRight: function() {
+        this.behaviorName = 'moveLeftToRight';
+        this.lastMove = 0;
+        this.fpsNum = 60;
+        this.execute = function(sprite, context, time, fpsNum) {
+          //  this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
+           // sprite.left += sprite.velocityX / this.fpsNum;
+            // sprite.left += sprite.velocityX / this.fpsNum;
+
+         sprite.left=    sprite.positionmile - progressObj.createSpriteMileNum;
+            //this.lastMove = time;
+        }
+    },
     //小人跑动动画
     runInPlace: function(setting) {
         var defaultSetting = {

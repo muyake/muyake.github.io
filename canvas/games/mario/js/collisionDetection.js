@@ -48,7 +48,7 @@ var CD = {
                 if (wall.status == 1) {
                     wall.up(60);
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-                    createFactory.createUpMoney(wall.left, wall.physicaltop);
+                    createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
                     wall.changeToAA();
                 } else {
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);

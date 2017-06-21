@@ -15,6 +15,7 @@ var sourceLoadObj = {
         element.tipDiv.style.display = 'block';
         //加载图片完成后执行。
         game.init();
+        createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
@@ -143,6 +144,7 @@ var game = {
         var runKey = ((this.mapKey["left"] && !this.mapKey["right"]) || (!this.mapKey["left"] && this.mapKey["right"])); //左右键中，只按了左键或只按了右键
         //只按左键或只按右键(大蹦，小蹦不管)
         if (runKey) {
+            createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
             //如果是左键
             if ((this.mapKey["left"] && !this.mapKey["right"])) {
                 //如果马里奥当前面向右，然后从右转向左，则设置初始化默认速度，以防当前面有墙，被墙挡住，速度为0，掉头后速度设为默认值。
@@ -319,7 +321,15 @@ var drawSpriteList = {
             money: {
                 funcName: 'judgeMM',
                 callback: function(moneySprite) {
+
                     moneySprite.visible = false;
+                    var id=moneySprite.id;                   
+                    var moneyList= createFactory.totalProgress.money;
+                    moneyList.forEach(function(item){
+                        if(item.id==id){
+                            item.isVisible=false;
+                        }
+                    })
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
                 }
             },
@@ -344,18 +354,19 @@ var gameControl = new Game('game', 'mycanvas');
 gameControl.speed = 1;
 gameControl.startAnimate = function(time) {
     drawSpriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
+    animateList.countDown(time);
     var length = drawSpriteList.createSpriteList.length;
     var createSpriteList = drawSpriteList.createSpriteList;
     for (var i = length; i > 0; i--) {
         createSpriteList[i - 1].draw(gameControl.context, time, gameControl.fps.num);
     }
-    createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
+    //createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
     //绘制其他的场景，例如墙，金币等。
     drawSpriteList.drawOthersFunc(gameControl.context, time, gameControl.fps.num);
     //碰撞检测
     drawSpriteList.judgeCD.cdfunc();
     drawSpriteList.mario.draw(gameControl.context, time, gameControl.fps.num);
-    animateList.countDown(time);
+    
 }
 var animateList = {
     //倒计时
