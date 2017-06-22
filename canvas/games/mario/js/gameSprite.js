@@ -64,7 +64,6 @@ CharacterSpriteAnimator.prototype.end = function(sprite) {
     }
 };
 CharacterSpriteAnimator.prototype.start = function() {
-
     this.isRunning = true;
 };
 
@@ -166,9 +165,9 @@ Mario.prototype.draw = function(ctx, time, fpsNum) {
     this.paint(ctx);
 };
 
-var Wall=function(setting) {
-    var status=setting.status||0;
-    setting.name = 'wall' + Date.now();
+var Wall = function(setting) {
+    var status = setting.status || 0;
+    setting.name = setting.name || 'wall';
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.SpriteLeftToRight()]);
     this.width = setting.width || WH.wall.width;
     this.id = setting.id || 0;
@@ -183,38 +182,39 @@ var Wall=function(setting) {
     this.initialTop = this.top;
     this.isJump = false; //判断是否为处于上下波动中
     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.wall);
-switch (status){
-    case 0:{
- this.imgwidth = wallConfig.normalSprite.width;
-    this.imgheight = wallConfig.normalSprite.height;
-    this.imgleft = wallConfig.normalSprite.left;
-    this.imgtop = wallConfig.normalSprite.top;
+    switch (status) {
+        case 0:
+            {
+                this.imgwidth = wallConfig.normalSprite.width;
+                this.imgheight = wallConfig.normalSprite.height;
+                this.imgleft = wallConfig.normalSprite.left;
+                this.imgtop = wallConfig.normalSprite.top;
+            }
+            break;
+        case 1:
+            {
+                this.imgwidth = wallConfig.abnormalwall.width;
+                this.imgheight = wallConfig.abnormalwall.height;
+                this.imgleft = wallConfig.abnormalwall.left;
+                this.imgtop = wallConfig.abnormalwall.top;
+                this.mycanvas = element.mycanvas;
+            }
+            break;
+        case 2:
+            {
+                this.imgwidth = wallConfig.afterabnormalSprite.width;
+                this.imgheight = wallConfig.afterabnormalSprite.height;
+                this.imgleft = wallConfig.afterabnormalSprite.left;
+                this.imgtop = wallConfig.afterabnormalSprite.top;
+            }
+            break;
     }
-    break;
-    case 1:{
-this.imgwidth = wallConfig.abnormalwall.width;
-    this.imgheight = wallConfig.abnormalwall.height;
-    this.imgleft = wallConfig.abnormalwall.left;
-    this.imgtop = wallConfig.abnormalwall.top;
     this.mycanvas = element.mycanvas;
-    }
-    break;
-    case 2:{
-         this.imgwidth = wallConfig.afterabnormalSprite.width;
-    this.imgheight = wallConfig.afterabnormalSprite.height;
-    this.imgleft = wallConfig.afterabnormalSprite.left;
-    this.imgtop = wallConfig.afterabnormalSprite.top;
-    }
-    break;
-}
-   
-
-    this.mycanvas = element.mycanvas;
-    this.NormalSpriteAnimatorUp = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.wallUpend, this);
+    this.wallSpriteAnimatorUp = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.wallUpend, this);
 };
 Wall.prototype = Object.create(SceneSprite.prototype);
 Wall.prototype.draw = function(ctx, time, fpsNum) {
-    this.NormalSpriteAnimatorUp.execute();
+    this.wallSpriteAnimatorUp.execute();
     this.fpsNum = fpsNum;
     this.update(ctx, time, fpsNum);
     this.paint(ctx);
@@ -222,8 +222,7 @@ Wall.prototype.draw = function(ctx, time, fpsNum) {
 Wall.prototype.up = function(VY) { //status为2时，为大蹦，1时为小蹦
     this.startVelocityY = VY;
     this.velocityY = -this.startVelocityY;
-    // this.behaviors = [];              
-    this.NormalSpriteAnimatorUp.start();
+    this.wallSpriteAnimatorUp.start();
 };
 Wall.prototype.changeToAA = function() {
     this.imgwidth = wallConfig.afterabnormalSprite.width;
@@ -231,112 +230,20 @@ Wall.prototype.changeToAA = function() {
     this.imgleft = wallConfig.afterabnormalSprite.left;
     this.imgtop = wallConfig.afterabnormalSprite.top;
     this.status = 2;
-    var id=this.id;
-    var moneyList = createFactory.totalProgress.wall;
-    moneyList.forEach(function(item) {
+    var id = this.id;
+    var wallList = totalProgressSprite.wall;
+    wallList.forEach(function(item) {
         if (item.id == id) {
             item.status = 2;
         }
     })
 }
 
-// //普通墙对象
-// var Normalwall = function(setting) {
-//     setting.name = 'normalwall' + Date.now();
-//     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.SpriteLeftToRight()]);
-//     this.width = setting.width || WH.wall.width;
-//     this.id = setting.id || 0;
-//     this.positionmile = setting.positionmile || 0;
-//     this.height = setting.height || WH.wall.width;
-//     this.physicaltop = setting.physicaltop || 0;
-//     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
-//     this.left = setting.left || 0;
-//     this.roleType = 'wall';
-//     this.status = 0; //0是普通墙，1是问号墙，2是问号被撞后的墙。
-//     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
-//     this.initialTop = this.top;
-//     this.isJump = false; //判断是否为处于上下波动中
-//     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.wall);
-//     this.imgwidth = wallConfig.normalSprite.width;
-//     this.imgheight = wallConfig.normalSprite.height;
-//     this.imgleft = wallConfig.normalSprite.left;
-//     this.imgtop = wallConfig.normalSprite.top;
-//     this.mycanvas = element.mycanvas;
-//     this.NormalSpriteAnimatorUp = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.wallUpend, this);
-// };
-// Normalwall.prototype = Object.create(SceneSprite.prototype);
-// Normalwall.prototype.draw = function(ctx, time, fpsNum) {
-//     this.NormalSpriteAnimatorUp.execute();
-//     this.fpsNum = fpsNum;
-//     this.update(ctx, time, fpsNum);
-//     this.paint(ctx);
-// };
-// Normalwall.prototype.up = function(VY) { //status为2时，为大蹦，1时为小蹦
-//     this.startVelocityY = VY;
-//     this.velocityY = -this.startVelocityY;
-//     // this.behaviors = [];              
-//     this.NormalSpriteAnimatorUp.start();
-// };
-
-// var Abnormalwall = function(setting) {
-//     setting.name = 'abnormalwall' + Date.now();
-//     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.SpriteLeftToRight()]);
-//     this.width = setting.width || WH.wall.width;
-//     this.height = setting.height || WH.wall.width;
-//     this.id = setting.id || 0;
-//     this.positionmile = setting.positionmile || 0;
-//     this.physicaltop = setting.physicaltop || 0;
-//     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - (this.physicaltop || 0);
-//     this.left = setting.left || 0;
-//     this.roleType = 'wall';
-//     this.status = setting.status||0; //0是普通墙，1是问号墙，2是问号被撞后的墙。
-//     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
-//     this.initialTop = this.top;
-//     this.isJump = false; //判断是否为处于上下波动中
-//     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.wall);
-   
-
-//     this.imgwidth = wallConfig.abnormalwall.width;
-//     this.imgheight = wallConfig.abnormalwall.height;
-//     this.imgleft = wallConfig.abnormalwall.left;
-//     this.imgtop = wallConfig.abnormalwall.top;
-//     this.mycanvas = element.mycanvas;
-//     this.NormalSpriteAnimatorUp = new CharacterSpriteAnimator(setting.jumpEndCallback, this);
-// };
-// Abnormalwall.prototype = Object.create(SceneSprite.prototype);
-// Abnormalwall.prototype.draw = function(ctx, time, fpsNum) {
-//     this.NormalSpriteAnimatorUp.execute();
-//     this.fpsNum = fpsNum;
-//     this.update(ctx, time, fpsNum);
-//     this.paint(ctx);
-// };
-// Abnormalwall.prototype.changeToAA = function() {
-//     this.imgwidth = wallConfig.afterabnormalSprite.width;
-//     this.imgheight = wallConfig.afterabnormalSprite.height;
-//     this.imgleft = wallConfig.afterabnormalSprite.left;
-//     this.imgtop = wallConfig.afterabnormalSprite.top;
-//     this.status = 2;
-//     var id=this.id;
-//     var moneyList = createFactory.totalProgress.wall;
-//     moneyList.forEach(function(item) {
-//         if (item.id == id) {
-//             item.status = 2;
-//         }
-//     })
-// }
-// Abnormalwall.prototype.up = function(VY) { //status为2时，为大蹦，1时为小蹦
-//     this.startVelocityY = VY;
-//     this.velocityY = -this.startVelocityY;
-//     // this.behaviors = [];              
-//     this.NormalSpriteAnimatorUp.start();
-// };
-
 //金币对象
 var Money = function(setting) {
-    setting.name = setting.name || 'money' + Date.now();
+    setting.name = setting.name || 'money';
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.money), [new behaviorList.SpriteLeftToRight()]);
     this.width = setting.width || WH.money.width;
-
     this.height = setting.height || WH.money.height;
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
@@ -349,23 +256,23 @@ var Money = function(setting) {
     this.isJump = false; //判断是否为处于上下波动中
     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.money);
     this.mycanvas = element.mycanvas;
-    this.NormalSpriteAnimatorUp = new CharacterSpriteAnimator(setting.jumpEndCallback, this);
+    this.moneySpriteAnimatorUp = new CharacterSpriteAnimator(setting.jumpEndCallback, this);
 };
 Money.prototype = Object.create(SceneSprite.prototype);
 Money.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum;
-    this.NormalSpriteAnimatorUp.execute();
+    this.moneySpriteAnimatorUp.execute();
     this.update(ctx, time, fpsNum);
     this.paint(ctx);
 }
 Money.prototype.up = function(VY) {
     this.startVelocityY = VY;
     this.velocityY = -this.startVelocityY;
-    this.NormalSpriteAnimatorUp.start();
+    this.moneySpriteAnimatorUp.start();
 };
 //管道对象
 var Pipe = function(setting) {
-    setting.name = setting.name || 'pipe' + Date.now();
+    setting.name = setting.name || 'pipe';
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.pipe), [new behaviorList.SpriteLeftToRight()]);
     this.width = setting.width || WH.pipe.width;;
     this.height = setting.height || WH.pipe.height;

@@ -35,10 +35,26 @@ var lib = {
             }
         }
     },
+    sort: function(arr, attributeName, status) { //status=0位正序，1为倒序
+        var s = status || 0;
+
+        function compare(item1, item2) {
+            var value1 = item1[attributeName];
+            var value2 = item2[attributeName];
+            if (value1 < value2) {
+                return s == 0 ? -1 : 1;
+            } else if (value1 > value2) {
+                return s == 0 ? 1 : -1;
+            } else {
+                return 0;
+            }
+        }
+        arr.sort(compare);
+    },
     //整数返回1，负数返回-1，0返回0
-   getSign: function (n) {
-    return n === 0 ? 0 : n / Math.abs(n);
-},
+    getSign: function(n) {
+        return n === 0 ? 0 : n / Math.abs(n);
+    },
     newGuid: function() {
         var guid = "";
         for (var i = 1; i <= 32; i++) {
@@ -239,6 +255,8 @@ var lib = {
             return true;
         }
     },
+    //排序
+
 
 }
 lib.init();

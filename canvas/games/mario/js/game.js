@@ -14,8 +14,10 @@ var sourceLoadObj = {
         element.progressDiv.style.display = 'none';
         element.tipDiv.style.display = 'block';
         //加载图片完成后执行。
+        createFactory.init();
         game.init();
-        createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
+
+        createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
@@ -144,7 +146,7 @@ var game = {
         var runKey = ((this.mapKey["left"] && !this.mapKey["right"]) || (!this.mapKey["left"] && this.mapKey["right"])); //左右键中，只按了左键或只按了右键
         //只按左键或只按右键(大蹦，小蹦不管)
         if (runKey) {
-            createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
+            createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
             //如果是左键
             if ((this.mapKey["left"] && !this.mapKey["right"])) {
                 //如果马里奥当前面向右，然后从右转向左，则设置初始化默认速度，以防当前面有墙，被墙挡住，速度为0，掉头后速度设为默认值。
@@ -255,63 +257,25 @@ var drawSpriteList = {
         name: "mario",
     }),
     progressObj: progressObj,
-    arrayOthers: {
-        wall: [
-            // new Abnormalwall({
-            //     physicaltop: 100,
-            //     left: 300
-            // }), new Normalwall({
-            //     physicaltop: 0,
-            //     left: 400
-            // }), 
-        ],
-        money: [
-            // new Money({
-            //     physicaltop: 100,
-            //     left: 200
-            // }), new Money({
-            //     physicaltop: 100,
-            //     left: 1000
-            // })
-        ],
-        pipe: [
-            // new Pipe({
-            //     physicaltop: 0,
-            //     left: 500
-            // })
-        ],
-        fire: [],
-        badflower: [],
-        flower: [],
-        monster: [],
-        mushroom: [],
-        tortoise: [],
-        star: [],
-        tower: [],
-        hole: [],
-    },
+    arrayOthersA: [],
     createSpriteList: [],
     goDirection: function(status) {
         this.bg.velocityX = gameConfig.skySpeed * status;
         this.progressObj.velocityX = gameConfig.progressObjSpeed * status;
-        var arr = [this.arrayOthers.wall, this.arrayOthers.money, this.arrayOthers.pipe];
-        for (var item in arr) {
-            arr[item].forEach(function(itemDraw) {
-                itemDraw.velocityX = gameConfig.objectSpeed * status;
-            })
-        }
+        this.arrayOthersA.forEach(function(itemDraw) {
+            itemDraw.velocityX = gameConfig.objectSpeed * status;
+        })
+
         var createSpriteList = this.createSpriteList;
         createSpriteList.forEach(function(item) {
             item.velocityX = gameConfig.objectSpeed * status;
         });
     },
     drawOthersFunc: function(ctx, time, fpsNum) {
-        var arrothers = this.arrayOthers;
-        for (var item in arrothers) {
-            arrothers[item].forEach(function(itemDraw) {
-                itemDraw.draw(ctx, time, fpsNum);
-            })
-        }
+        var arrothers = this.arrayOthersA;
+        arrothers.forEach(function(itemDraw) {
+            itemDraw.draw(ctx, time, fpsNum);
+        });
     },
     judgeCD: {
         config: {
@@ -321,13 +285,12 @@ var drawSpriteList = {
             money: {
                 funcName: 'judgeMM',
                 callback: function(moneySprite) {
-
                     moneySprite.visible = false;
-                    var id=moneySprite.id;                   
-                    var moneyList= createFactory.totalProgress.money;
-                    moneyList.forEach(function(item){
-                        if(item.id==id){
-                            item.isVisible=false;
+                    var id = moneySprite.id;
+                    var moneyList = totalProgressSprite.money;
+                    moneyList.forEach(function(item) {
+                        if (item.id == id) {
+                            item.isVisible = false;
                         }
                     })
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
@@ -339,14 +302,20 @@ var drawSpriteList = {
         },
         cdfunc: function() {
             var self = this;
-            var arrothers = drawSpriteList.arrayOthers;
+            var arrothers = drawSpriteList.arrayOthersA;
             gameConfig.setSpeedDefault();
-            for (var item in arrothers) {
-                arrothers[item].forEach(function(itemDraw) {
-                    var callback = self.config[item].callback || function() {};
-                    CD[self.config[item].funcName](drawSpriteList.mario, itemDraw, callback)
-                })
-            }
+            drawSpriteList.arrayOthersA.forEach(function(itemDraw) {
+                var callback = self.config[itemDraw.name].callback || function() {};
+                CD[self.config[itemDraw.name].funcName](drawSpriteList.mario, itemDraw, callback)
+            })
+
+
+            // for (var item in arrothers) {
+            //     arrothers[item].forEach(function(itemDraw) {
+            //         var callback = self.config[item].callback || function() {};
+            //         CD[self.config[item].funcName](drawSpriteList.mario, itemDraw, callback)
+            //     })
+            // }
         },
     },
 };
@@ -366,7 +335,7 @@ gameControl.startAnimate = function(time) {
     //碰撞检测
     drawSpriteList.judgeCD.cdfunc();
     drawSpriteList.mario.draw(gameControl.context, time, gameControl.fps.num);
-    
+
 }
 var animateList = {
     //倒计时

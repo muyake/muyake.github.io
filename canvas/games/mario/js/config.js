@@ -160,11 +160,26 @@ var marioConfig = {
     }
   }
 };
-var WH={
-  wall:{width:35,height:35},
-  money:{width:35,height:35},
-    mario:{width:33,height:68},
-    pipe:{width:45,height:94},
+var WH = {
+  wall: {
+    width: 35,
+    height: 35
+  },
+  MAX: {
+    width: 45
+  },
+  money: {
+    width: 35,
+    height: 35
+  },
+  mario: {
+    width: 33,
+    height: 68
+  },
+  pipe: {
+    width: 45,
+    height: 94
+  },
 }
 var wallConfig = {
   normalSprite: {

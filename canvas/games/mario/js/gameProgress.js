@@ -30,49 +30,51 @@ var progressObj = {
     },
 };
 
+var totalProgressSprite = {
+    wall: [{
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile: 770, //left=progressObj.mileageNum-positionmile   
+        physicaltop: 100,
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile: 805,
+        physicaltop: 100,
+    }],
+    money: [{
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 100,
+        positionmile: 200
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 100,
+        positionmile: 1000
+    }],
+    pipe: [{
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: 500
+    }],
+    fire: [],
+    badflower: [],
+    flower: [],
+    monster: [],
+    mushroom: [],
+    tortoise: [],
+    star: [],
+    tower: [],
+    hole: [],
+};
+
 var createFactory = {
-    totalProgress: {
-        wall: [{
-            isVisible: true,
-            id: lib.newGuid(),
-            status: 0,
-            positionmile: 770, //left=progressObj.mileageNum-positionmile   
-            physicaltop: 100,
-        }, {
-            isVisible: true,
-            id: lib.newGuid(),
-            status: 1,
-            positionmile: 805,
-            physicaltop: 100,
-        }],
-        money: [{
-            isVisible: true,
-            id: lib.newGuid(),
-            physicaltop: 100,
-            positionmile: 200
-        }, {
-            isVisible: true,
-            id: lib.newGuid(),
-            physicaltop: 100,
-            positionmile: 1000
-        }],
-        pipe: [{
-            isVisible: true,
-            id: lib.newGuid(),
-            physicaltop: 0,
-            positionmile: 500
-        }],
-        fire: [],
-        badflower: [],
-        flower: [],
-        monster: [],
-        mushroom: [],
-        tortoise: [],
-        star: [],
-        tower: [],
-        hole: [],
-    },
-    //createSpriteList: [],
+    arrayTotalProgress: [],
+
     createUpMoney: function(positionmile, physicaltop) {
         var createUpMoneyObj = new Money({
             physicaltop: physicaltop,
@@ -86,48 +88,13 @@ var createFactory = {
     createWall: function(setting) {
         setting.status = setting.status || 0;
         var wall;
-         wall = new Wall({
-                        id: setting.id,
-                        physicaltop: setting.physicaltop,
-                        positionmile: setting.positionmile,
-                        status: setting.status,
-                        left: setting.positionmile - progressObj.createSpriteMileNum,
-                    });
-        // switch (setting.status) {
-        //     case 0:
-        //         {
-        //             wall = new Normalwall({
-        //                 id: setting.id,
-        //                 physicaltop: setting.physicaltop,
-        //                 positionmile: setting.positionmile,
-        //                 //left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
-        //                 left: setting.positionmile - progressObj.createSpriteMileNum,
-        //             });
-        //         }
-        //         break;
-        //     case 1:
-        //         {
-        //             wall = new Abnormalwall({
-        //                 id: setting.id,
-        //                 physicaltop: setting.physicaltop,
-        //                 positionmile: setting.positionmile,
-        //                 // left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
-        //                 left: setting.positionmile - progressObj.createSpriteMileNum,
-        //             });
-        //         }
-        //         break;
-        //     case 2:
-        //         {
-        //             wall = new Abnormalwall({
-        //                 id: setting.id,
-        //                 physicaltop: setting.physicaltop,
-        //                 positionmile: setting.positionmile,
-        //                 // left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
-        //                 left: setting.positionmile - progressObj.createSpriteMileNum,
-        //             });
-        //         }
-        //         break;
-        // }
+        wall = new Wall({
+            id: setting.id,
+            physicaltop: setting.physicaltop,
+            positionmile: setting.positionmile,
+            status: setting.status,
+            left: setting.positionmile - progressObj.createSpriteMileNum,
+        });
         return wall;
     },
     createPipe: function(setting) {
@@ -194,35 +161,33 @@ var createFactory = {
         });
     },
     insertDrawSpriteList: function(mileageNum, drawSpriteList) {
-        // var drawSpriteList = {};
-
-        for (var item in drawSpriteList) {
-            drawSpriteList[item].forEach(function(removeItem) {
-                if (!removeItem.visible || (removeItem.positionmile - progressObj.createSpriteMileNum) < -WH[item].width || (removeItem.positionmile - progressObj.createSpriteMileNum) > element.mycanvas.width) {
-                    var id = removeItem.id;
-                   lib.removeByValue(drawSpriteList[item],'id',id);               
-                }
-            });
-        }
-
-
+        drawSpriteList.forEach(function(removeItem) {
+            if (!removeItem.visible || (removeItem.positionmile - progressObj.createSpriteMileNum) < -removeItem.width || (removeItem.positionmile - progressObj.createSpriteMileNum) > element.mycanvas.width) {
+                var id = removeItem.id;
+                lib.removeByValue(drawSpriteList, 'id', id);
+            }
+        });
         var self = this;
-        var totalProgress = this.totalProgress;
-        // console.log(progressObj.createSpriteMileNum);
-        for (var item in totalProgress) {
-            //drawSpriteList[item]=[];
-            totalProgress[item].forEach(function(itemDraw) {
-                if (itemDraw.isVisible && (itemDraw.positionmile - progressObj.createSpriteMileNum) >= -WH[item].width && (itemDraw.positionmile - progressObj.createSpriteMileNum) <= element.mycanvas.width) {
-                    var id = itemDraw.id;
-                    if (!self.hasId(id, drawSpriteList[item])) {
-                        drawSpriteList[item].push(self[self.nameToCreateFun[item]](itemDraw));
-                    }
+        var totalProgressArray = this.arrayTotalProgress;
+        totalProgressArray.forEach(function(item) {
+            if (item.isVisible && (item.positionmile - progressObj.createSpriteMileNum) >= -WH[item.name].width && (item.positionmile - progressObj.createSpriteMileNum) <= element.mycanvas.width) {
+                var id = item.id;
+                if (!self.hasId(id, drawSpriteList)) {
+                    drawSpriteList.push(self[self.nameToCreateFun[item.name]](item));
                 }
-            })
-
-        }
+            }
+        });
     },
     setVisible: function(mileageNum, drawSpriteList) {
 
+    },
+    init: function() {
+        for (var key in totalProgressSprite) {
+            totalProgressSprite[key].forEach(function(item) {
+                item.name = key;
+            })
+            this.arrayTotalProgress = this.arrayTotalProgress.concat(totalProgressSprite[key]);
+        }
+        lib.sort(this.arrayTotalProgress, 'positionmile', 0);
     }
 }
