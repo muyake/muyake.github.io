@@ -4,7 +4,7 @@ var gameSourceUrl = {
 		//背景
 		BG: './images/background2.png',
 		wall: './images/wall/wall.png',
-
+		flower: './images/flower/css_sprites.png',
 		pipe: './images/pipe.png',
 		money: './images/money.png',
 		//马里奥

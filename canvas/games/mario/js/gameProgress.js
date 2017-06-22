@@ -35,20 +35,29 @@ var totalProgressSprite = {
         isVisible: true,
         id: lib.newGuid(),
         status: 0,
-        positionmile: 770, //left=progressObj.mileageNum-positionmile   
+        positionmile: 100, //left=progressObj.mileageNum-positionmile   
         physicaltop: 100,
+        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
     }, {
         isVisible: true,
         id: lib.newGuid(),
         status: 1,
-        positionmile: 805,
+        positionmile: 135,
         physicaltop: 100,
+        contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile: 170,
+        physicaltop: 100,
+        contain: 3, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
     }],
     money: [{
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: 100,
-        positionmile: 200
+        positionmile: 500
     }, {
         isVisible: true,
         id: lib.newGuid(),
@@ -63,7 +72,12 @@ var totalProgressSprite = {
     }],
     fire: [],
     badflower: [],
-    flower: [],
+    flower: [{
+        isVisible: true,
+        id: lib.newGuid(),
+        positionmile: 135,
+        physicaltop: 50,
+    }],
     monster: [],
     mushroom: [],
     tortoise: [],
@@ -90,6 +104,7 @@ var createFactory = {
         var wall;
         wall = new Wall({
             id: setting.id,
+            contain: setting.contain,
             physicaltop: setting.physicaltop,
             positionmile: setting.positionmile,
             status: setting.status,
@@ -122,7 +137,13 @@ var createFactory = {
 
     },
     createFlower: function(setting) {
-
+        return new Flower({
+            id: setting.id,
+            physicaltop: setting.physicaltop,
+            positionmile: setting.positionmile,
+            left: setting.positionmile - progressObj.createSpriteMileNum,
+            // left:setting.positionmile - progressObj.createSpriteMileNum,
+        });
     },
     createMonster: function(setting) {
 

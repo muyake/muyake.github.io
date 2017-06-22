@@ -177,6 +177,7 @@ var Wall = function(setting) {
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
     this.left = setting.left || 0;
     this.roleType = 'wall';
+    this.contain = setting.contain || 0;
     this.status = status; //0是普通墙，1是问号墙，2是问号被撞后的墙。
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.initialTop = this.top;
@@ -270,6 +271,43 @@ Money.prototype.up = function(VY) {
     this.velocityY = -this.startVelocityY;
     this.moneySpriteAnimatorUp.start();
 };
+//flower
+var Flower = function(setting) {
+    setting.name = setting.name || 'flower';
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.flower), [new behaviorList.SpriteLeftToRight()]);
+    this.width = setting.width || WH.flower.width;
+    this.height = setting.height || WH.flower.height;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    this.id = setting.id || 0;
+    this.left = setting.left || 0;
+    this.imgwidth = flowerConfig.config.sprite_0.width;
+    this.imgheight = flowerConfig.config.sprite_0.height;
+    this.imgleft = flowerConfig.config.sprite_0.left;
+    this.imgtop = flowerConfig.config.sprite_0.top;
+    this.positionmile = setting.positionmile || 0;
+    this.roleType = 'flower';
+    this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
+    this.initialTop = this.top;
+    this.isJump = false; //判断是否为处于上下波动中
+    //this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.flower);
+    this.mycanvas = element.mycanvas;
+    this.flowerSpriteAnimatorUp = new CharacterSpriteAnimator(setting.jumpEndCallback, this);
+};
+Flower.prototype = Object.create(SceneSprite.prototype);
+Flower.prototype.draw = function(ctx, time, fpsNum) {
+    this.fpsNum = fpsNum;
+    this.flowerSpriteAnimatorUp.execute();
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
+}
+Flower.prototype.up = function(VY) {
+    this.startVelocityY = VY;
+    this.velocityY = -this.startVelocityY;
+    this.flowerSpriteAnimatorUp.start();
+};
+
+
 //管道对象
 var Pipe = function(setting) {
     setting.name = setting.name || 'pipe';

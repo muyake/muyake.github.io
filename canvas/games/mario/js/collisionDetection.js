@@ -41,14 +41,27 @@ var CD = {
         MdownWall: function(mario, wall, callback) {
             mario.velocityY = -mario.velocityY;
             mario.top = wall.top + wall.height + 1;
-
-            callback();
+            callback(wall);
             if (!wall.isJump) {
                 //console.log("下侧调2");
                 if (wall.status == 1) {
                     wall.up(60);
-                    audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-                    createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
+                    switch (wall.contain) {
+                        case 1:
+                            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+                            createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
+                            break;
+                        case 2:
+
+                            // createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
+                            break;
+                        case 3:
+                            //createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
+                            break;
+                        case 4:
+                            // createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
+                            break;
+                    }
                     wall.changeToAA();
                 } else {
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
@@ -105,6 +118,17 @@ var CD = {
             return true
         } else {
             callback(money);
+        }
+    },
+    judgeMF: function(mario, flower, callback) {
+        if (flower.visible == false) {
+            return;
+        }
+        // 两个矩形检测
+        if ((mario.left + mario.width) < flower.left || (flower.left + flower.width) < mario.left || (mario.top + mario.height) < flower.top || (flower.top + flower.height) < mario.top) {
+            return true
+        } else {
+            callback(flower);
         }
     },
     //马里奥和普通墙

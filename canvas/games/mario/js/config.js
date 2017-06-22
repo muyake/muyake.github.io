@@ -160,6 +160,41 @@ var marioConfig = {
     }
   }
 };
+var flowerConfig = {
+  config: {
+    totalCount: 5,
+    sprite_0: {
+      width: 50,
+      height: 50,
+      left: 10,
+      top: 10,
+    },
+    sprite_1: {
+      width: 50,
+      height: 50,
+      left: 80,
+      top: 10,
+    },
+    sprite_2: {
+      width: 50,
+      height: 50,
+      left: 10,
+      top: 80,
+    },
+    sprite_3: {
+      width: 50,
+      height: 50,
+      left: 80,
+      top: 80,
+    },
+    sprite_4: {
+      width: 50,
+      height: 50,
+      left: 150,
+      top: 10,
+    },
+  }
+}
 var WH = {
   wall: {
     width: 35,
@@ -167,6 +202,10 @@ var WH = {
   },
   MAX: {
     width: 45
+  },
+  flower: {
+    width: 35,
+    height: 35
   },
   money: {
     width: 35,

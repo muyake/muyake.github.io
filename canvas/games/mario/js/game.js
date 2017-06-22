@@ -47,7 +47,9 @@ var game = {
         document.querySelector('#smallBtn').addEventListener('click', function() {
             createFactory.createUpMoney(100, 100);
         }, false);
-
+        document.querySelector('#flower').addEventListener('click', function() {
+            createFactory.createUpMoney(100, 100);
+        }, false);
         document.querySelector('#bigBtn').addEventListener('click', function() {
             audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
         }, false);
@@ -264,8 +266,7 @@ var drawSpriteList = {
         this.progressObj.velocityX = gameConfig.progressObjSpeed * status;
         this.arrayOthersA.forEach(function(itemDraw) {
             itemDraw.velocityX = gameConfig.objectSpeed * status;
-        })
-
+        });
         var createSpriteList = this.createSpriteList;
         createSpriteList.forEach(function(item) {
             item.velocityX = gameConfig.objectSpeed * status;
@@ -280,7 +281,12 @@ var drawSpriteList = {
     judgeCD: {
         config: {
             wall: {
-                funcName: 'judgeMWall'
+                funcName: 'judgeMWall',
+                callback: function(wallSprite) {
+                    if (wallSprite.status == 0 || wallSprite.status == 1) {
+                        wallSprite.up(60);
+                    }
+                }
             },
             money: {
                 funcName: 'judgeMM',
@@ -293,6 +299,20 @@ var drawSpriteList = {
                             item.isVisible = false;
                         }
                     })
+                    audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+                }
+            },
+            flower: {
+                funcName: 'judgeMF',
+                callback: function(flowerSprite) {
+                    flowerSprite.visible = false;
+                    var id = flowerSprite.id;
+                    var moneyList = totalProgressSprite.money;
+                    moneyList.forEach(function(item) {
+                        if (item.id == id) {
+                            item.isVisible = false;
+                        }
+                    });
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
                 }
             },
