@@ -240,6 +240,10 @@ var SpriteAnimatorEndCallbackList = {
         lib.removeByValue(drawSpriteList.createSpriteList, 'name', sprite.name);
         sprite = null;
     },
+    floserupend: function(sprite) {
+        // lib.removeByValue(drawSpriteList.createSpriteList, 'name', sprite.name);
+        // sprite = null;
+    },
     wallUpend: function(sprite) {
         sprite.isJump = false;
         sprite.startVelocityY = 0;

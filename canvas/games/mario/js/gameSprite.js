@@ -86,8 +86,29 @@ CharacterSpriteAnimator.prototype.execute = function() {
     }
 }
 
+var upSpriteAnimator=function(elapsedCallback, sprite){
+    CharacterSpriteAnimator.call(this,elapsedCallback, sprite);
+}
+upSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
+upSpriteAnimator.prototype.constructor = upSpriteAnimator;
+upSpriteAnimator.prototype.execute=function(){
+     var animator = this;
+    if (animator.isRunning) {
+      //  this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
+        this.sprite.top -= this.sprite.velocityY / this.sprite.fpsNum;
+        if (this.sprite.top > this.sprite.initialTop) {
+            this.sprite.isJump = true;
+            this.sprite.painter = this.sprite.jumpPainter;
 
+        } else {
 
+            this.sprite.top = this.sprite.initialTop;
+            this.sprite.isJump = false;
+            animator.isRunning = false;
+            animator.end(this.sprite); //一定要放到isRunning = false;下面
+        }
+    }
+}
 //场景Sprite
 var SceneSprite = function(name, painter, behaviors) {
     Sprite.call(this, name, painter, behaviors);
@@ -281,29 +302,31 @@ var Flower = function(setting) {
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
-    this.imgwidth = flowerConfig.config.sprite_0.width;
-    this.imgheight = flowerConfig.config.sprite_0.height;
-    this.imgleft = flowerConfig.config.sprite_0.left;
-    this.imgtop = flowerConfig.config.sprite_0.top;
+    // this.imgwidth = flowerConfig.config.sprite_4.width;
+    // this.imgheight = flowerConfig.config.sprite_4.height;
+    // this.imgleft = flowerConfig.config.sprite_4.left;
+    // this.imgtop = flowerConfig.config.sprite_4.top;
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'flower';
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.initialTop = this.top;
     this.isJump = false; //判断是否为处于上下波动中
-    //this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.flower);
+    this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.flower);
     this.mycanvas = element.mycanvas;
-    this.flowerSpriteAnimatorUp = new CharacterSpriteAnimator(setting.jumpEndCallback, this);
+    this.flowerSpriteAnimatorUp = new upSpriteAnimator(setting.jumpEndCallback, this);
 };
 Flower.prototype = Object.create(SceneSprite.prototype);
 Flower.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum;
     this.flowerSpriteAnimatorUp.execute();
     this.update(ctx, time, fpsNum);
+    console.log(this.top);
     this.paint(ctx);
 }
 Flower.prototype.up = function(VY) {
     this.startVelocityY = VY;
-    this.velocityY = -this.startVelocityY;
+    this.initialTop=this.top-WH.wall.height;
+    this.velocityY = this.startVelocityY;
     this.flowerSpriteAnimatorUp.start();
 };
 

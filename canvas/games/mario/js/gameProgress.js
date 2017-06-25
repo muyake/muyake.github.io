@@ -72,12 +72,14 @@ var totalProgressSprite = {
     }],
     fire: [],
     badflower: [],
-    flower: [{
-        isVisible: true,
-        id: lib.newGuid(),
-        positionmile: 135,
-        physicaltop: 50,
-    }],
+    flower: [
+    // {
+    //     isVisible: true,
+    //     id: lib.newGuid(),
+    //     positionmile: 135,
+    //     physicaltop: 50,
+    // }
+    ],
     monster: [],
     mushroom: [],
     tortoise: [],
@@ -98,6 +100,16 @@ var createFactory = {
         });
         createUpMoneyObj.up(200);
         drawSpriteList.createSpriteList.push(createUpMoneyObj);
+    },
+     createUpFlower: function(positionmile, physicaltop) {
+        var createUpFlowerObj = new Flower({
+            physicaltop: physicaltop,
+            positionmile: positionmile,
+            // left: positionmile-,
+            jumpEndCallback: SpriteAnimatorEndCallbackList.floserupend
+        });
+        createUpFlowerObj.up(100);
+        drawSpriteList.createSpriteList.push(createUpFlowerObj);
     },
     createWall: function(setting) {
         setting.status = setting.status || 0;
