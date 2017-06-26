@@ -57,7 +57,7 @@ var CD = {
                             // createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
                             break;
                         case 3:
-                         audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+                         audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
                             createFactory.createUpFlower(wall.positionmile, wall.physicaltop);
                             //createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
                             break;

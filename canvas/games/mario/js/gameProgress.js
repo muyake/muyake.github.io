@@ -95,6 +95,7 @@ var createFactory = {
         var createUpMoneyObj = new Money({
             physicaltop: physicaltop,
             positionmile: positionmile,
+             id:lib.newGuid(),
             // left: positionmile-,
             jumpEndCallback: SpriteAnimatorEndCallbackList.moneyupend
         });
@@ -105,6 +106,7 @@ var createFactory = {
         var createUpFlowerObj = new Flower({
             physicaltop: physicaltop,
             positionmile: positionmile,
+            id:lib.newGuid(),
             // left: positionmile-,
             jumpEndCallback: SpriteAnimatorEndCallbackList.floserupend
         });

@@ -237,7 +237,7 @@ var SpriteAnimatorEndCallbackList = {
         }
     },
     moneyupend: function(sprite) {
-        lib.removeByValue(drawSpriteList.createSpriteList, 'name', sprite.name);
+        lib.removeByValue(drawSpriteList.createSpriteList, 'id', sprite.id);
         sprite = null;
     },
     floserupend: function(sprite) {
@@ -309,15 +309,19 @@ var drawSpriteList = {
             flower: {
                 funcName: 'judgeMF',
                 callback: function(flowerSprite) {
-                    flowerSprite.visible = false;
-                    var id = flowerSprite.id;
-                    var moneyList = totalProgressSprite.money;
-                    moneyList.forEach(function(item) {
-                        if (item.id == id) {
-                            item.isVisible = false;
-                        }
-                    });
-                    audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+                    lib.removeByValue(drawSpriteList.createSpriteList, 'id', flowerSprite.id);
+                     audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
+                     flowerSprite = null;
+
+                    // flowerSprite.visible = false;
+                    // var id = flowerSprite.id;
+                    // var moneyList = totalProgressSprite.money;
+                    // moneyList.forEach(function(item) {
+                    //     if (item.id == id) {
+                    //         item.isVisible = false;
+                    //     }
+                    // });
+                    // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
                 }
             },
             pipe: {
@@ -331,7 +335,11 @@ var drawSpriteList = {
             drawSpriteList.arrayOthersA.forEach(function(itemDraw) {
                 var callback = self.config[itemDraw.name].callback || function() {};
                 CD[self.config[itemDraw.name].funcName](drawSpriteList.mario, itemDraw, callback)
-            })
+            });
+             drawSpriteList.createSpriteList.forEach(function(itemDraw) {
+                var callback = self.config[itemDraw.name].callback || function() {};
+                CD[self.config[itemDraw.name].funcName](drawSpriteList.mario, itemDraw, callback)
+            });
 
 
             // for (var item in arrothers) {

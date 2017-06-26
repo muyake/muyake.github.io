@@ -320,7 +320,7 @@ Flower.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum;
     this.flowerSpriteAnimatorUp.execute();
     this.update(ctx, time, fpsNum);
-    console.log(this.top);
+    //console.log(this.top);
     this.paint(ctx);
 }
 Flower.prototype.up = function(VY) {

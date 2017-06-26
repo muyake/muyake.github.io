@@ -26,6 +26,14 @@ var gameAudio={
         startTime:7,
         endTime:7.5,
     },
+     flowerup:{
+        startTime:9.8,
+        endTime:11.5,
+    },
+     growup:{
+        startTime:5.5,
+        endTime:7,
+    },
     hitwall:{
         startTime:4.9,
         endTime:5,
