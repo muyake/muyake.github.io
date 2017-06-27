@@ -5,6 +5,7 @@ var gameSourceUrl = {
 		BG: './images/background2.png',
 		wall: './images/wall/wall.png',
 		flower: './images/flower/4.png',
+		mushroom: './images/mushroom/4.png',
 		pipe: './images/pipe.png',
 		money: './images/money.png',
 		//马里奥

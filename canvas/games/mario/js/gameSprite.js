@@ -86,12 +86,12 @@ CharacterSpriteAnimator.prototype.execute = function() {
     }
 }
 
-var upSpriteAnimator=function(elapsedCallback, sprite){
+var UpSpriteAnimator=function(elapsedCallback, sprite){
     CharacterSpriteAnimator.call(this,elapsedCallback, sprite);
 }
-upSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
-upSpriteAnimator.prototype.constructor = upSpriteAnimator;
-upSpriteAnimator.prototype.execute=function(){
+UpSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
+UpSpriteAnimator.prototype.constructor = UpSpriteAnimator;
+UpSpriteAnimator.prototype.execute=function(){
      var animator = this;
     if (animator.isRunning) {
       //  this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
@@ -101,7 +101,7 @@ upSpriteAnimator.prototype.execute=function(){
             this.sprite.painter = this.sprite.jumpPainter;
 
         } else {
-
+            this.sprite.upover=true;
             this.sprite.top = this.sprite.initialTop;
             this.sprite.isJump = false;
             animator.isRunning = false;
@@ -109,6 +109,20 @@ upSpriteAnimator.prototype.execute=function(){
         }
     }
 }
+
+var MoveSpriteAnimator=function(elapsedCallback, sprite){
+    CharacterSpriteAnimator.call(this,elapsedCallback, sprite);
+}
+MoveSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
+MoveSpriteAnimator.prototype.constructor = MoveSpriteAnimator;
+MoveSpriteAnimator.prototype.execute=function(){
+     var animator = this;
+    if (animator.isRunning) {
+      //  this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
+        this.sprite.left -= this.sprite.velocityX / this.sprite.fpsNum;        
+    }
+}
+
 //场景Sprite
 var SceneSprite = function(name, painter, behaviors) {
     Sprite.call(this, name, painter, behaviors);
@@ -174,7 +188,7 @@ Mario.prototype.jump = function(VY) {
     this.velocityY = -this.startVelocityY;
     this.behaviors = [];
     this.marioSpriteAnimatorJump.start();
-}
+};
 Mario.prototype.run = function() {
 
 };
@@ -313,7 +327,7 @@ var Flower = function(setting) {
     this.isJump = false; //判断是否为处于上下波动中
     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.flower);
     this.mycanvas = element.mycanvas;
-    this.flowerSpriteAnimatorUp = new upSpriteAnimator(setting.jumpEndCallback, this);
+    this.flowerSpriteAnimatorUp = new UpSpriteAnimator(setting.jumpEndCallback, this);
 };
 Flower.prototype = Object.create(SceneSprite.prototype);
 Flower.prototype.draw = function(ctx, time, fpsNum) {
@@ -330,7 +344,59 @@ Flower.prototype.up = function(VY) {
     this.flowerSpriteAnimatorUp.start();
 };
 
+//flower
+var Mushroom = function(setting) {
+    setting.name = setting.name || 'mushroom';
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.mushroom), [new behaviorList.SpriteLeftToRight()]);
+    this.width = setting.width || WH.mushroom.width;
+    this.height = setting.height || WH.mushroom.height;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    this.id = setting.id || 0;
+    this.left = setting.left || 0;
+    // this.imgwidth = mushroomConfig.config.sprite_4.width;
+    // this.imgheight = mushroomConfig.config.sprite_4.height;
+    // this.imgleft = mushroomConfig.config.sprite_4.left;
+    // this.imgtop = mushroomConfig.config.sprite_4.top;
+    this.positionmile = setting.positionmile || 0;
+    this.roleType = 'mushroom';
+    this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
+    this.initialTop = this.top;
+    this.isJump = false; //判断是否为处于上下波动中
+    this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.mushroom);
+    this.mycanvas = element.mycanvas;
+    this.mushroomSpriteAnimatorUp = new UpSpriteAnimator(setting.jumpEndCallback, this);
+    this.upover=false;
+    this.mushroomSpriteAnimatorMove = new MoveSpriteAnimator(function(){}, this);
+};
+Mushroom.prototype = Object.create(SceneSprite.prototype);
+Mushroom.prototype.draw = function(ctx, time, fpsNum) {
+    this.fpsNum = fpsNum;
+    this.mushroomSpriteAnimatorUp.execute();
+     this.mushroomSpriteAnimatorMove.execute();
+    this.update(ctx, time, fpsNum);
 
+   // console.log(this.left);
+    this.paint(ctx);
+}
+Mushroom.prototype.up = function(VY) {
+    this.startVelocityY = VY;
+    this.initialTop=this.top-WH.wall.height;
+    this.velocityY = this.startVelocityY;
+    this.mushroomSpriteAnimatorUp.start();
+};
+Mushroom.prototype.jump = function(VY) {
+    this.startVelocityY = VY;
+    this.velocityY = -this.startVelocityY;
+  this.initialTop=this.top-WH.wall.height;
+   
+    this.mushroomSpriteAnimatorUp.start();
+};
+Mushroom.prototype.move = function(VX) {
+    this.velocityX = VX;   
+    this.velocityY = this.startVelocityY;
+    this.mushroomSpriteAnimatorUp.start();
+};
 //管道对象
 var Pipe = function(setting) {
     setting.name = setting.name || 'pipe';

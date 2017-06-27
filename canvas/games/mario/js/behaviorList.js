@@ -26,6 +26,7 @@ var behaviorList = {
             //this.lastMove = time;
         }
     },
+   
     //小人跑动动画
     runInPlace: function(setting) {
         var defaultSetting = {

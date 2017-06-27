@@ -244,6 +244,13 @@ var SpriteAnimatorEndCallbackList = {
         // lib.removeByValue(drawSpriteList.createSpriteList, 'name', sprite.name);
         // sprite = null;
     },
+    mushroomupend: function(sprite) {
+        console.log("mushroomupend");
+        sprite.behaviors = [new behaviorList.moveLeftToRight()];
+        sprite.move(100);
+        // lib.removeByValue(drawSpriteList.createSpriteList, 'name', sprite.name);
+        // sprite = null;
+    },
     wallUpend: function(sprite) {
         sprite.isJump = false;
         sprite.startVelocityY = 0;
@@ -265,6 +272,7 @@ var drawSpriteList = {
     progressObj: progressObj,
     arrayOthersA: [],
     createSpriteList: [],
+    createAnimationSpriteList: [],
     goDirection: function(status) {
         this.bg.velocityX = gameConfig.skySpeed * status;
         this.progressObj.velocityX = gameConfig.progressObjSpeed * status;
@@ -310,18 +318,23 @@ var drawSpriteList = {
                 funcName: 'judgeMF',
                 callback: function(flowerSprite) {
                     lib.removeByValue(drawSpriteList.createSpriteList, 'id', flowerSprite.id);
-                     audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
-                     flowerSprite = null;
-
-                    // flowerSprite.visible = false;
-                    // var id = flowerSprite.id;
-                    // var moneyList = totalProgressSprite.money;
-                    // moneyList.forEach(function(item) {
-                    //     if (item.id == id) {
-                    //         item.isVisible = false;
-                    //     }
-                    // });
-                    // audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+                    audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
+                    flowerSprite = null;
+                }
+            },
+            mushroom: {
+                funcName: 'judgeMMR',
+                callback: function(mushroomSprite) {
+                    // lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mushroomSprite.id);
+                    // audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
+                    // mushroomSprite = null;
+                }
+            },
+            moverBarrier: {
+                callback: function(mushroomSprite) {
+                    lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mushroomSprite.id);
+                    audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
+                    mushroomSprite = null;
                 }
             },
             pipe: {
@@ -336,11 +349,21 @@ var drawSpriteList = {
                 var callback = self.config[itemDraw.name].callback || function() {};
                 CD[self.config[itemDraw.name].funcName](drawSpriteList.mario, itemDraw, callback)
             });
-             drawSpriteList.createSpriteList.forEach(function(itemDraw) {
+            drawSpriteList.createSpriteList.forEach(function(itemDraw) {
                 var callback = self.config[itemDraw.name].callback || function() {};
                 CD[self.config[itemDraw.name].funcName](drawSpriteList.mario, itemDraw, callback)
             });
+            drawSpriteList.createAnimationSpriteList.forEach(function(mover) {
+                // var callback = self.config[mover.name].callback || function() {};
+                //CD[self.config[mover.name].funcName](drawSpriteList.mario, mover, callback);
+                if (mover.upover) {
+                    drawSpriteList.arrayOthersA.forEach(function(barrier) {
+                        var callback2 = self.config["moverBarrier"].callback || function() {};
+                        CD['judgeMoverBarrier'](mover, barrier, callback2);
+                    });
+                }
 
+            });
 
             // for (var item in arrothers) {
             //     arrothers[item].forEach(function(itemDraw) {
@@ -356,11 +379,15 @@ gameControl.speed = 1;
 gameControl.startAnimate = function(time) {
     drawSpriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
     animateList.countDown(time);
-    var length = drawSpriteList.createSpriteList.length;
-    var createSpriteList = drawSpriteList.createSpriteList;
-    for (var i = length; i > 0; i--) {
-        createSpriteList[i - 1].draw(gameControl.context, time, gameControl.fps.num);
-    }
+
+    drawSpriteList.createSpriteList.forEach(function(item) {
+        item.draw(gameControl.context, time, gameControl.fps.num);
+    });
+
+    drawSpriteList.createAnimationSpriteList.forEach(function(item) {
+        item.draw(gameControl.context, time, gameControl.fps.num);
+    });
+
     //createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
     //绘制其他的场景，例如墙，金币等。
     drawSpriteList.drawOthersFunc(gameControl.context, time, gameControl.fps.num);

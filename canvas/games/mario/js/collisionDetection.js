@@ -52,12 +52,14 @@ var CD = {
                             createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
                             break;
                         case 2:
+                            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
+                            createFactory.createUpMushroom(wall.positionmile, wall.physicaltop);
                             //  audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
                             // createFactory.createUpFlower(wall.positionmile, wall.physicaltop);
                             // createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
                             break;
                         case 3:
-                         audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
+                            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
                             createFactory.createUpFlower(wall.positionmile, wall.physicaltop);
                             //createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
                             break;
@@ -70,6 +72,19 @@ var CD = {
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
                 }
             }
+        },
+        MoverleftBarrier: function(mover, barrier) {
+            mover.velocityX = -mover.velocityX;
+            
+        },
+          MoverrightBarrier: function(mover, barrier) {
+            mover.velocityX = -mover.velocityX;
+            
+        },
+      //马里奥在墙上侧
+        MoverupBarrier: function(mover, barrier) {
+            mover.initialTop = barrier.top - mover.height;
+            mover.upColliding = barrier;
         },
         //碰撞中执行的函数,
         Colliding: function(A, B, leftFun, rightFun, downFun, upFun) {
@@ -111,6 +126,7 @@ var CD = {
             }
         }
     },
+
     //马里奥和金币
     judgeMM: function(mario, money, callback) {
         if (money.visible == false) {
@@ -134,6 +150,18 @@ var CD = {
             callback(flower);
         }
     },
+    judgeMMR: function(mario, mushroom, callback) {
+        if (mushroom.visible == false) {
+            return;
+        }
+        // 两个矩形检测
+        if ((mario.left + mario.width) < mushroom.left || (mushroom.left + mushroom.width) < mario.left || (mario.top + mario.height) < mushroom.top || (mushroom.top + mushroom.height) < mario.top) {
+            return true
+        } else {
+            callback(mushroom);
+        }
+    },
+
     //马里奥和普通墙
     judgeMWall: function(mario, wall, callback) {
         if (wall.visible == false) {
@@ -160,6 +188,7 @@ var CD = {
         }
 
     },
+
     judgeMPipe: function(mario, pipe, callback) {
         if (pipe.visible == false) {
             return;
@@ -182,5 +211,29 @@ var CD = {
             self.CDFunc.Colliding(mario, pipe, leftfun, rightfun, downfun, upfun);
 
         }
-    }
+    },
+    //移动物与障碍物
+    judgeMoverBarrier: function(mover, barrier, callback) {
+        if (barrier.visible == false) {
+            return;
+        }
+        var self = this;
+        // 两个矩形检测
+        if ((mover.left + mover.width) < barrier.left || (barrier.left + barrier.width) < mover.left || (mover.top + mover.height) < barrier.top || (barrier.top + barrier.height) < mover.top) {
+            this.CDFunc.MOutCarrying(mover, barrier);
+        } else {
+            var leftfun = function() {
+                self.CDFunc.MoverleftBarrier(mover, barrier)
+            };
+            var rightfun = function() {
+                self.CDFunc.MoverrightBarrier(mover, barrier)
+            };
+            var upfun = function() {
+                self.CDFunc.MoverupBarrier(mover, barrier)
+            };
+            var downfun = function() {};
+            self.CDFunc.Colliding(mover, barrier, leftfun, rightfun, downfun, upfun);
+
+        }
+    },
 }

@@ -207,6 +207,10 @@ var WH = {
     width: 35,
     height: 35
   },
+  mushroom: {
+    width: 35,
+    height: 35
+  },
   money: {
     width: 35,
     height: 35

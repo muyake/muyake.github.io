@@ -49,9 +49,16 @@ var totalProgressSprite = {
         isVisible: true,
         id: lib.newGuid(),
         status: 1,
-        positionmile: 170,
+        positionmile: 205,
         physicaltop: 100,
         contain: 3, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile: 170,
+        physicaltop: 100,
+        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
     }],
     money: [{
         isVisible: true,
@@ -112,6 +119,17 @@ var createFactory = {
         });
         createUpFlowerObj.up(100);
         drawSpriteList.createSpriteList.push(createUpFlowerObj);
+    },
+      createUpMushroom: function(positionmile, physicaltop) {
+        var createUpMushroomObj = new Mushroom({
+            physicaltop: physicaltop,
+            positionmile: positionmile,
+            id:lib.newGuid(),
+            // left: positionmile-,
+            jumpEndCallback: SpriteAnimatorEndCallbackList.mushroomupend
+        });
+        createUpMushroomObj.up(100);
+        drawSpriteList.createAnimationSpriteList.push(createUpMushroomObj);
     },
     createWall: function(setting) {
         setting.status = setting.status || 0;
