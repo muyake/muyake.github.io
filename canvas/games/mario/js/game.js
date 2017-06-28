@@ -246,8 +246,8 @@ var SpriteAnimatorEndCallbackList = {
     },
     mushroomupend: function(sprite) {
         console.log("mushroomupend");
-        sprite.behaviors = [new behaviorList.moveLeftToRight()];
-        sprite.move(100);
+         sprite.behaviors = [new behaviorList.moveLeftToRight()];
+         sprite.move(50);
         // lib.removeByValue(drawSpriteList.createSpriteList, 'name', sprite.name);
         // sprite = null;
     },
@@ -282,6 +282,10 @@ var drawSpriteList = {
         var createSpriteList = this.createSpriteList;
         createSpriteList.forEach(function(item) {
             item.velocityX = gameConfig.objectSpeed * status;
+        });
+        this.createAnimationSpriteList.forEach(function(item){
+            item.velocityX =item.initvelocityX+ gameConfig.objectSpeed * status;
+          
         });
     },
     drawOthersFunc: function(ctx, time, fpsNum) {
@@ -325,9 +329,9 @@ var drawSpriteList = {
             mushroom: {
                 funcName: 'judgeMMR',
                 callback: function(mushroomSprite) {
-                    // lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mushroomSprite.id);
-                    // audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
-                    // mushroomSprite = null;
+                    lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mushroomSprite.id);
+                    audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
+                    mushroomSprite = null;
                 }
             },
             moverBarrier: {
@@ -354,8 +358,8 @@ var drawSpriteList = {
                 CD[self.config[itemDraw.name].funcName](drawSpriteList.mario, itemDraw, callback)
             });
             drawSpriteList.createAnimationSpriteList.forEach(function(mover) {
-                // var callback = self.config[mover.name].callback || function() {};
-                //CD[self.config[mover.name].funcName](drawSpriteList.mario, mover, callback);
+                var callback = self.config[mover.name].callback || function() {};
+                CD[self.config[mover.name].funcName](drawSpriteList.mario, mover, callback);
                 if (mover.upover) {
                     drawSpriteList.arrayOthersA.forEach(function(barrier) {
                         var callback2 = self.config["moverBarrier"].callback || function() {};

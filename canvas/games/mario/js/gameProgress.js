@@ -114,7 +114,7 @@ var createFactory = {
             physicaltop: physicaltop,
             positionmile: positionmile,
             id:lib.newGuid(),
-            // left: positionmile-,
+           
             jumpEndCallback: SpriteAnimatorEndCallbackList.floserupend
         });
         createUpFlowerObj.up(100);
@@ -125,7 +125,7 @@ var createFactory = {
             physicaltop: physicaltop,
             positionmile: positionmile,
             id:lib.newGuid(),
-            // left: positionmile-,
+           
             jumpEndCallback: SpriteAnimatorEndCallbackList.mushroomupend
         });
         createUpMushroomObj.up(100);

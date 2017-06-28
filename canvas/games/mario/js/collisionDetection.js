@@ -2,6 +2,23 @@
 var CD = {
     //碰撞函数结果库
     CDFunc: {
+        //移动物不与承载物接触时
+        MoverOutCarrying: function(mover, carrying) {
+            var upColliding = mover.upColliding;
+            //如果马里奥下面没有承载物，或马里奥下面有承载物，且左右脱离承载物。则设置马里奥初始高度。
+            //因为要判断马里奥从承载物上走下是有蹦跳效果，所以当脱离承载物的时刻，会出现下面有承载物，且左右脱离承载物，当从承载物上蹦下来时，设置下面承载物为null.
+            var flog = mover.upColliding && ((mover.left + mover.width) < upColliding.left || (upColliding.left + upColliding.width) < mover.left);
+            if (!mover.upColliding || flog) {
+                mover.initialTop = element.mycanvas.height - mover.height - gameConfig.roadHeight;
+                //  mover.upColliding = null;
+            }
+            //如果下方有承载物且不是在蹦跳中，则从承载物上走下，否则如果在蹦跳中，则 mover.velocityY =0，蹦不起来。
+            if (mover.upColliding == carrying && !mover.isJump) {
+                mover.fall(0);
+                mover.isJump = true;
+                mover.upColliding = null;
+            }
+        },
         //马里奥不与承载物接触时
         MOutCarrying: function(mario, carrying) {
             var upColliding = mario.upColliding;
@@ -53,18 +70,13 @@ var CD = {
                             break;
                         case 2:
                             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
-                            createFactory.createUpMushroom(wall.positionmile, wall.physicaltop);
-                            //  audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-                            // createFactory.createUpFlower(wall.positionmile, wall.physicaltop);
-                            // createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
+                            createFactory.createUpMushroom(wall.positionmile, wall.physicaltop);                           
                             break;
                         case 3:
                             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
-                            createFactory.createUpFlower(wall.positionmile, wall.physicaltop);
-                            //createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
+                            createFactory.createUpFlower(wall.positionmile, wall.physicaltop);                           
                             break;
-                        case 4:
-                            // createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
+                        case 4:                           
                             break;
                     }
                     wall.changeToAA();
@@ -75,11 +87,12 @@ var CD = {
         },
         MoverleftBarrier: function(mover, barrier) {
             mover.velocityX = -mover.velocityX;
+             mover.initvelocityX = -mover.initvelocityX;
             
         },
           MoverrightBarrier: function(mover, barrier) {
             mover.velocityX = -mover.velocityX;
-            
+              mover.initvelocityX = -mover.initvelocityX;            
         },
       //马里奥在墙上侧
         MoverupBarrier: function(mover, barrier) {
@@ -220,7 +233,7 @@ var CD = {
         var self = this;
         // 两个矩形检测
         if ((mover.left + mover.width) < barrier.left || (barrier.left + barrier.width) < mover.left || (mover.top + mover.height) < barrier.top || (barrier.top + barrier.height) < mover.top) {
-            this.CDFunc.MOutCarrying(mover, barrier);
+            this.CDFunc.MoverOutCarrying(mover, barrier);
         } else {
             var leftfun = function() {
                 self.CDFunc.MoverleftBarrier(mover, barrier)

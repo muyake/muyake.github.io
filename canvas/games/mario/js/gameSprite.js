@@ -119,7 +119,8 @@ MoveSpriteAnimator.prototype.execute=function(){
      var animator = this;
     if (animator.isRunning) {
       //  this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
-        this.sprite.left -= this.sprite.velocityX / this.sprite.fpsNum;        
+        this.sprite.left -= this.sprite.velocityX / this.sprite.fpsNum; 
+        console.log(this.sprite.left);       
     }
 }
 
@@ -315,11 +316,7 @@ var Flower = function(setting) {
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
-    this.left = setting.left || 0;
-    // this.imgwidth = flowerConfig.config.sprite_4.width;
-    // this.imgheight = flowerConfig.config.sprite_4.height;
-    // this.imgleft = flowerConfig.config.sprite_4.left;
-    // this.imgtop = flowerConfig.config.sprite_4.top;
+    this.left = setting.left || 0;   
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'flower';
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
@@ -354,10 +351,8 @@ var Mushroom = function(setting) {
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
-    // this.imgwidth = mushroomConfig.config.sprite_4.width;
-    // this.imgheight = mushroomConfig.config.sprite_4.height;
-    // this.imgleft = mushroomConfig.config.sprite_4.left;
-    // this.imgtop = mushroomConfig.config.sprite_4.top;
+    this.initvelocityX=0;
+   
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'mushroom';
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
@@ -366,14 +361,15 @@ var Mushroom = function(setting) {
     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.mushroom);
     this.mycanvas = element.mycanvas;
     this.mushroomSpriteAnimatorUp = new UpSpriteAnimator(setting.jumpEndCallback, this);
+     this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
     this.upover=false;
-    this.mushroomSpriteAnimatorMove = new MoveSpriteAnimator(function(){}, this);
+   
 };
 Mushroom.prototype = Object.create(SceneSprite.prototype);
 Mushroom.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum;
     this.mushroomSpriteAnimatorUp.execute();
-     this.mushroomSpriteAnimatorMove.execute();
+   this.marioSpriteAnimatorJump.execute();
     this.update(ctx, time, fpsNum);
 
    // console.log(this.left);
@@ -388,14 +384,21 @@ Mushroom.prototype.up = function(VY) {
 Mushroom.prototype.jump = function(VY) {
     this.startVelocityY = VY;
     this.velocityY = -this.startVelocityY;
-  this.initialTop=this.top-WH.wall.height;
-   
-    this.mushroomSpriteAnimatorUp.start();
+    this.initialTop=this.top-WH.wall.height;   
+   //this.top = this.initialTop;
+   this.mushroomSpriteAnimatorUp.start();
+};
+Mushroom.prototype.fall = function(VY) {
+    this.startVelocityY = VY;
+    this.velocityY = -this.startVelocityY;
+  this.initialTop=this.top-WH.wall.height;   
+   //this.top = this.initialTop;
+   this.marioSpriteAnimatorJump.start();
 };
 Mushroom.prototype.move = function(VX) {
-    this.velocityX = VX;   
-    this.velocityY = this.startVelocityY;
-    this.mushroomSpriteAnimatorUp.start();
+      this.velocityX=VX;
+    this.initvelocityX=VX;
+    
 };
 //管道对象
 var Pipe = function(setting) {
