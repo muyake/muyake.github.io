@@ -48,7 +48,12 @@ var game = {
             createFactory.createUpMoney(100, 100);
         }, false);
         document.querySelector('#flower').addEventListener('click', function() {
-            createFactory.createUpMoney(100, 100);
+            drawSpriteList.mario.rise(WH.mario.height);
+            //createFactory.createUpMoney(100, 100);
+        }, false);
+         document.querySelector('#flower1').addEventListener('click', function() {
+            drawSpriteList.mario.rise(WH.mario.height*0.5);
+            //createFactory.createUpMoney(100, 100);
         }, false);
         document.querySelector('#bigBtn').addEventListener('click', function() {
             audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
@@ -331,6 +336,7 @@ var drawSpriteList = {
                 callback: function(mushroomSprite) {
                     lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mushroomSprite.id);
                     audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
+                    drawSpriteList.mario.rise(WH.mario.height);
                     mushroomSprite = null;
                 }
             },

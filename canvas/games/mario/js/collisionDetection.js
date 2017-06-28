@@ -86,11 +86,13 @@ var CD = {
             }
         },
         MoverleftBarrier: function(mover, barrier) {
+             mover.left = barrier.left - mover.width;
             mover.velocityX = -mover.velocityX;
              mover.initvelocityX = -mover.initvelocityX;
             
         },
           MoverrightBarrier: function(mover, barrier) {
+             mover.left = barrier.left + mover.width;
             mover.velocityX = -mover.velocityX;
               mover.initvelocityX = -mover.initvelocityX;            
         },

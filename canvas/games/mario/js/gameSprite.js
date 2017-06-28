@@ -110,19 +110,46 @@ UpSpriteAnimator.prototype.execute=function(){
     }
 }
 
-var MoveSpriteAnimator=function(elapsedCallback, sprite){
+var RiseSpriteAnimator=function(elapsedCallback, sprite){
     CharacterSpriteAnimator.call(this,elapsedCallback, sprite);
 }
-MoveSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
-MoveSpriteAnimator.prototype.constructor = MoveSpriteAnimator;
-MoveSpriteAnimator.prototype.execute=function(){
+RiseSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
+RiseSpriteAnimator.prototype.constructor = RiseSpriteAnimator;
+RiseSpriteAnimator.prototype.execute=function(){
      var animator = this;
     if (animator.isRunning) {
       //  this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
-        this.sprite.left -= this.sprite.velocityX / this.sprite.fpsNum; 
-        console.log(this.sprite.left);       
+        this.sprite.height += this.sprite.risespeed / this.sprite.fpsNum;
+        this.sprite.width += this.sprite.risespeed*WH.mario.width/WH.mario.height / this.sprite.fpsNum;
+         this.sprite.top -= this.sprite.risespeed / this.sprite.fpsNum;
+        if ((this.sprite.risespeed >0&&this.sprite.height < this.sprite.initialHeight)||(this.sprite.risespeed <0&&this.sprite.height > this.sprite.initialHeight)) {
+            this.sprite.isRising = true;      
+
+        } else {
+           // this.sprite.upover=true;
+            this.sprite.height = this.sprite.initialHeight;
+            this.sprite.width = this.sprite.initialHeight*WH.mario.width/WH.mario.height;
+            this.sprite.isRising = false;
+            animator.isRunning = false;
+            animator.end(this.sprite); //一定要放到isRunning = false;下面
+        }
     }
 }
+
+
+// var MoveSpriteAnimator=function(elapsedCallback, sprite){
+//     CharacterSpriteAnimator.call(this,elapsedCallback, sprite);
+// }
+// MoveSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
+// MoveSpriteAnimator.prototype.constructor = MoveSpriteAnimator;
+// MoveSpriteAnimator.prototype.execute=function(){
+//      var animator = this;
+//     if (animator.isRunning) {
+//       //  this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
+//         this.sprite.left -= this.sprite.velocityX / this.sprite.fpsNum; 
+//         console.log(this.sprite.left);       
+//     }
+// }
 
 //场景Sprite
 var SceneSprite = function(name, painter, behaviors) {
@@ -159,9 +186,9 @@ var Mario = function(setting) {
     this.isReverse = setting.isReverse;
     this.mycanvas = element.mycanvas;
     this.velocityX = setting.velocityX;
-    this.width = setting.width || WH.mario.width;
+    this.width = setting.width || WH.mario.width*0.5;
     this.roleType = 'mairo';
-    this.height = setting.height || WH.mario.height;
+    this.height = setting.height || WH.mario.height*0.5;
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
     this.left = this.mycanvas.width / 3 - this.width / 2;
@@ -170,12 +197,15 @@ var Mario = function(setting) {
     this.startVelocityY = 0;
     this.jumpPainter = this.painters.jump;
     this.upColliding = null;
+    this.risespeed=0;
     this.initialTop = this.top;
     this.behaviorStatus = {
         runInPlace: new behaviorList.runInPlace(),
     };
     this.painter = this.painters.stand;
     this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
+ this.marioSpriteAnimatorRising = new RiseSpriteAnimator(function(){}, this);
+
 };
 Mario.prototype = Object.create(Sprite.prototype);
 Mario.prototype.constructor = Mario;
@@ -193,9 +223,21 @@ Mario.prototype.jump = function(VY) {
 Mario.prototype.run = function() {
 
 };
+Mario.prototype.rise = function(endHeight) {
+    if(endHeight>this.height){
+        this.risespeed=30;
+    }else if(endHeight<this.height){
+        this.risespeed=-30;
+    }else{
+        this.risespeed=0;
+    }
+    this.initialHeight=endHeight;
+    this.marioSpriteAnimatorRising.start();
+};
 Mario.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
     this.marioSpriteAnimatorJump.execute();
+     this.marioSpriteAnimatorRising.execute();
     // //碰撞的向后顺序是先撞墙，再吃金币  l
     this.update(ctx, time, fpsNum);
     this.paint(ctx);

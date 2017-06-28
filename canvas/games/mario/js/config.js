@@ -216,8 +216,10 @@ var WH = {
     height: 35
   },
   mario: {
+   // width:20,
     width: 33,
-    height: 68
+     height: 68
+    //height:33
   },
   pipe: {
     width: 45,
