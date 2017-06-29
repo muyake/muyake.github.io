@@ -21,8 +21,8 @@ var behaviorList = {
           //  this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
            // sprite.left += sprite.velocityX / this.fpsNum;
             // sprite.left += sprite.velocityX / this.fpsNum;
-
-         sprite.left=    sprite.positionmile - progressObj.createSpriteMileNum;
+        var translateLeft=sprite.translateLeft||0;
+         sprite.left=    sprite.positionmile - progressObj.createSpriteMileNum-translateLeft;
             //this.lastMove = time;
         }
     },

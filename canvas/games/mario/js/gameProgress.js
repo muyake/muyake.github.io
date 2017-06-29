@@ -80,12 +80,12 @@ var totalProgressSprite = {
     fire: [],
     badflower: [],
     flower: [
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     positionmile: 135,
-    //     physicaltop: 50,
-    // }
+        // {
+        //     isVisible: true,
+        //     id: lib.newGuid(),
+        //     positionmile: 135,
+        //     physicaltop: 50,
+        // }
     ],
     monster: [],
     mushroom: [],
@@ -102,30 +102,30 @@ var createFactory = {
         var createUpMoneyObj = new Money({
             physicaltop: physicaltop,
             positionmile: positionmile,
-             id:lib.newGuid(),
+            id: lib.newGuid(),
             // left: positionmile-,
             jumpEndCallback: SpriteAnimatorEndCallbackList.moneyupend
         });
         createUpMoneyObj.up(200);
         drawSpriteList.createSpriteList.push(createUpMoneyObj);
     },
-     createUpFlower: function(positionmile, physicaltop) {
+    createUpFlower: function(positionmile, physicaltop) {
         var createUpFlowerObj = new Flower({
             physicaltop: physicaltop,
             positionmile: positionmile,
-            id:lib.newGuid(),
-           
+            id: lib.newGuid(),
+
             jumpEndCallback: SpriteAnimatorEndCallbackList.floserupend
         });
         createUpFlowerObj.up(100);
         drawSpriteList.createSpriteList.push(createUpFlowerObj);
     },
-      createUpMushroom: function(positionmile, physicaltop) {
+    createUpMushroom: function(positionmile, physicaltop) {
         var createUpMushroomObj = new Mushroom({
             physicaltop: physicaltop,
             positionmile: positionmile,
-            id:lib.newGuid(),
-           
+            id: lib.newGuid(),
+
             jumpEndCallback: SpriteAnimatorEndCallbackList.mushroomupend
         });
         createUpMushroomObj.up(100);
@@ -161,6 +161,20 @@ var createFactory = {
             left: setting.positionmile - progressObj.createSpriteMileNum,
             // left:setting.positionmile - progressObj.createSpriteMileNum,
         });
+    },
+    createBrick: function(positionmile, physicaltop) {
+        var arr = ["leftup", "leftdown", "rightup", "rightdown"];
+        arr.forEach(function(item) {
+            var createUpBrickObj = new Brick({
+                id: lib.newGuid(),
+                physicaltop: physicaltop,
+                positionmile: positionmile,
+                status: item,
+            });
+            createUpBrickObj.up();
+            drawSpriteList.createBrickSpriteList.push(createUpBrickObj);
+        })
+
     },
     createFire: function(setting) {
 

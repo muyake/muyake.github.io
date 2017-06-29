@@ -45,7 +45,7 @@ var game = {
     bindEvent: function() {
         var self = this;
         document.querySelector('#smallBtn').addEventListener('click', function() {
-            createFactory.createUpMoney(100, 100);
+            createFactory.createBrick(100, 100);
         }, false);
         document.querySelector('#flower').addEventListener('click', function() {
             drawSpriteList.mario.rise(WH.mario.height);
@@ -278,6 +278,7 @@ var drawSpriteList = {
     arrayOthersA: [],
     createSpriteList: [],
     createAnimationSpriteList: [],
+    createBrickSpriteList:[],
     goDirection: function(status) {
         this.bg.velocityX = gameConfig.skySpeed * status;
         this.progressObj.velocityX = gameConfig.progressObjSpeed * status;
@@ -404,7 +405,9 @@ gameControl.startAnimate = function(time) {
     //碰撞检测
     drawSpriteList.judgeCD.cdfunc();
     drawSpriteList.mario.draw(gameControl.context, time, gameControl.fps.num);
-
+    drawSpriteList.createBrickSpriteList.forEach(function(item) {
+        item.draw(gameControl.context, time, gameControl.fps.num);
+    });
 }
 var animateList = {
     //倒计时
