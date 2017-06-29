@@ -24,6 +24,7 @@ var sourceLoadObj = {
         //audioControl.BGMPlay(gameSourceObj.audioList.BGM);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
+        audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
     }
 }
 
@@ -51,8 +52,8 @@ var game = {
             drawSpriteList.mario.rise(WH.mario.height);
             //createFactory.createUpMoney(100, 100);
         }, false);
-         document.querySelector('#flower1').addEventListener('click', function() {
-            drawSpriteList.mario.rise(WH.mario.height*0.5);
+        document.querySelector('#flower1').addEventListener('click', function() {
+            drawSpriteList.mario.rise(WH.mario.height * 0.5);
             //createFactory.createUpMoney(100, 100);
         }, false);
         document.querySelector('#bigBtn').addEventListener('click', function() {
@@ -251,10 +252,14 @@ var SpriteAnimatorEndCallbackList = {
     },
     mushroomupend: function(sprite) {
         console.log("mushroomupend");
-         sprite.behaviors = [new behaviorList.moveLeftToRight()];
-         sprite.move(50);
+        sprite.behaviors = [new behaviorList.moveLeftToRight()];
+        sprite.move(50);
         // lib.removeByValue(drawSpriteList.createSpriteList, 'name', sprite.name);
         // sprite = null;
+    },
+    brickupend: function(sprite) {
+        lib.removeByValue(drawSpriteList.createBrickSpriteList, 'id', sprite.id);
+        sprite = null;
     },
     wallUpend: function(sprite) {
         sprite.isJump = false;
@@ -278,7 +283,7 @@ var drawSpriteList = {
     arrayOthersA: [],
     createSpriteList: [],
     createAnimationSpriteList: [],
-    createBrickSpriteList:[],
+    createBrickSpriteList: [],
     goDirection: function(status) {
         this.bg.velocityX = gameConfig.skySpeed * status;
         this.progressObj.velocityX = gameConfig.progressObjSpeed * status;
@@ -289,9 +294,9 @@ var drawSpriteList = {
         createSpriteList.forEach(function(item) {
             item.velocityX = gameConfig.objectSpeed * status;
         });
-        this.createAnimationSpriteList.forEach(function(item){
-            item.velocityX =item.initvelocityX+ gameConfig.objectSpeed * status;
-          
+        this.createAnimationSpriteList.forEach(function(item) {
+            item.velocityX = item.initvelocityX + gameConfig.objectSpeed * status;
+
         });
     },
     drawOthersFunc: function(ctx, time, fpsNum) {
@@ -305,9 +310,14 @@ var drawSpriteList = {
             wall: {
                 funcName: 'judgeMWall',
                 callback: function(wallSprite) {
-                    if (wallSprite.status == 0 || wallSprite.status == 1) {
-                        wallSprite.up(60);
-                    }
+                    wallSprite.visible = false;
+                    var id = wallSprite.id;
+                    var wallList = totalProgressSprite.wall;
+                    wallList.forEach(function(item) {
+                        if (item.id == id) {
+                            item.isVisible = false;
+                        }
+                    });
                 }
             },
             money: {
@@ -320,7 +330,7 @@ var drawSpriteList = {
                         if (item.id == id) {
                             item.isVisible = false;
                         }
-                    })
+                    });
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
                 }
             },

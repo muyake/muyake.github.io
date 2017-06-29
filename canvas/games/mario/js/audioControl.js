@@ -38,7 +38,10 @@ var gameAudio={
         startTime:4.9,
         endTime:5,
     },
-    
+     wallbreak:{
+        startTime:3.4,
+        endTime:3.9,
+    },
 }
 
 //audioControl

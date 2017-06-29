@@ -20,5 +20,7 @@ var gameSourceUrl = {
 		BGM: './sounds/mario/bag.mp3',
 		jumpAll: './sounds/mario/jumpAll.mp3',
 		collision: './sounds/mario/mariocollision.mp3',
+		die: './sounds/mario/die.mp3',
+		music: './sounds/mario/music2.mp3',//顶到藤蔓 顶碎砖块 1up 拉旗杆 过关时时间清零
 	}
 }

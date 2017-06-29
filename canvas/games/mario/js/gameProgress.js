@@ -170,6 +170,8 @@ var createFactory = {
                 physicaltop: physicaltop,
                 positionmile: positionmile,
                 status: item,
+                jumpEndCallback: SpriteAnimatorEndCallbackList.brickupend,
+     
             });
             createUpBrickObj.up();
             drawSpriteList.createBrickSpriteList.push(createUpBrickObj);

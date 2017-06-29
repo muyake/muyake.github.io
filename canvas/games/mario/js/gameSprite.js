@@ -213,6 +213,7 @@ var Mario = function(setting) {
     this.behaviorStatus = {
         runInPlace: new behaviorList.runInPlace(),
     };
+    this.status=1;//1为小人，2为吃蘑菇长大，3为吃花吐子弹。
     this.painter = this.painters.stand;
     this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
     this.marioSpriteAnimatorRising = new RiseSpriteAnimator(function() {}, this);
@@ -237,7 +238,9 @@ Mario.prototype.run = function() {
 Mario.prototype.rise = function(endHeight) {
     if (endHeight > this.height) {
         this.risespeed = 30;
+        this.status++;
     } else if (endHeight < this.height) {
+        this.status--;
         this.risespeed = -30;
     } else {
         this.risespeed = 0;
@@ -493,29 +496,7 @@ var Brick = function(setting) {
     this.imgtop = wallConfig[this.status+"Sprite"].top;
     this.width = this.imgwidth*0.7;
     this.height = this.imgheight*0.7;//50变35，即width*0.7;
-    switch (this.status) {
-        case "leftup":
-            {
-                // this.velocityY = -200;
-                // this.velocityX=70;
-            }
-            break;
-        case "leftdown":
-            {
-               
-            }
-            break;
-        case "rightup":
-            {
-                
-            }
-            break;
-        case "rightdown":
-            {
-                
-            }
-            break;
-    }
+    
     this.translateLeft=0;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.initialTop = this.top;
@@ -527,8 +508,7 @@ var Brick = function(setting) {
 Brick.prototype = Object.create(SceneSprite.prototype);
 Brick.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum;
-    this.BrickSpriteAnimatorUp.execute();
-    //console.log(this.top);
+    this.BrickSpriteAnimatorUp.execute();    
     this.update(ctx, time, fpsNum);
     this.paint(ctx);
 }

@@ -254,7 +254,7 @@ var wallConfig = {
   },
   leftdownSprite: {
     height: 30,
-    width: 39,
+    width: 30,
     left: 51,
     top: 0
   },

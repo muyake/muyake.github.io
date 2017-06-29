@@ -58,11 +58,11 @@ var CD = {
         MdownWall: function(mario, wall, callback) {
             mario.velocityY = -mario.velocityY;
             mario.top = wall.top + wall.height + 1;
-            callback(wall);
+           // callback(wall);
             if (!wall.isJump) {
                 //console.log("下侧调2");
-                if (wall.status == 1) {
-                    wall.up(60);
+                if (wall.status == 1) {                                      
+                     wall.up(60);
                     switch (wall.contain) {
                         case 1:
                             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
@@ -80,8 +80,17 @@ var CD = {
                             break;
                     }
                     wall.changeToAA();
-                } else {
+                } else if(wall.status==2){
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
+                }else{
+                    if(mario.status==1){
+                          wall.up(60);
+                            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
+                    }else{
+                       callback(wall);
+                       createFactory.createBrick(wall.physicaltop, wall.positionmile);
+                          audioControl.audioPlay(gameSourceObj.audioList.music, gameAudio.wallbreak);
+                    }
                 }
             }
         },
