@@ -54,10 +54,14 @@ var game = {
         }, false);
         document.querySelector('#flower1').addEventListener('click', function() {
             drawSpriteList.mario.rise(WH.mario.height * 0.5);
-            //createFactory.createUpMoney(100, 100);
+            createFactory.createBullet(100, 100);
         }, false);
         document.querySelector('#bigBtn').addEventListener('click', function() {
             audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
+        }, false);
+         document.querySelector('#fire').addEventListener('click', function() {
+           // drawSpriteList.mario.rise(WH.mario.height * 0.5);
+            createFactory.createBullet(100, 30);
         }, false);
         // Key Listeners..............................................
         gameControl.addKeyListener({
@@ -284,6 +288,7 @@ var drawSpriteList = {
     createSpriteList: [],
     createAnimationSpriteList: [],
     createBrickSpriteList: [],
+     createBulletSpriteList: [],
     goDirection: function(status) {
         this.bg.velocityX = gameConfig.skySpeed * status;
         this.progressObj.velocityX = gameConfig.progressObjSpeed * status;
@@ -408,7 +413,9 @@ gameControl.startAnimate = function(time) {
     drawSpriteList.createAnimationSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
-
+ drawSpriteList.createBulletSpriteList.forEach(function(item) {
+        item.draw(gameControl.context, time, gameControl.fps.num);
+    });
     //createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
     //绘制其他的场景，例如墙，金币等。
     drawSpriteList.drawOthersFunc(gameControl.context, time, gameControl.fps.num);

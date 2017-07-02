@@ -110,6 +110,31 @@ UpSpriteAnimator.prototype.execute = function() {
     }
 }
 
+//子弹跳
+var BulletJumpSpriteAnimator = function(elapsedCallback, sprite) {
+    CharacterSpriteAnimator.call(this, elapsedCallback, sprite);
+}
+BulletJumpSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
+BulletJumpSpriteAnimator.prototype.constructor = BulletJumpSpriteAnimator;
+BulletJumpSpriteAnimator.prototype.execute = function() {
+    var animator = this;
+    if (animator.isRunning) {
+       this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE*2 / this.sprite.fpsNum;
+        this.sprite.translateLeft+=this.sprite.velocityX / this.sprite.fpsNum;
+        this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;
+        if (this.sprite.top <this.sprite.initialTop) {
+            this.sprite.isJump = true;
+            this.sprite.painter = this.sprite.jumpPainter;
+            
+        } else {
+            this.sprite.top =this.sprite.initialTop;
+            //console.log( this.sprite.velocityY);
+            this.sprite.velocityY=-200;//如果设置为-this.sprite.velocityY不能保证每次速度是一样的，因为this.sprite.fpsNum在变换。
+           // this.sprite.velocityY=-this.sprite.velocityY- this.sprite.GRAVITY_FORCE*2 / this.sprite.fpsNum;           
+        }  
+    }
+}
+
 var RiseSpriteAnimator = function(elapsedCallback, sprite) {
     CharacterSpriteAnimator.call(this, elapsedCallback, sprite);
 }
@@ -397,7 +422,7 @@ Flower.prototype.up = function(VY) {
     this.flowerSpriteAnimatorUp.start();
 };
 
-//flower
+//蘑菇
 var Mushroom = function(setting) {
     setting.name = setting.name || 'mushroom';
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.mushroom), [new behaviorList.SpriteLeftToRight()]);
@@ -408,7 +433,6 @@ var Mushroom = function(setting) {
     this.id = setting.id || 0;
     this.left = setting.left || 0;
     this.initvelocityX = 0;
-
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'mushroom';
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
@@ -456,6 +480,69 @@ Mushroom.prototype.move = function(VX) {
     this.initvelocityX = VX;
 
 };
+
+
+
+//子弹
+var Bullet = function(setting) {
+    setting.name = setting.name || 'bullet';
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.bullet), [new behaviorList.SpriteLeftToRight()]);
+    this.width = setting.width || WH.bullet.width;
+    this.height = setting.height || WH.bullet.height;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    this.id = setting.id || 0;
+    this.left = setting.left || 0;
+    this.initvelocityX = 0;
+    this.translateLeft=0;
+    this.positionmile = setting.positionmile || 0;
+    this.roleType = 'bullet';
+    this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
+    this.initialTop = this.top;
+    this.isJump = false; //判断是否为处于上下波动中
+    this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.bullet);
+    this.mycanvas = element.mycanvas;
+    this.bulletSpriteAnimatorJump = new BulletJumpSpriteAnimator(setting.jumpEndCallback, this);
+    this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);    
+
+};
+Bullet.prototype = Object.create(SceneSprite.prototype);
+Bullet.prototype.draw = function(ctx, time, fpsNum) {
+    this.fpsNum = fpsNum;
+    this.bulletSpriteAnimatorJump.execute();
+    this.marioSpriteAnimatorJump.execute();
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
+}
+// Bullet.prototype.up = function(VY) {
+//     this.startVelocityY = VY;
+//     this.initialTop = this.top - WH.wall.height;
+//     this.velocityY = this.startVelocityY;
+//     this.bulletSpriteAnimatorJump.start();
+// };
+Bullet.prototype.jump = function(VY) {
+    this.startVelocityY = 0;
+    this.velocityX=-70;
+    this.velocityY = -this.startVelocityY;
+    this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
+    //this.top = this.initialTop;
+    this.bulletSpriteAnimatorJump.start();
+};
+// Bullet.prototype.fall = function(VY) {
+//     this.startVelocityY = VY;
+//     this.velocityY = -this.startVelocityY;
+//     this.initialTop = this.top - WH.wall.height;
+//     //this.top = this.initialTop;
+//     this.marioSpriteAnimatorJump.start();
+// };
+// Bullet.prototype.move = function(VX) {
+//     this.velocityX = VX;
+//     this.initvelocityX = VX;
+
+// };
+
+
+
 //管道对象
 var Pipe = function(setting) {
     setting.name = setting.name || 'pipe';

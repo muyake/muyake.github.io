@@ -58,54 +58,59 @@ var CD = {
         MdownWall: function(mario, wall, callback) {
             mario.velocityY = -mario.velocityY;
             mario.top = wall.top + wall.height + 1;
-           // callback(wall);
+            // callback(wall);
             if (!wall.isJump) {
                 //console.log("下侧调2");
-                if (wall.status == 1) {                                      
-                     wall.up(60);
+                if (wall.status == 1) {
+                    wall.up(60);
                     switch (wall.contain) {
                         case 1:
                             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
                             createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
                             break;
                         case 2:
-                            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
-                            createFactory.createUpMushroom(wall.positionmile, wall.physicaltop);                           
-                            break;
                         case 3:
-                            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
-                            createFactory.createUpFlower(wall.positionmile, wall.physicaltop);                           
+                            {//如果是长大了，就会出花，如果是小人状态，则出蘑菇。
+                                audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
+                                if (mario.status == 1) {
+                                    createFactory.createUpMushroom(wall.positionmile, wall.physicaltop);
+                                } else {
+
+                                    createFactory.createUpFlower(wall.positionmile, wall.physicaltop);
+                                }
+                            }
                             break;
-                        case 4:                           
+                        case 4:
+                        //弹小星星
                             break;
                     }
                     wall.changeToAA();
-                } else if(wall.status==2){
+                } else if (wall.status == 2) {
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
-                }else{
-                    if(mario.status==1){
-                          wall.up(60);
-                            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
-                    }else{
-                       callback(wall);
-                       createFactory.createBrick(wall.physicaltop, wall.positionmile);
-                          audioControl.audioPlay(gameSourceObj.audioList.music, gameAudio.wallbreak);
+                } else {
+                    if (mario.status == 1) {
+                        wall.up(60);
+                        audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
+                    } else {
+                        callback(wall);
+                        createFactory.createBrick(wall.physicaltop, wall.positionmile);
+                        audioControl.audioPlay(gameSourceObj.audioList.music, gameAudio.wallbreak);
                     }
                 }
             }
         },
         MoverleftBarrier: function(mover, barrier) {
-             mover.left = barrier.left - mover.width;
+            mover.left = barrier.left - mover.width;
             mover.velocityX = -mover.velocityX;
-             mover.initvelocityX = -mover.initvelocityX;
-            
+            mover.initvelocityX = -mover.initvelocityX;
+
         },
-          MoverrightBarrier: function(mover, barrier) {
-             mover.left = barrier.left + mover.width;
+        MoverrightBarrier: function(mover, barrier) {
+            mover.left = barrier.left + mover.width;
             mover.velocityX = -mover.velocityX;
-              mover.initvelocityX = -mover.initvelocityX;            
+            mover.initvelocityX = -mover.initvelocityX;
         },
-      //马里奥在墙上侧
+        //马里奥在墙上侧
         MoverupBarrier: function(mover, barrier) {
             mover.initialTop = barrier.top - mover.height;
             mover.upColliding = barrier;

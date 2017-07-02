@@ -88,7 +88,7 @@ var totalProgressSprite = {
         // }
     ],
     monster: [],
-    mushroom: [],
+    //mushroom: [],
     tortoise: [],
     star: [],
     tower: [],
@@ -130,6 +130,16 @@ var createFactory = {
         });
         createUpMushroomObj.up(100);
         drawSpriteList.createAnimationSpriteList.push(createUpMushroomObj);
+    },
+    createBullet: function(positionmile, physicaltop) {
+        var createBulletObj = new Bullet({
+            physicaltop: physicaltop,
+            positionmile: positionmile,
+            id: lib.newGuid(),
+            jumpEndCallback: SpriteAnimatorEndCallbackList.mushroomupend
+        });
+       createBulletObj.jump(100);
+        drawSpriteList.createBulletSpriteList.push(createBulletObj);
     },
     createWall: function(setting) {
         setting.status = setting.status || 0;

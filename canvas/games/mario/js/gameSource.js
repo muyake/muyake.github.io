@@ -8,6 +8,7 @@ var gameSourceUrl = {
 		mushroom: './images/mushroom/4.png',
 		pipe: './images/pipe.png',
 		money: './images/money.png',
+		bullet: './images/fire/fireL/0.png',
 		//马里奥
 		mario: {
 			run: "./images/mario/smallmario/marioR/spritesrun.png",
