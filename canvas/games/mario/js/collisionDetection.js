@@ -103,7 +103,6 @@ var CD = {
             mover.left = barrier.left - mover.width;
             mover.velocityX = -mover.velocityX;
             mover.initvelocityX = -mover.initvelocityX;
-
         },
         MoverrightBarrier: function(mover, barrier) {
             mover.left = barrier.left + mover.width;
@@ -168,6 +167,17 @@ var CD = {
             callback(money);
         }
     },
+    judgeBBarrier: function(bullet, barrier, callback) {
+        if (barrier.visible == false) {
+            return;
+        }
+        // 两个矩形检测
+        if ((bullet.left + bullet.width) < barrier.left || (barrier.left + barrier.width) < bullet.left || (bullet.top + bullet.height) < barrier.top || (barrier.top + barrier.height) < bullet.top) {
+            return true
+        } else {
+            callback(bullet);
+        }
+    },
     judgeMF: function(mario, flower, callback) {
         if (flower.visible == false) {
             return;
@@ -176,6 +186,7 @@ var CD = {
         if ((mario.left + mario.width) < flower.left || (flower.left + flower.width) < mario.left || (mario.top + mario.height) < flower.top || (flower.top + flower.height) < mario.top) {
             return true
         } else {
+            mario.status=3;
             callback(flower);
         }
     },

@@ -41,7 +41,9 @@ var game = {
         "right": false, //right
         "s": false,
         "w": false,
-        "space": false
+        "d":false,
+        "space": false,
+
     },
     bindEvent: function() {
         var self = this;
@@ -61,7 +63,8 @@ var game = {
         }, false);
          document.querySelector('#fire').addEventListener('click', function() {
            // drawSpriteList.mario.rise(WH.mario.height * 0.5);
-            createFactory.createBullet(100, 30);
+          //  createFactory.createBullet(100, 30);
+           createFactory.createBullet(progressObj.createSpriteMileNum+drawSpriteList.mario.left+drawSpriteList.mario.width, 30);
         }, false);
         // Key Listeners..............................................
         gameControl.addKeyListener({
@@ -130,6 +133,37 @@ var game = {
                 self.activeEventCallback();
             }
         });
+
+
+         gameControl.addKeyListener({
+            key: 'd',
+            listener: function(status) {
+                if (gameControl.paused) {
+                    return;
+                }
+                if (status == 1) {
+                    self.mapKey['d'] = true;
+                    if (drawSpriteList.mario.status==4||drawSpriteList.mario.status==3) {
+                        console.log(drawSpriteList.mario.top+drawSpriteList.mario.height/3);
+                        createFactory.createBullet(progressObj.createSpriteMileNum+drawSpriteList.mario.left+drawSpriteList.mario.width,drawSpriteList.mario.top+drawSpriteList.mario.height/3);
+                    
+                    }
+                        //createFactory.createBullet(progressObj.createSpriteMileNum, 30);
+                    // if (!drawSpriteList.mario.isJump && !gameControl.paused) {
+                    //     audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
+                    //     if (!drawSpriteList.mario.isJump) { // throttle 
+                    //         drawSpriteList.mario.jump(marioGameConfig.bigJumpV);
+                    //     }
+                    // }
+                } else {
+                    self.mapKey['d'] = false;
+                }
+                self.activeEventCallback();
+            }
+        });
+
+
+
         gameControl.addKeyListener({
             key: 'right',
             listener: function(status) {
@@ -347,6 +381,14 @@ var drawSpriteList = {
                     flowerSprite = null;
                 }
             },
+             bullet: {
+                funcName: 'judgeBBarrier',
+                callback: function(bulletSprite) {
+                    lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bulletSprite.id);
+                    audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
+                    bulletSprite = null;
+                }
+            },
             mushroom: {
                 funcName: 'judgeMMR',
                 callback: function(mushroomSprite) {
@@ -379,6 +421,15 @@ var drawSpriteList = {
                 var callback = self.config[itemDraw.name].callback || function() {};
                 CD[self.config[itemDraw.name].funcName](drawSpriteList.mario, itemDraw, callback)
             });
+            drawSpriteList.createBulletSpriteList.forEach(function(itemDraw) {
+                // var callback = self.config[itemDraw.name].callback || function() {};
+                // CD[self.config[itemDraw.name].funcName](drawSpriteList.mario, itemDraw, callback)
+                drawSpriteList.arrayOthersA.forEach(function(barrier) {
+                        var callback2 = self.config["bullet"].callback || function() {};
+                        CD['judgeBBarrier'](itemDraw, barrier, callback2);
+                    });
+
+            });
             drawSpriteList.createAnimationSpriteList.forEach(function(mover) {
                 var callback = self.config[mover.name].callback || function() {};
                 CD[self.config[mover.name].funcName](drawSpriteList.mario, mover, callback);
@@ -388,7 +439,6 @@ var drawSpriteList = {
                         CD['judgeMoverBarrier'](mover, barrier, callback2);
                     });
                 }
-
             });
 
             // for (var item in arrothers) {

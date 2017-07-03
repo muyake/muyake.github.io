@@ -115,6 +115,10 @@ Game.prototype = {
 			case 32:key='space';break;
 			case 68:key='d';break;
 			case 87:key='w';break;
+
+			//case 68:key='d';break;
+			//case 87:key='w';break;
+
 			case 75:key='k';break;
 			case 83:key='s';break;
 			case 80:key='p';break;

@@ -15,9 +15,9 @@ var gameAudio={
     intoPipe:{
         startTime:8,
         endTime:9,
+        startTime:10,
     },
     monsterDie:{
-        startTime:10,
         endTime:11,
     },
 
@@ -29,6 +29,10 @@ var gameAudio={
      flowerup:{
         startTime:9.8,
         endTime:11.5,
+    },
+     fire:{
+        startTime:11.3,
+        endTime:11.6,
     },
      growup:{
         startTime:5.5,

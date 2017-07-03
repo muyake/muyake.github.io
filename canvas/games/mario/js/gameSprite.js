@@ -489,8 +489,9 @@ var Bullet = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.bullet), [new behaviorList.SpriteLeftToRight()]);
     this.width = setting.width || WH.bullet.width;
     this.height = setting.height || WH.bullet.height;
-    this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    this.top = setting.top || 0;
+    console.log(this.top);
+   // this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
     this.initvelocityX = 0;
@@ -504,7 +505,8 @@ var Bullet = function(setting) {
     this.mycanvas = element.mycanvas;
     this.bulletSpriteAnimatorJump = new BulletJumpSpriteAnimator(setting.jumpEndCallback, this);
     this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);    
-
+    this.RV=480;//旋转角速度
+    this.rotate=0;//旋转角度。
 };
 Bullet.prototype = Object.create(SceneSprite.prototype);
 Bullet.prototype.draw = function(ctx, time, fpsNum) {
@@ -512,36 +514,23 @@ Bullet.prototype.draw = function(ctx, time, fpsNum) {
     this.bulletSpriteAnimatorJump.execute();
     this.marioSpriteAnimatorJump.execute();
     this.update(ctx, time, fpsNum);
-    this.paint(ctx);
+    ctx.save();
+    ctx.translate(this.left+this.width/2,this.top+this.height/2);
+    this.rotate+=this.RV/fpsNum;
+   // console.log(this.rotate);
+    ctx.rotate(this.rotate*Math.PI/180);
+    //this.paint(ctx);
+    ctx.drawImage(this.painter.image, -this.width/2, -this.height/2, this.width, this.height);
+    ctx.restore();
 }
-// Bullet.prototype.up = function(VY) {
-//     this.startVelocityY = VY;
-//     this.initialTop = this.top - WH.wall.height;
-//     this.velocityY = this.startVelocityY;
-//     this.bulletSpriteAnimatorJump.start();
-// };
 Bullet.prototype.jump = function(VY) {
     this.startVelocityY = 0;
-    this.velocityX=-70;
+    this.velocityX=-140;
     this.velocityY = -this.startVelocityY;
     this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
     //this.top = this.initialTop;
     this.bulletSpriteAnimatorJump.start();
 };
-// Bullet.prototype.fall = function(VY) {
-//     this.startVelocityY = VY;
-//     this.velocityY = -this.startVelocityY;
-//     this.initialTop = this.top - WH.wall.height;
-//     //this.top = this.initialTop;
-//     this.marioSpriteAnimatorJump.start();
-// };
-// Bullet.prototype.move = function(VX) {
-//     this.velocityX = VX;
-//     this.initvelocityX = VX;
-
-// };
-
-
 
 //管道对象
 var Pipe = function(setting) {

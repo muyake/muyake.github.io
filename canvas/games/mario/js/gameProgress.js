@@ -97,7 +97,6 @@ var totalProgressSprite = {
 
 var createFactory = {
     arrayTotalProgress: [],
-
     createUpMoney: function(positionmile, physicaltop) {
         var createUpMoneyObj = new Money({
             physicaltop: physicaltop,
@@ -133,12 +132,14 @@ var createFactory = {
     },
     createBullet: function(positionmile, physicaltop) {
         var createBulletObj = new Bullet({
-            physicaltop: physicaltop,
+            top: physicaltop,
             positionmile: positionmile,
             id: lib.newGuid(),
-            jumpEndCallback: SpriteAnimatorEndCallbackList.mushroomupend
+          //  jumpEndCallback: SpriteAnimatorEndCallbackList.mushroomupend
         });
        createBulletObj.jump(100);
+        audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.fire);
+        
         drawSpriteList.createBulletSpriteList.push(createBulletObj);
     },
     createWall: function(setting) {

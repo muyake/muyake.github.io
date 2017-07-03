@@ -195,14 +195,16 @@ var flowerConfig = {
     },
   }
 }
-var Bullet={
-  config:｛
- sprite1{height:35;width:35;left: 0,top: 0;}
- sprite3{height:35;width:35;left: 0,top: 34;}
- sprite2{height:35;width:35;left: 0,top: 67;}
- sprite0{height:35;width:35;left: 0,top: 101;}
- sprite4{height:35;width:35;left: 0,top: 137;}
-}
+// var Bullet={
+//   config:{
+//      sprite1{height:35;width:35;left: 0,top: 0;}
+//  sprite3{height:35;width:35;left: 0,top: 34;}
+//  sprite2{height:35;width:35;left: 0,top: 67;}
+//  sprite0{height:35;width:35;left: 0,top: 101;}
+//  sprite4{height:35;width:35;left: 0,top: 137;}
+//   }
+
+// };
 var WH = {
   wall: {
     width: 35,
