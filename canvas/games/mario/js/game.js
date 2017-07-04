@@ -286,8 +286,8 @@ var SpriteAnimatorEndCallbackList = {
     },
     mushroomupend: function(sprite) {
         console.log("mushroomupend");
-        sprite.behaviors = [new behaviorList.moveLeftToRight()];
-        sprite.move(50);
+       // sprite.behaviors = [new behaviorList.moveLeftToRight()];
+        sprite.move(-50);
         // lib.removeByValue(drawSpriteList.createSpriteList, 'name', sprite.name);
         // sprite = null;
     },
@@ -330,7 +330,7 @@ var drawSpriteList = {
             item.velocityX = gameConfig.objectSpeed * status;
         });
         this.createAnimationSpriteList.forEach(function(item) {
-            item.velocityX = item.initvelocityX + gameConfig.objectSpeed * status;
+            item.velocityX = item.initvelocityX +gameConfig.objectSpeed * status;
 
         });
     },
@@ -457,6 +457,7 @@ gameControl.startAnimate = function(time) {
     });
 
     drawSpriteList.createAnimationSpriteList.forEach(function(item) {
+       
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
     drawSpriteList.createBulletSpriteList.forEach(function(item) {

@@ -77,7 +77,6 @@ CharacterSpriteAnimator.prototype.execute = function() {
             this.sprite.painter = this.sprite.jumpPainter;
 
         } else {
-
             this.sprite.top = this.sprite.initialTop;
             this.sprite.isJump = false;
             animator.isRunning = false;
@@ -191,6 +190,30 @@ MoveSpriteAnimator.prototype.execute=function(){
     }
 }
 
+var MoveSpriteAnimator2=function(elapsedCallback, sprite){
+    CharacterSpriteAnimator.call(this,elapsedCallback, sprite);
+}
+MoveSpriteAnimator2.prototype = Object.create(CharacterSpriteAnimator.prototype);
+MoveSpriteAnimator2.prototype.constructor = MoveSpriteAnimator2;
+MoveSpriteAnimator2.prototype.execute=function(){
+     var animator = this;
+    if (animator.isRunning) {
+        //this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE*2 / this.sprite.fpsNum;
+        this.sprite.translateLeft+=this.sprite.initvelocityX / this.sprite.fpsNum;
+      //  this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;
+        // if (this.sprite.top <this.sprite.initialTop) {
+        //     this.sprite.isJump = true;
+        //     this.sprite.painter = this.sprite.jumpPainter;
+
+        // } else {
+        //     this.sprite.upover = true;
+        //     this.sprite.top = this.sprite.initialTop;
+        //     this.sprite.isJump = false;
+        //     animator.isRunning = false;
+        //     animator.end(this.sprite); //一定要放到isRunning = false;下面
+        // }       
+    }
+}
 //场景Sprite
 var SceneSprite = function(name, painter, behaviors) {
     Sprite.call(this, name, painter, behaviors);
@@ -446,7 +469,10 @@ var Mushroom = function(setting) {
     this.mycanvas = element.mycanvas;
     this.mushroomSpriteAnimatorUp = new UpSpriteAnimator(setting.jumpEndCallback, this);
     this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
+     this.marioSpriteAnimatorMove = new MoveSpriteAnimator2(SpriteAnimatorEndCallbackList.marioJumpend, this);
+   
     this.upover = false;
+    this.translateLeft=0;
 
 };
 Mushroom.prototype = Object.create(SceneSprite.prototype);
@@ -454,6 +480,7 @@ Mushroom.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum;
     this.mushroomSpriteAnimatorUp.execute();
     this.marioSpriteAnimatorJump.execute();
+    this.marioSpriteAnimatorMove.execute();
     this.update(ctx, time, fpsNum);
 
     // console.log(this.left);
@@ -476,13 +503,15 @@ Mushroom.prototype.fall = function(VY) {
     this.startVelocityY = VY;
     this.velocityY = -this.startVelocityY;
     this.initialTop = this.top - WH.wall.height;
+
     //this.top = this.initialTop;
     this.marioSpriteAnimatorJump.start();
 };
 Mushroom.prototype.move = function(VX) {
     this.velocityX = VX;
     this.initvelocityX = VX;
-
+    this.velocityY=0;
+this.marioSpriteAnimatorMove.start();
 };
 
 
@@ -528,14 +557,14 @@ Bullet.prototype.draw = function(ctx, time, fpsNum) {
     ctx.drawImage(this.painter.image, -this.width/2, -this.height/2, this.width, this.height);
     ctx.restore();
 }
-Bullet.prototype.jump = function(VY,VX) {
+Bullet.prototype.jump = function(VX) {
 
     this.startVelocityY = 0;
     this.velocityX=VX;
     if(this.velocityX>0){
-         this.RV=-480;
+         this.RV=-bulletConfig.RV;
      }else{
-        this.RV=480;
+        this.RV=bulletConfig.RV;
      }
     this.velocityY = -this.startVelocityY;
     this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;

@@ -138,9 +138,9 @@ var createFactory = {
           //  jumpEndCallback: SpriteAnimatorEndCallbackList.mushroomupend
         });
         if(isreverse){
-             createBulletObj.jump(100,-140);
+             createBulletObj.jump(-140);
         }else{
-             createBulletObj.jump(100,140);
+             createBulletObj.jump(140);
         }      
         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.fire);
         
