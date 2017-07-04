@@ -130,14 +130,18 @@ var createFactory = {
         createUpMushroomObj.up(100);
         drawSpriteList.createAnimationSpriteList.push(createUpMushroomObj);
     },
-    createBullet: function(positionmile, physicaltop) {
+    createBullet: function(positionmile, physicaltop,isreverse) {
         var createBulletObj = new Bullet({
             top: physicaltop,
             positionmile: positionmile,
             id: lib.newGuid(),
           //  jumpEndCallback: SpriteAnimatorEndCallbackList.mushroomupend
         });
-       createBulletObj.jump(100);
+        if(isreverse){
+             createBulletObj.jump(100,-140);
+        }else{
+             createBulletObj.jump(100,140);
+        }      
         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.fire);
         
         drawSpriteList.createBulletSpriteList.push(createBulletObj);

@@ -119,6 +119,10 @@ BulletJumpSpriteAnimator.prototype.constructor = BulletJumpSpriteAnimator;
 BulletJumpSpriteAnimator.prototype.execute = function() {
     var animator = this;
     if (animator.isRunning) {
+      if(this.sprite.left+this.sprite.width<0||this.sprite.left>this.sprite.mycanvas.width){
+         lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', this.sprite.id);                 
+              
+      }
        this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE*2 / this.sprite.fpsNum;
         this.sprite.translateLeft+=this.sprite.velocityX / this.sprite.fpsNum;
         this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;
@@ -490,7 +494,7 @@ var Bullet = function(setting) {
     this.width = setting.width || WH.bullet.width;
     this.height = setting.height || WH.bullet.height;
     this.top = setting.top || 0;
-    console.log(this.top);
+   // console.log(this.top);
    // this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
@@ -511,6 +515,7 @@ var Bullet = function(setting) {
 Bullet.prototype = Object.create(SceneSprite.prototype);
 Bullet.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum;
+     // console.log(this.left);
     this.bulletSpriteAnimatorJump.execute();
     this.marioSpriteAnimatorJump.execute();
     this.update(ctx, time, fpsNum);
@@ -523,9 +528,15 @@ Bullet.prototype.draw = function(ctx, time, fpsNum) {
     ctx.drawImage(this.painter.image, -this.width/2, -this.height/2, this.width, this.height);
     ctx.restore();
 }
-Bullet.prototype.jump = function(VY) {
+Bullet.prototype.jump = function(VY,VX) {
+
     this.startVelocityY = 0;
-    this.velocityX=-140;
+    this.velocityX=VX;
+    if(this.velocityX>0){
+         this.RV=-480;
+     }else{
+        this.RV=480;
+     }
     this.velocityY = -this.startVelocityY;
     this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
     //this.top = this.initialTop;

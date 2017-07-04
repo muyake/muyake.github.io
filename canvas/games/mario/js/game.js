@@ -41,7 +41,7 @@ var game = {
         "right": false, //right
         "s": false,
         "w": false,
-        "d":false,
+        "d": false,
         "space": false,
 
     },
@@ -61,10 +61,10 @@ var game = {
         document.querySelector('#bigBtn').addEventListener('click', function() {
             audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
         }, false);
-         document.querySelector('#fire').addEventListener('click', function() {
-           // drawSpriteList.mario.rise(WH.mario.height * 0.5);
-          //  createFactory.createBullet(100, 30);
-           createFactory.createBullet(progressObj.createSpriteMileNum+drawSpriteList.mario.left+drawSpriteList.mario.width, 30);
+        document.querySelector('#fire').addEventListener('click', function() {
+            // drawSpriteList.mario.rise(WH.mario.height * 0.5);
+            //  createFactory.createBullet(100, 30);
+            createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, 30);
         }, false);
         // Key Listeners..............................................
         gameControl.addKeyListener({
@@ -121,21 +121,14 @@ var game = {
                 }
                 if (status == 1) {
                     self.mapKey['w'] = true;
-                    if (!drawSpriteList.mario.isJump && !gameControl.paused) {
-                        audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
-                        if (!drawSpriteList.mario.isJump) { // throttle 
-                            drawSpriteList.mario.jump(marioGameConfig.bigJumpV);
-                        }
-                    }
+
                 } else {
                     self.mapKey['w'] = false;
                 }
                 self.activeEventCallback();
             }
         });
-
-
-         gameControl.addKeyListener({
+        gameControl.addKeyListener({
             key: 'd',
             listener: function(status) {
                 if (gameControl.paused) {
@@ -143,20 +136,10 @@ var game = {
                 }
                 if (status == 1) {
                     self.mapKey['d'] = true;
-                    if (drawSpriteList.mario.status==4||drawSpriteList.mario.status==3) {
-                        console.log(drawSpriteList.mario.top+drawSpriteList.mario.height/3);
-                        createFactory.createBullet(progressObj.createSpriteMileNum+drawSpriteList.mario.left+drawSpriteList.mario.width,drawSpriteList.mario.top+drawSpriteList.mario.height/3);
-                    
-                    }
-                        //createFactory.createBullet(progressObj.createSpriteMileNum, 30);
-                    // if (!drawSpriteList.mario.isJump && !gameControl.paused) {
-                    //     audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
-                    //     if (!drawSpriteList.mario.isJump) { // throttle 
-                    //         drawSpriteList.mario.jump(marioGameConfig.bigJumpV);
-                    //     }
-                    // }
+
                 } else {
                     self.mapKey['d'] = false;
+                    self.advance = 0;
                 }
                 self.activeEventCallback();
             }
@@ -187,7 +170,8 @@ var game = {
             }
         });
     },
-    activeEventCallback: function(time) {
+    activeEventCallback: function() {
+        var time = Date.now();
         var jumpKey = this.mapKey["s"] || this.mapKey["w"]; //按蹦跳键
         var runKey = ((this.mapKey["left"] && !this.mapKey["right"]) || (!this.mapKey["left"] && this.mapKey["right"])); //左右键中，只按了左键或只按了右键
         //只按左键或只按右键(大蹦，小蹦不管)
@@ -242,7 +226,19 @@ var game = {
                 drawSpriteList.mario.behaviors = [];
             }
         }
+
+        if (this.mapKey['d'] && (drawSpriteList.mario.status == 4 || drawSpriteList.mario.status == 3) & time - this.advance > 300) {
+            if (drawSpriteList.mario.isReverse) {
+                createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, drawSpriteList.mario.top + drawSpriteList.mario.height / 3,drawSpriteList.mario.isReverse);
+
+            } else {
+                createFactory.createBullet(progressObj.createSpriteMileNum+ drawSpriteList.mario.left , drawSpriteList.mario.top + drawSpriteList.mario.height / 3,drawSpriteList.mario.isReverse);
+            }
+            this.advance = time;
+        }
+
     },
+    advance: 0,
     setDirection: function(status) {
         switch (status) {
             case 0:
@@ -322,7 +318,7 @@ var drawSpriteList = {
     createSpriteList: [],
     createAnimationSpriteList: [],
     createBrickSpriteList: [],
-     createBulletSpriteList: [],
+    createBulletSpriteList: [],
     goDirection: function(status) {
         this.bg.velocityX = gameConfig.skySpeed * status;
         this.progressObj.velocityX = gameConfig.progressObjSpeed * status;
@@ -381,7 +377,7 @@ var drawSpriteList = {
                     flowerSprite = null;
                 }
             },
-             bullet: {
+            bullet: {
                 funcName: 'judgeBBarrier',
                 callback: function(bulletSprite) {
                     lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bulletSprite.id);
@@ -425,9 +421,9 @@ var drawSpriteList = {
                 // var callback = self.config[itemDraw.name].callback || function() {};
                 // CD[self.config[itemDraw.name].funcName](drawSpriteList.mario, itemDraw, callback)
                 drawSpriteList.arrayOthersA.forEach(function(barrier) {
-                        var callback2 = self.config["bullet"].callback || function() {};
-                        CD['judgeBBarrier'](itemDraw, barrier, callback2);
-                    });
+                    var callback2 = self.config["bullet"].callback || function() {};
+                    CD['judgeBBarrier'](itemDraw, barrier, callback2);
+                });
 
             });
             drawSpriteList.createAnimationSpriteList.forEach(function(mover) {
@@ -463,7 +459,7 @@ gameControl.startAnimate = function(time) {
     drawSpriteList.createAnimationSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
- drawSpriteList.createBulletSpriteList.forEach(function(item) {
+    drawSpriteList.createBulletSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
     //createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
