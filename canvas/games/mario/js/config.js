@@ -225,10 +225,14 @@ var WH = {
     height: 35
   },
   mario: {
-   // width:20,
-    width: 33,
+    bigstatus:{
+       width: 33,
      height: 68
-    //height:33
+    },
+    smallstatus:{
+        width: 33*0.5,
+     height: 68*0.5
+   }  
   },
   pipe: {
     width: 45,

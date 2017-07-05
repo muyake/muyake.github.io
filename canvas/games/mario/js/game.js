@@ -51,11 +51,11 @@ var game = {
             createFactory.createBrick(100, 100);
         }, false);
         document.querySelector('#flower').addEventListener('click', function() {
-            drawSpriteList.mario.rise(WH.mario.height);
+            drawSpriteList.mario.rise(WH.mario.bigstatus.height);
             //createFactory.createUpMoney(100, 100);
         }, false);
         document.querySelector('#flower1').addEventListener('click', function() {
-            drawSpriteList.mario.rise(WH.mario.height * 0.5);
+            drawSpriteList.mario.rise(WH.mario.smallstatus.height);
             createFactory.createBullet(100, 100);
         }, false);
         document.querySelector('#bigBtn').addEventListener('click', function() {
@@ -263,28 +263,11 @@ var SpriteAnimatorEndCallbackList = {
     moneyupend: function(sprite) {
         lib.removeByValue(drawSpriteList.createSpriteList, 'id', sprite.id);
         sprite = null;
-    },
-    floserupend: function(sprite) {
-        // lib.removeByValue(drawSpriteList.createSpriteList, 'name', sprite.name);
-        // sprite = null;
-    },
-    mushroomupend: function(sprite) {
-        console.log("mushroomupend");
-       // sprite.behaviors = [new behaviorList.moveLeftToRight()];
-        sprite.move(-50);
-        // lib.removeByValue(drawSpriteList.createSpriteList, 'name', sprite.name);
-        // sprite = null;
-    },
+    },      
     brickupend: function(sprite) {
         lib.removeByValue(drawSpriteList.createBrickSpriteList, 'id', sprite.id);
         sprite = null;
-    },
-    wallUpend: function(sprite) {
-        sprite.isJump = false;
-        sprite.startVelocityY = 0;
-        sprite.velocityY = 0;
-        sprite.isJump = false;
-    },
+    },    
 }
 var drawSpriteList = {
     bg: new BG({
@@ -314,6 +297,11 @@ var drawSpriteList = {
             item.velocityX = gameConfig.objectSpeed * status;
         });
         this.createAnimationSpriteList.forEach(function(item) {
+            item.velocityX = item.initvelocityX +gameConfig.objectSpeed * status;
+
+        });
+         this.createBulletSpriteList.forEach(function(item) {
+         //console.log(item.velocityX );        
             item.velocityX = item.initvelocityX +gameConfig.objectSpeed * status;
 
         });
@@ -373,8 +361,8 @@ var drawSpriteList = {
                 funcName: 'judgeMMR',
                 callback: function(mushroomSprite) {
                     lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mushroomSprite.id);
-                    audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
-                    drawSpriteList.mario.rise(WH.mario.height);
+                   
+                    drawSpriteList.mario.rise(WH.mario.bigstatus.height);
                     mushroomSprite = null;
                 }
             },

@@ -80,9 +80,9 @@ var Mario = function(setting) {
     this.isReverse = setting.isReverse;
     this.mycanvas = element.mycanvas;
     this.velocityX = setting.velocityX;
-    this.width = setting.width || WH.mario.width * 0.5;
+    this.width = setting.width || WH.mario.smallstatus.width;
     this.roleType = 'mairo';
-    this.height = setting.height || WH.mario.height * 0.5;
+    this.height = setting.height || WH.mario.smallstatus.height;
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
     this.left = this.mycanvas.width / 3 - this.width / 2;
@@ -96,7 +96,7 @@ var Mario = function(setting) {
     this.behaviorStatus = {
         runInPlace: new behaviorList.runInPlace(),
     };
-    this.status=1;//1为小人，2为吃蘑菇长大，3为吃花吐子弹。
+    this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹。
     this.painter = this.painters.stand;
     this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
     this.marioSpriteAnimatorRising = new RiseSpriteAnimator(function() {}, this);
@@ -111,28 +111,25 @@ Mario.prototype.painters = {
 }
 Mario.prototype.jump = function(VY) {
     this.startVelocityY = VY;
-    if(VY== marioGameConfig.smallJumpV){
-
-    }
-    switch(VY)
-    {
-        case marioGameConfig.smallJumpV:{
-            audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.smallJump);
-        }
-        break;
-        case marioGameConfig.bigJumpV:{
-            audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
-        }
-        break;
+    //跳跃声音的产生。
+    switch (VY) {
+        case marioGameConfig.smallJumpV:
+            {
+                audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.smallJump);
+            }
+            break;
+        case marioGameConfig.bigJumpV:
+            {
+                audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
+            }
+            break;
     }
 
     this.velocityY = -this.startVelocityY;
     this.behaviors = [];
     this.marioSpriteAnimatorJump.start();
 };
-Mario.prototype.run = function() {
 
-};
 Mario.prototype.rise = function(endHeight) {
     if (endHeight > this.height) {
         this.risespeed = 30;
@@ -142,6 +139,18 @@ Mario.prototype.rise = function(endHeight) {
         this.risespeed = -30;
     } else {
         this.risespeed = 0;
+    }
+    switch (endHeight) {
+        case WH.mario.smallstatus.height:
+            {
+                audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.changeSmall);
+            }
+            break;
+        case WH.mario.bigstatus.height:
+            {
+                audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
+            }
+            break;
     }
     this.initialHeight = endHeight;
     this.marioSpriteAnimatorRising.start();
@@ -156,6 +165,7 @@ Mario.prototype.draw = function(ctx, time, fpsNum) {
 };
 
 var Wall = function(setting) {
+    var self=this;
     var status = setting.status || 0;
     setting.name = setting.name || 'wall';
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.SpriteLeftToRight()]);
@@ -201,7 +211,8 @@ var Wall = function(setting) {
             break;
     }
     this.mycanvas = element.mycanvas;
-    this.wallSpriteAnimatorUp = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.wallUpend, this);
+
+    this.wallSpriteAnimatorUp = new CharacterSpriteAnimator(self.jumpend.bind(self), this);
 };
 Wall.prototype = Object.create(SceneSprite.prototype);
 Wall.prototype.draw = function(ctx, time, fpsNum) {
@@ -228,6 +239,12 @@ Wall.prototype.changeToAA = function() {
             item.status = 2;
         }
     });
+}
+Wall.prototype.jumpend = function() {
+    this.isJump = false;
+    this.startVelocityY = 0;
+    this.velocityY = 0;
+    this.isJump = false;
 }
 
 //金币对象
@@ -278,7 +295,7 @@ var Flower = function(setting) {
     this.isJump = false; //判断是否为处于上下波动中
     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.flower);
     this.mycanvas = element.mycanvas;
-    this.flowerSpriteAnimatorUp = new UpSpriteAnimator(setting.jumpEndCallback, this);
+    this.flowerSpriteAnimatorUp = new UpSpriteAnimator(null, this);
 };
 Flower.prototype = Object.create(SceneSprite.prototype);
 Flower.prototype.draw = function(ctx, time, fpsNum) {
@@ -297,6 +314,7 @@ Flower.prototype.up = function(VY) {
 
 //蘑菇
 var Mushroom = function(setting) {
+    var self = this;
     setting.name = setting.name || 'mushroom';
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.mushroom), [new behaviorList.SpriteLeftToRight()]);
     this.width = setting.width || WH.mushroom.width;
@@ -313,12 +331,12 @@ var Mushroom = function(setting) {
     this.isJump = false; //判断是否为处于上下波动中
     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.mushroom);
     this.mycanvas = element.mycanvas;
-    this.mushroomSpriteAnimatorUp = new UpSpriteAnimator(setting.jumpEndCallback, this);
+    this.mushroomSpriteAnimatorUp = new UpSpriteAnimator(self.move.bind(self, -50), this);
     this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
-     this.marioSpriteAnimatorMove = new MoveSpriteAnimator2(SpriteAnimatorEndCallbackList.marioJumpend, this);
-   
+    this.marioSpriteAnimatorMove = new MoveSpriteAnimator2(SpriteAnimatorEndCallbackList.marioJumpend, this);
+
     this.upover = false;
-    this.translateLeft=0;
+    this.translateLeft = 0;
 
 };
 Mushroom.prototype = Object.create(SceneSprite.prototype);
@@ -356,8 +374,8 @@ Mushroom.prototype.fall = function(VY) {
 Mushroom.prototype.move = function(VX) {
     this.velocityX = VX;
     this.initvelocityX = VX;
-    this.velocityY=0;
-this.marioSpriteAnimatorMove.start();
+    this.velocityY = 0;
+    this.marioSpriteAnimatorMove.start();
 };
 
 
@@ -369,12 +387,12 @@ var Bullet = function(setting) {
     this.width = setting.width || WH.bullet.width;
     this.height = setting.height || WH.bullet.height;
     this.top = setting.top || 0;
-   // console.log(this.top);
-   // this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    // console.log(this.top);
+    // this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
     this.initvelocityX = 0;
-    this.translateLeft=0;
+    this.translateLeft = 0;
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'bullet';
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
@@ -383,36 +401,40 @@ var Bullet = function(setting) {
     this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.bullet);
     this.mycanvas = element.mycanvas;
     this.bulletSpriteAnimatorJump = new BulletJumpSpriteAnimator(setting.jumpEndCallback, this);
-    this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);    
-    this.RV=480;//旋转角速度
-    this.rotate=0;//旋转角度。
+    this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
+    this.RV = 480; //旋转角速度
+    this.rotate = 0; //旋转角度。
 };
 Bullet.prototype = Object.create(SceneSprite.prototype);
 Bullet.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum;
-     // console.log(this.left);
+    // console.log(this.left);
     this.bulletSpriteAnimatorJump.execute();
     this.marioSpriteAnimatorJump.execute();
+   
     this.update(ctx, time, fpsNum);
     ctx.save();
-    ctx.translate(this.left+this.width/2,this.top+this.height/2);
-    this.rotate+=this.RV/fpsNum;
-   // console.log(this.rotate);
-    ctx.rotate(this.rotate*Math.PI/180);
+
+    ctx.translate(this.left + this.width / 2, this.top + this.height / 2);
+    this.rotate += this.RV / fpsNum;
+    // console.log(this.rotate);
+    ctx.rotate(this.rotate * Math.PI / 180);
     //this.paint(ctx);
-    ctx.drawImage(this.painter.image, -this.width/2, -this.height/2, this.width, this.height);
+    ctx.drawImage(this.painter.image, -this.width / 2, -this.height / 2, this.width, this.height);
     ctx.restore();
 }
 Bullet.prototype.jump = function(VX) {
 
     this.startVelocityY = 0;
+    this.initvelocityX = VX;
     this.velocityX=VX;
-    if(this.velocityX>0){
-         this.RV=-bulletConfig.RV;
-     }else{
-        this.RV=bulletConfig.RV;
-     }
     this.velocityY = -this.startVelocityY;
+    if (this.initvelocityX > 0) {
+        this.RV = -bulletConfig.RV;
+    } else {
+        this.RV = bulletConfig.RV;
+    }
+    
     this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
     //this.top = this.initialTop;
     this.bulletSpriteAnimatorJump.start();
@@ -444,22 +466,22 @@ Pipe.prototype.draw = function(ctx, time, fpsNum) {
 var Brick = function(setting) {
     setting.name = setting.name || 'brick';
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.brick), [new behaviorList.SpriteLeftToRight()]);
-    
+
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'Brick';
-    this.status = setting.status||"leftup";
-    this.imgwidth = wallConfig[this.status+"Sprite"].width;
-    this.imgheight = wallConfig[this.status+"Sprite"].height;
-    this.imgleft = wallConfig[this.status+"Sprite"].left;
-    this.imgtop = wallConfig[this.status+"Sprite"].top;
-    this.width = this.imgwidth*0.7;
-    this.height = this.imgheight*0.7;//50变35，即width*0.7;
-    
-    this.translateLeft=0;
+    this.status = setting.status || "leftup";
+    this.imgwidth = wallConfig[this.status + "Sprite"].width;
+    this.imgheight = wallConfig[this.status + "Sprite"].height;
+    this.imgleft = wallConfig[this.status + "Sprite"].left;
+    this.imgtop = wallConfig[this.status + "Sprite"].top;
+    this.width = this.imgwidth * 0.7;
+    this.height = this.imgheight * 0.7; //50变35，即width*0.7;
+
+    this.translateLeft = 0;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.initialTop = this.top;
     this.isJump = false; //判断是否为处于上下波动中
@@ -470,39 +492,39 @@ var Brick = function(setting) {
 Brick.prototype = Object.create(SceneSprite.prototype);
 Brick.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum;
-    this.BrickSpriteAnimatorUp.execute();    
+    this.BrickSpriteAnimatorUp.execute();
     this.update(ctx, time, fpsNum);
     this.paint(ctx);
 }
 Brick.prototype.up = function() {
-    this.initialTop=this.mycanvas.height;
+    this.initialTop = this.mycanvas.height;
     switch (this.status) {
         case "leftup":
             {
                 this.velocityY = -350;
-                this.velocityX=70;
+                this.velocityX = 70;
             }
             break;
         case "leftdown":
             {
                 this.velocityY = -200;
-                this.velocityX=70;
+                this.velocityX = 70;
             }
             break;
         case "rightup":
             {
-                 this.velocityY = -350;
-                this.velocityX=-70;
+                this.velocityY = -350;
+                this.velocityX = -70;
             }
             break;
         case "rightdown":
             {
-                 this.velocityY = -200;
-                this.velocityX=-70;
+                this.velocityY = -200;
+                this.velocityX = -70;
             }
             break;
     }
-    
+
     this.BrickSpriteAnimatorUp.start();
 };
 

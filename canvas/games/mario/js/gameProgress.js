@@ -112,9 +112,7 @@ var createFactory = {
         var createUpFlowerObj = new Flower({
             physicaltop: physicaltop,
             positionmile: positionmile,
-            id: lib.newGuid(),
-
-            jumpEndCallback: SpriteAnimatorEndCallbackList.floserupend
+            id: lib.newGuid(),            
         });
         createUpFlowerObj.up(100);
         drawSpriteList.createSpriteList.push(createUpFlowerObj);
@@ -123,9 +121,7 @@ var createFactory = {
         var createUpMushroomObj = new Mushroom({
             physicaltop: physicaltop,
             positionmile: positionmile,
-            id: lib.newGuid(),
-
-            jumpEndCallback: SpriteAnimatorEndCallbackList.mushroomupend
+            id: lib.newGuid(),           
         });
         createUpMushroomObj.up(100);
         drawSpriteList.createAnimationSpriteList.push(createUpMushroomObj);
@@ -134,8 +130,7 @@ var createFactory = {
         var createBulletObj = new Bullet({
             top: physicaltop,
             positionmile: positionmile,
-            id: lib.newGuid(),
-          //  jumpEndCallback: SpriteAnimatorEndCallbackList.mushroomupend
+            id: lib.newGuid(),          
         });
         if(isreverse){
              createBulletObj.jump(-140);

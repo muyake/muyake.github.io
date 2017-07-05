@@ -99,7 +99,8 @@ RiseSpriteAnimator.prototype.execute = function() {
     if (animator.isRunning) {
         //  this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
         this.sprite.height += this.sprite.risespeed / this.sprite.fpsNum;
-        this.sprite.width += this.sprite.risespeed * WH.mario.width / WH.mario.height / this.sprite.fpsNum;
+        var whRate=WH.mario.bigstatus.width / WH.mario.bigstatus.height;
+        this.sprite.width += this.sprite.risespeed *whRate / this.sprite.fpsNum;
         this.sprite.top -= this.sprite.risespeed / this.sprite.fpsNum;
         if ((this.sprite.risespeed > 0 && this.sprite.height < this.sprite.initialHeight) || (this.sprite.risespeed < 0 && this.sprite.height > this.sprite.initialHeight)) {
             this.sprite.isRising = true;
@@ -107,7 +108,8 @@ RiseSpriteAnimator.prototype.execute = function() {
         } else {
             // this.sprite.upover=true;
             this.sprite.height = this.sprite.initialHeight;
-            this.sprite.width = this.sprite.initialHeight * WH.mario.width / WH.mario.height;
+            var whrate=WH.mario.bigstatus.width / WH.mario.bigstatus.height;
+            this.sprite.width = this.sprite.initialHeight *whrate ;
             this.sprite.isRising = false;
             animator.isRunning = false;
             animator.end(this.sprite); //一定要放到isRunning = false;下面
