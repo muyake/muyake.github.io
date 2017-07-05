@@ -99,14 +99,7 @@ var game = {
                     return;
                 }
                 if (status == 1) {
-                    self.mapKey['s'] = true;
-                    if (!drawSpriteList.mario.isJump && !gameControl.paused) {
-                        audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.smallJump);
-                        if (!drawSpriteList.mario.isJump) { // throttle      
-
-                            drawSpriteList.mario.jump(marioGameConfig.smallJumpV);
-                        }
-                    }
+                    self.mapKey['s'] = true;                    
                 } else {
                     self.mapKey['s'] = false;
                 }
@@ -121,7 +114,6 @@ var game = {
                 }
                 if (status == 1) {
                     self.mapKey['w'] = true;
-
                 } else {
                     self.mapKey['w'] = false;
                 }
@@ -266,15 +258,7 @@ var SpriteAnimatorEndCallbackList = {
         sprite.startVelocityY = 0;
         sprite.velocityY = 0;
         sprite.isJump = false;
-        game.activeEventCallback();
-        //按左键，或按右键
-        if (game.mapKey["s"] || game.mapKey["w"]) {
-            if (game.mapKey["s"]) {
-                audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.smallJump);
-            } else {
-                audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
-            }
-        }
+        game.activeEventCallback();        
     },
     moneyupend: function(sprite) {
         lib.removeByValue(drawSpriteList.createSpriteList, 'id', sprite.id);
@@ -435,14 +419,7 @@ var drawSpriteList = {
                         CD['judgeMoverBarrier'](mover, barrier, callback2);
                     });
                 }
-            });
-
-            // for (var item in arrothers) {
-            //     arrothers[item].forEach(function(itemDraw) {
-            //         var callback = self.config[item].callback || function() {};
-            //         CD[self.config[item].funcName](drawSpriteList.mario, itemDraw, callback)
-            //     })
-            // }
+            });          
         },
     },
 };

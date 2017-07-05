@@ -4,6 +4,7 @@ var publicConfig = {
 };
 //马里奥动画配置参数
 var marioConfig = {
+ 
   config: {
     totalCount: 21,
     sprite_0: {
