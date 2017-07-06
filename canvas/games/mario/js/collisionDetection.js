@@ -70,7 +70,7 @@ var CD = {
                             break;
                         case 2:
                         case 3:
-                            {//如果是长大了，就会出花，如果是小人状态，则出蘑菇。
+                            { //如果是长大了，就会出花，如果是小人状态，则出蘑菇。
                                 audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
                                 if (mario.status == 1) {
                                     createFactory.createUpMushroom(wall.positionmile, wall.physicaltop);
@@ -81,7 +81,7 @@ var CD = {
                             }
                             break;
                         case 4:
-                        //弹小星星
+                            //弹小星星
                             break;
                     }
                     wall.changeToAA();
@@ -92,7 +92,16 @@ var CD = {
                         wall.up(60);
                         audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
                     } else {
-                        callback(wall);
+                    //大个马里奥将砖顶碎                     
+                    wall.visible = false;
+                    var id = wall.id;
+                    var wallList = totalProgressSprite.wall;
+                    wallList.forEach(function(item) {
+                        if (item.id == id) {
+                            item.isVisible = false;
+                        }
+                    });
+
                         createFactory.createBrick(wall.physicaltop, wall.positionmile);
                         audioControl.audioPlay(gameSourceObj.audioList.music, gameAudio.wallbreak);
                     }
@@ -157,6 +166,7 @@ var CD = {
 
     //马里奥和金币
     judgeMM: function(mario, money, callback) {
+        //var funCallback = callback || function() {};
         if (money.visible == false) {
             return;
         }
@@ -165,6 +175,16 @@ var CD = {
             return true
         } else {
             callback(money);
+            //碰到金币后消失
+            money.visible = false;
+            var id = money.id;
+            var moneyList = totalProgressSprite.money;
+            moneyList.forEach(function(item) {
+                if (item.id == id) {
+                    item.isVisible = false;
+                }
+            });
+            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
         }
     },
     judgeBBarrier: function(bullet, barrier, callback) {
@@ -175,7 +195,10 @@ var CD = {
         if ((bullet.left + bullet.width) < barrier.left || (barrier.left + barrier.width) < bullet.left || (bullet.top + bullet.height) < barrier.top || (barrier.top + barrier.height) < bullet.top) {
             return true
         } else {
-            callback(bullet);
+            //callback(bullet);
+            lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bullet.id);
+            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
+            bullet = null;
         }
     },
     judgeMF: function(mario, flower, callback) {
@@ -186,8 +209,11 @@ var CD = {
         if ((mario.left + mario.width) < flower.left || (flower.left + flower.width) < mario.left || (mario.top + mario.height) < flower.top || (flower.top + flower.height) < mario.top) {
             return true
         } else {
-            mario.status=3;
-            callback(flower);
+            mario.status = 3;
+            lib.removeByValue(drawSpriteList.createSpriteList, 'id', flower.id);
+            audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
+            flower = null;
+            //callback(flower);
         }
     },
     judgeMMR: function(mario, mushroom, callback) {
@@ -198,7 +224,10 @@ var CD = {
         if ((mario.left + mario.width) < mushroom.left || (mushroom.left + mushroom.width) < mario.left || (mario.top + mario.height) < mushroom.top || (mushroom.top + mushroom.height) < mario.top) {
             return true
         } else {
-            callback(mushroom);
+            // callback(mushroom);
+            lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mushroom.id);
+            drawSpriteList.mario.rise(WH.mario.bigstatus.height);
+            mushroom = null;
         }
     },
 

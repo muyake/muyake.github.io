@@ -99,7 +99,7 @@ var game = {
                     return;
                 }
                 if (status == 1) {
-                    self.mapKey['s'] = true;                    
+                    self.mapKey['s'] = true;
                 } else {
                     self.mapKey['s'] = false;
                 }
@@ -221,10 +221,10 @@ var game = {
 
         if (this.mapKey['d'] && (drawSpriteList.mario.status == 4 || drawSpriteList.mario.status == 3) & time - this.advance > 300) {
             if (drawSpriteList.mario.isReverse) {
-                createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, drawSpriteList.mario.top + drawSpriteList.mario.height / 3,drawSpriteList.mario.isReverse);
+                createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, drawSpriteList.mario.top + drawSpriteList.mario.height / 3, drawSpriteList.mario.isReverse);
 
             } else {
-                createFactory.createBullet(progressObj.createSpriteMileNum+ drawSpriteList.mario.left , drawSpriteList.mario.top + drawSpriteList.mario.height / 3,drawSpriteList.mario.isReverse);
+                createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left, drawSpriteList.mario.top + drawSpriteList.mario.height / 3, drawSpriteList.mario.isReverse);
             }
             this.advance = time;
         }
@@ -258,16 +258,16 @@ var SpriteAnimatorEndCallbackList = {
         sprite.startVelocityY = 0;
         sprite.velocityY = 0;
         sprite.isJump = false;
-        game.activeEventCallback();        
+        game.activeEventCallback();
     },
     moneyupend: function(sprite) {
         lib.removeByValue(drawSpriteList.createSpriteList, 'id', sprite.id);
         sprite = null;
-    },      
+    },
     brickupend: function(sprite) {
         lib.removeByValue(drawSpriteList.createBrickSpriteList, 'id', sprite.id);
         sprite = null;
-    },    
+    },
 }
 var drawSpriteList = {
     bg: new BG({
@@ -277,15 +277,23 @@ var drawSpriteList = {
         top: 0,
         left: 0
     }),
+    //马里奥
     mario: new Mario({
         name: "mario",
     }),
+    //总体进度
     progressObj: progressObj,
+    //墙，管道，固定金币等
     arrayOthersA: [],
+    //花，弹出的金币
     createSpriteList: [],
+    //其他移动物体，例如蘑菇，怪兽等可以水平移动的物体
     createAnimationSpriteList: [],
+    //砖碎片列表
     createBrickSpriteList: [],
+    //子弹列表
     createBulletSpriteList: [],
+    //通过按键来控制这些对象的速度状态。
     goDirection: function(status) {
         this.bg.velocityX = gameConfig.skySpeed * status;
         this.progressObj.velocityX = gameConfig.progressObjSpeed * status;
@@ -297,74 +305,31 @@ var drawSpriteList = {
             item.velocityX = gameConfig.objectSpeed * status;
         });
         this.createAnimationSpriteList.forEach(function(item) {
-            item.velocityX = item.initvelocityX +gameConfig.objectSpeed * status;
+            item.velocityX = item.initvelocityX + gameConfig.objectSpeed * status;
 
         });
-         this.createBulletSpriteList.forEach(function(item) {
-         //console.log(item.velocityX );        
-            item.velocityX = item.initvelocityX +gameConfig.objectSpeed * status;
+        this.createBulletSpriteList.forEach(function(item) {
+            item.velocityX = item.initvelocityX + gameConfig.objectSpeed * status;
 
         });
     },
-    drawOthersFunc: function(ctx, time, fpsNum) {
-        var arrothers = this.arrayOthersA;
-        arrothers.forEach(function(itemDraw) {
-            itemDraw.draw(ctx, time, fpsNum);
-        });
-    },
+    //事物间的碰撞
     judgeCD: {
         config: {
             wall: {
                 funcName: 'judgeMWall',
-                callback: function(wallSprite) {
-                    wallSprite.visible = false;
-                    var id = wallSprite.id;
-                    var wallList = totalProgressSprite.wall;
-                    wallList.forEach(function(item) {
-                        if (item.id == id) {
-                            item.isVisible = false;
-                        }
-                    });
-                }
             },
             money: {
                 funcName: 'judgeMM',
-                callback: function(moneySprite) {
-                    moneySprite.visible = false;
-                    var id = moneySprite.id;
-                    var moneyList = totalProgressSprite.money;
-                    moneyList.forEach(function(item) {
-                        if (item.id == id) {
-                            item.isVisible = false;
-                        }
-                    });
-                    audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-                }
             },
             flower: {
                 funcName: 'judgeMF',
-                callback: function(flowerSprite) {
-                    lib.removeByValue(drawSpriteList.createSpriteList, 'id', flowerSprite.id);
-                    audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
-                    flowerSprite = null;
-                }
             },
             bullet: {
                 funcName: 'judgeBBarrier',
-                callback: function(bulletSprite) {
-                    lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bulletSprite.id);
-                    audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
-                    bulletSprite = null;
-                }
             },
             mushroom: {
                 funcName: 'judgeMMR',
-                callback: function(mushroomSprite) {
-                    lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mushroomSprite.id);
-                   
-                    drawSpriteList.mario.rise(WH.mario.bigstatus.height);
-                    mushroomSprite = null;
-                }
             },
             moverBarrier: {
                 callback: function(mushroomSprite) {
@@ -380,34 +345,46 @@ var drawSpriteList = {
         cdfunc: function() {
             var self = this;
             var arrothers = drawSpriteList.arrayOthersA;
+            //设置速度默认值，例如，先设置速度正常,当马里奥被管道水平挡住,速度为0，当反向走时，脱离管道碰撞，速度恢复正常。
             gameConfig.setSpeedDefault();
+            //马里奥与墙、管道,固定金币等碰撞
             drawSpriteList.arrayOthersA.forEach(function(itemDraw) {
                 var callback = self.config[itemDraw.name].callback || function() {};
                 CD[self.config[itemDraw.name].funcName](drawSpriteList.mario, itemDraw, callback)
             });
+            //马里奥与花，弹起的金币等碰撞
             drawSpriteList.createSpriteList.forEach(function(itemDraw) {
                 var callback = self.config[itemDraw.name].callback || function() {};
                 CD[self.config[itemDraw.name].funcName](drawSpriteList.mario, itemDraw, callback)
             });
+            //子弹与障碍物碰撞，（包括与管道和墙的左右碰撞，并不完善（尚未完成），与怪兽的碰撞）
             drawSpriteList.createBulletSpriteList.forEach(function(itemDraw) {
-                // var callback = self.config[itemDraw.name].callback || function() {};
-                // CD[self.config[itemDraw.name].funcName](drawSpriteList.mario, itemDraw, callback)
                 drawSpriteList.arrayOthersA.forEach(function(barrier) {
                     var callback2 = self.config["bullet"].callback || function() {};
                     CD['judgeBBarrier'](itemDraw, barrier, callback2);
                 });
 
             });
+            //蘑菇，怪兽等水平的对象与障碍物（马里奥，管道，墙等）的碰撞
             drawSpriteList.createAnimationSpriteList.forEach(function(mover) {
                 var callback = self.config[mover.name].callback || function() {};
                 CD[self.config[mover.name].funcName](drawSpriteList.mario, mover, callback);
-                if (mover.upover) {
+                //如果蘑菇已经上升完毕，则在判断蘑菇与墙，管道的碰撞效果。            
+                if (mover.name == 'mushroom') {
+                    if (mover.upover) {
+                        drawSpriteList.arrayOthersA.forEach(function(barrier) {
+                            var callback2 = self.config["moverBarrier"].callback || function() {};
+                            CD['judgeMoverBarrier'](mover, barrier, callback2);
+                        });
+                    }
+                } else {
                     drawSpriteList.arrayOthersA.forEach(function(barrier) {
                         var callback2 = self.config["moverBarrier"].callback || function() {};
                         CD['judgeMoverBarrier'](mover, barrier, callback2);
                     });
                 }
-            });          
+
+            });
         },
     },
 };
@@ -422,15 +399,16 @@ gameControl.startAnimate = function(time) {
     });
 
     drawSpriteList.createAnimationSpriteList.forEach(function(item) {
-       
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
     drawSpriteList.createBulletSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
     //createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
-    //绘制其他的场景，例如墙，金币等。
-    drawSpriteList.drawOthersFunc(gameControl.context, time, gameControl.fps.num);
+    //绘制其他的场景，例如墙，金币等。 
+    drawSpriteList.arrayOthersA.forEach(function(itemDraw) {
+        itemDraw.draw(gameControl.context, time, gameControl.fps.num);
+    });
     //碰撞检测
     drawSpriteList.judgeCD.cdfunc();
     drawSpriteList.mario.draw(gameControl.context, time, gameControl.fps.num);
