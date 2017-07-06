@@ -77,16 +77,8 @@ var totalProgressSprite = {
         physicaltop: 0,
         positionmile: 500
     }],
-    fire: [],
-    badflower: [],
-    flower: [
-        // {
-        //     isVisible: true,
-        //     id: lib.newGuid(),
-        //     positionmile: 135,
-        //     physicaltop: 50,
-        // }
-    ],
+    
+    badflower: [],   
     monster: [],
     //mushroom: [],
     tortoise: [],
@@ -97,17 +89,18 @@ var totalProgressSprite = {
 
 var createFactory = {
     arrayTotalProgress: [],
+    //创造升起的金币
     createUpMoney: function(positionmile, physicaltop) {
         var createUpMoneyObj = new Money({
             physicaltop: physicaltop,
             positionmile: positionmile,
-            id: lib.newGuid(),
-            // left: positionmile-,
+            id: lib.newGuid(),            
             jumpEndCallback: SpriteAnimatorEndCallbackList.moneyupend
         });
         createUpMoneyObj.up(200);
         drawSpriteList.createSpriteList.push(createUpMoneyObj);
     },
+    //创造花朵
     createUpFlower: function(positionmile, physicaltop) {
         var createUpFlowerObj = new Flower({
             physicaltop: physicaltop,
@@ -117,6 +110,7 @@ var createFactory = {
         createUpFlowerObj.up(100);
         drawSpriteList.createSpriteList.push(createUpFlowerObj);
     },
+    //创造蘑菇
     createUpMushroom: function(positionmile, physicaltop) {
         var createUpMushroomObj = new Mushroom({
             physicaltop: physicaltop,
@@ -126,6 +120,7 @@ var createFactory = {
         createUpMushroomObj.up(100);
         drawSpriteList.createAnimationSpriteList.push(createUpMushroomObj);
     },
+    //创造子弹
     createBullet: function(positionmile, physicaltop,isreverse) {
         var createBulletObj = new Bullet({
             top: physicaltop,
@@ -141,6 +136,7 @@ var createFactory = {
         
         drawSpriteList.createBulletSpriteList.push(createBulletObj);
     },
+    //创造墙
     createWall: function(setting) {
         setting.status = setting.status || 0;
         var wall;
@@ -154,24 +150,26 @@ var createFactory = {
         });
         return wall;
     },
+    //创造管道
     createPipe: function(setting) {
         return new Pipe({
             id: setting.id,
             physicaltop: setting.physicaltop,
-            positionmile: setting.positionmile,
-            //left: setting.positionmile - progressObj.mileageNum*Math.abs(gameConfig.objectSpeed/ gameConfig.progressObjSpeed),
+            positionmile: setting.positionmile,            
             left: setting.positionmile - progressObj.createSpriteMileNum,
         });
     },
+    //创造固定金币
     createMoney: function(setting) {
         return new Money({
             id: setting.id,
             physicaltop: setting.physicaltop,
             positionmile: setting.positionmile,
             left: setting.positionmile - progressObj.createSpriteMileNum,
-            // left:setting.positionmile - progressObj.createSpriteMileNum,
+            
         });
     },
+    //创造砖块
     createBrick: function(positionmile, physicaltop) {
         var arr = ["leftup", "leftdown", "rightup", "rightdown"];
         arr.forEach(function(item) {
@@ -188,36 +186,36 @@ var createFactory = {
         })
 
     },
-    createFire: function(setting) {
-
-    },
+   //创造坏花
     createBadflower: function(setting) {
 
     },
+    //创造花
     createFlower: function(setting) {
         return new Flower({
             id: setting.id,
             physicaltop: setting.physicaltop,
             positionmile: setting.positionmile,
-            left: setting.positionmile - progressObj.createSpriteMileNum,
-            // left:setting.positionmile - progressObj.createSpriteMileNum,
+            left: setting.positionmile - progressObj.createSpriteMileNum,           
         });
     },
+    //创造怪兽
     createMonster: function(setting) {
 
-    },
-    createMushroom: function(setting) {
-
-    },
+    },   
+    //创造乌龟
     createTortoise: function(setting) {
 
     },
+    //创造小星星
     createStar: function(setting) {
 
     },
+    //创造城堡
     createTower: function(setting) {
 
     },
+    //创造洞
     createHole: function(setting) {
 
     },
@@ -225,9 +223,9 @@ var createFactory = {
         'wall': 'createWall',
         'money': 'createMoney',
         'pipe': 'createPipe',
-        'fire': 'createFire',
+        
         'badflower': 'createBadflower',
-        'flower': 'createFlower',
+       
         'monster': 'createMonster',
         'tortoise': 'createTortoise',
         'star': 'createStar',
@@ -239,6 +237,7 @@ var createFactory = {
             return item.id == id;
         });
     },
+    //从总的数组队列中选择满足条件的对象进行显示。
     insertDrawSpriteList: function(mileageNum, drawSpriteList) {
         drawSpriteList.forEach(function(removeItem) {
             if (!removeItem.visible || (removeItem.positionmile - progressObj.createSpriteMileNum) < -removeItem.width || (removeItem.positionmile - progressObj.createSpriteMileNum) > element.mycanvas.width) {
@@ -256,11 +255,10 @@ var createFactory = {
                 }
             }
         });
-    },
-    setVisible: function(mileageNum, drawSpriteList) {
+    },    
 
-    },
     init: function() {
+        //将所有对象填入到数组中，并进行排列。
         for (var key in totalProgressSprite) {
             totalProgressSprite[key].forEach(function(item) {
                 item.name = key;

@@ -3,6 +3,7 @@
 
 //所有行为
 var behaviorList = {
+    //背景图片用的这个行为
     moveLeftToRight: function() {
         this.behaviorName = 'moveLeftToRight';
         this.lastMove = 0;
@@ -13,17 +14,14 @@ var behaviorList = {
             this.lastMove = time;
         }
     },
+    //其他物体的横向运动，都是根据sprite.positionmile与progressObj.createSpriteMileNum的相对位置计算出来的
     SpriteLeftToRight: function() {
         this.behaviorName = 'moveLeftToRight';
         this.lastMove = 0;
         this.fpsNum = 60;
-        this.execute = function(sprite, context, time, fpsNum) {
-          //  this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
-           // sprite.left += sprite.velocityX / this.fpsNum;
-            // sprite.left += sprite.velocityX / this.fpsNum;
+        this.execute = function(sprite, context, time, fpsNum) {          
         var translateLeft=sprite.translateLeft||0;
-         sprite.left=    sprite.positionmile - progressObj.createSpriteMileNum-translateLeft;
-            //this.lastMove = time;
+         sprite.left=    sprite.positionmile - progressObj.createSpriteMileNum-translateLeft;         
         }
     },
    
@@ -80,6 +78,4 @@ var behaviorList = {
             this.lastAdvance = time;
         }
     },
-
-
 }
