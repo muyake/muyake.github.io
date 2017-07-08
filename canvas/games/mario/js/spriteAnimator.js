@@ -25,8 +25,7 @@ CharacterSpriteAnimator.prototype.execute = function() {
         this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;
         if (this.sprite.top < this.sprite.initialTop) {
             this.sprite.isJump = true;
-            this.sprite.painter = this.sprite.jumpPainter;
-
+            //this.sprite.painter = this.sprite.jumpPainter;
         } else {
             this.sprite.top = this.sprite.initialTop;
             this.sprite.isJump = false;
@@ -48,7 +47,7 @@ UpSpriteAnimator.prototype.execute = function() {
         this.sprite.top -= this.sprite.velocityY / this.sprite.fpsNum;
         if (this.sprite.top > this.sprite.initialTop) {
             this.sprite.isJump = true;
-            this.sprite.painter = this.sprite.jumpPainter;
+           // this.sprite.painter = this.sprite.jumpPainter;
 
         } else {
             this.sprite.upover = true;
@@ -78,7 +77,7 @@ BulletJumpSpriteAnimator.prototype.execute = function() {
         this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;
         if (this.sprite.top <this.sprite.initialTop) {
             this.sprite.isJump = true;
-            this.sprite.painter = this.sprite.jumpPainter;
+           // this.sprite.painter = this.sprite.jumpPainter;
             
         } else {
             this.sprite.top =this.sprite.initialTop;
@@ -94,6 +93,7 @@ var RiseSpriteAnimator = function(elapsedCallback, sprite) {
 }
 RiseSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
 RiseSpriteAnimator.prototype.constructor = RiseSpriteAnimator;
+//马里奥长大
 RiseSpriteAnimator.prototype.execute = function() {
     var animator = this;
     if (animator.isRunning) {
@@ -102,6 +102,7 @@ RiseSpriteAnimator.prototype.execute = function() {
         var whRate=WH.mario.bigstatus.width / WH.mario.bigstatus.height;
         this.sprite.width += this.sprite.risespeed *whRate / this.sprite.fpsNum;
         this.sprite.top -= this.sprite.risespeed / this.sprite.fpsNum;
+        this.sprite.left -= this.sprite.risespeed *whRate/ this.sprite.fpsNum/2;
         if ((this.sprite.risespeed > 0 && this.sprite.height < this.sprite.initialHeight) || (this.sprite.risespeed < 0 && this.sprite.height > this.sprite.initialHeight)) {
             this.sprite.isRising = true;
 
@@ -117,13 +118,13 @@ RiseSpriteAnimator.prototype.execute = function() {
     }
 }
 
-
-var MoveSpriteAnimator=function(elapsedCallback, sprite){
+//砖的四散。
+var BrikeSpriteAnimator=function(elapsedCallback, sprite){
     CharacterSpriteAnimator.call(this,elapsedCallback, sprite);
 }
-MoveSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
-MoveSpriteAnimator.prototype.constructor = MoveSpriteAnimator;
-MoveSpriteAnimator.prototype.execute=function(){
+BrikeSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
+BrikeSpriteAnimator.prototype.constructor = BrikeSpriteAnimator;
+BrikeSpriteAnimator.prototype.execute=function(){
      var animator = this;
     if (animator.isRunning) {
         this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE*2 / this.sprite.fpsNum;
@@ -131,7 +132,7 @@ MoveSpriteAnimator.prototype.execute=function(){
         this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;
         if (this.sprite.top <this.sprite.initialTop) {
             this.sprite.isJump = true;
-            this.sprite.painter = this.sprite.jumpPainter;
+            //this.sprite.painter = this.sprite.jumpPainter;
 
         } else {
             this.sprite.upover = true;
@@ -142,13 +143,13 @@ MoveSpriteAnimator.prototype.execute=function(){
         }       
     }
 }
-
-var MoveSpriteAnimator2=function(elapsedCallback, sprite){
+//只有横向移动
+var MoveSpriteAnimator=function(elapsedCallback, sprite){
     CharacterSpriteAnimator.call(this,elapsedCallback, sprite);
 }
-MoveSpriteAnimator2.prototype = Object.create(CharacterSpriteAnimator.prototype);
-MoveSpriteAnimator2.prototype.constructor = MoveSpriteAnimator2;
-MoveSpriteAnimator2.prototype.execute=function(){
+MoveSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
+MoveSpriteAnimator.prototype.constructor = MoveSpriteAnimator;
+MoveSpriteAnimator.prototype.execute=function(){
      var animator = this;
     if (animator.isRunning) {     
         this.sprite.translateLeft+=this.sprite.initvelocityX / this.sprite.fpsNum;
