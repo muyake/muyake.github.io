@@ -163,14 +163,15 @@ var marioConfig = {
 };
 
 var bulletConfig={
-  RV:480,//旋转角速度
-
+  RV:980,//旋转角速度
+  VX:240,
 };
 var WH = {
   wall: {
     width: 35,
     height: 35
   },
+
    bullet: {
     width: 24,
     height: 24
@@ -179,6 +180,10 @@ var WH = {
     width: 45
   },
   flower: {
+    width: 35,
+    height: 35
+  },
+   star: {
     width: 35,
     height: 35
   },

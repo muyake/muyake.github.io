@@ -44,21 +44,56 @@ var totalProgressSprite = {
         status: 1,
         positionmile: 135,
         physicaltop: 100,
-        contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile: 170,
+        physicaltop: 100,
+        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
     }, {
         isVisible: true,
         id: lib.newGuid(),
         status: 1,
         positionmile: 205,
         physicaltop: 100,
+        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile: 240,
+        physicaltop: 100,
         contain: 3, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
     }, {
         isVisible: true,
         id: lib.newGuid(),
         status: 1,
-        positionmile: 170,
+        positionmile: 275,
         physicaltop: 100,
-        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    },{
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile: 310,
+        physicaltop: 100,
+        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    },{
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile: 345,
+        physicaltop: 100,
+        contain: 4, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    },{
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile: 380,
+        physicaltop: 100,
+        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
     }],
     money: [{
         isVisible: true,
@@ -75,7 +110,7 @@ var totalProgressSprite = {
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: 0,
-        positionmile: 500
+        positionmile: 600
     }],
     
     badflower: [],   
@@ -117,8 +152,22 @@ var createFactory = {
             positionmile: positionmile,
             id: lib.newGuid(),           
         });
-        createUpMushroomObj.up(100);
+        createUpMushroomObj.up(200);
         drawSpriteList.createAnimationSpriteList.push(createUpMushroomObj);
+    },
+    //创造star
+    createStar: function(positionmile, physicaltop) {
+        var createUpStarObj = new Star({
+            physicaltop: physicaltop,
+            positionmile: positionmile,
+            id: lib.newGuid(),  
+            jumpEndCallback:function(sprite){
+                sprite.up(150);                              
+            },      
+        });
+        createUpStarObj.up(200);
+        createUpStarObj.move(-70); 
+        drawSpriteList.createAnimationSpriteList.push(createUpStarObj);
     },
     //创造子弹
     createBullet: function(positionmile, physicaltop,isreverse) {
@@ -128,9 +177,9 @@ var createFactory = {
             id: lib.newGuid(),          
         });
         if(isreverse){
-             createBulletObj.jump(-140);
+             createBulletObj.jump(-bulletConfig.VX);
         }else{
-             createBulletObj.jump(140);
+             createBulletObj.jump(bulletConfig.VX);
         }      
         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.fire);
         
@@ -207,10 +256,8 @@ var createFactory = {
     createTortoise: function(setting) {
 
     },
-    //创造小星星
-    createStar: function(setting) {
-
-    },
+    
+   
     //创造城堡
     createTower: function(setting) {
 

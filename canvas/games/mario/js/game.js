@@ -51,12 +51,16 @@ var game = {
             createFactory.createBrick(100, 100);
         }, false);
         document.querySelector('#flower').addEventListener('click', function() {
-            drawSpriteList.mario.rise(WH.mario.bigstatus.height);
+            drawSpriteList.mario.rise(WH.mario.bigstatus.height,3);
             //createFactory.createUpMoney(100, 100);
         }, false);
         document.querySelector('#flower1').addEventListener('click', function() {
-            drawSpriteList.mario.rise(WH.mario.smallstatus.height);
+            drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
             createFactory.createBullet(100, 100);
+        }, false);
+        document.querySelector('#createStar').addEventListener('click', function() {
+           // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
+            createFactory.createStar(100, 100);
         }, false);
         document.querySelector('#bigBtn').addEventListener('click', function() {
             audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
@@ -325,6 +329,9 @@ var drawSpriteList = {
             flower: {
                 funcName: 'judgeMF',
             },
+            star:{
+                 funcName: 'judgeMS',
+            },
             bullet: {
                 funcName: 'judgeBBarrier',
             },
@@ -363,14 +370,13 @@ var drawSpriteList = {
                     var callback2 = self.config["bullet"].callback || function() {};
                     CD['judgeBBarrier'](itemDraw, barrier, callback2);
                 });
-
             });
             //蘑菇，怪兽等水平的对象与障碍物（马里奥，管道，墙等）的碰撞
             drawSpriteList.createAnimationSpriteList.forEach(function(mover) {
                 var callback = self.config[mover.name].callback || function() {};
                 CD[self.config[mover.name].funcName](drawSpriteList.mario, mover, callback);
                 //如果蘑菇已经上升完毕，则在判断蘑菇与墙，管道的碰撞效果。            
-                if (mover.name == 'mushroom') {
+                if (mover.name == 'mushroom'||mover.name == 'star') {
                     if (mover.upover) {
                         drawSpriteList.arrayOthersA.forEach(function(barrier) {
                             var callback2 = self.config["moverBarrier"].callback || function() {};

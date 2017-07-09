@@ -72,16 +72,18 @@ var CD = {
                         case 3:
                             { //如果是长大了，就会出花，如果是小人状态，则出蘑菇。
                                 audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
+                                
                                 if (mario.status == 1) {
                                     createFactory.createUpMushroom(wall.positionmile, wall.physicaltop);
                                 } else {
-
                                     createFactory.createUpFlower(wall.positionmile, wall.physicaltop);
                                 }
                             }
                             break;
                         case 4:
                             //弹小星星
+                            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
+                             createFactory.createStar(wall.positionmile, wall.physicaltop);
                             break;
                     }
                     wall.changeToAA();
@@ -92,17 +94,17 @@ var CD = {
                         wall.up(60);
                         audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
                     } else {
-                    //大个马里奥将砖顶碎                     
-                    wall.visible = false;
-                    var id = wall.id;
-                    var wallList = totalProgressSprite.wall;
-                    wallList.forEach(function(item) {
-                        if (item.id == id) {
-                            item.isVisible = false;
-                        }
-                    });
-
-                        createFactory.createBrick(wall.physicaltop, wall.positionmile);
+                        //大个马里奥将砖顶碎                     
+                        wall.visible = false;
+                        var id = wall.id;
+                        var wallList = totalProgressSprite.wall;
+                        wallList.forEach(function(item) {
+                            if (item.id == id) {
+                                item.isVisible = false;
+                            }
+                        });
+                        console.log(wall.positionmile);
+                        createFactory.createBrick(wall.positionmile, wall.physicaltop);
                         audioControl.audioPlay(gameSourceObj.audioList.music, gameAudio.wallbreak);
                     }
                 }
@@ -209,11 +211,27 @@ var CD = {
         if ((mario.left + mario.width) < flower.left || (flower.left + flower.width) < mario.left || (mario.top + mario.height) < flower.top || (flower.top + flower.height) < mario.top) {
             return true
         } else {
-            mario.status = 3;
+            //mario.status = 3;
+
             lib.removeByValue(drawSpriteList.createSpriteList, 'id', flower.id);
             audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
+            drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
             flower = null;
             //callback(flower);
+        }
+    },
+    judgeMS: function(mario, star, callback) {
+        if (star.visible == false) {
+            return;
+        }
+        // 两个矩形检测
+        if ((mario.left + mario.width) < star.left || (star.left + star.width) < mario.left || (mario.top + mario.height) < star.top || (star.top + star.height) < mario.top) {
+            return true
+        } else {
+            // callback(star);
+            lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', star.id);
+            drawSpriteList.mario.rise(drawSpriteList.mario.height, 4);
+            star = null;
         }
     },
     judgeMMR: function(mario, mushroom, callback) {
@@ -226,7 +244,7 @@ var CD = {
         } else {
             // callback(mushroom);
             lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mushroom.id);
-            drawSpriteList.mario.rise(WH.mario.bigstatus.height);
+            drawSpriteList.mario.rise(WH.mario.bigstatus.height, 2);
             mushroom = null;
         }
     },

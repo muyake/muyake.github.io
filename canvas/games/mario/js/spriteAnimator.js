@@ -45,6 +45,7 @@ UpSpriteAnimator.prototype.execute = function() {
     if (animator.isRunning) {
         //  this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
         this.sprite.top -= this.sprite.velocityY / this.sprite.fpsNum;
+       
         if (this.sprite.top > this.sprite.initialTop) {
             this.sprite.isJump = true;
            // this.sprite.painter = this.sprite.jumpPainter;
