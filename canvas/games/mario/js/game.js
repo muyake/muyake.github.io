@@ -55,7 +55,7 @@ var game = {
             //createFactory.createUpMoney(100, 100);
         }, false);
         document.querySelector('#flower1').addEventListener('click', function() {
-            drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
+            drawSpriteList.mario.rise(WH.mario.smallstatus.height,3);
             createFactory.createBullet(100, 100);
         }, false);
         document.querySelector('#createStar').addEventListener('click', function() {
@@ -367,8 +367,11 @@ var drawSpriteList = {
             //子弹与障碍物碰撞，（包括与管道和墙的左右碰撞，并不完善（尚未完成），与怪兽的碰撞）
             drawSpriteList.createBulletSpriteList.forEach(function(itemDraw) {
                 drawSpriteList.arrayOthersA.forEach(function(barrier) {
-                    var callback2 = self.config["bullet"].callback || function() {};
+                    if (barrier.name=='wall'||barrier.name=='pipe') {
+                           var callback2 = self.config["bullet"].callback || function() {};
                     CD['judgeBBarrier'](itemDraw, barrier, callback2);
+                    }
+                 
                 });
             });
             //蘑菇，怪兽等水平的对象与障碍物（马里奥，管道，墙等）的碰撞

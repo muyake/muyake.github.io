@@ -115,6 +115,7 @@ var CD = {
             mover.velocityX = -mover.velocityX;
             mover.initvelocityX = -mover.initvelocityX;
         },
+        
         MoverrightBarrier: function(mover, barrier) {
             mover.left = barrier.left + mover.width;
             mover.velocityX = -mover.velocityX;
@@ -124,16 +125,6 @@ var CD = {
         MoverupBarrier: function(mover, barrier) {
             mover.initialTop = barrier.top - mover.height;
             mover.upColliding = barrier;
-        },
-        BulletleftBarrier: function(bullet, barrier) {
-             lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bullet.id);
-            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
-            bullet = null;
-        },
-          BulletrightBarrier: function(bullet, barrier) {
-            lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bullet.id);
-            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
-            bullet = null;
         },
         //碰撞中执行的函数,
         Colliding: function(A, B, leftFun, rightFun, downFun, upFun) {
@@ -199,8 +190,8 @@ var CD = {
             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
         }
     },
-    judgeBBarrier: function(bullet, barrier, callback) {
-         if (barrier.visible == false) {
+    judgeBBarrier: function(bullet, barrier, callback) {        
+        if (barrier.visible == false) {
             return;
         }
         var self = this;
@@ -209,10 +200,10 @@ var CD = {
             this.CDFunc.MoverOutCarrying(bullet, barrier);
         } else {
             var leftfun = function() {
-                self.CDFunc.BulletleftBarrier(bullet, barrier)
+                self.CDFunc.MoverleftBarrier(bullet, barrier)
             };
             var rightfun = function() {
-                self.CDFunc.BulletrightBarrier(bullet, barrier)
+                self.CDFunc.MoverrightBarrier(bullet, barrier)
             };
             var upfun = function() {
                 self.CDFunc.MoverupBarrier(bullet, barrier)
