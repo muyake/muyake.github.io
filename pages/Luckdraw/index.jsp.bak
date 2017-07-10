@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title></title>
+    <script type="text/javascript" src="http://s.xnimg.cn/a90462/wap/mobile/2017activity/beautifulroom/js/flexible.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <header class="header">        
+    </header>
+    <div class="container">
+        <div class="luckDraw-box-common">
+            <div class="startBtn-box">
+                <div class="btn-box">
+                    <div class="cost">
+                        消耗<span>1298</span>张奖券
+                    </div>
+                </div>
+                <div class="surplus">
+                    剩余<span>1298</span>张奖券
+                </div>
+            </div>
+            <div class="luckItem first grade1">
+                <div class="giftImg">
+                    <div class="giftCount">
+                        x16
+                    </div>
+                </div>
+                <div class="giftName">
+                    小星星
+                </div>
+                <div class="border-box" data-id='1'>
+                </div>
+            </div>
+            <div class="luckItem commen1 grade3">
+                <div class="giftImg" style="background-image: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/gift2.png);">
+                    <div class="giftCount">
+                        x16
+                    </div>
+                </div>
+                <div class="giftName">
+                    小星星
+                </div>
+                <div class="border-box"  data-id='2'>
+                </div>
+            </div>
+            <div class="luckItem commen2  grade2">
+                <div class="border-box" data-id='3'>
+                </div>
+            </div>
+            <div class="luckItem commen3  grade3">
+                <div class="border-box" data-id='4'>
+                </div>
+            </div>
+            <div class="luckItem commen4  grade2">
+                <div class="border-box" data-id='5'>
+                </div>
+            </div>
+            <div class="luckItem commen5  grade2">
+                <div class="border-box" data-id='6'>
+                </div>
+            </div>
+            <div class="luckItem commen6  grade3">
+                <div class="border-box" data-id='7'>
+                </div>
+            </div>
+            <div class="luckItem commen7  grade2">
+                <div class="border-box" data-id='8'>
+                </div>
+            </div>
+            <div class="luckItem commen8  grade3">
+                <div class="border-box" data-id='9'>
+                </div>
+            </div>
+            <div class="luckItem commen9  grade3">
+                <div class="border-box" data-id='10'>
+                </div>
+            </div>
+            <div class="luckItem commen10  grade2">
+                <div class="border-box" data-id='11'>
+                </div>
+            </div>
+            <div class="luckItem commen11  grade3">
+                <div class="border-box" data-id='12'>
+                </div>
+            </div>
+        </div>
+        <div class="luckDraw-box-special">
+        </div>
+    </div>
+
+
+     <script src='http://s.xnimg.cn/a90527/wap/mobile/2017activity/nebula/js/index.js'>
+         </script>
+</body>
+
+</html>

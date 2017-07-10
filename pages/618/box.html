@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript">
+    function getNumList() {
+        var nums = document.getElementById('numbers').value;
+        var reg = /\d+/g;
+        var numList = nums.match(reg);
+        if (numList == null)
+            document.getElementById('result').innerHTML = "NO LEGAL NUMBER INPUT";
+        else
+            document.getElementById('result').innerHTML = numList.join(',');
+    }
+    </script>
+    <style>
+    .div2 {
+        width: 147px;
+        height: 147px;
+        box-sizing: border-box;
+        background: #4a21b4;
+        margin-top: 100px;
+        margin-left: 200px;    
+        border-left:20px solid #3d17a1;  
+        border-top:20px solid #25047e;
+        border-right: 20px solid #3d17a1;
+        border-bottom:20px solid #824aff;       
+    }
+    .div2:after{
+        content: '';
+        display: block;
+    position: absolute;
+    z-index: -1;
+    margin-top: -24px;
+    margin-left: -24px;
+    width: 155px;
+  height: 155px;
+  background-image: -moz-linear-gradient( 90deg, rgb(106,53,240) 0%, rgb(115,86,254) 100%);
+  background-image: -webkit-linear-gradient( 90deg, rgb(106,53,240) 0%, rgb(115,86,254) 100%);
+  background-image: -ms-linear-gradient( 90deg, rgb(106,53,240) 0%, rgb(115,86,254) 100%);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="div2">
+    </div>
+</body>
+
+</html>

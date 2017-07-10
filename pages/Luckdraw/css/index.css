@@ -1,0 +1,698 @@
+/* background: [background-color] [background-image] [background-repeat] [background-attachment] [background-position] / [ background-size] [background-origin] [background-clip]; */
+
+html,
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ol,
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #666;
+}
+
+img {
+    border: none;
+}
+
+a,
+img {
+    -webkit-touch-callout: none;
+}
+
+
+/* 常用原子样式 */
+
+.f-l {
+    float: left;
+}
+
+.f-r {
+    float: right;
+}
+
+.clearfix:after {
+    clear: both;
+    content: "";
+    display: block;
+    overflow: hidden;
+}
+
+.ellip {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.m0 {
+    margin: 0;
+}
+
+html,
+body {
+    width: 100%;
+   height: 100%;
+}
+
+body {
+    background-color: #1e150e;
+    background-size: 100%;
+    /*-webkit-overflow-scrolling: touch;*/
+}
+.toast{
+    position: fixed;
+    min-width: 3.7rem;
+    max-width: 5rem;
+    background: rgba(0,0,0,.8);
+    padding:0.3rem;
+    border-radius: 6px;
+    z-index: 10001;
+    top:50%;
+    left: 50%;
+    -webkit-transform:translate3d(-50%,-50%,0);
+    -moz-transform:translate3d(-50%,-50%,0);    
+    -o-transform:translate3d(-50%,-50%,0);
+    text-align: center;
+    font-size: 0.48rem;
+    color: #fff;
+}
+.header {
+    height: 5rem;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 1px;    
+}
+.tip{
+    width: 9.493333rem;
+    height: 3.2rem;
+    margin:0 auto;
+    margin-top:0.266667rem;
+     background: url('http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/tip.png') no-repeat center;
+    background-size: 100% 100%;
+}
+
+.explain {
+    font-size: 0.32rem;
+    color: #4a2d0a;
+    line-height: 1.5;
+    width: 8.96rem;
+    margin: 0 auto;
+    margin-top: 4.32rem;
+}
+
+.container {
+    margin-top: -1.466667rem;
+    padding-bottom: 2rem;
+}
+
+.tap-box {
+    text-align: center;
+}
+
+.tap-box>div {
+    display: inline-block;
+    font-size: 0;
+    vertical-align: middle;
+}
+
+.commonBtn-box,
+.seniorBtn-box {
+    width: 3.333333rem;
+    height: 1.066667rem;
+    background: no-repeat center;
+    background-size: 100% 100%;
+}
+
+.commonBtn-box.active {
+    background-image: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/activeCommonBtn.png);
+}
+
+.commonBtn-box.notactive {
+    background-image: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/notActiveCommonBtn.png);
+}
+
+.seniorBtn-box.active {
+    background-image: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/activeSeniorBtn.png);
+}
+
+.seniorBtn-box.notactive {
+    background-image: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/notActiveSeniorBtn.png);
+}
+
+.seniorBtn-box {
+    margin-left: 0.533333rem;
+}
+
+[data-dpr="1"] .luckDraw-box{
+ border: 1px solid #4d4435; 
+}
+[data-dpr="3"] .luckDraw-box{
+ border: 0.026667rem solid #4d4435; 
+}
+[data-dpr="2"] .luckDraw-box{
+ border: 0.026667rem solid #4d4435; 
+}
+
+
+.luckDraw-box {
+    width: 9.493333rem;
+    height: 9.493333rem;
+    border:  1px solid #48443b;
+    /*border: #48443b 0.053333rem solid;*/
+    border-radius: 0.293333rem;
+    margin: 0 auto;
+    margin-top: -0.133333rem;
+    background: #3a281a;
+    -webkit-box-shadow: inset 0 0 1.333333rem #1b110a;
+    -moz-box-shadow: inset 0 0 1.333333rem #1b110a;
+    box-shadow: inset 0 0 1.333333rem #1b110a;
+    position: relative;
+}
+
+.luckItem {
+    box-sizing: border-box;
+    width: 2.0rem;
+    position: absolute;
+    ;
+    height: 2.0rem;
+    /* overflow: hidden;*/
+    border-radius: 0.133333rem;
+    /* border:0.053333rem solid #55473a;   */
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/itembg2.png) no-repeat center;
+    background-size: 100% 100%;
+}
+
+.successImg .luckItem{
+    left: 50%;
+    top:50%;
+     -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
+}
+
+
+.luckDraw-box-senior .first,
+.luckDraw-box-common .first {
+    left: 0.24rem;
+    top: 0.24rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/itembg1.png) no-repeat center;
+    background-size: 100% 100%;
+}
+
+.commen1 {
+    left: 2.693333rem;
+    top: 0.626667rem;
+}
+
+.commen2 {
+    left: 4.746667rem;
+    top: 0.626667rem;
+}
+
+.commen3 {
+    left: 6.8rem;
+    top: 0.626667rem;
+}
+
+.commen4 {
+    left: 6.8rem;
+    top: 2.693333rem;
+}
+
+.commen5 {
+    left: 6.8rem;
+    top: 4.746667rem;
+}
+
+.commen6 {
+    left: 6.8rem;
+    top: 6.8rem;
+}
+
+.commen7 {
+    left: 4.746667rem;
+    top: 6.8rem;
+}
+
+.commen8 {
+    left: 2.693333rem;
+    top: 6.8rem;
+    /*-webkit-mask-image:url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/grade2Border.png);*/
+}
+
+.commen9 {
+    left: 0.64rem;
+    top: 6.8rem;
+}
+
+.commen10 {
+    left: 0.64rem;
+    top: 4.746667rem;
+}
+
+.commen11 {
+    left: 0.64rem;
+    top: 2.693333rem;
+}
+
+.luckDraw-box .startBtn-box {
+    left: 3.013333rem;
+    top: 3.013333rem;
+    position: absolute;
+}
+
+.luckDraw-box-common .startBtn-box .btn-box {
+    width: 3.466667rem;
+    height: 2.773333rem;
+    margin: 0 auto;
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/commonStartBtn.png) no-repeat center;
+    background-size: 100% auto;
+    overflow: hidden;
+}
+
+.luckDraw-box-senior .startBtn-box .btn-box {
+    width: 3.466667rem;
+    height: 2.773333rem;
+    margin: 0 auto;
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/seniorStartBtn.png) no-repeat center;
+    background-size: 100% auto;
+    overflow: hidden;
+}
+
+.luckDraw-box .startBtn-box .btn-box .cost {
+    margin-top: 1.733333rem;
+    text-align: center;
+    font-size: 0.346667rem;
+    color: #ddad65;
+    line-height: 1em;
+}
+
+.luckDraw-box .startBtn-box .btn-box .cost span {
+    margin: 0 0.08rem;
+}
+
+.luckDraw-box .startBtn-box .surplus {
+    margin-top: 0.266667rem;
+    text-align: center;
+    font-size: 0.346667rem;
+    color: #ffc44d;
+}
+
+.luckDraw-box .startBtn-box .surplus span {
+    color: #ffeac1;
+    margin: 0 0.08rem;
+}
+
+.luckDraw-box .border-box,.lotterySuccess .border-box{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.lotterySuccess .first{
+    width: 100%;
+    height: 100%;
+     background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/itembg1.png) no-repeat center;
+    background-size: 100% 100%;
+}
+.lotterySuccess .first .giftImg{
+    width: 1.786667rem;
+    height: 1.786667rem;
+    margin: 0 auto;
+    margin-top: 0.053333rem;
+    overflow: hidden;
+    background: no-repeat center;
+    background-size: 100% 100%;
+}
+
+.luckDraw-box-common {
+    display: none;
+}
+
+.luckDraw-box-common {}
+
+.luckDraw-box-common .grade2 .border-box,.lotterySuccess .first.grade2 .border-box {
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/commongrade1border.png) no-repeat center;
+    background-size: 100% 100%;
+}
+.luckDraw-box-senior .grade2 .border-box,.lotterySuccess .grade2 .border-box {
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/grade3Border.png) no-repeat center;
+    background-size: 100% 100%;
+}
+.luckDraw-box-senior .grade1 .border-box,.lotterySuccess .first.grade1 .border-box {
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/grade1Border.png) no-repeat center;
+    background-size: 100% 100%;
+}
+
+.luckDraw-box .grade3 .border-box ,.lotterySuccess .grade3 .border-box {
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/grade3Border.png) no-repeat center;
+    background-size: 100% 100%;
+}
+
+.luckDraw-box .grade1 .active,
+.luckDraw-box .grade2 .active,
+.luckDraw-box .grade3 .active {
+    background: none;
+    border-radius: 0.133333rem;
+    border: 0.053333rem solid #fff2b2;
+    -webkit-box-shadow: 0 0 10px #fff2b2, inset 0 0 10px #fff2b2;
+    -moz-box-shadow: 0 0 10px #fff2b2, inset 0 0 10px #fff2b2;
+    box-shadow: 0 0 10px #fff2b2, inset 0 0 10px #fff2b2;
+}
+
+.luckDraw-box-common .grade2 .giftImg,.luckDraw-box-senior .grade1 .giftImg,.lotterySuccess .successImg .first .giftImg {
+    width: 1.786667rem;
+    height: 1.786667rem;
+    margin: 0 auto;
+    margin-top: 0.053333rem;
+    overflow: hidden;
+    background: no-repeat center;
+    background-size: 100% 100%;
+}
+
+.luckDraw-box-senior .grade1 .giftImg .giftCount,.luckDraw-box-common .grade2 .giftImg .giftCount ,.lotterySuccess .first .giftImg .giftCount {
+    font-size: 0.4rem;
+    color: #f9de51;
+    font-weight: 900;
+    /*background: red;*/
+    margin-top: 1.253333rem;
+    text-align: right;
+   /* -webkit-text-fill-color: #f9de51;
+    -webkit-text-stroke: 1px #331900;*/
+    /*text-shadow:0.04rem 0px #331900, -0.04rem 0px #331900, 0px 0.04rem #331900, 0px -0.04rem #331900;*/
+}
+
+.luckDraw-box-common .grade2 .giftName,.lotterySuccess .first.grade2 .giftName{
+    color: #ffefd9;
+    font-size: 0.373333rem;
+    line-height: 0.586667rem;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    border-bottom-left-radius: 0.133333rem;
+    border-bottom-right-radius: 0.133333rem;
+    background-image: -moz-linear-gradient( to left, rgb(101, 36, 0) 0%, rgb(192, 74, 22) 17%, rgb(227, 112, 37) 50%, rgb(192, 74, 22) 83%, rgb(101, 36, 0) 100%);
+    background-image: -webkit-linear-gradient( to left, rgb(101, 36, 0) 0%, rgb(192, 74, 22) 17%, rgb(227, 112, 37) 50%, rgb(192, 74, 22) 83%, rgb(101, 36, 0) 100%);
+    background-image: -ms-linear-gradient( to left, rgb(101, 36, 0) 0%, rgb(192, 74, 22) 17%, rgb(227, 112, 37) 50%, rgb(192, 74, 22) 83%, rgb(101, 36, 0) 100%);
+    background-image: linear-gradient( to left, rgb(101, 36, 0) 0%, rgb(192, 74, 22) 17%, rgb(227, 112, 37) 50%, rgb(192, 74, 22) 83%, rgb(101, 36, 0) 100%);
+}
+
+.luckDraw-box-senior .grade1 .giftName,.lotterySuccess .first.grade1 .giftName{
+    color: #ffefd9;
+    font-size: 0.373333rem;
+    line-height: 0.586667rem;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    border-bottom-left-radius: 0.133333rem;
+    border-bottom-right-radius: 0.133333rem;
+    background-image: -webkit-linear-gradient( to left, #945b00 0%, #956000 2.4%, #cb9c36 20%, #e3c04d 47%, #e8c248 50%, #e3c04d 53%, #cb9c36 80%, #cb9c36 97.6%, #945b00 100%);
+    background-image: linear-gradient( to left, #945b00 0%, #956000 2.4%, #cb9c36 20%, #e3c04d 47%, #e8c248 50%, #e3c04d 53%, #cb9c36 80%, #956000 97.6%, #945b00 100%);
+}
+
+.luckDraw-box .giftImg,.lotterySuccess .successImg .giftImg {
+    width: 1.333333rem;
+    height: 1.333333rem;
+    margin: 0 auto;
+    margin-top: 0.053333rem;
+    overflow: hidden;
+    background: no-repeat center;
+    background-size: 100% 100%;
+}
+
+
+.luckDraw-box .giftCount ,.successImg  .giftCount{
+    font-size: 0.293333rem;
+    color: #ccad6a;
+    font-weight: 900;
+    /*background: red;*/
+    margin-top: 0.933333rem;
+    text-align: right;
+ /*   -webkit-text-fill-color: #ccad6a;
+    -webkit-text-stroke: 0.04rem #331900;*/
+}
+.luckDraw-box .giftName,.successImg  .giftName{
+    color: #f5d9b1;
+    font-size: 0.32rem;
+    line-height: 2em;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    border-bottom-left-radius: 0.133333rem;
+    border-bottom-right-radius: 0.133333rem;
+}
+[data-dpr="1"] .rule-box{
+ border: 1px solid #4d4435; 
+}
+[data-dpr="3"] .rule-box{
+ border: 0.026667rem solid #4d4435; 
+}
+[data-dpr="2"] .rule-box{
+ border: 0.026667rem solid #4d4435; 
+}
+
+.rule-box {
+    font-size: 0.346667rem;
+    color: rgb( 102, 87, 71);
+    line-height: 1.846;
+    width: 8.933333rem;
+    border: 1px solid #4d4435;    
+    /*border:0.053333rem solid #4d4435;*/
+    margin: 0 auto;
+    margin-top: 0.666667rem;
+    padding-left: 0.666667rem;
+    padding-right: 0.266667rem;
+}
+
+.rule-box .top {
+    margin: 0 auto;
+    margin-top: -0.333333rem;
+    text-align: center;
+    background: #1e150e;
+    width: 2.266667rem;
+
+}
+.rule-box ol,
+.rule-box li {
+    font-size: 0.32rem;
+    text-align: justify;
+    list-style-type: decimal;
+    padding-left: 0.16rem;
+}
+
+.fixBottom-box {
+    width: 100%;
+    height: 1.826667rem;
+    position: fixed;
+    bottom: 0px;
+    font-size: 0;
+    left: 0px;
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/fixBottom.png) no-repeat center;
+    background-size: 100% 100%;
+}
+
+.w1 {
+    display: inline-block;
+    line-height: 1.5em;
+    font-size: 0.346667rem;
+    color: rgb( 228, 182, 120);
+    margin-top: 0.533333rem;
+    width: 3.333333rem;
+    text-align: right;
+}
+
+.fragmentNum {
+    display: inline-block;
+    line-height: 1.5em;
+    font-size: 0.346667rem;
+    color: #f5d9b1;
+    margin-top: 0.533333rem;
+    margin-left: 0.4rem;
+    width: 0.88rem;
+    text-align: center;
+}
+
+.w2 {
+    position: absolute;
+    line-height: 2em;
+    font-size: 0.32rem;
+    color: #f5d9b1;
+    left: 0.5rem;
+    top: 1.1rem;
+    text-align: left;
+}
+
+.exchangeBtn {
+    position: absolute;
+    left: 4.586667rem;
+    top: 0.24rem;
+    width: 1.093333rem;
+    height: 1.093333rem;
+   /* border: 2px solid red;*/
+
+}
+
+.rechargeBtn {
+    position: absolute;
+    left: 6.8rem;
+    top: 0.346667rem;
+    width: 2.72rem;
+    height: 1.2rem;
+  /*  border: 2px solid red;*/
+}
+
+.popupBox {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.makeSureBox {
+    display: none;
+    width: 6.826667rem;
+    height: 3.2rem;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/makeSureBox.png) no-repeat center;
+    background-size: 100% 100%;
+}
+.makeSureBox .cancel{
+    position: absolute;
+    left:0.746667rem;
+    top:  1.866667rem;
+    width: 2.48rem;
+    height: 0.866667rem;
+    box-sizing: border-box;    
+    /*border: 2px solid red;*/
+}
+.makeSureBox .ok{
+    position: absolute;
+    left:3.68rem;
+    top:  1.866667rem;
+    width: 2.48rem;
+    height: 0.866667rem;
+    box-sizing: border-box;    
+    /*border: 2px solid red;*/
+}
+
+.makeSureBox {
+    width: 6.826667rem;
+    height: 3.2rem;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/makeSureBox.png) no-repeat center;
+    background-size: 100% 100%;
+}
+.exchangeSuccess,.lotterySuccess{
+    width: 7.426667rem;
+    height: 7.853333rem;
+    display: none;
+      margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+   /* background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/successBG.png) no-repeat center;
+    background-size: 100% 100%;*/
+}
+.exchangeSuccess{
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/successBG.png) no-repeat center;
+    background-size: 100% 100%;
+}
+.lotterySuccess{
+     background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/drawLuckBG.png) no-repeat center;
+    background-size: 100% 100%;
+}
+.exchangeSuccess .successImg{
+   position: absolute;
+   left: 2.48rem;
+   top: 3.066667rem; 
+    background:url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/success.png) no-repeat center;
+    background-size: 100% 100%;
+    width: 2.4rem;
+    height: 2.4rem;
+}
+.exchangeSuccess .successImg .giftCount{
+   font-size: 0.4rem;
+    color: #f9de51;
+    font-weight: 900;
+    position: absolute;
+    /*background: red;*/
+    top: 1.666667rem;  
+   
+
+    left:1.7rem;  
+     margin-top: 0px;
+    text-align: right;
+    -webkit-text-fill-color: #f9de51;
+    -webkit-text-stroke: 1px #331900;
+}
+.lotterySuccess .successImg{
+   position: absolute;
+   left: 2.48rem;
+   top: 3.066667rem;
+   width: 2.426667rem;
+    height: 2.426667rem;   
+}
+.closeBtn{
+    position: absolute;
+    bottom: 0px;
+    width: 0.85rem;
+    height: 0.8rem;
+    /*border:2px solid red;*/
+    left: 3.2rem;
+}
+
+

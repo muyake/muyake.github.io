@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    opacity: 0;
+    background: #1f1e4d;
+}
+
+.title-box {
+    width: 100%;
+}
+
+.recordTitleImg {
+    display: block;
+    width: 100%;
+}
+
+.box {
+    width: 5.8rem;
+    min-height: 6.1rem;
+    margin: 0 auto;
+    margin-top: -1rem;
+    padding-top: 1.07rem;
+    overflow: hidden;
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/618/images/box.png) no-repeat top center/contain;
+}
+
+
+.item,.noitem {
+    width: 5.12rem;
+   /* height: 1.45rem;*/
+    margin: 0 auto;   
+    box-sizing: border-box;
+    background:#fff;
+   /*background: url(http://a.xnimg.cn/wap/mobile/2017activity/618/images/recordBG.png) no-repeat top center/cover;*/
+}
+.borderStyleUp{
+     width: 5.12rem;
+    height: 0.22rem;
+    margin: 0 auto;   
+    box-sizing: border-box; 
+    margin-top: 0.02rem;   
+   background: url(http://a.xnimg.cn/wap/mobile/2017activity/618/images/borderdot1.png) no-repeat center;
+   background-size: 100% 100%;
+}
+ .borderStyle{
+    width: 5.12rem;
+    height: 0.41rem;
+    margin: 0 auto;   
+    box-sizing: border-box;    
+   background: url(http://a.xnimg.cn/wap/mobile/2017activity/618/images/borderdot2.png) no-repeat center/cover;
+}
+
+.borderStyle:last-child{
+    
+    height: 0.19rem;
+   background: url(http://a.xnimg.cn/wap/mobile/2017activity/618/images/borderdot3.png) no-repeat center/cover;
+}
+.noitem{
+    padding-top: 0.3rem;
+}
+
+.noitem p{
+    text-align: center;
+    font-size: 0.25rem;
+    color:#1e1e4c;
+    line-height: 1.5em;
+}
+
+.time {
+    margin: 0 auto;
+    padding-top: 0.2rem;
+    line-height: 0.5rem;
+    font-size: 0.22rem;
+    width: 4.27rem;
+    color: #999999;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.recordInfo {
+    margin: 0 auto;
+    width: 4.27rem;
+    line-height: 0.6rem;
+    color: #1e1e4c;
+    font-size: 0rem;
+    font-weight: 700;
+}
+
+.recordInfo>div {
+    display: inline-block;
+}
+
+.gift {
+    width: 2.3rem;
+    font-size: 0.26rem;
+}
+
+.voucherCount {
+    width: 1.85rem;
+    color: #999999;
+    font-size: 0.2rem;
+    text-align: right;
+}
+
+.voucherCount span {
+    color: #1e1e4c;
+    font-size: 0.26rem;
+}
+
+.footerlog{
+    width: 1.54rem;
+    height: 0.52rem;
+    display: block;
+    margin:0 auto;
+    margin-top: 0.2rem;
+    margin-bottom: 0.34rem;
+}

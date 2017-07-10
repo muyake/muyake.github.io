@@ -52,6 +52,13 @@ var totalProgressSprite = {
         positionmile: 170,
         physicaltop: 100,
         contain: 3, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile: 205,
+        physicaltop: 100,
+        contain: 3, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
     }],
     money: [{
         isVisible: true,
@@ -73,12 +80,12 @@ var totalProgressSprite = {
     fire: [],
     badflower: [],
     flower: [
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     positionmile: 135,
-    //     physicaltop: 50,
-    // }
+        // {
+        //     isVisible: true,
+        //     id: lib.newGuid(),
+        //     positionmile: 135,
+        //     physicaltop: 50,
+        // }
     ],
     monster: [],
     mushroom: [],
@@ -101,7 +108,7 @@ var createFactory = {
         createUpMoneyObj.up(200);
         drawSpriteList.createSpriteList.push(createUpMoneyObj);
     },
-     createUpFlower: function(positionmile, physicaltop) {
+    createUpFlower: function(positionmile, physicaltop) {
         var createUpFlowerObj = new Flower({
             physicaltop: physicaltop,
             positionmile: positionmile,

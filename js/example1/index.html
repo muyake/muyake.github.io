@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>字幕滚动</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        background: darkred;
+        height: 2000px;
+    }
+    
+    .div1 {
+        width: 217px;
+        height: 300px;
+        background: rgb(39, 41, 62);
+        overflow-x: hidden;
+    }
+    
+    .div3 {
+        width: 200px;
+        height: 300px;
+        overflow: hidden;
+        margin-top: 200px;
+        margin-left: 200px;
+    }
+    
+    .div1 p {
+        color: #ffd600;
+        font-size: 18px;
+        line-height: 1.5em;
+    }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="添加" id="addBtn">
+    <div class="div3">
+        <div class="div1">
+        </div>
+    </div>
+    <script>
+    var lib = {
+
+        //获取数字，即将24px转为24
+        getNum: function(value) {
+            return parseInt(value.replace(/[^0-9]/ig, ""));
+        },
+        //获取div高度
+        getDIVoffsetHeight: function(selector) {
+            var div1 = window.getComputedStyle(selector, null);
+            var margin = this.getNum(div1.getPropertyValue("margin-top")) + this.getNum(div1.getPropertyValue("margin-bottom"));
+            var padding = this.getNum(div1.getPropertyValue("padding-top")) + this.getNum(div1.getPropertyValue("padding-bottom"));
+            var border = this.getNum(div1.getPropertyValue("border-width")) + this.getNum(div1.getPropertyValue("border-width"));
+            var height = this.getNum(div1.getPropertyValue("height"));
+            var boxSizing = this.getNum(div1.getPropertyValue("box-sizing"));
+            if (boxSizing == 'border-box') {
+                return height + margin;
+            } else {
+                return margin + padding + border + height;
+            }
+        },
+        //获取
+        getRandom: function(startnum, endnum) {
+            return (Math.random() * (endnum - startnum) >> 0) + startnum;
+        },
+    };
+    var mainLib = {
+        limitCount: 150,
+        count: 1,
+        divContainer: document.querySelector('.div1'),
+        containHeight:0,
+        itemHeight: 0,
+        rowHeight:0,
+        totalArray: [],
+        scrollInterval:2,
+        timeConfig: {
+            addTime: 200, //加入一条数据的最小间隔
+            ajaxTime: 2000, //4s获取调用一次接口获取数据。
+            scrollTime: 10, //例如每行数据占1行，scrollTop每次+2，每条数据的高度为27，即需要滚14次，每次滚动为10ms,则处理一条数据的时间理论上为140ms。如果占两行则每次滚动+4.
+        },
+        addItem: function() {
+            var self = this;          
+            if (self.totalArray.length > 0) {
+                var text = self.totalArray.shift();
+                var p = document.createElement('P');
+                p.innerHTML = self.count + "字幕" + text;
+                self.divContainer.appendChild(p);
+                self.count++;
+                if (self.count >= self.limitCount) {
+                    self.divContainer.removeChild(document.querySelector('p:first-of-type'));
+                };
+                self.itemHeight = lib.getDIVoffsetHeight(p);
+                self.setScrollIntevval(self.itemHeight);
+                self.scrollBottom();
+            }
+        },  
+        setScrollIntevval:function(totalHeight){
+            var status=totalHeight/this.rowHeight;//每条数据占多少行。           
+                 this.scrollInterval=2*status;//即如果1行每次滚动2,如果两行则滚动4.         
+
+        },  
+        scrollBottom: function() {
+            var self = mainLib;           
+            if (self.divContainer.scrollTop + self.containHeight < self.divContainer.scrollHeight) {
+                self.divContainer.scrollTop = self.divContainer.scrollTop + self.scrollInterval;
+                setTimeout(self.scrollBottom, self.timeConfig.scrollTime);
+            } else {
+                self.divContainer.scrollTop = self.divContainer.scrollHeight - self.containHeight;
+                self.addItem();
+            }
+        },
+        insertItem: function() {
+            var self = this;
+            setInterval(function() {
+                var count = lib.getRandom(1, 2);
+                for (var i = 0; i < count; i++) {
+                    self.totalArray.push(Date.now());
+                }  
+                self.divContainer.scrollTop = self.divContainer.scrollHeight - self.containHeight;
+                 self.addItem();
+            }, self.timeConfig.ajaxTime);
+        },
+        setItemHeight:function(){
+                var self=this;               
+                var p = document.createElement('P');
+                p.innerHTML = "字";
+                self.divContainer.appendChild(p);
+                self.rowHeight=lib.getDIVoffsetHeight(p);
+                self.divContainer.removeChild(p);
+        },
+        init: function() {
+            var self = this;
+            self.containHeight= lib.getNum(window.getComputedStyle(self.divContainer, null).height);
+            self.setItemHeight();
+            this.insertItem();           
+        },
+    }
+    mainLib.init();
+    </script>
+</body>
+
+</html>

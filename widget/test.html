@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>垂直手风琴</title>
+    <style type="text/css">
+    ​
+    </style>
+</head>
+
+<body>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .unionAdmin-nav {
+        width: 140px;
+        float: left;
+        min-height: 100%;
+    }
+    
+    .unionAdmin-nav ul {
+        width: 100%;
+    }
+    
+    .unionAdmin-nav ul li {
+        position: relative;
+        /*background: rgb(206, 225, 238) no-repeat center center;*/
+        cursor: pointer;
+        display: block;
+    }
+    
+    .unionAdmin-nav ul li h3 {
+        color: #3b3c40;
+        line-height: 31px;
+        font-size: 16px;
+        padding-left: 20px;
+        /*border: 1px solid #BCD7E9;*/
+        border-bottom: none;
+    }
+    
+    .unionAdmin-nav ul li h3:hover {
+        text-decoration: underline;
+    }
+    
+    .unionAdmin-nav ul li .noactive:before {
+        content: "";
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        border: 5px solid transparent;
+        border-left: 5px solid #3b3c40;
+        top: 13px;
+        left: 5px;
+    }
+    
+    .unionAdmin-nav ul li .active:before {
+        content: "";
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        border: 5px solid transparent;
+        border-top: 5px solid #3b3c40;
+        top: 15px;
+        left: 5px;
+    }
+    
+    .unionAdmin-nav li div {
+        display: none;
+        /*background: #F0F5F8;*/
+        padding: 5px 0;
+    }
+    
+    .unionAdmin-nav li div>a {
+        text-decoration: none;
+        color: #3b3c40;
+        ;
+        display: block;
+        line-height: 24px;
+        padding-left: 28px;
+        font-size: 14px;
+    }
+    
+    .unionAdmin-nav li div>a:hover {
+        text-decoration: underline;
+    }
+    </style>
+    <div class="unionAdmin-nav">
+        <ul class="nav-menu">
+            <li class="nav-anchor1">
+                <h3 class="noactive">主播管理</h3>
+                <div class="nav-anchor-menu">
+                    <a href="http://superadmin.renren.com/player/all" class="nav-anchor-union">全部主播</a>
+                    <a href="http://superadmin.renren.com/gonghui" class="nav-anchor-union">工会列表</a>
+                    <a href="http://superadmin.renren.com/player" class="nav-anchor-alone">独立主播</a>
+                    <a href="http://superadmin.renren.com/admin" class="nav-anchor-alone">权限管理</a>
+                    <a href="http://superadmin.renren.com/playerType" class="nav-anchor-alone">主播分类管理</a>
+                    <a href="http://superadmin.renren.com/suren" class="nav-anchor-alone">素人主播管理</a>
+                    <a href="http://superadmin.renren.com/surenAdmin" class="nav-anchor-alone">素人管理员管理</a>
+                </div>
+            </li>
+            <li class="nav-operate1">
+                <h3 class="noactive">运营管理</h3>
+                <div class="nav-operate-menu" style="">
+                    <a href="http://superadmin.renren.com/honorwall/index" class="nav-anchor-union">荣誉墙</a>
+                    <a href="http://superadmin.renren.com/businessManagement/recommendPool" class="nav-anchor-union">推荐池</a>
+                    <a href="http://superadmin.renren.com/giftTicket/index" class="nav-anchor-union">礼券管理</a>
+                    <a href="http://superadmin.renren.com/channel" class="nav-anchor-union">渠道信息管理</a>
+                    <a href="http://superadmin.renren.com/businessManagement/liveAd" class="nav-anchor-union">直播间广告h5</a>
+                    <a href="http://superadmin.renren.com/defaultFollow/getPlayerIds" class="nav-anchor-union">刷机包关注</a>
+                    <a href="http://superadmin.renren.com/h5banner" class="nav-anchor-union">banner管理h5</a>
+                    <a href="http://superadmin.renren.com/channel/gift" class="nav-anchor-union">渠道礼券管理</a>
+                    <a href="http://superadmin.renren.com/shortvideo/index" class="nav-anchor-union">短视频审核</a>
+                </div>
+            </li>
+            <li class="nav-data1">
+                <h3 class="noactive">数据查询</h3>
+                <div class="nav-data-menu">
+                    <a href="http://superadmin.renren.com/playerQuality/goodanchor" class="nav-anchor-union">优质主播</a>
+                    <a href="http://superadmin.renren.com/playerQuality/dangerouspool" class="nav-anchor-union">危险池</a>
+                    <a href="http://superadmin.renren.com/bigRUser/getBigrs" class="nav-anchor-alone">大R用户</a>
+                </div>
+            </li>
+            <li class="nav-pclive1">
+                <h3 class="noactive">pc直播</h3>
+                <div class="nav-data-menu">
+                    <a href="http://superadmin.renren.com/bigRUser/getBigrs" class="nav-anchor-union">星球管理</a>
+                    <a href="http://superadmin.renren.com/pc/hotLive" class="nav-anchor-union">主播推荐管理</a>
+                    <a href="http://superadmin.renren.com/pc/banner" class="nav-anchor-union">banner管理</a>
+                    <a href="http://superadmin.renren.com/pc/partner" class="nav-anchor-union">直播伴侣管理</a>
+                    <a href="http://superadmin.renren.com/pc/block" class="nav-anchor-union">屏蔽直播管理</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+    //侧边栏的控制
+    var navItem = document.querySelector(".nav-menu");
+    navItem.addEventListener('click', function(e) {
+        if (e.target.nodeName.toUpperCase() == 'H3') {
+            var item = e.target.parentNode;
+            var h3List = document.querySelectorAll("li h3");
+            h3List.forEach(function(h3itme) {
+                if (h3itme != e.target) {
+                    h3itme.className = 'noactive';
+                    var parent = h3itme.parentNode;
+                    parent.querySelector('div').style.display = 'none';
+                }
+
+            });
+            var subdiv = item.querySelector('div');
+            var displayValue = window.getComputedStyle(subdiv, null).display;
+            if (displayValue == 'block') {
+                e.target.className = 'noactive';
+                subdiv.style.display = 'none';
+            } else {
+                e.target.className = 'active';
+                subdiv.style.display = 'block';
+            }
+        }
+    })
+    </script>
+    ​</body>
+
+</html>

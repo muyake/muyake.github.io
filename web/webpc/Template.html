@@ -1,0 +1,2548 @@
+
+
+<!DOCTYPE html>
+<html lang="en"><head><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style><style class="vjs-styles-dimensions">
+      .videoHLS-dimensions {
+        width: 360px;
+        height: 640px;
+      }
+
+      .videoHLS-dimensions.vjs-fluid {
+        padding-top: 177.77777777777777%;
+      }
+    </style><script type="text/javascript" async="" src="http://www.google-analytics.com/analytics.js"></script><script async="" src="https://www.google-analytics.com/analytics.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-W9KRTTV"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W9KRTTV');</script>
+    <title>人人直播-高颜值品质直播平台-美女视频-美女直播-视频聊天-视频交友</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta property="wb:webmaster" content="f2fdc876b8ba2a5d">
+    <meta name="keywords" content="人人直播,美女直播,美女视频,同城交友">
+    <meta name="description" content="人人直播是人人网旗下直播平台，是最真的真人互动视频直播社区。在这里不仅有方便，快捷，流畅的视频直播体验；还有街拍美女、高校校花、帅气男神，你想要的在这里都可以找到；秀场视频直播间，支持数万人同时在线视频聊天、在线K歌跳舞、视频交友。人人直播，高品质的美女直播，最真的在线视频交友平台；到人人直播与数万美女、男神免费在线互动。">
+    <link rel="shortcut icon" type="image/x-icon" href="http://a.xnimg.cn/wap/pcLive/dist/img/favicon32.ico">
+    <link rel="stylesheet" href="./css/home.css">
+    <script src="http://push.zhanzhang.baidu.com/push.js"></script><script src="https://hm.baidu.com/hm.js?966bff0a868cd407a416b4e3993b9dc8"></script><script type="text/javascript" src="http://s.xnimg.cn/a89303/wap/mobile/hlsPlayer/js/player.js"></script>
+    <script type="text/javascript" src="http://s.xnimg.cn/a90525/wap/pcLive/dist/common.js"></script>
+<style type="text/css">@charset "UTF-8";
+/**
+ * @author kun.wang
+ * @module header样式
+ * @date 2016/09/01
+   @二期修改 jiancong.shao
+   @date 2017/03/28
+ */
+/**
+ * @author kun.wang
+ * @module css reset
+ * @date 2016/10/10
+ */
+html {
+  font-size: 14px;
+  font-family: Arial,Verdana,'Microsoft yahei';
+  color: #333;
+  background-color: #e9edf0; }
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+ol,
+ul,
+li {
+  list-style: none; }
+
+a {
+  text-decoration: none;
+  color: #666; }
+
+img {
+  border: none; }
+
+/* 常用原子样式 */
+.d-show {
+  display: block; }
+
+.d-inline {
+  display: inline-block; }
+
+.d-hide {
+  display: none; }
+
+.f-l {
+  float: left; }
+
+.f-r {
+  float: right; }
+
+.clearfix {
+  clear: both; }
+
+.ellip {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.mt10 {
+  margin-top: 10px; }
+
+.mt0 {
+  margin-top: 0; }
+
+.m0 {
+  margin: 0; }
+
+body {
+  padding-top: 50px !important; }
+
+.header {
+  width: 100%;
+  min-width: 1160px;
+  height: 50px;
+  background-color: #282828;
+  box-shadow: 0px 5px 5px 2px rgba(22, 5, 7, 0.1);
+  position: fixed;
+  z-index: 1100;
+  top: 0; }
+  .header .play-start {
+    display: none; }
+  .header .header-wrap {
+    width: 1160px;
+    height: 100%;
+    margin: 0 auto;
+    font-size: 16px; }
+    .header .header-wrap .header-logo {
+      width: 150px;
+      padding-top: 10px;
+      float: left; }
+    .header .header-wrap .header-nav {
+      height: 100%;
+      line-height: 50px;
+      float: left;
+      margin-left: 45px; }
+      .header .header-wrap .header-nav .header-nav-item {
+        float: left;
+        margin: 0 18px; }
+        .header .header-wrap .header-nav .header-nav-item a {
+          color: #fff;
+          padding-left: 26px;
+          transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+          -webkit-transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1); }
+        .header .header-wrap .header-nav .header-nav-item .live {
+          background: url(http://a.xnimg.cn/wap/pcLive/dist/img/live2.png) no-repeat;
+          background-position-y: 2px; }
+        .header .header-wrap .header-nav .header-nav-item .home {
+          background: url(http://a.xnimg.cn/wap/pcLive/dist/img/home2.png) no-repeat;
+          background-position-y: 0px; }
+        .header .header-wrap .header-nav .header-nav-item .rankList {
+          background: url(http://a.xnimg.cn/wap/pcLive/dist/img/rankList.png) no-repeat;
+          background-position-y: 2px; }
+        .header .header-wrap .header-nav .header-nav-item .shop {
+          background: url(http://a.xnimg.cn/wap/pcLive/dist/img/shop.png) no-repeat;
+          background-position-y: 1px; }
+        .header .header-wrap .header-nav .header-nav-item .program {
+          background: url(http://a.xnimg.cn/wap/pcLive/dist/img/program.png) no-repeat;
+          background-position-y: 0px; }
+        .header .header-wrap .header-nav .header-nav-item a:hover, .header .header-wrap .header-nav .header-nav-item .active {
+          color: #ffd600;
+          background-position-y: 101%; }
+      .header .header-wrap .header-nav .upload-box {
+        position: relative;
+        color: #fff;
+        cursor: pointer;
+        position: relative;
+        z-index: 20; }
+        .header .header-wrap .header-nav .upload-box .upload {
+          position: relative;
+          width: 106px;
+          z-index: 15;
+          height: 100%;
+          text-align: center;
+          line-height: 50px;
+          background-color: #282828; }
+        .header .header-wrap .header-nav .upload-box .upload-sub {
+          position: absolute;
+          width: 100px;
+          height: 100px;
+          bottom: 0;
+          z-index: 10;
+          opacity: 0;
+          overflow: hidden;
+          transition: opacity 0.5s linear,bottom 0.5s ease-out;
+          border: 3px solid #fff; }
+          .header .header-wrap .header-nav .upload-box .upload-sub img {
+            width: 100%;
+            height: 100%; }
+        .header .header-wrap .header-nav .upload-box .hover {
+          bottom: -106px;
+          opacity: 1; }
+    .header .header-wrap .header-right {
+      float: right;
+      position: relative; }
+      .header .header-wrap .header-right .app {
+        float: left;
+        display: block;
+        font-size: 14px;
+        margin-right: 10px;
+        width: 48px;
+        height: 20px;
+        line-height: 20px;
+        margin-top: 15px;
+        color: #fff;
+        padding-left: 18px;
+        border: 1px solid #fff;
+        background: url(http://a.xnimg.cn/wap/pcLive/dist/img/downloadApp.png) 5% 50% no-repeat;
+        border-radius: 1px; }
+      .header .header-wrap .header-right .go-recharge {
+        float: right;
+        font-size: 14px;
+        margin-right: 6px;
+        width: 40px;
+        height: 20px;
+        line-height: 20px;
+        margin-top: 15px;
+        text-align: center;
+        border: 1px solid #ffd600;
+        border-radius: 1px;
+        color: #ffd600;
+        box-shadow: 0 0 #ffd600 inset;
+        transition: box-shadow 0.2s linear; }
+        .header .header-wrap .header-right .go-recharge:hover {
+          box-shadow: 0 20px #ffd600 inset;
+          color: #282828; }
+      .header .header-wrap .header-right .header-user {
+        float: right;
+        position: relative;
+        height: 50px;
+        margin-left: 10px;
+        cursor: pointer; }
+        .header .header-wrap .header-right .header-user .user-info {
+          height: 50px;
+          padding-top: 9px; }
+        .header .header-wrap .header-right .header-user .user-img {
+          float: left;
+          margin-right: 10px;
+          width: 34px;
+          height: 34px;
+          border-radius: 3px;
+          background-color: #eee; }
+          .header .header-wrap .header-right .header-user .user-img img {
+            width: 100%;
+            height: 100%; }
+        .header .header-wrap .header-right .header-user .user-right {
+          float: right;
+          font-size: 14px;
+          line-height: 18px;
+          color: #ffd600; }
+          .header .header-wrap .header-right .header-user .user-right .user-name {
+            color: #fff; }
+          .header .header-wrap .header-right .header-user .user-right .guo-img {
+            vertical-align: top;
+            width: 17px; }
+        .header .header-wrap .header-right .header-user .user-sub {
+          position: absolute;
+          width: 426px;
+          top: 50px;
+          left: -256px;
+          background-color: rgba(0, 0, 0, 0.6);
+          color: #fff;
+          z-index: 1000;
+          overflow: hidden;
+          transition: opacity 0.3s linear,visibility 0.3s linear;
+          display: none;
+          box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+          cursor: auto; }
+          .header .header-wrap .header-right .header-user .user-sub .user-main {
+            width: 100%;
+            height: 170px; }
+            .header .header-wrap .header-right .header-user .user-sub .user-main .userImg {
+              width: 100px;
+              height: 100px;
+              border-radius: 50%;
+              display: inline-block;
+              margin-top: 20px;
+              margin-left: 20px; }
+              .header .header-wrap .header-right .header-user .user-sub .user-main .userImg img {
+                display: block;
+                height: 100%;
+                width: 100%;
+                border-radius: 50%; }
+            .header .header-wrap .header-right .header-user .user-sub .user-main .userInfo {
+              width: 170px;
+              height: 100px;
+              display: inline-block;
+              position: absolute;
+              margin-left: 12px;
+              margin-top: 30px;
+              color: #fff; }
+              .header .header-wrap .header-right .header-user .user-sub .user-main .userInfo .userName {
+                color: #fff;
+                display: inline-block;
+                max-width: 120px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 20px; }
+              .header .header-wrap .header-right .header-user .user-sub .user-main .userInfo .isVip {
+                height: 15px;
+                width: 42px;
+                margin-left: 5px; }
+              .header .header-wrap .header-right .header-user .user-sub .user-main .userInfo .userId {
+                margin-top: 5px; }
+              .header .header-wrap .header-right .header-user .user-sub .user-main .userInfo .contr-value {
+                margin-top: 15px;
+                display: inline-block;
+                width: 14px;
+                line-height: 20px;
+                font-size: 14px;
+                border-radius: 10px;
+                padding-left: 20px;
+                background-image: url(http://a.xnimg.cn/wap/pcLive/dist/img/public/grade/crown1.png);
+                background-position: 9% 50%;
+                background-size: 45% 100%;
+                background-repeat: no-repeat;
+                margin-right: 10px;
+                text-align: right;
+                padding-right: 10px; }
+              .header .header-wrap .header-right .header-user .user-sub .user-main .userInfo .charm-value {
+                display: inline-block;
+                width: 14px;
+                line-height: 20px;
+                font-size: 14px;
+                border-radius: 10px;
+                padding-left: 20px;
+                background-image: url(http://a.xnimg.cn/wap/pcLive/dist/img/public/grade/crown1.png);
+                background-position: 9% 50%;
+                background-size: 45% 100%;
+                background-repeat: no-repeat;
+                background-color: red;
+                margin-left: 10px;
+                text-align: right;
+                padding-right: 10px; }
+          .header .header-wrap .header-right .header-user .user-sub .userCenterBox {
+            width: 100%;
+            height: 110px;
+            font-size: 12px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding-top: 10px; }
+            .header .header-wrap .header-right .header-user .user-sub .userCenterBox li {
+              float: left;
+              width: 56px;
+              height: 100px;
+              margin-left: 42px; }
+              .header .header-wrap .header-right .header-user .user-sub .userCenterBox li a {
+                color: #fff; }
+            .header .header-wrap .header-right .header-user .user-sub .userCenterBox .pensonCenter .pensonCenterIcon {
+              width: 100%;
+              height: 56px;
+              background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RDNENUJGOTExM0E4MTFFN0EwMzFFNDkxM0RGNUUzMTYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RDNENUJGOTAxM0E4MTFFN0EwMzFFNDkxM0RGNUUzMTYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmYmI4MGRmMy1lZmJlLTQ1NGQtYTI0NC02MTgwODYxMTNiYjgiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDowNDZlNDU3ZS1lYWFmLTExNzktYTA2ZC04NzNkZDk3NTMwODAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6hb3CVAAAD5klEQVR42tSau08UURTG7w6sK8+siqDERqPiVrqIj9hhZaUW2oiaaKEhkUSNNmKlWS0tiCFaSIKCMfEV/wBpNRHRhKwCJhYkJD4IIAjC8vAc51sdVnbmPmYH+JJfQpa5d86ZuXPuOWcmNNcu/FA5UUvsJbYRG4m1RBH+/5P4RnwmPhKviA7iq+mJQwYOrCFOEseInTyX4vg5opNgC1qJwaAcWE9cIs46rrCpxol7xE1iQGWgpXBsPnGZ6CUu+mg8q5A4R/TgHGG/78AW4hERF8HoHVFHJP24A4eINwEaz9pBvCYOmzpwhnhClIrgVUw8hg1aDtQTd4g8sXjKgw31qg4cJJrE0lETbJJyIEa0GV35Qmxt5fjbnzvRBtv+C41Ocfh6iPWnZ/hWIprx+zCC77jxM8G27SJS2e7AeWK71vS8K1QvYLzAb7uJfcQmxd1nvti2C9n2gUpsJHpXv0Zh5HeiW9uJMaIqvWM7r8UVbeNXKY4swxj9pdSYuYR4ytPaU0Y1xqw2eh5Owea/DhwnCrSnC2vGFX0VwOZ5Diw31aUdKEf8WG7iGqSSHdivUYy47ya5GpORSXMVyA7sMZqmCPdQpwg1ryhqLNSwZtdhMcbaqmIHNhtNMQaCGpdRaLEDFcbTdCsaM2a0EztVwQ6UGE/zC8XfnGQvIokx5iqxhF/iTLNf4rh+46zUqSl2YNS36bhtNevy/1kc459GORp/MV5GK5EPRT1SZQt55AgwvxND7MAnrUhUilheBgdktQ6wJoXdcOQG4w8tB/rYAe5VHlBKo2I+9SkixAYwDEvUHu4eC/0XOa1AxyYXTRZefnGcQ16d7ECHZAC0e86RHKZnEZSccmKbX1p4iN96Hu7PlieXI8kFd7Z5IH3oA6m1bwXggCUdFNqdBQ07MLFkMn3vJI9tbXU6wH2CFtchqQAd8D5XC2yetygSrinZlNB8h6KoQZzLPRVMZHYlBPos11yHcpweyqHxIziHu64Lx1uczBccYewLcc8qrBQU4QEPayyTCVzPUeCdknehgkxlc+BPkSDsFxpq21U+4ngYhBx17zSidgpM4jfFxE3Y/b9er9K6jzhBPFXq3kxrGSWrGbR+eheKugvpBdGwhFooDbBJyDrAahb2q9SZRTR8BjY0u+17brpLHNFOds3Ej/RR2CB0HWA9x8PTFaDx7xFtnslkHlKFg7C/g2jMccrBc18V9uuQpMwAlfSM98cbCLO3hP0Bh58tgdvCfkGV8NyLnWmTwcceZQi33CWuFnofe3BKzC/v7qdzG+W8z6fPbbhSqMW6jYl/n9sUOx7I9Oc2H7Dbd6AWMdJvAQYA0HnIYMwOz0sAAAAASUVORK5CYII=) 50% 50% no-repeat;
+              background-size: 90% 90%;
+              margin-bottom: 5px; }
+            .header .header-wrap .header-right .header-user .user-sub .userCenterBox .myGiftCertificate .myGiftCertificateIcon {
+              width: 100%;
+              height: 56px;
+              background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDI4NTY5NTIxNDRCMTFFNzk0NDNFRkY4NDgwREZFNzMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDI4NTY5NTExNDRCMTFFNzk0NDNFRkY4NDgwREZFNzMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmYmI4MGRmMy1lZmJlLTQ1NGQtYTI0NC02MTgwODYxMTNiYjgiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDowNDZlNDU3ZS1lYWFmLTExNzktYTA2ZC04NzNkZDk3NTMwODAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7I3hylAAAE80lEQVR42tRabWwUVRQ9/TCmtTUIlQoxgkopBYyCRo3ByCoRE6X4w0aiCNEfEhS0KP7QqhEVTTTaGjSIiTGpfAoGhB+GSiwmxIixoBKobRGiaKXQSii2BrSs53beyOzuvLfT3XntcJMTyr6dO+fOe+/ee95OTnzGuwjBRhIx4mZiAnElcSlxkRrvIY4Th4mfiG+IRuJYtjfOz+LaEcQ84gHieiLH8N0LieFEOXGX+ixONBFriXqiKxMSuRlcM4p4i/iFeJu4IQ15neWoa8XHr8QKYrTNAGS2niFaiac8yyMMKyQWES3qHheEHUAZ8S3xBlEEe1ak7iH3mhhWALOJ74gpGDy7jthN3JttAI8SnxIXY/BNZmOT4pBRAAuJVUQehs7yFIeFAw2gUmWFqNgKxSlQABXEmiF+8n4zsUZxMwYg6Wud5UyTzZ5Yl5xikwOoJq5FdE24LdEFIFXwRUTfXvBWbG8v9FzK0pnGVHwr+66C06luuvnVz+8A9pc7/x9+Arh7B9s4dgX5fdnTPM2VcoC+t7NH7C1IXko1xOP9/YjqRktUP3Lum3fuBOZuMt/kLCfwTfrpLmb4dWwuesN/3u2XAcu5sk8lPNu/iSuITncJzU0gLzapJb3zs+zHJjcD9zTYId+/sI86KyHRChRneANItNoFrIOzzM7fYZHcwGr//nxg7zV2AthY6SzVVHvQDUDEyFTfiw+MNzt3x+OciZar7QTQXKYbEQ0yWgK43befL6G+qNxudl61DRh2Eri8HZj+tZ0AhENJl05PxGQT16r8n2j1i6KVPOf5St+6fKVhU+31J5wnPO6w3ulurryG6UAxJe/89cAlJ8MnfpDyeqN2L5bLEhrnv/a4vjfMNjv/kHK47SpgDzfwjtvsPHnh0Kzdi2USQKk+hXWkSXGe8VEd9tKo3kplD8R9h6o/YOexn32goar2FDrVsrA3WN3IxPrYiH4/yUnZIZ1KJBnjz43b3cD6M48zMgPd/KPYdzi2C3h4vd7xsqXAz2OV+PzYr2Jmbx/NARqn6Ua7ZAY6jH2IyX73jP9RaufpmzmckAAO+g5VtAH3f2Z2/gj1RdkhYMo+YMZXdgIQDhPadKNt530hy1XnL6m29CXu/slmp9KrV7/K7pxS4uhIO8SFw9PLdKNNEkCjk0qS7BglwtaZZuefsFP8cxhwhAJp5y12AhAOx0do0h++dDfxHu0+MNnEVpXm6Gv8ITsB6DkI53ZXUq5W7ek5W7LK2Zwme5LFriHmyMmpP9oJoGor8G+enyZY6y1kq5VMC64F+q/mk99XAWyb6VRlGybpeddNyZ8K13qvqO+UkkE8lrBBRUxLcQoi6mueBWZ9AYw5YlvUQ3Ht9Ip691ilJaKHWl77C84vPe3JvZB88PJ5cC70ikver5mrI/ZGmLxwqzV1o/9I8ZYVHkHyp4g5iqOxnZbE+5B04hEi36eOflqD6gEmXyyOUACLFacBCZqVxIIhnok+xWGlthSlccBSi/uGaE9IuqxSHJBpAGJb4PwgPZjZ6QdCyu/mtM1AQIeyseU9iJqUliNcE9/PEzdKMxPkgoGI+jPEa3B+9JZc3BMicTnafo+QBmy5uhfCDuB/JQznVYOx6t8mXz0R6Dij/1rxMQbOqwa/DfjAIqTXbUTRx9S6lV8S3ddtijwb0n3dplmpwEbjgUJA+0+AAQAYtzJEQ/+2wwAAAABJRU5ErkJggg==) 50% 50% no-repeat;
+              background-size: 90% 90%;
+              margin-bottom: 5px; }
+            .header .header-wrap .header-right .header-user .user-sub .userCenterBox .myCar .myCarIcon {
+              width: 100%;
+              height: 56px;
+              background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2xpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoxQjk4NDI2RUIzMjA2ODExODA4M0Q5RTQ5MDRENzEwMSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo5MTNCOTJGQzA0N0UxMUU3OUNCMThCRjI3NDY2QUQ0RSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo5MTNCOTJGQjA0N0UxMUU3OUNCMThCRjI3NDY2QUQ0RSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxNSAoTWFjaW50b3NoKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkRDRjU3MDlFNDkyMDY4MTE4MDgzOTgxRDA3RTUyNkU4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjFCOTg0MjZFQjMyMDY4MTE4MDgzRDlFNDkwNEQ3MTAxIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+rMh1VgAABwVJREFUeNrMWmmMFEUUfj3dcx/LrgMsxAvlNGu4Dw1EUWOMB+j6A8IV4AdGowkkEhJFf4Bogkb0hyKSoHKqQSH+MCZGlkRNuBEjuBwJRsmGY5fd2d2Znpme6fa9mhp2jq7untll4IWXYmeqq75X79W7eqRocwwKqXF9BCqly291D8FhNvIM5LHII5AHIwf5lDjyNeSLyK3Ih5BbcK+rUAXhfjf+r0CVhIvcgcMS5AXIk5Eli+le5AbkMchP8c8MXOM4jruRt6MwHdXgUKoAPgyH15FfKjjhaogEnsL5HVx3G47voSBtN0UA3IDmrkJ+GzkEA0sB5FeRl+I+63D8CAXRnDzocgh+FA5HkDfeBPCFFOJ7HME9HxgQAXChuTgcQ54ItaMJyIdx7+f7JQAusAKH75AjUHsibezlGCoXAB98GYctyDLcOqK9t3As5p6g6bRhBn4ODt/fYvCFlEVuxov9Q2kccJmAH4fDrtsIfF4Tuzg2sQZwghuHo8jj4fakU8hTkTVRHFhpBl7CWdHXQiA3uMDAR7OdOmiXspBq1SB5LpNTcG1oPI9FG8s0gKc/HIezZn5eGeJiApgaZ0yH3gMpUE+iZEZNhOjlKUlb6R14QxSkXGGxt5XrXFD3gh/qFwXA5Zdq5V7fLLrEePpRHJYLQUbsgXlHK9CwHIUI1kSIZcjRQg0sQvYLg0XYUcYBSqMMg+YHHCYo/SI/x1wkgNhMws5P1XOvDMGHPLXQwkJ2aLwYmWQZrsOVmUXwES8kjmlgpJzfagkdeHCWF/zj3Wy/bMyA5CkN4r+lwMiYPkI1yHDSwGM2xQjeARObQGyGIOGly+xrUioAL0HD0iCEZnuZq6a/lagLQo97oR4/lxRhPTGbkE23zfgKNJC9rkPH5jhcWdcNvQdT4gR/soe5X0cam+UB993mgd9zD5rkTK/o0SkKr2FtBMgBMZIGdO5MQOaazv7W47rwGfddMlxYOxyCrh5rp54OwbRLMcs5PjQrwWGNIWQj7QSgiKsnEPxu9Qb4vBlZ0Wl9iu3pn5GmgjzIWlNyndDCR5EGhtpt0vW1aq6ZoPXGO5MrYVqoxXLOjtQqmxsI7EILaCghCFfrx9yN1gK0aHPgi+Rq4ffbkmvgoPac7T7kjQQUrrqtQhHEc5/94x+qG+GPzMOwxLcJmuSj7LO/slNhe3IVHND6KsYUJoWxfSpIuG5krp9FdqL0v1nmSgWUlqLNse5qtOAdp0D9gsCARaVrH/SyxDDv9RqWByH5J8aBX4VxgKiDxLxSqQCST4Lwk76BLblifc5B7zGg/eNeJ491khFfqHSzyDM+FmhuAzpPKFqtemf+SW6oa/aDf7Kb/e0eJrNwP+A1Y13fgXhGKBCZ44PQo16QvJYu6iyZ0GFhNJ3hgcjTOVPxT3TjqcsgecDW7VVDkWd90LVXBe/9mNHO68to3XfKLHgK6DgJ0MJDUhks/4PFJx2c6QG91z5By7TrkDqjsaBnZHP1BHkVK6/lHauAf4IbQk94i9Jxeo60YJIY0gcHlMb1kSuYkZ7g2V0RUfQt854h8fEbaQO6f0yCeqK8vIz/nmb5zqAX/SxhE2nc5ZPK1jQ000MjzG35lXaa5ilY6zpNiWmT618mQD0uro019Okdn8WZhkwLIhPH0PMTxgDz6bsLCxoSoCxf0Nqy0PNLypEAPT+nQPvPvj2hqwZ0faOKQJXkYBmsK9JmXxHW7TcEQDNqx+ELs5mJQ2lInc9Yg0JTSxxJO76wmctZSLbarIl3LbZfFX1NWNtLuxIbeMui7Kp0fauyOsB8J4znKKBcQTFPBQppV2SeZI6duxKYrhuitsoGUWdudWHTqMhP17ugYVmAjaLuJeUzSfQ+6X+yuchasL8rILEagbyKD72bqAVDaUPXngRbS0BrTBtbBa1FigsTRZVZ/eIAC2b2l5rsXWcaIrA2AanvfuxRIX1RCP4kryA10+Yuf60zD7nbdAPMUa5v5Z7GQZFOtTQVK07AU6uSSlUL8FTazS999VRmDzjhPA6LQdDxJPuky0Uus6g6q5Lo1Cl2dGyNs54rCA0UFiG2c2UHZfZ+gJsTvVT41PqYsV5tckNgmocV35WkGOQUEqjJxOG0k1jzCoLfXIDNXgA+cQUXwtbo6XJ7RyqssSUPzpkOi6r4jwCSR8lc1SGNppK+kGFeyEEzOMvBf16Cy5kAfDKVTV9B7d+TkbtcguD3mWAS3wGTO7Efci+jT9YQPL3ImG4GvsyKS38rYdX2hNwb+rVWjeB+ksqD1PtU7zoszR0TLfgu9WKQN0HuBxwDRZTwf4I8mgvgOC+pRAOlFOXudiFvDlda5hg8JaYXijvyuU2l1B8BihpMkPu5DUVJepOY/7lNqOBC5n9u8zeP9i28odAv+l+AAQB99pAGwRF10QAAAABJRU5ErkJggg==) 50% 50% no-repeat;
+              background-size: 90% 90%;
+              margin-bottom: 5px; }
+            .header .header-wrap .header-right .header-user .user-sub .userCenterBox .myGuard {
+              color: #878787; }
+              .header .header-wrap .header-right .header-user .user-sub .userCenterBox .myGuard .myGuardIcon {
+                width: 100%;
+                height: 56px;
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NUMwN0U5NEIxNDRDMTFFNzlFQkFFQTM1RDFCOUQxRjkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NUMwN0U5NEExNDRDMTFFNzlFQkFFQTM1RDFCOUQxRjkiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2OTE5MGJjOS04OTM1LTQyODUtOGQ4ZS0wZGFkNTRlNzBkZmMiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDowNDZlNDU3ZS1lYWFmLTExNzktYTA2ZC04NzNkZDk3NTMwODAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5g79xMAAAFRklEQVR42tSa309cRRTHZ+8uPxaW3z8WNgQELCAQRFjR8IZPPqlvGqtN9MGkahM16YtVHzT6YKI1adToS2PT1oRoavwD7KsYsTEhSGsTApQF5IfA7kJYAvR8Z+eud3/cO3P33qVykk8Iu3dmzpk5c86ZuesZHx9nLkgjMUY8SfQQ7UQDUS6+jxOrxCwxQ/xK3CT+cTqwz0HbOuIM8SIxTHgsni0haolu4mnx2RExSVwnrhDr+Sih5dGmmfiMmCM+J8IS5c3EI9qij3niEhEqpAFYrfPEHeIdg3u4IWXEm8RtMUaR2wacIn4jPiUCrHASEGNgrF63DHiW+J14jB2fDBITxHNODXiN+JGoZMcvWI0fhA55GXCW+IbwsgcnXqHDWbsGPCOiwv9FLgmdlAx4hLj2gGc+10pcE7pZJjKEr+/zjTRHR0dsZ2eHbW5upmhtbWWlpaUpioqKnOwJ6PY4sW9mwFvEo7KeDg8P2e7ubopYLJbi4OAg7dn9/X1ONBpNZi+PhxUXF6eAQcDn8/HvJALd3hahNssAZMEPcrWampriSiQSCc7e3l7evoBVQvtcfXi93jQaGxtzdfE+cZWIZBrwrpnrLC8vH4ujY/WMK2hiAHS8QLxh3MT1xKvs5MgrQueUAS8R/hNkgF/onGbASZPTugFwtKFCjLC+vs7m5+cLZQDOICFs4qfyrOctBVFmYWGBLS4usvr6elZWVub2ENB5DCvwhNs9I1TOzs7yiILwOzExwT8rgIQ1cYZ1VZaWllg8Hk/9v7a2xmZmZgphQDdc6GG3Yvj29jbb2tpiGxsbWd9PT0/zbBwKhVhTUxPPvC7IKfQSdNLD6uoqr3mgnJWboPyYm5vjaJrGGhoaWEtLC+vo6HAyfBAuVOF0GjDzdnwcxqysrLixAhWa0x4wk7W1tbbbtbW1OZ19SAIGRKXnTk2TKoNSWVUqKyvZ8PCwdYz0KEX2KDSTriXKXpmBnZ2dSoNi846OjvJq0/IE41U6T/0LA+5KTxIB+flG9bBSUlLCKirk2042aUL+hgHSAF1TU+NqklMRRZe8rYn7F0sxqcvzVk7p/BhQOtVOwgDcEluO7Pf7eT2jEh6NM4ik1dvbyzdtrmfMBHWTQqKDzr/4xCb+Q1R3ptLe3s5LAtmyQ1m4HIyGIFT29fXxDI3iTuV0p+iy0Dmim3lVZkBVVRWf0UgkYvpMT0+PZXvQ399vnZlog2OjK8h144EGBuxKK6fu7kKUxf/d6VAUq6urU3kUul4xGgDfuCy9XaLYPDAw4FYhlpVLgsGgNGkKuSx0TruZ+5iIqUSHwcFB1USjdjKhBIgKVTH2x4SuLNMAOPeHKj1UV1ezoaEhJ7dsaTPf3NxspxT5SL8TyjQA8gVxS6UXbMiRkRH+N1/BZkVJbUN56HYxbQIyHsCd4/OokJXuNihUhsNhfv9pV/SoZmM/oeh8gRnuRXMZwOsL4mUcslT9t6urixuiWuNAcUQbxYqTCV1w9XMnywVNGvxMnLMzo9gXcClkXj2JZVah+inMTukt5JzQKbtfi0ZfC8u/YorvCjCjmF1sSpy4kHnh53CX8vJyOzNunPnXiW9Ny3NJB2iIt+nfMRvvyfSwCBwIwiVepN+wjGIKHf3Eki+kb7Hjkz/FfdUNaRhW7BAbG7+DuKBScjgQ9P0eMYKbGKU8YucATXzCki+9EYvjLiq+Q3xJdIksm1BOhHkMtsiSPzV4SPydlJ0nLOr5SdFHG0v+1OCe3U6cVGVrYiUuisuxMeG3eJOo/9wmYNiQ+s9t/hKnwJsqFwoyuS/AAFdoZzrZN48nAAAAAElFTkSuQmCC) 50% 50% no-repeat;
+                background-size: 90% 90%;
+                margin-bottom: 5px; }
+          .header .header-wrap .header-right .header-user .user-sub .user-oper {
+            float: right;
+            width: 75px;
+            margin-top: 30px;
+            margin-right: 20px;
+            color: #000; }
+            .header .header-wrap .header-right .header-user .user-sub .user-oper li {
+              background-color: #ffd600;
+              border-radius: 3px;
+              margin-bottom: 10px;
+              line-height: 32px;
+              height: 32px;
+              text-align: center;
+              width: 100%;
+              font-size: 14px;
+              cursor: pointer; }
+              .header .header-wrap .header-right .header-user .user-sub .user-oper li a {
+                color: #000;
+                display: block;
+                width: 100%;
+                height: 100%; }
+              .header .header-wrap .header-right .header-user .user-sub .user-oper li .logout {
+                color: #565658;
+                background-color: #d4d5da; }
+          .header .header-wrap .header-right .header-user .user-sub .userTokens {
+            display: block;
+            margin-top: 10px;
+            margin-left: 130px;
+            color: #fff; }
+          .header .header-wrap .header-right .header-user .user-sub .operHover {
+            padding: 8px 0; }
+      .header .header-wrap .header-right .header-oper {
+        float: right;
+        height: 50px;
+        line-height: 50px;
+        cursor: default; }
+        .header .header-wrap .header-right .header-oper .header-reg-btn,
+        .header .header-wrap .header-right .header-oper .header-log-btn {
+          display: inline-block;
+          width: 50px;
+          height: 25px;
+          color: #fff;
+          text-align: center;
+          line-height: 25px;
+          border-radius: 3px;
+          cursor: pointer;
+          font-size: 14px;
+          box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.6); }
+        .header .header-wrap .header-right .header-oper .header-log-btn {
+          background-color: rgba(53, 162, 231, 0.8); }
+          .header .header-wrap .header-right .header-oper .header-log-btn:hover {
+            background-color: #35a2e7; }
+        .header .header-wrap .header-right .header-oper .header-reg-btn {
+          margin-left: 5px;
+          background-color: rgba(105, 105, 105, 0.7); }
+          .header .header-wrap .header-right .header-oper .header-reg-btn:hover {
+            background-color: dimgray; }
+
+.giftCertificate-container {
+  position: absolute;
+  width: 70%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999999;
+  color: #fff;
+  cursor: pointer;
+  top: 30%;
+  left: 15%; }
+  .giftCertificate-container .close {
+    position: absolute;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -moz-transform: rotate(45deg);
+    /* Firefox */
+    -webkit-transform: rotate(45deg);
+    /* Safari 和 Chrome */
+    -o-transform: rotate(45deg);
+    font-size: 23px;
+    right: 0px;
+    top: -3px;
+    z-index: 99999; }
+  .giftCertificate-container .title {
+    padding: 30px 50px;
+    text-align: left; }
+  .giftCertificate-container .body-container {
+    padding-bottom: 20px;
+    border-bottom: solid 1px #666178; }
+  .giftCertificate-container .img-container {
+    background: #2a2b3f;
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    margin-left: -95px;
+    margin-top: -10px;
+    border-radius: 3px;
+    border: solid 1px #eed307;
+    margin-left: -30px; }
+    .giftCertificate-container .img-container img {
+      width: 38px;
+      height: 38px;
+      margin-top: 14px; }
+  .giftCertificate-container .info-container {
+    display: inline-block;
+    margin-left: 20px; }
+  .giftCertificate-container .getCirtificate {
+    display: inline-block;
+    background: #ffe400;
+    font-size: 20px;
+    color: #27293e;
+    padding: 10px 25px;
+    margin: 20px 0; }
+  .giftCertificate-container .count {
+    color: #ffe400; }
+  .giftCertificate-container .top {
+    padding: 5px 0px; }
+
+.giftCertificate-container.body {
+  position: fixed;
+  text-align: center;
+  width: 260px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+</style><style type="text/css">.uplayer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+  display: none; }
+  .uplayer .startPlayPopup {
+    width: 550px;
+    border-radius: 5px;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 50%;
+    z-index: 100;
+    box-shadow: 1px 1px 3px #666; }
+    .uplayer .startPlayPopup .submitForm {
+      display: none; }
+    .uplayer .startPlayPopup .submitResult {
+      padding-top: 20px;
+      display: none; }
+    .uplayer .startPlayPopup .picList li > div:after {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      width: 0;
+      vertical-align: middle; }
+    .uplayer .startPlayPopup .titleBar {
+      height: 60px;
+      font-size: 18px;
+      padding: 18px;
+      color: #282828;
+      font-weight: 700;
+      box-sizing: border-box;
+      border-bottom: 1px solid #e4e4e8; }
+    .uplayer .startPlayPopup .titleBar:after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      clear: both;
+      visibility: hidden; }
+    .uplayer .startPlayPopup .title {
+      float: left;
+      line-height: 24px; }
+    .uplayer .startPlayPopup .closeBtn {
+      cursor: pointer;
+      float: right;
+      width: 24px;
+      height: 24px;
+      background: url("http://a.xnimg.cn/wap/pcLive/src/libs/uiComponent/startPlayPopup/img/closeBtn.png") no-repeat center/16px 16px; }
+    .uplayer .startPlayPopup .popupContent {
+      box-sizing: border-box;
+      padding: 14px 64px 30px; }
+    .uplayer .startPlayPopup .inputDiv {
+      margin-top: 30px;
+      margin-bottom: 30px; }
+    .uplayer .startPlayPopup .inputDiv > label {
+      font-size: 14px;
+      line-height: 30px;
+      color: #282828;
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 26px; }
+    .uplayer .startPlayPopup .playName {
+      display: inline-block;
+      height: 30px;
+      width: 330px; }
+    .uplayer .startPlayPopup .uploadBtn {
+      display: inline-block;
+      text-align: center;
+      height: 156px;
+      width: 156px;
+      vertical-align: middle;
+      position: relative;
+      background: #ebecf1 no-repeat center/100% 100%; }
+    .uplayer .startPlayPopup .uploadBtn:after {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      width: 0;
+      vertical-align: middle; }
+    .uplayer .startPlayPopup .uploadingImg {
+      display: none;
+      width: 100%;
+      height: 100%;
+      background: #ebecf1 url(http://a.xnimg.cn/wap/pcLive/src/libs/uiComponent/startPlayPopup/img/uploading.gif) no-repeat center/50% 50%; }
+    .uplayer .startPlayPopup .btnText {
+      vertical-align: middle;
+      display: inline-block;
+      width: 60px;
+      height: 60px; }
+    .uplayer .startPlayPopup .inputDiv .playCoverLabel {
+      vertical-align: top;
+      line-height: 26px; }
+    .uplayer .startPlayPopup .btnText img {
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+      font-size: 30px;
+      line-height: 1rem; }
+    .uplayer .startPlayPopup .btnText p {
+      display: block;
+      font-size: 14px;
+      line-height: 1rem;
+      color: #565658;
+      margin-top: 5px; }
+    .uplayer .startPlayPopup .uploadBtnCover {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      filter: Alpha(opacity=0); }
+    .uplayer .startPlayPopup .changecover {
+      width: 100%;
+      height: 30px;
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      text-align: center;
+      line-height: 30px;
+      color: #fff;
+      display: none; }
+    .uplayer .startPlayPopup #coverimgForm {
+      width: 100%;
+      height: 100%; }
+    .uplayer .startPlayPopup #uploadPic {
+      width: 100%;
+      height: 100%;
+      display: inline-block; }
+    .uplayer .startPlayPopup .picList {
+      display: inline-block;
+      width: 335px;
+      height: 100px; }
+    .uplayer .startPlayPopup .picList li {
+      display: inline-block;
+      vertical-align: middle;
+      width: 100px;
+      height: 100px;
+      margin-right: 12px;
+      box-sizing: border-box;
+      background: no-repeat center /cover;
+      background-image: url("http://a.xnimg.cn/wap/pcLive/src/libs/uiComponent/startPlayPopup/img/pic1.png");
+      position: relative; }
+    .uplayer .startPlayPopup .picList li:last-child {
+      margin-right: 0px; }
+    .uplayer .startPlayPopup .picList li > div {
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      text-align: center;
+      opacity: 0;
+      cursor: pointer;
+      background: no-repeat center /cover; }
+    .uplayer .startPlayPopup .picList li > div.verticalMiddle {
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      text-align: center;
+      opacity: 1;
+      transition: opacity 0.5s ease; }
+    .uplayer .startPlayPopup .picList li > div.selectDiv {
+      cursor: default;
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      background: no-repeat center /cover;
+      background-image: url("http://a.xnimg.cn/wap/pcLive/src/libs/uiComponent/startPlayPopup/img/selectCoverImg.png"); }
+    .uplayer .startPlayPopup .picList li > .selectDiv > .selectBtn {
+      display: none; }
+    .uplayer .startPlayPopup .selectBtn {
+      opacity: 1;
+      width: 60px;
+      height: 24px;
+      background: url("http://a.xnimg.cn/wap/pcLive/src/libs/uiComponent/startPlayPopup/img/selectBtnBackgroundImg.png") no-repeat center/100% 100%;
+      font-size: 12px;
+      line-height: 24px;
+      text-align: center;
+      color: #fff;
+      display: inline-block; }
+    .uplayer .startPlayPopup .submitBtn {
+      width: 412px;
+      height: 40px;
+      line-height: 40px;
+      color: #282828;
+      text-align: center;
+      background: #ffd600;
+      border-radius: 400px;
+      margin-top: 54px;
+      cursor: pointer; }
+    .uplayer .startPlayPopup .liveCourse {
+      width: 412px;
+      height: 40px;
+      text-align: center; }
+    .uplayer .startPlayPopup .liveCourse a {
+      color: #35a2e7;
+      line-height: 40px;
+      font-size: 14px; }
+    .uplayer .startPlayPopup .urlContainer {
+      margin-top: 10px;
+      line-height: 1.5em; }
+    .uplayer .startPlayPopup .submitResult .urlContainer > div {
+      display: inline-block;
+      vertical-align: top; }
+    .uplayer .startPlayPopup .submitResult .urlContainer .label {
+      width: 130px;
+      text-align: justify; }
+    .uplayer .startPlayPopup .submitResult .urlContainer .serverUrl,
+    .uplayer .startPlayPopup .submitResult .urlContainer .zhiboma {
+      word-break: break-all;
+      width: 226px; }
+    .uplayer .startPlayPopup .submitResult .urlContainer .copyServerUrl,
+    .uplayer .startPlayPopup .submitResult .urlContainer .copyServerzhiliuma {
+      margin-left: 24px;
+      color: #0091ff;
+      font-size: 14px;
+      text-align: right;
+      cursor: pointer; }
+    .uplayer .startPlayPopup .tip {
+      margin-top: 36px;
+      margin-bottom: 14px;
+      box-sizing: border-box;
+      padding-left: 30px;
+      font-size: 14px;
+      color: #999999;
+      line-height: 1.5em;
+      background: url("http://a.xnimg.cn/wap/pcLive/src/libs/uiComponent/startPlayPopup/img/warnIcon.png") no-repeat;
+      background-size: 22px 18px; }
+  .uplayer .confirme-open-live {
+    background: #35a2e7;
+    width: 120px;
+    height: 40px;
+    border-radius: 60px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    margin-left: 155px;
+    cursor: pointer; }
+  .uplayer .confirme-open-live.unactive {
+    background: #666; }
+  .uplayer .chose-assistent select {
+    width: 200px;
+    height: 30px;
+    margin-left: 25px; }
+</style><style type="text/css">.toast {
+  position: fixed;
+  width: auto;
+  min-width: 100px;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+  z-index: 100001;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  font-family: 'Microsoft yahei'; }
+</style><style type="text/css">@charset "UTF-8";
+/**
+ * @author kun.wang
+ * @module footer样式
+ * @date 2016/10/26
+ */
+.footer {
+  width: 100%;
+  min-width: 1160px;
+  margin-top: 30px;
+  border-top: 1px solid #acacac; }
+  .footer .footer-wrap {
+    width: 1160px;
+    margin: 0 auto; }
+    .footer .footer-wrap p {
+      margin-top: 5px;
+      color: #666; }
+      .footer .footer-wrap p .divider {
+        padding: 0 5px;
+        color: #999; }
+    .footer .footer-wrap a:hover {
+      color: #35a2e7; }
+    .footer .footer-wrap .legal {
+      cursor: pointer; }
+      .footer .footer-wrap .legal:hover {
+        color: #35a2e7; }
+
+.layer-shade-footer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10000; }
+
+.layer-box-footer {
+  position: absolute;
+  width: 430px;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0) scale(0.2);
+  transition: transform 0.3s ease-in-out;
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+  line-height: 24px; }
+  .layer-box-footer .layer-close-footer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    background: url(http://a.xnimg.cn/wap/pcLive/dist/img/close.png) no-repeat 50% 50%/100%;
+    cursor: pointer; }
+  .layer-box-footer h3 {
+    margin-bottom: 8px;
+    font-size: 16px; }
+  .layer-box-footer a:hover {
+    color: #35a2e7; }
+  .layer-box-footer li {
+    margin: 2px 0; }
+  .layer-box-footer .type {
+    padding: 5px 30px;
+    background: url(http://s.xnimg.cn/imgpro/civilization/sprite-law1.png) no-repeat; }
+  .layer-box-footer .type1 {
+    background: url(http://s.xnimg.cn/imgpro/civilization/jubaologoNew.png) no-repeat;
+    background-position: 0 0; }
+  .layer-box-footer .type2 {
+    background-position: -4px -25px; }
+  .layer-box-footer .type3 {
+    background-position: -4px -50px; }
+  .layer-box-footer .type4 {
+    background-position: -4px -75px; }
+
+.left-link {
+  float: left;
+  margin-top: 14px;
+  margin-bottom: 40px; }
+  .left-link ul {
+    float: left;
+    margin-right: 50px; }
+    .left-link ul li {
+      line-height: 30px; }
+
+.right-info {
+  margin-top: 14px;
+  margin-bottom: 40px;
+  float: right; }
+  .right-info p {
+    text-align: right; }
+</style><style type="text/css">.sideBar {
+  position: fixed;
+  right: 0;
+  width: 64px;
+  height: 256px;
+  z-index: 999;
+  margin-top: 190px; }
+  .sideBar > li {
+    font-size: 12px;
+    width: 100%;
+    height: 60px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    color: #ffd600; }
+  .sideBar .anchorOnline.default {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAYCAYAAAAVibZIAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MEY5QzEzNDJDNjlBMTFFNjg4QjBBRjg1NUVDOThBNzAiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MEY5QzEzNDFDNjlBMTFFNjg4QjBBRjg1NUVDOThBNzAiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmVhNzhlZjJiLWMwZGItNGNkOS04MWJkLTEyNzI5NDIwNWUwZiIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjA0NmU0NTdlLWVhYWYtMTE3OS1hMDZkLTg3M2RkOTc1MzA4MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiAOhWEAAAIcSURBVHjatNVPSFRRFMdxZ8ocLDO0hNIowQTRDFvoJvsDCgbRIshEJRJ0ES5KCAosN9o2cWELEdsELYKIpDCioChaWGEtSlJX/qMoxKKoKKbvgd+DyzB3fBN24YMjd9559557zp1I/G3Gqo/oCvMVuI4F/MIsRlD6r0FP4AVa8BVP8ANtmMAR34MRz/Z34Q2WcBzPnLkDuIkYyrX6UCs9p4daEgLaeIxTyMHZdFY6oxcW+3aIOXxGZdiVFmIyRb7jmNL3Qh/Ub2StUBnr8S2doJMqpzWe+Tzswct0gt7DFhzyzLciE7fSOagSvMNzlVA8Yf49NmCnmiLUSqfVObW4mGR+AB3JAqZaqY1sddQObMSfhLnvzv82/yVMm1aqLWMKkqGin9Op22669XcZizjtC9qAceWzClfU+024plIbxWb06UBHFeuqvdjdfj6GcEy5sttpEK80P64DtFKbRxke4jBeowAW7WMQ1N72VFfaXZxRq7pjSXVZ58slYwwHg+0PK+AFXWkzSdJibVmjgwuGG3Arqu3ZYKU/dV/Wpzi4o7it4PvxwZmz/D7CbjRHnQsiptvHN+7oSrQdPVDKbOTivgL24EbUeWCfEt+IbZ7AVgmXFMACbVce9+Iyeu1La/XldtXeSaffl/Xb9EnpCdqzE+sUfFqf+93OS+yoIpVUtcrHVrxJt3zQvqVKl62qS7V53r0fIv/jJ/qvAAMA9zSFB0lyyikAAAAASUVORK5CYII=) 50% 25% no-repeat;
+    background-color: #282828;
+    position: relative; }
+    .sideBar .anchorOnline.default p {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      right: 0;
+      margin: auto; }
+    .sideBar .anchorOnline.default ul {
+      display: none; }
+  .sideBar .anchorOnline.active {
+    height: 445px;
+    width: 220px;
+    background-color: #fff;
+    margin-left: -160px;
+    transition: width 0.5s,margin-left 0.5s,height 0.5s 0.5s; }
+    .sideBar .anchorOnline.active p {
+      display: none; }
+    .sideBar .anchorOnline.active ul {
+      display: block; }
+    .sideBar .anchorOnline.active .openAnchorOnline {
+      width: 100%;
+      height: 60px;
+      background-color: #ffd600;
+      border-top-left-radius: 4px; }
+      .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineTop {
+        width: 100%;
+        height: 100%; }
+        .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineTop .openAnchorOnlineImg {
+          float: left;
+          width: 40px;
+          height: 40px;
+          margin-left: 10px;
+          margin-top: 10px;
+          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAYCAYAAAAVibZIAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MzhGMjMwQ0JDNzQyMTFFNjk2QzE4RkE1MTQ1OTU1RjkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MzhGMjMwQ0FDNzQyMTFFNjk2QzE4RkE1MTQ1OTU1RjkiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmVhNzhlZjJiLWMwZGItNGNkOS04MWJkLTEyNzI5NDIwNWUwZiIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjA0NmU0NTdlLWVhYWYtMTE3OS1hMDZkLTg3M2RkOTc1MzA4MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgWIqsUAAAHRSURBVHjatJVLKIRRFMeZySOKwhBDFh6lZMrWQnaSLCw8ymK2NhY2FthgRewsLLBgpSiSFFmMBRGLKRqvlGcemRnv9/jf6f/Vbfoec8mpX1/nnu/733vPOfd+tph/MJtFvBRMggvwDk7BGCj+7YSN4BWEwB5YBgf0n0GtqmAReOEKKyJileAa3IM8FdERrqjKIF7D+KCK6BE4NonHgnPgVSmUE/hMREPMr1NF9BMkWOwmGTypiPrYTnaDeBpwgS0V0QXgMClUC4gDMyqFKgQfwMOiRNo+2y1e72Oj7d2BXFAPvigu2zeYsCimriWBXRbDrhOTLSXas1/GY5ooibjBGSc6BJ18BsElaDUSqwab7EXBAMeb6N+AORCgH6R/Rd8ti6WDaQbewCgol+JiIr/U8CUslot+JrhlysLm4E0kBOdBgc4O/LypDHMJW2TKwjZLwQ6THG+AB5BvEM9m1+xoA2K7SxbdUMdWEjvKiohl8HIRC2vWBsWSVw0aXbZ2fuhlyoSl8riK8W755SkOroAGkGMi3MV3t3lJr9Hvi9FJ+DhPj9ZKAVbSw9QIhvl+j9Ql4jlktj1xNNv4s1sHJ/xthKQ7VEtRL3gE/VGk7e/2I8AA3cl9HUvI1gEAAAAASUVORK5CYII=) 50% 50% no-repeat; }
+        .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineTop .openAnchorOnlineText {
+          float: left;
+          font-size: 14px;
+          color: #282828;
+          line-height: 40px;
+          margin-top: 10px;
+          opacity: 0;
+          transition: opacity 0.5s; }
+        .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineTop .openAnchorOnlineText.active {
+          opacity: 1;
+          transition: opacity 0.5s; }
+        .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineTop .openAnchorOnlineArrow {
+          float: right;
+          width: 40px;
+          height: 40px;
+          margin-top: 10px;
+          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAASCAYAAACNdSR1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MUVCNzA1ODJDNzMxMTFFNjg3MDZBNTM3ODUzNTkzQTgiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MUVCNzA1ODFDNzMxMTFFNjg3MDZBNTM3ODUzNTkzQTgiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmVhNzhlZjJiLWMwZGItNGNkOS04MWJkLTEyNzI5NDIwNWUwZiIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjA0NmU0NTdlLWVhYWYtMTE3OS1hMDZkLTg3M2RkOTc1MzA4MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqDyKgoAAABOSURBVHjaYmAgAxwF4lNALEqM4tNA/B+ILxKjAaTg0jDScIlUDWdBAkwENPyH0oyETL0IVXwZnzOQFV4apAoZoCmO6DA9TkoSJQoABBgABv0oWrmRlXoAAAAASUVORK5CYII=) 50% 50% no-repeat;
+          opacity: 0;
+          transition: opacity 0.5s; }
+        .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineTop .openAnchorOnlineArrow.active {
+          opacity: 1;
+          transition: opacity 0.5s; }
+      .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineMiddle {
+        display: none;
+        overflow: hidden;
+        width: 100%;
+        height: 350px;
+        transition: height 0.5s; }
+        .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineMiddle .listAll {
+          width: 107%;
+          height: 110%;
+          overflow: scroll; }
+          .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineMiddle .listAll .anchorOnlineList {
+            width: 100%;
+            height: 70px;
+            background-color: #fff;
+            border-bottom: 1px solid #eeeeee; }
+            .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineMiddle .listAll .anchorOnlineList .anchorHead {
+              position: relative;
+              float: left;
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              margin-top: 16px;
+              margin-left: 20px; }
+              .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineMiddle .listAll .anchorOnlineList .anchorHead img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%; }
+              .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineMiddle .listAll .anchorOnlineList .anchorHead .isVJ {
+                position: absolute;
+                width: 24px;
+                height: 24px;
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAXCAYAAAARIY8tAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjZEMDc1QzJDNzREMTFFNkJEOTRCODE1NjhCQUIyNjEiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjZEMDc1QzFDNzREMTFFNkJEOTRCODE1NjhCQUIyNjEiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmVhNzhlZjJiLWMwZGItNGNkOS04MWJkLTEyNzI5NDIwNWUwZiIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjA0NmU0NTdlLWVhYWYtMTE3OS1hMDZkLTg3M2RkOTc1MzA4MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PtfP+rUAAAMZSURBVHjapFXNS1RRFP/NjB8LMw3HHFNK0W1SoWWB1aoyEkyndBGBSEHUok0F/gNRUQa1sU0byTI1MdpIH5JlQlJRiyCdGCObMRMsR3D8mNs597znzBtnNKcDv/fOu++ec8/3tSmlsAJtIlQTKgi7je8gYYzwntBP6Cb8iKtBjcSAUtmEu+rfifduZGOjYWOFFipSVfS8Q3BBzQEz3YLZN8AiGWpLARz5QOp2IK1awGvAOOEU4XF8D5RqWbIp0KXUaLGi9ZXBewKdkd60RHpgj7L8NJkJTF4C/DXA/AhWJd7jrxUZltU6UGX+lhAVKRc9PxKy9capq0iIMi8CWVeYmyCUEPymB81aeaAjceVMLMs6WBdwUzxQagu9vTqh34qAhe/4L0rKAzZ/NRNfmGTUOVXKQ4tyL7EhapH16wDnBln7PU2hnhK+IM/YNybvrEwgI52YBVoItAPpJ6B1kwcdOvd+t6U6yreBO1AdrAivNbhlrSAfKjQM1XdPvhnPWyMqy1drVlQn56BMmzD71uLp/nJ5D7wjo6g45uaBR72y5j5EEbAB7U/k20UR31sWIRwcMrlSu24opkW/9YBd8p6eAYY+AU9fUw7/yNrxwxS+ENBlHFhzgHrPESG86DO5XM4BZRcpOikquLRnzw7Kl0Os7xsEvniN2FMTl24FXpLD/gnDo8r4OWcP5DhHruVHepooYup9FQ7Pscrl4dm3M0prWJfPbjQYzZaSZaebeXgxGA4PHxAdHrs9SjC11OSGkoyRW6uHljTJEjWdoelVZ5UtpBC1tEl42MvzDTHiklZtcv1rbrQPn+licFPRUbraqFfrj8RqNA/FMVXbY4fHNkrMfZ3krBurNuqzAeDkUeB6UwzluuOaTeUP2HBz2OUauXBikgbW1LUEh90FOkDPsl/GsPNJejw2rqRGseAy9fy5tSvPOCuyQo1mdYbz77H1yE1Gxe+8RfVHCU8uXl0x78mhOea8DS0rt2FP/DtZqTrCuJ4koaBS060yW7wFSnmSBczzGv/jPUI/CfXRd3K8Sz8ngUvfFevS/yvAAFjRNltWBZeTAAAAAElFTkSuQmCC) 50% 50% no-repeat;
+                margin-top: -14px;
+                margin-left: 24px; }
+            .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineMiddle .listAll .anchorOnlineList .anchorInfo {
+              float: left;
+              margin-top: 16px;
+              text-align: left;
+              margin-left: 15px;
+              width: 110px; }
+              .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineMiddle .listAll .anchorOnlineList .anchorInfo .anchorName {
+                font-size: 14px;
+                font-weight: 700;
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis; }
+              .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineMiddle .listAll .anchorOnlineList .anchorInfo .anchorLiveState {
+                font-size: 12px;
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                color: #6dd499; }
+                .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineMiddle .listAll .anchorOnlineList .anchorInfo .anchorLiveState span {
+                  color: #8f8f8f; }
+      .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineMiddle.active {
+        display: block; }
+        .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineMiddle.active .noPerson {
+          font-size: 16px;
+          text-align: center;
+          margin-top: 158px;
+          color: #666; }
+      .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineBottom {
+        display: none;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        color: #33b0ff; }
+      .sideBar .anchorOnline.active .openAnchorOnline .openAnchorOnlineBottom.active {
+        display: block; }
+  .sideBar .customerService.default {
+    margin-top: 5px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI0MjgwNDZDNjkyMTFFNjk5OTFCMjc4RjRGQjA3RTMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI0MjgwNDVDNjkyMTFFNjk5OTFCMjc4RjRGQjA3RTMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmVhNzhlZjJiLWMwZGItNGNkOS04MWJkLTEyNzI5NDIwNWUwZiIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjA0NmU0NTdlLWVhYWYtMTE3OS1hMDZkLTg3M2RkOTc1MzA4MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjKCxSEAAAH/SURBVHjarJRNSFZBFIb9TAxT1PIPtEVkkq0kRUKEChSFFhkuhCIQRIRa5FLIaKGoCze6CIQWgWQuCsIfFCloo5gUiFJCGlhqEWhkSqBk6jPwDowX7/ddvjzwcObOnXnvmbnnnNDeXMyRWmyE97nwBJZhW/6x5g+1UJgIL8EYpMACfIUzcA5+QSW8CyoYD58gE27CoPOuCvrhG1yAHb8jn4AMja8rmhaPmLEB6FCk1zSXrv0HBHvgvcal8s99rqNf/rL8FPR6BU/pvmJ0VGNLPoJ2Pks+zY79/vKWfKLP+yT5jXBp8xHmNf4uf9ZHcFdrJvX8AabNIM5Z1OSM38qX2YUeW4ccqFc2nI+UNuaoK7AG+fAP7ulud5QNJXAR+uB2kMRug/vwEFphVnl3DFZhBp7CMzcXwwkeVyWYCE/Cn/+t5QL4q3uOd+bzFXFRUMEKJaqhELpUu9auwgMVwZRK8dBazlC1VCuyF9CtTV4rhwaJmehHoQ5+WEEjNgF5MAKN8DnAlZl67oQbsGhK0QoOqCE0Q3sUffUuPIIhK2ia57gSOVp7BVfsT9lTmoSiFDP7EoyOFRxUy3oDtyA7oJBZVwOvtf+lPXKy0qPWSaXfagA/ne5jEz5NYqlOszAVc8dbKaeVNsX649nqkcnORvOhTX1sXtU0DF8ilV5Uti/AANcmfawQ89c+AAAAAElFTkSuQmCC) 50% 25% no-repeat;
+    background-color: #282828;
+    position: relative; }
+    .sideBar .customerService.default p {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      right: 0;
+      margin: auto; }
+    .sideBar .customerService.default ul {
+      display: none; }
+  .sideBar .customerService.active {
+    width: 157px;
+    height: 216px;
+    margin-left: -100px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #282828;
+    opacity: 1;
+    cursor: auto;
+    pointer-events: none;
+    background: url(http://a.xnimg.cn/wap/pcLive/dist/da6fbc36778c00373ec45c4db90b16a7.jpg) 50% 100% no-repeat;
+    background-size: 92% 70%;
+    background-color: #fff;
+    transition: width 0.5s,margin-left 0.5s ,height 0.5s 0.5s, font-size 0.5s; }
+    .sideBar .customerService.active p {
+      display: none; }
+    .sideBar .customerService.active ul {
+      display: block; }
+    .sideBar .customerService.active .openCustomerService {
+      width: 100%;
+      height: 60px;
+      background-color: #ffd600;
+      border-top-left-radius: 4px; }
+      .sideBar .customerService.active .openCustomerService .openCustomerServiceTop {
+        cursor: pointer;
+        pointer-events: initial;
+        width: 100%;
+        height: 100%; }
+        .sideBar .customerService.active .openCustomerService .openCustomerServiceTop .openCustomerServiceImg {
+          float: left;
+          width: 40px;
+          height: 40px;
+          margin-left: 10px;
+          margin-top: 10px;
+          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QzA4OTNFOTRDNzJDMTFFNkFFOTlBNjI2OTRGMUNGQTgiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QzA4OTNFOTNDNzJDMTFFNkFFOTlBNjI2OTRGMUNGQTgiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmVhNzhlZjJiLWMwZGItNGNkOS04MWJkLTEyNzI5NDIwNWUwZiIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjA0NmU0NTdlLWVhYWYtMTE3OS1hMDZkLTg3M2RkOTc1MzA4MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PoCOMlwAAAIOSURBVHjarJVNSJRRFIa1pqyUxp/+SIMwf2alVoRZYIoU5aKkrQtdCOJGwY0LXenCRQvFleAiCM2ihIoIoo2IUqLRxhZFYBS4CU1TSUvT58h74evDbxynLjycO9/97jtnzj3vnVD2qYT/OvbssH4G7sJXWFXs0/NdCxbDW6iFnzACK1AHE3BhN4L74QHsg1uQB1chF6rgANyHUDTBQ3BU85twGtrhmW/PU+iEHKjUsyPa/5dgL0xqflnxUcAvGFQsVRyHe37BdAhrfkzxS4Cge35cMcPNg2q4opgcsJ6i+CNaDd/DR81nFLMDBP/ondf6PAXvEnyn1OKZv1GscC/6xjxkqoU+QL5bCAVkMKxN9dAF69Co2q6pG0rgLAx4N+5NC28r+BsOqwfX1NR96sFytdS02qpDJdgaiVG8nCRHRCANlv/Vy4XKNCTnuBFRVudjFbymRjXOQTd896yXQZtMMK6ybCtohR6Clyq2ueEiNPu+sFe+NhcVwRN4ASe8NTSxMZnfFpvgUwwlMz/f0WHZIZW6U7ZsLkErNMBcjPepvfcQvkG1JeQytMtzVI0c73gFV1wNN9QmiXGK2b6DpuN+cgFc1wn+gllYjEHoJNyAHssOHjvrmSeXoEYLNhZ0Acx6bh/X8BkSS/VcFv1Wf79TsuC2/i9ytSksG7qNC8p+RreTuek5fN7JenGNTQEGAF9hacNofPgzAAAAAElFTkSuQmCC) 50% 50% no-repeat; }
+        .sideBar .customerService.active .openCustomerService .openCustomerServiceTop .openCustomerServiceText {
+          float: left;
+          font-size: 14px;
+          height: 20px;
+          color: #282828;
+          line-height: 40px;
+          margin-top: 10px;
+          opacity: 0;
+          transition: opacity 0.5s; }
+        .sideBar .customerService.active .openCustomerService .openCustomerServiceTop .openCustomerServiceText.active {
+          opacity: 1;
+          transition: opacity 0.5s; }
+        .sideBar .customerService.active .openCustomerService .openCustomerServiceTop .openCustomerServiceArrow {
+          float: right;
+          width: 40px;
+          height: 40px;
+          margin-top: 10px;
+          cursor: pointer;
+          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAASCAYAAACNdSR1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MUVCNzA1ODJDNzMxMTFFNjg3MDZBNTM3ODUzNTkzQTgiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MUVCNzA1ODFDNzMxMTFFNjg3MDZBNTM3ODUzNTkzQTgiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmVhNzhlZjJiLWMwZGItNGNkOS04MWJkLTEyNzI5NDIwNWUwZiIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjA0NmU0NTdlLWVhYWYtMTE3OS1hMDZkLTg3M2RkOTc1MzA4MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqDyKgoAAABOSURBVHjaYmAgAxwF4lNALEqM4tNA/B+ILxKjAaTg0jDScIlUDWdBAkwENPyH0oyETL0IVXwZnzOQFV4apAoZoCmO6DA9TkoSJQoABBgABv0oWrmRlXoAAAAASUVORK5CYII=) 50% 50% no-repeat;
+          opacity: 0; }
+        .sideBar .customerService.active .openCustomerService .openCustomerServiceTop .openCustomerServiceArrow.active {
+          opacity: 1;
+          transition: opacity 0.5s; }
+  .sideBar .sweepCodeToLive.default {
+    margin-top: 5px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjYwQzBDMzBDNjk2MTFFNkE4QkZBNjM5RURDRDg0REEiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjYwQzBDMkZDNjk2MTFFNkE4QkZBNjM5RURDRDg0REEiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmVhNzhlZjJiLWMwZGItNGNkOS04MWJkLTEyNzI5NDIwNWUwZiIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjA0NmU0NTdlLWVhYWYtMTE3OS1hMDZkLTg3M2RkOTc1MzA4MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PkWH59QAAAHESURBVHjatNVPKERBHAfw/Vfr30FyWyGJlVCEsgel/E8pDlLKbW9OysFZOTg5UQ64y6LkX4kif3JAbcLFieREsmvXru/Ud7Zpmrc95U19em9mf++3+2bmN+tOR12ONA+v1XAMCUgr4rALAeWZAMfiWmyCOSpFkJu/+AwaYRu+lST50MNEfRwTMd2wA59KbB50wSWEZOIfiMCQ4a1OoQqK2X+De2gzxK7BIHg9ypTEeD8DH7zKL/UpD/s4ZoqNyen1GL51EgpgwsYaWcaaEs9x7uZtJLaMla+YAj/vp0k2LySVfpJjplg/c2USX8EArHPbyJYLLbCvjIlV74Qt+NJixW65ULdbEJahVXsjsT+PYByeOFYKK9AunldixYKeM/bB7XTlOZY4yOpLa8RCHPL1ZYtqMWLvhvjZAtypi7cKDbChlbRYkF5Y5FW0GniBTZ4LHVAGJ1DLcyeTuIk7YtiipJu1sUcIwygTW06Fh6eVnZI2tRGYhfJsi/eXkn7lPIsamIISeP6Pkj6AQihSVOglnWOzpPX2bhrUSzpiOOhFSe9lSXwDdUr/Fupl4jFYgn5toVL8uwlria61Q8ml9x0r6V8BBgBcHn/k+93ZrAAAAABJRU5ErkJggg==) 50% 25% no-repeat;
+    background-color: #282828;
+    position: relative; }
+    .sideBar .sweepCodeToLive.default p {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      right: 0;
+      margin: auto; }
+    .sideBar .sweepCodeToLive.default ul {
+      display: none; }
+  .sideBar .sweepCodeToLive.active {
+    width: 157px;
+    height: 216px;
+    margin-left: -100px;
+    background: #fff url(http://a.xnimg.cn/wap/pcLive/dist/img/client.png) no-repeat 50% 86%/84%;
+    margin-top: 10px;
+    cursor: auto;
+    pointer-events: none;
+    transition: width 0.5s,margin-left 0.5s ,height 0.5s 0.5s, font-size 0.5s; }
+    .sideBar .sweepCodeToLive.active p {
+      display: none; }
+    .sideBar .sweepCodeToLive.active ul {
+      display: block; }
+    .sideBar .sweepCodeToLive.active .opensweepCodeToLive {
+      width: 100%;
+      height: 60px;
+      background-color: #ffd600;
+      border-top-left-radius: 4px; }
+      .sideBar .sweepCodeToLive.active .opensweepCodeToLive .opensweepCodeToLiveTop {
+        width: 100%;
+        height: 100%;
+        pointer-events: initial;
+        cursor: pointer; }
+        .sideBar .sweepCodeToLive.active .opensweepCodeToLive .opensweepCodeToLiveTop .opensweepCodeToLiveImg {
+          float: left;
+          width: 40px;
+          height: 40px;
+          margin-left: 10px;
+          margin-top: 10px;
+          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTlEMzBEQzBDNzMzMTFFNjg0M0RGRUFBQ0JDMTg4RTYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTlEMzBEQkZDNzMzMTFFNjg0M0RGRUFBQ0JDMTg4RTYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmVhNzhlZjJiLWMwZGItNGNkOS04MWJkLTEyNzI5NDIwNWUwZiIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjA0NmU0NTdlLWVhYWYtMTE3OS1hMDZkLTg3M2RkOTc1MzA4MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PrPshT4AAAHHSURBVHjatNVLKERRGAdw987UeC0ku/FqEiOhCGUWSnmnFAspZTc7K2VhrSysrCgL7GVQ8ipR5JEFSsLGimRFMmPGjP+p/51Op3Onq9xTv+49Z777zdxzznfGCJRkudJMXqvgCOKQksRgB/zSM36OxZTYOHNUiCCDv/gUGmALvqUkedDNRL0cEzFdsA2fUmwudMIFhKzEPxCBQc1bnUAlFLH/BvfQqoldhQHwmNKURHk/DR+8Wl/qlR72ckwXG7Wm19R86wTkw7iDNbKN1SWe5dzNOUhsG2u9YhJ8vJ8iq3kgIfUTHNPF+pgrnfgS+mGN28ZqOdAMe9KYWPUO2IQvJVbslnN5uwVhCVqUNxL78xDG4IljpbAMbeJ5KVYs6BljHwy3Ks9wu6SDrL6UQizEAV/fardKjNi7IX42D3fy4q1APawrJS0WpAcWeBWtGl5gg+dCO5TBMdTw3EknbuSOGLIp6SZl7BHCMMLEtlNh8rRyUtK6NgwzUJ6p8v5S0q+cZ1EDk1AMz/9R0vtQAIWSgFrS2Q5LWm3vukG1pCOag16U9G6GxNdQK/VvoM5KPAqL0KcsVJJ/N2El0ZVyKGWpfdcq71eAAQBcC3aeCZNxlwAAAABJRU5ErkJggg==) 50% 50% no-repeat; }
+        .sideBar .sweepCodeToLive.active .opensweepCodeToLive .opensweepCodeToLiveTop .opensweepCodeToLiveText {
+          float: left;
+          font-size: 14px;
+          color: #282828;
+          line-height: 40px;
+          margin-top: 10px;
+          opacity: 0;
+          transition: opacity 0.5s; }
+        .sideBar .sweepCodeToLive.active .opensweepCodeToLive .opensweepCodeToLiveTop .opensweepCodeToLiveText.active {
+          opacity: 1;
+          transition: opacity 0.5s; }
+        .sideBar .sweepCodeToLive.active .opensweepCodeToLive .opensweepCodeToLiveTop .opensweepCodeToLiveArrow {
+          float: right;
+          width: 40px;
+          height: 40px;
+          margin-top: 10px;
+          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAASCAYAAACNdSR1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2Q1OWYyMi1jYjBjLTQxMTktYTgyZi04Mjg2MDhkYmE4OTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MUVCNzA1ODJDNzMxMTFFNjg3MDZBNTM3ODUzNTkzQTgiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MUVCNzA1ODFDNzMxMTFFNjg3MDZBNTM3ODUzNTkzQTgiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmVhNzhlZjJiLWMwZGItNGNkOS04MWJkLTEyNzI5NDIwNWUwZiIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjA0NmU0NTdlLWVhYWYtMTE3OS1hMDZkLTg3M2RkOTc1MzA4MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqDyKgoAAABOSURBVHjaYmAgAxwF4lNALEqM4tNA/B+ILxKjAaTg0jDScIlUDWdBAkwENPyH0oyETL0IVXwZnzOQFV4apAoZoCmO6DA9TkoSJQoABBgABv0oWrmRlXoAAAAASUVORK5CYII=) 50% 50% no-repeat;
+          opacity: 0;
+          transition: opacity 0.5s; }
+        .sideBar .sweepCodeToLive.active .opensweepCodeToLive .opensweepCodeToLiveTop .opensweepCodeToLiveArrow.active {
+          opacity: 1;
+          transition: opacity 0.5s; }
+
+.goBackTop {
+  display: none;
+  margin-top: 5px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAOCAYAAAArMezNAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2lpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpFMDhENTk0MjIwMjE2ODExODA4MzlENkNGOEY2MTA5NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxRDk3NERFNEZBNkYxMUU2OTkxRDk5OTc1QzA2OUQ1QyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxRDk3NERFM0ZBNkYxMUU2OTkxRDk5OTc1QzA2OUQ1QyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ZTI0MmQzYjgtYmFiMi00NjM4LWE5MmEtZWNjY2U0ZWE0MjIzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkUwOEQ1OTQyMjAyMTY4MTE4MDgzOUQ2Q0Y4RjYxMDk3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+RQR8zAAAAQRJREFUeNpi/H+NgSaAiUh1jEA8HYoZidHAQqTBHUCcAWV/AOJKarg4E4jLgPgJFFdAxfB7kUAYBwHxKiD+BMT2ULHDQMwDxKFAvJ4cFzsB8XIg/gnEnkB8GYrdoWIroGpIMlgXiNcBMTMQRwLxSSS5k1AxZqgaXWINVgHiXUDMB8SpQLwJixqQWBpUzU6oHrwGiwLxdiCWAOIqIJ6PJ6jmQdVIQvWI4jKYH4g3Q22fCk1ixCTDaVA9m6E+QDGYDRpe5kC8FIhzSchkOVA95tBUwoZs8FxoDO8D4iQg/k+Cwf+hevZBzZiLnPNWA7E4NG3+IqNo+AVN82ug6Z5gBiEbAAQYAA9cNVi8gYrlAAAAAElFTkSuQmCC) 50% 25% no-repeat;
+  background-color: #282828;
+  position: relative; }
+  .goBackTop p {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    margin: auto; }
+
+.clickCollection {
+  margin-top: 5px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACqElEQVRYR8WXy3XaQBSGv5sd3phUYFgiFrErMFQQOgipwHYFgQosVxC7giQVmFQQskAsjSsIbJKsmJy5GinDQ8/gMBvO4Yx0v/vfp4QjHzmyfWoDmDkt1nxwDtxJl2kdZ+oDzJgivHFGFxLQ/m8AZs4Qw0fg2Rk9Q3gvHe6rQtRSwEQsADWqBi2MYSpdLl4cwPdeAlpqP2IJnCL0pcOkCkRlBXzvE8nNjBGiCTmRgP6LAXjerySgmRgyTzT5pWGprEIlBVLvDWPpMvI9ravCXgD16LeWmI1xC8M5hhbCObCiQUvaGvf0bKgQJ6Yt0yXCBKO/tk88S0eVSk8KYCIGwBXQy4nhCmGQlWheiLJfYWFecZPkjwI4+h/eUytQ4gWGhdILy7IZbub0MDRVOXEqouqdpjYavLYqxgAzvfjN1fRF3bZalP0bdlzJ+iGw9Xup8YL+oSHUODwiWj1pHm0koYm0lb47NMSOcUMvcXCnCg4NkWfchmx/GR5IiSLjmQCuv/9TOLQS1nzSmBu+c0Jvu3fkAmxBfJGu9onSx0Q6lGxSZxovBojr+RH4KkFug9oBSwHgQQKGWeS5s8Dr73cScF3a/XhEh66z5sLnAyTJCDcS6AtLHxMp8K3KHGTvnkUAcRxrLBquHdvw2Vprbw+hxJMiAKMXXd9OHtLZ8ZNbJI1tSIOxn+Ub8yXHgUwAXbsNT7ZtJsuHG9NXrLl2LfVvSOIpF0qHcQqarGp79odCBTwJNYncqLVrl+6BbiO2IFPWhAhv3f92eo6kw0OZSshWwNvzdLTGy4g9dlSPtpPSAdst6dLdS5ZTu19kVkJeCJIe4Ms85oRwX0dLZY+/GSzImVcymWVclIQDDEO3WllZN9apvJp0ZWi752ca3GdBV1pKSzeBChePDvAHoag0MEmL8XgAAAAASUVORK5CYII=) 50% 25% no-repeat;
+  background-color: #282828;
+  position: relative; }
+  .clickCollection p {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    margin: auto; }
+
+.changeLook {
+  display: none;
+  margin-top: 5px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3tpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpFMDhENTk0MjIwMjE2ODExODA4MzlENkNGOEY2MTA5NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo0NTE1ODFBMTJGQUMxMUU3ODExQUU4QzJBRkU5NzBERCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo0NTE1ODFBMDJGQUMxMUU3ODExQUU4QzJBRkU5NzBERCIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTNmMWIwYjgtYzdkYS00ZTJhLWI3ZjYtN2MyODBlYmI4MTM4IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6OGUxMDY2NGEtNmJjNC0xMTdhLTg2ZTktZTFmZTk0MWZmNGVjIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+UJxdoQAAAcpJREFUeNq0lUsoRGEUxw2DmoVGWdhgQ7hRhJCFPHZeYeUVpVjZsGBtNUVSdhZKTSJJiZWU0iivRDHCQlay8YhZYGb8T/2nvu487r3NzKlf3+3e7/vfc889D1vwNiVplmrwvAS4gAe8Aj94B2dgDpTHOmyL4nk+WATdBi8Pgl0wBR54rw1cgJdI4vLQDZw8fAh2wCW9zgLF3NcO7OALjPH8KigEz3rxLrAJ0ikmB85jeK6BFVBLR4IMdYGIqzEvBWsU3gL1BsJi4loruJEQ6/+hXbleAg5wAvrBj8mkaOaPD7OQeA1oAQEwakE4A1SAed39T1W8j+s+P9GsiROzRnnewHUjGUVUxPU6AZoDYFAtom+GKBv44hB2sBZEwxmK+ThXX5xea0xlv/pD3QkKc6jXPJppXFatg6tH9Vz6yIxuo48d0WzOS4V38npdFZdmNK1slJj1WCwm6TFp4ACcxgqLl5vMWCZ7Uh2/diLasAhwLaO4ZiBcBY5BL/hjjnsjNa5fMMK2ucw2esVhsAfuwAdroZLxbWI3lNwe4t6wSZQLqpWHUrELHAg2A++3wSR4Mjvm1LwdBo0gD+SAN3APjjh1vFZnaELsX4ABAMB4a5O6Ht7RAAAAAElFTkSuQmCC) 50% 25% no-repeat;
+  background-color: #282828;
+  position: relative; }
+  .changeLook p {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    margin: auto; }
+
+.changeLook2 {
+  overflow: hidden;
+  display: none;
+  margin-top: 5px;
+  position: relative;
+  background-size: 100% 100%;
+  background-position: 50% 50%; }
+  .changeLook2 .mask {
+    width: 100%;
+    height: 100%;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3tpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpFMDhENTk0MjIwMjE2ODExODA4MzlENkNGOEY2MTA5NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo0NTE1ODFBMTJGQUMxMUU3ODExQUU4QzJBRkU5NzBERCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo0NTE1ODFBMDJGQUMxMUU3ODExQUU4QzJBRkU5NzBERCIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTNmMWIwYjgtYzdkYS00ZTJhLWI3ZjYtN2MyODBlYmI4MTM4IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6OGUxMDY2NGEtNmJjNC0xMTdhLTg2ZTktZTFmZTk0MWZmNGVjIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+UJxdoQAAAcpJREFUeNq0lUsoRGEUxw2DmoVGWdhgQ7hRhJCFPHZeYeUVpVjZsGBtNUVSdhZKTSJJiZWU0iivRDHCQlay8YhZYGb8T/2nvu487r3NzKlf3+3e7/vfc889D1vwNiVplmrwvAS4gAe8Aj94B2dgDpTHOmyL4nk+WATdBi8Pgl0wBR54rw1cgJdI4vLQDZw8fAh2wCW9zgLF3NcO7OALjPH8KigEz3rxLrAJ0ikmB85jeK6BFVBLR4IMdYGIqzEvBWsU3gL1BsJi4loruJEQ6/+hXbleAg5wAvrBj8mkaOaPD7OQeA1oAQEwakE4A1SAed39T1W8j+s+P9GsiROzRnnewHUjGUVUxPU6AZoDYFAtom+GKBv44hB2sBZEwxmK+ThXX5xea0xlv/pD3QkKc6jXPJppXFatg6tH9Vz6yIxuo48d0WzOS4V38npdFZdmNK1slJj1WCwm6TFp4ACcxgqLl5vMWCZ7Uh2/diLasAhwLaO4ZiBcBY5BL/hjjnsjNa5fMMK2ucw2esVhsAfuwAdroZLxbWI3lNwe4t6wSZQLqpWHUrELHAg2A++3wSR4Mjvm1LwdBo0gD+SAN3APjjh1vFZnaELsX4ABAMB4a5O6Ht7RAAAAAElFTkSuQmCC) 50% 25% no-repeat;
+    background-color: rgba(0, 0, 0, 0.45);
+    position: absolute;
+    z-index: 99; }
+    .changeLook2 .mask p {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      right: 0;
+      margin: auto; }
+  .changeLook2 .mask:hover {
+    background: transparent;
+    background-color: transparent; }
+    .changeLook2 .mask:hover p {
+      color: transparent; }
+  .changeLook2 .circle {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: 2px rgba(255, 255, 255, 0.7) solid;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    -moz-transform: scale(0, 0);
+    -webkit-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    -moz-animation: zoom 2s ease infinite;
+    -webkit-animation: zoom 2s ease infinite;
+    animation: zoom 2s ease infinite; }
+
+@-moz-keyframes zoom {
+  0% {
+    -moz-transform: scale(0, 0); }
+  50% {
+    -moz-transform: scale(2, 2); }
+  100% {
+    -moz-transform: scale(2, 2); } }
+
+@-webkit-keyframes zoom {
+  0% {
+    -webkit-transform: scale(0, 0); }
+  100% {
+    -webkit-transform: scale(2, 2); }
+  100% {
+    -moz-transform: scale(2, 2); } }
+
+@keyframes zoom {
+  0% {
+    -webkit-transform: scale(0, 0); }
+  100% {
+    -webkit-transform: scale(2, 2); }
+  100% {
+    -moz-transform: scale(2, 2); } }
+  .changeLook2 .imgMiddleLayer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    background-size: 100% 100%;
+    background-position: 50% 50%; }
+  .changeLook2 .imgMiddleLayer.active {
+    opacity: 1;
+    -moz-transition: all 1s ease 0s;
+    -webkit-transition: all 1s ease 0s;
+    -o-transition: all 1s ease 0s;
+    transition: all 1s ease 0s; }
+</style><style type="text/css">.toast {
+  position: fixed;
+  width: auto;
+  min-width: 100px;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+  z-index: 100001;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  font-family: 'Microsoft yahei'; }
+</style><link id="load-css-1" rel="stylesheet" type="text/css" href="http://s.xnimg.cn/a86405/wap/mobile/hlsPlayer/css/videoSkin.css"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-88837644-1', 'auto');ga('set', 'userId', userInfo.userId);ga('send', 'pageview');</script><script type="text/javascript" async="" src="http://s.xnimg.cn/a89302/wap/mobile/hlsPlayer/js/video.js"></script><script type="text/javascript" async="" src="http://s.xnimg.cn/a87409/wap/mobile/hlsPlayer/js/hls.js"></script><script type="text/javascript" async="" src="http://s.xnimg.cn/a87243/wap/mobile/shrewmouse/js/c_14.min.js"></script><script type="text/javascript" async="" src="http://s.xnimg.cn/a89274/wap/mobile/hlsPlayer/js/control.js"></script></head>
+<body><div class="uplayer">
+    <div class="startPlayPopup">
+        <div class="titleBar">
+            <div class="title">
+                我要开播
+            </div>
+            <div class="closeBtn">
+            </div>
+        </div>
+        <div class="popupContent">
+            <div class="submitForm">
+                <div class="inputDiv">
+                    <label for="playName">直播名称</label>
+                    <input type="text" id="playName" class="playName">
+                </div>
+                <div class="inputDiv">
+                    <label class="playCoverLabel" for="playCoverImg">直播封面</label>
+                    <div class="uploadBtn">
+                        <div class="uploadingImg">                            
+                        </div>
+                        <div class="btnText">
+                            <img src="http://a.xnimg.cn/wap/pcLive/dist/img/shizi.png" alt="">
+                            <p>上传封面</p>
+                        </div>
+                        <div class="changecover">
+                            更换封面
+                        </div>
+                        <div class="uploadBtnCover">
+                            <iframe name="uploadframe" src="http://www.renren.com/ajaxProxy.html" style="display: none;"></iframe>
+                            <form id="coverimgForm" action="http://upload.renren.com/upload.fcgi" method="post" enctype="multipart/form-data" target="uploadframe">
+                                <input type="file" name="file" id="uploadPic">
+                                <input type="hidden" name="pagetype" value="clientDecal">
+                                <!--<input type="hidden" name="pagetype" value="mcsvideo">-->
+                                <input type="hidden" name="tick" value="ugc.renren.com_bd76abd76ce5df8b67b2">
+                                <input type="hidden" name="hostid" value="172860266">
+                                <input type="hidden" name="uploadid" value="1411281455">
+                                <input type="hidden" name="callback" value="parent.uploadCallback1">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="inputDiv">
+                    <label>历史封面</label>
+                    <ul class="picList">
+                        <li data-coverurl="http://fmn.rrimg.com/fmn077/20170417/1100/original_RSa5_b89c000b79881e80.jpg" style="background-image: url(http://fmn.rrimg.com/fmn077/20170417/1100/original_RSa5_b89c000b79881e80.jpg);">
+                            <div>
+                                <div class="selectBtn">
+                                    选择
+                                </div>
+                            </div>
+                        </li>
+                        <li data-coverurl="http://fmn.rrimg.com/fmn075/attachment/20170517/1640/a_PomN_c356000029591e80.png" style="background-image: url(http://fmn.rrimg.com/fmn075/attachment/20170517/1640/a_PomN_c356000029591e80.png);">
+                            <div>
+                                <div class="selectBtn">
+                                    选择
+                                </div>
+                            </div>
+                        </li>
+                        <li data-coverurl="http://fmn.rrimg.com/fmn073/attachment/20170425/1520/a_uuvU_b84f000bae531e80.jpg" style="background-image: url(http://fmn.rrimg.com/fmn073/attachment/20170425/1520/a_uuvU_b84f000bae531e80.jpg);">
+                            <div>
+                                <div class="selectBtn">
+                                    选择
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chose-assistent">
+                    <label>选择伴侣</label>
+                    <select><option value="">本地摄像头</option></select>
+                </div>
+                <div class="submitBtn">
+                    开始直播
+                </div>
+                <div class="liveCourse">
+                    <a href="http://zhibo.renren.com/liveroom/obsCourse" target="_blank">直播教程</a>
+                </div>
+            </div>
+            <div class="submitResult">
+                <div class="urlContainer">
+                    <div class="label">服务器地址(url)：</div>
+                    <div class="serverUrl">
+                        aa
+                    </div>
+                    <div class="copyServerUrl" data-clipboard-action="copy" data-clipboard-target=".serverUrl">
+                        复制
+                    </div>
+                </div>
+                <div class="urlContainer">
+                    <div class="label">直播码 (流密钥)：</div>
+                    <div class="zhiboma">
+                        bb
+                    </div>
+                    <div class="copyServerzhiliuma" data-clipboard-action="copy" data-clipboard-target=".zhiboma">
+                        复制
+                    </div>
+                </div>
+                <div class="tip">
+                    备注：每次点击获取推流码会生成新的直播码，每个直播码的有效期为5分钟， 请将推流码复制到OBS推流中。
+                </div>
+                <div class="confirme-open-live">确认开播</div>
+            </div>
+        </div>
+    </div>
+</div>
+<ul class="sideBar">
+    <li class="anchorOnline default">
+        <p>我的关注</p>
+        <ul class="openAnchorOnline">
+            <li class="openAnchorOnlineTop">
+                <div class="openAnchorOnlineImg"></div>
+                <div class="openAnchorOnlineText">我的关注</div>
+                <div class="openAnchorOnlineArrow"></div>
+            </li>
+            <li class="openAnchorOnlineMiddle">
+                <div class="listAll"><div class="anchorOnlineList" data-liveroomid="1285195"><div class="anchorHead"><img src="http://hdn.xnimg.cn/photos/hdn321/20170220/0950/h_tiny_5PKz_1a170006c79e1986.jpg"></div><div class="anchorInfo"><div class="anchorName">糖甜甜</div><div class="anchorLiveState">直播中 <span>每逢月末😮</span></div></div></div><div class="anchorOnlineList" data-liveroomid="1285164"><div class="anchorHead"><img src="http://hdn.xnimg.cn/photos/hdn221/20170526/0130/h_tiny_xIai_97020007d9e0195a.jpg"></div><div class="anchorInfo"><div class="anchorName">超人妹妹</div><div class="anchorLiveState">直播中 <span>任务啊</span></div></div></div></div>
+            </li>
+            <li class="openAnchorOnlineBottom"> 点击查看更多</li>
+        </ul>
+    </li>
+    <li class="customerService default">
+        <p>客服支持</p>
+        <ul class="openCustomerService">
+            <li class="openCustomerServiceTop">
+                <div class="openCustomerServiceImg"></div>
+                <div class="openCustomerServiceText">客服支持</div>
+                <div class="openCustomerServiceArrow"></div>
+            </li>
+            <li class="openCustomerServiceMiddle"></li>
+        </ul>
+    </li>
+    <li class="sweepCodeToLive default">
+        <p>扫码直播</p>
+        <ul class="opensweepCodeToLive">
+            <li class="opensweepCodeToLiveTop">
+                <div class="opensweepCodeToLiveImg"></div>
+                <div class="opensweepCodeToLiveText">扫码直播</div>
+                <div class="opensweepCodeToLiveArrow"></div>
+            </li>
+            <li class="opensweepCodeToLiveMiddle"></li>
+        </ul>
+    </li>
+    <li class="clickCollection">
+        <p>加入收藏</p>
+    </li>
+    <!-- <li class="changeLook ga-changelookodduser">
+        <p>换个看看</p>
+    </li> -->
+    <li class="changeLook2 ga-changelookevenuser">
+        <div class="mask">
+            <p>换个看看</p>
+        </div>
+        <div class="imgMiddleLayer"></div>
+        <div class="circle"></div>
+    </li>
+    <li class="goBackTop" style="display: list-item;">
+        <p>返回顶部</p>
+    </li>
+</ul>
+    
+
+<script type="text/javascript" src="http://s.xnimg.cn/a90405/wap/pcLive/dist/libs.js"></script>
+<script type="text/javascript" src="http://s.xnimg.cn/a90408/wap/pcLive/dist/headerFooter.js"></script>
+<div class="header">
+    <div class="header-wrap">
+        <div class="header-logo" style="width:170px">
+            <a href="http://zhibo.renren.com/">
+                <img src="http://a.xnimg.cn/wap/pcLive/dist/img/logo-beta.png" alt="人人直播,美女直播,美女视频,视频聊天,视频交友,校花直播">
+            </a>
+        </div>
+        <ul class="header-nav">
+            <li class="header-nav-item">
+                <a href="http://zhibo.renren.com/" class="live active">直播</a>
+            </li>
+            <li class="header-nav-item">
+                <a href="http://www.renren.com/" class="home" target="_blank">主站</a>
+            </li>
+            <li class="header-nav-item">
+                <a href="http://zhibo.renren.com/car/home" class="shop" target="_blank">商城</a>
+            </li>
+            <li class="header-nav-item">
+                <a href="http://zhibo.renren.com/rank" class="rankList" target="_blank">排行榜</a>
+            </li>
+            <li class="header-nav-item">
+                <a href="http://zhibo.renren.com/banner" class="program" target="_blank">栏目</a>
+            </li>
+        </ul>
+        <div class="header-right">
+            <a href="http://zhibo.renren.com/client" class="app" target="_blank">客户端</a>
+            
+                <div class="header-user">
+                    <div class="user-info">
+                        <div class="user-img">
+                            <img src="http://hdn.xnimg.cn/photos/hdn221/20110228/1210/tiny_tyvj_231321a019118.jpg" class="head-img" alt="亚克西">
+                        </div>
+                        <div class="user-right">
+                            <p class="user-name">亚克西</p>
+                            <a href="http://zhibo.renren.com/personcenter/index#nav=3" style="color:#ffd600">人人果：<span class="token-num">240</span>
+                                <img src="http://a.xnimg.cn/wap/pcLive/dist/img/guo.png" class="guo-img" alt="人人果">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="user-sub">
+                        <div class="user-main">
+                            <div class="userImg">
+                                <img src="http://hdn.xnimg.cn/photos/hdn221/20110228/1210/tiny_tyvj_231321a019118.jpg" class="headImg" alt="亚克西">
+                            </div>
+                            <div class="userInfo">
+                                <span class="userName">亚克西</span><img class="isVip" src="http://a.xnimg.cn/wap/pcLive/dist/img/vip_icon.png">
+                                <div class="userId">(309136841)</div>
+                                <span class="contr-value" style="background-image: url(&quot;http://a.xnimg.cn/wap/pcLive/dist/img/public/grade/star.png&quot;); background-color: rgb(254, 226, 51);">1</span><span class="charm-value" style="background-image: url(&quot;http://a.xnimg.cn/wap/pcLive/dist/img/public/charmgrade/1_25.png&quot;); background-color: rgb(253, 103, 162);">1</span>
+                            </div>
+                            <ul class="user-oper">
+                                <li><a href="http://zhibo.renren.com/anchor/309136841" class="anchor-home">直播空间</a></li>
+                                <!-- <li><a href="http://zhibo.renren.com/recharge#nav=1" class="user-center">个人中心</a></li> -->
+                                <li class="play-start" style="display: list-item;">我要开播</li>
+                                <li><a href="http://www.renren.com/Logout.do?origURL=http://zhibo.renren.com/" class="logout">退出</a></li>
+                            </ul>
+                            <a href="http://zhibo.renren.com/personcenter/index#nav=3" class="userTokens">人人果：<span class="token-num" style="color:#ffd600">240</span>
+                                <img src="http://a.xnimg.cn/wap/pcLive/dist/img/guo.png" class="guo-img" alt="人人果">
+                            </a>
+                        </div>
+                        <ul class="userCenterBox">
+                            <li class="pensonCenter">
+                                <a href="http://zhibo.renren.com/personcenter/index#nav=1" target="_blank">
+                                    <div class="pensonCenterIcon"></div>
+                                    <div class="pensonCenterText">个人中心</div>
+                                </a>
+                            </li>
+                            <li class="myGiftCertificate">
+                                <a href="http://zhibo.renren.com/personcenter/index#nav=4" target="_blank">
+                                    <div class="myGiftCertificateIcon"></div>
+                                    <div class="myGiftCertificateText">我的礼券</div>
+                                </a>
+                            </li>
+                            <li class="myCar">
+                                <a href="http://zhibo.renren.com/car/home#nav=0">
+                                    <div class="myCarIcon"></div>
+                                    <div class="myCarText">我的座驾</div>
+                                </a>
+                            </li>
+                            <li class="myGuard">
+                                <a href="javascript:;">
+                                    <div class="myGuardIcon"></div>
+                                    <div class="myGuard">我的守护(即将上线)</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="http://zhibo.renren.com/personcenter/index#nav=3" class="go-recharge" target="_blank">充值</a>
+            
+            
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // 人人果取整
+    $('.token-num').html(parseInt($('.token-num').html()));
+    var isLogin = true;
+    var userInfo = {};
+    var _rtk = '27f8b674';
+    if(isLogin) {
+        userInfo = {
+            userId: '309136841',
+            userName: '亚克西',
+            headUrl: 'http://hdn.xnimg.cn/photos/hdn221/20110228/1210/tiny_tyvj_231321a019118.jpg',
+            userTokensAmount: '240.00'
+        };
+    }
+    var pageSign='null';
+</script>
+    <div class="section">
+        <div class="top-main">
+            <div class="box-video">
+                <div class="left-container">
+                    <div class="seo"><a href="http://zhibo.renren.com/redian" target="_blank" style="color: transparent">美女直播间热舞,美女直播秀,美女直播间</a></div>
+                    <div class="video-active" id="videoContainer">
+                        <div class="enter-room-btn" style="opacity: 0;">进入直播间</div>
+                    <div style="position: absolute; margin: auto; top: 0px; left: 0px; bottom: 0px; right: 0px; width: 100%; height: 100%; background-color: transparent;" data-setup="{&quot;techOrder&quot;: [&quot;flash&quot;]}" poster="" le_config="disable_le_player" background="transparent" x-webkit-airplay="true" autoplay="true" preload="auto" loop="true" webkit-playsinline="true" playsinline="true" x5-video-player-fullscreen="true" x5-video-player-type="h5" class="video-js vjs-big-play-centered vjs-workinghover vjs-has-started videoHLS-dimensions vjs-controls-enabled vjs-playing vjs-user-inactive" id="videoHLS" role="region" aria-label="video player"><object type="application/x-shockwave-flash" data="http://a.xnimg.cn/wap/mobile/hlsPlayer/swf/player.swf" width="100%" height="100%" id="videoHLS_Flash_api" name="videoHLS_Flash_api" class="vjs-tech"><param name="movie" value="http://a.xnimg.cn/wap/mobile/hlsPlayer/swf/player.swf"><param name="flashvars" value="readyFunction=videojs.Flash.onReady&amp;eventProxyFunction=videojs.Flash.onEvent&amp;errorEventProxyFunction=videojs.Flash.onError&amp;autoplay=true&amp;preload=auto&amp;loop=true&amp;muted=undefined&amp;"><param name="allowScriptAccess" value="always"><param name="allowNetworking" value="all"><param name="wmode" value="transparent"><param name="bgcolor" value="#000000"></object><div></div><div class="vjs-text-track-display" aria-live="off" aria-atomic="true"></div><div class="vjs-loading-spinner" dir="ltr" style="display: none;"></div><button class="vjs-big-play-button" type="button" aria-live="polite" title="Play Video" aria-disabled="false" style="display: none;"><span class="vjs-control-text">Play Video</span></button><div class="vjs-control-bar" dir="ltr" role="group"><button class="vjs-play-control vjs-control vjs-button vjs-playing" type="button" aria-live="polite" title="Pause" aria-disabled="false"><span class="vjs-control-text">Pause</span></button><div class="vjs-volume-menu-button vjs-menu-button vjs-menu-button-inline vjs-control vjs-button vjs-volume-menu-button-horizontal vjs-vol-3" tabindex="0" role="button" aria-live="polite" title="Mute" aria-disabled="false"><div class="vjs-menu"><div class="vjs-menu-content"><div tabindex="0" class="vjs-volume-bar vjs-slider-bar vjs-slider vjs-slider-horizontal" role="slider" aria-valuenow="100.00" aria-valuemin="0" aria-valuemax="100" aria-label="volume level" aria-valuetext="100.00%"><div class="vjs-volume-level"><span class="vjs-control-text"></span></div></div></div></div><span class="vjs-control-text">Mute</span></div><div class="vjs-current-time vjs-time-control vjs-control"><div class="vjs-current-time-display" aria-live="off"><span class="vjs-control-text">Current Time</span> 23:45</div></div><div class="vjs-time-control vjs-time-divider"><div><span>/</span></div></div><div class="vjs-duration vjs-time-control vjs-control"><div class="vjs-duration-display" aria-live="off"><span class="vjs-control-text">Duration Time</span> 0:00</div></div><div class="vjs-live-control vjs-control vjs-hidden"><div class="vjs-live-display" aria-live="off"><span class="vjs-control-text">Stream Type</span>LIVE</div></div><div class="vjs-custom-control-spacer vjs-spacer ">&nbsp;</div><div class="vjs-playback-rate vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden" tabindex="0" role="menuitem" aria-live="polite" title="Playback Rate" aria-disabled="false" aria-expanded="false" aria-haspopup="true"><div class="vjs-menu" role="presentation"><ul class="vjs-menu-content" role="menu"></ul></div><span class="vjs-control-text">Playback Rate</span><div class="vjs-playback-rate-value">1</div></div><div class="vjs-chapters-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden" tabindex="0" role="menuitem" aria-live="polite" title="Chapters" aria-disabled="false" aria-expanded="false" aria-haspopup="true" aria-label="Chapters Menu"><div class="vjs-menu" role="presentation"><ul class="vjs-menu-content" role="menu"><li class="vjs-menu-title" tabindex="-1">Chapters</li></ul></div><span class="vjs-control-text">Chapters</span></div><div class="vjs-descriptions-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden" tabindex="0" role="menuitem" aria-live="polite" title="Descriptions" aria-disabled="false" aria-expanded="false" aria-haspopup="true" aria-label="Descriptions Menu"><div class="vjs-menu" role="presentation"><ul class="vjs-menu-content" role="menu"><li class="vjs-menu-item vjs-selected" tabindex="-1" role="menuitemcheckbox" aria-live="polite" aria-disabled="false" aria-checked="true" title=", selected">descriptions off<span class="vjs-control-text">, selected</span></li></ul></div><span class="vjs-control-text">Descriptions</span></div><div class="vjs-subtitles-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden" tabindex="0" role="menuitem" aria-live="polite" title="Subtitles" aria-disabled="false" aria-expanded="false" aria-haspopup="true" aria-label="Subtitles Menu"><div class="vjs-menu" role="presentation"><ul class="vjs-menu-content" role="menu"><li class="vjs-menu-item vjs-selected" tabindex="-1" role="menuitemcheckbox" aria-live="polite" aria-disabled="false" aria-checked="true" title=", selected">subtitles off<span class="vjs-control-text">, selected</span></li></ul></div><span class="vjs-control-text">Subtitles</span></div><div class="vjs-captions-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden" tabindex="0" role="menuitem" aria-live="polite" title="Captions" aria-disabled="false" aria-expanded="false" aria-haspopup="true" aria-label="Captions Menu"><div class="vjs-menu" role="presentation"><ul class="vjs-menu-content" role="menu"><li class="vjs-menu-item vjs-texttrack-settings" tabindex="-1" role="menuitem" aria-live="polite" aria-disabled="false" title=", opens captions settings dialog">captions settings<span class="vjs-control-text">, opens captions settings dialog</span></li><li class="vjs-menu-item vjs-selected" tabindex="-1" role="menuitemcheckbox" aria-live="polite" aria-disabled="false" aria-checked="true" title=", selected">captions off<span class="vjs-control-text">, selected</span></li></ul></div><span class="vjs-control-text">Captions</span></div><div class="vjs-audio-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden" tabindex="0" role="menuitem" aria-live="polite" title="Audio Track" aria-disabled="false" aria-expanded="false" aria-haspopup="true" aria-label="Audio Menu"><div class="vjs-menu" role="presentation"><ul class="vjs-menu-content" role="menu"></ul></div><span class="vjs-control-text">Audio Track</span></div></div><div class="vjs-error-display vjs-modal-dialog vjs-hidden" tabindex="-1" aria-describedby="videoHLS_component_314_description" aria-hidden="true" aria-label="Modal Window" role="dialog"><p class="vjs-modal-dialog-description vjs-offscreen" id="videoHLS_component_314_description">This is a modal window.</p><div class="vjs-modal-dialog-content" role="document">FLASH: rtmpconnectfailure</div><canvas id="connectCanvas" style="position:absolute;margin: auto;left:50%;top:50%; transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-webkit-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);"></canvas></div><div class="vjs-caption-settings vjs-modal-overlay vjs-hidden" tabindex="-1" role="dialog" aria-labelledby="TTsettingsDialogLabel-videoHLS_component_319" aria-describedby="TTsettingsDialogDescription-videoHLS_component_319"><div role="document"><div class="vjs-control-text" id="TTsettingsDialogLabel-videoHLS_component_319" aria-level="1" role="heading">Caption Settings Dialog</div><div class="vjs-control-text" id="TTsettingsDialogDescription-videoHLS_component_319">Beginning of dialog window. Escape will cancel and close the window.</div><div class="vjs-tracksettings"><div class="vjs-tracksettings-colors"><fieldset class="vjs-fg-color vjs-tracksetting"><legend>Text</legend><label class="vjs-label" for="captions-foreground-color-videoHLS_component_319">Color</label><select id="captions-foreground-color-videoHLS_component_319"><option value="#FFF">White</option><option value="#000">Black</option><option value="#F00">Red</option><option value="#0F0">Green</option><option value="#00F">Blue</option><option value="#FF0">Yellow</option><option value="#F0F">Magenta</option><option value="#0FF">Cyan</option></select><span class="vjs-text-opacity vjs-opacity"><label class="vjs-label" for="captions-foreground-opacity-videoHLS_component_319">Transparency</label><select id="captions-foreground-opacity-videoHLS_component_319"><option value="1">Opaque</option><option value="0.5">Semi-Transparent</option></select></span></fieldset><fieldset class="vjs-bg-color vjs-tracksetting"><legend>Background</legend><label class="vjs-label" for="captions-background-color-videoHLS_component_319">Color</label><select id="captions-background-color-videoHLS_component_319"><option value="#000">Black</option><option value="#FFF">White</option><option value="#F00">Red</option><option value="#0F0">Green</option><option value="#00F">Blue</option><option value="#FF0">Yellow</option><option value="#F0F">Magenta</option><option value="#0FF">Cyan</option></select><span class="vjs-bg-opacity vjs-opacity"><label class="vjs-label" for="captions-background-opacity-videoHLS_component_319">Transparency</label><select id="captions-background-opacity-videoHLS_component_319"><option value="1">Opaque</option><option value="0.5">Semi-Transparent</option><option value="0">Transparent</option></select></span></fieldset><fieldset class="vjs-window-color vjs-tracksetting"><legend>Window</legend><label class="vjs-label" for="captions-window-color-videoHLS_component_319">Color</label><select id="captions-window-color-videoHLS_component_319"><option value="#000">Black</option><option value="#FFF">White</option><option value="#F00">Red</option><option value="#0F0">Green</option><option value="#00F">Blue</option><option value="#FF0">Yellow</option><option value="#F0F">Magenta</option><option value="#0FF">Cyan</option></select><span class="vjs-window-opacity vjs-opacity"><label class="vjs-label" for="captions-window-opacity-videoHLS_component_319">Transparency</label><select id="captions-window-opacity-videoHLS_component_319"><option value="0">Transparent</option><option value="0.5">Semi-Transparent</option><option value="1">Opaque</option></select></span></fieldset></div><div class="vjs-tracksettings-font"><div class="vjs-font-percent vjs-tracksetting"><label class="vjs-label" for="captions-font-size-videoHLS_component_319">Font Size</label><select id="captions-font-size-videoHLS_component_319"><option value="0.50">50%</option><option value="0.75">75%</option><option value="1.00">100%</option><option value="1.25">125%</option><option value="1.50">150%</option><option value="1.75">175%</option><option value="2.00">200%</option><option value="3.00">300%</option><option value="4.00">400%</option></select></div><div class="vjs-edge-style vjs-tracksetting"><label class="vjs-label" for="videoHLS_component_319">Text Edge Style</label><select id="videoHLS_component_319"><option value="none">None</option><option value="raised">Raised</option><option value="depressed">Depressed</option><option value="uniform">Uniform</option><option value="dropshadow">Dropshadow</option></select></div><div class="vjs-font-family vjs-tracksetting"><label class="vjs-label" for="captions-font-family-videoHLS_component_319">Font Family</label><select id="captions-font-family-videoHLS_component_319"><option value="proportionalSansSerif">Proportional Sans-Serif</option><option value="monospaceSansSerif">Monospace Sans-Serif</option><option value="proportionalSerif">Proportional Serif</option><option value="monospaceSerif">Monospace Serif</option><option value="casual">Casual</option><option value="script">Script</option><option value="small-caps">Small Caps</option></select></div></div><div class="vjs-tracksettings-controls"><button class="vjs-default-button">Defaults</button><button class="vjs-done-button">Done</button></div></div></div></div></div></div>
+                    <div class="video-left">
+                        <img src="http://hdn.xnimg.cn/photos/hdn421/20170627/0555/h_tiny_Xt3W_c30b000928b01986.jpg" class="head-img" alt="人人直播-阿狸 _">
+                        <div class="m-info">
+                            <p class="lt-name ellip">阿狸 _</p>
+                            <p class="lt-viewer"><span>5238</span> 观看</p>
+                        </div>
+                         
+                                <button class="focus-btn" data-playerid="907001787" data-followed="false">关注</button>
+                            
+                    </div>
+                    <div class="video-right">
+                        <div class="live-flag">LIVE</div>
+                        <div class="water">
+                            <p>RENRENLIVE <span class="date" data-date="1498541376000">06/27</span></p>
+                            <p class="live-during">00:23:45</p>
+                        </div>
+                    </div>
+                    <!-- 扫描 2wm -->
+                    <div class="video-sweep-live">
+                        <div class="video-sweep-live-text">扫码微信看直播</div>
+                        <div class="video-sweep-live-img"></div>
+                    </div>
+                    <div class="playerEnd"></div>
+                </div>
+                <ul class="recommend-list">
+                
+                    <li class="recommend-list-item active" data-id="1285095" data-state="0" data-cover="http://fmn.rrimg.com/fmn075/20170627/1325/original_AHuF_c34100010c461e80.jpg" style="background-image:url(http://fmn.rrimg.com/fmn075/20170627/1325/original_AHuF_c34100010c461e80.jpg)" data-head="http://hdn.xnimg.cn/photos/hdn421/20170627/0555/h_tiny_Xt3W_c30b000928b01986.jpg" data-followed="false" data-playerid="907001787">
+                        <a href="javascript:;" class="mask"><i class="arrow"></i></a>
+                        <div class="b-info">
+                            <p class="name ellip">阿狸 _</p>
+                            <p class="viewer"><span>5238</span>人观看</p>
+                        </div>
+                    </li>
+                
+                    <li class="recommend-list-item" data-id="1285085" data-state="0" data-cover="http://fmn.rrimg.com/fmn071/20170627/1320/original_dlG4_266200010c1d1e84.jpg" style="background-image:url(http://fmn.rrimg.com/fmn071/20170627/1320/original_dlG4_266200010c1d1e84.jpg)" data-head="http://hdn.xnimg.cn/photos/hdn321/20170614/1900/h_tiny_yqsC_6e88000456b4195a.jpg" data-followed="false" data-playerid="924706451">
+                        <a href="javascript:;" class="mask"><i class="arrow"></i></a>
+                        <div class="b-info">
+                            <p class="name ellip">孟宝儿</p>
+                            <p class="viewer"><span>5457</span>人观看</p>
+                        </div>
+                    </li>
+                
+                    <li class="recommend-list-item" data-id="1285216" data-state="0" data-cover="http://fmn.rrimg.com/fmn074/20170619/1800/original_TA6k_dae0000143841e7f.jpg" style="background-image:url(http://fmn.rrimg.com/fmn074/20170619/1800/original_TA6k_dae0000143841e7f.jpg)" data-head="http://hdn.xnimg.cn/photos/hdn521/20170624/0635/h_tiny_6Yd6_53900004ecd21986.jpg" data-followed="false" data-playerid="940637287">
+                        <a href="javascript:;" class="mask"><i class="arrow"></i></a>
+                        <div class="b-info">
+                            <p class="name ellip">青狐媚灬娇娇</p>
+                            <p class="viewer"><span>1138</span>人观看</p>
+                        </div>
+                    </li>
+                
+                    <li class="recommend-list-item" data-id="1285221" data-state="0" data-cover="http://fmn.rrimg.com/fmn070/20170627/1420/original_iAJo_0dce00010c611e83.jpg" style="background-image:url(http://fmn.rrimg.com/fmn070/20170627/1420/original_iAJo_0dce00010c611e83.jpg)" data-head="http://hdn.xnimg.cn/photos/hdn521/20170622/0940/h_tiny_25Jx_1a1700094afd1986.jpg" data-followed="false" data-playerid="922339516">
+                        <a href="javascript:;" class="mask"><i class="arrow"></i></a>
+                        <div class="b-info">
+                            <p class="name ellip">喵了个会长</p>
+                            <p class="viewer"><span>982</span>人观看</p>
+                        </div>
+                    </li>
+                
+                    <li class="recommend-list-item" data-id="1285055" data-state="0" data-cover="http://fmn.rrimg.com/fmn071/20170627/1250/original_Jjex_0dfa00010bc11e83.jpg" style="background-image:url(http://fmn.rrimg.com/fmn071/20170627/1250/original_Jjex_0dfa00010bc11e83.jpg)" data-head="http://hdn.xnimg.cn/photos/hdn321/20161223/0855/h_tiny_ljCg_6e880000a8c5195a.jpg" data-followed="false" data-playerid="912601683">
+                        <a href="javascript:;" class="mask"><i class="arrow"></i></a>
+                        <div class="b-info">
+                            <p class="name ellip">乐 儿</p>
+                            <p class="viewer"><span>4441</span>人观看</p>
+                        </div>
+                    </li>
+                
+                    <li class="recommend-list-item" data-id="1285201" data-state="0" data-cover="http://fmn.rrimg.com/fmn078/20170627/1415/original_8MBj_da6700017d331e7f.jpg" style="background-image:url(http://fmn.rrimg.com/fmn078/20170627/1415/original_8MBj_da6700017d331e7f.jpg)" data-head="http://hdn.xnimg.cn/photos/hdn121/20170626/1315/h_tiny_8c97_f7fe0008cf10195a.jpg" data-followed="false" data-playerid="923214983">
+                        <a href="javascript:;" class="mask"><i class="arrow"></i></a>
+                        <div class="b-info">
+                            <p class="name ellip">超高冷的玉崽</p>
+                            <p class="viewer"><span>1118</span>人观看</p>
+                        </div>
+                    </li>
+                
+                    <li class="recommend-list-item" data-id="1285059" data-state="0" data-cover="http://fmn.rrimg.com/fmn077/20170621/1350/original_FkAy_26740000ea411e84.jpg" style="background-image:url(http://fmn.rrimg.com/fmn077/20170621/1350/original_FkAy_26740000ea411e84.jpg)" data-head="http://hdn.xnimg.cn/photos/hdn321/20170620/1805/h_tiny_pVxj_b0dc000927d6195a.jpg" data-followed="false" data-playerid="920045470">
+                        <a href="javascript:;" class="mask"><i class="arrow"></i></a>
+                        <div class="b-info">
+                            <p class="name ellip">雪梨suli</p>
+                            <p class="viewer"><span>5024</span>人观看</p>
+                        </div>
+                    </li>
+                
+                    <li class="recommend-list-item" data-id="1285105" data-state="0" data-cover="http://fmn.rrimg.com/fmn073/20170627/1340/original_bDp4_0e0500010c471e83.jpg" style="background-image:url(http://fmn.rrimg.com/fmn073/20170627/1340/original_bDp4_0e0500010c471e83.jpg)" data-head="http://hdn.xnimg.cn/photos/hdn521/20170421/2320/h_tiny_FuY9_a67b00036f48195a.jpg" data-followed="false" data-playerid="924402324">
+                        <a href="javascript:;" class="mask"><i class="arrow"></i></a>
+                        <div class="b-info">
+                            <p class="name ellip">孟小阳吖</p>
+                            <p class="viewer"><span>3732</span>人观看</p>
+                        </div>
+                    </li>
+                
+                    <li class="recommend-list-item" data-id="1285168" data-state="0" data-cover="http://fmn.rrimg.com/fmn076/20170627/1400/original_gPOw_0d8c00010c471e83.jpg" style="background-image:url(http://fmn.rrimg.com/fmn076/20170627/1400/original_gPOw_0d8c00010c471e83.jpg)" data-head="http://hdn.xnimg.cn/photos/hdn421/20170624/1845/h_tiny_AC8N_60c30004ed73195a.jpg" data-followed="false" data-playerid="943841429">
+                        <a href="javascript:;" class="mask"><i class="arrow"></i></a>
+                        <div class="b-info">
+                            <p class="name ellip">翻页</p>
+                            <p class="viewer"><span>1997</span>人观看</p>
+                        </div>
+                    </li>
+                
+                </ul>
+            </div>
+        </div>
+        <div class="main-list">
+            <div class="box box-hot">
+                <h3 class="title"><i></i>红人主播</h3>
+                <ul class="list hot-list" data-type="hot">
+                
+                    <li class="list-item" data-id="1285154">
+                        <img class="poster" src="http://fmn.rrimg.com/fmn072/20170627/1400/original_8usa_0dad00010c8f1e83.jpg" alt="༄ེ美童༄的直播间">
+                        <div class="live-info">
+                            <p class="title ellip">又月底了！</p>
+                            <p class="name ellip">༄ེ美童༄</p>
+                            <p class="view-count">2403</p>
+                        </div>
+                        
+                            <div class="live-icon">直播</div>
+                        
+                        <div class="mask-play"></div>
+                        
+                                <div class="corner-mark popular"></div>  
+                            
+                    </li>
+                
+                    <li class="list-item" data-id="1285159">
+                        <img class="poster" src="http://fmn.rrimg.com/fmn073/20170627/1400/original_WefI_da6700017d121e7f.jpg" alt="查米的直播间">
+                        <div class="live-info">
+                            <p class="title ellip">查米来啦</p>
+                            <p class="name ellip">查米</p>
+                            <p class="view-count">2411</p>
+                        </div>
+                        
+                            <div class="live-icon">直播</div>
+                        
+                        <div class="mask-play"></div>
+                        
+                                <div class="corner-mark medal"></div>  
+                            
+                    </li>
+                
+                    <li class="list-item" data-id="1285202">
+                        <img class="poster" src="http://fmn.rrimg.com/fmn074/20170627/1415/original_EIqM_c33600010c401e80.jpg" alt="Ariel宠儿.的直播间">
+                        <div class="live-info">
+                            <p class="title ellip">😯诚心招守护</p>
+                            <p class="name ellip">Ariel宠儿.</p>
+                            <p class="view-count">1033</p>
+                        </div>
+                        
+                            <div class="live-icon">直播</div>
+                        
+                        <div class="mask-play"></div>
+                        
+                                <div class="corner-mark fire"></div>  
+                            
+                    </li>
+                
+                    <li class="list-item" data-id="1285225">
+                        <img class="poster" src="http://fmn.rrimg.com/fmn075/20170627/1425/original_ewfp_c3af00010cbe1e80.jpg" alt="新人伊沫的直播间">
+                        <div class="live-info">
+                            <p class="title ellip">第五天，寻家人找守护～</p>
+                            <p class="name ellip">新人伊沫</p>
+                            <p class="view-count">611</p>
+                        </div>
+                        
+                            <div class="live-icon">直播</div>
+                        
+                        <div class="mask-play"></div>
+                        
+                    </li>
+                
+                    <li class="list-item" data-id="1285126">
+                        <img class="poster" src="http://fmn.rrimg.com/fmn070/20170627/1350/original_EOgv_0dce00010c371e83.jpg" alt="心肝宝贝的直播间">
+                        <div class="live-info">
+                            <p class="title ellip">来啦</p>
+                            <p class="name ellip">心肝宝贝</p>
+                            <p class="view-count">3356</p>
+                        </div>
+                        
+                            <div class="live-icon">直播</div>
+                        
+                        <div class="mask-play"></div>
+                        
+                    </li>
+                
+                    <li class="list-item" data-id="1285196">
+                        <img class="poster" src="http://fmn.rrimg.com/fmn079/20170627/1415/original_bj3d_26b600010c951e84.jpg" alt="Dear baby的直播间">
+                        <div class="live-info">
+                            <p class="title ellip">再来一次</p>
+                            <p class="name ellip">Dear baby</p>
+                            <p class="view-count">1376</p>
+                        </div>
+                        
+                            <div class="live-icon">直播</div>
+                        
+                        <div class="mask-play"></div>
+                        
+                    </li>
+                
+                    <li class="list-item" data-id="1285078">
+                        <img class="poster" src="http://fmn.rrimg.com/fmn078/20170627/1315/original_ksi8_267400010c131e84.jpg" alt="南方大妞的直播间">
+                        <div class="live-info">
+                            <p class="title ellip">新主播爱唱歌，求关注😊</p>
+                            <p class="name ellip">南方大妞</p>
+                            <p class="view-count">5185</p>
+                        </div>
+                        
+                            <div class="live-icon">直播</div>
+                        
+                        <div class="mask-play"></div>
+                        
+                    </li>
+                
+                    <li class="list-item" data-id="1285183">
+                        <img class="poster" src="http://fmn.rrimg.com/fmn075/20170627/1410/original_A6FI_0e0500010c6e1e83.jpg" alt="宝宝。的直播间">
+                        <div class="live-info">
+                            <p class="title ellip">来来积少成多。</p>
+                            <p class="name ellip">宝宝。</p>
+                            <p class="view-count">1754</p>
+                        </div>
+                        
+                            <div class="live-icon">直播</div>
+                        
+                        <div class="mask-play"></div>
+                        
+                    </li>
+                
+                </ul>
+            </div>
+            <div class="box box-news">
+                <h3 class="title"><i></i>新闻活动<a href="http://zhibo.renren.com/news/p/1">更多...</a></h3>
+                <ul class="news-list">
+                <li class="news-item"><a href="http://zhibo.renren.com/news/82"><span class="news-title">[往期活动] 致童真的你</span><span class="news-date">2017-06-07</span></a></li><li class="news-item"><a href="http://zhibo.renren.com/news/84"><span class="news-title">[往期活动] 有氧女神</span><span class="news-date">2017-06-07</span></a></li><li class="news-item"><a href="http://zhibo.renren.com/news/74"><span class="news-title">[往期活动]  520表白节</span><span class="news-date">2017-06-07</span></a></li><li class="news-item"><a href="http://zhibo.renren.com/news/70"><span class="news-title">[往期活动]  12星座巅峰对决</span><span class="news-date">2017-06-07</span></a></li><li class="news-item"><a href="http://zhibo.renren.com/news/80"><span class="news-title">[往期活动] 愚人节大整蛊</span><span class="news-date">2017-06-07</span></a></li><li class="news-item"><a href="http://zhibo.renren.com/news/78"><span class="news-title">[往期活动] 感恩拍卖会</span><span class="news-date">2017-06-07</span></a></li><li class="news-item"><a href="http://zhibo.renren.com/news/72"><span class="news-title">[往期活动]  女神节轰趴</span><span class="news-date">2017-06-07</span></a></li><li class="news-item"><a href="http://zhibo.renren.com/news/60"><span class="news-title">[往期活动]  情人节与你牵手</span><span class="news-date">2017-06-06</span></a></li><li class="news-item"><a href="http://zhibo.renren.com/news/68"><span class="news-title">[往期活动]  新春红包 存福纳吉</span><span class="news-date">2017-06-07</span></a></li><li class="news-item"><a href="http://zhibo.renren.com/news/64"><span class="news-title">[往期活动]  人人年度盛典</span><span class="news-date">2017-06-06</span></a></li></ul>
+                <div class="Ad-colum"></div>
+            </div>
+            
+            <div class="box box-new">
+                <h3 class="title"><i></i>新晋主播</h3>
+                <ul class=" list new-list" data-type="new"><li class="list-item" data-id="1285234">
+    <!-- <div class="poster" title="点击进入爱零食小仙女的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn078&#x2F;20170627&#x2F;1425&#x2F;original_4mPA_266900010c851e84.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn078/20170627/1425/original_4mPA_266900010c851e84.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn078/20170627/1425/original_4mPA_266900010c851e84.jpg" alt="爱零食小仙女的直播间">
+    <div class="live-info">
+        <p class="title ellip">来呀。</p>
+        <p class="name ellip">爱零食小仙女</p>
+        <p class="view-count">286</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+<div class="corner-mark newer"></div></li><li class="list-item" data-id="1285223">
+    <!-- <div class="poster" title="点击进入七七的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn077&#x2F;20170627&#x2F;1420&#x2F;original_Gty2_0def00010c4f1e83.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn077/20170627/1420/original_Gty2_0def00010c4f1e83.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn077/20170627/1420/original_Gty2_0def00010c4f1e83.jpg" alt="七七的直播间">
+    <div class="live-info">
+        <p class="title ellip">。</p>
+        <p class="name ellip">七七</p>
+        <p class="view-count">535</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285209">
+    <!-- <div class="poster" title="点击进入小白的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn072&#x2F;20170627&#x2F;1415&#x2F;original_jhLV_0da200010ca91e83.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn072/20170627/1415/original_jhLV_0da200010ca91e83.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn072/20170627/1415/original_jhLV_0da200010ca91e83.jpg" alt="小白的直播间">
+    <div class="live-info">
+        <p class="title ellip">改完卷子了</p>
+        <p class="name ellip">小白</p>
+        <p class="view-count">1002</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285207">
+    <!-- <div class="poster" title="点击进入宅女卡哇伊的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn074&#x2F;20170627&#x2F;1415&#x2F;original_7oNM_daca00017d601e7f.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn074/20170627/1415/original_7oNM_daca00017d601e7f.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn074/20170627/1415/original_7oNM_daca00017d601e7f.jpg" alt="宅女卡哇伊的直播间">
+    <div class="live-info">
+        <p class="title ellip">晕死卡掉</p>
+        <p class="name ellip">宅女卡哇伊</p>
+        <p class="view-count">971</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285240">
+    <!-- <div class="poster" title="点击进入婷婷lisa的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn078&#x2F;20170622&#x2F;1830&#x2F;original_Vr7t_0e050000f1551e83.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn078/20170622/1830/original_Vr7t_0e050000f1551e83.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn078/20170622/1830/original_Vr7t_0e050000f1551e83.jpg" alt="婷婷lisa的直播间">
+    <div class="live-info">
+        <p class="title ellip">肚皮舞钢琴</p>
+        <p class="name ellip">婷婷lisa</p>
+        <p class="view-count">292</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285151">
+    <!-- <div class="poster" title="点击进入Am思思的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn074&#x2F;20170627&#x2F;1355&#x2F;original_CjZ8_269600010c2f1e84.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn074/20170627/1355/original_CjZ8_269600010c2f1e84.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn074/20170627/1355/original_CjZ8_269600010c2f1e84.jpg" alt="Am思思的直播间">
+    <div class="live-info">
+        <p class="title ellip">好久不见</p>
+        <p class="name ellip">Am思思</p>
+        <p class="view-count">2320</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285135">
+    <!-- <div class="poster" title="点击进入林兮.的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn074&#x2F;20170627&#x2F;1350&#x2F;original_ReBM_daa600017d1c1e7f.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn074/20170627/1350/original_ReBM_daa600017d1c1e7f.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn074/20170627/1350/original_ReBM_daa600017d1c1e7f.jpg" alt="林兮.的直播间">
+    <div class="live-info">
+        <p class="title ellip">吧啦啦小魔仙</p>
+        <p class="name ellip">林兮.</p>
+        <p class="view-count">2879</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1284999">
+    <!-- <div class="poster" title="点击进入聪明吴燕的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn079&#x2F;20170627&#x2F;1215&#x2F;original_a376_da5500017c601e7f.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn079/20170627/1215/original_a376_da5500017c601e7f.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn079/20170627/1215/original_a376_da5500017c601e7f.jpg" alt="聪明吴燕的直播间">
+    <div class="live-info">
+        <p class="title ellip">嗨嗨嗨</p>
+        <p class="name ellip">聪明吴燕</p>
+        <p class="view-count">4532</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li></ul>
+            </div>
+            <div class="box box-band">
+                <h3 class="title"><i></i>栏目</h3>
+                <ul class="list band-list" data-type="band"><li class="band-list-item" data-url="http://fmn.rrimg.com/fmn070/attachment/20170621/1945/a_H0eQ_dae0000156741e7f.jpg" style="background-image: url(&quot;http://fmn.rrimg.com/fmn070/attachment/20170621/1945/a_H0eQ_dae0000156741e7f.jpg&quot;);">
+    <a href="http://zhibo.renren.com/anchor/899827665" class="mask" target="_blank">
+        <div class="lt-info">
+            <img data-src="http://hdn.xnimg.cn/photos/hdn521/20170620/1220/h_tiny_NXcT_60c30004d9ef195a.jpg" src="http://hdn.xnimg.cn/photos/hdn521/20170620/1220/h_tiny_NXcT_60c30004d9ef195a.jpg">
+            <span class="ellip">绝对现场</span>
+        </div>
+        <p class="band-title ellip">次元理想音乐节群访+探班</p>
+        <div class="bot-line">
+            <div class="prevue">预告</div>
+            <div class="timing">06月27日 17:00</div>
+        </div>
+    </a>
+    <div class="focus-btn" data-playerid="899827665">关 注</div>
+</li>
+<li class="band-list-item" data-url="http://fmn.rrimg.com/fmn070/attachment/20170627/1220/a_ZqQq_da6700017c611e7f.jpg" style="background-image: url(&quot;http://fmn.rrimg.com/fmn070/attachment/20170627/1220/a_ZqQq_da6700017c611e7f.jpg&quot;);">
+    <a href="http://zhibo.renren.com/anchor/927172081" class="mask" target="_blank">
+        <div class="lt-info">
+            <img data-src="http://hdn.xnimg.cn/photos/hdn121/20170412/2050/h_tiny_UzK5_4e920006380d1986.jpg" src="http://hdn.xnimg.cn/photos/hdn121/20170412/2050/h_tiny_UzK5_4e920006380d1986.jpg">
+            <span class="ellip">粉丝网</span>
+        </div>
+        <p class="band-title ellip">i do! 李若嘉专访</p>
+        <div class="bot-line">
+            <div class="prevue">预告</div>
+            <div class="timing">06月27日 17:00</div>
+        </div>
+    </a>
+    <div class="focus-btn" data-playerid="927172081">关 注</div>
+</li>
+<li class="band-list-item" data-url="http://fmn.rrimg.com/fmn070/attachment/20170621/1945/a_H0eQ_dae0000156741e7f.jpg" style="background-image: url(&quot;http://fmn.rrimg.com/fmn070/attachment/20170621/1945/a_H0eQ_dae0000156741e7f.jpg&quot;);">
+    <a href="http://zhibo.renren.com/anchor/899827665" class="mask" target="_blank">
+        <div class="lt-info">
+            <img data-src="http://hdn.xnimg.cn/photos/hdn521/20170620/1220/h_tiny_NXcT_60c30004d9ef195a.jpg" src="http://hdn.xnimg.cn/photos/hdn521/20170620/1220/h_tiny_NXcT_60c30004d9ef195a.jpg">
+            <span class="ellip">绝对现场</span>
+        </div>
+        <p class="band-title ellip">理想音乐第三季 · 次元音乐节</p>
+        <div class="bot-line">
+            <div class="prevue">预告</div>
+            <div class="timing">06月27日 18:30</div>
+        </div>
+    </a>
+    <div class="focus-btn" data-playerid="899827665">关 注</div>
+</li>
+</ul>
+            </div>           
+            <div class="box-rank">
+                <div class="box day-box">
+                    <h3 class="title">
+                        <i></i>
+                        人气日榜
+                    </h3>
+                    <ul class="list rank-list" data-type="rank"><li class="rank-item" data-userid="925243786" data-roomid="0">
+    <div class="rankNum"></div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn521/20170513/0445/h_tiny_GHhP_1a1700088cfd1986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn521/20170513/0445/h_tiny_GHhP_1a1700088cfd1986.jpg" alt="小闲女">
+        <div class="user-name">小闲女</div>
+        <div class="user-live" data-roomid="0"></div>
+        <div class="star-count">741546</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="943590878" data-roomid="0">
+    <div class="rankNum"></div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn121/20170623/0115/h_tiny_WJLS_00c60004c5f81986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn121/20170623/0115/h_tiny_WJLS_00c60004c5f81986.jpg" alt="聒噪的佳佳">
+        <div class="user-name">聒噪的佳佳</div>
+        <div class="user-live" data-roomid="0"></div>
+        <div class="star-count">411572</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="940637287" data-roomid="1285216">
+    <div class="rankNum"></div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn521/20170624/0635/h_tiny_6Yd6_53900004ecd21986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn521/20170624/0635/h_tiny_6Yd6_53900004ecd21986.jpg" alt="青狐媚灬娇娇">
+        <div class="user-name">青狐媚灬娇娇</div>
+        <div class="user-live" data-roomid="1285216"></div>
+        <div class="star-count">379015</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="913462752" data-roomid="0">
+    <div class="rankNum">4</div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn421/20170609/2225/h_tiny_8Wks_60c30004a66c195a.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn421/20170609/2225/h_tiny_8Wks_60c30004a66c195a.jpg" alt="黄小鹿">
+        <div class="user-name">黄小鹿</div>
+        <div class="user-live" data-roomid="0"></div>
+        <div class="star-count">308024</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="920043010" data-roomid="0">
+    <div class="rankNum">5</div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn121/20170611/0625/h_tiny_Dgh5_4e920007848e1986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn121/20170611/0625/h_tiny_Dgh5_4e920007848e1986.jpg" alt="小姐姐">
+        <div class="user-name">小姐姐</div>
+        <div class="user-live" data-roomid="0"></div>
+        <div class="star-count">251695</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="926863391" data-roomid="1285036">
+    <div class="rankNum">6</div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn321/20170410/1405/h_tiny_OHiq_60c3000357fd195a.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn321/20170410/1405/h_tiny_OHiq_60c3000357fd195a.jpg" alt="小妖精">
+        <div class="user-name">小妖精</div>
+        <div class="user-live" data-roomid="1285036"></div>
+        <div class="star-count">229163</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="919490871" data-roomid="0">
+    <div class="rankNum">7</div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn321/20170223/2225/h_tiny_hG5R_7c2600070120195a.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn321/20170223/2225/h_tiny_hG5R_7c2600070120195a.jpg" alt="自渡">
+        <div class="user-name">自渡</div>
+        <div class="user-live" data-roomid="0"></div>
+        <div class="star-count">199207</div>
+    </div>
+</li>
+</ul>
+                </div>
+                 <div class="box month-box">
+                    <h3 class="title">
+                        <i></i>
+                        人气月榜
+                    </h3>
+                    <ul class="list rank-list" data-type="rank"><li class="rank-item" data-userid="920359659" data-roomid="0">
+    <div class="rankNum"></div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn521/20170424/1055/h_tiny_r57U_00bf000386331986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn521/20170424/1055/h_tiny_r57U_00bf000386331986.jpg" alt="虎妞baby">
+        <div class="user-name">虎妞baby</div>
+        <div class="user-live" data-roomid="0"></div>
+        <div class="star-count">19789777</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="920920032" data-roomid="0">
+    <div class="rankNum"></div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn221/20170614/0315/h_tiny_nxnY_a67b00049b09195a.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn221/20170614/0315/h_tiny_nxnY_a67b00049b09195a.jpg" alt="小兔牙_Yaki">
+        <div class="user-name">小兔牙_Yaki</div>
+        <div class="user-live" data-roomid="0"></div>
+        <div class="star-count">14737332</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="912260669" data-roomid="0">
+    <div class="rankNum"></div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn121/20170619/1005/h_tiny_GhdX_00bf0004b3691986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn121/20170619/1005/h_tiny_GhdX_00bf0004b3691986.jpg" alt="唱作人麻小花">
+        <div class="user-name">唱作人麻小花</div>
+        <div class="user-live" data-roomid="0"></div>
+        <div class="star-count">13985245</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="898875507" data-roomid="0">
+    <div class="rankNum">4</div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn221/20170611/0115/h_tiny_78aF_9a13000826691986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn221/20170611/0115/h_tiny_78aF_9a13000826691986.jpg" alt="可乐软糖">
+        <div class="user-name">可乐软糖</div>
+        <div class="user-live" data-roomid="0"></div>
+        <div class="star-count">11403291</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="934637515" data-roomid="0">
+    <div class="rankNum">5</div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn421/20170621/1055/h_tiny_nY1t_970200085623195a.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn421/20170621/1055/h_tiny_nY1t_970200085623195a.jpg" alt="YI妹妹">
+        <div class="user-name">YI妹妹</div>
+        <div class="user-live" data-roomid="0"></div>
+        <div class="star-count">9520607</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="915151662" data-roomid="0">
+    <div class="rankNum">6</div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn221/20170623/2135/h_tiny_4DI3_b6d2000982fd1986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn221/20170623/2135/h_tiny_4DI3_b6d2000982fd1986.jpg" alt="迷路醒">
+        <div class="user-name">迷路醒</div>
+        <div class="user-live" data-roomid="0"></div>
+        <div class="star-count">8956441</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="900814090" data-roomid="0">
+    <div class="rankNum">7</div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn421/20170612/0240/h_tiny_HA2D_1a170009196c1986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn421/20170612/0240/h_tiny_HA2D_1a170009196c1986.jpg" alt="小黄鹂呀">
+        <div class="user-name">小黄鹂呀</div>
+        <div class="user-live" data-roomid="0"></div>
+        <div class="star-count">8912045</div>
+    </div>
+</li>
+</ul>
+                </div>
+                 <div class="box contribution-box">
+                    <h3 class="title">
+                        <i></i>
+                        贡献月榜
+                    </h3>
+                    <ul class="list rank-list" data-type="rank"><li class="rank-item" data-userid="915512420">
+    <div class="rankNum"></div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn321/20170413/0420/h_tiny_yOWU_97020006d99a195a.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn321/20170413/0420/h_tiny_yOWU_97020006d99a195a.jpg" alt="Æason">
+        <div class="user-name">Æason</div>    
+        <div class="star-count">171272200</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="542383178">
+    <div class="rankNum"></div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn321/20170418/1605/h_tiny_PO87_00bf000360411986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn321/20170418/1605/h_tiny_PO87_00bf000360411986.jpg" alt="蜡笔小新">
+        <div class="user-name">蜡笔小新</div>    
+        <div class="star-count">162118890</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="942325959">
+    <div class="rankNum"></div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn521/20170611/1425/h_tiny_MXc4_a4ab0004889d1986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn521/20170611/1425/h_tiny_MXc4_a4ab0004889d1986.jpg" alt="拾念">
+        <div class="user-name">拾念</div>    
+        <div class="star-count">111410660</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="915716396">
+    <div class="rankNum">
+    4
+    </div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn121/20170612/2155/h_tiny_ZDre_c30b0008e59f1986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn121/20170612/2155/h_tiny_ZDre_c30b0008e59f1986.jpg" alt="匿名">
+        <div class="user-name">匿名</div>    
+        <div class="star-count">74559960</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="935608257">
+    <div class="rankNum">
+    5
+    </div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn121/20170602/1620/h_tiny_ySPm_a67b00046317195a.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn121/20170602/1620/h_tiny_ySPm_a67b00046317195a.jpg" alt="原味">
+        <div class="user-name">原味</div>    
+        <div class="star-count">73345820</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="916927781">
+    <div class="rankNum">
+    6
+    </div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn221/20170623/0010/h_tiny_bVKW_f7fe0008c04d195a.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn221/20170623/0010/h_tiny_bVKW_f7fe0008c04d195a.jpg" alt="黄鹂家大狗剩">
+        <div class="user-name">黄鹂家大狗剩</div>    
+        <div class="star-count">70017540</div>
+    </div>
+</li>
+<li class="rank-item" data-userid="913121375">
+    <div class="rankNum">
+    7
+    </div>
+    <div class="user-info">
+        <img src="http://hdn.xnimg.cn/photos/hdn521/20170623/0005/h_tiny_Gqjw_9695000af0a31986.jpg" class="user-img" data-url="http://hdn.xnimg.cn/photos/hdn521/20170623/0005/h_tiny_Gqjw_9695000af0a31986.jpg" alt="勇哥">
+        <div class="user-name">勇哥</div>    
+        <div class="star-count">68191180</div>
+    </div>
+</li>
+</ul>
+                </div>
+            </div>
+            <div class="box box-mobile">
+                <h3 class="title"><i></i>移动主播</h3>
+                <ul class="list mobile-list" data-type="mobile"><li class="list-item" data-id="1285095">
+    <!-- <div class="poster" title="点击进入阿狸 _的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn075&#x2F;20170627&#x2F;1325&#x2F;original_AHuF_c34100010c461e80.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn075/20170627/1325/original_AHuF_c34100010c461e80.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn075/20170627/1325/original_AHuF_c34100010c461e80.jpg" alt="阿狸 _的直播间">
+    <div class="live-info">
+        <p class="title ellip">若只是初见、</p>
+        <p class="name ellip">阿狸 _</p>
+        <p class="view-count">5239</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+<div class="corner-mark medal"></div></li><li class="list-item" data-id="1285085">
+    <!-- <div class="poster" title="点击进入孟宝儿的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn071&#x2F;20170627&#x2F;1320&#x2F;original_dlG4_266200010c1d1e84.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn071/20170627/1320/original_dlG4_266200010c1d1e84.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn071/20170627/1320/original_dlG4_266200010c1d1e84.jpg" alt="孟宝儿的直播间">
+    <div class="live-info">
+        <p class="title ellip">可以喜欢我吗</p>
+        <p class="name ellip">孟宝儿</p>
+        <p class="view-count">5457</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285216">
+    <!-- <div class="poster" title="点击进入青狐媚灬娇娇的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn074&#x2F;20170619&#x2F;1800&#x2F;original_TA6k_dae0000143841e7f.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn074/20170619/1800/original_TA6k_dae0000143841e7f.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn074/20170619/1800/original_TA6k_dae0000143841e7f.jpg" alt="青狐媚灬娇娇的直播间">
+    <div class="live-info">
+        <p class="title ellip">扎心</p>
+        <p class="name ellip">青狐媚灬娇娇</p>
+        <p class="view-count">1142</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285221">
+    <!-- <div class="poster" title="点击进入喵了个会长的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn070&#x2F;20170627&#x2F;1420&#x2F;original_iAJo_0dce00010c611e83.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn070/20170627/1420/original_iAJo_0dce00010c611e83.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn070/20170627/1420/original_iAJo_0dce00010c611e83.jpg" alt="喵了个会长的直播间">
+    <div class="live-info">
+        <p class="title ellip">嗓心了</p>
+        <p class="name ellip">喵了个会长</p>
+        <p class="view-count">984</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285055">
+    <!-- <div class="poster" title="点击进入乐 儿的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn071&#x2F;20170627&#x2F;1250&#x2F;original_Jjex_0dfa00010bc11e83.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn071/20170627/1250/original_Jjex_0dfa00010bc11e83.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn071/20170627/1250/original_Jjex_0dfa00010bc11e83.jpg" alt="乐 儿的直播间">
+    <div class="live-info">
+        <p class="title ellip">还差一点点~</p>
+        <p class="name ellip">乐 儿</p>
+        <p class="view-count">4441</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285201">
+    <!-- <div class="poster" title="点击进入超高冷的玉崽的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn078&#x2F;20170627&#x2F;1415&#x2F;original_8MBj_da6700017d331e7f.jpg"></div> -->
+    <img src="http://fmn.rrimg.com/fmn078/20170627/1415/original_8MBj_da6700017d331e7f.jpg" class="poster" data-url="http://fmn.rrimg.com/fmn078/20170627/1415/original_8MBj_da6700017d331e7f.jpg" alt="超高冷的玉崽的直播间">
+    <div class="live-info">
+        <p class="title ellip">倒数第4天咩</p>
+        <p class="name ellip">超高冷的玉崽</p>
+        <p class="view-count">1118</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li></ul>
+            </div>
+            <div class="box box-more">
+                <h3 class="title"><i></i>更多热门
+                <a href="http://zhibo.renren.com/all" class="to-whole" target="_blank">查看更多</a>
+                </h3>
+                <ul class="list more-list" data-type="more"><li class="list-item" data-id="1285073">
+    <!-- <div class="poster" title="点击进入星星的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn077&#x2F;20170627&#x2F;1310&#x2F;original_O2gJ_0e1000010c1d1e83.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn077/20170627/1310/original_O2gJ_0e1000010c1d1e83.jpg" alt="星星的直播间">
+    <div class="live-info">
+        <p class="title ellip">机智的我举一反三哈哈</p>
+        <p class="name ellip">星星</p>
+        <p class="view-count">5457</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285126">
+    <!-- <div class="poster" title="点击进入心肝宝贝的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn070&#x2F;20170627&#x2F;1350&#x2F;original_EOgv_0dce00010c371e83.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn070/20170627/1350/original_EOgv_0dce00010c371e83.jpg" alt="心肝宝贝的直播间">
+    <div class="live-info">
+        <p class="title ellip">来啦</p>
+        <p class="name ellip">心肝宝贝</p>
+        <p class="view-count">3357</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1284999">
+    <!-- <div class="poster" title="点击进入聪明吴燕的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn079&#x2F;20170627&#x2F;1215&#x2F;original_a376_da5500017c601e7f.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn079/20170627/1215/original_a376_da5500017c601e7f.jpg" alt="聪明吴燕的直播间">
+    <div class="live-info">
+        <p class="title ellip">嗨嗨嗨</p>
+        <p class="name ellip">聪明吴燕</p>
+        <p class="view-count">4534</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285065">
+    <!-- <div class="poster" title="点击进入妖妖灵的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn076&#x2F;20170627&#x2F;1305&#x2F;original_9HF3_dabf00017c551e7f.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn076/20170627/1305/original_9HF3_dabf00017c551e7f.jpg" alt="妖妖灵的直播间">
+    <div class="live-info">
+        <p class="title ellip">妖妖灵与农村的幸福生活，有没有人记得我</p>
+        <p class="name ellip">妖妖灵</p>
+        <p class="view-count">4414</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1284939">
+    <!-- <div class="poster" title="点击进入乖巧斐的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn078&#x2F;20170621&#x2F;1235&#x2F;original_bG5A_0d970000e9de1e83.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn078/20170621/1235/original_bG5A_0d970000e9de1e83.jpg" alt="乖巧斐的直播间">
+    <div class="live-info">
+        <p class="title ellip">尬聊</p>
+        <p class="name ellip">乖巧斐</p>
+        <p class="view-count">4687</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285135">
+    <!-- <div class="poster" title="点击进入林兮.的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn074&#x2F;20170627&#x2F;1350&#x2F;original_ReBM_daa600017d1c1e7f.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn074/20170627/1350/original_ReBM_daa600017d1c1e7f.jpg" alt="林兮.的直播间">
+    <div class="live-info">
+        <p class="title ellip">吧啦啦小魔仙</p>
+        <p class="name ellip">林兮.</p>
+        <p class="view-count">2950</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1284904">
+    <!-- <div class="poster" title="点击进入小公主.的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn079&#x2F;20170625&#x2F;1225&#x2F;original_gORP_2674000100e51e84.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn079/20170625/1225/original_gORP_2674000100e51e84.jpg" alt="小公主.的直播间">
+    <div class="live-info">
+        <p class="title ellip">求大神给我破20万</p>
+        <p class="name ellip">小公主.</p>
+        <p class="view-count">4687</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285060">
+    <!-- <div class="poster" title="点击进入傻傻丫头的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn079&#x2F;20170627&#x2F;1255&#x2F;original_jj9U_0da200010c361e83.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn079/20170627/1255/original_jj9U_0da200010c361e83.jpg" alt="傻傻丫头的直播间">
+    <div class="live-info">
+        <p class="title ellip">干嘛呢</p>
+        <p class="name ellip">傻傻丫头</p>
+        <p class="view-count">4350</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285042">
+    <!-- <div class="poster" title="点击进入大北的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn079&#x2F;20170624&#x2F;2105&#x2F;original_crww_0dce0000fe2f1e83.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn079/20170624/2105/original_crww_0dce0000fe2f1e83.jpg" alt="大北的直播间">
+    <div class="live-info">
+        <p class="title ellip">我想念。。。</p>
+        <p class="name ellip">大北</p>
+        <p class="view-count">4495</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1284997">
+    <!-- <div class="poster" title="点击进入selo宝珠的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn071&#x2F;20170627&#x2F;1215&#x2F;original_RGPJ_c3af00010c1b1e80.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn071/20170627/1215/original_RGPJ_c3af00010c1b1e80.jpg" alt="selo宝珠的直播间">
+    <div class="live-info">
+        <p class="title ellip">我要你在我身旁</p>
+        <p class="name ellip">selo宝珠</p>
+        <p class="view-count">4610</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285122">
+    <!-- <div class="poster" title="点击进入李世希的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn072&#x2F;20170627&#x2F;1345&#x2F;original_Bpmk_26a000010c5e1e84.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn072/20170627/1345/original_Bpmk_26a000010c5e1e84.jpg" alt="李世希的直播间">
+    <div class="live-info">
+        <p class="title ellip">hi</p>
+        <p class="name ellip">李世希</p>
+        <p class="view-count">3270</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285107">
+    <!-- <div class="poster" title="点击进入皮皮的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn077&#x2F;20170627&#x2F;1325&#x2F;original_CbpA_daf600017cf91e7f.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn077/20170627/1325/original_CbpA_daf600017cf91e7f.jpg" alt="皮皮的直播间">
+    <div class="live-info">
+        <p class="title ellip">出门学习我的任务怎么办😭😭</p>
+        <p class="name ellip">皮皮</p>
+        <p class="view-count">3988</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285109">
+    <!-- <div class="poster" title="点击进入小小小霞的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn076&#x2F;20170627&#x2F;1340&#x2F;original_FskG_c34c00010c5e1e80.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn076/20170627/1340/original_FskG_c34c00010c5e1e80.jpg" alt="小小小霞的直播间">
+    <div class="live-info">
+        <p class="title ellip">中午好、</p>
+        <p class="name ellip">小小小霞</p>
+        <p class="view-count">3700</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285110">
+    <!-- <div class="poster" title="点击进入小情绪的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn075&#x2F;20170627&#x2F;1340&#x2F;original_nxFs_0dc300010c0d1e83.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn075/20170627/1340/original_nxFs_0dc300010c0d1e83.jpg" alt="小情绪的直播间">
+    <div class="live-info">
+        <p class="title ellip">来喽，冲刺！</p>
+        <p class="name ellip">小情绪</p>
+        <p class="view-count">3711</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1284966">
+    <!-- <div class="poster" title="点击进入西米小姐的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn079&#x2F;20170626&#x2F;1305&#x2F;original_NxBS_c336000106821e80.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn079/20170626/1305/original_NxBS_c336000106821e80.jpg" alt="西米小姐的直播间">
+    <div class="live-info">
+        <p class="title ellip">第二天了，想我吗？</p>
+        <p class="name ellip">西米小姐</p>
+        <p class="view-count">4393</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285070">
+    <!-- <div class="poster" title="点击进入小巫女的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn073&#x2F;20170627&#x2F;1310&#x2F;original_9UJC_c34100010c2a1e80.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn073/20170627/1310/original_9UJC_c34100010c2a1e80.jpg" alt="小巫女的直播间">
+    <div class="live-info">
+        <p class="title ellip">求过30万</p>
+        <p class="name ellip">小巫女</p>
+        <p class="view-count">4384</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285051">
+    <!-- <div class="poster" title="点击进入灵灵旗的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn073&#x2F;20170622&#x2F;1840&#x2F;original_W9dt_da8800015df21e7f.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn073/20170622/1840/original_W9dt_da8800015df21e7f.jpg" alt="灵灵旗的直播间">
+    <div class="live-info">
+        <p class="title ellip">标题什么的无所谓吧</p>
+        <p class="name ellip">灵灵旗</p>
+        <p class="view-count">4459</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285067">
+    <!-- <div class="poster" title="点击进入锐锐的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn078&#x2F;20170627&#x2F;1305&#x2F;original_GPl1_0db800010be71e83.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn078/20170627/1305/original_GPl1_0db800010be71e83.jpg" alt="锐锐的直播间">
+    <div class="live-info">
+        <p class="title ellip">过过任务有人吗</p>
+        <p class="name ellip">锐锐</p>
+        <p class="view-count">4348</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285174">
+    <!-- <div class="poster" title="点击进入崽崽大可爱的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn074&#x2F;20170627&#x2F;1405&#x2F;original_08hb_da6700017d201e7f.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn074/20170627/1405/original_08hb_da6700017d201e7f.jpg" alt="崽崽大可爱的直播间">
+    <div class="live-info">
+        <p class="title ellip">250万拜托拜托💕</p>
+        <p class="name ellip">崽崽大可爱</p>
+        <p class="view-count">1980</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285066">
+    <!-- <div class="poster" title="点击进入兔小白的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn075&#x2F;20170627&#x2F;1305&#x2F;original_7zsd_da7200017c651e7f.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn075/20170627/1305/original_7zsd_da7200017c651e7f.jpg" alt="兔小白的直播间">
+    <div class="live-info">
+        <p class="title ellip">爱唱歌的兔小白</p>
+        <p class="name ellip">兔小白</p>
+        <p class="view-count">4327</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285117">
+    <!-- <div class="poster" title="点击进入早上的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn070&#x2F;20170624&#x2F;2110&#x2F;original_jJEW_0dc30000fe2f1e83.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn070/20170624/2110/original_jJEW_0dc30000fe2f1e83.jpg" alt="早上的直播间">
+    <div class="live-info">
+        <p class="title ellip">守护是真走了</p>
+        <p class="name ellip">早上</p>
+        <p class="view-count">3463</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285114">
+    <!-- <div class="poster" title="点击进入贝拉的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn071&#x2F;20170627&#x2F;1340&#x2F;original_2au6_266200010c391e84.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn071/20170627/1340/original_2au6_266200010c391e84.jpg" alt="贝拉的直播间">
+    <div class="live-info">
+        <p class="title ellip">🈚️又是可怕的月末</p>
+        <p class="name ellip">贝拉</p>
+        <p class="view-count">4133</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285091">
+    <!-- <div class="poster" title="点击进入AUV桦桦的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn078&#x2F;20170627&#x2F;1320&#x2F;original_m8y5_267400010c221e84.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn078/20170627/1320/original_m8y5_267400010c221e84.jpg" alt="AUV桦桦的直播间">
+    <div class="live-info">
+        <p class="title ellip">下午好宝宝们</p>
+        <p class="name ellip">AUV桦桦</p>
+        <p class="view-count">4327</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li><li class="list-item" data-id="1285183">
+    <!-- <div class="poster" title="点击进入宝宝。的直播间" data-url="http:&#x2F;&#x2F;fmn.rrimg.com&#x2F;fmn075&#x2F;20170627&#x2F;1410&#x2F;original_A6FI_0e0500010c6e1e83.jpg"></div> -->
+    <img src="http://a.xnimg.cn/wap/pcLive/dist/img/base.png" class="poster" data-url="http://fmn.rrimg.com/fmn075/20170627/1410/original_A6FI_0e0500010c6e1e83.jpg" alt="宝宝。的直播间">
+    <div class="live-info">
+        <p class="title ellip">来来积少成多。</p>
+        <p class="name ellip">宝宝。</p>
+        <p class="view-count">1759</p>
+    </div>
+    <div class="live-icon">直播</div>
+    <div class="mask-play"></div>
+</li></ul>
+                <div class="loading">
+                    <a href="javascript:void(0);" class="loading-text">加载更多</a>
+                    <div class="loading-ball" style="display: none;">加载中 
+                        <div></div><div></div><div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <div class="ft-login">       
+        <div class="bd">
+            <div class="ft-login-cat"> 
+            <img src="http://a.xnimg.cn/wap/pcLive/dist/img/mainpage/ft-login-img.png" alt="人人直播" class="login-cat-img">
+            <div class="ft-login-title">
+                <p>
+                   一键登录~ 
+                </p>
+                <p>
+                    关注你最喜欢的主播~
+                </p>
+            </div>               
+            </div>
+            <div class="ft-login-btn">
+                <a href="javascript:void(0);" class="ft-login-mobile iconfont">手机登录</a>
+                <a href="http://www.renren.com/api/jump?src=qq&amp;frd=zhibo&amp;furl=&amp;channelId=" class="ft-login-tencent iconfont">QQ登录</a>
+                <a href="http://www.renren.com/api/jump?src=wb&amp;frd=zhibo&amp;furl=&amp;channelId=" class="ft-login-sina iconfont">微博登录</a>
+                <a href="javascript:void(0);" class="ft-login-weixin iconfont" hidefocus="true">微信登录
+                </a>
+            </div>          
+            <div class="ft-login-tip">添加到收藏夹</div>
+        </div>       
+    </div>
+    <div class="footer">
+    <div class="footer-wrap">
+        <!-- <p>
+            <span>北京千橡网景科技发展有限公司</span>
+            <span class="divider">|</span>
+            <span class="legal">法律声明</span>
+            <span class="divider">|</span>
+            <a href="http://sq.ccm.gov.cn/ccnt/sczr/service/business/emark/toDetail/DFB957BAEB8B417882539C9B9F9547E6" target="_blank">京网文[2013]0136-030号</a>
+            <span class="divider">|</span>
+            <a href="http://www.miibeian.gov.cn/" target="_blank">京ICP证090254号</a>
+            <span class="divider">|</span>
+            <a href="http://www.renren.com/" target="_blank">人人网&copy;2017</a>
+        </p> -->
+        <div class="left-link">
+            <ul class="wzrr">
+                <li>玩转人人</li>
+                <li><a href="http://page.renren.com/register/regGuide/" target="_blank">公共主页</a></li>
+                <li><a href="http://zhibo.renren.com/redian" target="_blank">热点直播</a></li>
+                <li><a href="http://zhibo.renren.com/chatroom" target="_blank">同城直播</a></li>
+            </ul>
+            <ul class="gsxx">
+                <li>公司信息</li>
+                <li><a href="http://www.renren-inc.com/zh/product/renren.html" target="_blank">关于我们</a></li>
+                <li><a href="http://page.renren.com/gongyi" target="_blank">人人公益</a></li>
+                <li><a href="http://www.renren-inc.com/zh/hr/" target="_blank">招聘</a></li>
+            </ul>
+            <ul class="yqlj">
+                <li>友情链接</li>
+                <li><a href="http://fenqi.renren.com/" target="_blank">人人分期</a></li>
+                <li><a href="https://licai.renren.com/" target="_blank">人人理财</a></li>
+                <li><a href="http://www.woxiu.com/" target="_blank">我秀</a></li>
+            </ul>
+            <ul class="ydxz">
+                <li>人人移动客户端下载</li>
+                <li><a href="http://mobile.renren.com/showClient?v=platform_rr&amp;psf=42064" target="_blank">iPhone/Android</a></li>
+                <li><a href="http://mobile.renren.com/showClient?v=platform_hd&amp;psf=42067" target="_blank">iPad客户端</a></li>
+                <li><a href="http://mobile.renren.com" target="_blank">其他人人产品</a></li>
+            </ul>
+            <ul class="swhz">
+                <li>商务合作</li>
+                <li><a href="http://dev.renren.com/" target="_blank">开放平台</a></li>
+                <li><a href="http://dsp.renren.com/dsp/index.htm" target="_blank">人人DSP</a></li>
+                <li><a href="http://bolt.jebe.renren.com/introduce.htm" class="l-2" target="_blank">中小企业自助广告</a></li>
+            </ul>
+        </div>
+        <div class="right-info">
+            <p>公司全称：北京千橡网景科技发展有限公司</p>
+            <p><a href="mailto:admin@renren-inc.com">公司邮箱：admin@renren-inc.com</a></p>
+            <!-- <p>违法和不良信息举报电话：027-87676735</p> -->
+            <p><a href="http://sq.ccm.gov.cn/ccnt/sczr/service/business/emark/toDetail/DFB957BAEB8B417882539C9B9F9547E6" target="_blank">京网文[2013]0136-030号</a></p>
+            <p><a href="http://www.miibeian.gov.cn/" target="_blank">京ICP证090254号</a></p>
+            <p>人人网©2017</p>
+        </div>
+    </div>
+</div>
+
+    <script type="text/javascript" src="http://s.xnimg.cn/a90525/wap/pcLive/dist/home.js"></script>
+
+
+</body></html>

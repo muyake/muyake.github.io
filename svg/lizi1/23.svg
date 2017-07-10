@@ -1,0 +1,14 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+	<div class="div2">
+		<svg class="dc animate" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" viewBox="0 0 280 60"><defs xmlns="http://www.w3.org/2000/svg"><linearGradient id="grad1" x1="100%" y1="100%" x2="45%" y2="45%"><stop offset="0%" style="stop-color:#ffd600;stop-opacity:1"></stop><stop offset="100%" style="stop-color:#ffd600;stop-opacity:1"></stop></linearGradient></defs><text class="num2" x="10" y="-105" dx="40" dy="110" stroke="#fff500" stroke-width="0px" style="fill:url(#grad1);font-weight: bold;font-size:1.3em">1</text><text class="multiplication2" x="10" y="-110" dy="110" font-style="italic" stroke="#fff500" stroke-width="0px" stroke-opacity="0.9" style="fill:url(#grad1);font-weight: bold;">×</text></svg>
+	</div>
+</body>
+</html>
+
