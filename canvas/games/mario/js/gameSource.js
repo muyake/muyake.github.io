@@ -32,6 +32,7 @@ var gameSourceUrl = {
     audioList: {
         //bigJump:'./sounds/mario/jump_big.mp3',
         BGM: './sounds/mario/bag.mp3',
+        WD: './sounds/mario/wudi.mp3',
         jumpAll: './sounds/mario/jumpAll.mp3', //
         collision: './sounds/mario/mariocollision.mp3', //子弹打在其他物体上
         die: './sounds/mario/die.mp3',

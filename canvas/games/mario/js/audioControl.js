@@ -53,6 +53,10 @@ var gameAudio = {
         startTime: 3.4,
         endTime: 3.9,
     },
+     WD: {
+        startTime: 0,
+        endTime: 20,
+    },
 }
 
 //audioControl

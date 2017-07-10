@@ -137,6 +137,7 @@ Mario.prototype.jump = function(VY) {
 };
 
 Mario.prototype.rise = function(endHeight, status) {
+    var self = this;
     if (endHeight > this.height) {
         this.risespeed = 30;
 
@@ -146,8 +147,8 @@ Mario.prototype.rise = function(endHeight, status) {
     } else {
         this.risespeed = 0;
     }
-    this.status = status;
-    switch (this.status) {
+
+    switch (status) {
         case 1:
         case 2:
             {
@@ -162,26 +163,21 @@ Mario.prototype.rise = function(endHeight, status) {
         case 4:
             {
                 this.setClothes('invinciblefireMairo');
+                audioControl.BGMPause(gameSourceObj.audioList.BGM);
+                audioControl.audioPlay(gameSourceObj.audioList.WD, gameAudio.WD);
+                gameSourceObj.audioList.WD.volume = 0.4;
             }
             break;
     }
+    this.originalStatus = this.status;
+    this.status = status;
+    this.status4DuringTime = progressObj.currentTime - 18;    
     if (endHeight < this.height) {
         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.changeSmall);
     } else {
         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
     }
-    // switch (endHeight) {
-    //     case WH.mario.smallstatus.height:
-    //         {
-    //             audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.changeSmall);
-    //         }
-    //         break;
-    //     case WH.mario.bigstatus.height:
-    //         {
-    //             audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
-    //         }
-    //         break;
-    // }
+
     this.initialHeight = endHeight;
     this.marioSpriteAnimatorRising.start();
 };
@@ -189,6 +185,31 @@ Mario.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
     this.marioSpriteAnimatorJump.execute();
     this.marioSpriteAnimatorRising.execute();
+
+    if (this.status == 4 && this.status4DuringTime > progressObj.currentTime) {
+        this.status = this.originalStatus;
+        console.log("恢复");
+        audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+        switch (this.status) {
+            case 1:
+            case 2:
+                {
+                    this.setClothes('commonMairo');
+                }
+                break;
+            case 3:
+                {
+                    this.setClothes('fireMairo');
+                }
+                break;
+            case 4:
+                {
+                    this.setClothes('invinciblefireMairo');
+                }
+                break;
+        }
+    }
+
     // //碰撞的向后顺序是先撞墙，再吃金币  l
     this.update(ctx, time, fpsNum);
     this.paint(ctx);
@@ -332,7 +353,7 @@ Flower.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum;
     this.flowerSpriteAnimatorUp.execute();
     this.update(ctx, time, fpsNum);
-    //console.log(this.top);
+
     this.paint(ctx);
 }
 Flower.prototype.up = function(VY) {

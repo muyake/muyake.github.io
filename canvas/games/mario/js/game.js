@@ -21,7 +21,7 @@ var sourceLoadObj = {
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
-        //audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+        audioControl.BGMPlay(gameSourceObj.audioList.BGM);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
@@ -51,15 +51,15 @@ var game = {
             createFactory.createBrick(100, 100);
         }, false);
         document.querySelector('#flower').addEventListener('click', function() {
-            drawSpriteList.mario.rise(WH.mario.bigstatus.height,3);
+            drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
             //createFactory.createUpMoney(100, 100);
         }, false);
         document.querySelector('#flower1').addEventListener('click', function() {
-            drawSpriteList.mario.rise(WH.mario.smallstatus.height,3);
+            drawSpriteList.mario.rise(WH.mario.smallstatus.height, 3);
             createFactory.createBullet(100, 100);
         }, false);
         document.querySelector('#createStar').addEventListener('click', function() {
-           // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
+            // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
             createFactory.createStar(100, 100);
         }, false);
         document.querySelector('#bigBtn').addEventListener('click', function() {
@@ -78,11 +78,23 @@ var game = {
                 return function(status) {
                     // alert(key);
                     if (status == 1 && flag) {
-                        if (gameSourceObj.audioList.BGM.paused) {
-                            audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+                        if (drawSpriteList.mario.status == 4) {
+                            //背景是无敌音乐
+                            if (gameSourceObj.audioList.WD.paused) {
+                                gameSourceObj.audioList.WD.play();
+                                //audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+                            } else {
+                                gameSourceObj.audioList.WD.pause();
+                                //audioControl.BGMPause(gameSourceObj.audioList.BGM);
+                            }
                         } else {
-                            audioControl.BGMPause(gameSourceObj.audioList.BGM);
+                            if (gameSourceObj.audioList.BGM.paused) {
+                                audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+                            } else {
+                                audioControl.BGMPause(gameSourceObj.audioList.BGM);
+                            }
                         }
+
                         gameControl.togglePaused();
                         if (progressObj.countDownWatch.isRunning()) {
                             progressObj.countDownPause();
@@ -223,7 +235,7 @@ var game = {
             }
         }
 
-        if (this.mapKey['d'] && (drawSpriteList.mario.status == 4 || drawSpriteList.mario.status == 3) & time - this.advance > 300) {
+        if (this.mapKey['d'] && (drawSpriteList.mario.originalStatus == 4 || drawSpriteList.mario.status == 3) & time - this.advance > 300) {
             if (drawSpriteList.mario.isReverse) {
                 createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, drawSpriteList.mario.top + drawSpriteList.mario.height / 3, drawSpriteList.mario.isReverse);
 
@@ -329,8 +341,8 @@ var drawSpriteList = {
             flower: {
                 funcName: 'judgeMF',
             },
-            star:{
-                 funcName: 'judgeMS',
+            star: {
+                funcName: 'judgeMS',
             },
             bullet: {
                 funcName: 'judgeBBarrier',
@@ -367,11 +379,11 @@ var drawSpriteList = {
             //子弹与障碍物碰撞，（包括与管道和墙的左右碰撞，并不完善（尚未完成），与怪兽的碰撞）
             drawSpriteList.createBulletSpriteList.forEach(function(itemDraw) {
                 drawSpriteList.arrayOthersA.forEach(function(barrier) {
-                    if (barrier.name=='wall'||barrier.name=='pipe') {
-                           var callback2 = self.config["bullet"].callback || function() {};
-                    CD['judgeBBarrier'](itemDraw, barrier, callback2);
+                    if (barrier.name == 'wall' || barrier.name == 'pipe') {
+                        var callback2 = self.config["bullet"].callback || function() {};
+                        CD['judgeBBarrier'](itemDraw, barrier, callback2);
                     }
-                 
+
                 });
             });
             //蘑菇，怪兽等水平的对象与障碍物（马里奥，管道，墙等）的碰撞
@@ -379,7 +391,7 @@ var drawSpriteList = {
                 var callback = self.config[mover.name].callback || function() {};
                 CD[self.config[mover.name].funcName](drawSpriteList.mario, mover, callback);
                 //如果蘑菇已经上升完毕，则在判断蘑菇与墙，管道的碰撞效果。            
-                if (mover.name == 'mushroom'||mover.name == 'star') {
+                if (mover.name == 'mushroom' || mover.name == 'star') {
                     if (mover.upover) {
                         drawSpriteList.arrayOthersA.forEach(function(barrier) {
                             var callback2 = self.config["moverBarrier"].callback || function() {};
@@ -388,8 +400,11 @@ var drawSpriteList = {
                     }
                 } else {
                     drawSpriteList.arrayOthersA.forEach(function(barrier) {
-                        var callback2 = self.config["moverBarrier"].callback || function() {};
+                        if(barrier.name=='wall'||barrier.name=='pipe'){
+                             var callback2 = self.config["moverBarrier"].callback || function() {};
                         CD['judgeMoverBarrier'](mover, barrier, callback2);
+                        }
+                       
                     });
                 }
 
