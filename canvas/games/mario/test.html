@@ -8,90 +8,19 @@
 <body>
     <canvas id="canvas" width="1000" height="1000"></canvas>
     <script type="text/javascript">
-    var lib = {
-        newGuid: function() {
-            var guid = "";
-            for (var i = 1; i <= 32; i++) {
-                var n = Math.floor(Math.random() * 16.0).toString(16);
-                guid += n;
-                // if ((i == 8) || (i == 12) || (i == 16) || (i == 20))
-                //     guid += "-";
-            }
-            return guid;
-        },
+    var a=3;
+    switch(a){
+        case 1:
+        console.log(1);
+        break;
+        case 2:
+        case 3:
+            console.log("2|3");
+            break;
+            case 4:
+            console.log("4");
+            break;
     }
-    var totalProgressSprite = {
-        wall: [{
-            isVisible: true,
-            id: lib.newGuid(),
-            status: 0,
-            positionmile: 770, //left=progressObj.mileageNum-positionmile   
-            physicaltop: 100,
-        }, {
-            isVisible: true,
-            id: lib.newGuid(),
-            status: 1,
-            positionmile: 805,
-            physicaltop: 100,
-        }],
-        money: [{
-            isVisible: true,
-            id: lib.newGuid(),
-            physicaltop: 100,
-            positionmile: 200
-        }, {
-            isVisible: true,
-            id: lib.newGuid(),
-            physicaltop: 100,
-            positionmile: 1000
-        }],
-        pipe: [{
-            isVisible: true,
-            id: lib.newGuid(),
-            physicaltop: 0,
-            positionmile: 500
-        }],
-        fire: [],
-        badflower: [],
-        flower: [],
-        monster: [],
-        mushroom: [],
-        tortoise: [],
-        star: [],
-        tower: [],
-        hole: [],
-    };
-    var arrtotla = [];
-    // totalProgressSprite.forEach(function (item) {
-    //   arrtotla.concat(item);
-    // });
-    for (var key in totalProgressSprite) {
-        arrtotla = arrtotla.concat(totalProgressSprite[key]);
-    }
-    arrtotla.forEach(function(item){
-      console.log(item.positionmile);
-    })
-
-    function sort(arr, attributeName, status) { //status=0位正序，1为倒序
-       var s=status||0;
-        function compare(item1, item2) {
-            var value1 = item1[attributeName];
-            var value2 = item2[attributeName];
-            if (value1 < value2) {
-                return  s==0?-1:1;
-            } else if (value1 > value2) {
-                return s==0?1:-1;
-            } else {
-                return 0;
-            }
-        }
-        arr.sort(compare);
-    }
-    console.log('排序');
-    sort(arrtotla,'positionmile');
-    arrtotla.forEach(function(item){
-      console.log(item.positionmile);
-    })
 
     </script>
 </body>

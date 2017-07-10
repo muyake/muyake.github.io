@@ -3,6 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <title>
+        超级玛丽
+    </title>
+    <link rel="icon" href="./images/ico/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./images/ico/favicon.ico" type="image/x-icon" />
     <style>
         html,
         body,
@@ -10,7 +15,6 @@
             margin: 0;
             padding: 0;
         }
-
         .load {
             width: 200px;
             height: 20px;
@@ -51,16 +55,19 @@
 <body>
      <input type="button" value='小蹦' id='smallBtn'>
      <input type="button" value="大崩" id='bigBtn'>
-      <input type="button" value="出花" id='flower'>
+      <input type="button" value="长大" id='flower'>
+        <input type="button" value="变小" id='flower1'>
+         <input type="button" value="变星星" id='createStar'>
+        <input type="button" value="发射子弹" id='fire'>
     <div class='tip'>
-    <!-- 左右键是跑动，s键是小蹦，w是大蹦，p键是暂停 -->
+    左右键是跑动，s键是小蹦，w是大蹦，p键是暂停,d键是发射子弹。
     </div>
     <canvas id="mycanvas" width="666" height="364"></canvas>
     <div id="load" class="load">
     </div>  
          <script src='./js/public.js'>
          </script>
-         <script src='./js/libs/requestNextAnimationFrame.js'></script>     
+         <script src='./js/libs/requestNextAnimationFrame.js'></script>    
          <script src='./js/libs/sprite.js'></script>
          <script src='./js/libs/gameEngine.js'>
          </script>
@@ -80,7 +87,8 @@
          </script>
       <!--    <script src='./js/createSprite.js'>
          </script> -->
-         <script src='./js/behaviorList.js'></script>   
+         <script src='./js/behaviorList.js'></script> 
+        <script src='./js/spriteAnimator.js'></script>
          <script src='./js/gameSprite.js'></script>
          <script src='./js/game.js'>
          </script>

@@ -4,6 +4,7 @@ var publicConfig = {
 };
 //马里奥动画配置参数
 var marioConfig = {
+ 
   config: {
     totalCount: 21,
     sprite_0: {
@@ -160,45 +161,20 @@ var marioConfig = {
     }
   }
 };
-var flowerConfig = {
-  config: {
-    totalCount: 5,
-    sprite_0: {
-      width: 50,
-      height: 50,
-      left: 10,
-      top: 10,
-    },
-    sprite_1: {
-      width: 50,
-      height: 50,
-      left: 80,
-      top: 10,
-    },
-    sprite_2: {
-      width: 50,
-      height: 50,
-      left: 10,
-      top: 80,
-    },
-    sprite_3: {
-      width: 50,
-      height: 50,
-      left: 80,
-      top: 80,
-    },
-    sprite_4: {
-      width: 50,
-      height: 50,
-      left: 150,
-      top: 10,
-    },
-  }
-}
+
+var bulletConfig={
+  RV:980,//旋转角速度
+  VX:240,
+};
 var WH = {
   wall: {
     width: 35,
     height: 35
+  },
+
+   bullet: {
+    width: 24,
+    height: 24
   },
   MAX: {
     width: 45
@@ -207,13 +183,27 @@ var WH = {
     width: 35,
     height: 35
   },
+   star: {
+    width: 35,
+    height: 35
+  },
+  mushroom: {
+    width: 35,
+    height: 35
+  },
   money: {
     width: 35,
     height: 35
   },
   mario: {
-    width: 33,
-    height: 68
+    bigstatus:{
+       width: 33,
+     height: 68
+    },
+    smallstatus:{
+        width: 33*0.5,
+     height: 68*0.5
+   }  
   },
   pipe: {
     width: 45,
@@ -248,7 +238,7 @@ var wallConfig = {
   },
   leftdownSprite: {
     height: 30,
-    width: 39,
+    width: 30,
     left: 51,
     top: 0
   },
@@ -278,7 +268,7 @@ var element = {
 var gameConfig = {
   // wallSpeed: 90,  // moneySpeed:90,
 
-  objectSpeed: 90,
+  objectSpeed: 90*1.5,
   progressObjSpeed: -2,
   skySpeed: 32,
   setSpeedDefault: function() {
