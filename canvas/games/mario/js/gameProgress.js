@@ -73,21 +73,21 @@ var totalProgressSprite = {
         positionmile: 275,
         physicaltop: 100,
         contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    },{
+    }, {
         isVisible: true,
         id: lib.newGuid(),
         status: 0,
         positionmile: 310,
         physicaltop: 100,
         contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    },{
+    }, {
         isVisible: true,
         id: lib.newGuid(),
         status: 1,
         positionmile: 345,
         physicaltop: 100,
         contain: 4, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    },{
+    }, {
         isVisible: true,
         id: lib.newGuid(),
         status: 0,
@@ -111,18 +111,23 @@ var totalProgressSprite = {
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: 0,
-        positionmile: 600
+        positionmile: 800
     }],
 
     fire: [],
-    badflower: [], 
+    badflower: [],
 
     monster: [],
     //mushroom: [],
     tortoise: [],
     star: [],
     tower: [],
-    hole: [],
+    hole: [{
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: -33,
+        positionmile: 600
+    }],
 };
 
 var createFactory = {
@@ -132,7 +137,7 @@ var createFactory = {
         var createUpMoneyObj = new Money({
             physicaltop: physicaltop,
             positionmile: positionmile,
-            id: lib.newGuid(),            
+            id: lib.newGuid(),
             jumpEndCallback: SpriteAnimatorEndCallbackList.moneyupend
         });
         createUpMoneyObj.up(200);
@@ -143,7 +148,7 @@ var createFactory = {
         var createUpFlowerObj = new Flower({
             physicaltop: physicaltop,
             positionmile: positionmile,
-            id: lib.newGuid(),            
+            id: lib.newGuid(),
         });
         createUpFlowerObj.up(100);
         drawSpriteList.createSpriteList.push(createUpFlowerObj);
@@ -153,7 +158,7 @@ var createFactory = {
         var createUpMushroomObj = new Mushroom({
             physicaltop: physicaltop,
             positionmile: positionmile,
-            id: lib.newGuid(),           
+            id: lib.newGuid(),
         });
         createUpMushroomObj.up(200);
         drawSpriteList.createAnimationSpriteList.push(createUpMushroomObj);
@@ -163,29 +168,29 @@ var createFactory = {
         var createUpStarObj = new Star({
             physicaltop: physicaltop,
             positionmile: positionmile,
-            id: lib.newGuid(),  
-            jumpEndCallback:function(sprite){
-                sprite.up(150);                              
-            },      
+            id: lib.newGuid(),
+            jumpEndCallback: function(sprite) {
+                sprite.up(150);
+            },
         });
         createUpStarObj.up(200);
-        createUpStarObj.move(-70); 
+        createUpStarObj.move(-70);
         drawSpriteList.createAnimationSpriteList.push(createUpStarObj);
     },
     //创造子弹
-    createBullet: function(positionmile, physicaltop,isreverse) {
+    createBullet: function(positionmile, physicaltop, isreverse) {
         var createBulletObj = new Bullet({
             top: physicaltop,
             positionmile: positionmile,
-            id: lib.newGuid(),          
+            id: lib.newGuid(),
         });
-        if(isreverse){
-             createBulletObj.jump(-bulletConfig.VX);
-        }else{
-             createBulletObj.jump(bulletConfig.VX);
-        }      
+        if (isreverse) {
+            createBulletObj.jump(-bulletConfig.VX);
+        } else {
+            createBulletObj.jump(bulletConfig.VX);
+        }
         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.fire);
-        
+
         drawSpriteList.createBulletSpriteList.push(createBulletObj);
     },
     //创造墙
@@ -207,7 +212,7 @@ var createFactory = {
         return new Pipe({
             id: setting.id,
             physicaltop: setting.physicaltop,
-            positionmile: setting.positionmile,            
+            positionmile: setting.positionmile,
             left: setting.positionmile - progressObj.createSpriteMileNum,
         });
     },
@@ -218,7 +223,7 @@ var createFactory = {
             physicaltop: setting.physicaltop,
             positionmile: setting.positionmile,
             left: setting.positionmile - progressObj.createSpriteMileNum,
-            
+
         });
     },
     //创造砖块
@@ -231,14 +236,14 @@ var createFactory = {
                 positionmile: positionmile,
                 status: item,
                 jumpEndCallback: SpriteAnimatorEndCallbackList.brickupend,
-     
+
             });
             createUpBrickObj.up();
             drawSpriteList.createBrickSpriteList.push(createUpBrickObj);
         })
 
     },
-   //创造坏花
+    //创造坏花
     createBadflower: function(setting) {
 
     },
@@ -248,34 +253,39 @@ var createFactory = {
             id: setting.id,
             physicaltop: setting.physicaltop,
             positionmile: setting.positionmile,
-            left: setting.positionmile - progressObj.createSpriteMileNum,           
+            left: setting.positionmile - progressObj.createSpriteMileNum,
         });
     },
     //创造怪兽
     createMonster: function(setting) {
 
-    },   
+    },
     //创造乌龟
     createTortoise: function(setting) {
 
     },
-    
-   
+
+
     //创造城堡
     createTower: function(setting) {
 
     },
     //创造洞
     createHole: function(setting) {
-
+        return new Hole({
+            id: setting.id,
+            physicaltop: setting.physicaltop,
+            positionmile: setting.positionmile,
+            left: setting.positionmile - progressObj.createSpriteMileNum,
+        });
     },
     nameToCreateFun: {
         'wall': 'createWall',
         'money': 'createMoney',
         'pipe': 'createPipe',
-        
+
         'badflower': 'createBadflower',
-       
+
         'monster': 'createMonster',
         'tortoise': 'createTortoise',
         'star': 'createStar',
@@ -305,7 +315,7 @@ var createFactory = {
                 }
             }
         });
-    },    
+    },
 
     init: function() {
         //将所有对象填入到数组中，并进行排列。

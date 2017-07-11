@@ -199,6 +199,28 @@ var CD = {
             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
         }
     },
+    judgeMH: function(mario, hole, callback) {
+         if (barrier.visible == false) {
+            return;
+        }
+        var self = this;
+        // 两个矩形检测
+        if ((bullet.left + bullet.width) < barrier.left || (barrier.left + barrier.width) < bullet.left || (bullet.top + bullet.height) < barrier.top || (barrier.top + barrier.height) < bullet.top) {
+            this.CDFunc.MoverOutCarrying(bullet, barrier);
+        } else {
+            var leftfun = function() {
+               // self.CDFunc.BulletleftBarrier(bullet, barrier)
+            };
+            var rightfun = function() {
+                //self.CDFunc.BulletrightBarrier(bullet, barrier)
+            };
+            var upfun = function() {
+                //self.CDFunc.MoverupBarrier(bullet, barrier)
+            };
+            var downfun = function() {};
+            self.CDFunc.Colliding(bullet, barrier, leftfun, rightfun, downfun, upfun);
+        }
+    },
     judgeBBarrier: function(bullet, barrier, callback) {
          if (barrier.visible == false) {
             return;
@@ -219,7 +241,6 @@ var CD = {
             };
             var downfun = function() {};
             self.CDFunc.Colliding(bullet, barrier, leftfun, rightfun, downfun, upfun);
-
         }
     },
     judgeMF: function(mario, flower, callback) {

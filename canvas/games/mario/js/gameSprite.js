@@ -629,6 +629,25 @@ Pipe.prototype.draw = function(ctx, time, fpsNum) {
 }
 
 
+//洞对象
+var Hole = function(setting) {
+    setting.name = setting.name || 'hole';
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.hole), [new behaviorList.SpriteLeftToRight()]);
+    this.width = setting.width || WH.hole.width;;
+    this.height = setting.height || WH.hole.height;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - this.physicaltop;
+    this.left = setting.left || 0;
+    this.positionmile = setting.positionmile || 0;
+    this.roleType = 'hole';
+    this.id = setting.id || 0;
+};
+Hole.prototype = Object.create(SceneSprite.prototype);
+Hole.prototype.draw = function(ctx, time, fpsNum) {
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
+}
+
 
 
 

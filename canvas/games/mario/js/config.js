@@ -171,7 +171,10 @@ var WH = {
     width: 35,
     height: 35
   },
-
+hole:{
+ width: 167*0.7,
+    height: 73*0.7
+},
    bullet: {
     width: 24,
     height: 24
@@ -268,13 +271,13 @@ var element = {
 var gameConfig = {
   // wallSpeed: 90,  // moneySpeed:90,
 
-  objectSpeed: 90*1.5,
+  objectSpeed: 60*1.5,
   progressObjSpeed: -2,
   skySpeed: 32,
   setSpeedDefault: function() {
-    this.objectSpeed = 90;
+    this.objectSpeed = 60;
     this.progressObjSpeed = -2;
-    this.skySpeed = 32;
+    this.skySpeed = 60;
   },
   setSpeedZero: function() {
     this.objectSpeed = 0;

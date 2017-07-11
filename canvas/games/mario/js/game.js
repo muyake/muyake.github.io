@@ -350,6 +350,9 @@ var drawSpriteList = {
             mushroom: {
                 funcName: 'judgeMMR',
             },
+             hole: {
+                funcName: 'judgeMH',
+            },
             moverBarrier: {
                 callback: function(mushroomSprite) {
                     lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mushroomSprite.id);

@@ -3,6 +3,7 @@ var gameSourceUrl = {
     imageList: {
         //背景
         BG: './images/background2.png',
+       // ground: './images/ground.png',
         wall: './images/wall/wall.png',
         flower: './images/flower/4.png',
         mushroom: './images/mushroom/4.png',
@@ -10,6 +11,7 @@ var gameSourceUrl = {
         money: './images/money.png',
         star: './images/star.png',
         bullet: './images/fire/fireL/0.png',
+        hole: './images/hole.png',
         //马里奥
         mario: {
             commonMairo: {
