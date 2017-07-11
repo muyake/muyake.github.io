@@ -147,31 +147,37 @@ Mario.prototype.rise = function(endHeight, status) {
     } else {
         this.risespeed = 0;
     }
-
-    switch (status) {
-        case 1:
-        case 2:
-            {
-                this.setClothes('commonMairo');
-            }
-            break;
-        case 3:
-            {
-                this.setClothes('fireMairo');
-            }
-            break;
-        case 4:
-            {
-                this.setClothes('invinciblefireMairo');
-                audioControl.BGMPause(gameSourceObj.audioList.BGM);
-                audioControl.audioPlay(gameSourceObj.audioList.WD, gameAudio.WD);
-                gameSourceObj.audioList.WD.volume = 0.4;
-            }
-            break;
+    if (this.status != 4) {
+        switch (status) {
+            case 1:
+            case 2:
+                {
+                    this.setClothes('commonMairo');
+                }
+                break;
+            case 3:
+                {
+                    this.setClothes('fireMairo');
+                }
+                break;
+            case 4:
+                {
+                    this.setClothes('invinciblefireMairo');
+                    audioControl.BGMPause(gameSourceObj.audioList.BGM);
+                    audioControl.audioPlay(gameSourceObj.audioList.WD, gameAudio.WD);
+                    gameSourceObj.audioList.WD.volume = 0.4;
+                }
+                break;
+        }
+        this.originalStatus = this.status;
+        this.status = status;
+    } else {
+        //如果是状态4，则只设原始状态为status
+        this.originalStatus = status;
     }
-    this.originalStatus = this.status;
-    this.status = status;
-    this.status4DuringTime = progressObj.currentTime - 18;    
+
+
+    this.status4DuringTime = progressObj.currentTime - 15;
     if (endHeight < this.height) {
         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.changeSmall);
     } else {

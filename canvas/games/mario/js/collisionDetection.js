@@ -73,7 +73,7 @@ var CD = {
                             { //如果是长大了，就会出花，如果是小人状态，则出蘑菇。
                                 audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
                                 
-                                if (mario.status == 1) {
+                                if (mario.status == 1||(mario.status==4&&mario.originalStatus==1)) {
                                     createFactory.createUpMushroom(wall.positionmile, wall.physicaltop);
                                 } else {
                                     createFactory.createUpFlower(wall.positionmile, wall.physicaltop);

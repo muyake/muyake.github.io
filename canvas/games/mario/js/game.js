@@ -21,7 +21,7 @@ var sourceLoadObj = {
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
-        audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+        //audioControl.BGMPlay(gameSourceObj.audioList.BGM);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
@@ -390,21 +390,23 @@ var drawSpriteList = {
             drawSpriteList.createAnimationSpriteList.forEach(function(mover) {
                 var callback = self.config[mover.name].callback || function() {};
                 CD[self.config[mover.name].funcName](drawSpriteList.mario, mover, callback);
-                //如果蘑菇已经上升完毕，则在判断蘑菇与墙，管道的碰撞效果。            
+                //如果蘑菇已经上升完毕，则在判断蘑菇与墙，管道的碰撞效果。//可以整理一下            
                 if (mover.name == 'mushroom' || mover.name == 'star') {
                     if (mover.upover) {
                         drawSpriteList.arrayOthersA.forEach(function(barrier) {
-                            var callback2 = self.config["moverBarrier"].callback || function() {};
-                            CD['judgeMoverBarrier'](mover, barrier, callback2);
+                            if (barrier.name == 'wall' || barrier.name == 'pipe') {
+                                var callback2 = self.config["moverBarrier"].callback || function() {};
+                                CD['judgeMoverBarrier'](mover, barrier, callback2);
+                            }
                         });
                     }
                 } else {
                     drawSpriteList.arrayOthersA.forEach(function(barrier) {
-                        if(barrier.name=='wall'||barrier.name=='pipe'){
-                             var callback2 = self.config["moverBarrier"].callback || function() {};
-                        CD['judgeMoverBarrier'](mover, barrier, callback2);
+                        if (barrier.name == 'wall' || barrier.name == 'pipe') {
+                            var callback2 = self.config["moverBarrier"].callback || function() {};
+                            CD['judgeMoverBarrier'](mover, barrier, callback2);
                         }
-                       
+
                     });
                 }
 
