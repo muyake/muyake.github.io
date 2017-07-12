@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <style type="text/css">
+    .smallRedBag-rotate {
+        display: inline-block;
+        background: url(smallRedBag.png) no-repeat;
+        width: 47px;
+        height: 58px;
+        position: absolute;
+        top: 200px;
+        left: 200px;
+        transform-origin: 50% 100%;
+        -ms-transform-origin: 50% 100%;
+        -webkit-transform-origin: 50% 100%;
+        -moz-transform-origin: 50% 100%;
+        animation-name: shake-rotate;
+        animation-duration: 2500ms;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+    }
+    
+    @keyframes shake-rotate {
+        56% {
+            transform: translate(0, 0) rotate(0deg) translateZ(0);
+        }
+        58% {
+            transform: translate(0, 0) rotate(7.5deg) translateZ(0);
+        }
+        60% {
+            transform: translate(0, 0) rotate(3.5deg) translateZ(0);
+        }
+        62% {
+            transform: translate(0, 0) rotate(6.5deg) translateZ(0);
+        }
+        64% {
+            transform: translate(0, 0) rotate(2.5deg) translateZ(0);
+        }
+        66% {
+            transform: translate(0, 0) rotate(-4.5deg) translateZ(0);
+        }
+        68% {
+            transform: translate(0, 0) rotate(-3.5deg) translateZ(0);
+        }
+        70% {
+            transform: translate(0, 0) rotate(-3.5deg) translateZ(0);
+        }
+        72% {
+            transform: translate(0, 0) rotate(0.5deg) translateZ(0);
+        }
+        74% {
+            transform: translate(0, 0) rotate(-5.5deg) translateZ(0);
+        }
+        76% {
+            transform: translate(0, 0) rotate(4.5deg) translateZ(0);
+        }
+        78% {
+            transform: translate(0, 0) rotate(-1.5deg) translateZ(0);
+        }
+        80% {
+            transform: translate(0, 0) rotate(1.5deg) translateZ(0);
+        }
+        82% {
+            transform: translate(0, 0) rotate(2.5deg) translateZ(0);
+        }
+        84% {
+            transform: translate(0, 0) rotate(0.5deg) translateZ(0);
+        }
+        86% {
+            transform: translate(0, 0) rotate(-2.5deg) translateZ(0);
+        }
+        88% {
+            transform: translate(0, 0) rotate(7.5deg) translateZ(0);
+        }
+        90% {
+            transform: translate(0, 0) rotate(4.5deg) translateZ(0);
+        }
+        92% {
+            transform: translate(0, 0) rotate(-6.5deg) translateZ(0);
+        }
+        94% {
+            transform: translate(0, 0) rotate(0.5deg) translateZ(0);
+        }
+        96% {
+            transform: translate(0, 0) rotate(5.5deg) translateZ(0);
+        }
+        98% {
+            transform: translate(0, 0) rotate(-6.5deg) translateZ(0);
+        }
+        0%,
+        100% {
+            transform: translate(0, 0) rotate(0) translateZ(0);
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="smallRedBag-rotate"></div>
+</body>
+
+</html>
