@@ -235,7 +235,7 @@ var game = {
             }
         }
 
-        if (this.mapKey['d'] && (drawSpriteList.mario.originalStatus == 4 || drawSpriteList.mario.status == 3) & time - this.advance > 300) {
+        if (this.mapKey['d'] && (drawSpriteList.mario.originalStatus == 4 ||drawSpriteList.mario.originalStatus == 3|| drawSpriteList.mario.status == 3) & time - this.advance > 300) {
             if (drawSpriteList.mario.isReverse) {
                 createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, drawSpriteList.mario.top + drawSpriteList.mario.height / 3, drawSpriteList.mario.isReverse);
 

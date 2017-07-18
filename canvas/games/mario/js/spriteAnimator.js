@@ -5,7 +5,6 @@ var CharacterSpriteAnimator = function(elapsedCallback, sprite) {
     }
     this.sprite = sprite;
     this.isRunning = false;
-
 }
 CharacterSpriteAnimator.prototype = Object.create(SpriteAnimator.prototype);
 CharacterSpriteAnimator.prototype.end = function(sprite) {

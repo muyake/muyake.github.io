@@ -200,26 +200,27 @@ var CD = {
         }
     },
     judgeMH: function(mario, barrier, callback) {
-        //  if (barrier.visible == false) {
-        //     return;
-        // }
-        // var self = this;
-        // // 两个矩形检测
-        // if ((bullet.left + bullet.width) < barrier.left || (barrier.left + barrier.width) < bullet.left || (bullet.top + bullet.height) < barrier.top || (barrier.top + barrier.height) < bullet.top) {
-        //     this.CDFunc.MoverOutCarrying(bullet, barrier);
-        // } else {
-        //     var leftfun = function() {
-        //        // self.CDFunc.BulletleftBarrier(bullet, barrier)
-        //     };
-        //     var rightfun = function() {
-        //         //self.CDFunc.BulletrightBarrier(bullet, barrier)
-        //     };
-        //     var upfun = function() {
-        //         //self.CDFunc.MoverupBarrier(bullet, barrier)
-        //     };
-        //     var downfun = function() {};
-        //     self.CDFunc.Colliding(bullet, barrier, leftfun, rightfun, downfun, upfun);
-        // }
+         if (barrier.visible == false) {
+            return;
+        }
+        var self = this;
+        if ((mario.left + mario.width) < barrier.left || (barrier.left + barrier.width) < mario.left || (mario.top + mario.height) < barrier.top || (barrier.top + barrier.height) < mario.top) {
+           // this.CDFunc.MoverOutCarrying(mario, barrier);
+        } else {
+          if((mario.left -15) > barrier.left && (barrier.left+barrier.width-15) > (mario.left+mario.width) ){
+               // console.log('掉小区');
+                mario.initialTop = element.mycanvas.height+100 ;    
+                if( !mario.isJump){
+                    mario.jump(0);                  
+                    audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
+                }           
+              
+                 
+                mario.isJump = true;
+                mario.upColliding = barrier;
+          }
+      }       
+       
     },
     judgeBBarrier: function(bullet, barrier, callback) {
          if (barrier.visible == false) {

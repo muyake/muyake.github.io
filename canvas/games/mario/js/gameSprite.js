@@ -177,7 +177,7 @@ Mario.prototype.rise = function(endHeight, status) {
     }
 
 
-    this.status4DuringTime = progressObj.currentTime - 15;
+    this.status4DuringTime = progressObj.currentTime - 20;
     if (endHeight < this.height) {
         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.changeSmall);
     } else {
@@ -436,71 +436,6 @@ Mushroom.prototype.move = function(VX) {
 };
 
 //小星星
-// var Star = function(setting) {
-//     var self = this;
-//     setting.name = setting.name || 'star';
-//     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.star), [new behaviorList.SpriteLeftToRight()]);
-//     this.width = setting.width || WH.star.width;
-//     this.height = setting.height || WH.star.height;
-//     this.physicaltop = setting.physicaltop || 0;
-//     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
-//     this.id = setting.id || 0;
-//     this.left = setting.left || 0;
-//     this.initvelocityX = 0;
-//     this.positionmile = setting.positionmile || 0;
-//     this.roleType = 'star';
-//     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
-//     this.initialTop = this.top;
-//     this.isJump = false; //判断是否为处于上下波动中
-//     //this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.star);
-//     this.mycanvas = element.mycanvas;
-//     //this.starSpriteAnimatorUp = new UpSpriteAnimator(self.move.bind(self, -50), this);
-// this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(function(){}, this);
-//     //this.marioSpriteAnimatorMove = new MoveSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
-
-//     this.upover = false;
-//     this.translateLeft = 0;
-
-// };
-// Star.prototype = Object.create(SceneSprite.prototype);
-// Star.prototype.draw = function(ctx, time, fpsNum) {
-//     this.fpsNum = fpsNum;
-// //this.starSpriteAnimatorUp.execute();
-//     this.marioSpriteAnimatorJump.execute();
-//   //  this.marioSpriteAnimatorMove.execute();
-//     this.update(ctx, time, fpsNum);
-
-// //console.log(this.top);
-//     this.paint(ctx);
-// }
-// Star.prototype.up = function(VY) {
-//     // this.startVelocityY = VY;
-//    // this.initialTop = this.top - WH.wall.height;
-//     this.velocityY = -VY;
-//     this.starSpriteAnimatorUp.start();
-// };
-// Star.prototype.jump = function(VY) {
-//     //this.startVelocityY = VY;
-//     this.velocityY = -VY;
-//     //this.initialTop = this.top - WH.wall.height;
-//     //this.top = this.initialTop;
-//     this.marioSpriteAnimatorJump.start();
-// };
-// Star.prototype.fall = function(VY) {
-//     //this.startVelocityY = VY;
-//     this.velocityY = -VY;
-//     this.initialTop = this.top - WH.wall.height;
-
-//     //this.top = this.initialTop;
-//     this.marioSpriteAnimatorJump.start();
-// };
-// Star.prototype.move = function(VX) {
-//     this.velocityX = VX;
-//     this.initvelocityX = VX;
-//     this.velocityY = 0;
-//     this.marioSpriteAnimatorMove.start();
-// };
-//金币对象
 var Star = function(setting) {
     setting.name = setting.name || 'star';
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.star), [new behaviorList.SpriteLeftToRight()]);

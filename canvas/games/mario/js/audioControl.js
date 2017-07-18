@@ -57,6 +57,10 @@ var gameAudio = {
         startTime: 0,
         endTime: 20,
     },
+     die: {
+        startTime: 0,
+        endTime: 3,
+    },
 }
 
 //audioControl
@@ -64,6 +68,7 @@ var audioControl = {
     audioPlay: function(audioObj, videoConfig) {
         audioObj.currentTime = videoConfig.startTime;
         audioObj.endTime = videoConfig.endTime;
+        console.dir(videoConfig);
         audioObj.play();
     },
     BGMPlay: function(audioObj) {
