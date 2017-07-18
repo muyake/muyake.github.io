@@ -4,7 +4,7 @@ var publicConfig = {
 };
 //马里奥动画配置参数
 var marioConfig = {
- 
+
   config: {
     totalCount: 21,
     sprite_0: {
@@ -162,20 +162,20 @@ var marioConfig = {
   }
 };
 
-var bulletConfig={
-  RV:980,//旋转角速度
-  VX:240,
+var bulletConfig = {
+  RV: 980, //旋转角速度
+  VX: 240,
 };
 var WH = {
   wall: {
     width: 35,
     height: 35
   },
-hole:{
- width: 167*0.7,
-    height: 73*0.7
-},
-   bullet: {
+  hole: {
+    width: 167 * 0.7,
+    height: 73 * 0.7
+  },
+  bullet: {
     width: 24,
     height: 24
   },
@@ -186,7 +186,7 @@ hole:{
     width: 35,
     height: 35
   },
-   star: {
+  star: {
     width: 35,
     height: 35
   },
@@ -199,14 +199,14 @@ hole:{
     height: 35
   },
   mario: {
-    bigstatus:{
-       width: 33,
-     height: 68
+    bigstatus: {
+      width: 33,
+      height: 68
     },
-    smallstatus:{
-        width: 33*0.5,
-     height: 68*0.5
-   }  
+    smallstatus: {
+      width: 33 * 0.5,
+      height: 68 * 0.5
+    }
   },
   pipe: {
     width: 45,
@@ -271,7 +271,7 @@ var element = {
 var gameConfig = {
   // wallSpeed: 90,  // moneySpeed:90,
 
-  objectSpeed: 60*1.5,
+  objectSpeed: 60 * 1.5,
   progressObjSpeed: -2,
   skySpeed: 32,
   setSpeedDefault: function() {

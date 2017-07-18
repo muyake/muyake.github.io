@@ -394,15 +394,28 @@ var drawSpriteList = {
                 var callback = self.config[mover.name].callback || function() {};
                 CD[self.config[mover.name].funcName](drawSpriteList.mario, mover, callback);
                 //如果蘑菇已经上升完毕，则在判断蘑菇与墙，管道的碰撞效果。//可以整理一下            
-                if (mover.name == 'mushroom' || mover.name == 'star') {
-                    if (mover.upover) {
-                        drawSpriteList.arrayOthersA.forEach(function(barrier) {
-                            if (barrier.name == 'wall' || barrier.name == 'pipe') {
-                                var callback2 = self.config["moverBarrier"].callback || function() {};
-                                CD['judgeMoverBarrier'](mover, barrier, callback2);
-                            }
-                        });
-                    }
+                // if (mover.name == 'mushroom' || mover.name == 'star') {
+                //     if (mover.upover) {
+                //         drawSpriteList.arrayOthersA.forEach(function(barrier) {
+                //             if (barrier.name == 'wall' || barrier.name == 'pipe') {
+                //                 var callback2 = self.config["moverBarrier"].callback || function() {};
+                //                 CD['judgeMoverBarrier'](mover, barrier, callback2);
+                //             }
+                //         });
+                //     }
+                // } else {
+                //     drawSpriteList.arrayOthersA.forEach(function(barrier) {
+                //         if (barrier.name == 'wall' || barrier.name == 'pipe') {
+                //             var callback2 = self.config["moverBarrier"].callback || function() {};
+                //             CD['judgeMoverBarrier'](mover, barrier, callback2);
+                //         }
+
+                //     });
+                // }
+
+
+                if (!mover.upover && (mover.name == 'mushroom' || mover.name == 'star')) {
+                    return;
                 } else {
                     drawSpriteList.arrayOthersA.forEach(function(barrier) {
                         if (barrier.name == 'wall' || barrier.name == 'pipe') {
