@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    body {
+        height: 10000px;
+    }
+
+    .container {
+        margin-top: 100px;
+        margin-left: 100px;
+        /*border: 1px solid green;*/
+        position: relative;
+        height: 267px;
+
+            -webkit-transition: -webkit-transform 1s;
+    -moz-transition: -moz-transform 1s;
+    transition: transform 1s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    }
+
+    .item {   
+        position: absolute;
+        width: 200px;
+        height: 267px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
+        background: no-repeat center/100%;
+    }  
+
+    .item1 {
+        top: 10px;
+        left: 0px;
+        opacity: 0.76;
+        transition:transform 0.5s ease-in-out,opacity 0.5s ease-in-out,left 0.5s cubic-bezier(.31,1.04,.42,.94);     
+        transform:scale(0.8) translateZ(195.839px);       
+    }
+
+    .item3 {
+        top: 10px;
+        left: 280px;  
+         opacity: 0.76;
+          transition:transform 0.5s ease-in-out,opacity 0.5s ease-in-out,left 0.5s cubic-bezier(.31,1.04,.42,.94);     
+        transform:scale(0.8)  translateZ(195.839px);           
+    }
+
+    .item2 {   
+    /*display: none;  */
+    	 opacity: 1;
+        left: 140px;       
+   		 transition:transform 0.5s ease-in-out,opacity 0.5s ease-in-out,left 0.5s cubic-bezier(.58,-0.07,.85,.77);
+        transform:scale(1) translateZ(295.839px);      
+    }
+    .item4 {     
+        opacity: 0.5;
+        left: 140px;       
+        transition:transform 0.5s ease-in-out,opacity 0.5s ease-in-out,left 0.5s cubic-bezier(.58,-0.07,.85,.77);
+        transform:scale(0.5) translateZ(95.839px);      
+    }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="点击" onclick='test()'>
+    <div class="container">
+        <div class="item item1" style="background-image:url(1.jpg); ">
+        </div>
+        <div class="item item2" style="background-image:url(2.jpg); "></div>
+        <div class="item item3" style="background-image:url(3.jpg); "></div>
+        <div class="item item3" style="background-image:url(4.jpg); "></div>
+    </div>
+    <script>
+    var arr=[1,2,3,4];
+    function test() {
+        var itemList = document.querySelectorAll('.container .item');
+        var last=arr.pop();
+        arr.unshift(last);      
+
+        for(var i=0;i<itemList.length;i++){
+        	 itemList[i].className = 'item'+arr[i]+ ' item';   
+        }      
+    }
+    setInterval(function(){
+    	test();
+    },2000);
+    </script>
+</body>
+
+</html>
