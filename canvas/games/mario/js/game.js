@@ -21,7 +21,7 @@ var sourceLoadObj = {
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
-        audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+      //  audioControl.BGMPlay(gameSourceObj.audioList.BGM);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
@@ -43,6 +43,12 @@ var game = {
         "w": false,
         "d": false,
         "space": false,
+
+    },
+    over:function(){
+
+    },
+    reset:function(){
 
     },
     bindEvent: function() {
@@ -263,17 +269,26 @@ var game = {
                 {
                     drawSpriteList.goDirection(1);
                 }
-                break;
+                break;;
+
         }
     }
 };
 
 var SpriteAnimatorEndCallbackList = {
-    marioJumpend: function(sprite) {
-        sprite.isJump = false;
-        sprite.startVelocityY = 0;
-        sprite.velocityY = 0;
-        sprite.isJump = false;
+    marioJumpend: function(mario) {
+        // if(mario.isDie){
+        //     mario.visible=false;
+        // }
+        if(mario.lifeNum>0){
+            game.reset();
+        }else{
+            game.over();
+        }
+        mario.isJump = false;
+        mario.startVelocityY = 0;
+        mario.velocityY = 0;
+        mario.isJump = false;
         game.activeEventCallback();
     },
     moneyupend: function(sprite) {

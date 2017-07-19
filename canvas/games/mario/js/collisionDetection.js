@@ -209,13 +209,8 @@ var CD = {
         } else {
           if((mario.left -15) > barrier.left && (barrier.left+barrier.width-15) > (mario.left+mario.width) ){
                // console.log('掉小区');
-                mario.initialTop = element.mycanvas.height+100 ;    
-                if( !mario.isJump){
-                    mario.jump(0);                  
-                    audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
-                }           
               
-                 
+                mario.die()
                 mario.isJump = true;
                 mario.upColliding = barrier;
           }

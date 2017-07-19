@@ -53,11 +53,11 @@ var gameAudio = {
         startTime: 3.4,
         endTime: 3.9,
     },
-     WD: {
+    WD: {
         startTime: 0,
         endTime: 20,
     },
-     die: {
+    die: {
         startTime: 0,
         endTime: 3,
     },
@@ -65,11 +65,19 @@ var gameAudio = {
 
 //audioControl
 var audioControl = {
-    audioPlay: function(audioObj, videoConfig) {
-        audioObj.currentTime = videoConfig.startTime;
-        audioObj.endTime = videoConfig.endTime;
-        console.dir(videoConfig);
-        audioObj.play();
+    //如果isplay不传，则总是播放，如果传了则只播放一次，例如人物死亡
+    audioPlay: function(audioObj, videoConfig, isplay) {
+        if (typeof isplay == 'undefine') {
+            audioObj.currentTime = videoConfig.startTime;
+            audioObj.endTime = videoConfig.endTime;
+            audioObj.play();
+        } else {
+            if (audioObj.paused) {
+                audioObj.currentTime = videoConfig.startTime;
+                audioObj.endTime = videoConfig.endTime;
+                audioObj.play();
+            }
+        }
     },
     BGMPlay: function(audioObj) {
         audioObj.loop = true;
