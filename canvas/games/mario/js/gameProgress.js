@@ -26,14 +26,14 @@ var progressObj = {
 
 var totalProgressSprite = {
     wall: [
-    {
-        isVisible: true,
-        id: lib.newGuid(),
-        status: 0,
-        positionmile: 100, //left=progressObj.mileageNum-positionmile   
-        physicaltop: 100,
-        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    }, 
+    // {
+    //     isVisible: true,
+    //     id: lib.newGuid(),
+    //     status: 0,
+    //     positionmile: 100, //left=progressObj.mileageNum-positionmile   
+    //     physicaltop: 100,
+    //     contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    // }, 
     // {
     //     isVisible: true,
     //     id: lib.newGuid(),
@@ -118,7 +118,12 @@ var totalProgressSprite = {
     //mushroom: [],
     tortoise: [],
     star: [],
-    tower: [],
+    tower: [{
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: -4,
+    }],
     hole: [{
         isVisible: true,
         id: lib.newGuid(),
@@ -265,7 +270,12 @@ var createFactory = {
 
     //创造城堡
     createTower: function(setting) {
-
+return new Tower({
+            id: setting.id,
+            physicaltop: setting.physicaltop,
+            positionmile: setting.positionmile,
+            left: setting.positionmile - progressObj.createSpriteMileNum,
+        });
     },
     //创造洞
     createHole: function(setting) {

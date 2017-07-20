@@ -12,6 +12,7 @@ var gameSourceUrl = {
         star: './images/star.png',
         bullet: './images/fire/fireL/0.png',
         hole: './images/hole.png',
+        tower: './images/tower.png',
         //马里奥
         mario: {
             commonMairo: {

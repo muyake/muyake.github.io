@@ -335,6 +335,30 @@ var CD = {
 
         }
     },
+
+    judgeMTower: function(mario, pipe, callback) {
+        if (pipe.visible == false) {
+            return;
+        }
+        var self = this;
+        // 两个矩形检测
+        if ((mario.left + mario.width) < pipe.left || (pipe.left + pipe.width) < mario.left || (mario.top + mario.height) < pipe.top || (pipe.top + pipe.height) < mario.top) {
+            this.CDFunc.MOutCarrying(mario, pipe);
+        } else {
+            var leftfun = function() {
+                self.CDFunc.MleftBarrier(mario, pipe)
+            };
+            var rightfun = function() {
+                self.CDFunc.MrightBarrier(mario, pipe)
+            };
+            var upfun = function() {
+                self.CDFunc.MupBarrier(mario, pipe)
+            };
+            var downfun = function() {};
+            self.CDFunc.Colliding(mario, pipe, leftfun, rightfun, downfun, upfun);
+
+        }
+    },
     //移动物与障碍物
     judgeMoverBarrier: function(mover, barrier, callback) {
         if (barrier.visible == false) {

@@ -171,6 +171,10 @@ var WH = {
     width: 35,
     height: 35
   },
+  tower: {
+    width: 279*0.8,
+    height: 342*0.7
+  },
   hole: {
     width: 167 * 0.7,
     height: 73 * 0.7

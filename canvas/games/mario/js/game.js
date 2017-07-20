@@ -383,6 +383,9 @@ var drawSpriteList = {
             pipe: {
                 funcName: 'judgeMPipe'
             },
+            tower: {
+                funcName: 'judgeMTower'
+            },
         },
         cdfunc: function() {
             var self = this;

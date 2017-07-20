@@ -580,7 +580,28 @@ Pipe.prototype.draw = function(ctx, time, fpsNum) {
     this.update(ctx, time, fpsNum);
     this.paint(ctx);
 }
+//城堡对象
+var Tower = function(setting) {
+    setting.name = setting.name || 'tower';
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.tower), [new behaviorList.SpriteLeftToRight()]);
+    this.width = setting.width || WH.tower.width;;
+    this.height = setting.height || WH.tower.height;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - this.physicaltop;
+    this.left = setting.left || 0;
+    this.positionmile = setting.positionmile || 0;
+    this.roleType = 'tower';
+    this.id = setting.id || 0;
+    this.isreverse=false;
+    this.mycanvas=element.mycanvas;
+    this.painter=new CharacterImagePainter(gameSourceUrl.imageList.tower);
+};
 
+Tower.prototype = Object.create(SceneSprite.prototype);
+Tower.prototype.draw = function(ctx, time, fpsNum) {
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
+}
 
 //洞对象
 var Hole = function(setting) {
