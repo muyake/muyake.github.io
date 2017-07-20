@@ -77,7 +77,7 @@ SceneImagePainter.prototype = {
 //马里奥对象
 var Mario = function(setting) {
     Sprite.call(this, setting.name);
-    //this.isDie=false;
+    this.isDie = false;
     this.isReverse = setting.isReverse;
     this.mycanvas = element.mycanvas;
     //this.velocityX = setting.velocityX;
@@ -97,7 +97,7 @@ var Mario = function(setting) {
     this.behaviorStatus = {
         runInPlace: new behaviorList.runInPlace(),
     };
-    this.lifeNum=6;
+    this.lifeNum = 6;
     this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹,4为无敌状态。
     this.painter = this.painters.stand;
     this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
@@ -115,6 +115,11 @@ Mario.prototype.setClothes = function(marioStatus) {
     this.painters.run.spritesheet.src = gameSourceUrl.imageList.mario[marioStatus].run;
     this.painters.jump.image.src = gameSourceUrl.imageList.mario[marioStatus].jump;
     this.painters.stand.image.src = gameSourceUrl.imageList.mario[marioStatus].stand;
+};
+Mario.prototype.reset = function() {
+    this.isDie=false;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
+    this.left = this.mycanvas.width / 3 - this.width / 2;
 };
 Mario.prototype.jump = function(VY) {
     //this.startVelocityY = VY;
@@ -188,12 +193,16 @@ Mario.prototype.rise = function(endHeight, status) {
     this.marioSpriteAnimatorRising.start();
 };
 Mario.prototype.die = function() {
-    //this.isDie=true;
-    this.lifeNum--;
-    this.initialTop = element.mycanvas.height + 200;
-    if (!this.isJump) {
-        this.jump(0);
+    if (!this.isDie) {
+        this.isDie = true;
+        this.lifeNum--;
+        this.initialTop = element.mycanvas.height + 200;
+        if (!this.isJump) {
+            this.jump(0);
+        }
     }
+
+
     audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die, true);
 };
 Mario.prototype.draw = function(ctx, time, fpsNum) {

@@ -21,7 +21,7 @@ var sourceLoadObj = {
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
-      //  audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+        //  audioControl.BGMPlay(gameSourceObj.audioList.BGM);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
@@ -45,11 +45,16 @@ var game = {
         "space": false,
 
     },
-    over:function(){
+    over: function() {
 
     },
-    reset:function(){
-
+    reset: function(num) {
+        progressObj.mileageNum = num;
+        progressObj.createSpriteMileNum=num*gameConfig.objectSpeed/Math.abs(gameConfig.progressObjSpeed); 
+       drawSpriteList.arrayOthersA=[];
+       createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
+       drawSpriteList.mario.reset();
+       
     },
     bindEvent: function() {
         var self = this;
@@ -241,7 +246,7 @@ var game = {
             }
         }
 
-        if (this.mapKey['d'] && (drawSpriteList.mario.originalStatus == 4 ||drawSpriteList.mario.originalStatus == 3|| drawSpriteList.mario.status == 3) & time - this.advance > 300) {
+        if (this.mapKey['d'] && (drawSpriteList.mario.originalStatus == 4 || drawSpriteList.mario.originalStatus == 3 || drawSpriteList.mario.status == 3) & time - this.advance > 300) {
             if (drawSpriteList.mario.isReverse) {
                 createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, drawSpriteList.mario.top + drawSpriteList.mario.height / 3, drawSpriteList.mario.isReverse);
 
@@ -277,14 +282,14 @@ var game = {
 
 var SpriteAnimatorEndCallbackList = {
     marioJumpend: function(mario) {
-        // if(mario.isDie){
-        //     mario.visible=false;
-        // }
-        if(mario.lifeNum>0){
-            game.reset();
-        }else{
-            game.over();
+        if (mario.isDie) {
+            if (mario.lifeNum > 0) {
+                game.reset(3);
+            } else {
+                game.over();
+            }
         }
+
         mario.isJump = false;
         mario.startVelocityY = 0;
         mario.velocityY = 0;

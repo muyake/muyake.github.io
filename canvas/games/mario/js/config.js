@@ -271,7 +271,7 @@ var element = {
 var gameConfig = {
   // wallSpeed: 90,  // moneySpeed:90,
 
-  objectSpeed: 60 * 1.5,
+  objectSpeed: 60,
   progressObjSpeed: -2,
   skySpeed: 32,
   setSpeedDefault: function() {
