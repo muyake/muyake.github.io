@@ -31,73 +31,71 @@ var progressObj = {
 };
 
 var totalProgressSprite = {
-    wall: [
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 0,
-    //     positionmile: 100, //left=progressObj.mileageNum-positionmile   
-    //     physicaltop: 100,
-    //     contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 1,
-    //     positionmile: 135,
-    //     physicaltop: 100,
-    //     contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 0,
-    //     positionmile: 170,
-    //     physicaltop: 100,
-    //     contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 1,
-    //     positionmile: 205,
-    //     physicaltop: 100,
-    //     contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 0,
-    //     positionmile: 240,
-    //     physicaltop: 100,
-    //     contain: 3, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 1,
-    //     positionmile: 275,
-    //     physicaltop: 100,
-    //     contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 0,
-    //     positionmile: 310,
-    //     physicaltop: 100,
-    //     contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 1,
-    //     positionmile: 345,
-    //     physicaltop: 100,
-    //     contain: 4, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 0,
-    //     positionmile: 380,
-    //     physicaltop: 100,
-    //     contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    wall: [{
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile: 100, //left=progressObj.mileageNum-positionmile   
+        physicaltop: 100,
+        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile: 135,
+        physicaltop: 100,
+        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile: 170,
+        physicaltop: 100,
+        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile: 205,
+        physicaltop: 100,
+        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile: 240,
+        physicaltop: 100,
+        contain: 3, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile: 275,
+        physicaltop: 100,
+        contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile: 310,
+        physicaltop: 100,
+        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile: 345,
+        physicaltop: 100,
+        contain: 4, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile: 380,
+        physicaltop: 100,
+        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
 
-    // }
-    ],
+    }],
     money: [{
         isVisible: true,
         id: lib.newGuid(),
@@ -128,7 +126,7 @@ var totalProgressSprite = {
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: -33,
-        positionmile: 300
+        positionmile: 850
     }],
 };
 

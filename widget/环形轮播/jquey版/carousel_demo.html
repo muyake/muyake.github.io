@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <style class="cp-pen-styles">
+    body {
+        background: #fff;
+    }
+
+     .novelRotatePop  .roundabout-holder {
+        padding: 0;
+        /*margin: 0 auto;*/
+        width: 156px;
+        margin-left: 24px;
+        height: 100px;
+    }
+
+     .novelRotatePop  .roundabout-moveable-item {
+        width: 84px;
+        height: 112px;
+        cursor: pointer;
+        /*border: 1px solid black;*/
+        display: block;
+    }
+
+    .novelRotatePop   .roundabout-moveable-item img {
+        height: 100%;
+        width: 100%;
+    }
+
+     .novelRotatePop  .roundabout-in-focus {
+        cursor: auto;
+    }
+
+     .novelRotatePop  #carousel li {
+        width: 84px;
+        height: 112px;
+        box-shadow: 0 1px 8px #7f7f7f;
+        text-align: center;
+        cursor: pointer;
+        overflow: hidden;
+        /*background: #000;*/
+        opacity: 1!important;
+    }
+
+     .novelRotatePop  #carousel li.roundabout-in-focus:hover span {
+        display: block;
+        z-index: 1;
+    }
+
+     .novelRotatePop  #carousel li.roundabout-in-focus {
+        cursor: default;
+    }
+
+     .novelRotatePop  #carousel li span {
+        display: none;
+        position: absolute;
+        width: 10px;
+        /*260px;*/
+        /*margin: 270px 88px;*/
+        overflow: hidden;
+        box-shadow: 0 1px 8px #7f7f7f;
+    }
+
+    .novelRotatePop   img {
+        max-width: 100%;
+        vertical-align: middle;
+        border: 0;
+    }
+
+     .novelRotatePop  #carousel a.view-project-button {
+        display: block;
+        text-decoration: none;
+        /*color: #262626;*/
+        outline: 0;
+        width: 84px;
+        height: 112px;
+    }
+
+     .novelRotatePop  #carousel li span {
+        display: none;
+        position: absolute;
+        width: 84px;
+        height: 112px;
+        margin: 0;
+        overflow: hidden;
+        box-shadow: 0 0 8px #000;
+    }
+
+     .novelRotatePop  #carouse-wrap {
+        position: relative;
+        /*background: red;*/
+        display: none;
+        margin: 0 auto;
+        width: 204px;
+    }
+
+    .novelRotatePop   #previous,
+    .novelRotatePop   #next {
+        width: 16px;
+        height: 16px;
+        display: block;
+        position: absolute;
+        /*background: red;*/
+        /*border:1px solid green;*/
+    }
+
+     .novelRotatePop  #next {
+        top: 40px;
+        right: -18px;
+    }
+
+     .novelRotatePop  #next div {
+        width: 6px;
+        height: 6px;
+        margin-left: 5px;
+        margin-top: 5px;
+        border-top: 1px solid #434557;
+        border-left: 1px solid #434557;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+    }
+
+    .novelRotatePop   #previous {
+        top: 40px;
+        left: -20px;
+    }
+
+     .novelRotatePop  #previous div {
+        width: 6px;
+        height: 6px;
+        margin-left: 5px;
+        margin-top: 5px;
+        border-top: 1px solid #434557;
+        border-left: 1px solid #434557;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+
+    .novelRotatePop {
+        width: 264px;
+      
+        top:30px;
+        right: 10px;
+        position: fixed;
+        padding: 5px 10px;
+    }
+ 
+    .novelRotatePop   .novelContent {
+        font: 12px/20px PingFangSC-Regular, '-apple-system', Simsun;
+        overflow: hidden;
+        height: 34px;
+        line-height: 1.4;
+        margin-bottom: 20px;
+        text-align: left;
+        padding: 0px 44px;
+        color: #434557;
+    }
+
+  
+
+     .novelRotatePop  .novelInfo>div {
+        display: none;
+    }
+    .novelRotatePop    .novelInfo>div:first-child {
+        display: block;
+    }   
+      .novelRotatePop .closeBtn{
+        width: 25px;
+        cursor: pointer;
+        height: 25px;
+        /*background: green;*/
+        font-size: 25px;
+        position: absolute;
+        right: 5px;
+        top: -12px;
+        line-height: 20px;
+        text-align: center;
+       -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="novelRotatePop">
+        <div class="closeBtn">+</div>
+        <div id="carouse-wrap">
+            <ul id="carousel" class="top_slider roundabout-holder" style="">            
+            </ul>
+            <a href="javascript:void(0)" id="previous">
+                <div class="leftarrow"></div>
+            </a>
+            <a href="javascript:void(0)" id="next">
+                <div class="rightarrow"></div>
+            </a>
+        </div>
+        <div class="novelInfo">            
+        </div>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="roundabout.min.js"></script>
+    <script>
+   var novealData={
+        arr:[{
+            coverUrl:'http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000036231/11000036231.jpg',
+            url:"http://blog.renren.com/ublog/fiction/11000036231",
+            novelName:'我的极品女上司',        
+            content:'送醉酒的女上司回家，没想到她竟然说很热，让我帮她……', 
+        },{
+            coverUrl:'http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000088329/11000088329.jpg',
+            url:"http://blog.renren.com/ublog/fiction/11000088329",
+            novelName:'白姐',           
+            content:'和姐同睡一床，半夜，她竟用手摸我的…',   
+        },{
+            coverUrl:'http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000001502/11000001502.jpg',
+            url:"http://blog.renren.com/ublog/fiction/11000001502",
+            novelName:'超级护卫',           
+            content:'醉酒的女老板身软如泥，躺在床上任我摆布',         
+
+        },{
+            coverUrl:'http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000007518/11000007518.jpg',
+            url:"http://blog.renren.com/ublog/fiction/11000003481",
+            novelName:'一号红人',            
+            content:'美女上司醉酒后，我让她舒服得晕过去……',           
+
+        },{
+            coverUrl:'http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000033787/11000033787.jpg',
+            url:"http://blog.renren.com/ublog/fiction/11000033787",
+            novelName:'超级保安',         
+            content:'女总裁为何夜夜呼叫小保安？只因为对方体力太好……',          
+
+        }]
+    }
+     $(document).ready(function() {
+        $('.novelRotatePop #carousel').empty();
+        $('.novelRotatePop .novelInfo').empty();
+        var liListStr='';
+        var novelInfo='';
+        novealData.arr.forEach(function(item,index){            
+            liListStr+='<li><span><a class="view-project-button" href="'+item.url+'"></a></span><img src="'+item.coverUrl+'" alt="" class="slide" /></li>';
+            novelInfo+='<div class="novelItem1"><div class="novelContent">'+item.content+'</div></div>';
+        });
+        $('.novelRotatePop .closeBtn').on('click',function(){
+            $('.novelRotatePop').hide();
+        });
+        $('.novelRotatePop #carousel').append(liListStr);
+        $('.novelRotatePop .novelInfo').append(novelInfo);
+        $('#carousel').roundabout({
+            minScale: 0.4,
+            childSelector: 'li',
+            autoplay: false,
+            autoplayDuration: 5000,
+            autoplayPauseOnHover: true,
+            easing: 'easeOutCubic', //默认swing 
+            duration: 500, //移动持续时间ms
+            btnNext: '#next',
+            btnPrev: '#previous'
+        }).bind({
+            animationEnd: function(e) {
+                $('#carousel').roundabout('startAutoplay');
+                var indexNum = $('#carousel').roundabout('getChildInFocus');
+                $('.novelInfo>div').hide();
+                $('.novelInfo>div').eq(indexNum).show();
+                //console.log(indexNum);
+            },
+            animationStart: function(e) {
+                $('#carousel').roundabout('stopAutoplay');
+            }
+        });
+        setTimeout(function() {
+            $('#carouse-wrap').css('display', 'block');
+        }, 50);
+    });
+
+
+    // $(document).ready(function() {
+
+    //     $('#carousel').roundabout({
+    //         minScale: 0.4,
+    //         childSelector: 'li',
+    //         autoplay: false,
+    //         autoplayDuration: 5000,
+    //         autoplayPauseOnHover: true,
+    //         easing: 'easeOutCubic', //默认swing 
+    //         duration: 500, //移动持续时间ms
+    //         btnNext: '#next',
+    //         btnPrev: '#previous'
+    //     }).bind({
+    //         animationEnd: function(e) {
+    //             $('#carousel').roundabout('startAutoplay');
+    //             var indexNum = $('#carousel').roundabout('getChildInFocus');
+    //             $('.novelInfo>div').hide();
+    //             $('.novelInfo>div').eq(indexNum).show();
+    //             //console.log(indexNum);
+    //         },
+    //         animationStart: function(e) {
+    //             $('#carousel').roundabout('stopAutoplay');
+    //         }
+    //     });
+    //     setTimeout(function() {
+    //         $('#carouse-wrap').css('display', 'block');
+    //     }, 50);
+    // });
+    /*
+    document.ready(function() {
+        $('#carousel').roundabout({
+            minScale: 0.4,
+            childSelector: "li",
+            autoplay: false,
+            autoplayDuration: 500000,
+            autoplayPauseOnHover: true
+        });
+    });*/
+    </script>
+</body>
+
+</html>
