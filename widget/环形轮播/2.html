@@ -15,76 +15,246 @@
         /*border: 1px solid green;*/
         position: relative;
         height: 267px;
-
-            -webkit-transition: -webkit-transform 1s;
-    -moz-transition: -moz-transform 1s;
-    transition: transform 1s;
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+        width: 440px;
+        border: 1px solid green;
+        -webkit-transition: -webkit-transform 1s;
+        -moz-transition: -moz-transform 1s;
+        transition: transform 1s;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
     }
 
-    .item {   
+    .item {
+        cursor: pointer;
         position: absolute;
         width: 200px;
         height: 267px;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
         background: no-repeat center/100%;
-    }  
+    }
 
     .item1 {
-        top: 10px;
         left: 0px;
         opacity: 0.76;
-        transition:transform 0.5s ease-in-out,opacity 0.5s ease-in-out,left 0.5s cubic-bezier(.31,1.04,.42,.94);     
-        transform:scale(0.8) translateZ(195.839px);       
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, left 0.5s cubic-bezier(.31, 1.04, .42, .94);
+        transform: scale(0.8) translateZ(195.839px);
     }
 
     .item3 {
-        top: 10px;
-        left: 240px;  
-         opacity: 0.76;
-          transition:transform 0.5s ease-in-out,opacity 0.5s ease-in-out,left 0.5s cubic-bezier(.31,1.04,.42,.94);     
-        transform:scale(0.8)  translateZ(195.839px);           
+        left: 240px;
+        opacity: 0.76;
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, left 0.5s cubic-bezier(.31, 1.04, .42, .94);
+        transform: scale(0.8) translateZ(195.839px);
     }
 
-    .item2 { 
-    	 opacity: 1;
-        left: 120px;       
-   		 transition:transform 0.5s ease-in-out,opacity 0.5s ease-in-out,left 0.5s cubic-bezier(.58,-0.07,.85,.77);
-        transform:scale(1) translateZ(295.839px);      
+    .item2 {
+        opacity: 1;
+        left: 120px;
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, left 0.5s cubic-bezier(.58, -0.07, .85, .77);
+        transform: scale(1) translateZ(295.839px);
     }
-    .item4 {     
+
+    .item4 {
         opacity: 0.5;
-        left: 120px;       
-        transition:transform 0.5s ease-in-out,opacity 0.5s ease-in-out,left 0.5s cubic-bezier(.58,-0.07,.85,.77);
-        transform:scale(0.5) translateZ(95.839px);      
+        left: 120px;
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, left 0.5s cubic-bezier(.58, -0.07, .85, .77);
+        transform: scale(0.5) translateZ(95.839px);
     }
+
+    .test {
+        width: 300px;
+        height: 300px;
+        border: 1px solid red;
+    }
+ 
     </style>
 </head>
 
 <body>
-    <input type="button" value="点击" onclick='test()'>
+    <input type="button" value="向左" id='left'>
+    <input type="button" value="向右" id='right'>
+  
     <div class="container">
         <div class="item item1" style="background-image:url(1.jpg); ">
         </div>
         <div class="item item2" style="background-image:url(2.jpg); "></div>
         <div class="item item3" style="background-image:url(3.jpg); "></div>
-        <div class="item item3" style="background-image:url(4.jpg); "></div>
+        <div class="item item4" style="background-image:url(4.jpg); "></div>
     </div>
+    
     <script>
-    var arr=[1,2,3,4];
-    function test() {
-        var itemList = document.querySelectorAll('.container .item');
-        var last=arr.pop();
-        arr.unshift(last);
-        for(var i=0;i<itemList.length;i++){
-        	 itemList[i].className = 'item'+arr[i]+ ' item';   
-        }      
+    /* From Modernizr */
+    //动画结束触发的函数。
+    function whichTransitionEvent() {
+        var t;
+        var el = document.createElement('fakeelement');
+        var transitions = {
+            'transition': 'transitionend',
+            'OTransition': 'oTransitionEnd',
+            'MozTransition': 'transitionend',
+            'WebkitTransition': 'webkitTransitionEnd',
+            'MsTransition': 'msTransitionEnd'
+        }
+        for (t in transitions) {
+            if (el.style[t] !== undefined) {
+                return transitions[t];
+            }
+        }
     }
-    setInterval(function(){
-    	test();
-    },2000);
+    var lunbo = {
+        arr: [],
+        leftBtnId: '',
+        isPlaying:false,
+        rightBtnId: '',
+        currentIndex: 0, //中间索引
+        cntTransTotal: 0,
+        itemList: document.querySelectorAll('.container .item'),
+        autoPlay: false,
+        interval: null,
+        animationEnd: function() {
+
+        },
+        init: function(setting) {
+            this.status = setting.status;
+            this.leftBtnId = setting.leftBtnId;
+            this.rightBtnId = setting.rightBtnId;
+            this.animationEnd = setting.animationEnd;
+            this.autoPlay = setting.autoPlay;
+            this.midClicFun = setting.midClicFun || function() {};
+            //if(setting.sta)
+            for (var i = 0; i < this.itemList.length; i++) {
+                this.arr[i] = i + 1;
+            }
+            this.currentIndex = this.arr.length / 2;
+            this.bind();
+        },
+        status: 0, //0表示向坐转，1表示向右转。
+        lunbofun: function() {
+            var self = this;
+            if (this.status == 0) {
+                var last = this.arr.pop();
+                this.arr.unshift(last);
+            } else {
+                var first = this.arr.shift();
+                this.arr.push(first);
+            }
+            for (var i = 0; i < this.itemList.length; i++) {
+                this.itemList[i].className = 'item' + this.arr[i] + ' item';
+                // this.itemList[i].removeEventListener('click',this.midClicFun.bind(self,self.currentIndex));
+            }
+            self.isPlaying=true;
+            //  document.querySelector('.item2').addEventListener('click',self.midClicFun.bind(self,self.currentIndex));
+        },
+        midClicFun: function() {
+
+        },
+        computeCurrentIndex: function() {
+            if (this.status == 0) {
+                this.currentIndex++;
+                this.currentIndex = this.currentIndex == (this.arr.length + 1) ? 1 : this.currentIndex;
+            } else {
+                this.currentIndex--;
+                this.currentIndex = this.currentIndex == 0 ? this.arr.length : this.currentIndex;
+            }
+        },
+        startPlay: function() {
+            var self = this;
+            self.interval = setInterval(function() {
+                self.lunbofun();
+            }, 2000);
+        },
+        stopPlay: function() {
+            var self=this;
+            if(!!self.interval){
+                clearInterval(self.interval);
+            }
+        },
+        bind: function() {
+            var self = this;
+            var transEndEventName = whichTransitionEvent();
+            // console.log(this.currentIndex);
+            self.animationEnd(self.currentIndex);
+            document.querySelector('.item2').addEventListener(transEndEventName, function(e) {
+                self.cntTransTotal++;
+                if (self.cntTransTotal == 3) { //3因为item动画包含3个内容。  
+                    self.computeCurrentIndex();
+                    self.animationEnd(self.currentIndex);
+                    self.cntTransTotal = 0;
+                     self.isPlaying=false;
+                }
+            });
+            document.querySelector('.container').addEventListener('click', function(e) {
+                if (e.target.className.indexOf('item2') >= 0) {
+                    self.midClicFun(self.currentIndex);
+                }
+                if (e.target.className.indexOf('item1') >= 0) {
+                    self.status = 1;
+                    self.lunbofun();
+                }
+                if (e.target.className.indexOf('item3') >= 0) {
+                    self.status = 0;
+                    self.lunbofun();
+                }
+            });
+
+            if (self.leftBtnId.length != 0) {
+                var leftBtn = document.querySelector(self.leftBtnId);
+                if (!!leftBtn) {
+                    leftBtn.addEventListener('click', function(e) {
+                        if(self.isPlaying){
+                            return;
+                        }
+                        self.stopPlay();
+                        self.startPlay();
+                        self.status = 0;
+                        self.lunbofun();
+                    });
+                }
+            }
+            if (self.rightBtnId.length != 0) {
+                var rightBtn = document.querySelector(self.rightBtnId);
+                if (!!rightBtn) {
+                    rightBtn.addEventListener('click', function(e) {
+                        if(self.isPlaying){
+                            return;
+                        }
+                        self.stopPlay();
+                        self.startPlay();
+                        self.status = 1;
+                        self.lunbofun();
+                    });
+                }
+            }
+            for (var i = 0; i < self.itemList.length; i++) {
+                var item = self.itemList[i];
+                item.addEventListener('mouseover', function() {
+                    self.autoPlay = false;
+                    self.stopPlay();
+                });
+                item.addEventListener('mouseout', function() {
+                    self.autoPlay = true;
+                    self.startPlay();
+                });
+            }
+            if (self.autoPlay) {
+                self.startPlay();
+            }
+        }
+    }
+    lunbo.init({
+        status: 0,
+        autoPlay: true,
+        leftBtnId: '#left',
+        rightBtnId: '#right',
+        container: '.container',
+        animationEnd: function(indexNum) {
+            console.log(indexNum);
+        },
+        midClicFun: function(index) {
+            console.log('点击' + index);
+        },
+    });
     </script>
 </body>
 
