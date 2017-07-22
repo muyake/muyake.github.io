@@ -172,8 +172,8 @@ var WH = {
     height: 35
   },
   tower: {
-    width: 279*0.8,
-    height: 342*0.7
+    width: 279*0.85,
+    height: 342*0.6
   },
   hole: {
     width: 167 * 0.7,
@@ -277,6 +277,7 @@ var gameConfig = {
 
   objectSpeed: 60,
   progressObjSpeed: -2,
+  objectSpeedRate:60/(2),//表示显示的米数与实际的距离的比值。
   skySpeed: 32,
   setSpeedDefault: function() {
     this.objectSpeed = 60;

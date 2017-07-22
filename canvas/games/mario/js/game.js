@@ -1,3 +1,4 @@
+console.log('分支');
 var sourceLoadObj = {
     sourceNum: 0,
     currentNum: 0,
@@ -21,7 +22,7 @@ var sourceLoadObj = {
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
-          audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+        //  audioControl.BGMPlay(gameSourceObj.audioList.BGM);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
@@ -49,8 +50,9 @@ var game = {
 
     },
     reset: function(num) {
+        console.log(12);
         progressObj.mileageNum = num;
-        progressObj.createSpriteMileNum=num*gameConfig.objectSpeed/Math.abs(gameConfig.progressObjSpeed); 
+        progressObj.createSpriteMileNum=num*gameConfig.objectSpeedRate; 
        drawSpriteList.arrayOthersA=[];
        createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
        drawSpriteList.mario.reset();
@@ -469,9 +471,12 @@ gameControl.startAnimate = function(time) {
     drawSpriteList.createBulletSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
+    
     //createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
     //绘制其他的场景，例如墙，金币等。 
+   // console.log('huizhi2');
     drawSpriteList.arrayOthersA.forEach(function(itemDraw) {
+       // console.log('huizhi');
         itemDraw.draw(gameControl.context, time, gameControl.fps.num);
     });
     //碰撞检测

@@ -9,10 +9,10 @@ var progressObj = {
     mileageNumUpdate: function(fpsNum) {
         this.fpsNum = (fpsNum == 0) ? 1 : (fpsNum || this.fpsNum);
         this.mileageNum += this.velocityX / this.fpsNum;
-        this.createSpriteMileNum = this.mileageNum*gameConfig.objectSpeed/Math.abs(gameConfig.progressObjSpeed);      
+
+        this.createSpriteMileNum = this.mileageNum*gameConfig.objectSpeedRate;      
     },
-    countDownNumUpdate: function() {
-        //this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
+    countDownNumUpdate: function() {        
         this.currentTime = this.totaltime - this.countDownWatch.getElapsedTime() / 1000;
     },
     countDownStart: function() {
@@ -93,23 +93,27 @@ var totalProgressSprite = {
 
     }
     ],
-    money: [{
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 100,
-        positionmile: 500
-    }, {
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 100,
-        positionmile: 1000
-    }],
-    pipe: [{
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 0,
-        positionmile: 800
-    }],
+    money: [
+    // {
+    //     isVisible: true,
+    //     id: lib.newGuid(),
+    //     physicaltop: 100,
+    //     positionmile: 500
+    // }, {
+    //     isVisible: true,
+    //     id: lib.newGuid(),
+    //     physicaltop: 100,
+    //     positionmile: 1000
+    // }
+    ],
+    pipe: [
+    // {
+    //     isVisible: true,
+    //     id: lib.newGuid(),
+    //     physicaltop: 0,
+    //     positionmile: 400
+    // }
+    ],
 
     fire: [],
     badflower: [],
@@ -119,19 +123,21 @@ var totalProgressSprite = {
     tortoise: [],
     star: [],
     tower: [
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     physicaltop: 0,
-    //     positionmile: -4,
-    // }
+    {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: -4,
+    }
     ],
-    hole: [{
+    hole: [
+    {
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: -33,
         positionmile: 650
-    }],
+    }
+    ],
 };
 
 var createFactory = {

@@ -118,6 +118,7 @@ Mario.prototype.setClothes = function(marioStatus) {
 };
 Mario.prototype.reset = function() {
     this.isDie=false;
+    this.initialTop= element.mycanvas.height - this.height - gameConfig.roadHeight;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
     this.left = this.mycanvas.width / 3 - this.width / 2;
 };
@@ -431,19 +432,10 @@ Mushroom.prototype.up = function(VY) {
     this.velocityY = VY;
     this.mushroomSpriteAnimatorUp.start();
 };
-Mushroom.prototype.jump = function(VY) {
-    //this.startVelocityY = VY;
-    this.velocityY = -VY;
-    this.initialTop = this.top - WH.wall.height;
-    //this.top = this.initialTop;
-    this.marioSpriteAnimatorJump.start();
-};
-Mushroom.prototype.fall = function(VY) {
-    //this.startVelocityY = VY;
-    this.velocityY = -VY;
-    this.initialTop = this.top - WH.wall.height;
 
-    //this.top = this.initialTop;
+Mushroom.prototype.fall = function(VY) {    
+    this.velocityY = -VY;
+    this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
     this.marioSpriteAnimatorJump.start();
 };
 Mushroom.prototype.move = function(VX) {
@@ -577,7 +569,9 @@ var Pipe = function(setting) {
 };
 Pipe.prototype = Object.create(SceneSprite.prototype);
 Pipe.prototype.draw = function(ctx, time, fpsNum) {
+    //console.log()
     this.update(ctx, time, fpsNum);
+  //  console.log(this.left)
     this.paint(ctx);
 }
 //城堡对象
