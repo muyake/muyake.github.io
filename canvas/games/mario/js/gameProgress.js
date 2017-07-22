@@ -123,19 +123,19 @@ var totalProgressSprite = {
     tortoise: [],
     star: [],
     tower: [
-    {
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 0,
-        positionmile: -4,
-    }
+    // {
+    //     isVisible: true,
+    //     id: lib.newGuid(),
+    //     physicaltop: 0,
+    //     positionmile: -4,
+    // }
     ],
     hole: [
     {
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: -33,
-        positionmile: 650
+        positionmile: 530
     }
     ],
 };

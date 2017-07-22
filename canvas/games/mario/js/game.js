@@ -50,7 +50,7 @@ var game = {
 
     },
     reset: function(num) {
-        console.log(12);
+       
         progressObj.mileageNum = num;
         progressObj.createSpriteMileNum=num*gameConfig.objectSpeedRate; 
        drawSpriteList.arrayOthersA=[];
@@ -319,12 +319,15 @@ var drawSpriteList = {
     mario: new Mario({
         name: "mario",
     }),
+   
     //总体进度
     progressObj: progressObj,
-    //墙，管道，固定金币等
+    //墙，管道，固定金币等可以为第一层
     arrayOthersA: [],
+    //洞
+   // arrayOthersB: [],
     //花，弹出的金币
-    createSpriteList: [],
+    createSpriteList: [],//可以为第一层
     //其他移动物体，例如蘑菇，怪兽等可以水平移动的物体
     createAnimationSpriteList: [],
     //砖碎片列表
@@ -444,10 +447,14 @@ var drawSpriteList = {
                 } else {
                     drawSpriteList.arrayOthersA.forEach(function(barrier) {
                         if (barrier.name == 'wall' || barrier.name == 'pipe') {
-                            var callback2 = self.config["moverBarrier"].callback || function() {};
-                            CD['judgeMoverBarrier'](mover, barrier, callback2);
+                           // var callback2 = self.config["moverBarrier"].callback || function() {};
+                            CD['judgeMoverBarrier'](mover, barrier);
                         }
-
+                        if (barrier.name == 'hole') {
+                              CD['judgeMoverHole'](mover, barrier);
+                            // var callback2 = self.config["moverBarrier"].callback || function() {};
+                            // CD['judgeMoverBarrier'](mover, barrier, callback2);
+                        }
                     });
                 }
 
@@ -458,9 +465,20 @@ var drawSpriteList = {
 var gameControl = new Game('game', 'mycanvas');
 gameControl.speed = 1;
 gameControl.startAnimate = function(time) {
+     //层级分法：从下往上依次为1.背景层，作为游戏的整个背景，放在最底部，2，洞为二层，因为洞两侧有多余部分，所以，不能让多余部分遮挡移动的物体（马里奥，蘑菇等）
+    //3.蘑菇，移动的金币，小星星等放在第三层，因为从砖里出来，所以在砖的下一层4.砖，管道等，为第四层，5马里奥为第五层。6碎砖块为第六层。
+
     drawSpriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
     animateList.countDown(time);
-
+  //绘制第二层（洞）等。 
+   // console.log('huizhi2');
+    drawSpriteList.arrayOthersA.forEach(function(itemDraw) {
+       // console.log('huizhi');
+       if(itemDraw.name=='hole'){
+         itemDraw.draw(gameControl.context, time, gameControl.fps.num);
+       }
+       
+    });
     drawSpriteList.createSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
@@ -477,7 +495,9 @@ gameControl.startAnimate = function(time) {
    // console.log('huizhi2');
     drawSpriteList.arrayOthersA.forEach(function(itemDraw) {
        // console.log('huizhi');
-        itemDraw.draw(gameControl.context, time, gameControl.fps.num);
+       if(itemDraw.name!='hole'){
+         itemDraw.draw(gameControl.context, time, gameControl.fps.num);
+       }       
     });
     //碰撞检测
     drawSpriteList.judgeCD.cdfunc();

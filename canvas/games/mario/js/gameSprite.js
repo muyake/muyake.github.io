@@ -438,6 +438,11 @@ Mushroom.prototype.fall = function(VY) {
     this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
     this.marioSpriteAnimatorJump.start();
 };
+Mushroom.prototype.die = function(VY) {    
+    this.velocityY = -VY;
+   // this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
+    this.marioSpriteAnimatorJump.start();
+};
 Mushroom.prototype.move = function(VX) {
     this.velocityX = VX;
     this.initvelocityX = VX;
@@ -493,6 +498,12 @@ Star.prototype.move = function(VX) {
 };
 Star.prototype.fall = function(VY) {
     this.initialTop = this.top - WH.wall.height;
+};
+Star.prototype.die = function(VY) {    
+    console.log('星星掉洞里了');
+   // this.velocityY = -VY;
+   // this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
+    //this.marioSpriteAnimatorJump.start();
 };
 //子弹
 var Bullet = function(setting) {

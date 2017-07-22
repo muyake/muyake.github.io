@@ -72,8 +72,8 @@ var CD = {
                         case 3:
                             { //如果是长大了，就会出花，如果是小人状态，则出蘑菇。
                                 audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
-                                
-                                if (mario.status == 1||(mario.status==4&&mario.originalStatus==1)) {
+
+                                if (mario.status == 1 || (mario.status == 4 && mario.originalStatus == 1)) {
                                     createFactory.createUpMushroom(wall.positionmile, wall.physicaltop);
                                 } else {
                                     createFactory.createUpFlower(wall.positionmile, wall.physicaltop);
@@ -83,7 +83,7 @@ var CD = {
                         case 4:
                             //弹小星星
                             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.flowerup);
-                             createFactory.createStar(wall.positionmile, wall.physicaltop);
+                            createFactory.createStar(wall.positionmile, wall.physicaltop);
                             break;
                     }
                     wall.changeToAA();
@@ -126,11 +126,11 @@ var CD = {
             mover.upColliding = barrier;
         },
         BulletleftBarrier: function(bullet, barrier) {
-             lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bullet.id);
+            lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bullet.id);
             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
             bullet = null;
         },
-          BulletrightBarrier: function(bullet, barrier) {
+        BulletrightBarrier: function(bullet, barrier) {
             lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bullet.id);
             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
             bullet = null;
@@ -200,25 +200,56 @@ var CD = {
         }
     },
     judgeMH: function(mario, barrier, callback) {
-         if (barrier.visible == false) {
+        if (barrier.visible == false) {
             return;
         }
         var self = this;
         if ((mario.left + mario.width) < barrier.left || (barrier.left + barrier.width) < mario.left || (mario.top + mario.height) < barrier.top || (barrier.top + barrier.height) < mario.top) {
-           // this.CDFunc.MoverOutCarrying(mario, barrier);
+            // this.CDFunc.MoverOutCarrying(mario, barrier);
         } else {
-          if((mario.left -15) > barrier.left && (barrier.left+barrier.width-15) > (mario.left+mario.width) ){
-               // console.log('掉小区');
-              
+            if ((mario.left - 15) > barrier.left && (barrier.left + barrier.width - 15) > (mario.left + mario.width)) {
+                // console.log('掉小区');
+
                 mario.die()
                 mario.isJump = true;
                 mario.upColliding = barrier;
-          }
-      }       
-       
+            }
+        }
+
+    },
+    judgeMoverHole: function(mover, hole, callback) {
+        if (hole.visible == false) {
+            return;
+        }
+        //如果蘑菇掉井里了，就消失。
+        if (mover.top >= element.mycanvas.height + 200) {
+            lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mover.id);
+            mover = null;
+            return;
+        }
+        var self = this;
+        if ((mover.left + mover.width) < hole.left || (hole.left + hole.width) < mover.left || (mover.top + mover.height) < hole.top || (hole.top + hole.height) < mover.top) {
+            // this.CDFunc.MoverOutCarrying(mover, hole);
+        } else {
+            if ((mover.left - 15) > hole.left && (hole.left + hole.width - 15) > (mover.left + mover.width)) {
+                // console.log('掉小区');
+
+                if (!mover.isDie) {
+                    mover.isDie = true;
+                    mover.initialTop = element.mycanvas.height + 200;
+                    if (!mover.isJump) {
+                        mover.die(0);
+                        console.log('luo')
+                    }
+                }
+                mover.isJump = true;
+                mover.upColliding = hole;
+
+            }
+        }
     },
     judgeBBarrier: function(bullet, barrier, callback) {
-         if (barrier.visible == false) {
+        if (barrier.visible == false) {
             return;
         }
         var self = this;
@@ -360,7 +391,7 @@ var CD = {
         }
     },
     //移动物与障碍物
-    judgeMoverBarrier: function(mover, barrier, callback) {
+    judgeMoverBarrier: function(mover, barrier) {
         if (barrier.visible == false) {
             return;
         }
