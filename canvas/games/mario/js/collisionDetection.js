@@ -248,6 +248,37 @@ var CD = {
             }
         }
     },
+     judgeBulletHole: function(mover, hole, callback) {
+        if (hole.visible == false) {
+            return;
+        }
+        //如果蘑菇掉井里了，就消失。
+        if (mover.top+mover.width/3 >= element.mycanvas.height) {
+            lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', mover.id);
+            mover = null;
+            return;
+        }
+        var self = this;
+        if ((mover.left + mover.width) < hole.left || (hole.left + hole.width) < mover.left || (mover.top + mover.height) < hole.top || (hole.top + hole.height) < mover.top) {
+            // this.CDFunc.MoverOutCarrying(mover, hole);
+        } else {
+            if ((mover.left - 15) > hole.left && (hole.left + hole.width - 15) > (mover.left + mover.width)) {
+                // console.log('掉小区');
+
+                if (!mover.isDie) {
+                    mover.isDie = true;
+                    mover.initialTop = element.mycanvas.height + 200;
+                    if (!mover.isJump) {
+                        mover.die(0);
+                        console.log('luo')
+                    }
+                }
+                mover.isJump = true;
+                mover.upColliding = hole;
+
+            }
+        }
+    },
     judgeBBarrier: function(bullet, barrier, callback) {
         if (barrier.visible == false) {
             return;

@@ -125,9 +125,11 @@ Mario.prototype.reset = function() {
 Mario.prototype.jump = function(VY) {
     //this.startVelocityY = VY;
     //跳跃声音的产生。
+    
     switch (VY) {
         case marioGameConfig.smallJumpV:
             {
+                console.log(VY);
                 audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.smallJump);
             }
             break;
@@ -137,7 +139,7 @@ Mario.prototype.jump = function(VY) {
             }
             break;
     }
-
+    console.log('蹦');
     this.velocityY = -VY;
     this.behaviors = [];
     this.painter = this.jumpPainter;
@@ -202,9 +204,7 @@ Mario.prototype.die = function() {
             this.jump(0);
         }
     }
-
-
-    audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die, true);
+    audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
 };
 Mario.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
@@ -500,10 +500,7 @@ Star.prototype.fall = function(VY) {
     this.initialTop = this.top - WH.wall.height;
 };
 Star.prototype.die = function(VY) {    
-    console.log('星星掉洞里了');
-   // this.velocityY = -VY;
-   // this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
-    //this.marioSpriteAnimatorJump.start();
+    console.log('星星掉洞里了');   
 };
 //子弹
 var Bullet = function(setting) {
@@ -563,6 +560,9 @@ Bullet.prototype.jump = function(VX) {
     this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
     //this.top = this.initialTop;
     this.bulletSpriteAnimatorJump.start();
+};
+Bullet.prototype.die = function(VY) {    
+    console.log('子弹掉洞里了');   
 };
 
 //管道对象

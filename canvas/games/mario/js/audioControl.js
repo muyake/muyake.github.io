@@ -66,18 +66,22 @@ var gameAudio = {
 //audioControl
 var audioControl = {
     //如果isplay不传，则总是播放，如果传了则只播放一次，例如人物死亡
-    audioPlay: function(audioObj, videoConfig, isplay) {
-        if (typeof isplay == 'undefine') {
-            audioObj.currentTime = videoConfig.startTime;
-            audioObj.endTime = videoConfig.endTime;
-            audioObj.play();
-        } else {
-            if (audioObj.paused) {
-                audioObj.currentTime = videoConfig.startTime;
+    audioPlay: function(audioObj, videoConfig) {
+        // if (typeof isplay == 'undefine') {
+        //     audioObj.currentTime = videoConfig.startTime;
+        //     audioObj.endTime = videoConfig.endTime;
+        //     audioObj.play();
+        // } else {
+        //     if (audioObj.paused) {
+        //         audioObj.currentTime = videoConfig.startTime;
+        //         audioObj.endTime = videoConfig.endTime;
+        //         audioObj.play();
+        //     }
+        // }
+
+         audioObj.currentTime = videoConfig.startTime;
                 audioObj.endTime = videoConfig.endTime;
                 audioObj.play();
-            }
-        }
     },
     BGMPlay: function(audioObj) {
         audioObj.loop = true;

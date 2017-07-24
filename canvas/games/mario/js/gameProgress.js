@@ -82,14 +82,14 @@ var totalProgressSprite = {
         status: 1,
         positionmile: 345,
         physicaltop: 100,
-        contain: 4, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
     }, {
         isVisible: true,
         id: lib.newGuid(),
-        status: 0,
+        status: 1,
         positionmile: 380,
         physicaltop: 100,
-        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
 
     }
     ],

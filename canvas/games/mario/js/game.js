@@ -222,7 +222,7 @@ var game = {
         //分为只按左右键，只按蹦跳键，同时按左键（或右键）和蹦跳键，还有其他不合理按键（例如同时按左右键），和都不按键
         //只要按蹦跳键，则马里奥处于蹦跳状态或者如果不处于蹦跳状态则执行蹦跳动作，所以，蹦跳键的行为大于左右键的行为，因为如果同时按右键和蹦跳键，是处于蹦跳状态的。
         if (jumpKey) { //如果按了蹦跳键
-            if (!drawSpriteList.mario.isJump) {
+            if (!drawSpriteList.mario.isJump) {                
                 var status = this.mapKey["s"] ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
                 drawSpriteList.mario.jump(status);
             } else {
@@ -414,7 +414,11 @@ var drawSpriteList = {
                         var callback2 = self.config["bullet"].callback || function() {};
                         CD['judgeBBarrier'](itemDraw, barrier, callback2);
                     }
-
+                    if (barrier.name == 'hole') {
+                              CD['judgeBulletHole'](itemDraw, barrier);
+                            // var callback2 = self.config["moverBarrier"].callback || function() {};
+                            // CD['judgeMoverBarrier'](mover, barrier, callback2);
+                        }
                 });
             });
             //蘑菇，怪兽等水平的对象与障碍物（马里奥，管道，墙等）的碰撞
