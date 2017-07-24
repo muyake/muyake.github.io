@@ -22,7 +22,7 @@ var sourceLoadObj = {
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
-        //  audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+          audioControl.BGMPlay(gameSourceObj.audioList.BGM);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
