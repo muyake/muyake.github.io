@@ -25,7 +25,7 @@ CharacterRunSpriteSheetPainter = function(cells, spritesheeturl, mycanvas, imgco
 CharacterRunSpriteSheetPainter.prototype = Object.create(SpriteSheetPainter.prototype);
 CharacterRunSpriteSheetPainter.prototype.constructor = CharacterRunSpriteSheetPainter;
 CharacterRunSpriteSheetPainter.prototype.paint = function(sprite, context) {
-    var cell = this.cells['sprite_' + this.cellIndex];
+    var cell = this.cells['sprite_' + this.cellIndex];    
     if (sprite.isReverse) {
         context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
     } else {
@@ -38,11 +38,10 @@ CharacterRunSpriteSheetPainter.prototype.paint = function(sprite, context) {
     }
 }
 CharacterRunSpriteSheetPainter.prototype.advance = function(sprite, context) {
+    this.cellIndex++;
     if (this.cellIndex == this.imgcount) {
         this.cellIndex = 0;
-    } else {
-        this.cellIndex++;
-    }
+    } 
 }
 
 //场景Sprite
@@ -239,6 +238,84 @@ Mario.prototype.draw = function(ctx, time, fpsNum) {
     this.update(ctx, time, fpsNum);
     this.paint(ctx);
 };
+
+
+
+
+
+//马里奥对象
+var Monster = function(setting) {
+    Sprite.call(this, setting.name);
+    this.isDie = false;
+    this.isReverse = setting.isReverse;
+    this.mycanvas = element.mycanvas;
+    this.name='monster';
+    //this.velocityX = setting.velocityX;
+    this.width = setting.width || WH.monster.width;
+    // this.roleType = 'mairo';
+    this.height = setting.height || WH.monster.height;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
+    this.left = this.mycanvas.width / 2 - this.width / 2;
+    this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
+    this.isJump = false; //是否在跳中
+
+    //this.jumpPainter = this.painters.jump;
+    this.upColliding = null; //下面的墙或管道等
+    this.risespeed = 0; //长大的速度
+    this.initialTop = this.top;
+    this.behaviorStatus = {
+        runInPlace: new behaviorList.runInPlace({PAGEFLIP_INTERVAL:100}),
+    };
+     this.behaviors = [this.behaviorStatus.runInPlace];
+    this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹,4为无敌状态。
+    this.painter = this.painters.run;
+    this.masterSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.masterJumpend, this);
+  //  this.masterSpriteAnimatorRising = new RiseSpriteAnimator(null, this);
+
+};
+Monster.prototype = Object.create(Sprite.prototype);
+Monster.prototype.constructor = Monster;
+Monster.prototype.painters = {
+    run: new CharacterRunSpriteSheetPainter(masterConfig.config, gameSourceUrl.imageList.monster, element.mycanvas, masterConfig.config.totalCount),
+    // jump: new CharacterImagePainter(gameSourceUrl.imageList.monster.commonMairo.jump),
+    // stand: new CharacterImagePainter(gameSourceUrl.imageList.monster.commonMairo.stand),
+};
+
+Monster.prototype.jump = function(VY) {
+    //this.startVelocityY = VY;
+    //跳跃声音的产生。 
+    this.velocityY = -VY;
+    this.behaviors = [];
+   // this.painter = this.jumpPainter;
+    this.masterSpriteAnimatorJump.start();
+};
+
+Monster.prototype.die = function() {
+    if (!this.isDie) {
+        this.isDie = true;
+        this.lifeNum--;
+        this.initialTop = element.mycanvas.height + 200;
+        if (!this.isJump) {
+            this.jump(0);
+        }
+    }
+    audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
+};
+Monster.prototype.draw = function(ctx, time, fpsNum) {
+    this.fpsNum = fpsNum; //给masterSpriteAnimator传递fpsnumbehaviors
+    this.masterSpriteAnimatorJump.execute();
+   // this.masterSpriteAnimatorRising.execute();
+
+    
+
+    // //碰撞的向后顺序是先撞墙，再吃金币  l
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
+};
+
+
+
 
 var Wall = function(setting) {
     var self = this;

@@ -83,6 +83,10 @@ var game = {
             //  createFactory.createBullet(100, 30);
             createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, 30);
         }, false);
+
+         document.querySelector('#monster').addEventListener('click', function() {
+             drawSpriteList.createAnimationSpriteList.push(new Monster('monster'));
+        }, false);
         // Key Listeners..............................................
         gameControl.addKeyListener({
             key: 'p',
@@ -377,6 +381,9 @@ var drawSpriteList = {
             },
             hole: {
                 funcName: 'judgeMH',
+            },
+             monster: {
+                funcName: 'judgeMMonster',
             },
             moverBarrier: {
                 callback: function(mushroomSprite) {

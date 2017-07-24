@@ -2,6 +2,49 @@ var publicConfig = {
   GRAVITY_FORCE: 353 //9.8 * 2 * 18,
     //pixelsPerMeter : element.width / ARENA_LENGTH_IN_METERS,
 };
+var masterConfig={
+
+  config: {
+    totalCount: 5,
+    sprite_0: {
+      width: 50,
+      height: 61,
+      left: 0,
+      top: 0,
+    },
+
+    sprite_1: {
+      width: 50,
+      height: 61,
+      left: 58,
+      top: 0,
+    },
+
+    
+    sprite_2: {
+      width: 50,
+      height: 61,
+      left: 119,
+      top: 0,
+    },
+
+  
+
+    sprite_3: {
+      width: 50,
+      height: 61,
+      left: 179,
+      top: 0,
+    },
+
+    sprite_4: {
+      width: 50,
+      height: 61, 
+      left: 240,
+      top: 0,
+    }
+  }
+};
 //马里奥动画配置参数
 var marioConfig = {
 
@@ -170,6 +213,10 @@ var WH = {
   wall: {
     width: 35,
     height: 35
+  },
+  monster:{
+    width:50*0.4,
+    height:61*0.4
   },
   tower: {
     width: 279*0.85,

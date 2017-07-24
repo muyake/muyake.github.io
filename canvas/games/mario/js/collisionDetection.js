@@ -279,6 +279,9 @@ var CD = {
             }
         }
     },
+     judgeMMonster: function(mover, hole, callback) {
+      
+    },
     judgeBBarrier: function(bullet, barrier, callback) {
         if (barrier.visible == false) {
             return;
