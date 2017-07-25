@@ -151,7 +151,8 @@ MoveSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
 MoveSpriteAnimator.prototype.constructor = MoveSpriteAnimator;
 MoveSpriteAnimator.prototype.execute=function(){
      var animator = this;
-    if (animator.isRunning) {     
+    if (animator.isRunning) {   
+       // console.log(this.sprite.translateLeft);
         this.sprite.translateLeft+=this.sprite.initvelocityX / this.sprite.fpsNum;
     }
 }

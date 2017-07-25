@@ -22,7 +22,7 @@ var sourceLoadObj = {
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
-        audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+        //audioControl.BGMPlay(gameSourceObj.audioList.BGM);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
@@ -85,7 +85,7 @@ var game = {
         }, false);
 
          document.querySelector('#monster').addEventListener('click', function() {
-             drawSpriteList.createAnimationSpriteList.push(new Monster('monster'));
+             drawSpriteList.createAnimationSpriteList.push(new Shell('shell'));
         }, false);
         // Key Listeners..............................................
         gameControl.addKeyListener({
@@ -383,6 +383,12 @@ var drawSpriteList = {
                 funcName: 'judgeMH',
             },
              monster: {
+                funcName: 'judgeMMonster',
+            },
+             tortoise: {
+                funcName: 'judgeMMonster',
+            },
+             shell: {
                 funcName: 'judgeMMonster',
             },
             moverBarrier: {

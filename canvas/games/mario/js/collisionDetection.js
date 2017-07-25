@@ -114,10 +114,12 @@ var CD = {
             mover.left = barrier.left - mover.width;
             mover.velocityX = -mover.velocityX;
             mover.initvelocityX = -mover.initvelocityX;
+            mover.isReverse=!mover.isReverse;
         },
         MoverrightBarrier: function(mover, barrier) {
             mover.left = barrier.left + mover.width;
             mover.velocityX = -mover.velocityX;
+            mover.isReverse=!mover.isReverse;
             mover.initvelocityX = -mover.initvelocityX;
         },
         //马里奥在墙上侧

@@ -2,7 +2,7 @@ var publicConfig = {
   GRAVITY_FORCE: 353 //9.8 * 2 * 18,
     //pixelsPerMeter : element.width / ARENA_LENGTH_IN_METERS,
 };
-var masterConfig={
+var monsterConfig={
 
   config: {
     totalCount: 5,
@@ -43,6 +43,191 @@ var masterConfig={
       left: 240,
       top: 0,
     }
+  }
+};
+
+var tortoiseConfig={
+
+  config: {
+    totalCount: 12,
+    sprite_11: {
+      width: 54,
+      height: 67,
+      left: 0,
+      top: 0,
+    },
+
+    sprite_10: {
+      width: 54,
+      height: 67,
+      left: 54,
+      top: 0,
+    },
+
+    
+    sprite_9: {
+      width: 54,
+      height: 67,
+      left: 108,
+      top: 0,
+    },
+
+  
+
+    sprite_8: {
+      width: 54,
+      height: 67,
+      left: 162,
+      top: 0,
+    },
+
+    sprite_7: {
+      width: 54,
+      height: 67, 
+      left: 216,
+      top: 0,
+    },
+     sprite_6: {
+      width: 54,
+      height: 67,
+      left: 270,
+      top: 0,
+    },
+
+    sprite_5: {
+      width: 54,
+      height: 67,
+      left: 324,
+      top: 0,
+    },
+
+    
+    sprite_4: {
+      width: 54,
+      height: 67,
+      left: 378,
+      top: 0,
+    },  
+
+    sprite_3: {
+      width: 54,
+      height: 67,
+      left: 432,
+      top: 0,
+    },
+
+    sprite_2: {
+      width: 54,
+      height: 67, 
+      left: 486,
+      top: 0,
+    },
+     sprite_1: {
+      width: 54,
+      height: 67,
+      left: 540,
+      top: 0,
+    },
+
+    sprite_0: {
+      width: 54,
+      height: 67,
+      left: 594,
+      top: 0,
+    },
+  }
+};
+
+var shellConfig={
+
+  config: {
+    totalCount: 12,
+    sprite_11: {
+      width: 45,
+      height: 43,
+      left: 135,
+      top: 0,
+    },
+    sprite_10: {
+      width: 45,
+      height: 43,
+      left: 180,
+      top: 0,
+    },
+
+    sprite_9: {
+      width: 45,
+      height: 43,
+      left: 225,
+      top: 0,
+    },
+
+    
+    sprite_8: {
+      width: 45,
+      height: 43,
+      left: 0,
+      top: 0,
+    },
+
+  
+
+    sprite_7: {
+      width: 45,
+      height: 43,
+      left: 45,
+      top: 0,
+    },
+
+    sprite_6: {
+      width: 45,
+      height: 43, 
+      left: 225,
+      top: 0,
+    },
+     sprite_5: {
+      width: 45,
+      height: 43,
+      left: 405,
+      top: 0,
+    },
+
+    sprite_4: {
+      width: 45,
+      height: 43,
+      left: 450,
+      top: 0,
+    },
+
+    
+    sprite_3: {
+      width: 45,
+      height: 43,
+      left: 495,
+      top: 0,
+    },  
+
+    sprite_2: {
+      width: 45,
+      height: 43,
+      left: 270,
+      top: 0,
+    },
+
+    sprite_1: {
+      width: 45,
+      height: 43, 
+      left: 315,
+      top: 0,
+    },
+     sprite_0: {
+      width: 45,
+      height: 43,
+      left: 360,
+      top: 0,
+    },
+
+  
   }
 };
 //马里奥动画配置参数
@@ -218,9 +403,17 @@ var WH = {
     width:50*0.4,
     height:61*0.4
   },
+  tortoise:{
+    width:54*0.4,
+    height:67*0.4
+  },
   tower: {
     width: 279*0.85,
     height: 342*0.6
+  },
+   shell: {
+    width: 45*0.4,
+    height: 43*0.4
   },
   hole: {
     width: 167 * 0.7,
