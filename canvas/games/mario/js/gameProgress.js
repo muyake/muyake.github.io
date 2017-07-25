@@ -112,7 +112,13 @@ var totalProgressSprite = {
     //     id: lib.newGuid(),
     //     physicaltop: 0,
     //     positionmile: 400
-    // }
+    // },
+     {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: 100
+    },
     ],
 
     fire: [],

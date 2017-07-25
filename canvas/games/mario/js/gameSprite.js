@@ -209,7 +209,6 @@ Mario.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
     this.marioSpriteAnimatorJump.execute();
     this.marioSpriteAnimatorRising.execute();
-
     if (this.status == 4 && this.status4DuringTime > progressObj.currentTime) {
         this.status = this.originalStatus;
         console.log("恢复");
@@ -243,79 +242,193 @@ Mario.prototype.draw = function(ctx, time, fpsNum) {
 
 
 
-//马里奥对象
+//怪兽对象
 var Monster = function(setting) {
     Sprite.call(this, setting.name);
     this.isDie = false;
-    this.isReverse = setting.isReverse;
+    this.isReverse =false;
     this.mycanvas = element.mycanvas;
     this.name='monster';
+    this.translateLeft=0;
     //this.velocityX = setting.velocityX;
     this.width = setting.width || WH.monster.width;
     // this.roleType = 'mairo';
     this.height = setting.height || WH.monster.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
+    //this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
+    this.top=element.mycanvas.height - this.height - gameConfig.roadHeight - 100-WH.wall.height;
     this.left = this.mycanvas.width / 2 - this.width / 2;
+    this.positionmile=this.left;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
     this.isJump = false; //是否在跳中
-
+    this.initvelocityX = -70;
     //this.jumpPainter = this.painters.jump;
-    this.upColliding = null; //下面的墙或管道等
-    this.risespeed = 0; //长大的速度
+    this.upColliding = null; //下面的墙或管道等 
     this.initialTop = this.top;
     this.behaviorStatus = {
         runInPlace: new behaviorList.runInPlace({PAGEFLIP_INTERVAL:100}),
     };
-     this.behaviors = [this.behaviorStatus.runInPlace];
+    this.behaviors = [this.behaviorStatus.runInPlace,new behaviorList.SpriteLeftToRight()];
     this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹,4为无敌状态。
     this.painter = this.painters.run;
-    this.masterSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.masterJumpend, this);
-  //  this.masterSpriteAnimatorRising = new RiseSpriteAnimator(null, this);
-
+    this.monsterSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.monsterJumpend, this);  
+    this.monsterSpriteAnimatorMove = new MoveSpriteAnimator(null, this);
+    this.monsterSpriteAnimatorMove.start();
 };
 Monster.prototype = Object.create(Sprite.prototype);
 Monster.prototype.constructor = Monster;
 Monster.prototype.painters = {
-    run: new CharacterRunSpriteSheetPainter(masterConfig.config, gameSourceUrl.imageList.monster, element.mycanvas, masterConfig.config.totalCount),
-    // jump: new CharacterImagePainter(gameSourceUrl.imageList.monster.commonMairo.jump),
-    // stand: new CharacterImagePainter(gameSourceUrl.imageList.monster.commonMairo.stand),
+    run: new CharacterRunSpriteSheetPainter(monsterConfig.config, gameSourceUrl.imageList.monster, element.mycanvas, monsterConfig.config.totalCount),
+   
 };
 
 Monster.prototype.jump = function(VY) {
-    //this.startVelocityY = VY;
-    //跳跃声音的产生。 
-    this.velocityY = -VY;
-    this.behaviors = [];
-   // this.painter = this.jumpPainter;
-    this.masterSpriteAnimatorJump.start();
+    this.velocityY = -VY;    
+    this.monsterSpriteAnimatorJump.start();
 };
 
 Monster.prototype.die = function() {
-    if (!this.isDie) {
-        this.isDie = true;
-        this.lifeNum--;
-        this.initialTop = element.mycanvas.height + 200;
-        if (!this.isJump) {
-            this.jump(0);
-        }
-    }
-    audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
+     this.jump(0);  
 };
 Monster.prototype.draw = function(ctx, time, fpsNum) {
-    this.fpsNum = fpsNum; //给masterSpriteAnimator传递fpsnumbehaviors
-    this.masterSpriteAnimatorJump.execute();
-   // this.masterSpriteAnimatorRising.execute();
-
-    
-
-    // //碰撞的向后顺序是先撞墙，再吃金币  l
+    this.fpsNum = fpsNum; //给monsterSpriteAnimator传递fpsnumbehaviors
+    this.monsterSpriteAnimatorMove.execute();
+    this.monsterSpriteAnimatorJump.execute(); 
     this.update(ctx, time, fpsNum);
     this.paint(ctx);
 };
 
+Monster.prototype.fall = function(VY) {    
+    this.velocityY = -VY;
+    this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
+    this.monsterSpriteAnimatorJump.start();
+};
 
 
+
+//乌龟对象
+var Tortoise = function(setting) {
+    Sprite.call(this, setting.name);
+    this.isDie = false;
+    this.isReverse =true;
+    this.mycanvas = element.mycanvas;
+    this.name='tortoise';
+    this.translateLeft=0;
+    //this.velocityX = setting.velocityX;
+    this.width = setting.width || WH.tortoise.width;
+    // this.roleType = 'mairo';
+    this.height = setting.height || WH.tortoise.height;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight ;
+    //this.top=element.mycanvas.height - this.height - gameConfig.roadHeight - 100-WH.wall.height;
+    this.left = this.mycanvas.width / 2 - this.width / 2;
+    this.positionmile=this.left;
+    this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
+    this.isJump = false; //是否在跳中
+    this.initvelocityX = 70;
+    //this.jumpPainter = this.painters.jump;
+    this.upColliding = null; //下面的墙或管道等 
+    this.initialTop = this.top;
+    this.behaviorStatus = {
+        runInPlace: new behaviorList.runInPlace({PAGEFLIP_INTERVAL:40}),
+    };
+    this.behaviors = [this.behaviorStatus.runInPlace,new behaviorList.SpriteLeftToRight()];
+    this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹,4为无敌状态。
+    this.painter = this.painters.run;
+    this.tortoiseSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.tortoiseJumpend, this);  
+    this.tortoiseSpriteAnimatorMove = new MoveSpriteAnimator(null, this);
+    this.tortoiseSpriteAnimatorMove.start();
+};
+Tortoise.prototype = Object.create(Sprite.prototype);
+Tortoise.prototype.constructor = Tortoise;
+Tortoise.prototype.painters = {
+    run: new CharacterRunSpriteSheetPainter(tortoiseConfig.config, gameSourceUrl.imageList.tortoise, element.mycanvas, tortoiseConfig.config.totalCount),
+   
+};
+
+Tortoise.prototype.jump = function(VY) {
+    this.velocityY = -VY;    
+    this.tortoiseSpriteAnimatorJump.start();
+};
+
+Tortoise.prototype.die = function() {
+     this.jump(0);  
+};
+Tortoise.prototype.draw = function(ctx, time, fpsNum) {
+    this.fpsNum = fpsNum; //给tortoiseSpriteAnimator传递fpsnumbehaviors
+    this.tortoiseSpriteAnimatorMove.execute();
+    this.tortoiseSpriteAnimatorJump.execute(); 
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
+};
+
+Tortoise.prototype.fall = function(VY) {    
+    this.velocityY = -VY;
+    this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
+    this.tortoiseSpriteAnimatorJump.start();
+};
+
+
+//怪兽对象
+var Shell = function(setting) {
+    Sprite.call(this, setting.name);
+    this.isDie = false;
+    this.isReverse =true;
+    this.mycanvas = element.mycanvas;
+    this.name='shell';
+    this.translateLeft=0;
+    //this.velocityX = setting.velocityX;
+    this.width = setting.width || WH.shell.width;
+    // this.roleType = 'mairo';
+    this.height = setting.height || WH.shell.height;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight ;
+    //this.top=element.mycanvas.height - this.height - gameConfig.roadHeight - 100-WH.wall.height;
+    this.left = this.mycanvas.width / 2 - this.width / 2;
+    this.positionmile=this.left;
+    this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
+    this.isJump = false; //是否在跳中
+    this.initvelocityX = 70;
+    //this.jumpPainter = this.painters.jump;
+    this.upColliding = null; //下面的墙或管道等 
+    this.initialTop = this.top;
+    this.behaviorStatus = {
+        runInPlace: new behaviorList.runInPlace({PAGEFLIP_INTERVAL:80}),
+    };
+    this.behaviors = [this.behaviorStatus.runInPlace,new behaviorList.SpriteLeftToRight()];
+    this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹,4为无敌状态。
+    this.painter = this.painters.run;
+    this.shellSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.shellJumpend, this);  
+    this.shellSpriteAnimatorMove = new MoveSpriteAnimator(null, this);
+    this.shellSpriteAnimatorMove.start();
+};
+Shell.prototype = Object.create(Sprite.prototype);
+Shell.prototype.constructor = Shell;
+Shell.prototype.painters = {
+    run: new CharacterRunSpriteSheetPainter(shellConfig.config, gameSourceUrl.imageList.shell, element.mycanvas, shellConfig.config.totalCount),
+   
+};
+
+Shell.prototype.jump = function(VY) {
+    this.velocityY = -VY;    
+    this.shellSpriteAnimatorJump.start();
+};
+
+Shell.prototype.die = function() {
+     this.jump(0);  
+};
+Shell.prototype.draw = function(ctx, time, fpsNum) {
+    this.fpsNum = fpsNum; //给shellSpriteAnimator传递fpsnumbehaviors
+    this.shellSpriteAnimatorMove.execute();
+    this.shellSpriteAnimatorJump.execute(); 
+    this.update(ctx, time, fpsNum);
+    this.paint(ctx);
+};
+Shell.prototype.fall = function(VY) {    
+    this.velocityY = -VY;
+    this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
+    this.shellSpriteAnimatorJump.start();
+};
 
 var Wall = function(setting) {
     var self = this;
@@ -485,8 +598,8 @@ var Mushroom = function(setting) {
     //this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.mushroom);
     this.mycanvas = element.mycanvas;
     this.mushroomSpriteAnimatorUp = new UpSpriteAnimator(self.move.bind(self, -50), this);
-    this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
-    this.marioSpriteAnimatorMove = new MoveSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
+    this.mushroomSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
+    this.mushroomSpriteAnimatorMove = new MoveSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
 
     this.upover = false;
     this.translateLeft = 0;
@@ -496,8 +609,8 @@ Mushroom.prototype = Object.create(SceneSprite.prototype);
 Mushroom.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum;
     this.mushroomSpriteAnimatorUp.execute();
-    this.marioSpriteAnimatorJump.execute();
-    this.marioSpriteAnimatorMove.execute();
+    this.mushroomSpriteAnimatorJump.execute();
+    this.mushroomSpriteAnimatorMove.execute();
     this.update(ctx, time, fpsNum);
 
     // console.log(this.left);
@@ -513,18 +626,18 @@ Mushroom.prototype.up = function(VY) {
 Mushroom.prototype.fall = function(VY) {    
     this.velocityY = -VY;
     this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
-    this.marioSpriteAnimatorJump.start();
+    this.mushroomSpriteAnimatorJump.start();
 };
 Mushroom.prototype.die = function(VY) {    
     this.velocityY = -VY;
    // this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
-    this.marioSpriteAnimatorJump.start();
+    this.mushroomSpriteAnimatorJump.start();
 };
 Mushroom.prototype.move = function(VX) {
     this.velocityX = VX;
     this.initvelocityX = VX;
     this.velocityY = 0;
-    this.marioSpriteAnimatorMove.start();
+    this.mushroomSpriteAnimatorMove.start();
 };
 
 //小星星

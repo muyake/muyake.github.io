@@ -14,6 +14,8 @@ var gameSourceUrl = {
         hole: './images/hole.png',
         tower: './images/tower.png',
         monster: './images/monster/1/img.png',
+        tortoise:'./images/tortoise/img.png',
+         shell:'./images/tortoise/roll/img.png',
         //马里奥
         mario: {
             commonMairo: {
