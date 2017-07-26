@@ -124,8 +124,8 @@ Mario.prototype.reset = function() {
 Mario.prototype.jump = function(VY) {
     //this.startVelocityY = VY;
     //跳跃声音的产生。
-    
-    switch (VY) {
+    if(!this.isDie){
+         switch (VY) {
         case marioGameConfig.smallJumpV:
             {
                 console.log(VY);
@@ -138,6 +138,8 @@ Mario.prototype.jump = function(VY) {
             }
             break;
     }
+    }
+   
     console.log('蹦');
     this.velocityY = -VY;
     this.behaviors = [];
@@ -201,6 +203,19 @@ Mario.prototype.die = function() {
         this.initialTop = element.mycanvas.height + 200;
         if (!this.isJump) {
             this.jump(0);
+        }
+    }
+    audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
+};
+
+Mario.prototype.collisiondie = function() {
+   // this.jump(0);
+    if (!this.isDie) {
+        this.isDie = true;
+        this.lifeNum--;
+        this.initialTop = element.mycanvas.height + 200;
+        if (!this.isJump) {
+            this.jump(marioGameConfig.smallJumpV/2);
         }
     }
     audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);

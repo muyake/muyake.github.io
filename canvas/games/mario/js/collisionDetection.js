@@ -25,7 +25,7 @@ var CD = {
             //如果马里奥下面没有承载物，或马里奥下面有承载物，且左右脱离承载物。则设置马里奥初始高度。
             //因为要判断马里奥从承载物上走下是有蹦跳效果，所以当脱离承载物的时刻，会出现下面有承载物，且左右脱离承载物，当从承载物上蹦下来时，设置下面承载物为null.
             var flog = mario.upColliding && ((mario.left + mario.width) < upColliding.left || (upColliding.left + upColliding.width) < mario.left);
-            if (!mario.upColliding || flog) {
+            if ((!mario.upColliding || flog)&&!mario.isDie) {
                 mario.initialTop = element.mycanvas.height - mario.height - gameConfig.roadHeight;
                 //  mario.upColliding = null;
             }

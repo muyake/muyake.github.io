@@ -20,6 +20,7 @@ CharacterSpriteAnimator.prototype.start = function() {
 CharacterSpriteAnimator.prototype.execute = function() {
     var animator = this;
     if (animator.isRunning) {
+        console.log(this.sprite.initialTop);
         this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
         this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;
         if (this.sprite.top < this.sprite.initialTop) {
@@ -43,8 +44,7 @@ UpSpriteAnimator.prototype.execute = function() {
     var animator = this;
     if (animator.isRunning) {
         //  this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
-        this.sprite.top -= this.sprite.velocityY / this.sprite.fpsNum;
-       
+        this.sprite.top -= this.sprite.velocityY / this.sprite.fpsNum;       
         if (this.sprite.top > this.sprite.initialTop) {
             this.sprite.isJump = true;
            // this.sprite.painter = this.sprite.jumpPainter;

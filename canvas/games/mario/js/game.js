@@ -87,6 +87,10 @@ var game = {
          document.querySelector('#monster').addEventListener('click', function() {
              drawSpriteList.createAnimationSpriteList.push(new Shell('shell'));
         }, false);
+         document.querySelector('#mariodie').addEventListener('click', function() {
+             drawSpriteList.mario.collisiondie();
+        }, false);
+         
         // Key Listeners..............................................
         gameControl.addKeyListener({
             key: 'p',
