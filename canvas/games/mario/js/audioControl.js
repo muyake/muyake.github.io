@@ -58,8 +58,8 @@ var gameAudio = {
         endTime: 20,
     },
     die: {
-        startTime: 0,
-        endTime: 3,
+        startTime: 0.5,
+        endTime: 4,
     },
 }
 
