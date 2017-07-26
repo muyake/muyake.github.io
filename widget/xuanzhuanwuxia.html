@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    .container {
+        /* transform: rotateY(-640deg);*/
+        transform: rotateY(0deg);
+        width: 128px;
+        height: 100px;
+        margin-left: -64px;
+        margin-top: -50px;
+        -webkit-transition: -webkit-transform 1s;
+        -moz-transition: -moz-transform 1s;
+        transition: transform 1s;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        border: 1px solid green;
+    }
+
+    .piece {
+        width: 128px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+        -webkit-transition: opacity 1s, -webkit-transform 1s;
+        -moz-transition: opacity 1s, -moz-transform 1s;
+        transition: opacity 1s, transform 1s;
+        position: absolute;
+        bottom: 0;
+        cursor: pointer;
+    }
+
+    #stage {
+        margin-top: 200px;
+        margin-left: 200px;
+        border: 1px solid green;
+        position: relative;
+        width: 600px;
+        height: 500px;
+    }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="左" id='left'>
+    <input type="button" value="右" id='right'>
+     <input type="button" value="test" id='test'>
+    <div id="stage" class="stage_area">
+        <div id="container" class="container">
+        </div>
+    </div>
+    <script>
+    document.querySelector('#test').addEventListener('click',function(){
+         document.querySelector('#piece0').style['msTransform']='scale(1, 1) rotateY(0deg) translateY(150px) translateZ(283.758px)';
+         document.querySelector('#piece0').style['border']='5px solid yellow';
+    });
+    var coverImgArr = [
+        "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000015896/11000015896.jpg",
+        "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000073734/11000073734.jpg",
+        "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000085140/11000085140.jpg",
+        "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000006513/11000006513.jpg",
+        "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000074417/11000074417.jpg",
+        "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000074626/11000074626.jpg",
+        "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000022939/11000022939.jpg",
+        "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000074718/11000074718.jpg",
+        "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000074766/11000074766.jpg"
+
+
+
+    ];
+    var lib = {
+        init: function() {
+            //最小值
+            Array.prototype.min = function() {
+                var min = this[0];
+                var len = this.length;
+                for (var i = 1; i < len; i++) {
+                    if (this[i] < min) {
+                        min = this[i];
+                    }
+                }
+                return min;
+            }
+            //最大值
+            Array.prototype.max = function() {
+                var max = this[0];
+                var len = this.length;
+                for (var i = 1; i < len; i++) {
+                    if (this[i] > max) {
+                        max = this[i];
+                    }
+                }
+                return max;
+            }
+        }
+    }
+    lib.init();
+    var rotate = {
+        $container: '',
+        coverImgArr: [],
+        arrNum:[],
+        rotate: 0,
+        indexPiece: 0,
+        transZ: 0,
+        nowpage: 0,
+        //添加3d变换
+        transform: function(element, value, key) {
+            key = key || "Transform";
+            ["moz", "o", "ms", "webkit", ""].forEach(function(prefix) {
+               // console.log(prefix + key);
+                element.style[prefix + key] = value;
+            });
+
+            return element;
+        },
+        // 浏览器选择器API
+        $: function(selector) {
+            return document.querySelector(selector);
+        },
+        $$: function(selector) {
+            return document.querySelectorAll(selector);
+        },
+        getScaleArray: function(arr, rotate, indexPiece) {
+            var scaleArr = [];
+            arr.forEach(function(item, index) {
+                var transYItem = Math.sin((index * rotate + (-1 * rotate * indexPiece + 90)) * 2 * Math.PI / 360) * 50;
+                scaleArr.push(transYItem);
+            });
+            var max = scaleArr.max();
+            var min = scaleArr.min();
+            scaleArr = scaleArr.map(function(item, index) {
+                return (((1 - 0.7) / (max - min)) * item + (max * 0.7 - min * 1) / (max - min)).toFixed(2);
+            });
+            return scaleArr;
+        },
+
+        init: function(setting) {
+            this.coverImgArr = setting.coverImgArr;
+            this.$container = this.$(setting.container);
+            this.rander();
+            this.bindEvent();
+        },
+
+        rander: function() {
+            this.rotate = 360 / this.coverImgArr.length;
+            // 显示图片
+            var htmlPic = '';
+            this.coverImgArr.forEach(function(item, index) {
+                htmlPic = htmlPic + '<img data="' + index + '" id="piece' + index + '" src="' + item + '" class="piece" />';
+            });
+            this.indexPiece = 0;
+            var elePics = this.$$(".piece");
+            this.transZ = 96 / Math.tan((this.rotate / 2 / 180) * Math.PI);
+            this.$container.innerHTML = htmlPic;
+            var scaleArr = this.getScaleArray(this.coverImgArr, this.rotate, this.indexPiece);
+            //初始值
+            var self = this;
+            var helf=parseInt( this.coverImgArr.length/2);
+            this.coverImgArr.forEach(function(item, index) {
+                var transYItem = Math.sin((index * self.rotate + (-1 * self.rotate * self.indexPiece + 90)) * 2 * Math.PI / 360) * 50;
+                self.transform(self.$("#piece" + index), "scale(" + scaleArr[index] + "," + scaleArr[index] + ") rotateY(" + (index * self.rotate) + "deg)  translateY(" + transYItem + "px) translateZ(" + (self.transZ + 20) + "px)");
+                //self.$("#piece" + index).style['zIndex']=Math.abs(helf-index);
+                self.arrNum.push(index);
+            });
+            self.arrNum.forEach(function(item,index){
+                self.$("#piece" + item).style['zIndex']=Math.abs(helf-index);
+            });
+            console.log(self.arrNum);
+            //console.log(self.indexPiece);
+            this.getNowPage();
+        },
+        clickMiddle: function() {
+            alert(this.nowpage);
+        },
+        //判断点击的是中间，还是左边，还是右边
+        getClickStatus: function(dataIndex) {
+            var self = this;
+            if (dataIndex == self.nowpage) {
+                self.clickMiddle();
+            } else {
+                var helfLength = self.coverImgArr.length / 2;
+                if (self.nowpage > helfLength) {
+                    if (dataIndex >= (self.nowpage - helfLength)&&(dataIndex<self.nowpage)) {
+                        self.rotateFun(1);
+                    } else {
+                        self.rotateFun(0);
+                    }
+                } else {
+                    if (self.nowpage<dataIndex&& dataIndex < (self.nowpage + helfLength)) {
+                        self.rotateFun(0);
+                    } else {
+                        self.rotateFun(1);
+                    }
+                }
+            }
+        },
+        bindEvent: function() {
+            var self = this;
+            this.$("#stage").addEventListener("click", function(e) {
+                var halfLength = self.coverImgArr.length / 2;
+                if (e.target.className.indexOf('piece') < 0) {
+                    return;
+                }
+                self.getNowPage();
+                var dataIndex = parseInt(e.target.getAttribute('data'));
+                self.getClickStatus(dataIndex);
+            });
+            this.$("#left").addEventListener("click", function(e) {
+                self.rotateFun(1);
+            });
+            this.$("#right").addEventListener("click", function(e) {
+                self.rotateFun(0);
+            });
+        },
+        getNowPage: function() {
+            var sign = this.indexPiece >= 0 ? true : false;
+            this.nowpage = this.indexPiece % this.coverImgArr.length;
+            if (this.nowpage < 0) {
+                this.nowpage = this.nowpage + this.coverImgArr.length;
+            }           
+        },
+        //status=1向右转，status=0向左转。
+        rotateFun: function(status) {
+            var self = this;
+            if (status == 0) {
+                console.log(1);
+                ++self.indexPiece;
+               var first=self.arrNum.shift();
+               self.arrNum.push(first);
+            } else {
+                --self.indexPiece;
+                 var last=self.arrNum.pop();
+                self.arrNum.unshift(last);
+            }
+            var helf=parseInt(this.coverImgArr.length/2);
+            var bottom=self.nowpage<helf?(helf+self.nowpage):(self.nowpage-helf);            
+            var scaleArr = self.getScaleArray(self.coverImgArr, self.rotate, self.indexPiece);
+            self.coverImgArr.forEach(function(item, index) {
+                var transYItem = Math.sin((index * self.rotate + (-1 * self.rotate * self.indexPiece + 90)) * 2 * Math.PI / 360) * 50;
+                self.transform(self.$("#piece" + index), "scale(" + scaleArr[index] + "," + scaleArr[index] + ") rotateY(" + parseFloat(index * self.rotate + (-1 * self.rotate * self.indexPiece)) + "deg)  translateY(" + transYItem + "px) translateZ(" + (self.transZ + 20) + "px)");
+            // self.$("#piece" + index).style['zIndex']=Math.abs(index-bottom);
+            });
+              self.arrNum.forEach(function(item,index){
+                self.$("#piece" + item).style['zIndex']=Math.abs(helf-index);
+            });
+            console.log(self.arrNum);
+            // var j=0;
+            // while(j>0){
+            //     self.$("#piece" + self.nowpage+).style['zIndex']=Math.abs(index-bottom);
+            //     j--;
+            // }
+        },
+    };
+    rotate.init({
+        coverImgArr: coverImgArr,
+        container: "#container",
+    });
+
+    // //(function() {
+    // if (typeof window.screenX === "number") {
+    //     // 随机颜色HSL
+    //     var randomHsl = function() {
+    //             return "hsla(" + Math.round(360 * Math.random()) + "," + "60%, 50%, .75)";
+    //         }
+    //         // CSS transform变换应用
+    //         ,
+    //         transform = function(element, value, key) {
+    //             key = key || "Transform";
+    //             ["Moz", "O", "Ms", "Webkit", ""].forEach(function(prefix) {
+    //                 element.style[prefix + key] = value;
+    //             });
+
+    //             return element;
+    //         }
+    //         // 浏览器选择器API
+    //         ,
+    //         $ = function(selector) {
+    //             return document.querySelector(selector);
+    //         },
+    //         $$ = function(selector) {
+    //             return document.querySelectorAll(selector);
+    //         };
+
+    //     // 显示图片
+    //     var htmlPic = '',
+    //         rotate = 360 / coverImgArr.length;
+    //     coverImgArr.forEach(function(item, index) {
+    //         htmlPic = htmlPic + '<img id="piece' + index + '" src="' + item + '" class="piece" />';
+    //     });
+
+    //     // 元素
+    //     var eleStage = $("#stage"),
+    //         eleContainer = $("#container"),
+    //         indexPiece = 0;
+    //     // 元素
+    //     var elePics = $$(".piece"),
+    //         transZ = 96 / Math.tan((rotate / 2 / 180) * Math.PI);
+    //     eleContainer.innerHTML = htmlPic;
+    //     $("#stage").addEventListener("click", function(e) {
+    //         if (e.target.className.indexOf('piece') < 0) {
+    //             return;
+    //         }
+    //         ++indexPiece;
+    //         scaleArr = getScaleArray(coverImgArr, rotate, indexPiece);
+    //         coverImgArr.forEach(function(item, index) {
+    //             var transYItem = Math.sin((index * rotate + (-1 * rotate * indexPiece + 90)) * 2 * Math.PI / 360) * 50;
+    //             transform($("#piece" + index), "scale(" + scaleArr[index] + "," + scaleArr[index] + ") rotateY(" + parseFloat(index * rotate + (-1 * rotate * indexPiece)) + "deg)  translateY(" + transYItem + "px) translateZ(" + (transZ + 20) + "px)");
+    //         });
+    //     });
+    //     //计算缩放数组
+    //     var scaleArr = getScaleArray(coverImgArr, rotate, indexPiece);
+
+    //     //初始值
+    //     coverImgArr.forEach(function(item, index) {
+    //         var transYItem = Math.sin((index * rotate + (-1 * rotate * indexPiece + 90)) * 2 * Math.PI / 360) * 50;
+
+    //         transform($("#piece" + index), "scale(" + scaleArr[index] + "," + scaleArr[index] + ") rotateY(" + (index * rotate) + "deg)  translateY(" + transYItem + "px) translateZ(" + (transZ + 20) + "px)");
+    //     });
+
+    //     // // 垂直位置居中 - Chrome浏览器
+    //     // var funStageValign = function(element) {
+    //     //     var scrollTop = document.documentElement.scrollTop,
+    //     //         clientHeight = document.documentElement.clientHeight;
+    //     //     offsetTop = element.getBoundingClientRect().top;
+    //     //     if (parseInt(window.getComputedStyle(element).top) === 0) {
+    //     //         element.style.top = scrollTop + (window.innerHeight - 300) / 2 - offsetTop;
+    //     //     } else {
+    //     //         element.style.top = "0px";
+    //     //     }
+    //     // };
+
+    //     // if (/chrome/i.test(navigator.userAgent)) {
+    //     //     // 创建Chrome浏览器视区修正按钮
+    //     //     var eleButton = document.createElement("input");
+    //     //     var arrValue = ["舞台位置窗体区域垂直居中", "垂直位置还原"];
+
+    //     //     eleButton.type = "button";
+    //     //     eleButton.value = arrValue[0];
+    //     //     eleButton.className = "chrome_fix";
+    //     //     eleButton.addEventListener("click", function() {
+    //     //         this.value = arrValue[Number(this.value !== arrValue[1])];
+    //     //         var stage = this.parentNode;
+    //     //         funStageValign(stage);
+    //     //     });
+
+    //     //     eleStage.appendChild(eleButton);
+    //     // }
+    // } else {
+    //     alert("你好，养猪场不是飞机场，是开不了战斗机的！");
+    // }
+    // })();
+    </script>
+</body>
+
+</html>
