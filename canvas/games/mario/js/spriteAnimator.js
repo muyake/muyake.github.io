@@ -20,7 +20,7 @@ CharacterSpriteAnimator.prototype.start = function() {
 CharacterSpriteAnimator.prototype.execute = function() {
     var animator = this;
     if (animator.isRunning) {
-        console.log(this.sprite.initialTop);
+       // console.log(this.sprite.initialTop);
         this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
         this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;
         if (this.sprite.top < this.sprite.initialTop) {
