@@ -17,7 +17,7 @@ var sourceLoadObj = {
         //加载图片完成后执行。
         createFactory.init();
         game.init();
-
+        
         createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
         gameControl.start();
         progressObj.countDownStart();
@@ -35,6 +35,11 @@ var game = {
     lastKeyListenerTime: 0,
     init: function() {
         var self = this;
+        clipObj.init(function(){
+            console.log('游戏开始');
+        },function(){
+             self.reset(3);
+        });
         this.bindEvent();
     },
     mapKey: {
@@ -89,6 +94,11 @@ var game = {
         }, false);
          document.querySelector('#mariodie').addEventListener('click', function() {
              drawSpriteList.mario.collisiondie();
+        }, false);
+          document.querySelector('#drawCircle').addEventListener('click', function() {
+            clipObj.startDraw();
+       // alert(1);
+          //   drawSpriteList.mario.collisiondie();
         }, false);
          
         // Key Listeners..............................................
@@ -294,7 +304,7 @@ var SpriteAnimatorEndCallbackList = {
     marioJumpend: function(mario) {
         if (mario.isDie) {
             if (mario.lifeNum > 0) {
-                game.reset(3);
+               clipObj.startDraw();
             } else {
                 game.over();
             }
@@ -472,7 +482,7 @@ var drawSpriteList = {
                             CD['judgeMoverBarrier'](mover, barrier);
                         }
                         if (barrier.name == 'hole') {
-                              CD['judgeMoverHole'](mover, barrier);
+                            CD['judgeMoverHole'](mover, barrier);
                             // var callback2 = self.config["moverBarrier"].callback || function() {};
                             // CD['judgeMoverBarrier'](mover, barrier, callback2);
                         }
@@ -488,8 +498,9 @@ gameControl.speed = 1;
 gameControl.startAnimate = function(time) {
      //层级分法：从下往上依次为1.背景层，作为游戏的整个背景，放在最底部，2，洞为二层，因为洞两侧有多余部分，所以，不能让多余部分遮挡移动的物体（马里奥，蘑菇等）
     //3.蘑菇，移动的金币，小星星等放在第三层，因为从砖里出来，所以在砖的下一层4.砖，管道等，为第四层，5马里奥为第五层。6碎砖块为第六层。
-
-    drawSpriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
+gameControl.context.save();
+clipObj.draw();
+     drawSpriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
     animateList.countDown(time);
   //绘制第二层（洞）等。 
    // console.log('huizhi2');
@@ -526,6 +537,7 @@ gameControl.startAnimate = function(time) {
     drawSpriteList.createBrickSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
+    gameControl.context.restore();
 }
 var animateList = {
     //倒计时
