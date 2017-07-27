@@ -142,11 +142,11 @@
         init: function(setting) {
             this.coverImgArr = setting.coverImgArr;
             this.$container = this.$(setting.container);
-            this.rander();
+            this.render();
             this.bindEvent();
         },
 
-        rander: function() {
+        render: function() {
             this.rotate = 360 / this.coverImgArr.length;
             // 显示图片
             var htmlPic = '';
@@ -183,18 +183,19 @@
             if (dataIndex == self.nowpage) {
                 self.clickMiddle();
             } else {
-                var helfLength = self.coverImgArr.length / 2;
+                var helfLength = self.coverImgArr.length / 2;               
+                var n=self.getIntervalNum(dataIndex)
                 if (self.nowpage > helfLength) {
                     if (dataIndex >= (self.nowpage - helfLength)&&(dataIndex<self.nowpage)) {
-                        self.rotateFun(1);
+                        self.rotateFun(1,n);
                     } else {
-                        self.rotateFun(0);
+                        self.rotateFun(0,n);
                     }
                 } else {
                     if (self.nowpage<dataIndex&& dataIndex < (self.nowpage + helfLength)) {
-                        self.rotateFun(0);
+                        self.rotateFun(0,n);
                     } else {
-                        self.rotateFun(1);
+                        self.rotateFun(1,n);
                     }
                 }
             }
@@ -211,10 +212,10 @@
                 self.getClickStatus(dataIndex);
             });
             this.$("#left").addEventListener("click", function(e) {
-                self.rotateFun(1);
+                self.rotateFun(1,1);
             });
             this.$("#right").addEventListener("click", function(e) {
-                self.rotateFun(0);
+                self.rotateFun(0,1);
             });
         },
         getNowPage: function() {
@@ -224,18 +225,51 @@
                 this.nowpage = this.nowpage + this.coverImgArr.length;
             }           
         },
+        getIntervalNum:function (num) {
+        var arr = this.arrNum;
+        var helf = parseInt(arr.length / 2);
+        var result = -1;
+        var tempNum=0;
+        var tempArr=[];
+        var j=helf;
+        arr.forEach(function(item, index) { 
+            if (item == num) {
+                result = index;
+            }
+        });
+        if(arr.length%2==1){
+            while(j>0){
+                tempArr.push(j);
+                tempArr.unshift(j);
+                j--;
+            }
+            tempArr.unshift(0);
+        }else{
+            tempArr.push(helf);
+            j--;
+            while(j>0){
+                tempArr.push(j);
+                tempArr.unshift(j);
+                j--;
+            }
+            tempArr.unshift(0);
+        }
+
+        return tempArr[result];
+    },
         //status=1向右转，status=0向左转。
-        rotateFun: function(status) {
+        rotateFun: function(status,n) {
             var self = this;
             if (status == 0) {
                 console.log(1);
-                ++self.indexPiece;
-               var first=self.arrNum.shift();
-               self.arrNum.push(first);
+               self.indexPiece=self.indexPiece+n;              
+               var temp=self.arrNum.splice(0,n);
+               self.arrNum=self.arrNum.concat(temp);
             } else {
-                --self.indexPiece;
-                 var last=self.arrNum.pop();
-                self.arrNum.unshift(last);
+                 self.indexPiece=self.indexPiece-n;               
+                var temp=self.arrNum.splice(-n,n);
+                 self.arrNum=temp.concat(self.arrNum);
+                //self.arrNum.splice(0,0,temp);
             }
             var helf=parseInt(this.coverImgArr.length/2);
             var bottom=self.nowpage<helf?(helf+self.nowpage):(self.nowpage-helf);            
@@ -243,17 +277,11 @@
             self.coverImgArr.forEach(function(item, index) {
                 var transYItem = Math.sin((index * self.rotate + (-1 * self.rotate * self.indexPiece + 90)) * 2 * Math.PI / 360) * 50;
                 self.transform(self.$("#piece" + index), "scale(" + scaleArr[index] + "," + scaleArr[index] + ") rotateY(" + parseFloat(index * self.rotate + (-1 * self.rotate * self.indexPiece)) + "deg)  translateY(" + transYItem + "px) translateZ(" + (self.transZ + 20) + "px)");
-            // self.$("#piece" + index).style['zIndex']=Math.abs(index-bottom);
+          
             });
-              self.arrNum.forEach(function(item,index){
+            self.arrNum.forEach(function(item,index){
                 self.$("#piece" + item).style['zIndex']=Math.abs(helf-index);
-            });
-            console.log(self.arrNum);
-            // var j=0;
-            // while(j>0){
-            //     self.$("#piece" + self.nowpage+).style['zIndex']=Math.abs(index-bottom);
-            //     j--;
-            // }
+            }); 
         },
     };
     rotate.init({
