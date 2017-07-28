@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
-    .container {
-        /* transform: rotateY(-640deg);*/
+    .container {        
         transform: rotateY(0deg);
-        width: 128px;
-        height: 100px;
-        margin-left: -64px;
-        margin-top: -50px;
+        width: 82px;
+        height: 307px;
+        margin-left: -41px;
+        margin-top: -154px;
         -webkit-transition: -webkit-transform 1s;
         -moz-transition: -moz-transform 1s;
         transition: transform 1s;
@@ -21,10 +20,18 @@
         position: absolute;
         left: 50%;
         top: 50%;
-        border: 1px solid green;
+        border:1px solid green;
+        /*border: 1px solid green;*/
+    }
+    #sword {
+        width: 82px;
+        height: 307px;
+        background: url(img/sword.png) no-repeat center/100% 100%;       
     }
 
     .piece {
+        top: 63px;
+        left: -22px;
         width: 128px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
         -webkit-transition: opacity 1s, -webkit-transform 1s;
@@ -40,8 +47,13 @@
         margin-left: 200px;
         border: 1px solid green;
         position: relative;
-        width: 600px;
-        height: 500px;
+        width: 580px;
+        height: 310px;
+    }
+    .content{
+        width: 100px;
+        height: 50px;
+        border:1px solid blue;
     }
     </style>
 </head>
@@ -49,15 +61,18 @@
 <body>
     <input type="button" value="左" id='left'>
     <input type="button" value="右" id='right'>
-     <input type="button" value="test" id='test'>
+    <input type="button" value="test" id='test'>
     <div id="stage" class="stage_area">
         <div id="container" class="container">
         </div>
     </div>
+    <div class="content">
+        
+    </di>
     <script>
-    document.querySelector('#test').addEventListener('click',function(){
-         document.querySelector('#piece0').style['msTransform']='scale(1, 1) rotateY(0deg) translateY(150px) translateZ(283.758px)';
-         document.querySelector('#piece0').style['border']='5px solid yellow';
+    document.querySelector('#test').addEventListener('click', function() {
+        document.querySelector('#piece0').style['msTransform'] = 'scale(1, 1) rotateY(0deg) translateY(150px) translateZ(283.758px)';
+        document.querySelector('#piece0').style['border'] = '5px solid yellow';
     });
     var coverImgArr = [
         "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000015896/11000015896.jpg",
@@ -69,11 +84,77 @@
         "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000022939/11000022939.jpg",
         "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000074718/11000074718.jpg",
         "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/11000074766/11000074766.jpg"
-
-
-
     ];
+    var bookData=      [{        
+        novelName: '长生武侠',
+        novelId: '11000015896',
+        content: '长生武侠不长生，寂寞红尘独寂寞。自然红尘之中，武道流行。美女如云，却不能掩埋刀骨；天地沉重，却不能阻...',
+    }, {
+        
+        novelName: '秦武侠佑',
+        novelId: '11000073734',
+        content: '英雄又如何？ 我自用大秦古武一一破之！ 且看大秦后裔杨宸以侠佑之名驰骋斗气魔法的世界！ ...',
+    }, {       
+        novelName: '武侠问道',
+        novelId: '11000085140',
+        content: '朝闻道，夕死可矣。武侠世界的道，又在哪里？一次又一次地轮转，又蕴含了什么样的秘密？古老的地球与洪荒，...',
+
+    }, {
+        novelName: '武道至尊',
+        novelId: '11000092562',
+        content: '废柴少年，无丝毫修武之材。 一代战神在他身上重生，从此天地大变！ 群雄俯首，众神称臣！ 武道至...',
+
+    }, {       
+        novelName: '戎武侠心',
+        novelId: '11000006513',
+        content: '当他身陨的时候，庙堂之上，南宋的开国皇帝赐其谥号“戎武”；江湖之远，市井民间，则喜欢在“戎武”之...',
+
+    }, {       
+        novelName: '穿越从武侠开始',
+        novelId: '11000074417',
+        content: '宇宙无边，时空无尽。 一个空间幻灭后的幸存者，转生到了射雕世界，成了王重阳的徒弟，这是他穿...',
+
+    }
+    , {       
+        novelName: '求道武侠世界',
+        novelId: '11000074626',
+        content: '浪迹江湖，道在脚下，这是一个求道者的故事。...',
+
+    }
+    , {       
+        novelName: '唐门宗师的武侠世界',
+        novelId: '11000074766',
+        content: '来到异世的惶恐不敌想要建立自己的千年宗门的雄心。 混乱的武林暗流汹涌，刀光血影。 本是内家拳弟子...',
+
+    }
+    , {       
+        novelName: '我有一个武侠分身',
+        novelId: '11000022939',
+        content: '普通大学生赵容获得了另外一个世界中的武侠分身，可以于睡梦在武侠世界和现实世界中互相切换身体。他不仅体...',
+
+    }, {       
+        novelName: '大通天传',
+        novelId: '11000074718',
+        content: '虞沧海如此说：我今觉醒，生而神灵。天上地下，日月所照，风雨所至，皆唯我独尊。 玄奇宏大的世界，天地...',
+    }
+    ]
     var lib = {
+        whichTransitionEvent: function() {
+            var t;
+            var el = document.createElement('fakeelement');
+            var transitions = {
+                'transition': 'transitionend',
+                'OTransition': 'oTransitionEnd',
+                'MozTransition': 'transitionend',
+                'WebkitTransition': 'webkitTransitionEnd',
+                'MsTransition': 'msTransitionEnd'
+            }
+            for (t in transitions) {
+                if (el.style[t] !== undefined) {
+                    return transitions[t];
+                }
+            }
+        },
         init: function() {
             //最小值
             Array.prototype.min = function() {
@@ -103,16 +184,17 @@
     var rotate = {
         $container: '',
         coverImgArr: [],
-        arrNum:[],
+        arrNum: [],
         rotate: 0,
         indexPiece: 0,
         transZ: 0,
         nowpage: 0,
+         autoPlay: false,
         //添加3d变换
         transform: function(element, value, key) {
             key = key || "Transform";
             ["moz", "o", "ms", "webkit", ""].forEach(function(prefix) {
-               // console.log(prefix + key);
+                // console.log(prefix + key);
                 element.style[prefix + key] = value;
             });
 
@@ -124,6 +206,12 @@
         },
         $$: function(selector) {
             return document.querySelectorAll(selector);
+        },
+        getCoverImg:function(id){
+            return "http://bookimg.haohuida.cn/cppartner/1x1/11x0/110x0/"+id+"/"+id+".jpg"
+        },
+        getUrl:function(id){
+            return "http://blog.renren.com/ublog/fiction/"+id;
         },
         getScaleArray: function(arr, rotate, indexPiece) {
             var scaleArr = [];
@@ -144,14 +232,16 @@
             this.$container = this.$(setting.container);
             this.render();
             this.bindEvent();
+            this.startPlay();
         },
 
         render: function() {
             this.rotate = 360 / this.coverImgArr.length;
             // 显示图片
-            var htmlPic = '';
+            var self=this;
+            var htmlPic = '<div id="sword"></div>';
             this.coverImgArr.forEach(function(item, index) {
-                htmlPic = htmlPic + '<img data="' + index + '" id="piece' + index + '" src="' + item + '" class="piece" />';
+                htmlPic = htmlPic + '<img data="' + index + '" id="piece' + index + '" src="' + self.getCoverImg(item.novelId) + '" class="piece" />';
             });
             this.indexPiece = 0;
             var elePics = this.$$(".piece");
@@ -160,18 +250,18 @@
             var scaleArr = this.getScaleArray(this.coverImgArr, this.rotate, this.indexPiece);
             //初始值
             var self = this;
-            var helf=parseInt( this.coverImgArr.length/2);
+            var helf = parseInt(this.coverImgArr.length / 2);
             this.coverImgArr.forEach(function(item, index) {
                 var transYItem = Math.sin((index * self.rotate + (-1 * self.rotate * self.indexPiece + 90)) * 2 * Math.PI / 360) * 50;
                 self.transform(self.$("#piece" + index), "scale(" + scaleArr[index] + "," + scaleArr[index] + ") rotateY(" + (index * self.rotate) + "deg)  translateY(" + transYItem + "px) translateZ(" + (self.transZ + 20) + "px)");
                 //self.$("#piece" + index).style['zIndex']=Math.abs(helf-index);
                 self.arrNum.push(index);
             });
-            self.arrNum.forEach(function(item,index){
-                self.$("#piece" + item).style['zIndex']=Math.abs(helf-index);
+            self.arrNum.forEach(function(item, index) {
+                self.$("#piece" + item).style['zIndex'] = Math.abs(helf - index);
             });
-            console.log(self.arrNum);
-            //console.log(self.indexPiece);
+            self.transform(self.$("#sword"), "translateZ(" + (self.transZ ) + "px)");
+            self.$(" #sword").style['zIndex'] = parseInt(helf / 2);
             this.getNowPage();
         },
         clickMiddle: function() {
@@ -183,22 +273,37 @@
             if (dataIndex == self.nowpage) {
                 self.clickMiddle();
             } else {
-                var helfLength = self.coverImgArr.length / 2;               
-                var n=self.getIntervalNum(dataIndex)
+                var helfLength = self.coverImgArr.length / 2;
+                var n = self.getIntervalNum(dataIndex)
                 if (self.nowpage > helfLength) {
-                    if (dataIndex >= (self.nowpage - helfLength)&&(dataIndex<self.nowpage)) {
-                        self.rotateFun(1,n);
+                    if (dataIndex >= (self.nowpage - helfLength) && (dataIndex < self.nowpage)) {
+                        self.rotateFun(1, n);
                     } else {
-                        self.rotateFun(0,n);
+                        self.rotateFun(0, n);
                     }
                 } else {
-                    if (self.nowpage<dataIndex&& dataIndex < (self.nowpage + helfLength)) {
-                        self.rotateFun(0,n);
+                    if (self.nowpage < dataIndex && dataIndex < (self.nowpage + helfLength)) {
+                        self.rotateFun(0, n);
                     } else {
-                        self.rotateFun(1,n);
+                        self.rotateFun(1, n);
                     }
                 }
             }
+        },
+        startPlay: function() {
+            var self = this;
+            self.interval = setInterval(function() {
+                self.rotateFun(0, 1);
+            }, 1500);
+        },
+        stopPlay: function() {
+            var self = this;
+            if (!!self.interval) {
+                clearInterval(self.interval);
+            }
+        },
+        animationEnd:function(index){
+            document.querySelector('.content').innerHTML=this.coverImgArr[index].novelName;
         },
         bindEvent: function() {
             var self = this;
@@ -206,16 +311,35 @@
                 var halfLength = self.coverImgArr.length / 2;
                 if (e.target.className.indexOf('piece') < 0) {
                     return;
-                }
-                self.getNowPage();
+                }               
                 var dataIndex = parseInt(e.target.getAttribute('data'));
                 self.getClickStatus(dataIndex);
             });
             this.$("#left").addEventListener("click", function(e) {
-                self.rotateFun(1,1);
+                self.rotateFun(1, 1);
             });
             this.$("#right").addEventListener("click", function(e) {
-                self.rotateFun(0,1);
+                self.rotateFun(0, 1);
+            });
+            var itemList=self.$$('.piece');
+            for (var i = 0; i < itemList.length; i++) {
+                var item = itemList[i];
+                item.addEventListener('mouseover', function() {
+                    self.autoPlay = false;
+                    self.stopPlay();
+                });
+                item.addEventListener('mouseout', function() {
+                    self.autoPlay = true;
+                    self.startPlay();
+                });
+            }
+            if (self.autoPlay) {
+                self.startPlay();
+            }
+             var transEndEventName = lib.whichTransitionEvent();
+            document.querySelector('#piece0').addEventListener(transEndEventName, function(e) {
+               // console.log(self.nowpage);
+                 self.animationEnd(self.nowpage);                
             });
         },
         getNowPage: function() {
@@ -223,165 +347,76 @@
             this.nowpage = this.indexPiece % this.coverImgArr.length;
             if (this.nowpage < 0) {
                 this.nowpage = this.nowpage + this.coverImgArr.length;
-            }           
+            }
+            return this.nowpage;
         },
-        getIntervalNum:function (num) {
-        var arr = this.arrNum;
-        var helf = parseInt(arr.length / 2);
-        var result = -1;
-        var tempNum=0;
-        var tempArr=[];
-        var j=helf;
-        arr.forEach(function(item, index) { 
-            if (item == num) {
-                result = index;
-            }
-        });
-        if(arr.length%2==1){
-            while(j>0){
-                tempArr.push(j);
-                tempArr.unshift(j);
-                j--;
-            }
-            tempArr.unshift(0);
-        }else{
-            tempArr.push(helf);
-            j--;
-            while(j>0){
-                tempArr.push(j);
-                tempArr.unshift(j);
-                j--;
-            }
-            tempArr.unshift(0);
-        }
-
-        return tempArr[result];
-    },
-        //status=1向右转，status=0向左转。
-        rotateFun: function(status,n) {
-            var self = this;
-            if (status == 0) {
-                console.log(1);
-               self.indexPiece=self.indexPiece+n;              
-               var temp=self.arrNum.splice(0,n);
-               self.arrNum=self.arrNum.concat(temp);
+        getIntervalNum: function(num) {
+            var arr = this.arrNum;
+            var helf = parseInt(arr.length / 2);
+            var result = -1;
+            var tempNum = 0;
+            var tempArr = [];
+            var j = helf;
+            arr.forEach(function(item, index) {
+                if (item == num) {
+                    result = index;
+                }
+            });
+            if (arr.length % 2 == 1) {
+                while (j > 0) {
+                    tempArr.push(j);
+                    tempArr.unshift(j);
+                    j--;
+                }
+                tempArr.unshift(0);
             } else {
-                 self.indexPiece=self.indexPiece-n;               
-                var temp=self.arrNum.splice(-n,n);
-                 self.arrNum=temp.concat(self.arrNum);
+                tempArr.push(helf);
+                j--;
+                while (j > 0) {
+                    tempArr.push(j);
+                    tempArr.unshift(j);
+                    j--;
+                }
+                tempArr.unshift(0);
+            }
+
+            return tempArr[result];
+        },
+        //status=1向右转，status=0向左转。
+        rotateFun: function(status, n) {
+            var self = this;
+            
+            if (status == 0) {
+                //console.log(1);
+                self.indexPiece = self.indexPiece + n;
+                var temp = self.arrNum.splice(0, n);
+                self.arrNum = self.arrNum.concat(temp);
+            } else {
+                self.indexPiece = self.indexPiece - n;
+                var temp = self.arrNum.splice(-n, n);
+                self.arrNum = temp.concat(self.arrNum);
                 //self.arrNum.splice(0,0,temp);
             }
-            var helf=parseInt(this.coverImgArr.length/2);
-            var bottom=self.nowpage<helf?(helf+self.nowpage):(self.nowpage-helf);            
+            var helf = parseInt(this.coverImgArr.length / 2);
+            var bottom = self.nowpage < helf ? (helf + self.nowpage) : (self.nowpage - helf);
             var scaleArr = self.getScaleArray(self.coverImgArr, self.rotate, self.indexPiece);
             self.coverImgArr.forEach(function(item, index) {
                 var transYItem = Math.sin((index * self.rotate + (-1 * self.rotate * self.indexPiece + 90)) * 2 * Math.PI / 360) * 50;
                 self.transform(self.$("#piece" + index), "scale(" + scaleArr[index] + "," + scaleArr[index] + ") rotateY(" + parseFloat(index * self.rotate + (-1 * self.rotate * self.indexPiece)) + "deg)  translateY(" + transYItem + "px) translateZ(" + (self.transZ + 20) + "px)");
-          
+
             });
-            self.arrNum.forEach(function(item,index){
-                self.$("#piece" + item).style['zIndex']=Math.abs(helf-index);
-            }); 
+            self.arrNum.forEach(function(item, index) {
+                self.$("#piece" + item).style['zIndex'] = Math.abs(helf - index);
+            });
+            self.transform(self.$("#sword"), "translateZ(" + (self.transZ ) + "px)");
+            self.$("#sword").style['zIndex'] = parseInt(helf / 2);
+             self.getNowPage();
         },
     };
     rotate.init({
-        coverImgArr: coverImgArr,
+        coverImgArr: bookData,
         container: "#container",
     });
-
-    // //(function() {
-    // if (typeof window.screenX === "number") {
-    //     // 随机颜色HSL
-    //     var randomHsl = function() {
-    //             return "hsla(" + Math.round(360 * Math.random()) + "," + "60%, 50%, .75)";
-    //         }
-    //         // CSS transform变换应用
-    //         ,
-    //         transform = function(element, value, key) {
-    //             key = key || "Transform";
-    //             ["Moz", "O", "Ms", "Webkit", ""].forEach(function(prefix) {
-    //                 element.style[prefix + key] = value;
-    //             });
-
-    //             return element;
-    //         }
-    //         // 浏览器选择器API
-    //         ,
-    //         $ = function(selector) {
-    //             return document.querySelector(selector);
-    //         },
-    //         $$ = function(selector) {
-    //             return document.querySelectorAll(selector);
-    //         };
-
-    //     // 显示图片
-    //     var htmlPic = '',
-    //         rotate = 360 / coverImgArr.length;
-    //     coverImgArr.forEach(function(item, index) {
-    //         htmlPic = htmlPic + '<img id="piece' + index + '" src="' + item + '" class="piece" />';
-    //     });
-
-    //     // 元素
-    //     var eleStage = $("#stage"),
-    //         eleContainer = $("#container"),
-    //         indexPiece = 0;
-    //     // 元素
-    //     var elePics = $$(".piece"),
-    //         transZ = 96 / Math.tan((rotate / 2 / 180) * Math.PI);
-    //     eleContainer.innerHTML = htmlPic;
-    //     $("#stage").addEventListener("click", function(e) {
-    //         if (e.target.className.indexOf('piece') < 0) {
-    //             return;
-    //         }
-    //         ++indexPiece;
-    //         scaleArr = getScaleArray(coverImgArr, rotate, indexPiece);
-    //         coverImgArr.forEach(function(item, index) {
-    //             var transYItem = Math.sin((index * rotate + (-1 * rotate * indexPiece + 90)) * 2 * Math.PI / 360) * 50;
-    //             transform($("#piece" + index), "scale(" + scaleArr[index] + "," + scaleArr[index] + ") rotateY(" + parseFloat(index * rotate + (-1 * rotate * indexPiece)) + "deg)  translateY(" + transYItem + "px) translateZ(" + (transZ + 20) + "px)");
-    //         });
-    //     });
-    //     //计算缩放数组
-    //     var scaleArr = getScaleArray(coverImgArr, rotate, indexPiece);
-
-    //     //初始值
-    //     coverImgArr.forEach(function(item, index) {
-    //         var transYItem = Math.sin((index * rotate + (-1 * rotate * indexPiece + 90)) * 2 * Math.PI / 360) * 50;
-
-    //         transform($("#piece" + index), "scale(" + scaleArr[index] + "," + scaleArr[index] + ") rotateY(" + (index * rotate) + "deg)  translateY(" + transYItem + "px) translateZ(" + (transZ + 20) + "px)");
-    //     });
-
-    //     // // 垂直位置居中 - Chrome浏览器
-    //     // var funStageValign = function(element) {
-    //     //     var scrollTop = document.documentElement.scrollTop,
-    //     //         clientHeight = document.documentElement.clientHeight;
-    //     //     offsetTop = element.getBoundingClientRect().top;
-    //     //     if (parseInt(window.getComputedStyle(element).top) === 0) {
-    //     //         element.style.top = scrollTop + (window.innerHeight - 300) / 2 - offsetTop;
-    //     //     } else {
-    //     //         element.style.top = "0px";
-    //     //     }
-    //     // };
-
-    //     // if (/chrome/i.test(navigator.userAgent)) {
-    //     //     // 创建Chrome浏览器视区修正按钮
-    //     //     var eleButton = document.createElement("input");
-    //     //     var arrValue = ["舞台位置窗体区域垂直居中", "垂直位置还原"];
-
-    //     //     eleButton.type = "button";
-    //     //     eleButton.value = arrValue[0];
-    //     //     eleButton.className = "chrome_fix";
-    //     //     eleButton.addEventListener("click", function() {
-    //     //         this.value = arrValue[Number(this.value !== arrValue[1])];
-    //     //         var stage = this.parentNode;
-    //     //         funStageValign(stage);
-    //     //     });
-
-    //     //     eleStage.appendChild(eleButton);
-    //     // }
-    // } else {
-    //     alert("你好，养猪场不是飞机场，是开不了战斗机的！");
-    // }
-    // })();
     </script>
 </body>
 
