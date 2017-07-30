@@ -137,6 +137,10 @@ var CD = {
             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
             bullet = null;
         },
+        MairoCollisionMonster:function(mario,monster){
+            console.log('碰撞死亡');
+            mario.collisiondie();
+        },
         //碰撞中执行的函数,
         Colliding: function(A, B, leftFun, rightFun, downFun, upFun) {
             var standardChangeX = A.width + B.width;
@@ -281,8 +285,38 @@ var CD = {
             }
         }
     },
-     judgeMMonster: function(mover, hole, callback) {
-      
+     judgeMMonster: function(mario, monster, callback) {
+       if (mario.visible == false&&mario.isDie==true) {
+            return;
+        }
+        var self = this;
+        // 两个矩形检测
+        if ((monster.left + monster.width) < mario.left || (mario.left + mario.width) < monster.left || (monster.top + monster.height) < mario.top || (mario.top + mario.height) < monster.top) {
+           // this.CDFunc.MoverOutCarrying(monster, mario);
+        } else {
+            var leftfun = function() {
+                self.CDFunc.MairoCollisionMonster(mario,monster);
+            };
+            var rightfun = function() {
+                self.CDFunc.MairoCollisionMonster(mario,monster);
+            };
+            var upfun = function() {
+
+               console.log('踩死');
+               self.CDFunc.MairoCollisionMonster(mario,monster);
+            };
+            var downfun = function() {
+               // debugger;
+
+                 console.log('踩死1');
+                 monster.collisionDie();
+               // self.CDFunc.MairoCollisionMonster(mario,monster);
+            };
+            if(!mario.isDie&&!monster.isDie){
+                   self.CDFunc.Colliding(monster, mario, leftfun, rightfun, downfun, upfun);
+            }
+         
+        }
     },
     judgeBBarrier: function(bullet, barrier, callback) {
         if (barrier.visible == false) {

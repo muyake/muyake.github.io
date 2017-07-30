@@ -276,13 +276,13 @@ var Monster = function(setting) {
     // this.roleType = 'mairo';
     this.height = setting.height || WH.monster.height;
     this.physicaltop = setting.physicaltop || 0;
-    //this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - 100 - WH.wall.height;
-    this.left = this.mycanvas.width / 2 - this.width / 2;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
+   // this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - 100 - WH.wall.height;
+    this.left = this.mycanvas.width - this.width / 2 ;
     this.positionmile = this.left;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
     this.isJump = false; //是否在跳中
-    this.initvelocityX = -70;
+    this.initvelocityX = 70;
     //this.jumpPainter = this.painters.jump;
     this.upColliding = null; //下面的墙或管道等 
     this.initialTop = this.top;
@@ -300,16 +300,23 @@ Monster.prototype = Object.create(Sprite.prototype);
 Monster.prototype.constructor = Monster;
 Monster.prototype.painters = {
     run: new CharacterRunSpriteSheetPainter(monsterConfig.config, gameSourceUrl.imageList.monster, element.mycanvas, monsterConfig.config.totalCount),
-
+    collisiondie: new CharacterImagePainter(gameSourceUrl.imageList.monsterDie),
 };
 
 Monster.prototype.jump = function(VY) {
     this.velocityY = -VY;
     this.monsterSpriteAnimatorJump.start();
 };
-
+Monster.prototype.collisionDie = function() {
+    this.initvelocityX = 0;
+     this.behaviors = [new behaviorList.SpriteLeftToRight()];
+     this.isDie=true;
+     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.monsterdie);
+    this.painter = this.painters.collisiondie;  
+};
 Monster.prototype.die = function() {
     this.jump(0);
+    this.isDie=true;
 };
 Monster.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum; //给monsterSpriteAnimator传递fpsnumbehaviors

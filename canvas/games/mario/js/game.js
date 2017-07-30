@@ -67,6 +67,7 @@ var game = {
     },
     bindEvent: function() {
         var self = this;
+         drawSpriteList.createAnimationSpriteList.push(new Monster('monster'));
         document.querySelector('#smallBtn').addEventListener('click', function() {
             createFactory.createBrick(100, 100);
         }, false);
@@ -92,7 +93,12 @@ var game = {
         }, false);
 
          document.querySelector('#monster').addEventListener('click', function() {
-             drawSpriteList.createAnimationSpriteList.push(new Shell('shell'));
+          //   drawSpriteList.createAnimationSpriteList.push(new Monster('monster'));
+          drawSpriteList.createAnimationSpriteList.forEach(function(item){
+            if(item.name=='monster'){
+                item.collisionDie();
+            }
+          });
         }, false);
          document.querySelector('#mariodie').addEventListener('click', function() {
              drawSpriteList.mario.collisiondie();
