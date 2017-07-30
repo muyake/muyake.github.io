@@ -11,7 +11,7 @@ var Game = function(gameName, canvasId) {
 	this.gameName = gameName;
 	this.sprites = [];
 	this.keyListeners = [];
-
+	this.gamePause=false;
 
 	// Time
 
@@ -109,6 +109,9 @@ Game.prototype = {
 
 
 	activeEvent:function(e,status){
+		// if(this.gamePause==true){
+		// 	return;
+		// }
 		var listener=undefined;
 		var key=undefined;
 		switch(e.keyCode){

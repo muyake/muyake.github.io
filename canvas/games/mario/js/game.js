@@ -37,7 +37,8 @@ var game = {
         var self = this;
         clipObj.init(function(){
             console.log('游戏开始');
-        },function(){
+            gameControl.gamePause=false;
+        },function(){            
              self.reset(3);
         });
         this.bindEvent();
@@ -60,6 +61,7 @@ var game = {
         progressObj.createSpriteMileNum=num*gameConfig.objectSpeedRate; 
        drawSpriteList.arrayOthersA=[];
        createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
+       
        drawSpriteList.mario.reset();
        
     },
@@ -95,10 +97,8 @@ var game = {
          document.querySelector('#mariodie').addEventListener('click', function() {
              drawSpriteList.mario.collisiondie();
         }, false);
-          document.querySelector('#drawCircle').addEventListener('click', function() {
-            clipObj.startDraw();
-       // alert(1);
-          //   drawSpriteList.mario.collisiondie();
+        document.querySelector('#gamePause').addEventListener('click', function() {
+            gameControl.gamePause=true;       
         }, false);
          
         // Key Listeners..............................................
@@ -210,6 +210,9 @@ var game = {
         });
     },
     activeEventCallback: function() {
+        // if(gameControl.gamePause==true){
+        //     return;
+        // }
         var time = Date.now();
         var jumpKey = this.mapKey["s"] || this.mapKey["w"]; //按蹦跳键
         var runKey = ((this.mapKey["left"] && !this.mapKey["right"]) || (!this.mapKey["left"] && this.mapKey["right"])); //左右键中，只按了左键或只按了右键
@@ -269,8 +272,7 @@ var game = {
         if (this.mapKey['d'] && (drawSpriteList.mario.originalStatus == 4 || drawSpriteList.mario.originalStatus == 3 || drawSpriteList.mario.status == 3) & time - this.advance > 300) {
             if (drawSpriteList.mario.isReverse) {
                 createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, drawSpriteList.mario.top + drawSpriteList.mario.height / 3, drawSpriteList.mario.isReverse);
-
-            } else {
+        } else {
                 createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left, drawSpriteList.mario.top + drawSpriteList.mario.height / 3, drawSpriteList.mario.isReverse);
             }
             this.advance = time;
@@ -304,6 +306,8 @@ var SpriteAnimatorEndCallbackList = {
     marioJumpend: function(mario) {
         if (mario.isDie) {
             if (mario.lifeNum > 0) {
+                console.log('暂停');
+                gameControl.gamePause = true;
                clipObj.startDraw();
             } else {
                 game.over();
@@ -423,7 +427,13 @@ var drawSpriteList = {
             var self = this;
             var arrothers = drawSpriteList.arrayOthersA;
             //设置速度默认值，例如，先设置速度正常,当马里奥被管道水平挡住,速度为0，当反向走时，脱离管道碰撞，速度恢复正常。
-            gameConfig.setSpeedDefault();
+            if(gameConfig.gamePause==true){
+                gameConfig.setSpeedZero();
+            }else{
+               gameConfig.setSpeedDefault();  
+            }
+           
+
             //马里奥与墙、管道,固定金币等碰撞
             drawSpriteList.arrayOthersA.forEach(function(itemDraw) {
                 var callback = self.config[itemDraw.name].callback || function() {};
