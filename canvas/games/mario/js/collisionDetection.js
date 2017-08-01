@@ -139,7 +139,14 @@ var CD = {
         },
         MairoCollisionMonster:function(mario,monster){
             console.log('碰撞死亡');
-            mario.collisiondie();
+            if(mario.status==1&&mario.height==WH.mario.smallstatus.height){
+                  console.log('碰撞死亡222');
+                  mario.collisiondie();
+              }else{
+                console.log('碰撞死亡111');
+                drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
+              }
+          
         },
         //碰撞中执行的函数,
         Colliding: function(A, B, leftFun, rightFun, downFun, upFun) {
@@ -295,14 +302,19 @@ var CD = {
            // this.CDFunc.MoverOutCarrying(monster, mario);
         } else {
             var leftfun = function() {
-                self.CDFunc.MairoCollisionMonster(mario,monster);
+                console.log('leftfun');
+               // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
+               self.CDFunc.MairoCollisionMonster(mario,monster);
             };
             var rightfun = function() {
+                     console.log('rightfun');
+               // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
                 self.CDFunc.MairoCollisionMonster(mario,monster);
             };
             var upfun = function() {
-
-               console.log('踩死');
+                 console.log('upfun');
+               // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
+               //console.log('踩死');
                self.CDFunc.MairoCollisionMonster(mario,monster);
             };
             var downfun = function() {

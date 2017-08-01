@@ -26,6 +26,7 @@ var sourceLoadObj = {
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
+        drawSpriteList.mario.rise(WH.mario.bigstatus.height,2);
     }
 }
 
