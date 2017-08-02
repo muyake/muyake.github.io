@@ -8,8 +8,8 @@ var behaviorList = {
         this.behaviorName = 'moveLeftToRight';
         this.lastMove = 0;
         this.fpsNum = 60;
-        this.execute = function(sprite, context, time, fpsNum) {
-            this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
+        this.execute = function(sprite, context, time, fpsNum) {           
+            this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);            
             sprite.left += sprite.velocityX / this.fpsNum;
             this.lastMove = time;
         }
@@ -22,6 +22,7 @@ var behaviorList = {
         this.execute = function(sprite, context, time, fpsNum) {          
         var translateLeft=sprite.translateLeft||0;
       //  console.log('translateLeft'+progressObj.createSpriteMileNum);
+     
          sprite.left=    sprite.positionmile - progressObj.createSpriteMileNum-translateLeft;         
         }
     },
