@@ -79,20 +79,9 @@
     	}
     	return obj;
     }
-      Array.prototype.max=function(){
-    	var obj={index:0,val:this[0]};
-    	var len=this.length;
-    	for(var i=0;i<len;i++){
-    		if(obj.val<this[i]){
-    			obj.index=i;
-    			obj.val=this[i];
-    		}
-    	}
-    	return obj;
-    }
     var data = [];
     var heightArr = [10, 10, 10, 10, 10];
-    for (var i = 1; i < 50; i++) {
+    for (var i = 1; i < 20; i++) {
         data.push(i);
     }
 
@@ -115,8 +104,6 @@
         div.innerHTML='<img src="'+url+'" alt="">';
         document.querySelector('.container').appendChild(div);
         heightArr[minObj.index]=heightArr[minObj.index]+height+10;
-        var maxObj=heightArr.max();
-         document.querySelector('.container').style.height=maxObj.val+20+'px';
     }
     data.forEach(function(item, index) {
     	var url=item+'.jpg';
