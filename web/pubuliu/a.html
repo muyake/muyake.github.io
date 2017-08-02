@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		.container{
+			position: relative;
+    		width: 1400px;
+    		background: gray;
+    		margin:0 auto;
+    		height: 1000px;
+    		overflow: hidden;
+		}
+		.container>div{
+			position: absolute;
+			width: 250px;
+			margin-right: 38px; 
+			background: #fff;
+		}
+		div[data-status='1']{
+			left:15px;
+		}
+		div[data-status='2']{
+			left:295px;
+		}
+		div[data-status='3']{
+			left:575px;
+		}
+		div[data-status='4']{
+			left:855px;
+		}
+		div[data-status='5']{
+			left:1135px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="item" style="height:340px;" data-status='1'>			
+		</div>
+		<div class="item" style="height:340px;" data-status='2'>			
+		</div>
+		<div class="item" style="height:340px;" data-status='3'>			
+		</div>
+		<div class="item" style="height:340px;" data-status='4'>			
+		</div>
+		<div class="item" style="height:340px;" data-status='5'>			
+		</div>	
+	</div>
+	<script>
+		var data=[];
+
+	</script>
+</body>
+</html>
