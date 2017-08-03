@@ -7,7 +7,7 @@
     <style>
     .container {
         position: relative;
-        width: 1160px;
+       width: 90%;
         background: gray;
         margin: 0 auto;
         height: 1000px;
@@ -51,77 +51,174 @@
 
 <body>
     <div class="container">
-        <!-- <div class="item" data-status='1'>
-            <img src="1.jpg" alt="">
-        </div>
-        <div class="item" data-status='2'>
-            <img src="2.jpg" alt="">
-        </div>
-        <div class="item" data-status='3'>
-            <img src="3.jpg" alt="">
-        </div>
-        <div class="item" data-status='4'>
-            <img src="4.jpg" alt="">
-        </div>
-        <div class="item" data-status='5'>
-            <img src="5.jpg" alt="">
-        </div> -->
     </div>
     <script>
-    Array.prototype.min=function(){
-    	var obj={index:0,val:this[0]};
-    	var len=this.length;
-    	for(var i=0;i<len;i++){
-    		if(obj.val>this[i]){
-    			obj.index=i;
-    			obj.val=this[i];
-    		}
-    	}
-    	return obj;
-    }
-      Array.prototype.max=function(){
-    	var obj={index:0,val:this[0]};
-    	var len=this.length;
-    	for(var i=0;i<len;i++){
-    		if(obj.val<this[i]){
-    			obj.index=i;
-    			obj.val=this[i];
-    		}
-    	}
-    	return obj;
-    }
-    var data = [];
-    var heightArr = [10, 10, 10, 10, 10];
-    for (var i = 1; i < 50; i++) {
-        data.push(i);
-    }
-
-    function loadImage(url, callback) {
-        var img = new Image();
-        img.onload = function() {
-            img.onload = null;
-            var width=img.width;
-            var height=img.height*220/width;
-            callback(img.src,height);
+    Array.prototype.min = function() {
+        var obj = {
+            index: 0,
+            val: this[0]
+        };
+        var len = this.length;
+        for (var i = 0; i < len; i++) {
+            if (obj.val > this[i]) {
+                obj.index = i;
+                obj.val = this[i];
+            }
         }
-        img.src = url;
+        return obj;
     }
-    function rander(url,height){
-    	var minObj=heightArr.min();
-        var div=document.createElement('DIV');
-        div.className='item';
-        div.style.top=minObj.val+'px';
-        div.setAttribute('data-status',minObj.index+1+'');
-        div.innerHTML='<img src="'+url+'" alt="">';
-        document.querySelector('.container').appendChild(div);
-        heightArr[minObj.index]=heightArr[minObj.index]+height+10;
-        var maxObj=heightArr.max();
-         document.querySelector('.container').style.height=maxObj.val+20+'px';
+    Array.prototype.max = function() {
+        var obj = {
+            index: 0,
+            val: this[0]
+        };
+        var len = this.length;
+        for (var i = 0; i < len; i++) {
+            if (obj.val < this[i]) {
+                obj.index = i;
+                obj.val = this[i];
+            }
+        }
+        return obj;
     }
-    data.forEach(function(item, index) {
-    	var url=item+'.jpg';
-    	loadImage(url,rander);
-    })
+    var pubuliu = {
+        itemWidth: 220,
+        totalWidth: 0,
+        cellCount: 0,
+        heightArr: [],
+        leftArr: [],
+        data: [],
+        marginWidth:0,
+        getContainerWidth: function() {
+            var element = document.querySelector('.container');
+            var width = window.getComputedStyle(element, null).width;
+            return parseInt(width);
+        },
+        init: function() {
+        	var self = this;
+            for (var i = 1; i < 50; i++) {
+                self.data.push(i);
+            }
+            this.computePosition();
+            this.bindEvent();
+        },
+        computePosition:function(){
+ 			this.totalWidth = this.getContainerWidth();
+            this.cellCount = parseInt(this.totalWidth / this.itemWidth);
+            this.marginWidth = (this.totalWidth - this.cellCount * this.itemWidth) / (this.cellCount + 1);
+            while(this.marginWidth<5){
+				this.cellCount =this.cellCount -1;
+				this.marginWidth = (this.totalWidth - this.cellCount * this.itemWidth) / (this.cellCount + 1);
+            }
+            for (var i = 0; i < this.cellCount; i++) {
+                this.leftArr.push((this.marginWidth + this.itemWidth) * i + this.marginWidth);
+                this.heightArr.push(this.marginWidth);
+            }
+            this.getData();
+        },
+        getData: function() {
+            var self = this;
+             document.querySelector('.container').innerHTML='';
+            self.data.forEach(function(item, index) {
+                var url = item + '.jpg';
+                self.loadImage(url, self.rander.bind(self));
+            });
+
+        },
+        loadImage: function(url, callback) {
+            var img = new Image();
+            img.onload = function() {
+                img.onload = null;
+                var width = img.width;
+                var height = img.height * 220 / width;
+                callback(img.src, height);
+            }
+            img.src = url;
+        },
+        rander: function(url, height) {
+            var minObj = this.heightArr.min();
+            var div = document.createElement('DIV');
+            div.className = 'item';
+            div.style.top = minObj.val + 'px';
+            div.style.left = this.leftArr[minObj.index] + 'px';
+            //div.setAttribute('data-status', minObj.index + 1 + '');
+            div.innerHTML = '<img src="' + url + '" alt="">';
+            document.querySelector('.container').appendChild(div);
+            this.heightArr[minObj.index] = this.heightArr[minObj.index] + height + this.marginWidth;
+            var maxObj = this.heightArr.max();
+            document.querySelector('.container').style.height = maxObj.val + 20 + 'px';
+        },
+        bindEvent: function() {
+            var firstOnResizeFire = true; //谷歌浏览器onresize事件会执行2次，这里加个标志位控制  
+            var self=this;
+            window.onresize = function() {
+            	   self.computePosition();
+                // if (firstOnResizeFire) {
+                //    // NfLayout.tabScrollerMenuAdjust(homePageWidth);
+                //     firstOnResizeFire = false;
+                //     self.computePosition();
+                //     //0.5秒之后将标志位重置（Chrome的window.onresize默认执行两次）  
+                //     setTimeout(function() {
+                //         firstOnResizeFire = true;
+                //     }, 500);
+                // }
+
+               // homePageWidth = document.body.clientWidth; //重新保存一下新宽度  
+            }
+        }
+    };
+    pubuliu.init();
+    // var data = [];
+    // var itemWidth = 220;
+
+    // function getContainerWidth() {
+    //     var element = document.querySelector('.container');
+    //     var width = window.getComputedStyle(element, null).width;
+    //     return parseInt(width);
+    // }
+    // var totalWidth = getContainerWidth();
+    // var cellCount = parseInt(totalWidth / itemWidth);
+    // var heightArr = [];
+    // var marginWidth = (totalWidth - cellCount * itemWidth) / (cellCount + 1);
+    // var leftArr = [];
+    // for (var i = 0; i < cellCount; i++) {
+    //     leftArr.push((marginWidth + itemWidth) * i + marginWidth);
+    //     heightArr.push(marginWidth);
+    // }
+
+
+    // for (var i = 1; i < 50; i++) {
+    //     data.push(i);
+    // }
+
+    // function loadImage(url, callback) {
+    //     var img = new Image();
+    //     img.onload = function() {
+    //         img.onload = null;
+    //         var width = img.width;
+    //         var height = img.height * 220 / width;
+    //         callback(img.src, height);
+    //     }
+    //     img.src = url;
+    // }
+
+    // function rander(url, height) {
+    //     var minObj = heightArr.min();
+    //     var div = document.createElement('DIV');
+    //     div.className = 'item';
+    //     div.style.top = minObj.val + 'px';
+    //     div.style.left = leftArr[minObj.index] + 'px';
+    //     //div.setAttribute('data-status', minObj.index + 1 + '');
+    //     div.innerHTML = '<img src="' + url + '" alt="">';
+    //     document.querySelector('.container').appendChild(div);
+    //     heightArr[minObj.index] = heightArr[minObj.index] + height + 10;
+    //     var maxObj = heightArr.max();
+    //     document.querySelector('.container').style.height = maxObj.val + 20 + 'px';
+    // }
+    // data.forEach(function(item, index) {
+    //     var url = item + '.jpg';
+    //     loadImage(url, rander);
+    // })
     </script>
 </body>
 
