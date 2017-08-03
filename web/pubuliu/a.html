@@ -7,7 +7,7 @@
     <style>
     .container {
         position: relative;
-       width: 90%;
+        width: 90%;
         background: gray;
         margin: 0 auto;
         height: 1000px;
@@ -88,37 +88,57 @@
         heightArr: [],
         leftArr: [],
         data: [],
-        marginWidth:0,
+        marginWidth: 0,
         getContainerWidth: function() {
             var element = document.querySelector('.container');
             var width = window.getComputedStyle(element, null).width;
             return parseInt(width);
         },
         init: function() {
-        	var self = this;
+            var self = this;
             for (var i = 1; i < 50; i++) {
                 self.data.push(i);
             }
             this.computePosition();
             this.bindEvent();
         },
-        computePosition:function(){
- 			this.totalWidth = this.getContainerWidth();
+        computePosition: function() {
+        	this.initData();
+            this.getData();
+        },
+        initData: function() {
+            this.totalWidth = this.getContainerWidth();
             this.cellCount = parseInt(this.totalWidth / this.itemWidth);
             this.marginWidth = (this.totalWidth - this.cellCount * this.itemWidth) / (this.cellCount + 1);
-            while(this.marginWidth<5){
-				this.cellCount =this.cellCount -1;
-				this.marginWidth = (this.totalWidth - this.cellCount * this.itemWidth) / (this.cellCount + 1);
+            while (this.marginWidth < 5) {
+                this.cellCount = this.cellCount - 1;
+                this.marginWidth = (this.totalWidth - this.cellCount * this.itemWidth) / (this.cellCount + 1);
             }
             for (var i = 0; i < this.cellCount; i++) {
                 this.leftArr.push((this.marginWidth + this.itemWidth) * i + this.marginWidth);
                 this.heightArr.push(this.marginWidth);
             }
-            this.getData();
+        },
+        resetPosition: function() {
+            this.totalWidth = this.getContainerWidth();
+            this.cellCount = parseInt(this.totalWidth / this.itemWidth);
+            this.marginWidth = (this.totalWidth - this.cellCount * this.itemWidth) / (this.cellCount + 1);
+            while (this.marginWidth < 5) {
+                this.cellCount = this.cellCount - 1;
+                this.marginWidth = (this.totalWidth - this.cellCount * this.itemWidth) / (this.cellCount + 1);
+            }
+            for (var i = 0; i < this.cellCount; i++) {
+                this.leftArr.push((this.marginWidth + this.itemWidth) * i + this.marginWidth);
+                this.heightArr.push(this.marginWidth);
+            }
+            var itemArray = document.querySelectorAll('.container .item');
+            for (var i = 0; i < itemArray.length; i++) {
+
+            }
         },
         getData: function() {
             var self = this;
-             document.querySelector('.container').innerHTML='';
+            // document.querySelector('.container').innerHTML='';
             self.data.forEach(function(item, index) {
                 var url = item + '.jpg';
                 self.loadImage(url, self.rander.bind(self));
@@ -150,9 +170,9 @@
         },
         bindEvent: function() {
             var firstOnResizeFire = true; //谷歌浏览器onresize事件会执行2次，这里加个标志位控制  
-            var self=this;
+            var self = this;
             window.onresize = function() {
-            	   self.computePosition();
+                self.computePosition();
                 // if (firstOnResizeFire) {
                 //    // NfLayout.tabScrollerMenuAdjust(homePageWidth);
                 //     firstOnResizeFire = false;
@@ -163,7 +183,7 @@
                 //     }, 500);
                 // }
 
-               // homePageWidth = document.body.clientWidth; //重新保存一下新宽度  
+                // homePageWidth = document.body.clientWidth; //重新保存一下新宽度  
             }
         }
     };
