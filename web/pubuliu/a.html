@@ -120,20 +120,30 @@
             }
         },
         resetPosition: function() {
+            var self=this;
             this.totalWidth = this.getContainerWidth();
+             this.heightArr=[];
+             this.leftArr=[];
             this.cellCount = parseInt(this.totalWidth / this.itemWidth);
             this.marginWidth = (this.totalWidth - this.cellCount * this.itemWidth) / (this.cellCount + 1);
-            while (this.marginWidth < 5) {
-                this.cellCount = this.cellCount - 1;
-                this.marginWidth = (this.totalWidth - this.cellCount * this.itemWidth) / (this.cellCount + 1);
+            while (self.marginWidth < 5) {
+                self.cellCount = self.cellCount - 1;
+                self.marginWidth = (self.totalWidth - self.cellCount * self.itemWidth) / (self.cellCount + 1);
             }
-            for (var i = 0; i < this.cellCount; i++) {
-                this.leftArr.push((this.marginWidth + this.itemWidth) * i + this.marginWidth);
-                this.heightArr.push(this.marginWidth);
+            for (var i = 0; i < self.cellCount; i++) {
+                self.leftArr.push((self.marginWidth + self.itemWidth) * i + self.marginWidth);
+                self.heightArr.push(self.marginWidth);
             }
             var itemArray = document.querySelectorAll('.container .item');
             for (var i = 0; i < itemArray.length; i++) {
-
+                 var minObj = self.heightArr.min();
+                itemArray[i].style.top = minObj.val + 'px';
+                 itemArray[i].style.left = self.leftArr[minObj.index] + 'px';
+                 var height=parseInt(itemArray[i].getAttribute('height-num'));
+                 //  var height = img.height * 220 / width;
+                  self.heightArr[minObj.index] = self.heightArr[minObj.index] + height + self.marginWidth;
+                var maxObj = self.heightArr.max();
+                document.querySelector('.container').style.height = maxObj.val + 20 + 'px';
             }
         },
         getData: function() {
@@ -159,6 +169,7 @@
             var minObj = this.heightArr.min();
             var div = document.createElement('DIV');
             div.className = 'item';
+            div.setAttribute('height-num',height);
             div.style.top = minObj.val + 'px';
             div.style.left = this.leftArr[minObj.index] + 'px';
             //div.setAttribute('data-status', minObj.index + 1 + '');
@@ -172,7 +183,7 @@
             var firstOnResizeFire = true; //谷歌浏览器onresize事件会执行2次，这里加个标志位控制  
             var self = this;
             window.onresize = function() {
-                self.computePosition();
+                self.resetPosition();
                 // if (firstOnResizeFire) {
                 //    // NfLayout.tabScrollerMenuAdjust(homePageWidth);
                 //     firstOnResizeFire = false;
