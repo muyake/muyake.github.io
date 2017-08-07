@@ -147,8 +147,7 @@
             }
         },
         getData: function() {
-            var self = this;
-            // document.querySelector('.container').innerHTML='';
+            var self = this;            
             self.data.forEach(function(item, index) {
                 var url = item + '.jpg';
                 self.loadImage(url, self.rander.bind(self));
