@@ -318,11 +318,26 @@ Monster.prototype.die = function() {
     this.jump(0);
     this.isDie=true;
 };
+
+Monster.prototype.shootDie = function() {
+    // this.jump(0);
+    if (!this.isDie) {
+        this.isDie = true;  
+        this.behaviors = [this.behaviorStatus.runInPlace];     
+        this.initialTop = element.mycanvas.height + 200;
+        if (!this.isJump) {
+            this.jump(marioGameConfig.smallJumpV / 2);
+        }
+    }
+   // audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
+};
 Monster.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum; //给monsterSpriteAnimator传递fpsnumbehaviors
     if (!gameControl.gamePause) {
         this.monsterSpriteAnimatorMove.execute();
+        //console.log('monsterSpriteAnimatorMoveexecute'+this.initialTop);
         this.monsterSpriteAnimatorJump.execute();
+        //console.log('monsterSpriteAnimatorJumpexecute'+this.initialTop);
         this.update(ctx, time, fpsNum);
     }
 
@@ -331,6 +346,7 @@ Monster.prototype.draw = function(ctx, time, fpsNum) {
 
 Monster.prototype.fall = function(VY) {
     this.velocityY = -VY;
+    console.log('fall');
     this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
     this.monsterSpriteAnimatorJump.start();
 };

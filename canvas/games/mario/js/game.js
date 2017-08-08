@@ -101,6 +101,16 @@ var game = {
             }
           });
         }, false);
+         
+          document.querySelector('#monsterdie').addEventListener('click', function() {
+            drawSpriteList.createAnimationSpriteList.forEach(function(item,index){
+                  if(item.name=='monster'){
+                    item.shootDie();
+                  }
+            })
+          
+
+        }, false);
          document.querySelector('#mariodie').addEventListener('click', function() {
              drawSpriteList.mario.collisiondie();
         }, false);
