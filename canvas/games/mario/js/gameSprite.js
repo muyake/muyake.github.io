@@ -326,10 +326,10 @@ Monster.prototype.shootDie = function() {
         this.behaviors = [this.behaviorStatus.runInPlace];     
         this.initialTop = element.mycanvas.height + 200;
         if (!this.isJump) {
+            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.monsterShootDie);
             this.jump(marioGameConfig.smallJumpV / 2);
         }
-    }
-   // audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
+    }   
 };
 Monster.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum; //给monsterSpriteAnimator传递fpsnumbehaviors
@@ -340,7 +340,9 @@ Monster.prototype.draw = function(ctx, time, fpsNum) {
         //console.log('monsterSpriteAnimatorJumpexecute'+this.initialTop);
         this.update(ctx, time, fpsNum);
     }
+    if(this.top>element.mycanvas.height){
 
+    }
     this.paint(ctx);
 };
 
@@ -418,8 +420,25 @@ Tortoise.prototype.fall = function(VY) {
     this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
     this.tortoiseSpriteAnimatorJump.start();
 };
-
-
+Tortoise.prototype.collisionDie = function() {
+    this.initvelocityX = 0;
+     this.behaviors = [new behaviorList.SpriteLeftToRight()];
+     this.isDie=true;
+     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.monsterdie);
+    this.painter = this.painters.collisiondie;  
+};
+Tortoise.prototype.shootDie = function() {
+    // this.jump(0);
+    if (!this.isDie) {
+        this.isDie = true;  
+        this.behaviors = [this.behaviorStatus.runInPlace];     
+        this.initialTop = element.mycanvas.height + 200;
+        if (!this.isJump) {
+            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.monsterShootDie);
+            this.jump(marioGameConfig.smallJumpV / 2);
+        }
+    }   
+};
 //怪兽对象
 var Shell = function(setting) {
     Sprite.call(this, setting.name);

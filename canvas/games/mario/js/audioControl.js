@@ -65,6 +65,10 @@ var gameAudio = {
         startTime: 0.5,
         endTime: 1,
     },
+    monsterShootDie:{
+        startTime: 2.6,
+        endTime: 3,
+    },
 }
 
 //audioControl

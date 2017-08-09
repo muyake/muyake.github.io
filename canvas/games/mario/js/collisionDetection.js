@@ -148,7 +148,12 @@ var CD = {
                   mario.collisiondie();
               }else{
                 console.log('碰撞死亡111');
-                drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
+                if(mario.status==4){
+                    monster.shootDie();
+                }else{
+                     drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
+                }
+               
               }
           
         },
@@ -304,7 +309,7 @@ var CD = {
             return;
         }
         var self = this;
-        console.log(monster.initialTop);
+        //console.log(monster.initialTop);
         // 两个矩形检测
         if ((monster.left + monster.width) < mario.left || (mario.left + mario.width) < monster.left || (monster.top + monster.height) < mario.top || (mario.top + mario.height) < monster.top) {
            // this.CDFunc.MoverOutCarrying(monster, mario);
@@ -364,6 +369,34 @@ var CD = {
             };
             var downfun = function() {};
             self.CDFunc.Colliding(bullet, barrier, leftfun, rightfun, downfun, upfun);
+        }
+    },
+    judgeBMonster: function(bullet, monster, callback) {
+        if (monster.visible == false) {
+            return;
+        }
+        var self = this;
+        // 两个矩形检测
+        if ((bullet.left + bullet.width) < monster.left || (monster.left + monster.width) < bullet.left || (bullet.top + bullet.height) < monster.top || (monster.top + monster.height) < bullet.top) {
+            //this.CDFunc.MoverOutCarrying(bullet, monster);
+        } else {
+            var leftfun = function() {
+                self.CDFunc.BulletleftBarrier(bullet, monster);
+                monster.shootDie();
+            };
+            var rightfun = function() {
+                self.CDFunc.BulletrightBarrier(bullet, monster);
+                monster.shootDie();
+            };
+            var upfun = function() {
+               self.CDFunc.BulletrightBarrier(bullet, monster);
+               monster.shootDie();
+            };
+            var downfun = function() {
+                  self.CDFunc.BulletrightBarrier(bullet, monster);
+                  monster.shootDie();
+            };
+            self.CDFunc.Colliding(bullet, monster, leftfun, rightfun, downfun, upfun);
         }
     },
     judgeMF: function(mario, flower, callback) {

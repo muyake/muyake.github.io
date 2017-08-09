@@ -26,7 +26,7 @@ var sourceLoadObj = {
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
-        drawSpriteList.mario.rise(WH.mario.bigstatus.height,2);
+        drawSpriteList.mario.rise(WH.mario.bigstatus.height,3);
     }
 }
 
@@ -68,7 +68,7 @@ var game = {
     },
     bindEvent: function() {
         var self = this;
-         drawSpriteList.createAnimationSpriteList.push(new Monster('monster'));
+        // drawSpriteList.createAnimationSpriteList.push(new Tortoise('tortoise'));
         document.querySelector('#smallBtn').addEventListener('click', function() {
             createFactory.createBrick(100, 100);
         }, false);
@@ -94,17 +94,17 @@ var game = {
         }, false);
 
          document.querySelector('#monster').addEventListener('click', function() {
-          //   drawSpriteList.createAnimationSpriteList.push(new Monster('monster'));
-          drawSpriteList.createAnimationSpriteList.forEach(function(item){
-            if(item.name=='monster'){
-                item.collisionDie();
-            }
-          });
+            drawSpriteList.createAnimationSpriteList.push(new Tortoise('tortoise'));
+          // drawSpriteList.createAnimationSpriteList.forEach(function(item){
+          //   if(item.name=='monster'||item.name=='tortoise'){
+          //       item.collisionDie();
+          //   }
+          // });
         }, false);
          
           document.querySelector('#monsterdie').addEventListener('click', function() {
             drawSpriteList.createAnimationSpriteList.forEach(function(item,index){
-                  if(item.name=='monster'){
+                  if(item.name=='monster'||item.name=='tortoise'){
                     item.shootDie();
                   }
             })
@@ -286,7 +286,7 @@ var game = {
             }
         }
 
-        if (this.mapKey['d'] && (drawSpriteList.mario.originalStatus == 4 || drawSpriteList.mario.originalStatus == 3 || drawSpriteList.mario.status == 3) & time - this.advance > 300) {
+        if (this.mapKey['d'] && ((drawSpriteList.mario.status == 4 && drawSpriteList.mario.originalStatus == 3 )|| drawSpriteList.mario.status == 3) && time - this.advance > 300) {
             if (drawSpriteList.mario.isReverse) {
                 createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, drawSpriteList.mario.top + drawSpriteList.mario.height / 3, drawSpriteList.mario.isReverse);
         } else {
@@ -345,6 +345,13 @@ var SpriteAnimatorEndCallbackList = {
         lib.removeByValue(drawSpriteList.createBrickSpriteList, 'id', sprite.id);
         sprite = null;
     },
+    monsterJumpend:function(sprite){
+        if(sprite.isDie==true){
+            lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', sprite.id);
+            sprite = null;
+            console.log('移除怪兽');
+        }
+    }
 }
 var drawSpriteList = {
     bg: new BG({
@@ -390,7 +397,6 @@ var drawSpriteList = {
         });
         this.createBulletSpriteList.forEach(function(item) {
             item.velocityX = item.initvelocityX + gameConfig.objectSpeed * status;
-
         });
     },
     //事物间的碰撞
@@ -469,10 +475,16 @@ var drawSpriteList = {
                         CD['judgeBBarrier'](itemDraw, barrier, callback2);
                     }
                     if (barrier.name == 'hole') {
-                              CD['judgeBulletHole'](itemDraw, barrier);
-                            // var callback2 = self.config["moverBarrier"].callback || function() {};
-                            // CD['judgeMoverBarrier'](mover, barrier, callback2);
-                        }
+                         CD['judgeBulletHole'](itemDraw, barrier);                            
+                     }                        
+                });
+
+                 drawSpriteList.createAnimationSpriteList.forEach(function(barrier) {
+                    if (barrier.name == 'monster' || barrier.name == 'tortoise'||barrier.name == 'shell') {
+                        var callback2 = self.config["bullet"].callback || function() {};
+                        CD['judgeBMonster'](itemDraw, barrier, callback2);
+                    }
+                                          
                 });
             });
             //蘑菇，怪兽等水平的对象与障碍物（马里奥，管道，墙等）的碰撞
