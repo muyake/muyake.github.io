@@ -370,11 +370,11 @@ var Tortoise = function(setting) {
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight;
     //this.top=element.mycanvas.height - this.height - gameConfig.roadHeight - 100-WH.wall.height;
-    this.left = this.mycanvas.width / 2 - this.width / 2;
+    this.left = this.mycanvas.width/2  - this.width / 2;
     this.positionmile = this.left;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
     this.isJump = false; //是否在跳中
-    this.initvelocityX = 70;
+    this.initvelocityX = 20;
     //this.jumpPainter = this.painters.jump;
     this.upColliding = null; //下面的墙或管道等 
     this.initialTop = this.top;
@@ -454,18 +454,22 @@ var Shell = function(setting) {
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight;
     //this.top=element.mycanvas.height - this.height - gameConfig.roadHeight - 100-WH.wall.height;
-    this.left = this.mycanvas.width / 2 - this.width / 2;
-    this.positionmile = this.left;
+    this.left = setting.left;
+    this.initvelocityX=0;
+    this.positionmile = this.left+progressObj.createSpriteMileNum;
+    this.translateLeft=0;
+    console.log('translateLeft'+this.translateLeft);
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
     this.isJump = false; //是否在跳中
-    this.initvelocityX = 70;
+   // this.initvelocityX = 70;
     //this.jumpPainter = this.painters.jump;
     this.upColliding = null; //下面的墙或管道等 
     this.initialTop = this.top;
     this.behaviorStatus = {
         runInPlace: new behaviorList.runInPlace({ PAGEFLIP_INTERVAL: 80 }),
     };
-    this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
+    //this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
+    this.behaviors = [new behaviorList.SpriteLeftToRight()];
     this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹,4为无敌状态。
     this.painter = this.painters.run;
     this.shellSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.shellJumpend, this);
@@ -489,10 +493,12 @@ Shell.prototype.die = function() {
 };
 Shell.prototype.draw = function(ctx, time, fpsNum) {
     if (!gameControl.gamePause) {
+         console.log('draw1'+this.left);
         this.fpsNum = fpsNum; //给shellSpriteAnimator传递fpsnumbehaviors
         this.shellSpriteAnimatorMove.execute();
         this.shellSpriteAnimatorJump.execute();
         this.update(ctx, time, fpsNum);
+          console.log('draw2'+this.left);
     }
     this.paint(ctx);
 };

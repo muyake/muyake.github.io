@@ -10,7 +10,9 @@ var CD = {
             var flog = mover.upColliding && ((mover.left + mover.width) < upColliding.left || (upColliding.left + upColliding.width) < mover.left);
             if (!mover.upColliding || flog) {
                 if(mover.isDie==false){
+
                      mover.initialTop = element.mycanvas.height - mover.height - gameConfig.roadHeight;
+                     // console.log('玛丽熬'+mover.initialTop);
                 }
                
                 //  mover.upColliding = null;
@@ -187,7 +189,7 @@ var CD = {
                 } else if (sinNum > 0) {
 
                     downFun();
-                    console.log(B.name + "下侧1");
+                    //console.log(B.name + "下侧1");
 
                 } else {
                     //console.log("上侧1");
@@ -339,8 +341,27 @@ var CD = {
             var downfun = function() {
                // debugger;
 
-                 console.log('踩死1');
-                 monster.collisionDie();
+               //  console.log('踩死1');
+                 if(monster.name=='monster'){
+                     monster.collisionDie();
+                 }
+                 if(monster.name=='tortoise'){
+                    console.log('猜到乌龟了');
+                     monster.visible=false;
+                     monster.isDie=true;
+                     var shell=new Shell({left:monster.left});
+                     shell.letf=monster.left;
+                     mario.initialTop=shell.top-mario.height;
+                     console.log('设置'+mario.initialTop);
+                     mario.upColliding=monster;
+                     drawSpriteList.createAnimationSpriteList.push(shell);                      
+                     SpriteAnimatorEndCallbackList.monsterJumpend(monster);
+                    
+                 }
+                 if(monster.name=='shell'){
+                    console.log('猜到乌龟壳了');
+                 }
+                
                // self.CDFunc.MairoCollisionMonster(mario,monster);
             };
             if(!mario.isDie&&!monster.isDie){

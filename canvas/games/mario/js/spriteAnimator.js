@@ -23,6 +23,7 @@ CharacterSpriteAnimator.prototype.execute = function() {
       // console.log(this.sprite.initialTop);
         this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
         this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;
+      //  console.log(this.sprite.initialTop);
         if (this.sprite.top < this.sprite.initialTop) {
             this.sprite.isJump = true;
             //this.sprite.painter = this.sprite.jumpPainter;
