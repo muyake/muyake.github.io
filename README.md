@@ -1,7 +1,7 @@
 # 穆亚克的git空间
 作者：穆亚克
 
-欢迎来玩![image](https://muyake.github.io/canvas/games/mario/images/ico/favicon.ico) [超级玛丽](https://muyake.github.io/canvas/games/mario/images/ico/favicon.ico)
+欢迎来玩![image](https://muyake.github.io/canvas/games/mario/images/ico/favicon.ico) [超级玛丽](https://muyake.github.io/canvas/games/mario/game.html)
 ## 目录
 ### 1.canvas
 + 动画
