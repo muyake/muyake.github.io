@@ -117,7 +117,7 @@ body {
     height: 3.2rem;
     margin:0 auto;
     margin-top:0.266667rem;
-     background: url('http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/tip.png') no-repeat center;
+     background: url('../image/tip.png') no-repeat center;
     background-size: 100% 100%;
 }
 
@@ -154,19 +154,19 @@ body {
 }
 
 .commonBtn-box.active {
-    background-image: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/activeCommonBtn.png);
+    background-image: url(../image/activeCommonBtn.png);
 }
 
 .commonBtn-box.notactive {
-    background-image: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/notActiveCommonBtn.png);
+    background-image: url(../image/notActiveCommonBtn.png);
 }
 
 .seniorBtn-box.active {
-    background-image: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/activeSeniorBtn.png);
+    background-image: url(../image/activeSeniorBtn.png);
 }
 
 .seniorBtn-box.notactive {
-    background-image: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/notActiveSeniorBtn.png);
+    background-image: url(../image/notActiveSeniorBtn.png);
 }
 
 .seniorBtn-box {
@@ -208,7 +208,7 @@ body {
     /* overflow: hidden;*/
     border-radius: 0.133333rem;
     /* border:0.053333rem solid #55473a;   */
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/itembg2.png) no-repeat center;
+    background: url(../image/itembg2.png) no-repeat center;
     background-size: 100% 100%;
 }
 
@@ -227,7 +227,7 @@ body {
     top: 0.24rem;
     width: 2.4rem;
     height: 2.4rem;
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/itembg1.png) no-repeat center;
+    background: url(../image/itembg1.png) no-repeat center;
     background-size: 100% 100%;
 }
 
@@ -269,7 +269,7 @@ body {
 .commen8 {
     left: 2.693333rem;
     top: 6.8rem;
-    /*-webkit-mask-image:url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/grade2Border.png);*/
+    /*-webkit-mask-image:url(../image/grade2Border.png);*/
 }
 
 .commen9 {
@@ -297,7 +297,7 @@ body {
     width: 3.466667rem;
     height: 2.773333rem;
     margin: 0 auto;
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/commonStartBtn.png) no-repeat center;
+    background: url(../image/commonStartBtn.png) no-repeat center;
     background-size: 100% auto;
     overflow: hidden;
 }
@@ -306,7 +306,7 @@ body {
     width: 3.466667rem;
     height: 2.773333rem;
     margin: 0 auto;
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/seniorStartBtn.png) no-repeat center;
+    background: url(../image/seniorStartBtn.png) no-repeat center;
     background-size: 100% auto;
     overflow: hidden;
 }
@@ -345,7 +345,7 @@ body {
 .lotterySuccess .first{
     width: 100%;
     height: 100%;
-     background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/itembg1.png) no-repeat center;
+     background: url(../image/itembg1.png) no-repeat center;
     background-size: 100% 100%;
 }
 .lotterySuccess .first .giftImg{
@@ -365,20 +365,20 @@ body {
 .luckDraw-box-common {}
 
 .luckDraw-box-common .grade2 .border-box,.lotterySuccess .first.grade2 .border-box {
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/commongrade1border.png) no-repeat center;
+    background: url(../image/commongrade1border.png) no-repeat center;
     background-size: 100% 100%;
 }
 .luckDraw-box-senior .grade2 .border-box,.lotterySuccess .grade2 .border-box {
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/grade3Border.png) no-repeat center;
+    background: url(../image/grade3Border.png) no-repeat center;
     background-size: 100% 100%;
 }
 .luckDraw-box-senior .grade1 .border-box,.lotterySuccess .first.grade1 .border-box {
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/grade1Border.png) no-repeat center;
+    background: url(../image/grade1Border.png) no-repeat center;
     background-size: 100% 100%;
 }
 
 .luckDraw-box .grade3 .border-box ,.lotterySuccess .grade3 .border-box {
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/grade3Border.png) no-repeat center;
+    background: url(../image/grade3Border.png) no-repeat center;
     background-size: 100% 100%;
 }
 
@@ -523,7 +523,7 @@ body {
     bottom: 0px;
     font-size: 0;
     left: 0px;
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/fixBottom.png) no-repeat center;
+    background: url(../image/fixBottom.png) no-repeat center;
     background-size: 100% 100%;
 }
 
@@ -598,7 +598,7 @@ body {
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/makeSureBox.png) no-repeat center;
+    background: url(../image/makeSureBox.png) no-repeat center;
     background-size: 100% 100%;
 }
 .makeSureBox .cancel{
@@ -630,7 +630,7 @@ body {
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/makeSureBox.png) no-repeat center;
+    background: url(../image/makeSureBox.png) no-repeat center;
     background-size: 100% 100%;
 }
 .exchangeSuccess,.lotterySuccess{
@@ -644,22 +644,22 @@ body {
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-   /* background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/successBG.png) no-repeat center;
+   /* background: url(../image/successBG.png) no-repeat center;
     background-size: 100% 100%;*/
 }
 .exchangeSuccess{
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/successBG.png) no-repeat center;
+    background: url(../image/successBG.png) no-repeat center;
     background-size: 100% 100%;
 }
 .lotterySuccess{
-     background: url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/drawLuckBG.png) no-repeat center;
+     background: url(../image/drawLuckBG.png) no-repeat center;
     background-size: 100% 100%;
 }
 .exchangeSuccess .successImg{
    position: absolute;
    left: 2.48rem;
    top: 3.066667rem; 
-    background:url(http://a.xnimg.cn/wap/mobile/2017activity/nebula/image/success.png) no-repeat center;
+    background:url(../image/success.png) no-repeat center;
     background-size: 100% 100%;
     width: 2.4rem;
     height: 2.4rem;
