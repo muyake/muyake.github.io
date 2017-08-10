@@ -1,29 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title></title>
-	<style>
-		.div2{
-			width: 300px;
-			height: 100px;
-			border:1px solid green;
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    	*{
+    		margin:0;
+    		padding:0;
+    	}
+    	body{
+    		width: 100%;
+    		background: rgba(0,0,0,0.2);
+    	}
+		.btcode{
+			position: fixed;
+			background: black;
+			bottom:0;
+			width: 100%;
+			height: 0.6rem;
+			line-height: 0.6rem;
+			color:#fff;
+			font-size: 0.2rem;
+			text-align: center;
+			overflow: scroll;
 		}
-	</style>
+		.div2{
+			width: 12.8rem;
+		}
+    </style>
 </head>
+
 <body>
+    <div class="btcode">
+    <div class="div2">
+    	查看更多精彩内容，关注微信号：
+    <strong><span style="background:#fe4245;color:#fff;padding: 0.1rem;">SZESC8888</span></strong> （←长按复制）
+    </div>    
+    </div>
+    <script>
+    window.onresize = r;
 
-	
-<div class="div2">
-	<svg width="100%" height="100%"   viewBox="0 0 640 480" preserveAspectRatio="xMaxYMin meet" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
- <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
- <g>
-  <title>Layer 1</title>
-  <text stroke="#000000" transform="matrix(17.819983559969046,0,0,22.76623404248221,-4105.85592421719,-4025.3182373287286) " xml:space="preserve" text-anchor="middle" font-family="serif" font-size="24" id="svg_7" y="198" x="248" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#000000">x12</text>
- </g>
-</svg>
-</div>
-
-
+    function r(resizeNum) {
+        //核心适配代码
+        var winW = window.innerWidth;
+        document.getElementsByTagName("html")[0].style.fontSize = winW * 0.15625 + "px";
+        //核心适配代码
+        if (winW > window.screen.width && resizeNum <= 10) {
+            setTimeout(function() {
+                r(++resizeNum)
+            });
+        } else {
+            document.getElementsByTagName("body")[0].style.opacity = 1;
+        }
+    }
+    setTimeout(function() {
+        r(0);
+    });
+    </script>
 </body>
+
 </html>

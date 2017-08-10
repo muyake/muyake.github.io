@@ -38,8 +38,7 @@
     </style>
 </head>
 
-<body>
-    <input type="button" value="添加" id="addBtn">
+<body>    
     <div class="div3">
         <div class="div1">
         </div>
@@ -118,7 +117,7 @@
         insertItem: function() {
             var self = this;
             setInterval(function() {
-                var count = lib.getRandom(1, 2);
+                var count = lib.getRandom(1, 4);
                 for (var i = 0; i < count; i++) {
                     self.totalArray.push(Date.now());
                 }  

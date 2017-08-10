@@ -63,7 +63,7 @@ var goodnightbaobao = function(closefun) {
     var images = {};
     var minuter = 20; //出场动画提前了20帧
     goodnightbaobao.closeBaobao = closefun ? closefun : function() {
-        console.log('closebaobao')
+
     };
     var w, h, scaleNum; //canvas.width与height
     //imgConfig
@@ -142,7 +142,6 @@ var goodnightbaobao = function(closefun) {
         }),
         rotatebody: new animationFunc(240 - minuter, 264 - minuter, 0, function(starttime, endtime, progress) {
             var rotate = curveFunction.sineEaseOut(progress - starttime, 0, 6, 3);
-            console.log(rotate);
             ctx.rotate(-rotate * Math.PI / 180);
             people.drawbody();
         }),
@@ -197,7 +196,7 @@ var goodnightbaobao = function(closefun) {
             ctx.translate(heartanimation.translate.x + changexyx, heartanimation.translate.y + changexyy);
             heartanimation.position.x = heartanimation.translate.x + changexyx;
             heartanimation.position.y = heartanimation.translate.y + changexyy;
-            console.log(heartanimation.translate.y + changexyy);
+
             ctx.scale(scale, scale);
             ctx.drawImage(images.wanzheng, spriteimg.heart.imgx, spriteimg.heart.imgy, spriteimg.heart.width, spriteimg.heart.height, -spriteimg.heart.width / 2, -spriteimg.heart.height / 2, spriteimg.heart.width, spriteimg.heart.height);
         }),
