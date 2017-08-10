@@ -31,7 +31,7 @@ body {
 .recordBtn{
     width: 1.37rem;
     height: 0.34rem;
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/618/images/recordbtn.png) no-repeat center;
+    background: url(..//images/recordbtn.png) no-repeat center;
     background-size:100% 100%; 
     display: inline-block;
     margin-left: 0.2rem;
@@ -64,7 +64,7 @@ body {
     box-sizing: border-box;
     width: 1.64rem;
     height: 1.54rem;
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/618/images/gitbox.png) no-repeat center;
+    background: url(..//images/gitbox.png) no-repeat center;
     background-size:100% 100%; 
     overflow: hidden;
     position: relative;
@@ -84,7 +84,7 @@ body {
     position: absolute;
     left: 0;
     top:0;
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/618/images/firsticon.png
+    background: url(..//images/firsticon.png
 ) no-repeat center;
     background-size:100% 100%; 
   }
@@ -153,7 +153,7 @@ margin-top: 0.14rem;
     line-height: 2.5em;
     font-size: 0.28rem;
     text-align: center;
-    background: url(http://a.xnimg.cn/wap/mobile/2017activity/618/images/border.png) repeat-x bottom;
+    background: url(..//images/border.png) repeat-x bottom;
 
 }
 .clause{
@@ -201,7 +201,7 @@ margin-top: 0.14rem;
     -moz-transition: opacity 0.5s; /* Firefox 4 */
     -webkit-transition: opacity 0.5s; /* Safari 和 Chrome */
     -o-transition: opacity 0.5s; /* Opera */
-    background:  url(http://a.xnimg.cn/wap/mobile/2017activity/618/images/successpop.png) no-repeat center/cover;
+    background:  url(..//images/successpop.png) no-repeat center/cover;
 }
 .successPopup .gitfInfo{
     margin-top: 0.9rem;
