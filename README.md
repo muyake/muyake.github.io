@@ -7,6 +7,7 @@
 + 动画
     + [晚安宝宝](https://muyake.github.io/canvas/animation/baobao/index.html)(手机版)
     + [表白星球](https://muyake.github.io/canvas/animation/biaobai/1.html)(手机版)
+    + [晚安星球](https://muyake.github.io/canvas/animation/nightstar/html/index.html)(手机版)
 + 游戏
     * [小人跑动](https://muyake.github.io/canvas/games/game1/game.html)(电脑版)（背景横向移动，体现远近距离视差，左右键控制角色的走动,空格键为跳跃）
     * [放地雷](https://muyake.github.io/canvas/games/html/game7.html)(电脑版)（鼠标点击，产生一个💣，带重力加速度，引信点完，产生爆炸效果）
