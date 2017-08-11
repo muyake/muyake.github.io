@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+- Copyright (C) 2012 David Geary. This code is from the book
+- Core HTML5 Canvas, published by Prentice-Hall in 2012.
+-
+- License:
+-
+- Permission is hereby granted, free of charge, to any person
+- obtaining a copy of this software and associated documentation files
+- (the "Software"), to deal in the Software without restriction,
+- including without limitation the rights to use, copy, modify, merge,
+- publish, distribute, sublicense, and/or sell copies of the Software,
+- and to permit persons to whom the Software is furnished to do so,
+- subject to the following conditions:
+-
+- The above copyright notice and this permission notice shall be
+- included in all copies or substantial portions of the Software.
+-
+- The Software may not be used to create training material of any sort,
+- including courses, books, instructional videos, presentations, etc.
+- without the express written consent of David Geary.
+-
+- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+- OTHER DEALINGS IN THE SOFTWARE.
+-->
+<html>
+<meta charset="UTF-8">
+
+<head>
+    <meta>
+    <title>Drawing Axes</title>
+    <script src='tween.js'></script>
+    <style>
+    body {
+        background: #eeeeee;
+    }
+
+    #canvas {
+        background: #ffffff;
+        cursor: pointer;
+        margin-left: 10px;
+        margin-top: 10px;
+        -webkit-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .divcanvas {
+        float: left;
+    }
+
+    .div1 {
+        margin-left: 20px;
+        float: left;
+    }
+
+    .code {
+        background: gray;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="divcanvas">
+        <canvas id='canvas' width='1000' height='1000'>
+            Canvas not supported
+        </canvas>
+    </div>
+    <div class="div1">
+        <p>
+            <label for="">func</label>
+            <select id='func'>
+            </select>
+        </p>
+        <p>
+            <label for="">time(t)</label>
+            <input type="range" id="rangeidx" max=600 min=-200 value=200>
+            <input type="text" id="rangevaluex" value="0">
+        </p>
+        <p>
+            <label for="">startValue(b)</label>
+            <input type="range" id="startValue" max=400 min=-400 value=0>
+            <input type="text" id="rangestart" value="0">
+        </p>
+        <p>
+            <label for="">changeValue(c)</label>
+            <input type="range" id="rangechange" value=400 max=800 min=-200 value=0>
+            <input type="text" id="rangetext" value="400">
+        </p>
+        <p>
+            <label for="">duration(d)</label>
+            <input type="range" id="rangeidyDuration" max=800 min=0 value=400>
+            <input type="text" value="400" id="rangevalueyDuration">
+        </p>
+        <p>
+            <label for="">maxX</label>
+            <input type="range" id="linelength" max=800 min=0 value=400>
+            <input type="text" value="400" id="rangevalueylinelength">
+        </p>
+         <p style='display: none;'>
+            <label for="">a</label>
+            <input type="range" id="arange" max=800 min=0 value=400>
+            <input type="text" value="400" id="avalue">
+        </p>
+        <p>
+            <label for="">结果</label>
+            <input type="range" id="rangeidy" max=800 min=-200 value=0>
+            <input type="text" id="rangevaluey">
+        </p>
+        <div class='code'>
+            <pre id="codeid"></pre>
+        </div>
+    </div>
+    <script src='tweenobj.js'></script>
+    <script src='example.js'></script>
+</body>
+</html>
