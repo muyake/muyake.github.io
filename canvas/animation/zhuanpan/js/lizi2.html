@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>晚安星球</title>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+    }
+
+    body {
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+    }
+
+    canvas {
+        display: block;
+    }
+    </style>
+    <script src="../js/tween.js"></script>
+</head>
+
+<body onload="init();">
+    <canvas id="canvas" width="750" height="1334" style="background-color:#17253F"></canvas>
+</body>
+<script>
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var sources = {
+    earth: "../img/star-earth.png"
+};
+var images = {};
+
+function loadImg(e, callback, images) {
+    var loadedImages = 0;
+    var numImages = 0;
+    for (var src in e) {
+        numImages++;
+    }
+    for (var src in e) {
+        images[src] = new Image();
+        images[src].onload = function() {
+            if (++loadedImages >= numImages) {
+                callback(images);
+            }
+        };
+        images[src].src = e[src];
+    }
+}
+
+function init() {
+    loadImg(sources, dray, images);
+}
+
+function dray() {
+    ctx.drawImage(images.earth, 0, 0);
+}
+</script>
+
+</html>
