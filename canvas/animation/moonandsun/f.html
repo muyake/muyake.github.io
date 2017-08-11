@@ -1,0 +1,293 @@
+﻿<html>
+<head>
+<script type="text/javascript">
+var w,h;
+var sun = new Image();
+var moon = new Image();
+var earth = new Image();
+var sunSc=1.4;
+var ctxAs=1;
+var ctxSc=1;
+var alphaLoop=0;//1~淡入 0~淡出
+var ctx;
+var angleSun=0;
+var angleEarth=0;
+var angleNum=0;
+
+var angleMoon=0;
+
+var stars = [];
+var meteors = [];
+function init(){
+	sun.src = "images/sun.png";
+	moon.src = "images/moon.png";
+	earth.src = "images/earth.png";
+
+	ctx = document.getElementById("canvas").getContext("2d");
+	w=window.innerWidth;
+	h=window.innerHeight;
+	ctx.canvas.width  = w;
+	ctx.canvas.height = h;
+
+	generateStars();
+	generateMeteor();
+	draw();
+	//requestAnimFrame(draw);
+	//setInterval(draw,100);
+}
+function draw() {
+	ctx.globalCompositeOperation = "destination-over";
+	ctx.clearRect(0,0,w,h);
+	ctx.fillStyle = "rgba(0,0,0,0.8)";
+	ctx.strokeStyle = "rgba(255,255,255,0.4)";
+	ctx.save();
+	ctx.translate(w/2,h/2);
+	var time = new Date();
+	angleSun+=0.05;
+	ctx.rotate(angleSun*Math.PI/180);
+	ctx.drawImage(sun,-100,-100);
+
+	ctx.globalAlpha=ctxAs;
+	ctx.scale(ctxSc,ctxSc);
+	ctx.drawImage(sun,-100,-100);
+	if(alphaLoop==0){
+		if(ctxSc<sunSc){
+			if(ctxSc<1){
+				ctxSc+=0.002;
+				ctxAs+=0.002;
+			}else{
+				ctxSc+=0.001;
+				ctxAs-=0.01;
+			}
+		}else{
+			ctxSc=sunSc;
+			ctxAs=0;
+		}
+		if(ctxAs<0){
+			ctxAs=0;
+			ctxSc=0.8;
+			alphaLoop=1;
+		}
+		if(ctxSc>sunSc){
+			ctxSc=sunSc;
+		}
+	}else{
+		if(ctxAs<0.9){
+			ctxAs+=0.1;
+			ctxSc+=0.01;
+		}else{
+			alphaLoop=0;
+		}
+	}
+	ctx.restore();
+	ctx.globalAlpha=1;
+	ctx.scale(1,1);
+
+	ctx.save();
+	angleNum+=0.1;
+	var ex=w/2+Math.sin(angleNum/180*Math.PI)*240;
+	var ey=h/2-Math.cos(angleNum/180*Math.PI)*240;
+	ctx.translate(ex,ey);
+	ctx.rotate((angleNum+2)*Math.PI/180);
+	ctx.fillRect(-50,-100,100,100);
+	ctx.restore();
+
+	ctx.save();
+	ctx.translate(ex,ey);
+	angleEarth+=2;
+	ctx.rotate(angleEarth*Math.PI/180);
+	ctx.drawImage(earth,-50,-50);
+	ctx.restore();
+
+	ctx.save();
+	ctx.translate(ex,ey);
+	angleMoon+=5;
+	ctx.rotate(angleMoon*Math.PI/180);
+	ctx.drawImage(moon,30,30);
+	ctx.restore();
+
+	drawTrack(240);
+	drawStars();
+	drawMeteor();
+
+	ctx.save();
+	ctx.fillStyle = "rgba(0,0,0,1)";
+	ctx.fillRect(0,0,w,h);
+	ctx.restore();
+
+	requestAnimFrame(draw);
+}
+
+function drawMeteor(){
+	for (var m in meteors) {
+		meteors[m].draw(ctx);
+		moveMeteor();
+	}
+}
+
+function generateMeteor() {
+	for (var i = 0; i < 2; i++) {
+		var m = new Meteor();
+		m.x=Math.random() * w;
+        m.y=Math.random() * h;
+        m.l=(Math.random() * 1)*4;
+		var tp=Math.random()*2>>0;
+		var pn;
+		if(tp==0){
+			pn=1;
+		}else{
+			pn=-1;
+		}
+        m.xs= -4 + Math.random() * 4 + 3*pn*10;
+        m.ys= Math.random() * 10 + 10;
+		meteors.push(m);
+	}
+}
+
+function moveMeteor(){
+	for(var b = 0; b < 2; b++) {
+        var p = meteors[b];
+        p.x += p.xs/6;
+        p.y += p.ys/6;
+        if(p.x > w || p.y > h) {
+			p.x = Math.random() * w;
+			p.y = Math.random() * h;
+
+			var tp=Math.random()*2>>0;
+			var pn;
+			if(tp==0){
+				pn=1;
+			}else{
+				pn=-1;
+
+			}
+			p.xs= -4 + Math.random() * 4 + 3*pn*10;
+			p.ys= Math.random() * 10 + 10;
+			p.opacity=Math.random()*1;
+        }
+    }
+}
+
+function Meteor() {
+	this.x;
+	this.y;
+    this.l;
+    this.xs;
+    this.ys;
+	this.opacity;
+
+	this.draw = function(ctx) {
+		ctx.save();
+		ctx.beginPath();
+		ctx.globalAlpha=this.opacity;
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x + this.l * this.xs, this.y + this.l * this.ys);
+        ctx.stroke();
+		ctx.restore();
+	}
+};
+
+function drawStars(){
+	for (var m in stars) {
+		stars[m].draw(ctx);
+	}
+}
+
+function generateStars() {
+	for (var i = 0; i < 50; i++) {
+		var s = new Star();
+		s.x = Math.random() * w;
+		s.y = Math.random() * h;
+		s.radius = Math.random() * 3;
+		s.opacity= Math.random() * 1;
+		s.loopNum=Math.ceil(Math.random()*2)-1;
+		stars.push(s);
+	}
+}
+
+function Star() {
+	this.x;
+	this.y;
+	this.radius;
+	this.opacity;
+	this.loopNum;
+	this.draw = function(ctx) {
+		ctx.save();
+		ctx.globalAlpha=this.opacity;
+		if(this.loopNum==0){
+			if(this.opacity<1){
+				this.opacity+=0.02;
+			}else{
+				this.loopNum=1;
+			}
+		}else{
+			if(this.opacity>0){
+				this.opacity-=0.02;
+			}else{
+				this.loopNum=0;
+			}
+		}
+		if(this.opacity<0){
+			this.opacity=0;
+		}
+		if(this.opacity>1){
+			this.opacity=1;
+		}
+		ctx.fillStyle = "#FFF";
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+		ctx.closePath();
+		ctx.fill();
+		ctx.restore();
+	}
+};
+
+function drawTrack(r){
+	var r1 = r+2;
+	var r0 = r1 - 1;
+	var n=128;
+	var theta = 2*Math.PI/n;
+	var phi = theta * 0.25;
+	ctx.save();
+	ctx.fillStyle = "rgba(255,255,255,0.5)";
+	ctx.translate(w/2,h/2);
+	for (var i = 0; i < n; ++i) {
+		ctx.beginPath();
+		ctx.arc(0, 0, r0, -phi, phi);
+		ctx.arc(0, 0, r1, phi, -phi, true);
+		ctx.fill();
+		ctx.rotate(theta);
+	}
+	ctx.restore();
+}
+
+window.requestAnimFrame = (function(){
+	return  window.requestAnimationFrame       ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame    ||
+			function( callback ){
+				window.setTimeout(callback,1000 / 60);
+			};
+})();
+</script>
+</head>
+<style type="text/css">
+* { margin: 0; padding: 0; }
+html, body { height: 100%; width: 100%; }
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+canvas {
+	display: block;
+
+}
+
+</style>
+<body onload="init();">
+	<div id="image-box" class="radius">
+	<canvas id="canvas" width="600" height="600"></canvas>
+</body>
+</html>
