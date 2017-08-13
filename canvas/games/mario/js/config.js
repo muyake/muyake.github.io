@@ -231,8 +231,9 @@ var shellConfig={
   }
 };
 var badFlowerConfig={
-   totalCount: 31,
+  
   config:{
+     totalCount: 35,
     sprite_34:{height:6,width:40,left: 0,top: 0,},
     sprite_8:{height:38,width:44,left: 0,top: 6,},
     sprite_35:{height:5,width:45,left: 0,top: 44,},
@@ -439,6 +440,10 @@ var WH = {
   wall: {
     width: 35,
     height: 35
+  },
+  badflower:{
+    width:55*0.5,
+    height:58*0.5,
   },
   monster:{
     width:50*0.4,

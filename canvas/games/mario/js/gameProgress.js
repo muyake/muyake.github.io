@@ -124,14 +124,22 @@ var totalProgressSprite = {
     ],
 
     fire: [],
-    badflower: [],    
+    badflower: [
+    {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: 400
+    },
+    ],    
     monster: [ 
     {
+        isDie:false,
          isAdd:false,//判断是否加入过数组
         isMonster:true,
         isVisible: true,
         id: lib.newGuid(),       
-        positionmile: 680,
+        positionmile: 890,
        }
        ],
     //mushroom: [],
@@ -196,6 +204,24 @@ var createFactory = {
         createUpMushroomObj.up(200);
         drawSpriteList.createAnimationSpriteList.push(createUpMushroomObj);
     },
+      //创造坏花
+    createBadflower: function(setting) {
+       //  var createUpMushroomObj = new BadFlower({
+       //      physicaltop: physicaltop,
+       //      positionmile: positionmile,
+       //      id: lib.newGuid(),
+       //  });
+       // // createUpMushroomObj.up(200);
+       //  drawSpriteList.createAnimationSpriteList.push(createUpMushroomObj);
+
+         return new BadFlower({
+            id: setting.id,
+            physicaltop: setting.physicaltop,
+            positionmile: setting.positionmile,
+            left: setting.positionmile - progressObj.createSpriteMileNum,
+
+        });
+    },
     //创造star
     createStar: function(positionmile, physicaltop) {
         var createUpStarObj = new Star({
@@ -210,6 +236,7 @@ var createFactory = {
         createUpStarObj.move(-70);
         drawSpriteList.createAnimationSpriteList.push(createUpStarObj);
     },
+
     //创造子弹
     createBullet: function(positionmile, physicaltop, isreverse) {
         var createBulletObj = new Bullet({
@@ -278,10 +305,10 @@ var createFactory = {
         })
 
     },
-    //创造坏花
-    createBadflower: function(setting) {
+    // //创造坏花
+    // createBadflower: function(setting) {
 
-    },
+    // },
     //创造花
     createFlower: function(setting) {
         return new Flower({
@@ -293,9 +320,10 @@ var createFactory = {
     },
     //创造怪兽
     createMonster: function(setting) {
-        if(setting.isAdd){
+        if(setting.isAdd||setting.isDie){
             return;
         }
+
         setting.isAdd=true;
         var monster=  new Monster({
                 id: setting.id,
@@ -307,7 +335,7 @@ var createFactory = {
     },
     //创造乌龟
     createTortoise: function(setting) {
-        if(setting.isAdd){
+        if(setting.isAdd||setting.isDie){
             return;
         }
   

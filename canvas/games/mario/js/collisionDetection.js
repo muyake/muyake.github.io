@@ -272,6 +272,39 @@ var CD = {
             }
         }
     },
+    judegMBadFlower:function(mario, badflower, callback) {
+ if (mario.visible == false && mario.isDie == true) {
+            return;
+        }
+        if (badflower.isDie == true) {
+            return;
+        }
+        var self = this;
+        //console.log(badflower.initialTop);
+        // 两个矩形检测
+        if ((badflower.left + badflower.width) < mario.left || (mario.left + mario.width) < badflower.left || (badflower.top + badflower.height) < mario.top || (mario.top + mario.height) < badflower.top) {
+            // this.CDFunc.MoverOutCarrying(badflower, mario);
+            if (mario.collision == badflower) {
+                console.log("取消collision")
+                mario.collision = null;
+            }
+
+        } else {
+            //如果马里奥的已经被碰到了
+            if (mario.collision == badflower) {
+                return;
+            }
+           
+            var downfun = function() {                
+             self.CDFunc.MairoCollisionMonster(mario, badflower);
+                // self.CDFunc.MairoCollisionbadflower(mario,badflower);
+            };
+            if (!mario.isDie && !badflower.isDie) {
+                self.CDFunc.Colliding(badflower, mario, downfun, downfun, downfun, downfun);
+            }
+
+        }
+    },
     judgeBulletHole: function(mover, hole, callback) {
         if (hole.visible == false) {
             return;

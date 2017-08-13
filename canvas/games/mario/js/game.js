@@ -26,7 +26,7 @@ var sourceLoadObj = {
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
-        //  drawSpriteList.mario.rise(WH.mario.bigstatus.height,3);
+          drawSpriteList.mario.rise(WH.mario.bigstatus.height,3);
     }
 }
 
@@ -69,13 +69,9 @@ var game = {
         createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
         drawSpriteList.mario.reset();
     },
-    bindEvent: function() {
-        var self = this;
-        var shell = new Shell({ left: 300 });
-        // drawSpriteList.createAnimationSpriteList.push(shell);
-        // drawSpriteList.createAnimationSpriteList.push(new Tortoise({ left: 350 }));
-        // drawSpriteList.createAnimationSpriteList.push(new Monster({ left: 400 }));
-        //  drawSpriteList.createAnimationSpriteList.push(new Shell({left:450}));    
+    bindEvent: function() {   
+         createFactory.createBadflower(300,0);
+         var self=this;         
         document.querySelector('#smallBtn').addEventListener('click', function() {
             createFactory.createBrick(100, 100);
         }, false);
@@ -100,12 +96,8 @@ var game = {
             createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, 30);
         }, false);
 
-        document.querySelector('#monster').addEventListener('click', function() {
-            console.log(1);
-            var shell = new Shell({ left: 300 });
-            //shell.letf=600;                    
-            drawSpriteList.createAnimationSpriteList.push(shell);
-
+        document.querySelector('#monster').addEventListener('click', function() {           
+            createFactory.createBadflower(300,0);
 
         }, false);
 
@@ -115,8 +107,6 @@ var game = {
                     item.shoot(100);
                 }
             });
-
-
         }, false);
         document.querySelector('#mariodie').addEventListener('click', function() {
             drawSpriteList.mario.collisiondie();
@@ -207,9 +197,6 @@ var game = {
                 self.activeEventCallback();
             }
         });
-
-
-
         gameControl.addKeyListener({
             key: 'right',
             listener: function(status) {
@@ -453,6 +440,9 @@ var drawSpriteList = {
             tower: {
                 funcName: 'judgeMTower'
             },
+            badflower:{
+                funcName:'judegMBadFlower'
+            },
         },
         cdfunc: function() {
             var self = this;
@@ -557,7 +547,7 @@ gameControl.startAnimate = function(time) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
 
-    drawSpriteList.createAnimationSpriteList.forEach(function(item) {
+    drawSpriteList.createAnimationSpriteList.forEach(function(item) {        
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
     drawSpriteList.createBulletSpriteList.forEach(function(item) {

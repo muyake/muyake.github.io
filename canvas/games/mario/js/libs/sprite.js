@@ -87,7 +87,7 @@ SpriteSheetPainter = function(cells, spritesheeturl, mycanvas) {
 		paint: function(sprite, context) {
 			var cell = this.cells[this.cellIndex];
 			context.drawImage(this.spritesheet.cell.left, cell.top, cell.width, cell.heightsprite.left, sprite.top, cell.width, cell.height);
-		}
+		},		
 	}
 
 var SpriteAnimator = function(painters, elapsedCallback) {

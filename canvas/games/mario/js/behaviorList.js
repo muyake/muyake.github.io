@@ -45,6 +45,25 @@ var behaviorList = {
             }
         }
     },
+    //坏花
+     upInPlace: function(setting) {
+        var defaultSetting = {
+            lastAdvance: 0,
+            PAGEFLIP_INTERVAL: 30,
+            behaviorName: 'runInPlace',
+        };
+        lib.jQueryExtend(defaultSetting, setting);
+        this.lastAdvance = defaultSetting.lastAdvance;
+        this.PAGEFLIP_INTERVAL = defaultSetting.PAGEFLIP_INTERVAL;
+        this.behaviorName = defaultSetting.behaviorName;
+        this.execute = function(sprite, context, time) {
+            if (time - this.lastAdvance > this.PAGEFLIP_INTERVAL) {
+                
+                sprite.painter.advance(sprite);
+                this.lastAdvance = time;
+            }
+        }
+    },
     //小人跳动
     jump: function(setting) {
         var defaultSetting = {

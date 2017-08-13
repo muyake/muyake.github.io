@@ -25,7 +25,7 @@ CharacterRunSpriteSheetPainter = function(cells, spritesheeturl, mycanvas, imgco
 CharacterRunSpriteSheetPainter.prototype = Object.create(SpriteSheetPainter.prototype);
 CharacterRunSpriteSheetPainter.prototype.constructor = CharacterRunSpriteSheetPainter;
 CharacterRunSpriteSheetPainter.prototype.paint = function(sprite, context) {
-    var cell = this.cells['sprite_' + this.cellIndex];
+    var cell = this.cells['sprite_' + this.cellIndex];      
     if (sprite.isReverse) {
         context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
     } else {
@@ -43,6 +43,39 @@ CharacterRunSpriteSheetPainter.prototype.advance = function(sprite, context) {
         this.cellIndex = 0;
     }
 }
+
+
+CharacterRiseSpriteSheetPainter = function(cells, spritesheeturl, mycanvas, imgcount) {
+    SpriteSheetPainter.call(this, cells, spritesheeturl, mycanvas);
+    this.imgcount = imgcount;
+}
+CharacterRiseSpriteSheetPainter.prototype = Object.create(SpriteSheetPainter.prototype);
+CharacterRiseSpriteSheetPainter.prototype.constructor = CharacterRiseSpriteSheetPainter;
+CharacterRiseSpriteSheetPainter.prototype.paint = function(sprite, context) {
+    var cell = this.cells['sprite_' + this.cellIndex];  
+    sprite.width=cell.width*0.5;
+    sprite.height=cell.height*0.5;   
+     sprite.top = element.mycanvas.height - sprite.height - gameConfig.roadHeight - sprite.physicaltop; 
+    if (sprite.isReverse) {
+        context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
+    } else {
+        var canvas = this.mycanvas;
+        context.translate(canvas.width, 0);
+        context.scale(-1, 1)
+        context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, canvas.width - sprite.width - sprite.left, sprite.top, sprite.width, sprite.height);
+        context.translate(canvas.width, 0);
+        context.scale(-1, 1);
+    }
+}
+CharacterRiseSpriteSheetPainter.prototype.advance = function(sprite, context) {
+    this.cellIndex++;
+    if (this.cellIndex == this.imgcount) {
+        this.cellIndex = 0;
+    }
+}
+
+
+
 
 //场景Sprite
 var SceneSprite = function(name, painter, behaviors) {
@@ -280,7 +313,7 @@ var Monster = function(setting) {
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
    // this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - 100 - WH.wall.height;
     this.left =setting.left|| this.mycanvas.width - this.width / 2 ;
-    this.positionmile = this.left;
+    this.positionmile = setting.positionmile;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
     this.isJump = false; //是否在跳中
    // this.initvelocityX = 70;
@@ -337,14 +370,10 @@ Monster.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum; //给monsterSpriteAnimator传递fpsnumbehaviors
     if (!gameControl.gamePause) {
         this.monsterSpriteAnimatorMove.execute();
-        //console.log('monsterSpriteAnimatorMoveexecute'+this.initialTop);
-        this.monsterSpriteAnimatorJump.execute();
-        //console.log('monsterSpriteAnimatorJumpexecute'+this.initialTop);
+        this.monsterSpriteAnimatorJump.execute();       
         this.update(ctx, time, fpsNum);
     }
-    if(this.top>element.mycanvas.height){
-
-    }
+   
     this.paint(ctx);
 };
 
@@ -374,7 +403,7 @@ var Tortoise = function(setting) {
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight;
     //this.top=element.mycanvas.height - this.height - gameConfig.roadHeight - 100-WH.wall.height;
     this.left =setting.left|| this.mycanvas.width/2  - this.width / 2;
-    this.positionmile = this.left;
+    this.positionmile = setting.positionmile;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
     this.isJump = false; //是否在跳中
     this.initvelocityX = gameConfig.monsterSpeed;
@@ -694,6 +723,11 @@ var BadFlower = function(setting) {
     this.id = setting.id || 0;
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
+    this.behaviorStatus = {
+        upInPlace: new behaviorList.upInPlace({ PAGEFLIP_INTERVAL: 80 }),
+    };
+    this.painter=new CharacterRiseSpriteSheetPainter(badFlowerConfig.config, gameSourceUrl.imageList.badflower, element.mycanvas, badFlowerConfig.config.totalCount);
+    this.behaviors = [this.behaviorStatus.upInPlace, new behaviorList.SpriteLeftToRight()];
     //  this.roleType = 'badflower';
     //this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.initialTop = this.top;
@@ -702,6 +736,9 @@ var BadFlower = function(setting) {
     this.mycanvas = element.mycanvas;
     this.badflowerSpriteAnimatorUp = new UpSpriteAnimator(null, this);
 };
+// BadFlower.prototype.painters = {
+//     growup: new CharacterRunSpriteSheetPainter(badFlowerConfig.config, gameSourceUrl.imageList.badflower, element.mycanvas, badFlowerConfig.config.totalCount),
+// };
 BadFlower.prototype = Object.create(SceneSprite.prototype);
 BadFlower.prototype.draw = function(ctx, time, fpsNum) {
     if (!gameControl.gamePause) {

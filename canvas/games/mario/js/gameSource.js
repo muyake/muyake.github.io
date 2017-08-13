@@ -6,7 +6,7 @@ var gameSourceUrl = {
        // ground: './images/ground.png',
         wall: './images/wall/wall.png',
         flower: './images/flower/4.png',
-         badflower: './images/flower/4.png',
+         badflower: './images/badflower/img.png',
         mushroom: './images/mushroom/4.png',
         pipe: './images/pipe.png',
         money: './images/money.png',
