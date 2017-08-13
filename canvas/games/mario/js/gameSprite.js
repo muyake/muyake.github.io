@@ -271,6 +271,7 @@ var Monster = function(setting) {
     this.mycanvas = element.mycanvas;
     this.name = 'monster';
     this.translateLeft = 0;
+    this.id= lib.newGuid(),
     //this.velocityX = setting.velocityX;
     this.width = setting.width || WH.monster.width;
     // this.roleType = 'mairo';
@@ -278,11 +279,12 @@ var Monster = function(setting) {
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
    // this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - 100 - WH.wall.height;
-    this.left = this.mycanvas.width - this.width / 2 ;
+    this.left =setting.left|| this.mycanvas.width - this.width / 2 ;
     this.positionmile = this.left;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
     this.isJump = false; //是否在跳中
-    this.initvelocityX = 70;
+   // this.initvelocityX = 70;
+   this.initvelocityX = gameConfig.monsterSpeed;
     //this.jumpPainter = this.painters.jump;
     this.upColliding = null; //下面的墙或管道等 
     this.initialTop = this.top;
@@ -360,6 +362,7 @@ var Tortoise = function(setting) {
     Sprite.call(this, setting.name);
     this.isDie = false;
     this.isReverse = true;
+     this.id= lib.newGuid(),
     this.mycanvas = element.mycanvas;
     this.name = 'tortoise';
     this.translateLeft = 0;
@@ -370,12 +373,12 @@ var Tortoise = function(setting) {
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvas.height - this.height - gameConfig.roadHeight;
     //this.top=element.mycanvas.height - this.height - gameConfig.roadHeight - 100-WH.wall.height;
-    this.left = this.mycanvas.width/2  - this.width / 2;
+    this.left =setting.left|| this.mycanvas.width/2  - this.width / 2;
     this.positionmile = this.left;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
     this.isJump = false; //是否在跳中
-    this.initvelocityX = 20;
-    //this.jumpPainter = this.painters.jump;
+    this.initvelocityX = gameConfig.monsterSpeed;
+  
     this.upColliding = null; //下面的墙或管道等 
     this.initialTop = this.top;
     this.behaviorStatus = {
@@ -392,7 +395,6 @@ Tortoise.prototype = Object.create(Sprite.prototype);
 Tortoise.prototype.constructor = Tortoise;
 Tortoise.prototype.painters = {
     run: new CharacterRunSpriteSheetPainter(tortoiseConfig.config, gameSourceUrl.imageList.tortoise, element.mycanvas, tortoiseConfig.config.totalCount),
-
 };
 
 Tortoise.prototype.jump = function(VY) {
@@ -444,6 +446,7 @@ var Shell = function(setting) {
     Sprite.call(this, setting.name);
     this.isDie = false;
     this.isReverse = true;
+     this.id= lib.newGuid(),
     this.mycanvas = element.mycanvas;
     this.name = 'shell';
     this.translateLeft = 0;
@@ -465,12 +468,13 @@ var Shell = function(setting) {
     //this.jumpPainter = this.painters.jump;
     this.upColliding = null; //下面的墙或管道等 
     this.initialTop = this.top;
+    this.status=0;//0表示静止状态，1表示欲动状态。
     this.behaviorStatus = {
         runInPlace: new behaviorList.runInPlace({ PAGEFLIP_INTERVAL: 80 }),
     };
     //this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
     this.behaviors = [new behaviorList.SpriteLeftToRight()];
-    this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹,4为无敌状态。
+    //this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹,4为无敌状态。
     this.painter = this.painters.run;
     this.shellSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.shellJumpend, this);
     this.shellSpriteAnimatorMove = new MoveSpriteAnimator(null, this);
@@ -480,25 +484,32 @@ Shell.prototype = Object.create(Sprite.prototype);
 Shell.prototype.constructor = Shell;
 Shell.prototype.painters = {
     run: new CharacterRunSpriteSheetPainter(shellConfig.config, gameSourceUrl.imageList.shell, element.mycanvas, shellConfig.config.totalCount),
-
 };
 
 Shell.prototype.jump = function(VY) {
     this.velocityY = -VY;
     this.shellSpriteAnimatorJump.start();
 };
-
+Shell.prototype.shoot=function(vy){
+    this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
+    this.initvelocityX = vy;
+    this.status=1;
+}
+Shell.prototype.pause=function(){
+    this.behaviors = [ new behaviorList.SpriteLeftToRight()];
+    this.initvelocityX = 0;
+    this.status=0;
+}
 Shell.prototype.die = function() {
     this.jump(0);
 };
 Shell.prototype.draw = function(ctx, time, fpsNum) {
     if (!gameControl.gamePause) {
-         console.log('draw1'+this.left);
+         //console.log('draw1'+this.left);
         this.fpsNum = fpsNum; //给shellSpriteAnimator传递fpsnumbehaviors
         this.shellSpriteAnimatorMove.execute();
         this.shellSpriteAnimatorJump.execute();
-        this.update(ctx, time, fpsNum);
-          console.log('draw2'+this.left);
+        this.update(ctx, time, fpsNum);        
     }
     this.paint(ctx);
 };
@@ -507,7 +518,18 @@ Shell.prototype.fall = function(VY) {
     this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
     this.shellSpriteAnimatorJump.start();
 };
-
+Shell.prototype.shootDie = function() {
+    // this.jump(0);
+    if (!this.isDie) {
+        this.isDie = true;  
+        this.behaviors = [this.behaviorStatus.runInPlace];     
+        this.initialTop = element.mycanvas.height + 200;
+        if (!this.isJump) {
+            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.monsterShootDie);
+            this.jump(marioGameConfig.smallJumpV / 2);
+        }
+    }   
+};
 var Wall = function(setting) {
     var self = this;
     var status = setting.status || 0;
@@ -660,6 +682,43 @@ Flower.prototype.up = function(VY) {
     this.velocityY = VY;
     this.flowerSpriteAnimatorUp.start();
 };
+
+//flower
+var BadFlower = function(setting) {
+    setting.name = setting.name || 'badflower';
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.badflower), [new behaviorList.SpriteLeftToRight()]);
+    this.width = setting.width || WH.badflower.width;
+    this.height = setting.height || WH.badflower.height;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    this.id = setting.id || 0;
+    this.left = setting.left || 0;
+    this.positionmile = setting.positionmile || 0;
+    //  this.roleType = 'badflower';
+    //this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
+    this.initialTop = this.top;
+    this.isJump = false; //判断是否为处于上下波动中
+    // this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.badflower);
+    this.mycanvas = element.mycanvas;
+    this.badflowerSpriteAnimatorUp = new UpSpriteAnimator(null, this);
+};
+BadFlower.prototype = Object.create(SceneSprite.prototype);
+BadFlower.prototype.draw = function(ctx, time, fpsNum) {
+    if (!gameControl.gamePause) {
+        this.fpsNum = fpsNum;
+        this.badflowerSpriteAnimatorUp.execute();
+        this.update(ctx, time, fpsNum);
+    }
+    this.paint(ctx);
+}
+BadFlower.prototype.up = function(VY) {
+    // this.startVelocityY = VY;
+    this.initialTop = this.top - WH.wall.height;
+    this.velocityY = VY;
+    this.badflowerSpriteAnimatorUp.start();
+};
+
+
 
 //蘑菇
 var Mushroom = function(setting) {

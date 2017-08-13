@@ -107,27 +107,43 @@ var totalProgressSprite = {
     //     positionmile: 1000
     // }
     ],
-    pipe: [
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     physicaltop: 0,
-    //     positionmile: 400
-    // },
+    pipe: [    
      {
+
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: 0,
-        positionmile: 40
+        positionmile: 140
+    },
+    {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: 660
     },
     ],
 
     fire: [],
-    badflower: [],
-
-    monster: [],
+    badflower: [],    
+    monster: [ 
+    {
+         isAdd:false,//判断是否加入过数组
+        isMonster:true,
+        isVisible: true,
+        id: lib.newGuid(),       
+        positionmile: 680,
+       }
+       ],
     //mushroom: [],
-    tortoise: [],
+    tortoise: [
+    // {
+    //      isAdd:false,//判断是否加入过数组
+    //     isMonster:true,
+    //     isVisible: true,
+    //     id: lib.newGuid(),       
+    //     positionmile: 380,
+    //    }
+       ],
     star: [],
     tower: [
     // {
@@ -243,6 +259,8 @@ var createFactory = {
 
         });
     },
+    
+    
     //创造砖块
     createBrick: function(positionmile, physicaltop) {
         var arr = ["leftup", "leftdown", "rightup", "rightdown"];
@@ -275,11 +293,31 @@ var createFactory = {
     },
     //创造怪兽
     createMonster: function(setting) {
-
+        if(setting.isAdd){
+            return;
+        }
+        setting.isAdd=true;
+        var monster=  new Monster({
+                id: setting.id,
+               // physicaltop: setting.physicaltop,
+                positionmile: setting.positionmile,
+                left: setting.positionmile - progressObj.createSpriteMileNum,
+            });
+         drawSpriteList.createAnimationSpriteList.push(monster); 
     },
     //创造乌龟
     createTortoise: function(setting) {
-
+        if(setting.isAdd){
+            return;
+        }
+  
+        setting.isAdd=true;
+        var tortoise=  new Tortoise({
+                id: setting.id,               
+                positionmile: setting.positionmile,
+                left: setting.positionmile - progressObj.createSpriteMileNum,
+            });
+         drawSpriteList.createAnimationSpriteList.push(tortoise); 
     },
 
 
@@ -333,7 +371,11 @@ return new Tower({
             if (item.isVisible && (item.positionmile - progressObj.createSpriteMileNum) >= -WH[item.name].width && (item.positionmile - progressObj.createSpriteMileNum) <= element.mycanvas.width) {
                 var id = item.id;
                 if (!self.hasId(id, drawSpriteList)) {
-                    drawSpriteList.push(self[self.nameToCreateFun[item.name]](item));
+                  if(item.isMonster){
+                    self[self.nameToCreateFun[item.name]](item);
+                  }else{
+                     drawSpriteList.push(self[self.nameToCreateFun[item.name]](item));
+                 }                   
                 }
             }
         });

@@ -9,12 +9,12 @@ var CD = {
             //因为要判断马里奥从承载物上走下是有蹦跳效果，所以当脱离承载物的时刻，会出现下面有承载物，且左右脱离承载物，当从承载物上蹦下来时，设置下面承载物为null.
             var flog = mover.upColliding && ((mover.left + mover.width) < upColliding.left || (upColliding.left + upColliding.width) < mover.left);
             if (!mover.upColliding || flog) {
-                if(mover.isDie==false){
+                if (mover.isDie == false) {
 
-                     mover.initialTop = element.mycanvas.height - mover.height - gameConfig.roadHeight;
-                     // console.log('玛丽熬'+mover.initialTop);
+                    mover.initialTop = element.mycanvas.height - mover.height - gameConfig.roadHeight;
+                    // console.log('玛丽熬'+mover.initialTop);
                 }
-               
+
                 //  mover.upColliding = null;
             }
             //如果下方有承载物且不是在蹦跳中，则从承载物上走下，否则如果在蹦跳中，则 mover.velocityY =0，蹦不起来。
@@ -30,7 +30,7 @@ var CD = {
             //如果马里奥下面没有承载物，或马里奥下面有承载物，且左右脱离承载物。则设置马里奥初始高度。
             //因为要判断马里奥从承载物上走下是有蹦跳效果，所以当脱离承载物的时刻，会出现下面有承载物，且左右脱离承载物，当从承载物上蹦下来时，设置下面承载物为null.
             var flog = mario.upColliding && ((mario.left + mario.width) < upColliding.left || (upColliding.left + upColliding.width) < mario.left);
-            if ((!mario.upColliding || flog)&&!mario.isDie) {
+            if ((!mario.upColliding || flog) && !mario.isDie) {
                 mario.initialTop = element.mycanvas.height - mario.height - gameConfig.roadHeight;
                 //  mario.upColliding = null;
             }
@@ -119,12 +119,12 @@ var CD = {
             mover.left = barrier.left - mover.width;
             mover.velocityX = -mover.velocityX;
             mover.initvelocityX = -mover.initvelocityX;
-            mover.isReverse=!mover.isReverse;
+            mover.isReverse = !mover.isReverse;
         },
         MoverrightBarrier: function(mover, barrier) {
             mover.left = barrier.left + mover.width;
             mover.velocityX = -mover.velocityX;
-            mover.isReverse=!mover.isReverse;
+            mover.isReverse = !mover.isReverse;
             mover.initvelocityX = -mover.initvelocityX;
         },
         //马里奥在墙上侧
@@ -142,22 +142,22 @@ var CD = {
             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
             bullet = null;
         },
-        MairoCollisionMonster:function(mario,monster){
+        MairoCollisionMonster: function(mario, monster) {
             console.log('碰撞死亡');
-            mario.collision=monster;
-            if(mario.status==1&&mario.height==WH.mario.smallstatus.height){
-                  console.log('碰撞死亡222');
-                  mario.collisiondie();
-              }else{
+            mario.collision = monster;
+            if (mario.status == 1 && mario.height == WH.mario.smallstatus.height) {
+                console.log('碰撞死亡222');
+                mario.collisiondie();
+            } else {
                 console.log('碰撞死亡111');
-                if(mario.status==4){
+                if (mario.status == 4) {
                     monster.shootDie();
-                }else{
-                     drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
+                } else {
+                    drawSpriteList.mario.rise(WH.mario.smallstatus.height, 1);
                 }
-               
-              }
-          
+
+            }
+
         },
         //碰撞中执行的函数,
         Colliding: function(A, B, leftFun, rightFun, downFun, upFun) {
@@ -272,12 +272,12 @@ var CD = {
             }
         }
     },
-     judgeBulletHole: function(mover, hole, callback) {
+    judgeBulletHole: function(mover, hole, callback) {
         if (hole.visible == false) {
             return;
         }
         //如果蘑菇掉井里了，就消失。
-        if (mover.top+mover.width/3 >= element.mycanvas.height) {
+        if (mover.top + mover.width / 3 >= element.mycanvas.height) {
             lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', mover.id);
             mover = null;
             return;
@@ -303,71 +303,157 @@ var CD = {
             }
         }
     },
-     judgeMMonster: function(mario, monster, callback) {
-       if (mario.visible == false&&mario.isDie==true) {
+    judgeMMonster: function(mario, monster, callback) {
+        if (mario.visible == false && mario.isDie == true) {
             return;
         }
-        if (monster.isDie==true) {
+        if (monster.isDie == true) {
             return;
         }
         var self = this;
         //console.log(monster.initialTop);
         // 两个矩形检测
         if ((monster.left + monster.width) < mario.left || (mario.left + mario.width) < monster.left || (monster.top + monster.height) < mario.top || (mario.top + mario.height) < monster.top) {
-           // this.CDFunc.MoverOutCarrying(monster, mario);
-            mario.collision=null;
+            // this.CDFunc.MoverOutCarrying(monster, mario);
+            if (mario.collision == monster) {
+                console.log("取消collision")
+                mario.collision = null;
+            }
 
         } else {
             //如果马里奥的已经被碰到了
-            if(mario.collision==monster){
+            if (mario.collision == monster) {
                 return;
             }
             var leftfun = function() {
                 console.log('leftfun');
-               // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
-               self.CDFunc.MairoCollisionMonster(mario,monster);
+                // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
+                self.CDFunc.MairoCollisionMonster(mario, monster);
             };
             var rightfun = function() {
-                     console.log('rightfun');
-               // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
-                self.CDFunc.MairoCollisionMonster(mario,monster);
+                console.log('rightfun');
+                // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
+                self.CDFunc.MairoCollisionMonster(mario, monster);
             };
             var upfun = function() {
-                 console.log('upfun');
-               // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
-               //console.log('踩死');
-               self.CDFunc.MairoCollisionMonster(mario,monster);
+                console.log('upfun');
+                // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
+                //console.log('踩死');
+                self.CDFunc.MairoCollisionMonster(mario, monster);
             };
             var downfun = function() {
-               // debugger;
+                // debugger;
 
-               //  console.log('踩死1');
-                 if(monster.name=='monster'){
-                     monster.collisionDie();
-                 }
-                 if(monster.name=='tortoise'){
+                //  console.log('踩死1');
+                if (monster.name == 'monster') {
+                    monster.collisionDie();
+                }
+                if (monster.name == 'tortoise') {
                     console.log('猜到乌龟了');
-                     monster.visible=false;
-                     monster.isDie=true;
-                     var shell=new Shell({left:monster.left});
-                     shell.letf=monster.left;
-                     mario.initialTop=shell.top-mario.height;
-                     console.log('设置'+mario.initialTop);
-                     mario.upColliding=monster;
-                     drawSpriteList.createAnimationSpriteList.push(shell);                      
-                     SpriteAnimatorEndCallbackList.monsterJumpend(monster);
-                    
-                 }
-                 if(monster.name=='shell'){
+                    monster.visible = false;
+                    monster.isDie = true;
+                    var shell = new Shell({ left: monster.left });
+
+                    mario.initialTop = shell.top - mario.height;
+                    console.log('设置' + mario.initialTop);
+                    mario.upColliding = monster;
+                    drawSpriteList.createAnimationSpriteList.push(shell);
+                    SpriteAnimatorEndCallbackList.monsterJumpend(monster);
+
+                }
+                if (monster.name == 'shell') {
                     console.log('猜到乌龟壳了');
-                 }
-                
-               // self.CDFunc.MairoCollisionMonster(mario,monster);
+                }
+
+                // self.CDFunc.MairoCollisionMonster(mario,monster);
             };
-            if(!mario.isDie&&!monster.isDie){
-                   self.CDFunc.Colliding(monster, mario, leftfun, rightfun, downfun, upfun);
+            if (!mario.isDie && !monster.isDie) {
+                self.CDFunc.Colliding(monster, mario, leftfun, rightfun, downfun, upfun);
             }
-         
+
+        }
+    },
+
+    judgeMShell: function(mario, shell, callback) {
+        if (mario.visible == false && mario.isDie == true) {
+            return;
+        }
+
+        var self = this;
+
+        // 两个矩形检测
+        if ((shell.left + shell.width) < mario.left || (mario.left + mario.width) < shell.left || (shell.top + shell.height) < mario.top || (mario.top + mario.height) < shell.top) {
+            this.CDFunc.MOutCarrying(mario, shell);
+            mario.collision = null;
+
+        } else {
+            //如果马里奥的已经被碰到了
+            if (mario.collision == shell) {
+                return;
+            }
+            var leftfun = function() {
+                console.log('马里奥从壳的右侧碰撞');
+                if (shell.status == 0) {
+                    mario.left = shell.left + shell.width;
+                    shell.shoot(gameConfig.shellSpeed);
+                } else {
+                    self.CDFunc.MairoCollisionMonster(mario, shell);
+                }
+            };
+            var rightfun = function() {
+                console.log('马里奥从壳的左侧碰撞');
+                if (shell.status == 0) {
+
+
+                    mario.left = shell.left - mario.width;
+                    shell.shoot(-gameConfig.shellSpeed);
+                } else {
+                    self.CDFunc.MairoCollisionMonster(mario, shell);
+                }
+            };
+            var upfun = function() {
+                console.log('upfun');
+
+
+                self.CDFunc.MairoCollisionMonster(mario, shell);
+            };
+            var downfun = function() {
+
+                console.log('downfun');
+
+                shell.pause();
+                mario.upColliding = shell;
+                mario.initialTop = shell.top - mario.height;
+                //  mario.upColliding=shell;
+
+            };
+            if (!mario.isDie && !shell.isDie) {
+                self.CDFunc.Colliding(shell, mario, leftfun, rightfun, downfun, upfun);
+            }
+
+        }
+    },
+    judgeShellMover: function(shell, mover) {
+        if(mover.isDie||shell.isDie){
+            return;
+        }
+        var self=this;
+        if ((shell.left + shell.width) < mover.left || (mover.left + mover.width) < shell.left || (shell.top + shell.height) < mover.top || (mover.top + mover.height) < shell.top) {
+            this.CDFunc.MoverOutCarrying(shell, mover);
+        } else {
+            var leftfun = function() {
+               mover.shootDie();
+            };
+            var rightfun = function() {
+                 mover.shootDie();
+            };
+            var upfun = function() {
+                 mover.shootDie();
+            };
+            var downfun = function() {
+                mover.shootDie();
+            };
+            self.CDFunc.Colliding(shell, mover, leftfun, rightfun, downfun, upfun);
         }
     },
     judgeBBarrier: function(bullet, barrier, callback) {
@@ -410,12 +496,12 @@ var CD = {
                 monster.shootDie();
             };
             var upfun = function() {
-               self.CDFunc.BulletrightBarrier(bullet, monster);
-               monster.shootDie();
+                self.CDFunc.BulletrightBarrier(bullet, monster);
+                monster.shootDie();
             };
             var downfun = function() {
-                  self.CDFunc.BulletrightBarrier(bullet, monster);
-                  monster.shootDie();
+                self.CDFunc.BulletrightBarrier(bullet, monster);
+                monster.shootDie();
             };
             self.CDFunc.Colliding(bullet, monster, leftfun, rightfun, downfun, upfun);
         }
