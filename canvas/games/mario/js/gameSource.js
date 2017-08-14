@@ -19,6 +19,7 @@ var gameSourceUrl = {
         tortoise:'./images/tortoise/img.png',
          shell:'./images/tortoise/roll/img.png',
          life:'./images/life/img.png',
+         gameOver:'./images/over.png',
         //马里奥
         mario: {
             commonMairo: {
