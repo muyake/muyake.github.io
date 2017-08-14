@@ -205,21 +205,12 @@ var createFactory = {
         drawSpriteList.createAnimationSpriteList.push(createUpMushroomObj);
     },
       //创造坏花
-    createBadflower: function(setting) {
-       //  var createUpMushroomObj = new BadFlower({
-       //      physicaltop: physicaltop,
-       //      positionmile: positionmile,
-       //      id: lib.newGuid(),
-       //  });
-       // // createUpMushroomObj.up(200);
-       //  drawSpriteList.createAnimationSpriteList.push(createUpMushroomObj);
-
+    createBadflower: function(setting) {     
          return new BadFlower({
             id: setting.id,
             physicaltop: setting.physicaltop,
             positionmile: setting.positionmile,
             left: setting.positionmile - progressObj.createSpriteMileNum,
-
         });
     },
     //创造star

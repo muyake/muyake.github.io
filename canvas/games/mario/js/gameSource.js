@@ -18,6 +18,7 @@ var gameSourceUrl = {
         monsterDie: './images/monster/1/dead.png',
         tortoise:'./images/tortoise/img.png',
          shell:'./images/tortoise/roll/img.png',
+         life:'./images/life/img.png',
         //马里奥
         mario: {
             commonMairo: {

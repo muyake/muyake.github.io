@@ -42,7 +42,10 @@ var clipObj = {
                   this.radius=this.radius<0?0:this.radius;
                    
                 }else{
-                    this.resetCallback();
+                    if(this.flag==true){
+                        this.resetCallback();
+                    }
+                    
                     this.flag=false;
                     this.radius += this.canvas.width / 150;
                 }

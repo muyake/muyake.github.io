@@ -230,6 +230,16 @@ var shellConfig={
   
   }
 };
+var lifeConfig={
+  config:{
+    totalCount:5,
+    sprite_1:{height:46,width:124,left: 0,top: 0,},
+    sprite_4:{height:47,width:127,left: 0,top: 46,},
+    sprite_3:{height:48,width:128,left: 0,top: 93,},
+    sprite_5:{height:48,width:129,left: 0,top: 141,},
+    sprite_2:{height:47,width:129,left: 0,top: 189,},
+  },
+}
 var badFlowerConfig={
   
   config:{
@@ -440,6 +450,10 @@ var WH = {
   wall: {
     width: 35,
     height: 35
+  },
+  life:{
+    width:127*0.5,
+    height:48*0.5,
   },
   badflower:{
     width:55*0.5,

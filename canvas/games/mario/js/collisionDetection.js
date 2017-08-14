@@ -272,8 +272,8 @@ var CD = {
             }
         }
     },
-    judegMBadFlower:function(mario, badflower, callback) {
- if (mario.visible == false && mario.isDie == true) {
+    judegMBadFlower: function(mario, badflower, callback) {
+        if (mario.visible == false && mario.isDie == true) {
             return;
         }
         if (badflower.isDie == true) {
@@ -294,9 +294,9 @@ var CD = {
             if (mario.collision == badflower) {
                 return;
             }
-           
-            var downfun = function() {                
-             self.CDFunc.MairoCollisionMonster(mario, badflower);
+
+            var downfun = function() {
+                self.CDFunc.MairoCollisionMonster(mario, badflower);
                 // self.CDFunc.MairoCollisionbadflower(mario,badflower);
             };
             if (!mario.isDie && !badflower.isDie) {
@@ -304,6 +304,21 @@ var CD = {
             }
 
         }
+    },
+    judgeBulletBadflower: function(bullet, badflower) {
+        if ((badflower.left + badflower.width) < bullet.left || (bullet.left + bullet.width) < badflower.left || (badflower.top + badflower.height) < bullet.top || (bullet.top + bullet.height) < badflower.top) {
+
+
+        } else {
+            lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bullet.id);
+            lib.removeByValue(drawSpriteList.arrayOthersA, 'id', badflower.id);
+             lib.removeByValue(createFactory.arrayTotalProgress, 'id', badflower.id);
+            
+            audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.monsterdie);
+            badflower = null;
+            bullet = null;
+        }
+
     },
     judgeBulletHole: function(mover, hole, callback) {
         if (hole.visible == false) {
@@ -467,21 +482,21 @@ var CD = {
         }
     },
     judgeShellMover: function(shell, mover) {
-        if(mover.isDie||shell.isDie){
+        if (mover.isDie || shell.isDie) {
             return;
         }
-        var self=this;
+        var self = this;
         if ((shell.left + shell.width) < mover.left || (mover.left + mover.width) < shell.left || (shell.top + shell.height) < mover.top || (mover.top + mover.height) < shell.top) {
             this.CDFunc.MoverOutCarrying(shell, mover);
         } else {
             var leftfun = function() {
-               mover.shootDie();
+                mover.shootDie();
             };
             var rightfun = function() {
-                 mover.shootDie();
+                mover.shootDie();
             };
             var upfun = function() {
-                 mover.shootDie();
+                mover.shootDie();
             };
             var downfun = function() {
                 mover.shootDie();

@@ -65,7 +65,7 @@ var gameAudio = {
         startTime: 0.5,
         endTime: 1,
     },
-    monsterShootDie:{
+    monsterShootDie: {
         startTime: 2.6,
         endTime: 3,
     },
@@ -74,10 +74,10 @@ var gameAudio = {
 //audioControl
 var audioControl = {
     //如果isplay不传，则总是播放，如果传了则只播放一次，例如人物死亡
-    audioPlay: function(audioObj, videoConfig) {       
-         audioObj.currentTime = videoConfig.startTime;
-                audioObj.endTime = videoConfig.endTime;
-                audioObj.play();
+    audioPlay: function(audioObj, videoConfig) {
+        audioObj.currentTime = videoConfig.startTime;
+        audioObj.endTime = videoConfig.endTime;
+        audioObj.play();
     },
     BGMPlay: function(audioObj) {
         audioObj.loop = true;

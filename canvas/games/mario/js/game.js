@@ -26,7 +26,7 @@ var sourceLoadObj = {
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
-          drawSpriteList.mario.rise(WH.mario.bigstatus.height,3);
+      //  drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
     }
 }
 
@@ -57,21 +57,24 @@ var game = {
 
     },
     reset: function(num) {
+        console.log("reset");
         progressObj.mileageNum = num;
         progressObj.createSpriteMileNum = num * gameConfig.objectSpeedRate;
         drawSpriteList.arrayOthersA = [];
-        createFactory.arrayTotalProgress.forEach(function(item){
-            if(item.isMonster){
-                item.isAdd=false;
+        createFactory.arrayTotalProgress.forEach(function(item) {
+            if (item.isMonster) {
+                item.isAdd = false;
             }
         })
-        drawSpriteList.createAnimationSpriteList=[];
+        drawSpriteList.createAnimationSpriteList = [];
         createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
+   
         drawSpriteList.mario.reset();
+             drawSpriteList.statusArr.life.minuteLife();
     },
-    bindEvent: function() {   
-         createFactory.createBadflower(300,0);
-         var self=this;         
+    bindEvent: function() {
+        createFactory.createBadflower(300, 0);
+        var self = this;
         document.querySelector('#smallBtn').addEventListener('click', function() {
             createFactory.createBrick(100, 100);
         }, false);
@@ -96,8 +99,8 @@ var game = {
             createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, 30);
         }, false);
 
-        document.querySelector('#monster').addEventListener('click', function() {           
-            createFactory.createBadflower(300,0);
+        document.querySelector('#monster').addEventListener('click', function() {
+            createFactory.createBadflower(300, 0);
 
         }, false);
 
@@ -347,6 +350,8 @@ var SpriteAnimatorEndCallbackList = {
         }
     }
 }
+
+
 var drawSpriteList = {
     bg: new BG({
         name: "BG",
@@ -362,6 +367,8 @@ var drawSpriteList = {
 
     //总体进度
     progressObj: progressObj,
+    //分数，生命值等
+    statusArr: { life: new Life({ name: 'life' }) },
     //墙，管道，固定金币等可以为第一层
     arrayOthersA: [],
     //洞
@@ -440,8 +447,8 @@ var drawSpriteList = {
             tower: {
                 funcName: 'judgeMTower'
             },
-            badflower:{
-                funcName:'judegMBadFlower'
+            badflower: {
+                funcName: 'judegMBadFlower'
             },
         },
         cdfunc: function() {
@@ -475,6 +482,9 @@ var drawSpriteList = {
                     if (barrier.name == 'hole') {
                         CD['judgeBulletHole'](itemDraw, barrier);
                     }
+                    if (barrier.name == 'badflower') {
+                        CD['judgeBulletBadflower'](itemDraw, barrier);
+                    }
                 });
 
                 drawSpriteList.createAnimationSpriteList.forEach(function(barrier) {
@@ -498,7 +508,7 @@ var drawSpriteList = {
                     if (mover.name == 'shell') {
                         drawSpriteList.createAnimationSpriteList.forEach(function(mover2) {
                             if (mover2.name == 'monster' || mover2.name == 'tortoise' || mover2.name == 'shell') {
-                                if (mover2 != mover&&mover2.status==0) {
+                                if (mover2 != mover && mover2.status == 0) {
                                     CD['judgeShellMover'](mover, mover2);
                                 }
                             }
@@ -516,12 +526,12 @@ var drawSpriteList = {
 
             });
             //如果移动物体走出视野，就移除
-             drawSpriteList.createAnimationSpriteList.forEach(function(mover,index,arr) {
-                   if(mover.left+mover.width<0||mover.left>element.mycanvas.width){
-                     lib.removeByValue(arr, 'id',mover.id);
-                   }
+            drawSpriteList.createAnimationSpriteList.forEach(function(mover, index, arr) {
+                if (mover.left + mover.width < 0 || mover.left > element.mycanvas.width) {
+                    lib.removeByValue(arr, 'id', mover.id);
+                }
 
-                });
+            });
         },
     },
 };
@@ -546,8 +556,14 @@ gameControl.startAnimate = function(time) {
     drawSpriteList.createSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
+    // drawSpriteList.statusArr.forEach(function(item) {
+    //     item.draw(gameControl.context, time, gameControl.fps.num);
+    // });
+    for (var i in drawSpriteList.statusArr) {
+        drawSpriteList.statusArr[i].draw(gameControl.context, time, gameControl.fps.num);
+    }
 
-    drawSpriteList.createAnimationSpriteList.forEach(function(item) {        
+    drawSpriteList.createAnimationSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
     drawSpriteList.createBulletSpriteList.forEach(function(item) {
@@ -584,6 +600,6 @@ var animateList = {
         progressObj.mileageNumUpdate(gameControl.fps.num);
         progressObj.countDownNumUpdate();
         cans.fillText("行程:" + (progressObj.mileageNum >> 0) + "m", 400, 20);
-        cans.fillText("倒计时:" + (progressObj.currentTime >> 0) + "s", 500, 20);
+        cans.fillText("倒计时:" + (progressObj.currentTime >> 0) + "s", 480, 20);
     },
 }
