@@ -13,7 +13,7 @@
         height: 1000px;
         overflow: hidden;
     }
-    
+
     .container>div {
         transition: all 0.3s;
         position: absolute;
@@ -22,28 +22,28 @@
         padding: 5px;
         background: #fff;
     }
-    
+
     .container>div img {
         width: 100%;
         display: block;
     }
-    
+
     div[data-status='1'] {
         left: 10px;
     }
-    
+
     div[data-status='2'] {
         left: 240px;
     }
-    
+
     div[data-status='3'] {
         left: 470px;
     }
-    
+
     div[data-status='4'] {
         left: 700px;
     }
-    
+
     div[data-status='5'] {
         left: 930px;
     }
@@ -54,6 +54,45 @@
     <div class="container">
     </div>
     <script>
+    //滚动条在Y轴上的滚动距离
+    function getScrollTop() {　　
+        var scrollTop = 0,
+            bodyScrollTop = 0,
+            documentScrollTop = 0;　　
+        if (document.body) {　　　　
+            bodyScrollTop = document.body.scrollTop;　　
+        }　　
+        if (document.documentElement) {　　　　
+            documentScrollTop = document.documentElement.scrollTop;　　
+        }　　
+        scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;　　
+        return scrollTop;
+    }
+    //文档的总高度
+    function getScrollHeight() {　　
+        var scrollHeight = 0,
+            bodyScrollHeight = 0,
+            documentScrollHeight = 0;　　
+        if (document.body) {　　　　
+            bodyScrollHeight = document.body.scrollHeight;　　
+        }　　
+        if (document.documentElement) {　　　　
+            documentScrollHeight = document.documentElement.scrollHeight;　　
+        }　　
+        scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;　　
+        return scrollHeight;
+    }
+    //浏览器视口的高度
+    function getWindowHeight() {　　
+        var windowHeight = 0;　　
+        if (document.compatMode == "CSS1Compat") {　　　　
+            windowHeight = document.documentElement.clientHeight;　　
+        } else {　　　　
+            windowHeight = document.body.clientHeight;　　
+        }　　
+        return windowHeight;
+    }
+
     Array.prototype.min = function() {
         var obj = {
             index: 0,
@@ -89,7 +128,7 @@
         heightArr: [],
         leftArr: [],
         data: [],
-        paddingWidth:10,
+        paddingWidth: 10,
         marginWidth: 0,
         getContainerWidth: function() {
             var element = document.querySelector('.container');
@@ -105,50 +144,50 @@
             this.bindEvent();
         },
         computePosition: function() {
-        	this.initData();
+            this.initData();
             this.getData();
         },
         initData: function() {
             this.totalWidth = this.getContainerWidth();
-            this.cellCount = parseInt((this.totalWidth-this.paddingWidth) / (this.itemWidth+this.paddingWidth));
-          
-            this.marginWidth = (this.totalWidth-this.paddingWidth - this.cellCount * (this.itemWidth+this.paddingWidth))/2;
+            this.cellCount = parseInt((this.totalWidth - this.paddingWidth) / (this.itemWidth + this.paddingWidth));
+
+            this.marginWidth = (this.totalWidth - this.paddingWidth - this.cellCount * (this.itemWidth + this.paddingWidth)) / 2;
             // while (this.marginWidth < 5) {
             //     this.cellCount = this.cellCount - 1;
             //     this.marginWidth = (this.totalWidth - this.cellCount * this.itemWidth) / (this.cellCount + 1);
             // }
             for (var i = 0; i < this.cellCount; i++) {
-                this.leftArr.push((this.marginWidth + (this.itemWidth+this.paddingWidth) * i));
+                this.leftArr.push((this.marginWidth + (this.itemWidth + this.paddingWidth) * i));
                 this.heightArr.push(this.paddingWidth);
             }
         },
         resetPosition: function() {
-            var self=this;
+            var self = this;
             this.totalWidth = this.getContainerWidth();
-             this.heightArr=[];
-             this.leftArr=[];
-              this.cellCount = parseInt((this.totalWidth-this.paddingWidth) / (this.itemWidth+this.paddingWidth));
-          
-            this.marginWidth = (this.totalWidth-this.paddingWidth - this.cellCount * (this.itemWidth+this.paddingWidth))/2;
-            
-             for (var i = 0; i < this.cellCount; i++) {
-                this.leftArr.push((this.marginWidth + (this.itemWidth+this.paddingWidth) * i));
+            this.heightArr = [];
+            this.leftArr = [];
+            this.cellCount = parseInt((this.totalWidth - this.paddingWidth) / (this.itemWidth + this.paddingWidth));
+
+            this.marginWidth = (this.totalWidth - this.paddingWidth - this.cellCount * (this.itemWidth + this.paddingWidth)) / 2;
+
+            for (var i = 0; i < this.cellCount; i++) {
+                this.leftArr.push((this.marginWidth + (this.itemWidth + this.paddingWidth) * i));
                 this.heightArr.push(this.paddingWidth);
             }
             var itemArray = document.querySelectorAll('.container .item');
             for (var i = 0; i < itemArray.length; i++) {
-                 var minObj = self.heightArr.min();
+                var minObj = self.heightArr.min();
                 itemArray[i].style.top = minObj.val + 'px';
-                 itemArray[i].style.left = self.leftArr[minObj.index] + 'px';
-                 var height=parseInt(itemArray[i].getAttribute('height-num'));
-                 //  var height = img.height * 220 / width;
-                  self.heightArr[minObj.index] = self.heightArr[minObj.index] + height + self.paddingWidth;
+                itemArray[i].style.left = self.leftArr[minObj.index] + 'px';
+                var height = parseInt(itemArray[i].getAttribute('height-num'));
+                //  var height = img.height * 220 / width;
+                self.heightArr[minObj.index] = self.heightArr[minObj.index] + height + self.paddingWidth;
                 var maxObj = self.heightArr.max();
                 document.querySelector('.container').style.height = maxObj.val + 20 + 'px';
             }
         },
         getData: function() {
-            var self = this;            
+            var self = this;
             self.data.forEach(function(item, index) {
                 var url = item + '.jpg';
                 self.loadImage(url, self.rander.bind(self));
@@ -169,7 +208,7 @@
             var minObj = this.heightArr.min();
             var div = document.createElement('DIV');
             div.className = 'item';
-            div.setAttribute('height-num',height);
+            div.setAttribute('height-num', height);
             div.style.top = minObj.val + 'px';
             div.style.left = this.leftArr[minObj.index] + 'px';
             //div.setAttribute('data-status', minObj.index + 1 + '');
@@ -179,15 +218,40 @@
             var maxObj = this.heightArr.max();
             document.querySelector('.container').style.height = maxObj.val + 20 + 'px';
         },
+        configer:{
+            addFlag:true,
+            page:1,
+        },
+        getAjaxData:function(setting){
+            console.log(setting);
+        },
         bindEvent: function() {
             var firstOnResizeFire = true; //谷歌浏览器onresize事件会执行2次，这里加个标志位控制  
             var self = this;
             window.onresize = function() {
-                self.resetPosition();             
+                self.resetPosition();
+            };
+            window.addEventListener("scroll", function() {
+                var configer=self.configer;               
+                if (!configer.addFlag) {
+                    return;
+                }
+                // console.log(getScrollTop());
+                // console.log(getWindowHeight());
+                // console.log(getScrollHeight());
+                if (getScrollTop() + getWindowHeight() +200 >= getScrollHeight()) {　
+                    console.log(1);
+                    configer.addFlag = false;
+                    configer.page++;
+                    //
+                    self.getAjaxData({                      
+                        page: configer.page
+                    });
+                }
+            });
         }
     }
-}
-    pubuliu.init();    
+    pubuliu.init();
     </script>
 </body>
 
