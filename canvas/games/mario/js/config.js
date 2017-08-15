@@ -516,6 +516,14 @@ var WH = {
     width: 45,
     height: 94
   },
+  flag: {
+    width: 81*0.5,
+    height: 70*0.5
+  },
+   final: {
+    width: 75*0.5,
+    height: 450*0.5
+  },
 }
 var wallConfig = {
   normalSprite: {

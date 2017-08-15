@@ -15,12 +15,15 @@ var gameAudio = {
     intoPipe: {
         startTime: 8,
         endTime: 9,
-        startTime: 10,
+
     },
     monsterDie: {
         endTime: 11,
     },
-
+    GameOver: {
+        startTime: 0,
+        endTime: 5,
+    },
     //gameSourceObj.audioList.collision
     eatMoney: {
         startTime: 7,
@@ -34,7 +37,10 @@ var gameAudio = {
         startTime: 11.3,
         endTime: 11.6,
     },
-
+downflag: {
+        startTime:9,
+        endTime: 11.5,
+    },
     //长大
     growup: {
         startTime: 5.5,

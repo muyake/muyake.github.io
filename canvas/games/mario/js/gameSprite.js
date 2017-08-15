@@ -129,7 +129,7 @@ var Mario = function(setting) {
     this.behaviorStatus = {
         runInPlace: new behaviorList.runInPlace(),
     };
-    this.lifeNum = 6;
+    this.lifeNum = 2;
     this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹,4为无敌状态。
     this.painter = this.painters.stand;
     this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
@@ -570,21 +570,33 @@ var Life = function(setting) {
     SceneSprite.call(this, setting.name || 'life', new SceneImagePainter(gameSourceUrl.imageList.life));
 }
 Life.prototype = Object.create(Sprite.prototype);
-Life.prototype.minuteLife =function(){
-    this.status--;
-   // console.log("命:"+this.status);
-    if(this.status>0){
-         this.imgwidth = lifeConfig.config['sprite_'+this.status].width;
-    this.imgheight = lifeConfig.config['sprite_'+this.status].height;
-    this.imgleft = lifeConfig.config['sprite_'+this.status].left;
-    this.imgtop = lifeConfig.config['sprite_'+this.status].top;
+Life.prototype.minuteLife =function(num){   
+    if(num<=0){
+        num=1;
     }
-   
+    this.imgwidth = lifeConfig.config['sprite_'+num].width;
+    this.imgheight = lifeConfig.config['sprite_'+num].height;
+    this.imgleft = lifeConfig.config['sprite_'+num].left;
+    this.imgtop = lifeConfig.config['sprite_'+num].top;
 } 
 
 Life.prototype.draw = function(ctx, time, fpsNum) {  
     this.paint(ctx);
 };
+
+var Over = function(setting) {    
+    this.width=element.mycanvas.width;
+    this.height=element.mycanvas.height;
+    this.top=0;
+    this.left=0;   
+    SceneSprite.call(this, setting.name || 'over', new SceneImagePainter(gameSourceUrl.imageList.gameOver));
+}
+Over.prototype = Object.create(Sprite.prototype);
+Over.prototype.draw = function(ctx, time, fpsNum) {  
+    this.paint(ctx);
+};
+
+
 var Wall = function(setting) {
     var self = this;
     var status = setting.status || 0;
@@ -992,6 +1004,63 @@ Pipe.prototype.draw = function(ctx, time, fpsNum) {
         }
         this.paint(ctx);
     }
+
+
+//旗杆对象
+var Final = function(setting) {
+    setting.name = setting.name || 'final';
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.final), [new behaviorList.SpriteLeftToRight()]);
+    this.width = setting.width || WH.final.width;;
+    this.height = setting.height || WH.final.height;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - this.physicaltop;
+    this.left = setting.left || 0;
+    this.positionmile = setting.positionmile || 0;
+    this.roleType = 'final';
+    this.id = setting.id || 0;
+};
+Final.prototype = Object.create(SceneSprite.prototype);
+Final.prototype.draw = function(ctx, time, fpsNum) {
+        if (!gameControl.gamePause) {
+            //console.log()
+            this.update(ctx, time, fpsNum);
+
+        }
+        this.paint(ctx);
+}
+//旗帜对象
+var  Flag= function(setting) {
+    setting.name = setting.name || 'flag';
+    SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.flag), [new behaviorList.SpriteLeftToRight()]);
+    this.width = setting.width || WH.flag.width;;
+    this.height = setting.height || WH.flag.height;
+    this.physicaltop = setting.physicaltop || 0;
+    this.top = element.mycanvas.height - this.height - this.physicaltop;
+    this.left = setting.left || 0;
+    this.positionmile = setting.positionmile || 0;
+    this.roleType = 'flag';
+    this.id = setting.id || 0;
+    this.velocityY = 0;
+    this.flowerSpriteAnimatorUp = new DownSpriteAnimator(null, this);
+};
+Flag.prototype = Object.create(SceneSprite.prototype);
+Flag.prototype.draw = function(ctx, time, fpsNum) {
+        if (!gameControl.gamePause) {
+            //console.log()
+            this.fpsNum=fpsNum;
+            this.flowerSpriteAnimatorUp.execute();
+            this.update(ctx, time, fpsNum);
+        }
+        this.paint(ctx);
+}
+Flag.prototype.down = function() {
+      // this.startVelocityY = VY;
+    this.initialTop =element.mycanvas.height- 50;
+    this.velocityY = 80;
+    audioControl.audioPlay(gameSourceObj.audioList.music, gameAudio.downflag);
+    this.flowerSpriteAnimatorUp.start();
+}
+
     //城堡对象
 var Tower = function(setting) {
     setting.name = setting.name || 'tower';

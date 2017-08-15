@@ -22,8 +22,7 @@ CharacterSpriteAnimator.prototype.execute = function() {
     if (animator.isRunning) {
       // console.log(this.sprite.initialTop);
         this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
-        this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;
-      //  console.log(this.sprite.initialTop);
+        this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;    
         if (this.sprite.top < this.sprite.initialTop) {
             this.sprite.isJump = true;
             //this.sprite.painter = this.sprite.jumpPainter;
@@ -47,6 +46,31 @@ UpSpriteAnimator.prototype.execute = function() {
         //  this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
         this.sprite.top -= this.sprite.velocityY / this.sprite.fpsNum;       
         if (this.sprite.top > this.sprite.initialTop) {
+            this.sprite.isJump = true;
+           // this.sprite.painter = this.sprite.jumpPainter;
+
+        } else {
+            this.sprite.upover = true;
+            this.sprite.top = this.sprite.initialTop;
+            this.sprite.isJump = false;
+            animator.isRunning = false;
+            animator.end(this.sprite); //一定要放到isRunning = false;下面
+        }
+    }
+}
+
+var DownSpriteAnimator = function(elapsedCallback, sprite) {
+    CharacterSpriteAnimator.call(this, elapsedCallback, sprite);
+}
+DownSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
+DownSpriteAnimator.prototype.constructor = UpSpriteAnimator;
+DownSpriteAnimator.prototype.execute = function() {
+    var animator = this;
+    if (animator.isRunning) {
+        //  this.sprite.velocityY = this.sprite.velocityY + this.sprite.GRAVITY_FORCE / this.sprite.fpsNum;
+        this.sprite.top += this.sprite.velocityY / this.sprite.fpsNum;  
+      //  console.log(this.sprite.top)     
+        if (this.sprite.top < this.sprite.initialTop) {
             this.sprite.isJump = true;
            // this.sprite.painter = this.sprite.jumpPainter;
 

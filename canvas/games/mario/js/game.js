@@ -38,9 +38,13 @@ var game = {
         var self = this;
         clipObj.init(function() {
             console.log('游戏开始');
-            gameControl.gamePause = false;
+            gameControl.gamePause = false;                        
         }, function() {
-            self.reset(3);
+            if(drawSpriteList.mario.lifeNum>0){
+                 self.reset(3);
+             }else{
+                self.over();
+             }           
         });
         this.bindEvent();
     },
@@ -54,7 +58,8 @@ var game = {
 
     },
     over: function() {
-
+        audioControl.audioPlay(gameSourceObj.audioList.GameOver, gameAudio.GameOver);
+        drawSpriteList.gameOver.push(new Over({ name: 'Over' })); 
     },
     reset: function(num) {
         console.log("reset");
@@ -70,13 +75,17 @@ var game = {
         createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
    
         drawSpriteList.mario.reset();
-             drawSpriteList.statusArr.life.minuteLife();
+             drawSpriteList.statusArr.life.minuteLife(drawSpriteList.mario.lifeNum);
     },
     bindEvent: function() {
         createFactory.createBadflower(300, 0);
         var self = this;
         document.querySelector('#smallBtn').addEventListener('click', function() {
-            createFactory.createBrick(100, 100);
+            drawSpriteList.arrayOthersA.forEach(function(item){
+                if(item.name=='flag'){
+                    item.down();
+                }
+            })
         }, false);
         document.querySelector('#flower').addEventListener('click', function() {
             drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
@@ -324,7 +333,8 @@ var SpriteAnimatorEndCallbackList = {
                 gameControl.gamePause = true;
                 clipObj.startDraw();
             } else {
-                game.over();
+                clipObj.startDraw();
+               // game.over();
             }
         }
 
@@ -371,6 +381,8 @@ var drawSpriteList = {
     statusArr: { life: new Life({ name: 'life' }) },
     //墙，管道，固定金币等可以为第一层
     arrayOthersA: [],
+    gameOver:[],
+      
     //洞
     // arrayOthersB: [],
     //花，弹出的金币
@@ -409,6 +421,9 @@ var drawSpriteList = {
             money: {
                 funcName: 'judgeMM',
             },
+             final: {
+                funcName: 'judgeMFianl',
+            },
             flower: {
                 funcName: 'judgeMF',
             },
@@ -433,7 +448,9 @@ var drawSpriteList = {
             shell: {
                 funcName: 'judgeMShell',
             },
-
+            flag: {
+                funcName: 'judgeMflag',
+            },
             moverBarrier: {
                 callback: function(mushroomSprite) {
                     lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mushroomSprite.id);
@@ -585,6 +602,9 @@ gameControl.startAnimate = function(time) {
     drawSpriteList.createBrickSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
+    drawSpriteList.gameOver.forEach(function(item) {
+        item.draw(gameControl.context, time, gameControl.fps.num);
+    });   
     gameControl.context.restore();
 }
 var animateList = {

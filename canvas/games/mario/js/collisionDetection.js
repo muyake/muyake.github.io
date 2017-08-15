@@ -48,6 +48,13 @@ var CD = {
             game.setDirection(0);
             mario.lrColliding = barrier;
         },
+        //马里奥在旗杆左侧
+        MleftFinal: function(mario, barrier) {
+            mario.left = barrier.left - mario.width+10;
+            gameConfig.setSpeedZero();
+            game.setDirection(0);
+            mario.lrColliding = barrier;
+        },
         //马里奥在阻挡物右侧
         MrightBarrier: function(mario, barrier) {
             mario.left = barrier.left + barrier.width;
@@ -271,6 +278,9 @@ var CD = {
 
             }
         }
+    },
+    judgeMflag:function(mario, flag, callback) {
+
     },
     judegMBadFlower: function(mario, badflower, callback) {
         if (mario.visible == false && mario.isDie == true) {
@@ -648,6 +658,28 @@ var CD = {
             var downfun = function() {};
             self.CDFunc.Colliding(mario, pipe, leftfun, rightfun, downfun, upfun);
 
+        }
+    },
+     judgeMFianl: function(mario, pipe, callback) {
+        if (pipe.visible == false) {
+            return;
+        }
+        var self = this;
+        // 两个矩形检测
+        if ((mario.left + mario.width-10) < pipe.left || (pipe.left + pipe.width) < mario.left || (mario.top + mario.height) < pipe.top || (pipe.top + pipe.height) < mario.top) {
+            this.CDFunc.MOutCarrying(mario, pipe);
+        } else {
+            var leftfun = function() {
+                self.CDFunc.MleftFinal(mario, pipe)
+            };
+            var rightfun = function() {
+                self.CDFunc.MleftFinal(mario, pipe)
+            };
+            var upfun = function() {
+                self.CDFunc.MleftFinal(mario, pipe)
+            };
+            var downfun = function() {};
+            self.CDFunc.Colliding(mario, pipe, leftfun, rightfun, downfun, upfun);
         }
     },
 

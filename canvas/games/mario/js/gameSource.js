@@ -20,6 +20,8 @@ var gameSourceUrl = {
          shell:'./images/tortoise/roll/img.png',
          life:'./images/life/img.png',
          gameOver:'./images/over.png',
+         flag:'./images/flag.png',
+          final:'./images/final.png',
         //马里奥
         mario: {
             commonMairo: {
@@ -40,7 +42,7 @@ var gameSourceUrl = {
         }
     },
     audioList: {
-        //bigJump:'./sounds/mario/jump_big.mp3',
+        GameOver:'./sounds/mario/GameOver.mp3',
         BGM: './sounds/mario/bag.mp3',
         WD: './sounds/mario/wudi.mp3',
         jumpAll: './sounds/mario/jumpAll.mp3', //

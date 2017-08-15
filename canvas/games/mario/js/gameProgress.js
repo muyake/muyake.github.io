@@ -122,7 +122,22 @@ var totalProgressSprite = {
         positionmile: 660
     },
     ],
+    final: [    
+     {
 
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: -10,
+        positionmile: 240
+    }
+    ],
+    flag:[
+    {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 162,
+        positionmile: 260
+    }],
     fire: [],
     badflower: [
     {
@@ -267,6 +282,24 @@ var createFactory = {
             left: setting.positionmile - progressObj.createSpriteMileNum,
         });
     },
+    //创造旗杆
+    createFinal: function(setting) {
+        return new Final({
+            id: setting.id,
+            physicaltop: setting.physicaltop,
+            positionmile: setting.positionmile,
+            left: setting.positionmile - progressObj.createSpriteMileNum,
+        });
+    },
+      //创造旗帜
+    createFlag: function(setting) {
+        return new Flag({
+            id: setting.id,
+            physicaltop: setting.physicaltop,
+            positionmile: setting.positionmile,
+            left: setting.positionmile - progressObj.createSpriteMileNum,
+        });
+    },
     //创造固定金币
     createMoney: function(setting) {
         return new Money({
@@ -276,8 +309,7 @@ var createFactory = {
             left: setting.positionmile - progressObj.createSpriteMileNum,
 
         });
-    },
-    
+    },   
     
     //创造砖块
     createBrick: function(positionmile, physicaltop) {
@@ -369,7 +401,9 @@ return new Tower({
         'tortoise': 'createTortoise',
         'star': 'createStar',
         'tower': 'createTower',
-        'hole': 'createHole'
+        'final':'createFinal',
+        'hole': 'createHole',
+        'flag':'createFlag',
     },
     hasId: function(id, spriteList) {
         return spriteList.some(function(item) {
