@@ -15,12 +15,14 @@
     }
 
     .container>div {
+        background: yellow;
         transition: all 0.3s;
         position: absolute;
         width: 220px;
         box-sizing: border-box;
         padding: 5px;
-        background: #fff;
+        overflow: hidden;
+        /*background: #fff;*/
     }
 
     .container>div img {
@@ -28,7 +30,116 @@
         display: block;
     }
 
-    div[data-status='1'] {
+
+
+    .container>div  .shadow[status='1'] {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;       
+        display: block;
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.5) inset;
+        transition: box-shadow 1s linear;
+    }
+    .container>div  .shadow[status='2']{
+        border-radius: 10000px;
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        left: 50%;
+        top: 50%; 
+        transform: translate3d(-50%,-50%,0); 
+        /*background: rgba(100,100,200,0.5);*/
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.5) inset; 
+         transition: box-shadow 1s linear;
+    }
+
+   /* .container>div:hover .shadow {
+        box-shadow: 0 0 0 110px rgba(0, 0, 0, 0.5) inset;
+        transition: box-shadow 1s linear;
+    }*/
+
+
+
+
+
+    .div3 {
+        width: 150px;
+        height: 200px;
+        margin: 100px;
+        border: 1px solid green;
+    }
+
+    .div3 .center {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        border: 0px solid rgba(0, 0, 0, 0.5);
+        transition: border 0.5s;
+    }
+
+    .div3 .center:hover {
+        border-left: 75px solid rgba(0, 0, 0, 0.5);
+        border-right: 75px solid rgba(0, 0, 0, 0.5);
+        border-bottom: 100px solid rgba(0, 0, 0, 0.5);
+        border-top: 100px solid rgba(0, 0, 0, 0.5);
+        transition: border 0.5s;
+        /*border:0px solid rgba(0,0,0,0.5);*/
+    }
+
+    .div4 {
+        width: 150px;
+        height: 200px;
+        margin: 100px;
+        border: 1px solid green;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .div4 .center {
+        width: 250px;
+        height: 250px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        border: 1px solid red;
+        transform: translate3d(-50%, -50%, 0);
+        border-radius: 200px;
+        transition: box-shadow 1s;
+        box-shadow: inset 0 0 0 0px rgba(0, 0, 0, 0.5);
+    }
+
+    .div4 .center:hover {
+        transition: box-shadow 1s;
+        box-shadow: inset 0 0 0 125px rgba(0, 0, 0, 0.5);
+    }
+
+    .div5 {
+        width: 150px;
+        height: 200px;
+        margin: 100px;
+        border: 1px solid green;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .div5 .center {
+        width: 150px;
+        height: 200px;
+        position: absolute;
+        left: 0%;
+        top: 0%;
+
+        transition: box-shadow 1s;
+        box-shadow: inset 0 0 0 0px rgba(0, 0, 0, 0.5), inset 0 0 0 0px rgba(0, 0, 0, 0.5);
+    }
+
+    .div5 .center:hover {
+        transition: box-shadow 1s;
+        box-shadow: inset 75px 0 0px rgba(0, 0, 0, 0.5), inset -75px 0 0 0px rgba(0, 0, 0, 0.5);
+    }
+    /* div[data-status='1'] {
         left: 10px;
     }
 
@@ -46,7 +157,7 @@
 
     div[data-status='5'] {
         left: 930px;
-    }
+    }*/
     </style>
 </head>
 
@@ -54,6 +165,22 @@
     <div class="container">
     </div>
     <script>
+
+    document.querySelector('.container').addEventListener('mouseover', function(e) {
+        var target=e.target;         
+       if(target.className=='shadow') {         
+         var width=parseInt(window.getComputedStyle(target,null).width);   
+         var height=parseInt(window.getComputedStyle(target,null).height);
+         var min=width>height?height:height;        
+           target.style.boxShadow='0 0 0 '+min/2+'px rgba(0, 0, 0, 0.5) inset';
+        }
+    });
+    document.querySelector('.container').addEventListener('mouseout', function(e) {
+       var target=e.target;
+       if(target.className=='shadow') {
+           target.style.boxShadow='0 0 0 0px rgba(0, 0, 0, 0.5) inset';
+        }
+    });
     //滚动条在Y轴上的滚动距离
     function getScrollTop() {　　
         var scrollTop = 0,
@@ -207,22 +334,31 @@
         rander: function(url, height) {
             var minObj = this.heightArr.min();
             var div = document.createElement('DIV');
-            div.className = 'item';
+            div.className = 'item div2';
             div.setAttribute('height-num', height);
             div.style.top = minObj.val + 'px';
             div.style.left = this.leftArr[minObj.index] + 'px';
+            var random=1+Math.floor(Math.random()*2);
             //div.setAttribute('data-status', minObj.index + 1 + '');
-            div.innerHTML = '<img src="' + url + '" alt="">';
+
+            var R=Math.sqrt(220*220+height*height);
+            if(random==1){
+                 div.innerHTML = '<img src="' + url + '" alt=""><div class="shadow" status="'+random+'"></div>';
+             }else{
+                div.innerHTML = '<img src="' + url + '" alt=""><div class="shadow" style="width:'+R+'px; height:'+R+'px" status="'+random+'"></div>';
+             }
+           
             document.querySelector('.container').appendChild(div);
             this.heightArr[minObj.index] = this.heightArr[minObj.index] + height + this.paddingWidth;
             var maxObj = this.heightArr.max();
             document.querySelector('.container').style.height = maxObj.val + 20 + 'px';
+
         },
-        configer:{
-            addFlag:true,
-            page:1,
+        configer: {
+            addFlag: true,
+            page: 1,
         },
-        getAjaxData:function(setting){
+        getAjaxData: function(setting) {
             console.log(setting);
         },
         bindEvent: function() {
@@ -232,19 +368,19 @@
                 self.resetPosition();
             };
             window.addEventListener("scroll", function() {
-                var configer=self.configer;               
+                var configer = self.configer;
                 if (!configer.addFlag) {
                     return;
                 }
                 // console.log(getScrollTop());
                 // console.log(getWindowHeight());
                 // console.log(getScrollHeight());
-                if (getScrollTop() + getWindowHeight() +200 >= getScrollHeight()) {　
+                if (getScrollTop() + getWindowHeight() + 200 >= getScrollHeight()) {　
                     console.log(1);
                     configer.addFlag = false;
                     configer.page++;
                     //
-                    self.getAjaxData({                      
+                    self.getAjaxData({
                         page: configer.page
                     });
                 }
