@@ -84,15 +84,15 @@ var totalProgressSprite = {
     //     physicaltop: 100,
     //     contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
     // }, 
-    {
-        isVisible: true,
-        id: lib.newGuid(),
-        status: 1,
-        positionmile: 380,
-        physicaltop: 100,
-        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    // {
+    //     isVisible: true,
+    //     id: lib.newGuid(),
+    //     status: 1,
+    //     positionmile: 380,
+    //     physicaltop: 100,
+    //     contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
 
-    }
+    // }
     ],
     money: [
     // {
@@ -108,19 +108,19 @@ var totalProgressSprite = {
     // }
     ],
     pipe: [    
-     {
+    //  {
 
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 0,
-        positionmile: 140
-    },
-    {
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 0,
-        positionmile: 660
-    },
+    //     isVisible: true,
+    //     id: lib.newGuid(),
+    //     physicaltop: 0,
+    //     positionmile: 140
+    // },
+    // {
+    //     isVisible: true,
+    //     id: lib.newGuid(),
+    //     physicaltop: 0,
+    //     positionmile: 660
+    // },
     ],
     final: [    
      {
@@ -128,7 +128,7 @@ var totalProgressSprite = {
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: -10,
-        positionmile: 240
+        positionmile: 540
     }
     ],
     flag:[
@@ -136,26 +136,26 @@ var totalProgressSprite = {
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: 162,
-        positionmile: 260
+        positionmile: 560
     }],
     fire: [],
     badflower: [
-    {
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 0,
-        positionmile: 400
-    },
+    // {
+    //     isVisible: true,
+    //     id: lib.newGuid(),
+    //     physicaltop: 0,
+    //     positionmile: 400
+    // },
     ],    
     monster: [ 
-    {
-        isDie:false,
-         isAdd:false,//判断是否加入过数组
-        isMonster:true,
-        isVisible: true,
-        id: lib.newGuid(),       
-        positionmile: 890,
-       }
+    // {
+    //     isDie:false,
+    //      isAdd:false,//判断是否加入过数组
+    //     isMonster:true,
+    //     isVisible: true,
+    //     id: lib.newGuid(),       
+    //     positionmile: 890,
+    //    }
        ],
     //mushroom: [],
     tortoise: [
@@ -169,12 +169,19 @@ var totalProgressSprite = {
        ],
     star: [],
     tower: [
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     physicaltop: 0,
-    //     positionmile: -4,
-    // }
+    { isReverse:false,
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: -4,
+    },
+     {
+        isReverse:true,
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: 754,
+    }
     ],
     hole: [
     // {
@@ -297,6 +304,9 @@ var createFactory = {
             id: setting.id,
             physicaltop: setting.physicaltop,
             positionmile: setting.positionmile,
+            callback:function(){
+               drawSpriteList.success();
+            },
             left: setting.positionmile - progressObj.createSpriteMileNum,
         });
     },
@@ -375,6 +385,7 @@ var createFactory = {
     //创造城堡
     createTower: function(setting) {
 return new Tower({
+            isReverse:setting.isReverse,
             id: setting.id,
             physicaltop: setting.physicaltop,
             positionmile: setting.positionmile,

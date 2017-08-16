@@ -26,7 +26,7 @@ var sourceLoadObj = {
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
-      //  drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
+        //  drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
     }
 }
 
@@ -38,13 +38,17 @@ var game = {
         var self = this;
         clipObj.init(function() {
             console.log('游戏开始');
-            gameControl.gamePause = false;                        
+            gameControl.gamePause = false;
         }, function() {
-            if(drawSpriteList.mario.lifeNum>0){
-                 self.reset(3);
-             }else{
+            if (drawSpriteList.mario.lifeNum > 0) {
+                self.reset(3);
+            } else {
                 self.over();
-             }           
+            }
+            if(drawSpriteList.isSuccess){
+                self.success();
+            }
+
         });
         this.bindEvent();
     },
@@ -59,7 +63,13 @@ var game = {
     },
     over: function() {
         audioControl.audioPlay(gameSourceObj.audioList.GameOver, gameAudio.GameOver);
-        drawSpriteList.gameOver.push(new Over({ name: 'Over' })); 
+        drawSpriteList.gameOver.push(new Over({ name: 'Over' }));
+    },
+    success:function() {
+        audioControl.audioPlay(gameSourceObj.audioList.gamesuccess, gameAudio.gameSuccess);
+        var success=new Over({ name: 'Over' });
+        success.painter.image.src = gameSourceUrl.imageList.gameSuccess;
+        drawSpriteList.gameOver.push(success);
     },
     reset: function(num) {
         console.log("reset");
@@ -73,22 +83,22 @@ var game = {
         })
         drawSpriteList.createAnimationSpriteList = [];
         createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
-   
+
         drawSpriteList.mario.reset();
-             drawSpriteList.statusArr.life.minuteLife(drawSpriteList.mario.lifeNum);
+        drawSpriteList.statusArr.life.minuteLife(drawSpriteList.mario.lifeNum);
     },
     bindEvent: function() {
         createFactory.createBadflower(300, 0);
         var self = this;
         document.querySelector('#smallBtn').addEventListener('click', function() {
-            drawSpriteList.arrayOthersA.forEach(function(item){
-                if(item.name=='flag'){
+            drawSpriteList.arrayOthersA.forEach(function(item) {
+                if (item.name == 'flag') {
                     item.down();
                 }
             })
         }, false);
         document.querySelector('#flower').addEventListener('click', function() {
-            drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
+            drawSpriteList.mario.laqi();
             //createFactory.createUpMoney(100, 100);
         }, false);
         document.querySelector('#flower1').addEventListener('click', function() {
@@ -100,7 +110,8 @@ var game = {
             createFactory.createStar(100, 100);
         }, false);
         document.querySelector('#bigBtn').addEventListener('click', function() {
-            audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.bigJump);
+            drawSpriteList.mario.laqi();
+            gameControl.gamePause = true;
         }, false);
         document.querySelector('#fire').addEventListener('click', function() {
             // drawSpriteList.mario.rise(WH.mario.height * 0.5);
@@ -242,6 +253,9 @@ var game = {
         //只按左键或只按右键(大蹦，小蹦不管)
         if (runKey) {
             createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
+            if(gameControl.gamePause==true){
+            return;
+        }
             //如果是左键
             if ((this.mapKey["left"] && !this.mapKey["right"])) {
                 //如果马里奥当前面向右，然后从右转向左，则设置初始化默认速度，以防当前面有墙，被墙挡住，速度为0，掉头后速度设为默认值。
@@ -266,15 +280,21 @@ var game = {
         //分为只按左右键，只按蹦跳键，同时按左键（或右键）和蹦跳键，还有其他不合理按键（例如同时按左右键），和都不按键
         //只要按蹦跳键，则马里奥处于蹦跳状态或者如果不处于蹦跳状态则执行蹦跳动作，所以，蹦跳键的行为大于左右键的行为，因为如果同时按右键和蹦跳键，是处于蹦跳状态的。
         if (jumpKey) { //如果按了蹦跳键
+             if (gameControl.gamePause == true) {
+                return;
+             }
             if (!drawSpriteList.mario.isJump) {
                 var status = this.mapKey["s"] ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
                 drawSpriteList.mario.jump(status);
-            } else {
-                drawSpriteList.mario.painter = drawSpriteList.mario.painters.jump;
-                drawSpriteList.mario.behaviors = [];
+            } else {               
+                    drawSpriteList.mario.painter = drawSpriteList.mario.painters.jump;
+                    drawSpriteList.mario.behaviors = [];                
             }
         } else { //没有按蹦跳键
             if (runKey) { //只按了左键或只按右键
+                if (gameControl.gamePause == true) {
+                    return;
+                }
                 if (drawSpriteList.mario.isJump) {
                     drawSpriteList.mario.painter = drawSpriteList.mario.painters.jump;
                     drawSpriteList.mario.behaviors = [];
@@ -283,6 +303,9 @@ var game = {
                     drawSpriteList.mario.behaviors = [drawSpriteList.mario.behaviorStatus.runInPlace];
                 }
             } else { //同时按了左键和右键，或者两者都没按
+                if (gameControl.gamePause == true) {
+                    return;
+                }
                 if (drawSpriteList.mario.isJump) {
                     drawSpriteList.mario.painter = drawSpriteList.mario.painters.jump;
                 } else {
@@ -334,7 +357,7 @@ var SpriteAnimatorEndCallbackList = {
                 clipObj.startDraw();
             } else {
                 clipObj.startDraw();
-               // game.over();
+                // game.over();
             }
         }
 
@@ -363,6 +386,11 @@ var SpriteAnimatorEndCallbackList = {
 
 
 var drawSpriteList = {
+    isSuccess:false,
+    success:function(){
+        this.mario.intoTower();
+        console.log('游戏胜利');
+    },
     bg: new BG({
         name: "BG",
         width: element.mycanvas.width,
@@ -373,6 +401,9 @@ var drawSpriteList = {
     //马里奥
     mario: new Mario({
         name: "mario",
+        success:function(){
+            clipObj.startDraw();
+        }
     }),
 
     //总体进度
@@ -381,8 +412,8 @@ var drawSpriteList = {
     statusArr: { life: new Life({ name: 'life' }) },
     //墙，管道，固定金币等可以为第一层
     arrayOthersA: [],
-    gameOver:[],
-      
+    gameOver: [],
+
     //洞
     // arrayOthersB: [],
     //花，弹出的金币
@@ -421,8 +452,13 @@ var drawSpriteList = {
             money: {
                 funcName: 'judgeMM',
             },
-             final: {
+            final: {
                 funcName: 'judgeMFianl',
+                callback:function(){
+                    console.log(33);
+                    drawSpriteList.isSuccess=true;
+                    gameControl.gamePause = true;
+                }
             },
             flower: {
                 funcName: 'judgeMF',
@@ -469,6 +505,9 @@ var drawSpriteList = {
             },
         },
         cdfunc: function() {
+            if(drawSpriteList.isSuccess){
+                return;
+            }
             var self = this;
             var arrothers = drawSpriteList.arrayOthersA;
             //设置速度默认值，例如，先设置速度正常,当马里奥被管道水平挡住,速度为0，当反向走时，脱离管道碰撞，速度恢复正常。
@@ -604,7 +643,7 @@ gameControl.startAnimate = function(time) {
     });
     drawSpriteList.gameOver.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
-    });   
+    });
     gameControl.context.restore();
 }
 var animateList = {

@@ -50,7 +50,7 @@ var CD = {
         },
         //马里奥在旗杆左侧
         MleftFinal: function(mario, barrier) {
-            mario.left = barrier.left - mario.width+10;
+            mario.left = barrier.left - mario.width + 10;
             gameConfig.setSpeedZero();
             game.setDirection(0);
             mario.lrColliding = barrier;
@@ -279,8 +279,20 @@ var CD = {
             }
         }
     },
-    judgeMflag:function(mario, flag, callback) {
-
+    judgeMflag: function(mario, flag, callback) {
+        //  if (mario.visible == false && mario.isDie == true) {
+        //     return;
+        // }
+       
+        // if ((flag.left + flag.width) < mario.left || (mario.left + mario.width) < flag.left || (flag.top + flag.height) < mario.top || (mario.top + mario.height) < flag.top) {
+           
+        // } else {
+        //      drawSpriteList.arrayOthersA.forEach(function(item) {
+        //         if (item.name == 'flag') {
+        //             item.down();
+        //         }
+        //     })
+        // }
     },
     judegMBadFlower: function(mario, badflower, callback) {
         if (mario.visible == false && mario.isDie == true) {
@@ -322,8 +334,8 @@ var CD = {
         } else {
             lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bullet.id);
             lib.removeByValue(drawSpriteList.arrayOthersA, 'id', badflower.id);
-             lib.removeByValue(createFactory.arrayTotalProgress, 'id', badflower.id);
-            
+            lib.removeByValue(createFactory.arrayTotalProgress, 'id', badflower.id);
+
             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.monsterdie);
             badflower = null;
             bullet = null;
@@ -660,26 +672,36 @@ var CD = {
 
         }
     },
-     judgeMFianl: function(mario, pipe, callback) {
-        if (pipe.visible == false) {
+    judgeMFianl: function(mario, final, callback) {
+        if (final.visible == false) {
             return;
         }
         var self = this;
         // 两个矩形检测
-        if ((mario.left + mario.width-10) < pipe.left || (pipe.left + pipe.width) < mario.left || (mario.top + mario.height) < pipe.top || (pipe.top + pipe.height) < mario.top) {
-            this.CDFunc.MOutCarrying(mario, pipe);
+        if ((mario.left + mario.width - 10) < final.left || (final.left + final.width) < mario.left || (mario.top + mario.height) < final.top || (final.top + final.height) < mario.top) {
+            this.CDFunc.MOutCarrying(mario, final);
         } else {
             var leftfun = function() {
-                self.CDFunc.MleftFinal(mario, pipe)
+                self.CDFunc.MleftFinal(mario, final)
             };
             var rightfun = function() {
-                self.CDFunc.MleftFinal(mario, pipe)
+                self.CDFunc.MleftFinal(mario, final)
             };
             var upfun = function() {
-                self.CDFunc.MleftFinal(mario, pipe)
+                self.CDFunc.MleftFinal(mario, final)
             };
             var downfun = function() {};
-            self.CDFunc.Colliding(mario, pipe, leftfun, rightfun, downfun, upfun);
+             drawSpriteList.arrayOthersA.forEach(function(item) {
+                if (item.name == 'flag') {
+                    item.down();
+                }
+            })
+             console.log(11);
+            
+             mario.laqi();
+            self.CDFunc.Colliding(mario, final, leftfun, rightfun, downfun, upfun);
+            mario.left=final.left+7;
+            callback();
         }
     },
 

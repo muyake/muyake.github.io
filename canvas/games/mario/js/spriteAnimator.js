@@ -181,3 +181,24 @@ MoveSpriteAnimator.prototype.execute=function(){
         this.sprite.translateLeft+=this.sprite.initvelocityX / this.sprite.fpsNum;
     }
 }
+//只有横向移动
+var MairoSpriteAnimator=function(elapsedCallback, sprite){
+    CharacterSpriteAnimator.call(this,elapsedCallback, sprite);
+}
+MairoSpriteAnimator.prototype = Object.create(CharacterSpriteAnimator.prototype);
+MairoSpriteAnimator.prototype.constructor = MairoSpriteAnimator;
+MairoSpriteAnimator.prototype.execute=function(){
+     var animator = this;
+    if (animator.isRunning) {   
+       if( -this.sprite.translateLeft<element.mycanvas.width-100){
+         this.sprite.translateLeft+=this.sprite.initvelocityX / this.sprite.fpsNum;
+
+     }else{
+        animator.isRunning=false;
+         this.sprite.painter = undefined;                
+         this.sprite.behaviors = [];
+        this.elapsedCallback();
+     }
+       
+    }
+}

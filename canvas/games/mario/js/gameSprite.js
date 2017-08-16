@@ -134,7 +134,8 @@ var Mario = function(setting) {
     this.painter = this.painters.stand;
     this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
     this.marioSpriteAnimatorRising = new RiseSpriteAnimator(null, this);
-
+    this.marioSpriteAnimatorMove = new MairoSpriteAnimator(setting.success, this);
+    this.initvelocityX = -gameConfig.monsterSpeed;
 };
 Mario.prototype = Object.create(Sprite.prototype);
 Mario.prototype.constructor = Mario;
@@ -142,12 +143,20 @@ Mario.prototype.painters = {
     run: new CharacterRunSpriteSheetPainter(marioConfig.config, gameSourceUrl.imageList.mario.commonMairo.run, element.mycanvas, marioConfig.config.totalCount),
     jump: new CharacterImagePainter(gameSourceUrl.imageList.mario.commonMairo.jump),
     stand: new CharacterImagePainter(gameSourceUrl.imageList.mario.commonMairo.stand),
+    laqi: new CharacterImagePainter(gameSourceUrl.imageList.mario.commonMairo.laqi),
 };
 Mario.prototype.setClothes = function(marioStatus) {
     this.painters.run.spritesheet.src = gameSourceUrl.imageList.mario[marioStatus].run;
     this.painters.jump.image.src = gameSourceUrl.imageList.mario[marioStatus].jump;
     this.painters.stand.image.src = gameSourceUrl.imageList.mario[marioStatus].stand;
+    this.painters.laqi.image.src = gameSourceUrl.imageList.mario[marioStatus].laqi;
 };
+Mario.prototype.laqi=function(){
+this.painter = this.painters.laqi;   
+this.velocityY =0;            
+               this.behaviors = [];
+               this.translateLeft=-this.left;
+}
 Mario.prototype.reset = function() {
     this.isDie = false;
     //this.painter = this.painters.stand;
@@ -256,10 +265,19 @@ Mario.prototype.collisiondie = function() {
     }
     audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
 };
+Mario.prototype.intoTower= function() {
+    // this.jump(0);
+   this.positionmile=progressObj.createSpriteMileNum;
+    this.marioSpriteAnimatorMove.start();
+   this.painter = this.painters.run;
+    this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
+    //audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
+};
 Mario.prototype.draw = function(ctx, time, fpsNum) {
     this.fpsNum = fpsNum; //给marioSpriteAnimator传递fpsnum
     this.marioSpriteAnimatorJump.execute();
     this.marioSpriteAnimatorRising.execute();
+    this.marioSpriteAnimatorMove.execute();
     if (this.status == 4 && this.status4DuringTime > progressObj.currentTime) {
         this.status = this.originalStatus;
         console.log("恢复");
@@ -285,9 +303,10 @@ Mario.prototype.draw = function(ctx, time, fpsNum) {
     }
 
     // //碰撞的向后顺序是先撞墙，再吃金币  l
-    if (!gameControl.gamePause) {
+    //if (!gameControl.gamePause&&gamesprite) {
         this.update(ctx, time, fpsNum);
-    }
+    //}
+ 
 
     this.paint(ctx);
 };
@@ -1041,16 +1060,16 @@ var  Flag= function(setting) {
     this.roleType = 'flag';
     this.id = setting.id || 0;
     this.velocityY = 0;
-    this.flowerSpriteAnimatorUp = new DownSpriteAnimator(null, this);
+    this.flowerSpriteAnimatorUp = new DownSpriteAnimator(function(){setting.callback()}, this);
 };
 Flag.prototype = Object.create(SceneSprite.prototype);
 Flag.prototype.draw = function(ctx, time, fpsNum) {
-        if (!gameControl.gamePause) {
+        //if (!gameControl.gamePause) {
             //console.log()
             this.fpsNum=fpsNum;
             this.flowerSpriteAnimatorUp.execute();
             this.update(ctx, time, fpsNum);
-        }
+       // }
         this.paint(ctx);
 }
 Flag.prototype.down = function() {
@@ -1073,7 +1092,7 @@ var Tower = function(setting) {
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'tower';
     this.id = setting.id || 0;
-    this.isreverse = false;
+    this.isReverse =setting.isReverse ;
     this.mycanvas = element.mycanvas;
     this.painter = new CharacterImagePainter(gameSourceUrl.imageList.tower);
 };

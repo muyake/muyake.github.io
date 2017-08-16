@@ -41,6 +41,11 @@ downflag: {
         startTime:9,
         endTime: 11.5,
     },
+    gameSuccess:{
+          startTime:0,
+        endTime: 7,
+    },
+   
     //长大
     growup: {
         startTime: 5.5,
