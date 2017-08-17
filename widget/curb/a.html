@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>	
+	.parent{
+		margin:500px;
+		width: 200px;
+		height: 200px;
+		border:1px solid blue;
+	}
+		.container{
+			position: relative;
+			
+			transform-style: preserve-3d;
+			width: 100px;
+			height: 100px;
+			border:1px solid green;
+			transform-origin: center; 
+			transform:rotateY(45deg) rotateZ(45deg) ;			
+			animation: mymove3 4s linear infinite;
+        -webkit-animation: mymove3 4s linear infinite;
+		}
+		.container>div{
+			width: 100px;
+			height: 100px;
+			
+			position: absolute;
+			left: 0px;
+			top:0px;
+		}	
+		.item1{
+			background: url(1.jpg) no-repeat center/cover;
+			transform: rotateY(90deg) translateZ(50px);
+		}
+		.item2{
+			background: url(2.jpg) no-repeat center/cover;
+			transform: rotateY(-90deg) translateZ(50px);
+		}
+		.item3{
+			background: url(3.jpg) no-repeat center/cover;
+			transform: rotateY(0deg) translateZ(50px);
+		}
+		.item4{
+			background: url(4.jpg) no-repeat center/cover;
+			transform: rotateY(180deg) translateZ(50px);
+		}
+		.item5{
+			background: url(5.jpg) no-repeat center/cover;
+			transform: rotateX(90deg) translateZ(50px);
+		}
+		.item6{
+			background: url(6.jpg) no-repeat center/cover;
+			transform: rotateX(-90deg) translateZ(50px);
+		}
+		@keyframes mymove3 {
+        0% {
+            transform: rotateY(45deg)  rotateZ(45deg);            
+        }
+                  
+        100% {
+            transform:rotateY(405deg)  rotateZ(45deg);          
+        }
+    }
+	</style>
+</head>
+<body>
+	<div class="parent">
+	<div class="container">
+		<div class="item1">	
+			item1		
+		</div>
+		<div class="item2">	
+		item2		
+		</div>
+		<div class="item3">	
+		item3		
+		</div>
+		<div class="item4">	
+		item4		
+		</div>
+		<div class="item5">	
+		item5		
+		</div>	
+		<div class="item6">	
+		item6	
+		</div>		
+	</div>
+	</div>
+
+	<script>
+		
+	</script>
+</body>
+</html>
