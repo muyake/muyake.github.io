@@ -579,6 +579,7 @@ var element = {
   mycanvas: document.getElementById('mycanvas'),
   progressDiv: document.getElementById('load'),
   tipDiv: document.querySelector('.tip'),
+  progressBox: document.querySelector('.loadDiv'),
 };
 var gameConfig = {
   // wallSpeed: 90,  // moneySpeed:90,

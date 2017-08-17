@@ -12,8 +12,9 @@ var sourceLoadObj = {
     },
     progressOver: function() {
         element.mycanvas.style.display = 'block';
-        element.progressDiv.style.display = 'none';
+       element.progressDiv.style.display = 'none';
         element.tipDiv.style.display = 'block';
+       element.progressBox.style.display = 'none';
         //加载图片完成后执行。
         createFactory.init();
         game.init();
