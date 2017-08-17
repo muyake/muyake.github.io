@@ -190,7 +190,7 @@ MairoSpriteAnimator.prototype.constructor = MairoSpriteAnimator;
 MairoSpriteAnimator.prototype.execute=function(){
      var animator = this;
     if (animator.isRunning) {   
-       if( -this.sprite.translateLeft<element.mycanvas.width-100){
+       if( -this.sprite.translateLeft<element.mycanvasWidth-100){
          this.sprite.translateLeft+=this.sprite.initvelocityX / this.sprite.fpsNum;
 
      }else{

@@ -577,6 +577,8 @@ var marioGameConfig = {
 }
 var element = {
   mycanvas: document.getElementById('mycanvas'),
+   mycanvasWidth: document.getElementById('mycanvas').width,
+    mycanvasHeight: document.getElementById('mycanvas').height,
   progressDiv: document.getElementById('load'),
   tipDiv: document.querySelector('.tip'),
   progressBox: document.querySelector('.loadDiv'),

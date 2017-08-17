@@ -23,7 +23,7 @@ var sourceLoadObj = {
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
-        //audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+       // audioControl.BGMPlay(gameSourceObj.audioList.BGM);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
@@ -60,14 +60,13 @@ var game = {
         "w": false,
         "d": false,
         "space": false,
-
     },
     over: function() {
         audioControl.audioPlay(gameSourceObj.audioList.GameOver, gameAudio.GameOver);
+        audioControl.BGMPause(gameSourceObj.audioList.BGM);
         drawSpriteList.gameOver.push(new Over({ name: 'Over' }));
     },
-    success:function() {
-        audioControl.audioPlay(gameSourceObj.audioList.gamesuccess, gameAudio.gameSuccess);
+    success:function() {      
         var success=new Over({ name: 'Over' });
         success.painter.image.src = gameSourceUrl.imageList.gameSuccess;
         drawSpriteList.gameOver.push(success);
@@ -257,18 +256,19 @@ var game = {
             if(gameControl.gamePause==true){
             return;
         }
+            gameConfig.setSpeedDefault();
             //如果是左键
             if ((this.mapKey["left"] && !this.mapKey["right"])) {
                 //如果马里奥当前面向右，然后从右转向左，则设置初始化默认速度，以防当前面有墙，被墙挡住，速度为0，掉头后速度设为默认值。
-                if (drawSpriteList.mario.isReverse) {
-                    gameConfig.setSpeedDefault();
+                if (drawSpriteList.mario.rColliding) {
+                  gameConfig.setSpeedZero();
                 }
                 this.setDirection(-1);
                 drawSpriteList.mario.isReverse = false;
                 // console.log("按左键");    
             } else {
-                if (!drawSpriteList.mario.isReverse) {
-                    gameConfig.setSpeedDefault();
+               if (drawSpriteList.mario.lColliding) {
+                  gameConfig.setSpeedZero();
                 }
                 // console.log("按右键");
                 drawSpriteList.mario.isReverse = true;
@@ -394,14 +394,15 @@ var drawSpriteList = {
     },
     bg: new BG({
         name: "BG",
-        width: element.mycanvas.width,
-        height: element.mycanvas.height,
+        width: element.mycanvasWidth,
+        height: element.mycanvasHeight,
         top: 0,
         left: 0
     }),
     //马里奥
     mario: new Mario({
         name: "mario",
+        isReverse:true,
         success:function(){
             clipObj.startDraw();
         }
@@ -584,7 +585,7 @@ var drawSpriteList = {
             });
             //如果移动物体走出视野，就移除
             drawSpriteList.createAnimationSpriteList.forEach(function(mover, index, arr) {
-                if (mover.left + mover.width < 0 || mover.left > element.mycanvas.width) {
+                if (mover.left + mover.width < 0 || mover.left > element.mycanvasWidth) {
                     lib.removeByValue(arr, 'id', mover.id);
                 }
 
@@ -600,7 +601,9 @@ gameControl.startAnimate = function(time) {
     gameControl.context.save();
     clipObj.draw();
     drawSpriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
+ 
     animateList.countDown(time);
+
     //绘制第二层（洞）等。 
     // console.log('huizhi2');
     drawSpriteList.arrayOthersA.forEach(function(itemDraw) {
@@ -626,7 +629,7 @@ gameControl.startAnimate = function(time) {
     drawSpriteList.createBulletSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
-
+    
     //createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
     //绘制其他的场景，例如墙，金币等。 
     // console.log('huizhi2');
@@ -636,8 +639,7 @@ gameControl.startAnimate = function(time) {
             itemDraw.draw(gameControl.context, time, gameControl.fps.num);
         }
     });
-    //碰撞检测
-    drawSpriteList.judgeCD.cdfunc();
+
     drawSpriteList.mario.draw(gameControl.context, time, gameControl.fps.num);
     drawSpriteList.createBrickSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
@@ -645,6 +647,8 @@ gameControl.startAnimate = function(time) {
     drawSpriteList.gameOver.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
+     //碰撞检测
+    drawSpriteList.judgeCD.cdfunc();
     gameControl.context.restore();
 }
 var animateList = {

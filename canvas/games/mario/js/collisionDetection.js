@@ -11,7 +11,7 @@ var CD = {
             if (!mover.upColliding || flog) {
                 if (mover.isDie == false) {
 
-                    mover.initialTop = element.mycanvas.height - mover.height - gameConfig.roadHeight;
+                    mover.initialTop = element.mycanvasHeight - mover.height - gameConfig.roadHeight;
                     // console.log('玛丽熬'+mover.initialTop);
                 }
 
@@ -31,7 +31,7 @@ var CD = {
             //因为要判断马里奥从承载物上走下是有蹦跳效果，所以当脱离承载物的时刻，会出现下面有承载物，且左右脱离承载物，当从承载物上蹦下来时，设置下面承载物为null.
             var flog = mario.upColliding && ((mario.left + mario.width) < upColliding.left || (upColliding.left + upColliding.width) < mario.left);
             if ((!mario.upColliding || flog) && !mario.isDie) {
-                mario.initialTop = element.mycanvas.height - mario.height - gameConfig.roadHeight;
+                mario.initialTop = element.mycanvasHeight - mario.height - gameConfig.roadHeight;
                 //  mario.upColliding = null;
             }
             //如果下方有承载物且不是在蹦跳中，则从承载物上走下，否则如果在蹦跳中，则 mario.velocityY =0，蹦不起来。
@@ -40,27 +40,33 @@ var CD = {
                 mario.isJump = true;
                 mario.upColliding = null;
             }
+            if(mario.lColliding==carrying){
+                mario.lColliding=null;               
+            }
+            if(mario.rColliding==carrying){
+                mario.rColliding=null;               
+            }
         },
         //马里奥在阻挡物左侧
         MleftBarrier: function(mario, barrier) {
             mario.left = barrier.left - mario.width;
             gameConfig.setSpeedZero();
             game.setDirection(0);
-            mario.lrColliding = barrier;
+            mario.lColliding = barrier;
         },
         //马里奥在旗杆左侧
         MleftFinal: function(mario, barrier) {
             mario.left = barrier.left - mario.width + 10;
             gameConfig.setSpeedZero();
             game.setDirection(0);
-            mario.lrColliding = barrier;
+            mario.lColliding = barrier;
         },
         //马里奥在阻挡物右侧
         MrightBarrier: function(mario, barrier) {
             mario.left = barrier.left + barrier.width;
             gameConfig.setSpeedZero();
             game.setDirection(0);
-            mario.lrColliding = barrier;
+            mario.rColliding = barrier;
         },
         //马里奥在墙上侧
         MupBarrier: function(mario, barrier) {
@@ -253,7 +259,7 @@ var CD = {
             return;
         }
         //如果蘑菇掉井里了，就消失。
-        if (mover.top >= element.mycanvas.height + 200) {
+        if (mover.top >= element.mycanvasHeight + 200) {
             lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mover.id);
             mover = null;
             return;
@@ -267,7 +273,7 @@ var CD = {
 
                 if (!mover.isDie) {
                     mover.isDie = true;
-                    mover.initialTop = element.mycanvas.height + 200;
+                    mover.initialTop = element.mycanvasHeight + 200;
                     if (!mover.isJump) {
                         mover.die(0);
                         console.log('luo')
@@ -347,7 +353,7 @@ var CD = {
             return;
         }
         //如果蘑菇掉井里了，就消失。
-        if (mover.top + mover.width / 3 >= element.mycanvas.height) {
+        if (mover.top + mover.width / 3 >= element.mycanvasHeight) {
             lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', mover.id);
             mover = null;
             return;
@@ -361,7 +367,7 @@ var CD = {
 
                 if (!mover.isDie) {
                     mover.isDie = true;
-                    mover.initialTop = element.mycanvas.height + 200;
+                    mover.initialTop = element.mycanvasHeight + 200;
                     if (!mover.isJump) {
                         mover.die(0);
                         console.log('luo')

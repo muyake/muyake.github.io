@@ -34,12 +34,14 @@ var gameSourceUrl = {
             fireMairo: {
                 run: "./images/mario/smallmario/marioR/spritesrun2.png",
                 jump: "./images/mario/smallmario/marioR/jump2.png",
-                stand: "./images/winS2.png",
+                laqi: "./images/winS2.png",
+                  stand: "./images/mario/smallmario/marioR/stand2.png",
             },
             invinciblefireMairo: {
                 run: "./images/mario/smallmario/marioR/spritesrun3.png",
                 jump: "./images/mario/smallmario/marioR/jump3.png",
-                stand: "./images/winS3.png",
+                laqi: "./images/winS3.png",
+                  stand: "./images/mario/smallmario/marioR/stand2.png",
             },
         }
     },
