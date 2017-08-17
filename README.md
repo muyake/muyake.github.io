@@ -21,6 +21,7 @@
 ### 2.css特效
 + [红包](https://muyake.github.io/widget/redbag/shake.html)
 + [加载中](https://muyake.github.io/widget/load.html)
++ [吃豆人](https://muyake.github.io/widget/chidouren.html)
 ### 3.活动（手机）
 + [618银河聚会](https://muyake.github.io/pages/618/main.html)（[3d小盒子](https://muyake.github.io/pages/618/box.html)-  [获奖记录](https://muyake.github.io/pages/618/Record.html)）
 + [冰龙特效](https://muyake.github.io/pages/IceDragon/IceDragon.html)（冰龙是gif动画）
