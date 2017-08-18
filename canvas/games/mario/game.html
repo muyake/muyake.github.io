@@ -20,7 +20,7 @@
             height: 20px;
             position: absolute;
             left: 50%;
-            top: 50%;
+            top: 100%;
             transform: translate3d(-50%, -50%, 0);
         }
 
@@ -37,7 +37,7 @@
             width: 30%;
         }
 
-        #mycanvas {
+        #mycanvas,.loadDiv {
             background: #fff;
             position: absolute;
             left: 50%;
@@ -45,7 +45,12 @@
             transform: translate3d(-50%, -50%, 0);
             display: none;
         }
-
+        .loadDiv{
+            width: 666px;
+            height: 364px;
+            background: url('./images/welcome.png') no-repeat center/100% 100%;
+            display: block;
+        }
         .tip {
             display: none;
         }
@@ -67,8 +72,11 @@
     左右键是跑动，s键是小蹦，w是大蹦，p键是暂停,d键是发射子弹。
     </div>
     <canvas id="mycanvas" width="666" height="364"></canvas>
+    <div class="loadDiv">
     <div id="load" class="load">
-    </div>  
+    </div> 
+    </div>
+    
          <script src='./js/public.js'>
          </script>
          <script src='./js/libs/requestNextAnimationFrame.js'></script>    

@@ -9,7 +9,7 @@ var CD = {
             //因为要判断马里奥从承载物上走下是有蹦跳效果，所以当脱离承载物的时刻，会出现下面有承载物，且左右脱离承载物，当从承载物上蹦下来时，设置下面承载物为null.
             var flog = mover.upColliding && ((mover.left + mover.width) < upColliding.left || (upColliding.left + upColliding.width) < mover.left);
             if (!mover.upColliding || flog) {
-                mover.initialTop = element.mycanvas.height - mover.height - gameConfig.roadHeight;
+                mover.initialTop = element.mycanvasHeight - mover.height - gameConfig.roadHeight;
                 //  mover.upColliding = null;
             }
             //如果下方有承载物且不是在蹦跳中，则从承载物上走下，否则如果在蹦跳中，则 mover.velocityY =0，蹦不起来。
@@ -26,7 +26,7 @@ var CD = {
             //因为要判断马里奥从承载物上走下是有蹦跳效果，所以当脱离承载物的时刻，会出现下面有承载物，且左右脱离承载物，当从承载物上蹦下来时，设置下面承载物为null.
             var flog = mario.upColliding && ((mario.left + mario.width) < upColliding.left || (upColliding.left + upColliding.width) < mario.left);
             if (!mario.upColliding || flog) {
-                mario.initialTop = element.mycanvas.height - mario.height - gameConfig.roadHeight;
+                mario.initialTop = element.mycanvasHeight - mario.height - gameConfig.roadHeight;
                 //  mario.upColliding = null;
             }
             //如果下方有承载物且不是在蹦跳中，则从承载物上走下，否则如果在蹦跳中，则 mario.velocityY =0，蹦不起来。

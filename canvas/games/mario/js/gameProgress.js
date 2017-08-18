@@ -8,6 +8,7 @@ var progressObj = {
     createSpriteMileNum: 0,
     mileageNumUpdate: function(fpsNum) {
         this.fpsNum = (fpsNum == 0) ? 1 : (fpsNum || this.fpsNum);
+       // console.log(this.velocityX );
         this.mileageNum += this.velocityX / this.fpsNum;
 
         this.createSpriteMileNum = this.mileageNum*gameConfig.objectSpeedRate;      
@@ -24,103 +25,113 @@ var progressObj = {
     },
 };
 
+var PJNum={
+    wall1:300,
+    
+    money1:700,
+    pipe1:600,
+    hole1:700,
+    badflower1:500,
+    final1:800,
+}
+
 var totalProgressSprite = {
     wall: [
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 0,
-    //     positionmile: 100, //left=progressObj.mileageNum-positionmile   
-    //     physicaltop: 100,
-    //     contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, 
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 1,
-    //     positionmile: 135,
-    //     physicaltop: 100,
-    //     contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 0,
-    //     positionmile: 170,
-    //     physicaltop: 100,
-    //     contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 1,
-    //     positionmile: 205,
-    //     physicaltop: 100,
-    //     contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 0,
-    //     positionmile: 240,
-    //     physicaltop: 100,
-    //     contain: 3, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 1,
-    //     positionmile: 275,
-    //     physicaltop: 100,
-    //     contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 0,
-    //     positionmile: 310,
-    //     physicaltop: 100,
-    //     contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 1,
-    //     positionmile: 345,
-    //     physicaltop: 100,
-    //     contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    // }, 
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     status: 1,
-    //     positionmile: 380,
-    //     physicaltop: 100,
-    //     contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile:PJNum.wall1+100, //left=progressObj.mileageNum-positionmile   
+        physicaltop: 100,
+        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, 
+    {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile:PJNum.wall1+ 135,
+        physicaltop: 100,
+        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile:PJNum.wall1+ 170,
+        physicaltop: 100,
+        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile: PJNum.wall1+205,
+        physicaltop: 100,
+        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile: PJNum.wall1+240,
+        physicaltop: 100,
+        contain: 3, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile:PJNum.wall1+ 275,
+        physicaltop: 100,
+        contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 0,
+        positionmile:PJNum.wall1+ 310,
+        physicaltop: 100,
+        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile:PJNum.wall1+ 345,
+        physicaltop: 100,
+        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    }, 
+    {
+        isVisible: true,
+        id: lib.newGuid(),
+        status: 1,
+        positionmile: PJNum.wall1+380,
+        physicaltop: 100,
+        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
 
-    // }
+    }
     ],
     money: [
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     physicaltop: 100,
-    //     positionmile: 500
-    // }, {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     physicaltop: 100,
-    //     positionmile: 1000
-    // }
+    {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 100,
+        positionmile:PJNum.money1+ 500,
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 100,
+        positionmile:PJNum.money1+ 600,
+    }
     ],
     pipe: [    
-    //  {
+     {
 
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     physicaltop: 0,
-    //     positionmile: 140
-    // },
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     physicaltop: 0,
-    //     positionmile: 660
-    // },
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile:PJNum.pipe1+ 440
+    },
+    {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile:PJNum.pipe1+ 860
+    },
     ],
     final: [    
      {
@@ -128,7 +139,7 @@ var totalProgressSprite = {
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: -10,
-        positionmile: 540
+        positionmile: PJNum.final1+940
     }
     ],
     flag:[
@@ -136,36 +147,36 @@ var totalProgressSprite = {
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: 162,
-        positionmile: 560
+        positionmile: PJNum.final1+960
     }],
     fire: [],
     badflower: [
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     physicaltop: 0,
-    //     positionmile: 400
-    // },
+    {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile:PJNum.badflower1+800
+    },
     ],    
     monster: [ 
-    // {
-    //     isDie:false,
-    //      isAdd:false,//判断是否加入过数组
-    //     isMonster:true,
-    //     isVisible: true,
-    //     id: lib.newGuid(),       
-    //     positionmile: 890,
-    //    }
+    {
+        isDie:false,
+         isAdd:false,//判断是否加入过数组
+        isMonster:true,
+        isVisible: true,
+        id: lib.newGuid(),       
+        positionmile: 690,
+       }
        ],
     //mushroom: [],
     tortoise: [
-    // {
-    //      isAdd:false,//判断是否加入过数组
-    //     isMonster:true,
-    //     isVisible: true,
-    //     id: lib.newGuid(),       
-    //     positionmile: 380,
-    //    }
+    {
+         isAdd:false,//判断是否加入过数组
+        isMonster:true,
+        isVisible: true,
+        id: lib.newGuid(),       
+        positionmile: 580,
+       }
        ],
     star: [],
     tower: [
@@ -173,23 +184,23 @@ var totalProgressSprite = {
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: 0,
-        positionmile: -4,
+        positionmile: -6,
     },
      {
         isReverse:true,
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: 0,
-        positionmile: 754,
+        positionmile:PJNum.final1+ 1154,
     }
     ],
     hole: [
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     physicaltop: -33,
-    //     positionmile: 330
-    // }
+    {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: -33,
+        positionmile:PJNum.hole1+ 430
+    }
     ],
 };
 
@@ -424,7 +435,7 @@ return new Tower({
     //从总的数组队列中选择满足条件的对象进行显示。
     insertDrawSpriteList: function(mileageNum, drawSpriteList) {
         drawSpriteList.forEach(function(removeItem) {
-            if (!removeItem.visible || (removeItem.positionmile - progressObj.createSpriteMileNum) < -removeItem.width || (removeItem.positionmile - progressObj.createSpriteMileNum) > element.mycanvas.width) {
+            if (!removeItem.visible || (removeItem.positionmile - progressObj.createSpriteMileNum) < -removeItem.width || (removeItem.positionmile - progressObj.createSpriteMileNum) > element.mycanvasWidth) {
                 var id = removeItem.id;
                 lib.removeByValue(drawSpriteList, 'id', id);
             }
@@ -432,7 +443,7 @@ return new Tower({
         var self = this;
         var totalProgressArray = this.arrayTotalProgress;
         totalProgressArray.forEach(function(item) {
-            if (item.isVisible && (item.positionmile - progressObj.createSpriteMileNum) >= -WH[item.name].width && (item.positionmile - progressObj.createSpriteMileNum) <= element.mycanvas.width) {
+            if (item.isVisible && (item.positionmile - progressObj.createSpriteMileNum) >= -WH[item.name].width && (item.positionmile - progressObj.createSpriteMileNum) <= element.mycanvasWidth) {
                 var id = item.id;
                 if (!self.hasId(id, drawSpriteList)) {
                   if(item.isMonster){

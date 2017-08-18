@@ -55,7 +55,7 @@ CharacterRiseSpriteSheetPainter.prototype.paint = function(sprite, context) {
     var cell = this.cells['sprite_' + this.cellIndex];
     sprite.width = cell.width * 0.5;
     sprite.height = cell.height * 0.5;
-    sprite.top = element.mycanvas.height - sprite.height - gameConfig.roadHeight - sprite.physicaltop;
+    sprite.top = element.mycanvasHeight - sprite.height - gameConfig.roadHeight - sprite.physicaltop;
     if (sprite.isReverse) {
         context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
     } else {
@@ -117,7 +117,7 @@ var Mario = function(setting) {
     // this.roleType = 'mairo';
     this.height = setting.height || WH.mario.smallstatus.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
+    this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - this.physicaltop;
     this.left = this.mycanvas.width / 3 - this.width / 2;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
     this.isJump = false; //是否在跳中
@@ -153,15 +153,17 @@ Mario.prototype.setClothes = function(marioStatus) {
 };
 Mario.prototype.laqi=function(){
 this.painter = this.painters.laqi;   
-this.velocityY =0;            
+this.velocityY =0;     
+       
                this.behaviors = [];
                this.translateLeft=-this.left;
 }
 Mario.prototype.reset = function() {
     this.isDie = false;
+    this.painter = this.painters.stand;
     //this.painter = this.painters.stand;
-    this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
+    this.initialTop = element.mycanvasHeight - this.height - gameConfig.roadHeight;
+    this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - this.physicaltop;
     this.left = this.mycanvas.width / 3 - this.width / 2;
 };
 Mario.prototype.jump = function(VY) {
@@ -245,7 +247,7 @@ Mario.prototype.die = function() {
         this.lifeNum--;
         console.log('die');
 
-        this.initialTop = element.mycanvas.height + 200;
+        this.initialTop = element.mycanvasHeight + 200;
         if (!this.isJump) {
             this.jump(0);
         }
@@ -258,7 +260,7 @@ Mario.prototype.collisiondie = function() {
     if (!this.isDie) {
         this.isDie = true;
         this.lifeNum--;
-        this.initialTop = element.mycanvas.height + 200;
+        this.initialTop = element.mycanvasHeight + 200;
         if (!this.isJump) {
             this.jump(marioGameConfig.smallJumpV / 2);
         }
@@ -271,6 +273,8 @@ Mario.prototype.intoTower= function() {
     this.marioSpriteAnimatorMove.start();
    this.painter = this.painters.run;
     this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
+     audioControl.BGMPause(gameSourceObj.audioList.BGM);
+      audioControl.audioPlay(gameSourceObj.audioList.gamesuccess, gameAudio.gameSuccess);
     //audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
 };
 Mario.prototype.draw = function(ctx, time, fpsNum) {
@@ -329,8 +333,8 @@ var Monster = function(setting) {
     // this.roleType = 'mairo';
     this.height = setting.height || WH.monster.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
-    // this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - 100 - WH.wall.height;
+    this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - this.physicaltop;
+    // this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - 100 - WH.wall.height;
     this.left = setting.left || this.mycanvas.width - this.width / 2;
     this.positionmile = setting.positionmile;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
@@ -378,7 +382,7 @@ Monster.prototype.shootDie = function() {
     if (!this.isDie) {
         this.isDie = true;
         this.behaviors = [this.behaviorStatus.runInPlace];
-        this.initialTop = element.mycanvas.height + 200;
+        this.initialTop = element.mycanvasHeight + 200;
         if (!this.isJump) {
             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.monsterShootDie);
             this.jump(marioGameConfig.smallJumpV / 2);
@@ -399,7 +403,7 @@ Monster.prototype.draw = function(ctx, time, fpsNum) {
 Monster.prototype.fall = function(VY) {
     this.velocityY = -VY;
     console.log('fall');
-    this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
+    this.initialTop = element.mycanvasHeight - this.height - gameConfig.roadHeight;
     this.monsterSpriteAnimatorJump.start();
 };
 
@@ -419,8 +423,8 @@ var Tortoise = function(setting) {
     // this.roleType = 'mairo';
     this.height = setting.height || WH.tortoise.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight;
-    //this.top=element.mycanvas.height - this.height - gameConfig.roadHeight - 100-WH.wall.height;
+    this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight;
+    //this.top=element.mycanvasHeight - this.height - gameConfig.roadHeight - 100-WH.wall.height;
     this.left = setting.left || this.mycanvas.width / 2 - this.width / 2;
     this.positionmile = setting.positionmile;
     this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
@@ -465,7 +469,7 @@ Tortoise.prototype.draw = function(ctx, time, fpsNum) {
 
 Tortoise.prototype.fall = function(VY) {
     this.velocityY = -VY;
-    this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
+    this.initialTop = element.mycanvasHeight - this.height - gameConfig.roadHeight;
     this.tortoiseSpriteAnimatorJump.start();
 };
 Tortoise.prototype.collisionDie = function() {
@@ -480,7 +484,7 @@ Tortoise.prototype.shootDie = function() {
     if (!this.isDie) {
         this.isDie = true;
         this.behaviors = [this.behaviorStatus.runInPlace];
-        this.initialTop = element.mycanvas.height + 200;
+        this.initialTop = element.mycanvasHeight + 200;
         if (!this.isJump) {
             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.monsterShootDie);
             this.jump(marioGameConfig.smallJumpV / 2);
@@ -501,8 +505,8 @@ var Shell = function(setting) {
     // this.roleType = 'mairo';
     this.height = setting.height || WH.shell.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight;
-    //this.top=element.mycanvas.height - this.height - gameConfig.roadHeight - 100-WH.wall.height;
+    this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight;
+    //this.top=element.mycanvasHeight - this.height - gameConfig.roadHeight - 100-WH.wall.height;
     this.left = setting.left;
     this.initvelocityX = 0;
     this.positionmile = this.left + progressObj.createSpriteMileNum;
@@ -561,7 +565,7 @@ Shell.prototype.draw = function(ctx, time, fpsNum) {
 };
 Shell.prototype.fall = function(VY) {
     this.velocityY = -VY;
-    this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
+    this.initialTop = element.mycanvasHeight - this.height - gameConfig.roadHeight;
     this.shellSpriteAnimatorJump.start();
 };
 Shell.prototype.shootDie = function() {
@@ -569,7 +573,7 @@ Shell.prototype.shootDie = function() {
     if (!this.isDie) {
         this.isDie = true;
         this.behaviors = [this.behaviorStatus.runInPlace];
-        this.initialTop = element.mycanvas.height + 200;
+        this.initialTop = element.mycanvasHeight + 200;
         if (!this.isJump) {
             audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.monsterShootDie);
             this.jump(marioGameConfig.smallJumpV / 2);
@@ -604,8 +608,8 @@ Life.prototype.draw = function(ctx, time, fpsNum) {
 };
 
 var Over = function(setting) {    
-    this.width=element.mycanvas.width;
-    this.height=element.mycanvas.height;
+    this.width=element.mycanvasWidth;
+    this.height=element.mycanvasHeight;
     this.top=0;
     this.left=0;   
     SceneSprite.call(this, setting.name || 'over', new SceneImagePainter(gameSourceUrl.imageList.gameOver));
@@ -626,7 +630,7 @@ var Wall = function(setting) {
     this.positionmile = setting.positionmile || 0;
     this.height = setting.height || WH.wall.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - this.physicaltop;
+    this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - this.physicaltop;
     this.left = setting.left || 0;
     // this.roleType = 'wall';
     this.contain = setting.contain || 0; //0代表没有东西,1代表金币，2,3代表蘑菇代表花(先蘑菇后花)，4代表星星
@@ -708,7 +712,7 @@ var Money = function(setting) {
     this.width = setting.width || WH.money.width;
     this.height = setting.height || WH.money.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
@@ -741,7 +745,7 @@ var Flower = function(setting) {
     this.width = setting.width || WH.flower.width;
     this.height = setting.height || WH.flower.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
@@ -776,7 +780,7 @@ var BadFlower = function(setting) {
     this.width = setting.width || WH.badflower.width;
     this.height = setting.height || WH.badflower.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
@@ -822,7 +826,7 @@ var Mushroom = function(setting) {
     this.width = setting.width || WH.mushroom.width;
     this.height = setting.height || WH.mushroom.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
     this.initvelocityX = 0;
@@ -863,12 +867,12 @@ Mushroom.prototype.up = function(VY) {
 
 Mushroom.prototype.fall = function(VY) {
     this.velocityY = -VY;
-    this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
+    this.initialTop = element.mycanvasHeight - this.height - gameConfig.roadHeight;
     this.mushroomSpriteAnimatorJump.start();
 };
 Mushroom.prototype.die = function(VY) {
     this.velocityY = -VY;
-    // this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
+    // this.initialTop = element.mycanvasHeight - this.height - gameConfig.roadHeight;
     this.mushroomSpriteAnimatorJump.start();
 };
 Mushroom.prototype.move = function(VX) {
@@ -885,7 +889,7 @@ var Star = function(setting) {
     this.width = setting.width || WH.star.width;
     this.height = setting.height || WH.star.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
@@ -942,7 +946,7 @@ var Bullet = function(setting) {
     this.top = setting.top || 0;
     this.isDie = false;
     // console.log(this.top);
-    // this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    // this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
     this.initvelocityX = 0;
@@ -993,7 +997,7 @@ Bullet.prototype.jump = function(VX) {
         this.RV = bulletConfig.RV;
     }
 
-    this.initialTop = element.mycanvas.height - this.height - gameConfig.roadHeight;
+    this.initialTop = element.mycanvasHeight - this.height - gameConfig.roadHeight;
     //this.top = this.initialTop;
     this.bulletSpriteAnimatorJump.start();
 };
@@ -1008,7 +1012,7 @@ var Pipe = function(setting) {
     this.width = setting.width || WH.pipe.width;;
     this.height = setting.height || WH.pipe.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - this.physicaltop;
+    this.top = element.mycanvasHeight - this.height - this.physicaltop;
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'pipe';
@@ -1032,7 +1036,7 @@ var Final = function(setting) {
     this.width = setting.width || WH.final.width;;
     this.height = setting.height || WH.final.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - this.physicaltop;
+    this.top = element.mycanvasHeight - this.height - this.physicaltop;
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'final';
@@ -1054,7 +1058,7 @@ var  Flag= function(setting) {
     this.width = setting.width || WH.flag.width;;
     this.height = setting.height || WH.flag.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - this.physicaltop;
+    this.top = element.mycanvasHeight - this.height - this.physicaltop;
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'flag';
@@ -1074,7 +1078,7 @@ Flag.prototype.draw = function(ctx, time, fpsNum) {
 }
 Flag.prototype.down = function() {
       // this.startVelocityY = VY;
-    this.initialTop =element.mycanvas.height- 50;
+    this.initialTop =element.mycanvasHeight- 50;
     this.velocityY = 80;
     audioControl.audioPlay(gameSourceObj.audioList.music, gameAudio.downflag);
     this.flowerSpriteAnimatorUp.start();
@@ -1087,7 +1091,7 @@ var Tower = function(setting) {
     this.width = setting.width || WH.tower.width;;
     this.height = setting.height || WH.tower.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - this.physicaltop;
+    this.top = element.mycanvasHeight - this.height - this.physicaltop;
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'tower';
@@ -1112,7 +1116,7 @@ var Hole = function(setting) {
     this.width = setting.width || WH.hole.width;;
     this.height = setting.height || WH.hole.height;
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - this.physicaltop;
+    this.top = element.mycanvasHeight - this.height - this.physicaltop;
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'hole';
@@ -1134,7 +1138,7 @@ var Brick = function(setting) {
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.wall), [new behaviorList.SpriteLeftToRight()]);
 
     this.physicaltop = setting.physicaltop || 0;
-    this.top = element.mycanvas.height - this.height - gameConfig.roadHeight - setting.physicaltop;
+    this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - setting.physicaltop;
     this.id = setting.id || 0;
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
@@ -1215,9 +1219,9 @@ BG.prototype.draw = function(ctx, time, fpsNum) {
     }
     var left = this.left;
     if (this.velocityX > 0) {
-        left = left < element.mycanvas.width ? left : 0;
+        left = left < element.mycanvasWidth ? left : 0;
     } else {
-        left = left > -element.mycanvas.width ? left : 0;
+        left = left > -element.mycanvasWidth ? left : 0;
     }
     this.left = left;
     this.paint(ctx);
