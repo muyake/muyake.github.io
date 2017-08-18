@@ -1,0 +1,16 @@
+
+
+header {
+    width: 100px;
+    height: 100%;
+    min-height: 700px;
+    border:1px solid darkgreen;
+    left: 0px;
+    top: 0px;
+    position: fixed;
+}
+
+.loginBottom {
+    position: absolute;
+    bottom: 30px;
+}

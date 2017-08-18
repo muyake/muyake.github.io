@@ -1,0 +1,22 @@
+	html{
+			height: 100%;
+
+		}
+		*{
+			margin:0;
+			padding:0;
+		}
+		article{
+			max-width: 800px;
+			height: 1000px;
+			border:1px solid darkred;
+			margin:0 auto;
+		}
+		.loginBottom{
+			width: 80px;
+			height: 80px;
+			border:1px solid green;			
+		}
+		body{
+			min-width: 1000px;
+		}

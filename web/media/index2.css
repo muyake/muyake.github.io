@@ -1,0 +1,13 @@
+
+header{
+			max-width: 800px;
+			height: 100px;
+			border:1px solid  darkgreen;
+			margin:0 auto;
+			position: relative;
+		}
+		.loginBottom{
+			position: absolute;
+			right: 30px;
+			top:0px;
+		}

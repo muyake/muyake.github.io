@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!-- 这段代码来让IE的文档模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen and (max-width:1360px)" href="index1.css">
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:1360px)" href="index2.css">
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <style>
+    @media screen and (max-device-width:1060px) {
+        body {
+            background: red;
+        }
+    }
+
+    @media screen and (min-width:1060px) {
+        body {
+            background: orange;
+        }
+    }
+ 	
+    @media screen and (min-width:1060px) and (max-width:1200px) {
+        body {
+            color:blue;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        我是header
+        <div class="loginBottom">登录</div>
+    </header>
+    <article>
+        <a href="http://www.360doc.com/content/14/0704/06/10734150_391862769.shtml">参考网站</a>
+        <p>知识点</p>
+        <ol style="margin-left: 20px;">
+            <li>根据ie版本来加载js,如果ie版本小于9则加载js，否则不加载</li>
+            <li>媒体查询主要是把公共部分和差异部分继续区分，需要根据媒体显示不同效果的放在不同css里,所有的css都会加载进来，只是使用不同的css，相同部分放到一个css里.</li>
+            <li>添加多个css文件会导致增加http请求次数，也可以写到一个css文件里（例如上面的style）</li>
+            <li>本案例与人人直播间效果类似</li>           
+        </ol>
+    </article>
+</body>
+
+</html>

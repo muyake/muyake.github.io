@@ -17,7 +17,7 @@
     * [超级玛丽](https://muyake.github.io/canvas/games/mario/game.html)(电脑版，自制canvas小游戏)。
 ### 2.js特效
 + [字幕滚动](https://muyake.github.io/js/example1/index.html)（模拟每2s产生1-4条数据）
-+ [瀑布流](https://muyake.github.io/web/pubuliu/a.html)（方法2 [瀑布流](https://muyake.github.io/web/pubuliu/b.html)）
++ [瀑布流](https://muyake.github.io/web/pubuliu/a.html)（方g法2 [瀑布流](https://muyake.github.io/web/pubuliu/b.html)）
 ### 2.css特效
 + [红包](https://muyake.github.io/widget/redbag/shake.html)
 + [加载中](https://muyake.github.io/widget/load.html)
@@ -32,3 +32,8 @@
 + [言情小说](https://muyake.github.io/widget/环形轮播/2.html)（[jquery插件版](https://muyake.github.io/widget/环形轮播/jquey版/carousel_demo.html)）
 +  [导航栏](https://muyake.github.io/widget/widget/nav.html)
 + [人人翻转](https://muyake.github.io/widget/renrenfanzhuan/fanzhuan.html)
+### 5.知识点
++ css
+    + [媒体查询](https://muyake.github.io/web/media/index.html)
++ js
+    
