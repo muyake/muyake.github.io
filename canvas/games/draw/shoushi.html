@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="x5-orientation" content="portrait">
+    <title>刮奖</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .div1 {
+        width: 6.4rem;
+        height: 9.48rem;
+        background: url(12.png) no-repeat center/100% 100%;
+        overflow: hidden;
+    }
+
+    .guajiang {
+        width: 4.65rem;
+        height: 1.28rem;
+        margin: 0 auto;
+        top: 6.68rem;
+        left: 0.86rem;
+        display: block;
+        position: absolute;
+
+        border: 1px solid green;
+    }
+
+    #status {
+        width: 100%;
+        height: 0.5rem;
+        color: darkred;
+        text-align: center;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="div1">
+        <canvas class="guajiang" id='mask' width="465" height="128">
+        </canvas>
+    </div>
+    <div id="status">
+    </div>
+    <script>
+    //适配
+    window.onresize = r;
+
+    function r(resizeNum) {
+        //核心适配代码
+        var winW = window.innerWidth;
+        document.getElementsByTagName("html")[0].style.fontSize = winW * 0.15625 + "px";
+        //核心适配代码
+        if (winW > window.screen.width && resizeNum <= 10) {
+            setTimeout(function() {
+                r(++resizeNum)
+            }, 100);
+        } else {
+            document.getElementsByTagName("body")[0].style.opacity = 1;
+            var pwidth = parseInt(window.getComputedStyle(canvas, null).width);
+            var pheight = parseInt(window.getComputedStyle(canvas, null).height);
+            var cwidth = parseInt(canvas.width);
+            var cheigth = parseInt(canvas.height);
+            ratew = cwidth / pwidth;
+            rateh = cheigth / pheight;
+        }
+    }
+    setTimeout(function() {
+        r(0)
+    }, 100);
+    </script>
+    <script type="text/javascript">
+    var canvas = document.getElementById("mask");
+    var context = canvas.getContext("2d");
+    context.fillStyle = "#D1D1D1"; //设置填充色为浅灰色
+    context.fillRect(0, 0, 465, 128); //填充该颜色，以覆盖下方的背景图片
+    </script>
+    <script>
+    context.globalCompositeOperation = 'destination-out';
+
+    var ratew = 0; //计算canvas宽度与实际的宽度比。
+    var rateh = 0;
+    //移动和touchstart
+    canvas.addEventListener('touchmove', function(event) { //当手指在画布上移动时
+        event.preventDefault(); //先去除默认的响应行为  
+        var touch = event.touches[0]; //获取触摸的第一个点
+      	judge(touch);
+    });
+      canvas.addEventListener('touchstart', function(event) { //当手指在画布上触摸时
+        event.preventDefault(); //先去除默认的响应行为  
+        var touch = event.touches[0]; //获取触摸的第一个点
+      	judge(touch);
+    });
+    function judge(touch){
+  		context.beginPath(); //开始路径的绘制
+        context.arc((touch.pageX - canvas.offsetLeft) * ratew, (touch.pageY - canvas.offsetTop) * rateh, 20, 0, Math.PI * 2); //
+        context.closePath(); //结束路径绘制
+        context.fillStyle = "#BDC3C7"; //随意设置一种绘制颜色
+        context.fill(); //填充该颜色
+        var imgData = context.getImageData(0, 0, 465, 128); //获取画布中的所有像素
+        var pixelsArr = imgData.data; //得到像素的字节数据
+        var loop = pixelsArr.length; //获取该数据的长度
+        var transparent = 0; //设置一个变量来记录已经变为透明的像素点的数量
+        for (var i = 0; i < loop; i += 4) { //循环遍历每一个像素
+            var alpha = pixelsArr[i + 3]; //获取每个像素的透明度数值
+            if (alpha < 10) { //当透明度小于10时，认为它已经被擦除
+                transparent++; //使transparent数值加1
+            }
+        }
+        var percentage = transparent / (loop / 4); //计算透明像素在所有像素点中所占比例
+        if (percentage > .6) { //当该比例大于90%时
+            document.getElementById("status").innerHTML = "刮奖结束！"; //显示刮奖结束字样
+
+        }
+    }
+    </script>
+</body>
+
+</html>
