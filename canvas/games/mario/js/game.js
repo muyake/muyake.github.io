@@ -38,11 +38,12 @@ var game = {
     init: function() {
         var self = this;
         clipObj.init(function() {
+
             console.log('游戏开始');
             gameControl.gamePause = false;
         }, function() {
             if (drawSpriteList.mario.lifeNum > 0) {
-                self.reset(3);
+                self.reset(154);
             } else {
                 self.over();
             }
@@ -73,6 +74,7 @@ var game = {
     },
     reset: function(num) {
         console.log("reset");
+
         progressObj.mileageNum = num;
         progressObj.createSpriteMileNum = num * gameConfig.objectSpeedRate;
         drawSpriteList.arrayOthersA = [];
@@ -88,7 +90,10 @@ var game = {
         drawSpriteList.statusArr.life.minuteLife(drawSpriteList.mario.lifeNum);
     },
     bindEvent: function() {
-        createFactory.createBadflower(300, 0);
+        //createFactory.createBadflower(300, 0);
+        this.reset(154);
+        // drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
+         // drawSpriteList.createAnimationSpriteList.push(new Shell({left:300}));
         var self = this;
         document.querySelector('#smallBtn').addEventListener('click', function() {
             drawSpriteList.arrayOthersA.forEach(function(item) {
@@ -102,7 +107,7 @@ var game = {
             //createFactory.createUpMoney(100, 100);
         }, false);
         document.querySelector('#flower1').addEventListener('click', function() {
-            drawSpriteList.mario.rise(WH.mario.smallstatus.height, 3);
+           
             createFactory.createBullet(100, 100);
         }, false);
         document.querySelector('#createStar').addEventListener('click', function() {
@@ -566,7 +571,7 @@ var drawSpriteList = {
                     if (mover.name == 'shell') {
                         drawSpriteList.createAnimationSpriteList.forEach(function(mover2) {
                             if (mover2.name == 'monster' || mover2.name == 'tortoise' || mover2.name == 'shell') {
-                                if (mover2 != mover && mover2.status == 0) {
+                                if (mover2 != mover) {
                                     CD['judgeShellMover'](mover, mover2);
                                 }
                             }

@@ -348,7 +348,7 @@ var Monster = function(setting) {
         runInPlace: new behaviorList.runInPlace({ PAGEFLIP_INTERVAL: 100 }),
     };
     this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
-    this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹,4为无敌状态。
+    this.status = 1; 
     this.painter = this.painters.run;
     this.monsterSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.monsterJumpend, this);
     this.monsterSpriteAnimatorMove = new MoveSpriteAnimator(null, this);
@@ -437,7 +437,7 @@ var Tortoise = function(setting) {
         runInPlace: new behaviorList.runInPlace({ PAGEFLIP_INTERVAL: 40 }),
     };
     this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
-    this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹,4为无敌状态。
+   // this.status = 1; 
     this.painter = this.painters.run;
     this.tortoiseSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.tortoiseJumpend, this);
     this.tortoiseSpriteAnimatorMove = new MoveSpriteAnimator(null, this);

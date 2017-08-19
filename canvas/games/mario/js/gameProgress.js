@@ -8,12 +8,12 @@ var progressObj = {
     createSpriteMileNum: 0,
     mileageNumUpdate: function(fpsNum) {
         this.fpsNum = (fpsNum == 0) ? 1 : (fpsNum || this.fpsNum);
-       // console.log(this.velocityX );
+        // console.log(this.velocityX );
         this.mileageNum += this.velocityX / this.fpsNum;
 
-        this.createSpriteMileNum = this.mileageNum*gameConfig.objectSpeedRate;      
+        this.createSpriteMileNum = this.mileageNum * gameConfig.objectSpeedRate;
     },
-    countDownNumUpdate: function() {        
+    countDownNumUpdate: function() {
         this.currentTime = this.totaltime - this.countDownWatch.getElapsedTime() / 1000;
     },
     countDownStart: function() {
@@ -25,183 +25,589 @@ var progressObj = {
     },
 };
 
-var PJNum={
-    wall1:300,
-    
-    money1:700,
-    pipe1:600,
-    hole1:700,
-    badflower1:500,
-    final1:800,
+var PJNum = {
+    wall1: 500,
+    wall2: 2150,
+    wall3: 2150 + WH.wall.width * 10 + WH.monster.width + 20,
+    wall4: 2150 + WH.wall.width * 10 + WH.monster.width + 20 + WH.wall.width * 60+ WH.hole.width +  WH.pipe.width-20 ,
+    wallTop: 100,
+    wallTop2: 140,
+    money1: 700,
+    pipe1: 550,
+    hole1: 700,
+    badflower1: 500,
+    final1: 2150 + WH.wall.width * 10 + WH.monster.width + 20 + WH.wall.width * 60+ WH.hole.width +  WH.pipe.width-20 + WH.wall.width * 20+ WH.monster.width + 20
 }
 
 var totalProgressSprite = {
-    wall: [
-    {
-        isVisible: true,
-        id: lib.newGuid(),
-        status: 0,
-        positionmile:PJNum.wall1+100, //left=progressObj.mileageNum-positionmile   
-        physicaltop: 100,
-        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    }, 
-    {
-        isVisible: true,
-        id: lib.newGuid(),
-        status: 1,
-        positionmile:PJNum.wall1+ 135,
-        physicaltop: 100,
-        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    }, {
-        isVisible: true,
-        id: lib.newGuid(),
-        status: 0,
-        positionmile:PJNum.wall1+ 170,
-        physicaltop: 100,
-        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    }, {
-        isVisible: true,
-        id: lib.newGuid(),
-        status: 1,
-        positionmile: PJNum.wall1+205,
-        physicaltop: 100,
-        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    }, {
-        isVisible: true,
-        id: lib.newGuid(),
-        status: 0,
-        positionmile: PJNum.wall1+240,
-        physicaltop: 100,
-        contain: 3, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    }, {
-        isVisible: true,
-        id: lib.newGuid(),
-        status: 1,
-        positionmile:PJNum.wall1+ 275,
-        physicaltop: 100,
-        contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    }, {
-        isVisible: true,
-        id: lib.newGuid(),
-        status: 0,
-        positionmile:PJNum.wall1+ 310,
-        physicaltop: 100,
-        contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    }, {
-        isVisible: true,
-        id: lib.newGuid(),
-        status: 1,
-        positionmile:PJNum.wall1+ 345,
-        physicaltop: 100,
-        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
-    }, 
-    {
-        isVisible: true,
-        id: lib.newGuid(),
-        status: 1,
-        positionmile: PJNum.wall1+380,
-        physicaltop: 100,
-        contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+    wall: [{
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall1, //left=progressObj.mileageNum-positionmile   
+            physicaltop: PJNum.wallTop,
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall1 + 100, //left=progressObj.mileageNum-positionmile   
+            physicaltop: PJNum.wallTop,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 1,
+            positionmile: PJNum.wall1 + 135,
+            physicaltop: PJNum.wallTop,
+            contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall1 + PJNum.wallTop2,
+            physicaltop: PJNum.wallTop,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 1,
+            positionmile: PJNum.wall1 + 170,
+            physicaltop: PJNum.wallTop + PJNum.wallTop2,
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 1,
+            positionmile: PJNum.wall1 + 205,
+            physicaltop: PJNum.wallTop,
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall1 + 240,
+            physicaltop: PJNum.wallTop,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }
+        //第二个坑左右
+        , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall2 + 0,
+            physicaltop: PJNum.wallTop,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 1,
+            positionmile: PJNum.wall2 + WH.wall.width,
+            physicaltop: PJNum.wallTop,
+            contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall2 + WH.wall.width * 2,
+            physicaltop: PJNum.wallTop,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        },
 
-    }
+        {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall2 + WH.wall.width * 3,
+            physicaltop: PJNum.wallTop + PJNum.wallTop2,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall2 + WH.wall.width * 4,
+            physicaltop: PJNum.wallTop + PJNum.wallTop2,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall2 + +WH.wall.width * 5,
+            physicaltop: PJNum.wallTop + PJNum.wallTop2,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall2 + WH.wall.width * 6,
+            physicaltop: PJNum.wallTop + PJNum.wallTop2,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall2 + WH.wall.width * 7,
+            physicaltop: PJNum.wallTop + PJNum.wallTop2,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall2 + WH.wall.width * 8,
+            physicaltop: PJNum.wallTop + PJNum.wallTop2,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall2 + WH.wall.width * 9,
+            physicaltop: PJNum.wallTop + PJNum.wallTop2,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }
+
+        , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall3 + WH.wall.width * 1,
+            physicaltop: PJNum.wallTop + PJNum.wallTop2,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, 
+        
+        {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall3 + WH.wall.width * 2,
+            physicaltop: PJNum.wallTop + PJNum.wallTop2,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall3 + WH.wall.width * 3,
+            physicaltop: PJNum.wallTop + PJNum.wallTop2,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 1,
+            positionmile: PJNum.wall3 + WH.wall.width * 4,
+            physicaltop: PJNum.wallTop + PJNum.wallTop2,
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }
+        , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall3 + WH.wall.width * 4,
+            physicaltop: PJNum.wallTop ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }
+        , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall3 + WH.wall.width * 7,
+            physicaltop: PJNum.wallTop ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }
+        , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status: 0,
+            positionmile: PJNum.wall3 + WH.wall.width * 8,
+            physicaltop: PJNum.wallTop ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }
+         , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:1,
+            positionmile: PJNum.wall3 + WH.wall.width * 13,
+            physicaltop: PJNum.wallTop ,
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }
+         , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:1,
+            positionmile: PJNum.wall3 + WH.wall.width * 16,
+            physicaltop: PJNum.wallTop ,
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }
+        , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:1,
+            positionmile: PJNum.wall3 + WH.wall.width * 16,
+            physicaltop: PJNum.wallTop+PJNum.wallTop2 ,
+            contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }
+         , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:1,
+            positionmile: PJNum.wall3 + WH.wall.width * 19,
+            physicaltop: PJNum.wallTop ,
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }
+
+         , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:0,
+            positionmile: PJNum.wall3 + WH.wall.width * 25,
+            physicaltop: PJNum.wallTop ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }
+         , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:0,
+            positionmile: PJNum.wall3 + WH.wall.width * 28,
+            physicaltop: PJNum.wallTop+PJNum.wallTop2 ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        } , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:0,
+            positionmile: PJNum.wall3 + WH.wall.width * 29,
+            physicaltop: PJNum.wallTop+PJNum.wallTop2 ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        } , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:0,
+            positionmile: PJNum.wall3 + WH.wall.width * 30,
+            physicaltop: PJNum.wallTop+PJNum.wallTop2 ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:0,
+            positionmile: PJNum.wall3 + WH.wall.width * 35,
+            physicaltop: PJNum.wallTop+PJNum.wallTop2 ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:1,
+            positionmile: PJNum.wall3 + WH.wall.width * 36,
+            physicaltop: PJNum.wallTop+PJNum.wallTop2 ,
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:1,
+            positionmile: PJNum.wall3 + WH.wall.width * 37,
+            physicaltop: PJNum.wallTop+PJNum.wallTop2 ,
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        },  {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:0,
+            positionmile: PJNum.wall3 + WH.wall.width * 36,
+            physicaltop: PJNum.wallTop ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:0,
+            positionmile: PJNum.wall3 + WH.wall.width * 37,
+            physicaltop: PJNum.wallTop ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:0,
+            positionmile: PJNum.wall3 + WH.wall.width * 38,
+            physicaltop: PJNum.wallTop +PJNum.wallTop2 ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        },
+        , {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:0,
+            positionmile: PJNum.wall4+WH.wall.width * 7 ,
+            physicaltop: PJNum.wallTop  ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        },
+
+, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:0,
+            positionmile: PJNum.wall4 + WH.wall.width * 8,
+            physicaltop: PJNum.wallTop  ,
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        },
+
+, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:1,
+            positionmile: PJNum.wall4 + WH.wall.width * 9,
+            physicaltop: PJNum.wallTop  ,
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        },
+
+, {
+            isVisible: true,
+            id: lib.newGuid(),
+            status:1,
+            positionmile: PJNum.wall4 + WH.wall.width * 10,
+            physicaltop: PJNum.wallTop  ,
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+        },
+
+
+      
+
+
+       
     ],
-    money: [
-    {
+    money: [{
         isVisible: true,
         id: lib.newGuid(),
-        physicaltop: 100,
-        positionmile:PJNum.money1+ 500,
+        physicaltop: PJNum.wallTop,
+        positionmile: PJNum.money1 + 500,
     }, {
         isVisible: true,
         id: lib.newGuid(),
-        physicaltop: 100,
-        positionmile:PJNum.money1+ 600,
-    }
-    ],
-    pipe: [    
-     {
-
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 0,
-        positionmile:PJNum.pipe1+ 440
-    },
-    {
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 0,
-        positionmile:PJNum.pipe1+ 860
-    },
-    ],
-    final: [    
-     {
-
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: -10,
-        positionmile: PJNum.final1+940
-    }
-    ],
-    flag:[
-    {
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 162,
-        positionmile: PJNum.final1+960
+        physicaltop: PJNum.wallTop,
+        positionmile: PJNum.money1 + 600,
     }],
+    pipe: [{
+
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: -40,
+        positionmile: PJNum.pipe1 + 440
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: -20,
+        positionmile: PJNum.pipe1 + 640
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: PJNum.pipe1 + 840
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: PJNum.pipe1 + 1040,
+    },
+
+ {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: PJNum.wall3 + WH.wall.width * 40+ WH.monster.width + 20,
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: PJNum.wall3 + WH.wall.width * 47,
+    },
+     {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: PJNum.wall3 + WH.wall.width * 60+15,
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: 0,
+        positionmile: PJNum.wall3 + WH.wall.width * 60+ WH.hole.width +  WH.pipe.width-20 ,
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: -20,
+        positionmile: PJNum.wall4+WH.wall.width * 4 ,
+    },
+ {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: -20,
+        positionmile:   PJNum.wall4 + WH.wall.width * 11+ WH.monster.width + 20,
+    }
+
+     ],
+    final: [
+         {
+
+            isVisible: true,
+            id: lib.newGuid(),
+            physicaltop: -10,
+            positionmile: PJNum.final1
+        }
+    ],
+    flag: [
+        {
+            isVisible: true,
+            id: lib.newGuid(),
+            physicaltop: 162,
+            positionmile: PJNum.final1+20
+        }
+    ],
     fire: [],
     badflower: [
-    {
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 0,
-        positionmile:PJNum.badflower1+800
-    },
-    ],    
-    monster: [ 
-    {
-        isDie:false,
-         isAdd:false,//判断是否加入过数组
-        isMonster:true,
-        isVisible: true,
-        id: lib.newGuid(),       
-        positionmile: 690,
-       }
-       ],
+        {
+            isVisible: true,
+            id: lib.newGuid(),
+            physicaltop: 0,
+            positionmile: PJNum.wall3 + WH.wall.width * 55,
+        },
+    ],
+    monster: [{
+            isDie: false,
+            isAdd: false, //判断是否加入过数组
+            isMonster: true,
+            isVisible: true,
+            id: lib.newGuid(),
+            positionmile: PJNum.pipe1 + 740,
+        },{
+            isDie: false,
+            isAdd: false, //判断是否加入过数组
+            isMonster: true,
+            isVisible: true,
+            id: lib.newGuid(),
+            positionmile: PJNum.pipe1 + 940,
+        }, {
+            isDie: false,
+            isAdd: false, //判断是否加入过数组
+            isMonster: true,
+            isVisible: true,
+            id: lib.newGuid(),
+            positionmile: PJNum.pipe1 + 945 + WH.monster.width + 15,
+        }, {
+            isDie: false,
+            isAdd: false, //判断是否加入过数组
+            isMonster: true,
+            isVisible: true,
+            id: lib.newGuid(),
+            positionmile: PJNum.wall2 + WH.wall.width * 17,
+        }, {
+            isDie: false,
+            isAdd: false, //判断是否加入过数组
+            isMonster: true,
+            isVisible: true,
+            id: lib.newGuid(),
+            positionmile: PJNum.wall2 + WH.wall.width * 17 + WH.monster.width + 20,
+        }
+
+        , {
+            isDie: false,
+            isAdd: false, //判断是否加入过数组
+            isMonster: true,
+            isVisible: true,
+            id: lib.newGuid(),
+           positionmile: PJNum.wall3 + WH.wall.width * 30,
+        }, {
+            isDie: false,
+            isAdd: false, //判断是否加入过数组
+            isMonster: true,
+            isVisible: true,
+            id: lib.newGuid(),
+             positionmile: PJNum.wall3 + WH.wall.width * 30+ WH.monster.width + 20,
+        }
+
+        , {
+            isDie: false,
+            isAdd: false, //判断是否加入过数组
+            isMonster: true,
+            isVisible: true,
+            id: lib.newGuid(),
+           positionmile: PJNum.wall3 + WH.wall.width * 37,
+        }, {
+            isDie: false,
+            isAdd: false, //判断是否加入过数组
+            isMonster: true,
+            isVisible: true,
+            id: lib.newGuid(),
+             positionmile: PJNum.wall3 + WH.wall.width * 37+ WH.monster.width + 20,
+        }
+, {
+            isDie: false,
+            isAdd: false, //判断是否加入过数组
+            isMonster: true,
+            isVisible: true,
+            id: lib.newGuid(),
+             positionmile: PJNum.wall4 + WH.wall.width * 8,
+        }
+, {
+            isDie: false,
+            isAdd: false, //判断是否加入过数组
+            isMonster: true,
+            isVisible: true,
+            id: lib.newGuid(),
+             positionmile: PJNum.wall4 + WH.wall.width * 8+ WH.monster.width + 20,
+        }
+
+
+         
+
+    ],
     //mushroom: [],
     tortoise: [
-    {
-         isAdd:false,//判断是否加入过数组
-        isMonster:true,
-        isVisible: true,
-        id: lib.newGuid(),       
-        positionmile: 580,
-       }
-       ],
-    star: [],
-    tower: [
-    { isReverse:false,
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 0,
-        positionmile: -6,
-    },
-     {
-        isReverse:true,
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: 0,
-        positionmile:PJNum.final1+ 1154,
-    }
+        {
+             isAdd:false,//判断是否加入过数组
+            isMonster:true,
+            isVisible: true,
+            id: lib.newGuid(),       
+            positionmile: PJNum.wall3 + WH.wall.width * 16,
+           },  {
+             isAdd:false,//判断是否加入过数组
+            isMonster:true,
+            isVisible: true,
+            id: lib.newGuid(),       
+            positionmile: PJNum.wall3 + WH.wall.width * 20,
+           }
+           ,  {
+             isAdd:false,//判断是否加入过数组
+            isMonster:true,
+            isVisible: true,
+            id: lib.newGuid(),       
+             positionmile: PJNum.wall3 + WH.wall.width * 50,
+           }
+           
     ],
-    hole: [
-    {
+    star: [],
+    tower: [{
+            isReverse: false,
+            isVisible: true,
+            id: lib.newGuid(),
+            physicaltop: 0,
+            positionmile: -6,
+        },
+         {
+            isReverse:true,
+            isVisible: true,
+            id: lib.newGuid(),
+            physicaltop: 0,
+            positionmile:PJNum.final1+ 234,
+        }
+    ],
+    hole: [{
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: -33,
-        positionmile:PJNum.hole1+ 430
+        positionmile: PJNum.pipe1 + 1340,
+    }, {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: -33,
+        positionmile: PJNum.wall2 + WH.wall.width * 7,
     }
-    ],
+    , {
+        isVisible: true,
+        id: lib.newGuid(),
+        physicaltop: -33,
+        positionmile: PJNum.wall3 + WH.wall.width * 60+WH.pipe.width,
+    }],
 };
 
 var createFactory = {
@@ -237,9 +643,9 @@ var createFactory = {
         createUpMushroomObj.up(200);
         drawSpriteList.createAnimationSpriteList.push(createUpMushroomObj);
     },
-      //创造坏花
-    createBadflower: function(setting) {     
-         return new BadFlower({
+    //创造坏花
+    createBadflower: function(setting) {
+        return new BadFlower({
             id: setting.id,
             physicaltop: setting.physicaltop,
             positionmile: setting.positionmile,
@@ -309,14 +715,14 @@ var createFactory = {
             left: setting.positionmile - progressObj.createSpriteMileNum,
         });
     },
-      //创造旗帜
+    //创造旗帜
     createFlag: function(setting) {
         return new Flag({
             id: setting.id,
             physicaltop: setting.physicaltop,
             positionmile: setting.positionmile,
-            callback:function(){
-               drawSpriteList.success();
+            callback: function() {
+                drawSpriteList.success();
             },
             left: setting.positionmile - progressObj.createSpriteMileNum,
         });
@@ -330,8 +736,8 @@ var createFactory = {
             left: setting.positionmile - progressObj.createSpriteMileNum,
 
         });
-    },   
-    
+    },
+
     //创造砖块
     createBrick: function(positionmile, physicaltop) {
         var arr = ["leftup", "leftdown", "rightup", "rightdown"];
@@ -364,39 +770,39 @@ var createFactory = {
     },
     //创造怪兽
     createMonster: function(setting) {
-        if(setting.isAdd||setting.isDie){
+        if (setting.isAdd || setting.isDie) {
             return;
         }
 
-        setting.isAdd=true;
-        var monster=  new Monster({
-                id: setting.id,
-               // physicaltop: setting.physicaltop,
-                positionmile: setting.positionmile,
-                left: setting.positionmile - progressObj.createSpriteMileNum,
-            });
-         drawSpriteList.createAnimationSpriteList.push(monster); 
+        setting.isAdd = true;
+        var monster = new Monster({
+            id: setting.id,
+            // physicaltop: setting.physicaltop,
+            positionmile: setting.positionmile,
+            left: setting.positionmile - progressObj.createSpriteMileNum,
+        });
+        drawSpriteList.createAnimationSpriteList.push(monster);
     },
     //创造乌龟
     createTortoise: function(setting) {
-        if(setting.isAdd||setting.isDie){
+        if (setting.isAdd || setting.isDie) {
             return;
         }
-  
-        setting.isAdd=true;
-        var tortoise=  new Tortoise({
-                id: setting.id,               
-                positionmile: setting.positionmile,
-                left: setting.positionmile - progressObj.createSpriteMileNum,
-            });
-         drawSpriteList.createAnimationSpriteList.push(tortoise); 
+
+        setting.isAdd = true;
+        var tortoise = new Tortoise({
+            id: setting.id,
+            positionmile: setting.positionmile,
+            left: setting.positionmile - progressObj.createSpriteMileNum,
+        });
+        drawSpriteList.createAnimationSpriteList.push(tortoise);
     },
 
 
     //创造城堡
     createTower: function(setting) {
-return new Tower({
-            isReverse:setting.isReverse,
+        return new Tower({
+            isReverse: setting.isReverse,
             id: setting.id,
             physicaltop: setting.physicaltop,
             positionmile: setting.positionmile,
@@ -423,9 +829,9 @@ return new Tower({
         'tortoise': 'createTortoise',
         'star': 'createStar',
         'tower': 'createTower',
-        'final':'createFinal',
+        'final': 'createFinal',
         'hole': 'createHole',
-        'flag':'createFlag',
+        'flag': 'createFlag',
     },
     hasId: function(id, spriteList) {
         return spriteList.some(function(item) {
@@ -446,11 +852,11 @@ return new Tower({
             if (item.isVisible && (item.positionmile - progressObj.createSpriteMileNum) >= -WH[item.name].width && (item.positionmile - progressObj.createSpriteMileNum) <= element.mycanvasWidth) {
                 var id = item.id;
                 if (!self.hasId(id, drawSpriteList)) {
-                  if(item.isMonster){
-                    self[self.nameToCreateFun[item.name]](item);
-                  }else{
-                     drawSpriteList.push(self[self.nameToCreateFun[item.name]](item));
-                 }                   
+                    if (item.isMonster) {
+                        self[self.nameToCreateFun[item.name]](item);
+                    } else {
+                        drawSpriteList.push(self[self.nameToCreateFun[item.name]](item));
+                    }
                 }
             }
         });

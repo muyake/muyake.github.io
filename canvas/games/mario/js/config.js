@@ -573,7 +573,7 @@ var wallConfig = {
 
 var marioGameConfig = {
   bigJumpV: 320,
-  smallJumpV: 220,
+  smallJumpV: 200,
 }
 var element = {
   mycanvas: document.getElementById('mycanvas'),
