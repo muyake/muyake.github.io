@@ -129,7 +129,7 @@ var Mario = function(setting) {
     this.behaviorStatus = {
         runInPlace: new behaviorList.runInPlace(),
     };
-    this.lifeNum = 2;
+    this.lifeNum = 3;
     this.status = 1; //1为小人，2为吃蘑菇长大，3为吃花吐子弹,4为无敌状态。
     this.painter = this.painters.stand;
     this.marioSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.marioJumpend, this);
