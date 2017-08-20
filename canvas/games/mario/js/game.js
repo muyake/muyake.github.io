@@ -17,16 +17,18 @@ var sourceLoadObj = {
        element.progressBox.style.display = 'none';
         //加载图片完成后执行。
         createFactory.init();
-        game.init();
+        
 
         createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
-       // audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+       audioControl.BGMPlay(gameSourceObj.audioList.BGM);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
+        game.init();
+       
         //  drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
     }
 }
@@ -43,7 +45,8 @@ var game = {
             gameControl.gamePause = false;
         }, function() {
             if (drawSpriteList.mario.lifeNum > 0) {
-                self.reset(154);
+                var num=progressObj.mileageNum>37*174/100?37*174/100:0;
+                self.reset(num);
             } else {
                 self.over();
             }
@@ -74,7 +77,10 @@ var game = {
     },
     reset: function(num) {
         console.log("reset");
-
+        //时间重置。
+        progressObj.totaltime=300;      
+        progressObj.countDownWatch.reset();
+        progressObj.countDownWatch.start();
         progressObj.mileageNum = num;
         progressObj.createSpriteMileNum = num * gameConfig.objectSpeedRate;
         drawSpriteList.arrayOthersA = [];
@@ -91,8 +97,8 @@ var game = {
     },
     bindEvent: function() {
         //createFactory.createBadflower(300, 0);
-        this.reset(154);
-        // drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
+        this.reset(0);
+       
          // drawSpriteList.createAnimationSpriteList.push(new Shell({left:300}));
         var self = this;
         document.querySelector('#smallBtn').addEventListener('click', function() {
@@ -524,7 +530,7 @@ var drawSpriteList = {
                 gameConfig.setSpeedDefault();
             }
 
-
+           
             //马里奥与墙、管道,固定金币等碰撞
             drawSpriteList.arrayOthersA.forEach(function(itemDraw) {
                 var callback = self.config[itemDraw.name].callback || function() {};
@@ -568,7 +574,7 @@ var drawSpriteList = {
                 if (!mover.upover && (mover.name == 'mushroom' || mover.name == 'star')) {
                     return;
                 } else {
-                    if (mover.name == 'shell') {
+                    if (mover.name == 'shell') {//是乌龟壳且运动中。
                         drawSpriteList.createAnimationSpriteList.forEach(function(mover2) {
                             if (mover2.name == 'monster' || mover2.name == 'tortoise' || mover2.name == 'shell') {
                                 if (mover2 != mover) {
@@ -668,7 +674,11 @@ var animateList = {
         cans.fillText((gameControl.fps.num >> 0) + 'fps', 50, 20);
         progressObj.mileageNumUpdate(gameControl.fps.num);
         progressObj.countDownNumUpdate();
-        cans.fillText("行程:" + (progressObj.mileageNum >> 0) + "m", 400, 20);
+
+        cans.fillText("行程:" + ((progressObj.mileageNum/174*100) >> 0) + "m", 400, 20);
         cans.fillText("倒计时:" + (progressObj.currentTime >> 0) + "s", 480, 20);
+        // if(progressObj.currentTime<=290){       
+        //  drawSpriteList.mario.collisiondie();          
+        // }
     },
 }

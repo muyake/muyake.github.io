@@ -40,13 +40,15 @@ var PJNum = {
 }
 
 var totalProgressSprite = {
-    wall: [{
+    wall: [   
+
+        {
             isVisible: true,
             id: lib.newGuid(),
             status: 0,
             positionmile: PJNum.wall1, //left=progressObj.mileageNum-positionmile   
             physicaltop: PJNum.wallTop,
-            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
         }, {
             isVisible: true,
             id: lib.newGuid(),
@@ -58,35 +60,35 @@ var totalProgressSprite = {
             isVisible: true,
             id: lib.newGuid(),
             status: 1,
-            positionmile: PJNum.wall1 + 135,
+            positionmile: PJNum.wall1+ 100 + WH.wall.width,
             physicaltop: PJNum.wallTop,
             contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
         }, {
             isVisible: true,
             id: lib.newGuid(),
             status: 0,
-            positionmile: PJNum.wall1 + PJNum.wallTop2,
+            positionmile: PJNum.wall1+ 100 + WH.wall.width*2,
             physicaltop: PJNum.wallTop,
             contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
         }, {
             isVisible: true,
             id: lib.newGuid(),
             status: 1,
-            positionmile: PJNum.wall1 + 170,
+            positionmile: PJNum.wall1 + 100+  WH.wall.width*2,
             physicaltop: PJNum.wallTop + PJNum.wallTop2,
             contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
         }, {
             isVisible: true,
             id: lib.newGuid(),
             status: 1,
-            positionmile: PJNum.wall1 + 205,
+            positionmile: PJNum.wall1+ 100 +  WH.wall.width*3,
             physicaltop: PJNum.wallTop,
             contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
         }, {
             isVisible: true,
             id: lib.newGuid(),
             status: 0,
-            positionmile: PJNum.wall1 + 240,
+            positionmile: PJNum.wall1 + 100+  WH.wall.width*4,
             physicaltop: PJNum.wallTop,
             contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
         }
@@ -226,7 +228,7 @@ var totalProgressSprite = {
             status:1,
             positionmile: PJNum.wall3 + WH.wall.width * 13,
             physicaltop: PJNum.wallTop ,
-            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+            contain: 4, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
         }
          , {
             isVisible: true,
@@ -242,7 +244,7 @@ var totalProgressSprite = {
             status:1,
             positionmile: PJNum.wall3 + WH.wall.width * 16,
             physicaltop: PJNum.wallTop+PJNum.wallTop2 ,
-            contain: 2, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
         }
          , {
             isVisible: true,
@@ -259,7 +261,8 @@ var totalProgressSprite = {
             status:0,
             positionmile: PJNum.wall3 + WH.wall.width * 25,
             physicaltop: PJNum.wallTop ,
-            contain: 0, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
+            moneyCount:5,
+            contain: 1, //0代表没有东西,1代表金币，2代表蘑菇，3代表花，4代表星星。
         }
          , {
             isVisible: true,
@@ -378,7 +381,8 @@ var totalProgressSprite = {
         physicaltop: PJNum.wallTop,
         positionmile: PJNum.money1 + 600,
     }],
-    pipe: [{
+    pipe: [
+    {
 
         isVisible: true,
         id: lib.newGuid(),
@@ -455,12 +459,21 @@ var totalProgressSprite = {
     ],
     fire: [],
     badflower: [
+    
         {
             isVisible: true,
             id: lib.newGuid(),
             physicaltop: 0,
             positionmile: PJNum.wall3 + WH.wall.width * 55,
         },
+          
+           {
+            isVisible: true,
+            id: lib.newGuid(),
+            physicaltop: 0,
+            positionmile:  PJNum.wall3 + WH.wall.width * 37,
+        },
+         
     ],
     monster: [{
             isDie: false,
@@ -663,7 +676,7 @@ var createFactory = {
             },
         });
         createUpStarObj.up(200);
-        createUpStarObj.move(-70);
+        createUpStarObj.move(-50);
         drawSpriteList.createAnimationSpriteList.push(createUpStarObj);
     },
 
@@ -693,6 +706,7 @@ var createFactory = {
             physicaltop: setting.physicaltop,
             positionmile: setting.positionmile,
             status: setting.status,
+            moneyCount:setting.moneyCount,
             left: setting.positionmile - progressObj.createSpriteMileNum,
         });
         return wall;

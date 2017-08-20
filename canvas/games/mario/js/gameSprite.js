@@ -151,12 +151,11 @@ Mario.prototype.setClothes = function(marioStatus) {
     this.painters.stand.image.src = gameSourceUrl.imageList.mario[marioStatus].stand;
     this.painters.laqi.image.src = gameSourceUrl.imageList.mario[marioStatus].laqi;
 };
-Mario.prototype.laqi=function(){
-this.painter = this.painters.laqi;   
-this.velocityY =0;     
-       
-               this.behaviors = [];
-               this.translateLeft=-this.left;
+Mario.prototype.laqi = function() {
+    this.painter = this.painters.laqi;
+    this.velocityY = 0;
+    this.behaviors = [];
+    this.translateLeft = -this.left;
 }
 Mario.prototype.reset = function() {
     this.isDie = false;
@@ -185,7 +184,7 @@ Mario.prototype.jump = function(VY) {
         }
     }
 
-    console.log('蹦');
+    //console.log('蹦');
     this.velocityY = -VY;
     this.behaviors = [];
     this.painter = this.jumpPainter;
@@ -264,17 +263,18 @@ Mario.prototype.collisiondie = function() {
         if (!this.isJump) {
             this.jump(marioGameConfig.smallJumpV / 2);
         }
+        audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
     }
-    audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
+
 };
-Mario.prototype.intoTower= function() {
+Mario.prototype.intoTower = function() {
     // this.jump(0);
-   this.positionmile=progressObj.createSpriteMileNum;
+    this.positionmile = progressObj.createSpriteMileNum;
     this.marioSpriteAnimatorMove.start();
-   this.painter = this.painters.run;
+    this.painter = this.painters.run;
     this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
-     audioControl.BGMPause(gameSourceObj.audioList.BGM);
-      audioControl.audioPlay(gameSourceObj.audioList.gamesuccess, gameAudio.gameSuccess);
+    audioControl.BGMPause(gameSourceObj.audioList.BGM);
+    audioControl.audioPlay(gameSourceObj.audioList.gamesuccess, gameAudio.gameSuccess);
     //audioControl.audioPlay(gameSourceObj.audioList.die, gameAudio.die);
 };
 Mario.prototype.draw = function(ctx, time, fpsNum) {
@@ -308,9 +308,9 @@ Mario.prototype.draw = function(ctx, time, fpsNum) {
 
     // //碰撞的向后顺序是先撞墙，再吃金币  l
     //if (!gameControl.gamePause&&gamesprite) {
-        this.update(ctx, time, fpsNum);
+    this.update(ctx, time, fpsNum);
     //}
- 
+
 
     this.paint(ctx);
 };
@@ -348,7 +348,7 @@ var Monster = function(setting) {
         runInPlace: new behaviorList.runInPlace({ PAGEFLIP_INTERVAL: 100 }),
     };
     this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
-    this.status = 1; 
+    this.status = 1;
     this.painter = this.painters.run;
     this.monsterSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.monsterJumpend, this);
     this.monsterSpriteAnimatorMove = new MoveSpriteAnimator(null, this);
@@ -437,7 +437,7 @@ var Tortoise = function(setting) {
         runInPlace: new behaviorList.runInPlace({ PAGEFLIP_INTERVAL: 40 }),
     };
     this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
-   // this.status = 1; 
+    // this.status = 1; 
     this.painter = this.painters.run;
     this.tortoiseSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.tortoiseJumpend, this);
     this.tortoiseSpriteAnimatorMove = new MoveSpriteAnimator(null, this);
@@ -585,37 +585,37 @@ var Life = function(setting) {
     this.imgheight = lifeConfig.config.sprite_5.height;
     this.imgleft = lifeConfig.config.sprite_5.left;
     this.imgtop = lifeConfig.config.sprite_5.top;
-    this.width=WH.life.width;
-    this.height=WH.life.height;
-    this.top=5;
-    this.left=580;
-    this.status=5;
+    this.width = WH.life.width;
+    this.height = WH.life.height;
+    this.top = 5;
+    this.left = 580;
+    this.status = 5;
     SceneSprite.call(this, setting.name || 'life', new SceneImagePainter(gameSourceUrl.imageList.life));
 }
 Life.prototype = Object.create(Sprite.prototype);
-Life.prototype.minuteLife =function(num){   
-    if(num<=0){
-        num=1;
+Life.prototype.minuteLife = function(num) {
+    if (num <= 0) {
+        num = 1;
     }
-    this.imgwidth = lifeConfig.config['sprite_'+num].width;
-    this.imgheight = lifeConfig.config['sprite_'+num].height;
-    this.imgleft = lifeConfig.config['sprite_'+num].left;
-    this.imgtop = lifeConfig.config['sprite_'+num].top;
-} 
+    this.imgwidth = lifeConfig.config['sprite_' + num].width;
+    this.imgheight = lifeConfig.config['sprite_' + num].height;
+    this.imgleft = lifeConfig.config['sprite_' + num].left;
+    this.imgtop = lifeConfig.config['sprite_' + num].top;
+}
 
-Life.prototype.draw = function(ctx, time, fpsNum) {  
+Life.prototype.draw = function(ctx, time, fpsNum) {
     this.paint(ctx);
 };
 
-var Over = function(setting) {    
-    this.width=element.mycanvasWidth;
-    this.height=element.mycanvasHeight;
-    this.top=0;
-    this.left=0;   
+var Over = function(setting) {
+    this.width = element.mycanvasWidth;
+    this.height = element.mycanvasHeight;
+    this.top = 0;
+    this.left = 0;
     SceneSprite.call(this, setting.name || 'over', new SceneImagePainter(gameSourceUrl.imageList.gameOver));
 }
 Over.prototype = Object.create(Sprite.prototype);
-Over.prototype.draw = function(ctx, time, fpsNum) {  
+Over.prototype.draw = function(ctx, time, fpsNum) {
     this.paint(ctx);
 };
 
@@ -628,6 +628,7 @@ var Wall = function(setting) {
     this.width = setting.width || WH.wall.width;
     this.id = setting.id || 0;
     this.positionmile = setting.positionmile || 0;
+    this.moneyCount = setting.moneyCount || 0;
     this.height = setting.height || WH.wall.height;
     this.physicaltop = setting.physicaltop || 0;
     this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - this.physicaltop;
@@ -685,21 +686,21 @@ Wall.prototype.up = function(VY) { //status为2时，为大蹦，1时为小蹦
     this.wallSpriteAnimatorUp.start();
 };
 Wall.prototype.changeToAA = function() {
-        this.imgwidth = wallConfig.afterabnormalSprite.width;
-        this.imgheight = wallConfig.afterabnormalSprite.height;
-        this.imgleft = wallConfig.afterabnormalSprite.left;
-        this.imgtop = wallConfig.afterabnormalSprite.top;
-        this.status = 2;
-        //将墙的状态改为2
-        var id = this.id;
-        var wallList = totalProgressSprite.wall;
-        wallList.forEach(function(item) {
-            if (item.id == id) {
-                item.status = 2;
-            }
-        });
-    }
-    //墙上下颠簸一下
+    this.imgwidth = wallConfig.afterabnormalSprite.width;
+    this.imgheight = wallConfig.afterabnormalSprite.height;
+    this.imgleft = wallConfig.afterabnormalSprite.left;
+    this.imgtop = wallConfig.afterabnormalSprite.top;
+    this.status = 2;
+    //将墙的状态改为2
+    var id = this.id;
+    var wallList = totalProgressSprite.wall;
+    wallList.forEach(function(item) {
+        if (item.id == id) {
+            item.status = 2;
+        }
+    });
+};
+//墙上下颠簸一下
 Wall.prototype.jumpend = function() {
     this.isJump = false;
     this.velocityY = 0;
@@ -792,6 +793,7 @@ var BadFlower = function(setting) {
     //  this.roleType = 'badflower';
     //this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;
     this.initialTop = this.top;
+    this.isDie = false;
     this.isJump = false; //判断是否为处于上下波动中
     // this.jumpPainter = new SceneImagePainter(gameSourceUrl.imageList.badflower);
     this.mycanvas = element.mycanvas;
@@ -815,7 +817,16 @@ BadFlower.prototype.up = function(VY) {
     this.velocityY = VY;
     this.badflowerSpriteAnimatorUp.start();
 };
-
+BadFlower.prototype.shootDie = function() {
+    // this.jump(0);
+    if (!this.isDie) {
+        this.isDie = true;
+        lib.removeByValue(drawSpriteList.arrayOthersA, 'id', this.id);
+        lib.removeByValue(createFactory.arrayTotalProgress, 'id', this.id);
+        audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.monsterdie);
+        this.visible = false;
+    }
+};
 
 
 //蘑菇
@@ -1020,13 +1031,13 @@ var Pipe = function(setting) {
 };
 Pipe.prototype = Object.create(SceneSprite.prototype);
 Pipe.prototype.draw = function(ctx, time, fpsNum) {
-        if (!gameControl.gamePause) {
-            //console.log()
-            this.update(ctx, time, fpsNum);
+    if (!gameControl.gamePause) {
+        //console.log()
+        this.update(ctx, time, fpsNum);
 
-        }
-        this.paint(ctx);
     }
+    this.paint(ctx);
+}
 
 
 //旗杆对象
@@ -1050,9 +1061,9 @@ Final.prototype.draw = function(ctx, time, fpsNum) {
 
         }
         this.paint(ctx);
-}
-//旗帜对象
-var  Flag= function(setting) {
+    }
+    //旗帜对象
+var Flag = function(setting) {
     setting.name = setting.name || 'flag';
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.flag), [new behaviorList.SpriteLeftToRight()]);
     this.width = setting.width || WH.flag.width;;
@@ -1064,27 +1075,27 @@ var  Flag= function(setting) {
     this.roleType = 'flag';
     this.id = setting.id || 0;
     this.velocityY = 0;
-    this.flowerSpriteAnimatorUp = new DownSpriteAnimator(function(){setting.callback()}, this);
+    this.flowerSpriteAnimatorUp = new DownSpriteAnimator(function() { setting.callback() }, this);
 };
 Flag.prototype = Object.create(SceneSprite.prototype);
 Flag.prototype.draw = function(ctx, time, fpsNum) {
-        //if (!gameControl.gamePause) {
-            //console.log()
-            this.fpsNum=fpsNum;
-            this.flowerSpriteAnimatorUp.execute();
-            this.update(ctx, time, fpsNum);
-       // }
-        this.paint(ctx);
+    //if (!gameControl.gamePause) {
+    //console.log()
+    this.fpsNum = fpsNum;
+    this.flowerSpriteAnimatorUp.execute();
+    this.update(ctx, time, fpsNum);
+    // }
+    this.paint(ctx);
 }
 Flag.prototype.down = function() {
-      // this.startVelocityY = VY;
-    this.initialTop =element.mycanvasHeight- 50;
+    // this.startVelocityY = VY;
+    this.initialTop = element.mycanvasHeight - 50;
     this.velocityY = 80;
     audioControl.audioPlay(gameSourceObj.audioList.music, gameAudio.downflag);
     this.flowerSpriteAnimatorUp.start();
 }
 
-    //城堡对象
+//城堡对象
 var Tower = function(setting) {
     setting.name = setting.name || 'tower';
     SceneSprite.call(this, setting.name, new SceneImagePainter(gameSourceUrl.imageList.tower), [new behaviorList.SpriteLeftToRight()]);
@@ -1096,7 +1107,7 @@ var Tower = function(setting) {
     this.positionmile = setting.positionmile || 0;
     this.roleType = 'tower';
     this.id = setting.id || 0;
-    this.isReverse =setting.isReverse ;
+    this.isReverse = setting.isReverse;
     this.mycanvas = element.mycanvas;
     this.painter = new CharacterImagePainter(gameSourceUrl.imageList.tower);
 };
