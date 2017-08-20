@@ -2,7 +2,7 @@
 作者：穆亚克
 
 欢迎来玩![image](https://muyake.github.io/canvas/games/mario/images/ico/favicon.ico) [超级玛丽](https://muyake.github.io/canvas/games/mario/game.html)
-## 目录
+## 成功目录
 ### 1.canvas
 + 动画
     + [晚安宝宝](https://muyake.github.io/canvas/animation/baobao/index.html)(手机版)
@@ -33,8 +33,9 @@
 + [言情小说](https://muyake.github.io/widget/环形轮播/2.html)（[jquery插件版](https://muyake.github.io/widget/环形轮播/jquey版/carousel_demo.html)）
 +  [导航栏](https://muyake.github.io/widget/widget/nav.html)
 + [人人翻转](https://muyake.github.io/widget/renrenfanzhuan/fanzhuan.html)
-### 5.知识点
+## 知识点目录
 + css
     + [媒体查询](https://muyake.github.io/web/media/index.html)
+    + [background](https://muyake.github.io/css/background/background.html)
 + js
     

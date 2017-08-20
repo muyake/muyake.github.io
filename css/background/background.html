@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="background.css">
+</head>
+<body>
+    <h1>background-origin,表示background-position坐标原地是在什么位置的左上角，background-origin：把背景图片延展到什么位置。</h1>
+    <a href="http://www.cnblogs.com/2050/archive/2012/11/13/2768289.html">参考文档</a>
+    <p>默认</p>
+    <div class="div1">div1
+    </div>
+    <p> background-origin:padding-box;默认状态</p>
+    <div class="div2">div2
+    </div>
+    <p> background-origin:content-box;从内容区开始</p>
+    <div class="div3">div3
+    </div>
+    <p> background-origin:border-box;从border开始，但是由于background-clip: padding-box;则只显示padding的部分</p>
+    <div class="div4">div4
+    </div>
+
+    <p> background-origin:padding-box;从padding开始，但是由于background-clip: border-box;上侧和左侧border不会显示，</p>
+    <div class="div5">div5
+    </div>
+
+    <h2>
+     background-size， background-position: 的关系。
+     如果background-size:100% 100%;背景图铺满，background-position无效。     
+    </h2>
+    <div class="div6">div6
+    </div>
+    <p>
+    如果background-size:contain或cover;当图片的宽度小于高度时,position的left值无效。    
+    </p>
+
+    <div class="div7">div7 lett无效
+    </div>
+
+    <p>
+    如果background-size:contain或cover;当图片的宽度大于高度时,position的top值无效。  (例子就不举了)  
+    </p>
+    
+    
+</body>
+</html>
