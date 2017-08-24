@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    *{
+        margin: 0px;
+        padding: 0px;
+    }
+    html {
+  height: 100vh;
+}
+body {
+  height: inherit;
+  background: #2e576b;
+ 
+}
+        .container{
+            width: 150px;
+            height: 200px;
+            margin: 300px;
+        }
+        .card{
+            position: relative;
+             width: 150px;
+            height: 200px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .card:after{
+            content:'';
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #0065a8, rgba(221, 238, 255, 0.4) 46%, rgba(255, 255, 255, 0.5));
+        }
+        .wave{
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: #0af;
+            border-radius: 44%;
+        opacity: .4;
+            left: -40%;
+    top: -62%;
+    animation: shift 3s infinite linear;
+        }
+        .wave.w2 {
+  background: yellow;
+  opacity: .1;
+  animation: shift 7s infinite linear;
+}
+.wave.w3 {
+  animation: shift 5s infinite linear;
+  background: crimson;
+  opacity: 0.1;
+}
+       @keyframes shift {
+  from {
+    transform: rotate(360deg);
+  }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="wave w1">
+
+            </div>
+            <div class="wave w2">
+
+            </div>
+            <div class="wave w3">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
