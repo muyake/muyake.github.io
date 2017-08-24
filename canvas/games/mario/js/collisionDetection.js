@@ -40,11 +40,11 @@ var CD = {
                 mario.isJump = true;
                 mario.upColliding = null;
             }
-            if(mario.lColliding==carrying){
-                mario.lColliding=null;               
+            if (mario.lColliding == carrying) {
+                mario.lColliding = null;
             }
-            if(mario.rColliding==carrying){
-                mario.rColliding=null;               
+            if (mario.rColliding == carrying) {
+                mario.rColliding = null;
             }
         },
         //马里奥在阻挡物左侧
@@ -70,11 +70,11 @@ var CD = {
         },
         //马里奥在墙上侧
         MupBarrier: function(mario, barrier) {
-           
-                 mario.initialTop = barrier.top - mario.height;
+
+            mario.initialTop = barrier.top - mario.height;
             mario.upColliding = barrier;
-           
-           
+
+
         },
         MdownWall: function(mario, wall, callback) {
             mario.velocityY = -mario.velocityY;
@@ -111,19 +111,19 @@ var CD = {
                 } else if (wall.status == 2) {
                     audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
                 } else {
-                    if(wall.contain==1&&wall.status==0&&wall.moneyCount>0){//墙里有多个金币
-                           audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
-                           createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
-                           wall.up(60);
-                           wall.moneyCount--;
-                           if(wall.moneyCount==0){
+                    if (wall.contain == 1 && wall.status == 0 && wall.moneyCount > 0) { //墙里有多个金币
+                        audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.eatMoney);
+                        createFactory.createUpMoney(wall.positionmile, wall.physicaltop);
+                        wall.up(60);
+                        wall.moneyCount--;
+                        if (wall.moneyCount == 0) {
                             wall.changeToAA();
-                           }
-                           return;
+                        }
+                        return;
                     }
                     if (mario.status == 1) {
                         wall.up(60);
-                        audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);                        
+                        audioControl.audioPlay(gameSourceObj.audioList.collision, gameAudio.hitwall);
                     } else {
                         //大个马里奥将砖顶碎                     
                         wall.visible = false;
@@ -142,21 +142,21 @@ var CD = {
             }
         },
         MoverleftBarrier: function(mover, barrier) {
-            mover.left = barrier.left - mover.width-3;
+            mover.left = barrier.left - mover.width - 3;
             mover.velocityX = -mover.velocityX;
             mover.initvelocityX = -mover.initvelocityX;
             mover.isReverse = !mover.isReverse;
         },
         MoverrightBarrier: function(mover, barrier) {
-            mover.left = barrier.left + mover.width+3;
+            mover.left = barrier.left + mover.width + 3;
             mover.velocityX = -mover.velocityX;
             mover.isReverse = !mover.isReverse;
             mover.initvelocityX = -mover.initvelocityX;
         },
         //马里奥在墙上侧
-        MoverupBarrier: function(mover, barrier) {           
-              mover.initialTop = barrier.top - mover.height;
-            mover.upColliding = barrier;              
+        MoverupBarrier: function(mover, barrier) {
+            mover.initialTop = barrier.top - mover.height;
+            mover.upColliding = barrier;
         },
         BulletleftBarrier: function(bullet, barrier) {
             lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bullet.id);
@@ -302,9 +302,9 @@ var CD = {
         //  if (mario.visible == false && mario.isDie == true) {
         //     return;
         // }
-       
+
         // if ((flag.left + flag.width) < mario.left || (mario.left + mario.width) < flag.left || (flag.top + flag.height) < mario.top || (mario.top + mario.height) < flag.top) {
-           
+
         // } else {
         //      drawSpriteList.arrayOthersA.forEach(function(item) {
         //         if (item.name == 'flag') {
@@ -352,7 +352,7 @@ var CD = {
 
         } else {
             lib.removeByValue(drawSpriteList.createBulletSpriteList, 'id', bullet.id);
-            bullet.shootDie();          
+            badflower.shootDie();
             bullet = null;
         }
 
@@ -437,7 +437,9 @@ var CD = {
                     console.log('猜到乌龟了');
                     monster.visible = false;
                     monster.isDie = true;
-                    var shell = new Shell({ left: monster.left });
+                    var shell = new Shell({
+                        left: monster.left
+                    });
 
                     mario.initialTop = shell.top - mario.height;
                     console.log('设置' + mario.initialTop);
@@ -526,35 +528,35 @@ var CD = {
         if ((shell.left + shell.width) < mover.left || (mover.left + mover.width) < shell.left || (shell.top + shell.height) < mover.top || (mover.top + mover.height) < shell.top) {
             this.CDFunc.MoverOutCarrying(shell, mover);
         } else {
-            if(shell.status==0){
- var leftfun = function() {
-                self.CDFunc.MoverleftBarrier(mover, shell)
-            };
-            var rightfun = function() {
-                self.CDFunc.MoverrightBarrier(mover, shell)
-            };
-            var upfun = function() {
-                self.CDFunc.MoverupBarrier(mover, shell)
-            };
-            var downfun = function() {};
-            self.CDFunc.Colliding(mover, shell, leftfun, rightfun, downfun, upfun);
-            }else{
+            if (shell.status == 0) {
                 var leftfun = function() {
-                mover.shootDie();
-            };
-            var rightfun = function() {
-                mover.shootDie();
-            };
-            var upfun = function() {
-                mover.shootDie();
-            };
-            var downfun = function() {
-                mover.shootDie();
-            };
-            self.CDFunc.Colliding(shell, mover, leftfun, rightfun, downfun, upfun);
+                    self.CDFunc.MoverleftBarrier(mover, shell)
+                };
+                var rightfun = function() {
+                    self.CDFunc.MoverrightBarrier(mover, shell)
+                };
+                var upfun = function() {
+                    self.CDFunc.MoverupBarrier(mover, shell)
+                };
+                var downfun = function() {};
+                self.CDFunc.Colliding(mover, shell, leftfun, rightfun, downfun, upfun);
+            } else {
+                var leftfun = function() {
+                    mover.shootDie();
+                };
+                var rightfun = function() {
+                    mover.shootDie();
+                };
+                var upfun = function() {
+                    mover.shootDie();
+                };
+                var downfun = function() {
+                    mover.shootDie();
+                };
+                self.CDFunc.Colliding(shell, mover, leftfun, rightfun, downfun, upfun);
             }
-            
-            
+
+
         }
     },
     judgeBBarrier: function(bullet, barrier, callback) {
@@ -658,7 +660,7 @@ var CD = {
         if (wall.visible == false) {
             return;
         }
-        if(mario.isDie==true){
+        if (mario.isDie == true) {
             return;
         }
         var self = this;
@@ -687,7 +689,7 @@ var CD = {
         if (pipe.visible == false) {
             return;
         }
-        if(mario.isDie==true){
+        if (mario.isDie == true) {
             return;
         }
         var self = this;
@@ -713,7 +715,7 @@ var CD = {
         if (final.visible == false) {
             return;
         }
-        if(mario.isDie==true){
+        if (mario.isDie == true) {
             return;
         }
         var self = this;
@@ -731,16 +733,16 @@ var CD = {
                 self.CDFunc.MleftFinal(mario, final)
             };
             var downfun = function() {};
-             drawSpriteList.arrayOthersA.forEach(function(item) {
+            drawSpriteList.arrayOthersA.forEach(function(item) {
                 if (item.name == 'flag') {
                     item.down();
                 }
             })
-             console.log(11);
-            
-             mario.laqi();
+            console.log(11);
+
+            mario.laqi();
             self.CDFunc.Colliding(mario, final, leftfun, rightfun, downfun, upfun);
-            mario.left=final.left+7;
+            mario.left = final.left + 7;
             callback();
         }
     },
@@ -749,7 +751,7 @@ var CD = {
         if (pipe.visible == false) {
             return;
         }
-        if(mario.isDie==true){
+        if (mario.isDie == true) {
             return;
         }
         var self = this;

@@ -76,7 +76,6 @@ CharacterRiseSpriteSheetPainter.prototype.advance = function(sprite, context) {
 
 
 
-
 //场景Sprite
 var SceneSprite = function(name, painter, behaviors) {
     Sprite.call(this, name, painter, behaviors);
@@ -160,6 +159,10 @@ Mario.prototype.laqi = function() {
 Mario.prototype.reset = function() {
     this.isDie = false;
     this.painter = this.painters.stand;
+    this.status = 1;
+    this.setClothes("commonMairo");
+    this.height = WH.mario.smallstatus.height;
+    this.width = WH.mario.smallstatus.width;
     //this.painter = this.painters.stand;
     this.initialTop = element.mycanvasHeight - this.height - gameConfig.roadHeight;
     this.top = element.mycanvasHeight - this.height - gameConfig.roadHeight - this.physicaltop;
@@ -317,8 +320,6 @@ Mario.prototype.draw = function(ctx, time, fpsNum) {
 
 
 
-
-
 //怪兽对象
 var Monster = function(setting) {
     Sprite.call(this, setting.name);
@@ -345,7 +346,9 @@ var Monster = function(setting) {
     this.upColliding = null; //下面的墙或管道等 
     this.initialTop = this.top;
     this.behaviorStatus = {
-        runInPlace: new behaviorList.runInPlace({ PAGEFLIP_INTERVAL: 100 }),
+        runInPlace: new behaviorList.runInPlace({
+            PAGEFLIP_INTERVAL: 100
+        }),
     };
     this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
     this.status = 1;
@@ -434,7 +437,9 @@ var Tortoise = function(setting) {
     this.upColliding = null; //下面的墙或管道等 
     this.initialTop = this.top;
     this.behaviorStatus = {
-        runInPlace: new behaviorList.runInPlace({ PAGEFLIP_INTERVAL: 40 }),
+        runInPlace: new behaviorList.runInPlace({
+            PAGEFLIP_INTERVAL: 40
+        }),
     };
     this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
     // this.status = 1; 
@@ -520,7 +525,9 @@ var Shell = function(setting) {
     this.initialTop = this.top;
     this.status = 0; //0表示静止状态，1表示欲动状态。
     this.behaviorStatus = {
-        runInPlace: new behaviorList.runInPlace({ PAGEFLIP_INTERVAL: 80 }),
+        runInPlace: new behaviorList.runInPlace({
+            PAGEFLIP_INTERVAL: 80
+        }),
     };
     //this.behaviors = [this.behaviorStatus.runInPlace, new behaviorList.SpriteLeftToRight()];
     this.behaviors = [new behaviorList.SpriteLeftToRight()];
@@ -786,7 +793,9 @@ var BadFlower = function(setting) {
     this.left = setting.left || 0;
     this.positionmile = setting.positionmile || 0;
     this.behaviorStatus = {
-        upInPlace: new behaviorList.upInPlace({ PAGEFLIP_INTERVAL: 80 }),
+        upInPlace: new behaviorList.upInPlace({
+            PAGEFLIP_INTERVAL: 80
+        }),
     };
     this.painter = new CharacterRiseSpriteSheetPainter(badFlowerConfig.config, gameSourceUrl.imageList.badflower, element.mycanvas, badFlowerConfig.config.totalCount);
     this.behaviors = [this.behaviorStatus.upInPlace, new behaviorList.SpriteLeftToRight()];
@@ -1075,7 +1084,9 @@ var Flag = function(setting) {
     this.roleType = 'flag';
     this.id = setting.id || 0;
     this.velocityY = 0;
-    this.flowerSpriteAnimatorUp = new DownSpriteAnimator(function() { setting.callback() }, this);
+    this.flowerSpriteAnimatorUp = new DownSpriteAnimator(function() {
+        setting.callback()
+    }, this);
 };
 Flag.prototype = Object.create(SceneSprite.prototype);
 Flag.prototype.draw = function(ctx, time, fpsNum) {
@@ -1140,7 +1151,6 @@ Hole.prototype.draw = function(ctx, time, fpsNum) {
     }
     this.paint(ctx);
 }
-
 
 
 
@@ -1210,8 +1220,6 @@ Brick.prototype.up = function() {
 
     this.BrickSpriteAnimatorUp.start();
 };
-
-
 
 
 

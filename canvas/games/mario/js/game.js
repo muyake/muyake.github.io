@@ -12,24 +12,24 @@ var sourceLoadObj = {
     },
     progressOver: function() {
         element.mycanvas.style.display = 'block';
-       element.progressDiv.style.display = 'none';
+        element.progressDiv.style.display = 'none';
         element.tipDiv.style.display = 'block';
-       element.progressBox.style.display = 'none';
+        element.progressBox.style.display = 'none';
         //加载图片完成后执行。
         createFactory.init();
-        
+
 
         createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
         gameControl.start();
         progressObj.countDownStart();
         //背景音乐响起     
-       audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+        audioControl.BGMPlay(gameSourceObj.audioList.BGM);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.jumpAll);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.collision);
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
         game.init();
-       
-        //  drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
+
+        drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
     }
 }
 
@@ -45,12 +45,12 @@ var game = {
             gameControl.gamePause = false;
         }, function() {
             if (drawSpriteList.mario.lifeNum > 0) {
-                var num=progressObj.mileageNum>37*174/100?37*174/100:0;
+                var num = progressObj.mileageNum > 37 * 174 / 100 ? 37 * 174 / 100 : 0;
                 self.reset(num);
             } else {
                 self.over();
             }
-            if(drawSpriteList.isSuccess){
+            if (drawSpriteList.isSuccess) {
                 self.success();
             }
 
@@ -68,17 +68,21 @@ var game = {
     over: function() {
         audioControl.audioPlay(gameSourceObj.audioList.GameOver, gameAudio.GameOver);
         audioControl.BGMPause(gameSourceObj.audioList.BGM);
-        drawSpriteList.gameOver.push(new Over({ name: 'Over' }));
+        drawSpriteList.gameOver.push(new Over({
+            name: 'Over'
+        }));
     },
-    success:function() {      
-        var success=new Over({ name: 'Over' });
+    success: function() {
+        var success = new Over({
+            name: 'Over'
+        });
         success.painter.image.src = gameSourceUrl.imageList.gameSuccess;
         drawSpriteList.gameOver.push(success);
     },
     reset: function(num) {
         console.log("reset");
         //时间重置。
-        progressObj.totaltime=300;      
+        progressObj.totaltime = 300;
         progressObj.countDownWatch.reset();
         progressObj.countDownWatch.start();
         progressObj.mileageNum = num;
@@ -98,8 +102,8 @@ var game = {
     bindEvent: function() {
         //createFactory.createBadflower(300, 0);
         this.reset(0);
-       
-         // drawSpriteList.createAnimationSpriteList.push(new Shell({left:300}));
+
+        // drawSpriteList.createAnimationSpriteList.push(new Shell({left:300}));
         var self = this;
         document.querySelector('#smallBtn').addEventListener('click', function() {
             drawSpriteList.arrayOthersA.forEach(function(item) {
@@ -113,7 +117,7 @@ var game = {
             //createFactory.createUpMoney(100, 100);
         }, false);
         document.querySelector('#flower1').addEventListener('click', function() {
-           
+
             createFactory.createBullet(100, 100);
         }, false);
         document.querySelector('#createStar').addEventListener('click', function() {
@@ -264,22 +268,22 @@ var game = {
         //只按左键或只按右键(大蹦，小蹦不管)
         if (runKey) {
             createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
-            if(gameControl.gamePause==true){
-            return;
-        }
+            if (gameControl.gamePause == true) {
+                return;
+            }
             gameConfig.setSpeedDefault();
             //如果是左键
             if ((this.mapKey["left"] && !this.mapKey["right"])) {
                 //如果马里奥当前面向右，然后从右转向左，则设置初始化默认速度，以防当前面有墙，被墙挡住，速度为0，掉头后速度设为默认值。
                 if (drawSpriteList.mario.rColliding) {
-                  gameConfig.setSpeedZero();
+                    gameConfig.setSpeedZero();
                 }
                 this.setDirection(-1);
                 drawSpriteList.mario.isReverse = false;
                 // console.log("按左键");    
             } else {
-               if (drawSpriteList.mario.lColliding) {
-                  gameConfig.setSpeedZero();
+                if (drawSpriteList.mario.lColliding) {
+                    gameConfig.setSpeedZero();
                 }
                 // console.log("按右键");
                 drawSpriteList.mario.isReverse = true;
@@ -292,15 +296,15 @@ var game = {
         //分为只按左右键，只按蹦跳键，同时按左键（或右键）和蹦跳键，还有其他不合理按键（例如同时按左右键），和都不按键
         //只要按蹦跳键，则马里奥处于蹦跳状态或者如果不处于蹦跳状态则执行蹦跳动作，所以，蹦跳键的行为大于左右键的行为，因为如果同时按右键和蹦跳键，是处于蹦跳状态的。
         if (jumpKey) { //如果按了蹦跳键
-             if (gameControl.gamePause == true) {
+            if (gameControl.gamePause == true) {
                 return;
-             }
+            }
             if (!drawSpriteList.mario.isJump) {
                 var status = this.mapKey["s"] ? marioGameConfig.smallJumpV : marioGameConfig.bigJumpV;
                 drawSpriteList.mario.jump(status);
-            } else {               
-                    drawSpriteList.mario.painter = drawSpriteList.mario.painters.jump;
-                    drawSpriteList.mario.behaviors = [];                
+            } else {
+                drawSpriteList.mario.painter = drawSpriteList.mario.painters.jump;
+                drawSpriteList.mario.behaviors = [];
             }
         } else { //没有按蹦跳键
             if (runKey) { //只按了左键或只按右键
@@ -398,8 +402,8 @@ var SpriteAnimatorEndCallbackList = {
 
 
 var drawSpriteList = {
-    isSuccess:false,
-    success:function(){
+    isSuccess: false,
+    success: function() {
         this.mario.intoTower();
         console.log('游戏胜利');
     },
@@ -413,8 +417,8 @@ var drawSpriteList = {
     //马里奥
     mario: new Mario({
         name: "mario",
-        isReverse:true,
-        success:function(){
+        isReverse: true,
+        success: function() {
             clipObj.startDraw();
         }
     }),
@@ -422,7 +426,11 @@ var drawSpriteList = {
     //总体进度
     progressObj: progressObj,
     //分数，生命值等
-    statusArr: { life: new Life({ name: 'life' }) },
+    statusArr: {
+        life: new Life({
+            name: 'life'
+        })
+    },
     //墙，管道，固定金币等可以为第一层
     arrayOthersA: [],
     gameOver: [],
@@ -467,9 +475,9 @@ var drawSpriteList = {
             },
             final: {
                 funcName: 'judgeMFianl',
-                callback:function(){
+                callback: function() {
                     console.log(33);
-                    drawSpriteList.isSuccess=true;
+                    drawSpriteList.isSuccess = true;
                     gameControl.gamePause = true;
                 }
             },
@@ -518,7 +526,7 @@ var drawSpriteList = {
             },
         },
         cdfunc: function() {
-            if(drawSpriteList.isSuccess){
+            if (drawSpriteList.isSuccess) {
                 return;
             }
             var self = this;
@@ -530,7 +538,7 @@ var drawSpriteList = {
                 gameConfig.setSpeedDefault();
             }
 
-           
+
             //马里奥与墙、管道,固定金币等碰撞
             drawSpriteList.arrayOthersA.forEach(function(itemDraw) {
                 var callback = self.config[itemDraw.name].callback || function() {};
@@ -574,7 +582,7 @@ var drawSpriteList = {
                 if (!mover.upover && (mover.name == 'mushroom' || mover.name == 'star')) {
                     return;
                 } else {
-                    if (mover.name == 'shell') {//是乌龟壳且运动中。
+                    if (mover.name == 'shell') { //是乌龟壳且运动中。
                         drawSpriteList.createAnimationSpriteList.forEach(function(mover2) {
                             if (mover2.name == 'monster' || mover2.name == 'tortoise' || mover2.name == 'shell') {
                                 if (mover2 != mover) {
@@ -612,7 +620,7 @@ gameControl.startAnimate = function(time) {
     gameControl.context.save();
     clipObj.draw();
     drawSpriteList.bg.draw(gameControl.context, time, gameControl.fps.num);
- 
+
     animateList.countDown(time);
 
     //绘制第二层（洞）等。 
@@ -640,7 +648,7 @@ gameControl.startAnimate = function(time) {
     drawSpriteList.createBulletSpriteList.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
-    
+
     //createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthers);
     //绘制其他的场景，例如墙，金币等。 
     // console.log('huizhi2');
@@ -658,7 +666,7 @@ gameControl.startAnimate = function(time) {
     drawSpriteList.gameOver.forEach(function(item) {
         item.draw(gameControl.context, time, gameControl.fps.num);
     });
-     //碰撞检测
+    //碰撞检测
     drawSpriteList.judgeCD.cdfunc();
     gameControl.context.restore();
 }
@@ -675,7 +683,7 @@ var animateList = {
         progressObj.mileageNumUpdate(gameControl.fps.num);
         progressObj.countDownNumUpdate();
 
-        cans.fillText("行程:" + ((progressObj.mileageNum/174*100) >> 0) + "m", 400, 20);
+        cans.fillText("行程:" + ((progressObj.mileageNum / 174 * 100) >> 0) + "m", 400, 20);
         cans.fillText("倒计时:" + (progressObj.currentTime >> 0) + "s", 480, 20);
         // if(progressObj.currentTime<=290){       
         //  drawSpriteList.mario.collisiondie();          
