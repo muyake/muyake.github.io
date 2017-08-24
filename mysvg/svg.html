@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>
+	</title>
+	<style>
+		.div1{
+			width: 100px;
+			height: 100px;
+			border:1px solid green;
+			background: url(back.svg) no-repeat center/100% 100%;
+		}
+	</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">		
+  <text id='test22'   x="0" y="15" fill="red">I love SVG</text>   
+</svg>
+<input type="button" value='改变svg属性' id='test1'/>
+<svg xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+onload="init()">
+
+<script>
+<![CDATA[
+
+var initcolor, circlenode
+
+function init()
+{
+circlenode = document.getElementById("c")
+}
+
+function changeColor()
+{
+initcolor = circlenode.getAttribute('fill');
+circlenode.setAttribute('fill','blue');
+}
+
+function restoreColor()
+{
+circlenode.setAttribute('fill',initcolor);
+}
+]]>
+</script>
+	<circle id='c' cx="100" cy="50" r="40" stroke="black"
+  stroke-width="2" fill="red"  onmouseover="changeColor()" onmouseout="restoreColor()"/>
+</svg>
+
+<div class="div1">
+	作为背景，svg中的script不起作用
+</div>
+<img src="back.svg" alt="" style="width: 100px;height: 100px;">
+<a href="http://www.zhangxinxu.com/wordpress/2014/08/svg-viewport-viewbox-preserveaspectratio/">svg与html的适配（很重要）</a>
+<a href="http://www.runoob.com/svg/svg-circle.html">svg菜鸟教程</a>
+<script>
+	document.querySelector('#test1').addEventListener('click',function(){
+		document.getElementById('test22').setAttribute('fill','blue');
+		document.getElementById('test22').textContent='动态改变svg中的文字与属性'; 
+	},false);
+</script>
+</body>
+</html>

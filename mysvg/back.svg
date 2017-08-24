@@ -1,0 +1,29 @@
+<svg  xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+onload="init()"  style="border:1px solid #cd0000;"  width="400" height="400" viewBox="0,0,40,40">
+
+<script>
+<![CDATA[
+
+var initcolor, circlenode
+
+function init()
+{
+circlenode = document.getElementById("c")
+}
+
+function changeColor()
+{
+initcolor = circlenode.getAttribute('fill');
+circlenode.setAttribute('fill','blue');
+}
+
+function restoreColor()
+{
+circlenode.setAttribute('fill',initcolor);
+}
+]]>
+</script>
+	<circle id='c' cx="20" cy="20" r="15" stroke="black"
+  stroke-width="1" fill="red"  onmouseover="changeColor()" onmouseout="restoreColor()"/>
+</svg>
