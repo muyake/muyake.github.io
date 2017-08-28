@@ -24,6 +24,7 @@
 + [加载中](https://muyake.github.io/widget/load.html)
 + [吃豆人](https://muyake.github.io/widget/chidouren.html)
 + [立方体](https://muyake.github.io/widget/curb/a.html)
++ [水浪](https://muyake.github.io/widget/wave.html)
 ### 3.活动（手机）
 + [618银河聚会](https://muyake.github.io/pages/618/main.html)（[3d小盒子](https://muyake.github.io/pages/618/box.html)-  [获奖记录](https://muyake.github.io/pages/618/Record.html)）
 + [冰龙特效](https://muyake.github.io/pages/IceDragon/IceDragon.html)（冰龙是gif动画）
