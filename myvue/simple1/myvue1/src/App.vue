@@ -1,13 +1,29 @@
+
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <router-view></router-view>
+    <h1>{{ msg }}</h1>   
+   <firstcomponent></firstcomponent>
+   <ul>
+     <li>
+       <router-link to='/first'>点我跳转到第一页</router-link>
+       <router-link to='/second'>点我跳转到第二页</router-link>
+     </li>
+   </ul>
+   <router-view class='view'></router-view>
   </div>
 </template>
 
 <script>
+import firstcomponent from './components/firstcomponent.vue'
 export default {
-  name: 'app'
+  name:'App',
+  data(){
+    return{
+      msg:'hello App!'
+    }
+  },
+  components:{firstcomponent}
 }
 </script>
 

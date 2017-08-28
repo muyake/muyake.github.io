@@ -33,8 +33,6 @@ apiRoutes.get('/goods', function(req, res) { /* 定义接口并返回数据 */
 app.use('/api', apiRoutes) /* 定义接口在/api目录下，方便管理 */
   /* datura接口 _end */
 
-
-
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
