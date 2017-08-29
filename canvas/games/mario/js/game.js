@@ -29,7 +29,7 @@ var sourceLoadObj = {
         audioControl.timeupdateAddEventListener(gameSourceObj.audioList.music);
         game.init();
 
-        drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
+        // drawSpriteList.mario.rise(WH.mario.bigstatus.height, 3);
     }
 }
 

@@ -584,12 +584,14 @@ var totalProgressSprite = {
         physicaltop: 0,
         positionmile: PJNum.final1 + 234,
     }],
-    hole: [{
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: -33,
-        positionmile: 450,
-    }, {
+    hole: [
+    // {
+    //     isVisible: true,
+    //     id: lib.newGuid(),
+    //     physicaltop: -33,
+    //     positionmile: 450,
+    // },
+     {
         isVisible: true,
         id: lib.newGuid(),
         physicaltop: -33,
