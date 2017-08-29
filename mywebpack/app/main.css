@@ -1,0 +1,26 @@
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color:red;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul {
+  margin: 0;
+  padding: 0;
+}
+
+#root{
+	width: 200px;
+	height: 200px;
+	color:green;
+	 background: linear-gradient(red, blue); /* 标准的语法 */
+}
