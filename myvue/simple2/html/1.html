@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+	
+<div id="app">
+  
+</div>
+
+ 
+</div>
+<script src='../js/router.js'></script>
+<script>
+	const urlObject = location.search.slice(1).split('&').reduce((pre, item) => {
+       item = item.split('=');
+       pre[item[0]] = decodeURIComponent(item[1]);
+       return pre;
+     }, {});
+	const urlOBject=location.search.slice(1).split('&').reduce((pre,item)=>{
+		item=item.split('=');
+		pre[item[0]]=decodeURIComponent(item[1]);
+		return pre;
+	},{});
+</script>
+</body>
+</html>
