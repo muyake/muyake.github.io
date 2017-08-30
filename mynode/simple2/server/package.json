@@ -1,0 +1,15 @@
+{  
+  "name": "server",
+  "description": "作者：穆亚克\r 参考网页地址http://blog.csdn.net/qq20004604/article/details/52019904",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "muyake",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4"
+  },
+}

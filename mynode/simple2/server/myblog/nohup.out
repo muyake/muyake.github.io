@@ -1,0 +1,10 @@
+
+> myblog@0.0.0 start E:\mygit\git\muyake.github.io\mynode\simple2\server\myblog
+> node ./app.js
+
+[0mGET /index [33m404 [0m826.159 ms - 1539[0m
+[0mGET /stylesheets/style.css [36m304 [0m5.696 ms - -[0m
+[0mGET / [36m304 [0m63.138 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m2.115 ms - -[0m
+[0mGET /users [32m200 [0m2.501 ms - 23[0m
+/c/Program Files/nodejs/npm: line 34:  7000 Hangup                  "$NODE_EXE" "$NPM_CLI_JS" "$@"
