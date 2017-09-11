@@ -1,0 +1,17 @@
+@import '../../../../component/base/scss/reset.scss';
+
+@function ptr($px){
+    @return to-fixed(($px / 75), 2) + rem;
+}
+
+@function to-fixed ($number, $digits: 0) {
+    $n: 1;
+
+    @for $i from 1 through $digits {
+        $n: $n * 10;
+    }
+
+    @return floor($number * $n) / $n;
+}
+
+

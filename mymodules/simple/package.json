@@ -1,0 +1,14 @@
+{
+  "name": "mcore",
+  "version": "1.0.0",
+  "description": "我的第一模块",
+  "main": "b.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mcore"
+  ],
+  "author": "muyake",
+  "license": "ISC"
+}

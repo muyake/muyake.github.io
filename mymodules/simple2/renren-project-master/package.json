@@ -1,0 +1,33 @@
+{
+  "name": "live",
+  "version": "1.0.0",
+  "description": "直播相关业务构建工具",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^6.4.0",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.3",
+    "jquery": "^3.1.0",
+    "node-sass": "^3.8.0",
+    "path": "^0.12.7",
+    "postcss-loader": "^0.10.0",
+    "project": "file:tools",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "walk": "^2.3.9",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1",
+    "zepto": "^1.2.0"
+  },
+  "dependencies": {
+    "project": "file:tools"
+  }
+}
