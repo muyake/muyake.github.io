@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    #mycanvas {
+        width: 600px;
+        height: 600px;
+        border: 1px solid blue;
+        margin-left: 200px;
+        margin-top: 200px;
+        margin-bottom: 20px;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas id='mycanvas' width="500" height="500">
+    </canvas>
+   <div>
+       <input type="range" name="range" id="range" min="0" max="500" value="0"></input>
+       <div id="result"></div>
+   </div>
+    
+   
+    <script>
+    function drawImgObj() {
+       
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0, 100, 100); 
+        };
+    }
+       var img = new Image();
+        img.src = 'cc.png';
+    var range = document.getElementById('range');
+    var translateX = document.getElementById('result');
+    var c = document.getElementById('mycanvas');
+    var ctx = c.getContext('2d');
+    range.addEventListener("change", function() {
+        ctx.save();
+         ctx.clearRect(0, 0, 500, 500);
+         ctx.drawImage(img, 0, 0, 100, 100);
+        translateX.innerHTML ='ctx.translate('+range.value+', 0);' ;
+        ctx.translate(parseInt(range.value), 0);
+         ctx.drawImage(img, 0, 0, 100, 100);
+         ctx.restore();
+    });
+
+    drawImgObj();
+    </script>
+</body>
+
+</html>

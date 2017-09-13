@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script>
+	var p={
+		age:12,
+		school:(function (obj) {
+			return obj.age+12;	
+		}).bind(this)(this),
+	};
+	console.log(p.school);
+</script>
+	
+</body>
+</html>

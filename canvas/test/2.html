@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    #mycanvas, #mycanvas2{
+        width: 600px;
+        height: 600px;
+        border: 1px solid blue;
+        margin-left: 200px;
+        margin-top: 200px;
+        margin-bottom: 20px;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- 画布单位对应关系，css属性是canvas元素在网页的大小，widht,height对应的是画布中占多少像素，例如
+        width="500" height="500"能正好放500*500像素的图片。如果width="100" height=1500"能正好放100*100像素的图片。也表示canvas图像生成的图片的像素大小。
+     -->
+
+    <img src="bb.png" id='hideimg' alt="" style="display: none;">
+    <canvas id='mycanvas' width="500" height="500">
+    </canvas>
+    <canvas id='mycanvas2' width="500" height="500">
+    </canvas>
+    <script>
+    function drawImgObj() {
+        var c = document.getElementById('mycanvas');
+        var ctx = c.getContext('2d');
+        var img = new Image();
+        img.src = 'aa.png';
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0);
+        };
+    }
+    function drawEle(){
+        var c = document.getElementById('mycanvas2');
+        var ctx = c.getContext('2d');
+        var img=document.getElementById('hideimg');
+        img.onload= function() {
+            ctx.drawImage(img, 0, 0);
+        };        
+    }
+    drawImgObj() 
+    drawEle();
+    </script>
+</body>
+
+</html>

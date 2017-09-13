@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    #mycanvas, #mycanvas2{
+        width: 600px;
+        height: 600px;
+        border: 1px solid blue;
+        margin-left: 200px;
+        margin-top: 200px;
+        margin-bottom: 20px;
+    }
+    </style>
+</head>
+
+<body>
+    
+
+
+    <canvas id='mycanvas' width="500" height="500">
+    </canvas>   
+    <script>
+    function drawImgObj() {
+        var c = document.getElementById('mycanvas');
+        var ctx = c.getContext('2d');
+        var img = new Image();
+        img.src = 'cc.png';
+        img.onload = function() {
+            ctx.drawImage(img,0,0,260,260, 0, 0,500,500);
+        };
+    }
+   
+    drawImgObj();  
+    </script>
+</body>
+
+</html>

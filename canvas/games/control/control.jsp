@@ -60,7 +60,7 @@
 
 <body>
     <div class="main">
-        <div class="result">asdfasf</div>
+        asdfasf
         <canvas id='controlCanvas' width="666" height="364">
             Canvas not supported
         </canvas>
@@ -83,8 +83,7 @@
             }, 100);
         } else {
             setRotate();
-          //  draw();
-          controler.init();
+            draw();
             document.getElementsByTagName("body")[0].style.opacity = 1;
         }
     }
@@ -114,10 +113,10 @@
         }
     }
     </script>
-<!--     <script src='stopwatch.js'></script>
+    <script src='stopwatch.js'></script>
     <script src='animationTimer.js'>
-    </script> -->
-    <script src='control2.js'>
+    </script>
+    <script src='control.js'>
     </script>
 </body>
 
