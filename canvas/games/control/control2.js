@@ -10,6 +10,18 @@
 			y: 230,
 		},
 	};
+	CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+    if (w < 2 * r) {r = w / 2;}
+    if (h < 2 * r){ r = h / 2;}
+    this.beginPath();
+    this.moveTo(x+r, y);
+    this.arcTo(x+w, y, x+w, y+h, r);
+    this.arcTo(x+w, y+h, x, y+h, r);
+    this.arcTo(x, y+h, x, y, r);
+    this.arcTo(x, y, x+w, y, r);
+    this.closePath();
+    return this;
+}
 	var controler = {
 		thrustersCanvas: document.getElementById('controlCanvas'),
 		context: document.getElementById('controlCanvas').getContext('2d'),
@@ -114,11 +126,25 @@
 					x: 68,
 					y: 566,
 				},
-			},
+			},			
 		},
+		pause:{
+				isPress: false,
+				position: {
+					x: 80,
+					y: 330,
+				},
+			},
 		//判断按钮是否被按住
 		juadegeP: function(loc1, loc2, r) {
 			if ((Math.pow(loc1.x - loc2.x, 2) + Math.pow(loc1.y - loc2.y, 2)) < Math.pow(r, 2)) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+		juadegePause:function(loc1, loc2, r) {
+			if ((Math.pow(loc1.x - loc2.x+7, 2) + Math.pow(loc1.y - loc2.y+12, 2)) < Math.pow(r, 2)) {
 				return true;
 			} else {
 				return false;
@@ -134,10 +160,11 @@
 			this.context.shadowBlur = 2;
 			this.drawTwoArcs();
 			this.context.beginPath();
-			this.context.arc(this.arrowArr.left.position.y, this.canvasHeight - this.arrowArr.left.position.x, this.arrowRadius, 0, 2 * Math.PI, false);
-			this.context.stroke();
+			this.context.fillStyle = this.pause.isPress ? this.THRUSTER_FIRING_FILL_STYLE : this.THRUSTER_FILL_STYLE;
+			this.context.roundRect(this.pause.position.y-12, this.canvasHeight - this.pause.position.x-7,this.arrowRadius,this.arrowRadius/2,4);
+			this.context.fill();
 			this.context.beginPath();
-			this.context.arc(this.arrowArr.right.position.y, this.canvasHeight - this.arrowArr.right.position.x, this.arrowRadius, 0, 2 * Math.PI, false);
+			this.context.arc(this.pause.position.y, this.canvasHeight - this.pause.position.x, this.arrowRadius/1.5, 0, 2 * Math.PI, false);
 			this.context.stroke();
 			this.paintThrusters();
 			this.context.restore();
@@ -256,7 +283,11 @@
 						self.arrowArr[item].isPress = true;
 					}
 				})
+				if (self.juadegeP(loc, self.pause.position, self.arrowRadius)) {
+					self.pause.isPress =!self.pause.isPress ;
+				}
 			}
+
 		},
 		//屏幕坐标转化为canvas坐标
 		windowToCanvas: function(x, y) {
