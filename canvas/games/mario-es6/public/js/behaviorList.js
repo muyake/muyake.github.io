@@ -2,7 +2,7 @@
 
 
 //所有行为
-let behaviorList = {
+export let behaviorList = {
     //背景图片用的这个行为
     moveLeftToRight: function() {
         this.behaviorName = 'moveLeftToRight';

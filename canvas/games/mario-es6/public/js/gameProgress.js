@@ -873,3 +873,4 @@ let createFactory = {
         lib.sort(this.arrayTotalProgress, 'positionmile', 0);
     }
 }
+export {progressObj,PJNum,totalProgressSprite,createFactory};

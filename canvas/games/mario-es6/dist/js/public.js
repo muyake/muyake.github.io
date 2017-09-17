@@ -1,25 +1,105 @@
-let lib = {
-  
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 2:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var lib = {
+
     //Object.prototype.toString.call(o)能直接返回对象的类属性，形如"[object class]"的字符串，我们通过截取class，并能知道传入的对象是什么类型
-    isClass: function(o) {
+    isClass: function isClass(o) {
         if (o === null) return "Null";
         if (o === undefined) return "Undefined";
         return Object.prototype.toString.call(o).slice(8, -1);
     },
-    removeByValue: function(arr, attrName, val) {
-        for (let i = 0; i < arr.length; i++) {
+    removeByValue: function removeByValue(arr, attrName, val) {
+        for (var i = 0; i < arr.length; i++) {
             if (arr[i][attrName] == val) {
                 arr.splice(i, 1);
                 break;
             }
         }
     },
-    sort: function(arr, attributeName, status) { //status=0位正序，1为倒序
-        let s = status || 0;
+    sort: function sort(arr, attributeName, status) {
+        //status=0位正序，1为倒序
+        var s = status || 0;
 
         function compare(item1, item2) {
-            let value1 = item1[attributeName];
-            let value2 = item2[attributeName];
+            var value1 = item1[attributeName];
+            var value2 = item2[attributeName];
             if (value1 < value2) {
                 return s == 0 ? -1 : 1;
             } else if (value1 > value2) {
@@ -31,21 +111,22 @@ let lib = {
         arr.sort(compare);
     },
     //整数返回1，负数返回-1，0返回0
-    getSign: function(n) {
+    getSign: function getSign(n) {
         return n === 0 ? 0 : n / Math.abs(n);
     },
-    newGuid: function() {
-        let guid = "";
-        for (let i = 1; i <= 32; i++) {
-            let n = Math.floor(Math.random() * 16.0).toString(16);
+    newGuid: function newGuid() {
+        var guid = "";
+        for (var i = 1; i <= 32; i++) {
+            var n = Math.floor(Math.random() * 16.0).toString(16);
             guid += n;
             // if ((i == 8) || (i == 12) || (i == 16) || (i == 20))
             //     guid += "-";
         }
         return guid;
     },
-    deepClone: function(obj) {
-        let result, oClass = this.isClass(obj);
+    deepClone: function deepClone(obj) {
+        var result = void 0,
+            oClass = this.isClass(obj);
         //如果直接用arguments.callee，this指向arguments对象,如果用局部函数的话，let tempFun= arguments.callee。this指向window.所以需要绑定this.
         //let tempFun= arguments.callee.bind(this);
 
@@ -58,7 +139,7 @@ let lib = {
             return obj;
         }
         for (key in obj) {
-            let copy = obj[key];
+            var copy = obj[key];
             if (this.isClass(copy) == "Object") {
                 result[key] = arguments.callee.bind(this)(copy); //递归调用
             } else if (this.isClass(copy) == "Array") {
@@ -71,8 +152,9 @@ let lib = {
     },
 
     //将图片或音频转为对象。
-    convertToObject: function(obj, sourceLoadObj) {
-        let result, oClass = this.isClass(obj);
+    convertToObject: function convertToObject(obj, sourceLoadObj) {
+        var result = void 0,
+            oClass = this.isClass(obj);
         if (oClass === "Object") {
             result = {};
         } else if (oClass === "Array") {
@@ -81,7 +163,7 @@ let lib = {
             return obj;
         }
         for (key in obj) {
-            let copy = obj[key];
+            var copy = obj[key];
             if (this.isClass(copy) == "Object") {
                 result[key] = arguments.callee.bind(this)(copy, sourceLoadObj); //递归调用
             } else if (this.isClass(copy) == "Array") {
@@ -91,24 +173,21 @@ let lib = {
                     result[key] = new Image();
                     result[key].src = obj[key];
                     sourceLoadObj.sourceNum++;
-                    result[key].addEventListener('load',
-                        function(e) {
-                            sourceLoadObj.currentNum++;
-                            sourceLoadObj.loadedCallback(e);
-                        });
-                    result[key].addEventListener('error',
-                        function(e) {
-                            sourceLoadObj.currentNum++;
-                            sourceLoadObj.loadedCallback(e);
-                        });
+                    result[key].addEventListener('load', function (e) {
+                        sourceLoadObj.currentNum++;
+                        sourceLoadObj.loadedCallback(e);
+                    });
+                    result[key].addEventListener('error', function (e) {
+                        sourceLoadObj.currentNum++;
+                        sourceLoadObj.loadedCallback(e);
+                    });
                 } else if (this.chkFormat(obj[key], 'audio')) {
                     result[key] = new Audio(obj[key]);
                     sourceLoadObj.sourceNum++;
-                    result[key].addEventListener('loadedmetadata',
-                        function(e) {
-                            sourceLoadObj.currentNum++;
-                            sourceLoadObj.loadedCallback(e);
-                        });
+                    result[key].addEventListener('loadedmetadata', function (e) {
+                        sourceLoadObj.currentNum++;
+                        sourceLoadObj.loadedCallback(e);
+                    });
                 } else {
                     result[key] = obj[key];
                 }
@@ -117,11 +196,18 @@ let lib = {
         return result;
     },
     // $.extend();
-    jQueryExtend: function() {
-        let options, name, src, copy, copyIsArray, clone,
-            target = arguments[0] || {}, // 默认第0个参数为目标参数
-            i = 1, // i表示从第几个参数凯斯想目标参数进行合并，默认从第1个参数开始向第0个参数进行合并
-            length = arguments.length,
+    jQueryExtend: function jQueryExtend() {
+        var options = void 0,
+            name = void 0,
+            src = void 0,
+            copy = void 0,
+            copyIsArray = void 0,
+            clone = void 0,
+            target = arguments[0] || {},
+            // 默认第0个参数为目标参数
+        i = 1,
+            // i表示从第几个参数凯斯想目标参数进行合并，默认从第1个参数开始向第0个参数进行合并
+        length = arguments.length,
             deep = false; // 默认为浅度拷贝
 
         // 判断第0个参数的类型，若第0个参数是boolean类型，则获取其为true还是false
@@ -137,7 +223,7 @@ let lib = {
 
         // 判断目标参数的类型，若目标参数既不是object类型，也不是function类型，则为目标参数重新赋值 
         // Handle case when target is a string or something (possible in deep copy)
-        if (typeof target !== "object" && !jQuery.isFunction(target)) {
+        if ((typeof target === "undefined" ? "undefined" : _typeof(target)) !== "object" && !jQuery.isFunction(target)) {
             target = {};
         }
 
@@ -178,7 +264,6 @@ let lib = {
                         if (copyIsArray) {
                             copyIsArray = false;
                             clone = src && jQuery.isArray(src) ? src : [];
-
                         } else {
                             // 若原对象存在，则直接进行使用，而不是创建
                             clone = src && jQuery.isPlainObject(src) ? src : {};
@@ -204,24 +289,25 @@ let lib = {
         return target;
     },
     Regexs: {
-        url: (/^http:\/\/([0-9a-z][0-9a-z\-]*\.)+[a-z]{2,}(:\d+)?\/[0-9a-z%\-_\/\.]+/i), //网址           
-        cnum: (/[^0-9a-zA-Z_.-]/),
-        img: (/\.jpg$|\.jpeg$|\.png$|\.gif$/i), //图片格式  
-        audio: (/\.mp3$|\.wmv$/i), //图片格式   
-        photo1: (/\.(jpe?g|gif)$/i), //图片格式       
+        url: /^http:\/\/([0-9a-z][0-9a-z\-]*\.)+[a-z]{2,}(:\d+)?\/[0-9a-z%\-_\/\.]+/i, //网址           
+        cnum: /[^0-9a-zA-Z_.-]/,
+        img: /\.jpg$|\.jpeg$|\.png$|\.gif$/i, //图片格式  
+        audio: /\.mp3$|\.wmv$/i, //图片格式   
+        photo1: /\.(jpe?g|gif)$/i //图片格式       
     },
     //判断是否为中文
-    chkChinese: function(s) {
-        for (let i = 0; i < s.length; i++) {
+    chkChinese: function chkChinese(s) {
+        for (var i = 0; i < s.length; i++) {
             if (s.charCodeAt(i) > 255) return true;
         }
         return false;
     },
-    chkFormat: function(str, ftype) {
-        let nReg = this.Regexs[ftype];
+    chkFormat: function chkFormat(str, ftype) {
+        var nReg = this.Regexs[ftype];
         if (str == null || str == "") return false; //输入为空，认为是验证不通过    
         if (ftype == 'num') {
-            if (!nReg.test(str) && !this.chkChinese(str)) { //10.23 tenfy 必须为数字且不能有中文    
+            if (!nReg.test(str) && !this.chkChinese(str)) {
+                //10.23 tenfy 必须为数字且不能有中文    
                 return true;
             } else {
                 return false;
@@ -233,7 +319,11 @@ let lib = {
 
             return true;
         }
-    },
+    }
     //排序
-}
-export {lib};
+};
+exports.lib = lib;
+
+/***/ })
+
+/******/ });

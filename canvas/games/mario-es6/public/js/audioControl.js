@@ -1,4 +1,4 @@
-let gameAudio = {
+export const  gameAudio = {
     //gameSourceObj.audioList.jumpAll
     smallJump: {
         startTime: 0.5,
@@ -83,7 +83,7 @@ downflag: {
 }
 
 //audioControl
-let audioControl = {
+export let audioControl = {
     //如果isplay不传，则总是播放，如果传了则只播放一次，例如人物死亡
     audioPlay: function(audioObj, videoConfig) {
         audioObj.currentTime = videoConfig.startTime;

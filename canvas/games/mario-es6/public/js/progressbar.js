@@ -128,3 +128,4 @@ COREHTML5.Progressbar.prototype = {
     this.context.clearRect(this.LEFT, this.TOP, this.context.canvas.width, this.context.canvas.height);
   }
 };
+export {COREHTML5};

@@ -60,65 +60,84 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/******/ ({
 
-"use strict";
-
-
-var _Person = __webpack_require__(1);
-
-var _Person2 = _interopRequireDefault(_Person);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var p = new _Person2.default('张三', 20);
-document.write(p.say());
-var a = 111;
-var b = 222;
-var xxx = function xxx(c, d) {
-  return c * d;
-};
-console.log(xxx(a, b));
-
-/***/ }),
-/* 1 */
+/***/ 9:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
+var clipObj = exports.clipObj = {
+    canvas: null,
+    radius: 0,
+    start: false,
+    maxRadius: 0,
+    flag: true, //true为减小，false为增大。
+    init: function init(overcallback, resetcallback) {
+        this.canvas = element.mycanvas;
+        var width = this.canvas.width;
+        var height = this.canvas.height;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+        this.maxRadius = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / 2;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+        this.radius = this.maxRadius;
+        this.context = gameControl.context;
+        this.overCallback = overcallback;
+        this.resetCallback = resetcallback;
+    },
+    setClippingRegion: function setClippingRegion(radius) {
+        this.context.beginPath();
+        this.context.arc(this.canvas.width / 2, this.canvas.height / 2, radius, 0, Math.PI * 2, false);
+        this.context.clip();
+    },
+    fillCanvas: function fillCanvas(color) {
+        this.context.fillStyle = color;
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    drawAnimationFrame: function drawAnimationFrame(radius) {
+        this.fillCanvas('black');
+        this.setClippingRegion(radius);
+    },
+    startDraw: function startDraw() {
+        this.start = true;
+    },
+    draw: function draw() {
+        if (this.start == true) {
+            if (!(this.radius > this.maxRadius)) {
+                if (this.radius > 0 && this.flag) {
+                    this.radius -= this.canvas.width / 150;
+                    this.radius = this.radius < 0 ? 0 : this.radius;
+                } else {
+                    if (this.flag == true) {
+                        this.resetCallback();
+                    }
 
-var Person = function () {
-  function Person(name, age) {
-    _classCallCheck(this, Person);
+                    this.flag = false;
+                    this.radius += this.canvas.width / 150;
+                }
 
-    this.name = name;
-    this.age = age;
-  }
-
-  _createClass(Person, [{
-    key: "say",
-    value: function say() {
-      return "\u6211\u662F" + this.name + ",\u6211\u4ECA\u5E74" + this.age + "\u5C81\u4E86\u3002";
+                this.drawAnimationFrame(this.radius);
+            } else {
+                this.endAnimation();
+            }
+        }
+    },
+    endAnimation: function endAnimation() {
+        this.start = false;
+        this.flag = true;
+        this.radius = this.canvas.width / 2;
+        this.overCallback();
+        //this.context.clearRect(0, 0, canvas.width, canvas.height);
     }
-  }]);
-
-  return Person;
-}();
-
-exports.default = Person;
+};
 
 /***/ })
-/******/ ]);
+
+/******/ });

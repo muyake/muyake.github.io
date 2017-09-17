@@ -1,5 +1,5 @@
 //所有游戏需要加载的外部资源
-let gameSourceUrl = {
+export default  gameSourceUrl = {
   imageList: {
     //背景
     BG: './images/background2.png',

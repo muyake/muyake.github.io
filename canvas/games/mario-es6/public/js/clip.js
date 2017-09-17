@@ -1,4 +1,4 @@
-let clipObj = {
+export let clipObj = {
     canvas: null,
     radius: 0,
     start: false,

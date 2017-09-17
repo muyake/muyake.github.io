@@ -1,7 +1,14 @@
-console.log('分支');
+
+import { Game } from './libs/gameEngine';
+import './libs/requestNextAnimationFrame';
+import './exc';
+//绘制进度条
+import {COREHTML5} from './COREHTML5';
+//绘制进度条
+import {publicConfig,monsterConfig,tortoiseConfig,shellConfig, lifeConfig,badFlowerConfig,marioConfig,bulletConfig,WH,wallConfig,marioGameConfig,element,gameConfig} from './config';
 let sourceLoadObj = {
-    sourceNum: 0,
-    currentNum: 0,
+    sourceNum: 0  ,
+     currentNum: 0,
     progressbar: new COREHTML5.Progressbar(element.progressDiv, 'rgba(0,0,0,0.5)', 100, 130, 250),
     loadedCallback: function() {
         let percent = this.currentNum / this.sourceNum * 100;
@@ -612,7 +619,7 @@ let drawSpriteList = {
         },
     },
 };
-let gameControl = new Game('game', 'mycanvas');
+let gameControl = new Game('game', element.mycanvas);
 gameControl.speed = 1;
 gameControl.startAnimate = function(time) {
     //层级分法：从下往上依次为1.背景层，作为游戏的整个背景，放在最底部，2，洞为二层，因为洞两侧有多余部分，所以，不能让多余部分遮挡移动的物体（马里奥，蘑菇等）

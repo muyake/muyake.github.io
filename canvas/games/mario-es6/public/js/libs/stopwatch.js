@@ -38,42 +38,43 @@
 //
 // Stopwatches are used primarily for timing animations.
 
-Stopwatch = function ()  {
-};
+
 
 // You can get the elapsed time while the timer is running, or after it's
 // stopped.
 
-Stopwatch.prototype = {
-   startTime: 0,
-   running: false,
-   elapsed: undefined,
+export default class Stopwatch{
+   constructor(){
+      this.startTime=0;
+   this.running=false;
+   this.elapsed=undefined;
+   }
 
-   start: function () {
+   start () {
       this.startTime = +new Date();
       this.elapsedTime = undefined;
       this.running = true;
-   },
+   }
 
-   stop: function () {
+   stop () {
       this.elapsed = (+new Date()) - this.startTime;
       this.running = false;
-   },
+   }
 
-   getElapsedTime: function () {
+   getElapsedTime () {
       if (this.running) {
          return (+new Date()) - this.startTime;
       }
       else {
         return this.elapsed;
       }
-   },
+   }
 
-   isRunning: function() {
+   isRunning() {
       return this.running;
-   },
+   }
 
-   reset: function() {
+   reset() {
      this.elapsed = 0;
    }
-};
+}

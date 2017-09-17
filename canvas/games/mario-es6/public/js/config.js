@@ -605,3 +605,4 @@ let gameConfig = {
   roadHeight: 10,
 
 }
+export {publicConfig,monsterConfig,tortoiseConfig,shellConfig, lifeConfig,badFlowerConfig,marioConfig,bulletConfig,WH,wallConfig,marioGameConfig,element,gameConfig};
