@@ -60,11 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -108,7 +109,7 @@ window.requestNextAnimationFrame = function () {
       geckoVersion = 0,
       userAgent = navigator.userAgent,
       index = 0,
-      self = this;
+      self = {};
 
   // Workaround for Chrome 10 bug where Chrome
   // does not pass the time to the animation function
@@ -200,4 +201,5 @@ window.requestNextAnimationFrame = function () {
 }();
 
 /***/ })
-/******/ ]);
+
+/******/ });

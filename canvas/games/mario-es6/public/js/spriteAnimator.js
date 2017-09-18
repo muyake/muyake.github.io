@@ -1,7 +1,24 @@
-import {SpriteAnimator} from './libs/spriteAnimator'
+import {
+    SpriteAnimator
+} from './libs/spriteAnimator';
+import {
+    publicConfig,
+    monsterConfig,
+    tortoiseConfig,
+    shellConfig,
+    lifeConfig,
+    badFlowerConfig,
+    marioConfig,
+    bulletConfig,
+    WH,
+    wallConfig,
+    marioGameConfig,
+    element,
+    gameConfig
+} from './config';
 class CharacterSpriteAnimator extends SpriteAnimator {
     constructor(elapsedCallback, sprite) {
-        super(undefined,elapsedCallback);
+        super(undefined, elapsedCallback);
         if (elapsedCallback) {
             this.elapsedCallback = elapsedCallback;
         }
@@ -86,7 +103,6 @@ class DownSpriteAnimator extends CharacterSpriteAnimator {
         }
     }
 }
-
 
 
 
@@ -207,3 +223,14 @@ class MairoSpriteAnimator extends CharacterSpriteAnimator {
         }
     }
 }
+
+export {
+    CharacterSpriteAnimator,
+    UpSpriteAnimator,
+    DownSpriteAnimator,
+    BulletJumpSpriteAnimator,
+    RiseSpriteAnimator,
+    BrikeSpriteAnimator,
+    MoveSpriteAnimator,
+    MairoSpriteAnimator
+};

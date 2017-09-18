@@ -60,12 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 10:
+/***/ 16:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -112,8 +112,8 @@ COREHTML5.Progressbar = function (div, strokeStyle, red, green, blue) {
   this.context = document.createElement('canvas').getContext('2d');
   this.domElement.appendChild(this.context.canvas);
   div.appendChild(this.domElement);
-  w = div.offsetWidth;
-  h = div.offsetHeight;
+  var w = div.offsetWidth;
+  var h = div.offsetHeight;
   this.context.canvas.width = w; // On each end, corner radius = h/2
   this.context.canvas.height = h;
 

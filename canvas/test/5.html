@@ -26,8 +26,7 @@
     
    
     <script>
-    function drawImgObj() {
-       
+    function drawImgObj() {       
         img.onload = function() {
             ctx.drawImage(img, 100, 100, 100, 100); 
         };
@@ -42,8 +41,10 @@
         ctx.save();
          ctx.clearRect(0, 0, 500, 500);
          ctx.drawImage(img, 100, 100, 100, 100);
-       translateX.innerHTML ='ctx.rotate('+range.value+');' ;
+       
+       translateX.innerHTML ='ctx.rotate('+parseInt(range.value)* Math.PI / 180+');' ;
         ctx.rotate(parseInt(range.value)* Math.PI / 180);
+        
          ctx.drawImage(img, 100, 100, 100, 100);
           ctx.restore();
     });

@@ -13,4 +13,6 @@ class ImagePainter {
         }
     }
 }
-export ImagePainter;
+export {
+    ImagePainter
+};

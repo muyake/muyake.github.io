@@ -364,7 +364,7 @@ var game = {
     }
 };
 
-var SpriteAnimatorEndCallbackList = {
+var SpriteAnimatorEndCallbackList1 = {
     marioJumpend: function(mario) {
         if (mario.isDie) {
             if (mario.lifeNum > 0) {
@@ -690,3 +690,6 @@ var animateList = {
         // }
     },
 }
+export {
+    SpriteAnimatorEndCallbackList1
+};

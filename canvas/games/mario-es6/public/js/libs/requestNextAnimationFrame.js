@@ -37,7 +37,7 @@ window.requestNextAnimationFrame =
       geckoVersion = 0,
       userAgent = navigator.userAgent,
       index = 0,
-      self = this;
+      self = {};
 
     // Workaround for Chrome 10 bug where Chrome
     // does not pass the time to the animation function
@@ -73,9 +73,9 @@ window.requestNextAnimationFrame =
       // Define the wrapper
 
       wrapper = function(time) {
-       // if (time === undefined) {
-          time = +new Date();
-       // }
+        // if (time === undefined) {
+        time = +new Date();
+        // }
         self.callback(time);
       };
 

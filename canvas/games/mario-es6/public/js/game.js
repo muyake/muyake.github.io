@@ -1,14 +1,92 @@
-
-import { Game } from './libs/gameEngine';
+import {
+    Game
+} from './libs/gameEngine';
 import './libs/requestNextAnimationFrame';
 import './exc';
 //绘制进度条
-import {COREHTML5} from './COREHTML5';
+import {
+    COREHTML5
+} from './progressbar';
 //绘制进度条
-import {publicConfig,monsterConfig,tortoiseConfig,shellConfig, lifeConfig,badFlowerConfig,marioConfig,bulletConfig,WH,wallConfig,marioGameConfig,element,gameConfig} from './config';
+import {
+    CD
+} from './collisionDetection';
+//绘制进度条
+import {
+    publicConfig,
+    monsterConfig,
+    tortoiseConfig,
+    shellConfig,
+    lifeConfig,
+    badFlowerConfig,
+    marioConfig,
+    bulletConfig,
+    WH,
+    wallConfig,
+    marioGameConfig,
+    element,
+    gameConfig
+} from './config';
+import {
+    progressObj,
+    PJNum,
+    totalProgressSprite,
+    createFactory
+}
+from './gameProgress';
+import {
+    lib
+} from './public.js';
+import {
+    audioControl
+}
+from './audioControl';
+
+
+
+import {
+    clipObj
+}
+from './clip';
+
+import
+gameSourceUrl
+from './gameSource';
+
+
+
+import {
+    CharacterImagePainter,
+    CharacterRunSpriteSheetPainter,
+    CharacterRiseSpriteSheetPainter,
+    SceneSprite,
+    SceneImagePainter,
+    Mario,
+    Monster,
+    Tortoise,
+    Shell,
+    Life,
+    Over,
+    Wall,
+    Money,
+    Flower,
+    BadFlower,
+    Mushroom,
+    Star,
+    Bullet,
+    Pipe,
+    Final,
+    Flag,
+    Tower,
+    Hole,
+    Brick,
+    BG
+} from './gameSprite';
+window.gameControl = new Game('game', element.mycanvas);
+gameControl.speed = 1;
 let sourceLoadObj = {
-    sourceNum: 0  ,
-     currentNum: 0,
+    sourceNum: 0,
+    currentNum: 0,
     progressbar: new COREHTML5.Progressbar(element.progressDiv, 'rgba(0,0,0,0.5)', 100, 130, 250),
     loadedCallback: function() {
         let percent = this.currentNum / this.sourceNum * 100;
@@ -41,8 +119,8 @@ let sourceLoadObj = {
 }
 
 //gameSourceUrl来自gameSourceUrl.js
-let gameSourceObj = lib.convertToObject(gameSourceUrl, sourceLoadObj);
-let game = {
+window.gameSourceObj = lib.convertToObject(gameSourceUrl, sourceLoadObj);
+window.game = {
     lastKeyListenerTime: 0,
     init: function() {
         let self = this;
@@ -371,7 +449,7 @@ let game = {
     }
 };
 
-let SpriteAnimatorEndCallbackList = {
+window.SpriteAnimatorEndCallbackList = {
     marioJumpend: function(mario) {
         if (mario.isDie) {
             if (mario.lifeNum > 0) {
@@ -408,7 +486,7 @@ let SpriteAnimatorEndCallbackList = {
 }
 
 
-let drawSpriteList = {
+window.drawSpriteList = {
     isSuccess: false,
     success: function() {
         this.mario.intoTower();
@@ -619,8 +697,7 @@ let drawSpriteList = {
         },
     },
 };
-let gameControl = new Game('game', element.mycanvas);
-gameControl.speed = 1;
+
 gameControl.startAnimate = function(time) {
     //层级分法：从下往上依次为1.背景层，作为游戏的整个背景，放在最底部，2，洞为二层，因为洞两侧有多余部分，所以，不能让多余部分遮挡移动的物体（马里奥，蘑菇等）
     //3.蘑菇，移动的金币，小星星等放在第三层，因为从砖里出来，所以在砖的下一层4.砖，管道等，为第四层，5马里奥为第五层。6碎砖块为第六层。

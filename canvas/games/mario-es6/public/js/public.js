@@ -1,5 +1,5 @@
 let lib = {
-  
+
     //Object.prototype.toString.call(o)能直接返回对象的类属性，形如"[object class]"的字符串，我们通过截取class，并能知道传入的对象是什么类型
     isClass: function(o) {
         if (o === null) return "Null";
@@ -57,7 +57,7 @@ let lib = {
         } else {
             return obj;
         }
-        for (key in obj) {
+        for (let key in obj) {
             let copy = obj[key];
             if (this.isClass(copy) == "Object") {
                 result[key] = arguments.callee.bind(this)(copy); //递归调用
@@ -80,12 +80,12 @@ let lib = {
         } else {
             return obj;
         }
-        for (key in obj) {
+        for (let key in obj) {
             let copy = obj[key];
             if (this.isClass(copy) == "Object") {
-                result[key] = arguments.callee.bind(this)(copy, sourceLoadObj); //递归调用
+                result[key] = lib.convertToObject(copy, sourceLoadObj); //递归调用
             } else if (this.isClass(copy) == "Array") {
-                result[key] = arguments.callee.bind(this)(copy, sourceLoadObj);
+                result[key] = lib.convertToObject(copy, sourceLoadObj);
             } else {
                 if (this.chkFormat(obj[key], 'img')) {
                     result[key] = new Image();
@@ -236,4 +236,6 @@ let lib = {
     },
     //排序
 }
-export {lib};
+export {
+    lib
+};

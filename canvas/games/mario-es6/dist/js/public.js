@@ -60,12 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 2:
+/******/ ([
+/* 0 */,
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -138,7 +138,7 @@ var lib = {
         } else {
             return obj;
         }
-        for (key in obj) {
+        for (var key in obj) {
             var copy = obj[key];
             if (this.isClass(copy) == "Object") {
                 result[key] = arguments.callee.bind(this)(copy); //递归调用
@@ -162,12 +162,12 @@ var lib = {
         } else {
             return obj;
         }
-        for (key in obj) {
+        for (var key in obj) {
             var copy = obj[key];
             if (this.isClass(copy) == "Object") {
-                result[key] = arguments.callee.bind(this)(copy, sourceLoadObj); //递归调用
+                result[key] = lib.convertToObject(copy, sourceLoadObj); //递归调用
             } else if (this.isClass(copy) == "Array") {
-                result[key] = arguments.callee.bind(this)(copy, sourceLoadObj);
+                result[key] = lib.convertToObject(copy, sourceLoadObj);
             } else {
                 if (this.chkFormat(obj[key], 'img')) {
                     result[key] = new Image();
@@ -325,5 +325,4 @@ var lib = {
 exports.lib = lib;
 
 /***/ })
-
-/******/ });
+/******/ ]);

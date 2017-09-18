@@ -36,8 +36,8 @@ COREHTML5.Progressbar = function(div, strokeStyle, red, green, blue) {
   this.context = document.createElement('canvas').getContext('2d');
   this.domElement.appendChild(this.context.canvas);
   div.appendChild(this.domElement);
-  w = div.offsetWidth;
-  h = div.offsetHeight;
+  let w = div.offsetWidth;
+  let h = div.offsetHeight;
   this.context.canvas.width = w; // On each end, corner radius = h/2
   this.context.canvas.height = h;
 
@@ -128,4 +128,6 @@ COREHTML5.Progressbar.prototype = {
     this.context.clearRect(this.LEFT, this.TOP, this.context.canvas.width, this.context.canvas.height);
   }
 };
-export {COREHTML5};
+export {
+  COREHTML5
+};

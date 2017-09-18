@@ -1,4 +1,4 @@
-export const  gameAudio = {
+export const gameAudio = {
     //gameSourceObj.audioList.jumpAll
     smallJump: {
         startTime: 0.5,
@@ -37,15 +37,15 @@ export const  gameAudio = {
         startTime: 11.3,
         endTime: 11.6,
     },
-downflag: {
-        startTime:9,
+    downflag: {
+        startTime: 9,
         endTime: 11.5,
     },
-    gameSuccess:{
-          startTime:0,
+    gameSuccess: {
+        startTime: 0,
         endTime: 7,
     },
-   
+
     //长大
     growup: {
         startTime: 5.5,
@@ -80,7 +80,7 @@ downflag: {
         startTime: 2.6,
         endTime: 3,
     },
-}
+};
 
 //audioControl
 export let audioControl = {

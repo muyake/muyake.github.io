@@ -1,3 +1,34 @@
+//绘制进度条
+import {
+    publicConfig,
+    monsterConfig,
+    tortoiseConfig,
+    shellConfig,
+    lifeConfig,
+    badFlowerConfig,
+    marioConfig,
+    bulletConfig,
+    WH,
+    wallConfig,
+    marioGameConfig,
+    element,
+    gameConfig
+} from './config';
+import {
+    lib
+} from './public.js';
+import {
+    gameAudio,
+    audioControl
+}
+from './audioControl';
+import {
+    progressObj,
+    PJNum,
+    totalProgressSprite,
+    createFactory
+}
+from './gameProgress';
 //碰撞检测
 export let CD = {
     //碰撞函数结果库

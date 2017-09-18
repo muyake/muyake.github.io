@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var Human = function (argument) {
+			this.skill = param&&param.skill||"保密";
+			this.hobby = param&&param.hobby||"保密";
+		}
+		Human.prototype = {
+			getSkill:function() {
+				return this.skill;
+			},
+			getHobby:function () {
+				return this.hobby;
+			}
+		}
+
+		var Named = function(name) {
+			var that = this;
+			(function(name,that) {
+				that.wholeName = name;
+				if (name.indexOf(' ')>-1) {
+					that.FirstName = name.slice(0,name.indexOf(' '));
+					that.secondName= name.slice(name.indexOf(' '));
+				}
+			})(name,that);
+		}
+
+		var Work = function(work) {
+			
+
+			
+		}
+	</script>
+</body>
+</html>

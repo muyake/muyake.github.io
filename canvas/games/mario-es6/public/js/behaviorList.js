@@ -1,15 +1,25 @@
 //游戏所有元素的动作对象
 
+import {
+    lib
+} from './public.js';
 
+import {
+    progressObj,
+    PJNum,
+    totalProgressSprite,
+    createFactory
+}
+from './gameProgress';
 //所有行为
-export let behaviorList = {
+let behaviorList = {
     //背景图片用的这个行为
     moveLeftToRight: function() {
         this.behaviorName = 'moveLeftToRight';
         this.lastMove = 0;
         this.fpsNum = 60;
-        this.execute = function(sprite, context, time, fpsNum) {           
-            this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);            
+        this.execute = function(sprite, context, time, fpsNum) {
+            this.fpsNum = (fpsNum == 0) ? 0 : (fpsNum || this.fpsNum);
             sprite.left += sprite.velocityX / this.fpsNum;
             this.lastMove = time;
         }
@@ -19,14 +29,14 @@ export let behaviorList = {
         this.behaviorName = 'moveLeftToRight';
         this.lastMove = 0;
         this.fpsNum = 60;
-        this.execute = function(sprite, context, time, fpsNum) {          
-        let translateLeft=sprite.translateLeft||0;
-      //  console.log('translateLeft'+progressObj.createSpriteMileNum);
-     
-         sprite.left=    sprite.positionmile - progressObj.createSpriteMileNum-translateLeft;         
+        this.execute = function(sprite, context, time, fpsNum) {
+            let translateLeft = sprite.translateLeft || 0;
+            //  console.log('translateLeft'+progressObj.createSpriteMileNum);
+
+            sprite.left = sprite.positionmile - progressObj.createSpriteMileNum - translateLeft;
         }
     },
-   
+
     //小人跑动动画
     runInPlace: function(setting) {
         let defaultSetting = {
@@ -46,7 +56,7 @@ export let behaviorList = {
         }
     },
     //坏花
-     upInPlace: function(setting) {
+    upInPlace: function(setting) {
         let defaultSetting = {
             lastAdvance: 0,
             PAGEFLIP_INTERVAL: 30,
@@ -58,7 +68,7 @@ export let behaviorList = {
         this.behaviorName = defaultSetting.behaviorName;
         this.execute = function(sprite, context, time) {
             if (time - this.lastAdvance > this.PAGEFLIP_INTERVAL) {
-                
+
                 sprite.painter.advance(sprite);
                 this.lastAdvance = time;
             }
@@ -100,3 +110,6 @@ export let behaviorList = {
         }
     },
 }
+export {
+    behaviorList
+};

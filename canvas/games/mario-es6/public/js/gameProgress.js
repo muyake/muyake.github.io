@@ -1,3 +1,49 @@
+import Stopwatch from './libs/stopwatch';
+import {
+    publicConfig,
+    monsterConfig,
+    tortoiseConfig,
+    shellConfig,
+    lifeConfig,
+    badFlowerConfig,
+    marioConfig,
+    bulletConfig,
+    WH,
+    wallConfig,
+    marioGameConfig,
+    element,
+    gameConfig
+} from './config';
+import {
+    CharacterImagePainter,
+    CharacterRunSpriteSheetPainter,
+    CharacterRiseSpriteSheetPainter,
+    SceneSprite,
+    SceneImagePainter,
+    Mario,
+    Monster,
+    Tortoise,
+    Shell,
+    Life,
+    Over,
+    Wall,
+    Money,
+    Flower,
+    BadFlower,
+    Mushroom,
+    Star,
+    Bullet,
+    Pipe,
+    Final,
+    Flag,
+    Tower,
+    Hole,
+    Brick,
+    BG
+} from './gameSprite';
+import {
+    lib
+} from './public.js'
 let progressObj = {
     mileageNum: 0, //马里奥走的里程
     totaltime: 300, //游戏倒计时
@@ -585,28 +631,29 @@ let totalProgressSprite = {
         positionmile: PJNum.final1 + 234,
     }],
     hole: [
-    // {
-    //     isVisible: true,
-    //     id: lib.newGuid(),
-    //     physicaltop: -33,
-    //     positionmile: 450,
-    // },
-     {
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: -33,
-        positionmile: PJNum.pipe1 + 1340,
-    }, {
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: -33,
-        positionmile: PJNum.wall2 + WH.wall.width * 7,
-    }, {
-        isVisible: true,
-        id: lib.newGuid(),
-        physicaltop: -33,
-        positionmile: PJNum.wall3 + WH.wall.width * 60 + WH.pipe.width,
-    }],
+        // {
+        //     isVisible: true,
+        //     id: lib.newGuid(),
+        //     physicaltop: -33,
+        //     positionmile: 450,
+        // },
+        {
+            isVisible: true,
+            id: lib.newGuid(),
+            physicaltop: -33,
+            positionmile: PJNum.pipe1 + 1340,
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            physicaltop: -33,
+            positionmile: PJNum.wall2 + WH.wall.width * 7,
+        }, {
+            isVisible: true,
+            id: lib.newGuid(),
+            physicaltop: -33,
+            positionmile: PJNum.wall3 + WH.wall.width * 60 + WH.pipe.width,
+        }
+    ],
 };
 
 let createFactory = {
@@ -873,4 +920,9 @@ let createFactory = {
         lib.sort(this.arrayTotalProgress, 'positionmile', 0);
     }
 }
-export {progressObj,PJNum,totalProgressSprite,createFactory};
+export {
+    progressObj,
+    PJNum,
+    totalProgressSprite,
+    createFactory
+};

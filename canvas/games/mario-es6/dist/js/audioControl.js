@@ -60,12 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 7:
+/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -156,9 +156,10 @@ var gameAudio = exports.gameAudio = {
         startTime: 2.6,
         endTime: 3
     }
+};
 
-    //audioControl
-};var audioControl = exports.audioControl = {
+//audioControl
+var audioControl = exports.audioControl = {
     //如果isplay不传，则总是播放，如果传了则只播放一次，例如人物死亡
     audioPlay: function audioPlay(audioObj, videoConfig) {
         audioObj.currentTime = videoConfig.startTime;
