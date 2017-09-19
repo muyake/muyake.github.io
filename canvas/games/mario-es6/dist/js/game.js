@@ -82,37 +82,37 @@ var monsterConfig = {
   config: {
     totalCount: 5,
     sprite_0: {
-      width: 50,
-      height: 61,
+      width: 20,
+      height: 24.4,
       left: 0,
       top: 0
     },
 
     sprite_1: {
-      width: 50,
-      height: 61,
-      left: 58,
+      width: 20,
+      height: 24.4,
+      left: 23.2,
       top: 0
     },
 
     sprite_2: {
-      width: 50,
-      height: 61,
-      left: 119,
+      width: 20,
+      height: 24.4,
+      left: 47.6,
       top: 0
     },
 
     sprite_3: {
-      width: 50,
-      height: 61,
-      left: 179,
+      width: 20,
+      height: 24.4,
+      left: 71.6,
       top: 0
     },
 
     sprite_4: {
-      width: 50,
-      height: 61,
-      left: 240,
+      width: 20,
+      height: 24.4,
+      left: 96,
       top: 0
     }
   }
@@ -123,208 +123,208 @@ var tortoiseConfig = {
   config: {
     totalCount: 12,
     sprite_11: {
-      width: 54,
-      height: 67,
+      width: 21.6,
+      height: 26.8,
       left: 0,
       top: 0
     },
 
     sprite_10: {
-      width: 54,
-      height: 67,
-      left: 54,
+      width: 21.6,
+      height: 26.8,
+      left: 21.6,
       top: 0
     },
 
     sprite_9: {
-      width: 54,
-      height: 67,
-      left: 108,
+      width: 21.6,
+      height: 26.8,
+      left: 43.2,
       top: 0
     },
 
     sprite_8: {
-      width: 54,
-      height: 67,
-      left: 162,
+      width: 21.6,
+      height: 26.8,
+      left: 64.8,
       top: 0
     },
 
     sprite_7: {
-      width: 54,
-      height: 67,
-      left: 216,
+      width: 21.6,
+      height: 26.8,
+      left: 86.4,
       top: 0
     },
     sprite_6: {
-      width: 54,
-      height: 67,
-      left: 270,
+      width: 21.6,
+      height: 26.8,
+      left: 108,
       top: 0
     },
 
     sprite_5: {
-      width: 54,
-      height: 67,
-      left: 324,
+      width: 21.6,
+      height: 26.8,
+      left: 129.6,
       top: 0
     },
 
     sprite_4: {
-      width: 54,
-      height: 67,
-      left: 378,
+      width: 21.6,
+      height: 26.8,
+      left: 151.2,
       top: 0
     },
 
     sprite_3: {
-      width: 54,
-      height: 67,
-      left: 432,
+      width: 21.6,
+      height: 26.8,
+      left: 172.8,
       top: 0
     },
 
     sprite_2: {
-      width: 54,
-      height: 67,
-      left: 486,
+      width: 21.6,
+      height: 26.8,
+      left: 194.4,
       top: 0
     },
     sprite_1: {
-      width: 54,
-      height: 67,
-      left: 540,
+      width: 21.6,
+      height: 26.8,
+      left: 86.4,
       top: 0
     },
 
     sprite_0: {
-      width: 54,
-      height: 67,
-      left: 594,
+      width: 21.6,
+      height: 26.8,
+      left: 237.6,
       top: 0
     }
   }
 };
 
 var shellConfig = {
-
   config: {
     totalCount: 12,
     sprite_11: {
-      width: 45,
-      height: 43,
-      left: 135,
+      width: 18,
+      height: 17.2,
+      left: 53.6,
       top: 0
     },
     sprite_10: {
-      width: 45,
-      height: 43,
-      left: 180,
+      width: 18,
+      height: 17.2,
+      left: 72,
       top: 0
     },
 
     sprite_9: {
-      width: 45,
-      height: 43,
-      left: 225,
+      width: 18,
+      height: 17.2,
+      left: 90,
       top: 0
     },
 
     sprite_8: {
-      width: 45,
-      height: 43,
+      width: 18,
+      height: 17.2,
       left: 0,
       top: 0
     },
 
     sprite_7: {
-      width: 45,
-      height: 43,
-      left: 45,
+      width: 18,
+      height: 17.2,
+      left: 18,
       top: 0
     },
 
     sprite_6: {
-      width: 45,
-      height: 43,
-      left: 225,
+      width: 18,
+      height: 17.2,
+      left: 90,
       top: 0
     },
     sprite_5: {
-      width: 45,
-      height: 43,
-      left: 405,
+      width: 18,
+      height: 17.2,
+      left: 162,
       top: 0
     },
 
     sprite_4: {
-      width: 45,
-      height: 43,
-      left: 450,
+      width: 18,
+      height: 17.2,
+      left: 72,
       top: 0
     },
 
     sprite_3: {
-      width: 45,
-      height: 43,
-      left: 495,
+      width: 18,
+      height: 17.2,
+      left: 198,
       top: 0
     },
 
     sprite_2: {
-      width: 45,
-      height: 43,
-      left: 270,
+      width: 18,
+      height: 17.2,
+      left: 108,
       top: 0
     },
 
     sprite_1: {
-      width: 45,
-      height: 43,
-      left: 315,
+      width: 18,
+      height: 17.2,
+      left: 126,
       top: 0
     },
     sprite_0: {
-      width: 45,
-      height: 43,
-      left: 360,
+      width: 18,
+      height: 17.2,
+      left: 144,
       top: 0
     }
 
   }
+
 };
 var lifeConfig = {
   config: {
     totalCount: 5,
     sprite_1: {
-      height: 46,
-      width: 124,
+      height: 23,
+      width: 62,
       left: 0,
       top: 0
     },
     sprite_4: {
-      height: 47,
-      width: 127,
+      height: 23.5,
+      width: 63.5,
       left: 0,
-      top: 46
+      top: 23
     },
     sprite_3: {
-      height: 48,
-      width: 128,
+      height: 24,
+      width: 64,
       left: 0,
-      top: 93
+      top: 46.5
     },
     sprite_5: {
       height: 48,
-      width: 129,
+      width: 64.5,
       left: 0,
-      top: 141
+      top: 70.5
     },
     sprite_2: {
-      height: 47,
-      width: 129,
+      height: 23.5,
+      width: 64.5,
       left: 0,
-      top: 189
+      top: 94.5
     }
   }
 };
@@ -333,220 +333,220 @@ var badFlowerConfig = {
   config: {
     totalCount: 35,
     sprite_34: {
-      height: 6,
-      width: 40,
+      height: 3,
+      width: 20,
       left: 0,
       top: 0
     },
     sprite_8: {
-      height: 38,
-      width: 44,
+      height: 19,
+      width: 22,
       left: 0,
-      top: 6
+      top: 3
     },
     sprite_35: {
-      height: 5,
-      width: 45,
+      height: 2.5,
+      width: 22.5,
       left: 0,
-      top: 44
+      top: 22
     },
     sprite_28: {
-      height: 31,
-      width: 45,
+      height: 15.5,
+      width: 22.5,
       left: 0,
-      top: 49
+      top: 24.5
     },
     sprite_29: {
-      height: 27,
-      width: 45,
+      height: 23.5,
+      width: 22.5,
       left: 0,
-      top: 80
+      top: 40
     },
     sprite_19: {
-      height: 57,
-      width: 45,
+      height: 28.5,
+      width: 22.5,
       left: 0,
-      top: 107
+      top: 53.5
     },
     sprite_0: {
-      height: 11,
-      width: 45,
+      height: 5.5,
+      width: 22.5,
       left: 0,
-      top: 164
+      top: 82
     },
     sprite_33: {
-      height: 10,
-      width: 46,
+      height: 5,
+      width: 23,
       left: 0,
-      top: 175
+      top: 87.5
     },
     sprite_27: {
-      height: 32,
-      width: 46,
+      height: 16,
+      width: 23,
       left: 0,
-      top: 185
+      top: 92.5
     },
     sprite_9: {
-      height: 43,
-      width: 46,
+      height: 21.5,
+      width: 23,
       left: 0,
-      top: 217
+      top: 108.5
     },
     sprite_20: {
-      height: 53,
-      width: 46,
+      height: 26.5,
+      width: 23,
+      left: 0,
+      top: 130
+    },
+    sprite_7: {
+      height: 16.5,
+      width: 23,
+      left: 0,
+      top: 156.5
+    },
+    sprite_30: {
+      height: 11,
+      width: 23.5,
+      left: 0,
+      top: 173
+    },
+    sprite_2: {
+      height: 9,
+      width: 24,
+      left: 0,
+      top: 184
+    },
+    sprite_1: {
+      height: 7.5,
+      width: 24,
+      left: 0,
+      top: 193
+    },
+    sprite_26: {
+      height: 16,
+      width: 24,
+      left: 0,
+      top: 200.5
+    },
+    sprite_10: {
+      height: 24.5,
+      width: 24,
+      left: 0,
+      top: 216.5
+    },
+    sprite_23: {
+      height: 19,
+      width: 24.5,
+      left: 0,
+      top: 241
+    },
+    sprite_21: {
+      height: 25.5,
+      width: 24.5,
       left: 0,
       top: 260
     },
-    sprite_7: {
-      height: 33,
-      width: 46,
+    sprite_3: {
+      height: 9.5,
+      width: 25,
       left: 0,
-      top: 313
+      top: 285.5
     },
-    sprite_30: {
-      height: 22,
-      width: 47,
+    sprite_22: {
+      height: 24,
+      width: 25.5,
       left: 0,
-      top: 346
+      top: 295
     },
-    sprite_2: {
-      height: 18,
-      width: 48,
+    sprite_11: {
+      height: 23,
+      width: 25.5,
       left: 0,
-      top: 368
+      top: 319
     },
-    sprite_1: {
+    sprite_31: {
+      height: 9.5,
+      width: 25.5,
+      left: 0,
+      top: 342
+    },
+    sprite_32: {
+      height: 7,
+      width: 26.5,
+      left: 0,
+      top: 351.5
+    },
+    sprite_18: {
+      height: 29,
+      width: 26.5,
+      left: 0,
+      top: 358.5
+    },
+    sprite_12: {
+      height: 23,
+      width: 27,
+      left: 0,
+      top: 387.5
+    },
+    sprite_25: {
+      height: 15.5,
+      width: 27,
+      left: 0,
+      top: 410.5
+    },
+    sprite_13: {
+      height: 23,
+      width: 27.5,
+      left: 0,
+      top: 426
+    },
+    sprite_17: {
+      height: 29,
+      width: 27.5,
+      left: 0,
+      top: 449
+    },
+    sprite_24: {
+      height: 17,
+      width: 27.5,
+      left: 0,
+      top: 478
+    },
+    sprite_6: {
       height: 15,
-      width: 48,
+      width: 28,
       left: 0,
-      top: 386
+      top: 495
     },
-    sprite_26: {
-      height: 32,
-      width: 48,
+    sprite_4: {
+      height: 10,
+      width: 28.5,
       left: 0,
-      top: 401
+      top: 510
     },
-    sprite_10: {
-      height: 49,
-      width: 48,
-      left: 0,
-      top: 433
-    },
-    sprite_23: {
-      height: 38,
-      width: 49,
-      left: 0,
-      top: 482
-    },
-    sprite_21: {
-      height: 51,
-      width: 49,
+    sprite_14: {
+      height: 27.5,
+      width: 29,
       left: 0,
       top: 520
     },
-    sprite_3: {
-      height: 19,
-      width: 50,
-      left: 0,
-      top: 571
-    },
-    sprite_22: {
-      height: 48,
-      width: 51,
-      left: 0,
-      top: 590
-    },
-    sprite_11: {
-      height: 46,
-      width: 51,
-      left: 0,
-      top: 638
-    },
-    sprite_31: {
-      height: 19,
-      width: 51,
-      left: 0,
-      top: 684
-    },
-    sprite_32: {
-      height: 14,
-      width: 53,
-      left: 0,
-      top: 703
-    },
-    sprite_18: {
-      height: 58,
-      width: 53,
-      left: 0,
-      top: 717
-    },
-    sprite_12: {
-      height: 46,
-      width: 54,
-      left: 0,
-      top: 775
-    },
-    sprite_25: {
-      height: 31,
-      width: 54,
-      left: 0,
-      top: 821
-    },
-    sprite_13: {
-      height: 46,
-      width: 55,
-      left: 0,
-      top: 852
-    },
-    sprite_17: {
-      height: 58,
-      width: 55,
-      left: 0,
-      top: 898
-    },
-    sprite_24: {
-      height: 34,
-      width: 55,
-      left: 0,
-      top: 956
-    },
-    sprite_6: {
-      height: 30,
-      width: 56,
-      left: 0,
-      top: 990
-    },
-    sprite_4: {
-      height: 20,
-      width: 57,
-      left: 0,
-      top: 1020
-    },
-    sprite_14: {
-      height: 55,
-      width: 58,
-      left: 0,
-      top: 1040
-    },
     sprite_5: {
-      height: 21,
-      width: 59,
+      height: 10.5,
+      width: 29.5,
       left: 0,
-      top: 1095
+      top: 547.5
     },
     sprite_15: {
-      height: 59,
-      width: 59,
+      height: 29.5,
+      width: 29.5,
       left: 0,
-      top: 1116
+      top: 558
     },
     sprite_16: {
-      height: 67,
-      width: 62,
+      height: 33.5,
+      width: 31,
       left: 0,
-      top: 1175
+      top: 587.5
     }
   }
   //马里奥动画配置参数
@@ -719,28 +719,28 @@ var WH = {
     height: 35
   },
   life: {
-    width: 127 * 0.5,
-    height: 48 * 0.5
+    width: 63.5,
+    height: 24
   },
   badflower: {
-    width: 55 * 0.5,
-    height: 58 * 0.5
+    width: 27.5,
+    height: 29
   },
   monster: {
-    width: 50 * 0.4,
-    height: 61 * 0.4
+    width: 20,
+    height: 24.4
   },
   tortoise: {
-    width: 54 * 0.4,
-    height: 67 * 0.4
+    width: 21.6,
+    height: 26.8
   },
   tower: {
     width: 279 * 0.85,
     height: 342 * 0.6
   },
   shell: {
-    width: 45 * 0.4,
-    height: 43 * 0.4
+    width: 18,
+    height: 17.2
   },
   hole: {
     width: 167 * 0.7,
@@ -775,8 +775,8 @@ var WH = {
       height: 68
     },
     smallstatus: {
-      width: 33 * 0.5,
-      height: 68 * 0.5
+      width: 16.5,
+      height: 34
     }
   },
   pipe: {
@@ -784,56 +784,56 @@ var WH = {
     height: 94
   },
   flag: {
-    width: 81 * 0.5,
-    height: 70 * 0.5
+    width: 40.5,
+    height: 35
   },
   final: {
-    width: 75 * 0.5,
-    height: 450 * 0.5
+    width: 37.5,
+    height: 225
   }
 };
 var wallConfig = {
   normalSprite: {
-    width: 50,
-    height: 50,
-    left: 215,
+    width: 35,
+    height: 35,
+    left: 150.5,
     top: 0
   },
   abnormalwall: {
-    height: 50,
-    width: 50,
-    left: 115,
+    height: 35,
+    width: 35,
+    left: 80.5,
     top: 0
   },
 
   afterabnormalSprite: {
-    height: 50,
-    width: 50,
-    left: 165,
+    height: 35,
+    width: 35,
+    left: 115.5,
     top: 0
   },
   leftupSprite: {
-    height: 23,
-    width: 23,
+    height: 16.1,
+    width: 16.1,
     left: 0,
     top: 0
   },
   leftdownSprite: {
-    height: 30,
-    width: 30,
-    left: 51,
+    height: 21,
+    width: 21,
+    left: 35.7,
     top: 0
   },
   rightupSprite: {
-    height: 33,
-    width: 35,
-    left: 80,
+    height: 23.1,
+    width: 24.5,
+    left: 56,
     top: 0
   },
   rightdownSprite: {
-    height: 30,
-    width: 28,
-    left: 23,
+    height: 21,
+    width: 19.6,
+    left: 16.7,
     top: 0
   }
 };
@@ -1156,7 +1156,7 @@ exports.lib = lib;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var gameAudio = exports.gameAudio = {
+var gameAudio = {
     //gameSourceObj.audioList.jumpAll
     smallJump: {
         startTime: 0.5,
@@ -1241,7 +1241,7 @@ var gameAudio = exports.gameAudio = {
 };
 
 //audioControl
-var audioControl = exports.audioControl = {
+var audioControl = {
     //如果isplay不传，则总是播放，如果传了则只播放一次，例如人物死亡
     audioPlay: function audioPlay(audioObj, videoConfig) {
         audioObj.currentTime = videoConfig.startTime;
@@ -1264,6 +1264,8 @@ var audioControl = exports.audioControl = {
         }, false);
     }
 };
+exports.gameAudio = gameAudio;
+exports.audioControl = audioControl;
 
 /***/ }),
 /* 3 */
@@ -1282,6 +1284,8 @@ var _stopwatch = __webpack_require__(12);
 var _stopwatch2 = _interopRequireDefault(_stopwatch);
 
 var _config = __webpack_require__(0);
+
+var _audioControl = __webpack_require__(2);
 
 var _gameSprite = __webpack_require__(4);
 
@@ -1706,15 +1710,7 @@ var totalProgressSprite = {
         positionmile: PJNum.final1 + 20
     }],
     fire: [],
-    badflower: [
-    // {
-    //         isVisible: true,
-    //         id: lib.newGuid(),
-    //         physicaltop: 0,
-    //         positionmile: 400,
-    //     },
-
-    {
+    badflower: [{
         isVisible: true,
         id: _public.lib.newGuid(),
         physicaltop: 0,
@@ -1805,6 +1801,12 @@ var totalProgressSprite = {
     }],
     //mushroom: [],
     tortoise: [{
+        isAdd: false, //判断是否加入过数组
+        isMonster: true,
+        isVisible: true,
+        id: _public.lib.newGuid(),
+        positionmile: 600
+    }, {
         isAdd: false, //判断是否加入过数组
         isMonster: true,
         isVisible: true,
@@ -1931,7 +1933,7 @@ var createFactory = {
         } else {
             createBulletObj.jump(_config.bulletConfig.VX);
         }
-        audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.fire);
+        _audioControl.audioControl.audioPlay(gameSourceObj.audioList.jumpAll, _audioControl.gameAudio.fire);
 
         drawSpriteList.createBulletSpriteList.push(createBulletObj);
     },
@@ -2266,8 +2268,8 @@ var CharacterRiseSpriteSheetPainter = function (_SpriteSheetPainter2) {
         key: 'paint',
         value: function paint(sprite, context) {
             var cell = this.cells['sprite_' + this.cellIndex];
-            sprite.width = cell.width * 0.5;
-            sprite.height = cell.height * 0.5;
+            sprite.width = cell.width;
+            sprite.height = cell.height;
             sprite.top = _config.element.mycanvasHeight - sprite.height - _config.gameConfig.roadHeight - sprite.physicaltop;
             if (sprite.isReverse) {
                 context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
@@ -2423,7 +2425,7 @@ var Mario = function (_Sprite2) {
                 switch (VY) {
                     case _config.marioGameConfig.smallJumpV:
                         {
-                            console.log(VY);
+                            //  console.log(VY);
                             _audioControl.audioControl.audioPlay(gameSourceObj.audioList.jumpAll, _audioControl.gameAudio.smallJump);
                         }
                         break;
@@ -2799,6 +2801,9 @@ var Shell = function (_Sprite5) {
         _this9.id = _public.lib.newGuid(), _this9.mycanvas = _config.element.mycanvas;
         _this9.name = 'shell';
         _this9.translateLeft = 0;
+        _this9.painters = {
+            run: new CharacterRunSpriteSheetPainter(_config.shellConfig.config, _gameSource2.default.imageList.shell, _config.element.mycanvas, _config.shellConfig.config.totalCount)
+        };
         //this.velocityX = setting.velocityX;
         _this9.width = setting.width || _config.WH.shell.width;
         // this.roleType = 'mairo';
@@ -2810,7 +2815,7 @@ var Shell = function (_Sprite5) {
         _this9.initvelocityX = 0;
         _this9.positionmile = _this9.left + _gameProgress.progressObj.createSpriteMileNum;
         _this9.translateLeft = 0;
-        console.log('translateLeft' + _this9.translateLeft);
+        // console.log('translateLeft' + this.translateLeft);
         _this9.GRAVITY_FORCE = _config.publicConfig.GRAVITY_FORCE; //重力
         _this9.isJump = false; //是否在跳中
         // this.initvelocityX = 70;
@@ -2830,7 +2835,7 @@ var Shell = function (_Sprite5) {
         _this9.shellSpriteAnimatorJump = new _spriteAnimator.CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.shellJumpend, _this9);
         _this9.shellSpriteAnimatorMove = new _spriteAnimator.MoveSpriteAnimator(null, _this9);
         _this9.shellSpriteAnimatorMove.start();
-        thi.painters = {
+        _this9.painters = {
             run: new CharacterRunSpriteSheetPainter(_config.shellConfig.config, _gameSource2.default.imageList.shell, _config.element.mycanvas, _config.shellConfig.config.totalCount)
         };
         return _this9;
@@ -3703,8 +3708,8 @@ var Brick = function (_SceneSprite13) {
         _this24.imgheight = _config.wallConfig[_this24.status + "Sprite"].height;
         _this24.imgleft = _config.wallConfig[_this24.status + "Sprite"].left;
         _this24.imgtop = _config.wallConfig[_this24.status + "Sprite"].top;
-        _this24.width = _this24.imgwidth * 0.7;
-        _this24.height = _this24.imgheight * 0.7; //50变35，即width*0.7;
+        _this24.width = _this24.imgwidth;
+        _this24.height = _this24.imgheight; //50变35，即width*0.7;
 
         _this24.translateLeft = 0;
         _this24.GRAVITY_FORCE = _config.publicConfig.GRAVITY_FORCE;
@@ -3933,12 +3938,14 @@ var _gameSource2 = _interopRequireDefault(_gameSource);
 
 var _gameSprite = __webpack_require__(4);
 
+__webpack_require__(21);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //绘制进度条
-window.gameControl = new _gameEngine.Game('game', _config.element.mycanvas);
-//绘制进度条
 
+//绘制进度条
+window.gameControl = new _gameEngine.Game('game', _config.element.mycanvas);
 //绘制进度条
 
 gameControl.speed = 1;
@@ -4006,7 +4013,7 @@ window.game = {
         "space": false
     },
     over: function over() {
-        _audioControl.audioControl.audioPlay(gameSourceObj.audioList.GameOver, gameAudio.GameOver);
+        _audioControl.audioControl.audioPlay(gameSourceObj.audioList.GameOver, _audioControl.gameAudio.GameOver);
         _audioControl.audioControl.BGMPause(gameSourceObj.audioList.BGM);
         drawSpriteList.gameOver.push(new _gameSprite.Over({
             name: 'Over'
@@ -4045,52 +4052,10 @@ window.game = {
 
         // drawSpriteList.createAnimationSpriteList.push(new Shell({left:300}));
         var self = this;
-        document.querySelector('#smallBtn').addEventListener('click', function () {
-            drawSpriteList.arrayOthersA.forEach(function (item) {
-                if (item.name == 'flag') {
-                    item.down();
-                }
-            });
-        }, false);
-        document.querySelector('#flower').addEventListener('click', function () {
-            drawSpriteList.mario.laqi();
-            //createFactory.createUpMoney(100, 100);
-        }, false);
-        document.querySelector('#flower1').addEventListener('click', function () {
 
-            _gameProgress.createFactory.createBullet(100, 100);
-        }, false);
-        document.querySelector('#createStar').addEventListener('click', function () {
-            // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
-            _gameProgress.createFactory.createStar(100, 100);
-        }, false);
-        document.querySelector('#bigBtn').addEventListener('click', function () {
-            drawSpriteList.mario.laqi();
-            gameControl.gamePause = true;
-        }, false);
-        document.querySelector('#fire').addEventListener('click', function () {
-            // drawSpriteList.mario.rise(WH.mario.height * 0.5);
-            //  createFactory.createBullet(100, 30);
-            _gameProgress.createFactory.createBullet(_gameProgress.progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, 30);
-        }, false);
-
-        document.querySelector('#monster').addEventListener('click', function () {
-            _gameProgress.createFactory.createBadflower(300, 0);
-        }, false);
-
-        document.querySelector('#monsterdie').addEventListener('click', function () {
-            drawSpriteList.createAnimationSpriteList.forEach(function (item) {
-                if (item.name == 'shell') {
-                    item.shoot(100);
-                }
-            });
-        }, false);
-        document.querySelector('#mariodie').addEventListener('click', function () {
-            drawSpriteList.mario.collisiondie();
-        }, false);
-        document.querySelector('#gamePause').addEventListener('click', function () {
-            gameControl.gamePause = true;
-        }, false);
+        setInterval(function () {
+            _gameProgress.createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
+        }, 1000);
 
         // Key Listeners..............................................
         gameControl.addKeyListener({
@@ -4176,6 +4141,7 @@ window.game = {
         gameControl.addKeyListener({
             key: 'right',
             listener: function listener(status) {
+                // console.log(2);
                 if (status == 1) {
                     self.mapKey['right'] = true;
                 } else {
@@ -4187,6 +4153,7 @@ window.game = {
         gameControl.addKeyListener({
             key: 'left',
             listener: function listener(status) {
+                // console.log(1);
                 if (status == 1) {
                     self.mapKey['left'] = true;
                 } else {
@@ -4337,7 +4304,7 @@ window.SpriteAnimatorEndCallbackList = {
         if (sprite.isDie == true) {
             _public.lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', sprite.id);
             sprite = null;
-            console.log('移除怪兽');
+            // console.log('移除怪兽');
         }
     }
 };
@@ -4451,7 +4418,7 @@ window.drawSpriteList = {
             moverBarrier: {
                 callback: function callback(mushroomSprite) {
                     _public.lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', mushroomSprite.id);
-                    _audioControl.audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.growup);
+                    _audioControl.audioControl.audioPlay(gameSourceObj.audioList.jumpAll, _audioControl.gameAudio.growup);
                     mushroomSprite = null;
                 }
             },
@@ -5135,8 +5102,9 @@ var _audioControl = __webpack_require__(2);
 
 var _gameProgress = __webpack_require__(3);
 
+var _gameSprite = __webpack_require__(4);
+
 //碰撞检测
-//绘制进度条
 var CD = exports.CD = {
     //碰撞函数结果库
     CDFunc: {
@@ -5561,7 +5529,7 @@ var CD = exports.CD = {
                     console.log('猜到乌龟了');
                     monster.visible = false;
                     monster.isDie = true;
-                    var shell = new Shell({
+                    var shell = new _gameSprite.Shell({
                         left: monster.left
                     });
 
@@ -5600,7 +5568,7 @@ var CD = exports.CD = {
                 return;
             }
             var leftfun = function leftfun() {
-                console.log('马里奥从壳的右侧碰撞');
+                //  console.log('马里奥从壳的右侧碰撞');
                 if (shell.status == 0) {
                     mario.left = shell.left + shell.width;
                     shell.shoot(_config.gameConfig.shellSpeed);
@@ -5609,7 +5577,7 @@ var CD = exports.CD = {
                 }
             };
             var rightfun = function rightfun() {
-                console.log('马里奥从壳的左侧碰撞');
+                //  console.log('马里奥从壳的左侧碰撞');
                 if (shell.status == 0) {
 
                     mario.left = shell.left - mario.width;
@@ -5619,7 +5587,8 @@ var CD = exports.CD = {
                 }
             };
             var upfun = function upfun() {
-                console.log('upfun');
+                // console.log('upfun');
+
 
                 self.CDFunc.MairoCollisionMonster(mario, shell);
             };
@@ -5908,7 +5877,7 @@ var CD = exports.CD = {
             self.CDFunc.Colliding(mover, barrier, leftfun, rightfun, downfun, upfun);
         }
     }
-};
+}; //绘制进度条
 
 /***/ }),
 /* 12 */
@@ -6750,6 +6719,13 @@ var clipObj = exports.clipObj = {
         //this.context.clearRect(0, 0, canvas.width, canvas.height);
     }
 }; //绘制进度条
+
+/***/ }),
+/* 20 */,
+/* 21 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: SyntaxError: E:/mygit/back2/muyake.github.io/canvas/games/mario-es6/public/js/adaptation.js: Unexpected token, expected ( (78:17)\n\n  76 | }\n  77 | \n> 78 | function addMeta {\n     |                  ^\n  79 |     var divIframe = document.createDocumentFragment;\n  80 |     divIframe.innerHTML = `<meta charset=\"UTF-8\">\n  81 |     <meta content=\"telephone=no,email=no\" name=\"format-detection\">\n");
 
 /***/ })
 /******/ ]);

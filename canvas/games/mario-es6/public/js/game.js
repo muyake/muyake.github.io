@@ -38,12 +38,10 @@ import {
     lib
 } from './public.js';
 import {
+    gameAudio,
     audioControl
 }
 from './audioControl';
-
-
-
 import {
     clipObj
 }
@@ -52,8 +50,6 @@ from './clip';
 import
 gameSourceUrl
 from './gameSource';
-
-
 
 import {
     CharacterImagePainter,
@@ -82,6 +78,10 @@ import {
     Brick,
     BG
 } from './gameSprite';
+
+
+import './adaptation';
+
 window.gameControl = new Game('game', element.mycanvas);
 gameControl.speed = 1;
 let sourceLoadObj = {
@@ -190,53 +190,11 @@ window.game = {
 
         // drawSpriteList.createAnimationSpriteList.push(new Shell({left:300}));
         let self = this;
-        document.querySelector('#smallBtn').addEventListener('click', function() {
-            drawSpriteList.arrayOthersA.forEach(function(item) {
-                if (item.name == 'flag') {
-                    item.down();
-                }
-            })
-        }, false);
-        document.querySelector('#flower').addEventListener('click', function() {
-            drawSpriteList.mario.laqi();
-            //createFactory.createUpMoney(100, 100);
-        }, false);
-        document.querySelector('#flower1').addEventListener('click', function() {
 
-            createFactory.createBullet(100, 100);
-        }, false);
-        document.querySelector('#createStar').addEventListener('click', function() {
-            // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
-            createFactory.createStar(100, 100);
-        }, false);
-        document.querySelector('#bigBtn').addEventListener('click', function() {
-            drawSpriteList.mario.laqi();
-            gameControl.gamePause = true;
-        }, false);
-        document.querySelector('#fire').addEventListener('click', function() {
-            // drawSpriteList.mario.rise(WH.mario.height * 0.5);
-            //  createFactory.createBullet(100, 30);
-            createFactory.createBullet(progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, 30);
-        }, false);
+        setInterval(function() {
+            createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
+        }, 1000);
 
-        document.querySelector('#monster').addEventListener('click', function() {
-            createFactory.createBadflower(300, 0);
-
-        }, false);
-
-        document.querySelector('#monsterdie').addEventListener('click', function() {
-            drawSpriteList.createAnimationSpriteList.forEach(function(item) {
-                if (item.name == 'shell') {
-                    item.shoot(100);
-                }
-            });
-        }, false);
-        document.querySelector('#mariodie').addEventListener('click', function() {
-            drawSpriteList.mario.collisiondie();
-        }, false);
-        document.querySelector('#gamePause').addEventListener('click', function() {
-            gameControl.gamePause = true;
-        }, false);
 
         // Key Listeners..............................................
         gameControl.addKeyListener({
@@ -323,6 +281,7 @@ window.game = {
         gameControl.addKeyListener({
             key: 'right',
             listener: function(status) {
+                // console.log(2);
                 if (status == 1) {
                     self.mapKey['right'] = true;
                 } else {
@@ -334,6 +293,7 @@ window.game = {
         gameControl.addKeyListener({
             key: 'left',
             listener: function(status) {
+                // console.log(1);
                 if (status == 1) {
                     self.mapKey['left'] = true;
                 } else {
@@ -480,7 +440,7 @@ window.SpriteAnimatorEndCallbackList = {
         if (sprite.isDie == true) {
             lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', sprite.id);
             sprite = null;
-            console.log('移除怪兽');
+            // console.log('移除怪兽');
         }
     }
 }

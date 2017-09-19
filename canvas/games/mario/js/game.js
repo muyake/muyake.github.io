@@ -400,7 +400,41 @@ var SpriteAnimatorEndCallbackList1 = {
     }
 }
 
+var SpriteAnimatorEndCallbackList = {
+    marioJumpend: function(mario) {
+        if (mario.isDie) {
+            if (mario.lifeNum > 0) {
+                console.log('暂停');
+                gameControl.gamePause = true;
+                clipObj.startDraw();
+            } else {
+                clipObj.startDraw();
+                // game.over();
+            }
+        }
 
+        mario.isJump = false;
+        mario.startVelocityY = 0;
+        mario.velocityY = 0;
+        mario.isJump = false;
+        game.activeEventCallback();
+    },
+    moneyupend: function(sprite) {
+        lib.removeByValue(drawSpriteList.createSpriteList, 'id', sprite.id);
+        sprite = null;
+    },
+    brickupend: function(sprite) {
+        lib.removeByValue(drawSpriteList.createBrickSpriteList, 'id', sprite.id);
+        sprite = null;
+    },
+    monsterJumpend: function(sprite) {
+        if (sprite.isDie == true) {
+            lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', sprite.id);
+            sprite = null;
+            console.log('移除怪兽');
+        }
+    }
+}
 var drawSpriteList = {
     isSuccess: false,
     success: function() {
@@ -690,6 +724,3 @@ var animateList = {
         // }
     },
 }
-export {
-    SpriteAnimatorEndCallbackList1
-};

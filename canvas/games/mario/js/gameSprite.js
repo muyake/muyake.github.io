@@ -53,8 +53,9 @@ CharacterRiseSpriteSheetPainter.prototype = Object.create(SpriteSheetPainter.pro
 CharacterRiseSpriteSheetPainter.prototype.constructor = CharacterRiseSpriteSheetPainter;
 CharacterRiseSpriteSheetPainter.prototype.paint = function(sprite, context) {
     var cell = this.cells['sprite_' + this.cellIndex];
-    sprite.width = cell.width * 0.5;
-    sprite.height = cell.height * 0.5;
+    console.log(this.cellIndex);
+    sprite.width = cell.width;
+    sprite.height = cell.height;
     sprite.top = element.mycanvasHeight - sprite.height - gameConfig.roadHeight - sprite.physicaltop;
     if (sprite.isReverse) {
         context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
