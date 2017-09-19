@@ -296,53 +296,258 @@ var shellConfig = {
 var lifeConfig = {
   config: {
     totalCount: 5,
-    sprite_1: { height: 46, width: 124, left: 0, top: 0 },
-    sprite_4: { height: 47, width: 127, left: 0, top: 46 },
-    sprite_3: { height: 48, width: 128, left: 0, top: 93 },
-    sprite_5: { height: 48, width: 129, left: 0, top: 141 },
-    sprite_2: { height: 47, width: 129, left: 0, top: 189 }
+    sprite_1: {
+      height: 46,
+      width: 124,
+      left: 0,
+      top: 0
+    },
+    sprite_4: {
+      height: 47,
+      width: 127,
+      left: 0,
+      top: 46
+    },
+    sprite_3: {
+      height: 48,
+      width: 128,
+      left: 0,
+      top: 93
+    },
+    sprite_5: {
+      height: 48,
+      width: 129,
+      left: 0,
+      top: 141
+    },
+    sprite_2: {
+      height: 47,
+      width: 129,
+      left: 0,
+      top: 189
+    }
   }
 };
 var badFlowerConfig = {
 
   config: {
     totalCount: 35,
-    sprite_34: { height: 6, width: 40, left: 0, top: 0 },
-    sprite_8: { height: 38, width: 44, left: 0, top: 6 },
-    sprite_35: { height: 5, width: 45, left: 0, top: 44 },
-    sprite_28: { height: 31, width: 45, left: 0, top: 49 },
-    sprite_29: { height: 27, width: 45, left: 0, top: 80 },
-    sprite_19: { height: 57, width: 45, left: 0, top: 107 },
-    sprite_0: { height: 11, width: 45, left: 0, top: 164 },
-    sprite_33: { height: 10, width: 46, left: 0, top: 175 },
-    sprite_27: { height: 32, width: 46, left: 0, top: 185 },
-    sprite_9: { height: 43, width: 46, left: 0, top: 217 },
-    sprite_20: { height: 53, width: 46, left: 0, top: 260 },
-    sprite_7: { height: 33, width: 46, left: 0, top: 313 },
-    sprite_30: { height: 22, width: 47, left: 0, top: 346 },
-    sprite_2: { height: 18, width: 48, left: 0, top: 368 },
-    sprite_1: { height: 15, width: 48, left: 0, top: 386 },
-    sprite_26: { height: 32, width: 48, left: 0, top: 401 },
-    sprite_10: { height: 49, width: 48, left: 0, top: 433 },
-    sprite_23: { height: 38, width: 49, left: 0, top: 482 },
-    sprite_21: { height: 51, width: 49, left: 0, top: 520 },
-    sprite_3: { height: 19, width: 50, left: 0, top: 571 },
-    sprite_22: { height: 48, width: 51, left: 0, top: 590 },
-    sprite_11: { height: 46, width: 51, left: 0, top: 638 },
-    sprite_31: { height: 19, width: 51, left: 0, top: 684 },
-    sprite_32: { height: 14, width: 53, left: 0, top: 703 },
-    sprite_18: { height: 58, width: 53, left: 0, top: 717 },
-    sprite_12: { height: 46, width: 54, left: 0, top: 775 },
-    sprite_25: { height: 31, width: 54, left: 0, top: 821 },
-    sprite_13: { height: 46, width: 55, left: 0, top: 852 },
-    sprite_17: { height: 58, width: 55, left: 0, top: 898 },
-    sprite_24: { height: 34, width: 55, left: 0, top: 956 },
-    sprite_6: { height: 30, width: 56, left: 0, top: 990 },
-    sprite_4: { height: 20, width: 57, left: 0, top: 1020 },
-    sprite_14: { height: 55, width: 58, left: 0, top: 1040 },
-    sprite_5: { height: 21, width: 59, left: 0, top: 1095 },
-    sprite_15: { height: 59, width: 59, left: 0, top: 1116 },
-    sprite_16: { height: 67, width: 62, left: 0, top: 1175 }
+    sprite_34: {
+      height: 6,
+      width: 40,
+      left: 0,
+      top: 0
+    },
+    sprite_8: {
+      height: 38,
+      width: 44,
+      left: 0,
+      top: 6
+    },
+    sprite_35: {
+      height: 5,
+      width: 45,
+      left: 0,
+      top: 44
+    },
+    sprite_28: {
+      height: 31,
+      width: 45,
+      left: 0,
+      top: 49
+    },
+    sprite_29: {
+      height: 27,
+      width: 45,
+      left: 0,
+      top: 80
+    },
+    sprite_19: {
+      height: 57,
+      width: 45,
+      left: 0,
+      top: 107
+    },
+    sprite_0: {
+      height: 11,
+      width: 45,
+      left: 0,
+      top: 164
+    },
+    sprite_33: {
+      height: 10,
+      width: 46,
+      left: 0,
+      top: 175
+    },
+    sprite_27: {
+      height: 32,
+      width: 46,
+      left: 0,
+      top: 185
+    },
+    sprite_9: {
+      height: 43,
+      width: 46,
+      left: 0,
+      top: 217
+    },
+    sprite_20: {
+      height: 53,
+      width: 46,
+      left: 0,
+      top: 260
+    },
+    sprite_7: {
+      height: 33,
+      width: 46,
+      left: 0,
+      top: 313
+    },
+    sprite_30: {
+      height: 22,
+      width: 47,
+      left: 0,
+      top: 346
+    },
+    sprite_2: {
+      height: 18,
+      width: 48,
+      left: 0,
+      top: 368
+    },
+    sprite_1: {
+      height: 15,
+      width: 48,
+      left: 0,
+      top: 386
+    },
+    sprite_26: {
+      height: 32,
+      width: 48,
+      left: 0,
+      top: 401
+    },
+    sprite_10: {
+      height: 49,
+      width: 48,
+      left: 0,
+      top: 433
+    },
+    sprite_23: {
+      height: 38,
+      width: 49,
+      left: 0,
+      top: 482
+    },
+    sprite_21: {
+      height: 51,
+      width: 49,
+      left: 0,
+      top: 520
+    },
+    sprite_3: {
+      height: 19,
+      width: 50,
+      left: 0,
+      top: 571
+    },
+    sprite_22: {
+      height: 48,
+      width: 51,
+      left: 0,
+      top: 590
+    },
+    sprite_11: {
+      height: 46,
+      width: 51,
+      left: 0,
+      top: 638
+    },
+    sprite_31: {
+      height: 19,
+      width: 51,
+      left: 0,
+      top: 684
+    },
+    sprite_32: {
+      height: 14,
+      width: 53,
+      left: 0,
+      top: 703
+    },
+    sprite_18: {
+      height: 58,
+      width: 53,
+      left: 0,
+      top: 717
+    },
+    sprite_12: {
+      height: 46,
+      width: 54,
+      left: 0,
+      top: 775
+    },
+    sprite_25: {
+      height: 31,
+      width: 54,
+      left: 0,
+      top: 821
+    },
+    sprite_13: {
+      height: 46,
+      width: 55,
+      left: 0,
+      top: 852
+    },
+    sprite_17: {
+      height: 58,
+      width: 55,
+      left: 0,
+      top: 898
+    },
+    sprite_24: {
+      height: 34,
+      width: 55,
+      left: 0,
+      top: 956
+    },
+    sprite_6: {
+      height: 30,
+      width: 56,
+      left: 0,
+      top: 990
+    },
+    sprite_4: {
+      height: 20,
+      width: 57,
+      left: 0,
+      top: 1020
+    },
+    sprite_14: {
+      height: 55,
+      width: 58,
+      left: 0,
+      top: 1040
+    },
+    sprite_5: {
+      height: 21,
+      width: 59,
+      left: 0,
+      top: 1095
+    },
+    sprite_15: {
+      height: 59,
+      width: 59,
+      left: 0,
+      top: 1116
+    },
+    sprite_16: {
+      height: 67,
+      width: 62,
+      left: 0,
+      top: 1175
+    }
   }
   //马里奥动画配置参数
 };var marioConfig = {
@@ -943,6 +1148,125 @@ exports.lib = lib;
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var gameAudio = exports.gameAudio = {
+    //gameSourceObj.audioList.jumpAll
+    smallJump: {
+        startTime: 0.5,
+        endTime: 2
+    },
+    bigJump: {
+        startTime: 3.2,
+        endTime: 4
+    },
+    eatMushroom: {
+        startTime: 5,
+        endTime: 7
+    },
+    intoPipe: {
+        startTime: 8,
+        endTime: 9
+
+    },
+    monsterDie: {
+        endTime: 11
+    },
+    GameOver: {
+        startTime: 0,
+        endTime: 5
+    },
+    //gameSourceObj.audioList.collision
+    eatMoney: {
+        startTime: 7,
+        endTime: 7.5
+    },
+    flowerup: {
+        startTime: 9.8,
+        endTime: 11.5
+    },
+    fire: {
+        startTime: 11.3,
+        endTime: 11.6
+    },
+    downflag: {
+        startTime: 9,
+        endTime: 11.5
+    },
+    gameSuccess: {
+        startTime: 0,
+        endTime: 7
+    },
+
+    //长大
+    growup: {
+        startTime: 5.5,
+        endTime: 7
+    },
+    //变小
+    changeSmall: {
+        startTime: 8.5,
+        endTime: 9.5
+    },
+    hitwall: {
+        startTime: 4.9,
+        endTime: 5
+    },
+    wallbreak: {
+        startTime: 3.4,
+        endTime: 3.9
+    },
+    WD: {
+        startTime: 0,
+        endTime: 20
+    },
+    die: {
+        startTime: 0.5,
+        endTime: 4
+    },
+    monsterdie: {
+        startTime: 0.5,
+        endTime: 1
+    },
+    monsterShootDie: {
+        startTime: 2.6,
+        endTime: 3
+    }
+};
+
+//audioControl
+var audioControl = exports.audioControl = {
+    //如果isplay不传，则总是播放，如果传了则只播放一次，例如人物死亡
+    audioPlay: function audioPlay(audioObj, videoConfig) {
+        audioObj.currentTime = videoConfig.startTime;
+        audioObj.endTime = videoConfig.endTime;
+        audioObj.play();
+    },
+    BGMPlay: function BGMPlay(audioObj) {
+        audioObj.loop = true;
+        audioObj.volume = 0.2;
+        audioObj.play();
+    },
+    BGMPause: function BGMPause(audioObj) {
+        audioObj.pause();
+    },
+    timeupdateAddEventListener: function timeupdateAddEventListener(audioObj) {
+        audioObj.addEventListener('timeupdate', function () {
+            if (this.currentTime > this.endTime) {
+                this.pause();
+            }
+        }, false);
+    }
+};
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1812,125 +2136,6 @@ exports.totalProgressSprite = totalProgressSprite;
 exports.createFactory = createFactory;
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var gameAudio = exports.gameAudio = {
-    //gameSourceObj.audioList.jumpAll
-    smallJump: {
-        startTime: 0.5,
-        endTime: 2
-    },
-    bigJump: {
-        startTime: 3.2,
-        endTime: 4
-    },
-    eatMushroom: {
-        startTime: 5,
-        endTime: 7
-    },
-    intoPipe: {
-        startTime: 8,
-        endTime: 9
-
-    },
-    monsterDie: {
-        endTime: 11
-    },
-    GameOver: {
-        startTime: 0,
-        endTime: 5
-    },
-    //gameSourceObj.audioList.collision
-    eatMoney: {
-        startTime: 7,
-        endTime: 7.5
-    },
-    flowerup: {
-        startTime: 9.8,
-        endTime: 11.5
-    },
-    fire: {
-        startTime: 11.3,
-        endTime: 11.6
-    },
-    downflag: {
-        startTime: 9,
-        endTime: 11.5
-    },
-    gameSuccess: {
-        startTime: 0,
-        endTime: 7
-    },
-
-    //长大
-    growup: {
-        startTime: 5.5,
-        endTime: 7
-    },
-    //变小
-    changeSmall: {
-        startTime: 8.5,
-        endTime: 9.5
-    },
-    hitwall: {
-        startTime: 4.9,
-        endTime: 5
-    },
-    wallbreak: {
-        startTime: 3.4,
-        endTime: 3.9
-    },
-    WD: {
-        startTime: 0,
-        endTime: 20
-    },
-    die: {
-        startTime: 0.5,
-        endTime: 4
-    },
-    monsterdie: {
-        startTime: 0.5,
-        endTime: 1
-    },
-    monsterShootDie: {
-        startTime: 2.6,
-        endTime: 3
-    }
-};
-
-//audioControl
-var audioControl = exports.audioControl = {
-    //如果isplay不传，则总是播放，如果传了则只播放一次，例如人物死亡
-    audioPlay: function audioPlay(audioObj, videoConfig) {
-        audioObj.currentTime = videoConfig.startTime;
-        audioObj.endTime = videoConfig.endTime;
-        audioObj.play();
-    },
-    BGMPlay: function BGMPlay(audioObj) {
-        audioObj.loop = true;
-        audioObj.volume = 0.2;
-        audioObj.play();
-    },
-    BGMPause: function BGMPause(audioObj) {
-        audioObj.pause();
-    },
-    timeupdateAddEventListener: function timeupdateAddEventListener(audioObj) {
-        audioObj.addEventListener('timeupdate', function () {
-            if (this.currentTime > this.endTime) {
-                this.pause();
-            }
-        }, false);
-    }
-};
-
-/***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1950,13 +2155,13 @@ var _public = __webpack_require__(1);
 
 var _sprite = __webpack_require__(14);
 
-var _gameProgress = __webpack_require__(2);
+var _gameProgress = __webpack_require__(3);
 
 var _config = __webpack_require__(0);
 
 var _behaviorList = __webpack_require__(15);
 
-var _audioControl = __webpack_require__(3);
+var _audioControl = __webpack_require__(2);
 
 var _gameSource = __webpack_require__(5);
 
@@ -3714,11 +3919,11 @@ var _collisionDetection = __webpack_require__(11);
 
 var _config = __webpack_require__(0);
 
-var _gameProgress = __webpack_require__(2);
+var _gameProgress = __webpack_require__(3);
 
 var _public = __webpack_require__(1);
 
-var _audioControl = __webpack_require__(3);
+var _audioControl = __webpack_require__(2);
 
 var _clip = __webpack_require__(19);
 
@@ -4926,9 +5131,9 @@ var _config = __webpack_require__(0);
 
 var _public = __webpack_require__(1);
 
-var _audioControl = __webpack_require__(3);
+var _audioControl = __webpack_require__(2);
 
-var _gameProgress = __webpack_require__(2);
+var _gameProgress = __webpack_require__(3);
 
 //碰撞检测
 //绘制进度条
@@ -5938,7 +6143,7 @@ exports.behaviorList = undefined;
 
 var _public = __webpack_require__(1);
 
-var _gameProgress = __webpack_require__(2);
+var _gameProgress = __webpack_require__(3);
 
 //所有行为
 //游戏所有元素的动作对象
