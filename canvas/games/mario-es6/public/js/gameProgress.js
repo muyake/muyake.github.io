@@ -486,12 +486,7 @@ let totalProgressSprite = {
     }],
     fire: [],
     badflower: [
-        // {
-        //         isVisible: true,
-        //         id: lib.newGuid(),
-        //         physicaltop: 0,
-        //         positionmile: 400,
-        //     },
+
 
         {
             isVisible: true,
@@ -596,6 +591,12 @@ let totalProgressSprite = {
     ],
     //mushroom: [],
     tortoise: [{
+            isAdd: false, //判断是否加入过数组
+            isMonster: true,
+            isVisible: true,
+            id: lib.newGuid(),
+            positionmile: 600,
+        }, {
             isAdd: false, //判断是否加入过数组
             isMonster: true,
             isVisible: true,

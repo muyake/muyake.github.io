@@ -1,6 +1,3 @@
-import {
-    lib
-} from './public.js';
 var CharacterSpriteAnimator = function(elapsedCallback, sprite) {
     if (elapsedCallback) {
         this.elapsedCallback = elapsedCallback;

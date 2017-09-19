@@ -38,6 +38,7 @@ import {
     lib
 } from './public.js';
 import {
+    gameAudio,
     audioControl
 }
 from './audioControl';

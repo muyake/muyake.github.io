@@ -111,8 +111,8 @@ class CharacterRiseSpriteSheetPainter extends SpriteSheetPainter {
     }
     paint(sprite, context) {
         let cell = this.cells['sprite_' + this.cellIndex];
-        sprite.width = cell.width * 0.5;
-        sprite.height = cell.height * 0.5;
+        sprite.width = cell.width;
+        sprite.height = cell.height;
         sprite.top = element.mycanvasHeight - sprite.height - gameConfig.roadHeight - sprite.physicaltop;
         if (sprite.isReverse) {
             context.drawImage(this.spritesheet, cell.left, cell.top, cell.width, cell.height, sprite.left, sprite.top, sprite.width, sprite.height);
@@ -231,7 +231,7 @@ class Mario extends Sprite {
             switch (VY) {
                 case marioGameConfig.smallJumpV:
                     {
-                        console.log(VY);
+                        //  console.log(VY);
                         audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.smallJump);
                     }
                     break;
@@ -561,6 +561,9 @@ class Shell extends Sprite {
             this.mycanvas = element.mycanvas;
         this.name = 'shell';
         this.translateLeft = 0;
+        this.painters = {
+            run: new CharacterRunSpriteSheetPainter(shellConfig.config, gameSourceUrl.imageList.shell, element.mycanvas, shellConfig.config.totalCount),
+        };
         //this.velocityX = setting.velocityX;
         this.width = setting.width || WH.shell.width;
         // this.roleType = 'mairo';
@@ -592,7 +595,7 @@ class Shell extends Sprite {
         this.shellSpriteAnimatorJump = new CharacterSpriteAnimator(SpriteAnimatorEndCallbackList.shellJumpend, this);
         this.shellSpriteAnimatorMove = new MoveSpriteAnimator(null, this);
         this.shellSpriteAnimatorMove.start();
-        thi.painters = {
+        this.painters = {
             run: new CharacterRunSpriteSheetPainter(shellConfig.config, gameSourceUrl.imageList.shell, element.mycanvas, shellConfig.config.totalCount),
         };
     }
@@ -1230,8 +1233,8 @@ class Brick extends SceneSprite {
         this.imgheight = wallConfig[this.status + "Sprite"].height;
         this.imgleft = wallConfig[this.status + "Sprite"].left;
         this.imgtop = wallConfig[this.status + "Sprite"].top;
-        this.width = this.imgwidth * 0.7;
-        this.height = this.imgheight * 0.7; //50变35，即width*0.7;
+        this.width = this.imgwidth;
+        this.height = this.imgheight; //50变35，即width*0.7;
 
         this.translateLeft = 0;
         this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE;

@@ -29,6 +29,34 @@ import {
     createFactory
 }
 from './gameProgress';
+
+import {
+    CharacterImagePainter,
+    CharacterRunSpriteSheetPainter,
+    CharacterRiseSpriteSheetPainter,
+    SceneSprite,
+    SceneImagePainter,
+    Mario,
+    Monster,
+    Tortoise,
+    Shell,
+    Life,
+    Over,
+    Wall,
+    Money,
+    Flower,
+    BadFlower,
+    Mushroom,
+    Star,
+    Bullet,
+    Pipe,
+    Final,
+    Flag,
+    Tower,
+    Hole,
+    Brick,
+    BG
+} from './gameSprite';
 //碰撞检测
 export let CD = {
     //碰撞函数结果库
@@ -530,7 +558,7 @@ export let CD = {
                 }
             };
             let upfun = function() {
-                console.log('upfun');
+                // console.log('upfun');
 
 
                 self.CDFunc.MairoCollisionMonster(mario, shell);
