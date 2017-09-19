@@ -538,7 +538,7 @@ export let CD = {
                 return;
             }
             let leftfun = function() {
-                console.log('马里奥从壳的右侧碰撞');
+                //  console.log('马里奥从壳的右侧碰撞');
                 if (shell.status == 0) {
                     mario.left = shell.left + shell.width;
                     shell.shoot(gameConfig.shellSpeed);
@@ -547,7 +547,7 @@ export let CD = {
                 }
             };
             let rightfun = function() {
-                console.log('马里奥从壳的左侧碰撞');
+                //  console.log('马里奥从壳的左侧碰撞');
                 if (shell.status == 0) {
 
 

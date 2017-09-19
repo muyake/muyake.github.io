@@ -15,6 +15,11 @@ import {
     gameConfig
 } from './config';
 import {
+    gameAudio,
+    audioControl
+}
+from './audioControl';
+import {
     CharacterImagePainter,
     CharacterRunSpriteSheetPainter,
     CharacterRiseSpriteSheetPainter,

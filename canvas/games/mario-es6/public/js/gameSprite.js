@@ -575,7 +575,7 @@ class Shell extends Sprite {
         this.initvelocityX = 0;
         this.positionmile = this.left + progressObj.createSpriteMileNum;
         this.translateLeft = 0;
-        console.log('translateLeft' + this.translateLeft);
+        // console.log('translateLeft' + this.translateLeft);
         this.GRAVITY_FORCE = publicConfig.GRAVITY_FORCE; //重力
         this.isJump = false; //是否在跳中
         // this.initvelocityX = 70;

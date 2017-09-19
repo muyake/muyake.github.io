@@ -1156,6 +1156,127 @@ exports.lib = lib;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+var gameAudio = {
+    //gameSourceObj.audioList.jumpAll
+    smallJump: {
+        startTime: 0.5,
+        endTime: 2
+    },
+    bigJump: {
+        startTime: 3.2,
+        endTime: 4
+    },
+    eatMushroom: {
+        startTime: 5,
+        endTime: 7
+    },
+    intoPipe: {
+        startTime: 8,
+        endTime: 9
+
+    },
+    monsterDie: {
+        endTime: 11
+    },
+    GameOver: {
+        startTime: 0,
+        endTime: 5
+    },
+    //gameSourceObj.audioList.collision
+    eatMoney: {
+        startTime: 7,
+        endTime: 7.5
+    },
+    flowerup: {
+        startTime: 9.8,
+        endTime: 11.5
+    },
+    fire: {
+        startTime: 11.3,
+        endTime: 11.6
+    },
+    downflag: {
+        startTime: 9,
+        endTime: 11.5
+    },
+    gameSuccess: {
+        startTime: 0,
+        endTime: 7
+    },
+
+    //长大
+    growup: {
+        startTime: 5.5,
+        endTime: 7
+    },
+    //变小
+    changeSmall: {
+        startTime: 8.5,
+        endTime: 9.5
+    },
+    hitwall: {
+        startTime: 4.9,
+        endTime: 5
+    },
+    wallbreak: {
+        startTime: 3.4,
+        endTime: 3.9
+    },
+    WD: {
+        startTime: 0,
+        endTime: 20
+    },
+    die: {
+        startTime: 0.5,
+        endTime: 4
+    },
+    monsterdie: {
+        startTime: 0.5,
+        endTime: 1
+    },
+    monsterShootDie: {
+        startTime: 2.6,
+        endTime: 3
+    }
+};
+
+//audioControl
+var audioControl = {
+    //如果isplay不传，则总是播放，如果传了则只播放一次，例如人物死亡
+    audioPlay: function audioPlay(audioObj, videoConfig) {
+        audioObj.currentTime = videoConfig.startTime;
+        audioObj.endTime = videoConfig.endTime;
+        audioObj.play();
+    },
+    BGMPlay: function BGMPlay(audioObj) {
+        audioObj.loop = true;
+        audioObj.volume = 0.2;
+        audioObj.play();
+    },
+    BGMPause: function BGMPause(audioObj) {
+        audioObj.pause();
+    },
+    timeupdateAddEventListener: function timeupdateAddEventListener(audioObj) {
+        audioObj.addEventListener('timeupdate', function () {
+            if (this.currentTime > this.endTime) {
+                this.pause();
+            }
+        }, false);
+    }
+};
+exports.gameAudio = gameAudio;
+exports.audioControl = audioControl;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 exports.createFactory = exports.totalProgressSprite = exports.PJNum = exports.progressObj = undefined;
 
 var _stopwatch = __webpack_require__(12);
@@ -1163,6 +1284,8 @@ var _stopwatch = __webpack_require__(12);
 var _stopwatch2 = _interopRequireDefault(_stopwatch);
 
 var _config = __webpack_require__(0);
+
+var _audioControl = __webpack_require__(2);
 
 var _gameSprite = __webpack_require__(4);
 
@@ -1810,7 +1933,7 @@ var createFactory = {
         } else {
             createBulletObj.jump(_config.bulletConfig.VX);
         }
-        audioControl.audioPlay(gameSourceObj.audioList.jumpAll, gameAudio.fire);
+        _audioControl.audioControl.audioPlay(gameSourceObj.audioList.jumpAll, _audioControl.gameAudio.fire);
 
         drawSpriteList.createBulletSpriteList.push(createBulletObj);
     },
@@ -2015,125 +2138,6 @@ exports.totalProgressSprite = totalProgressSprite;
 exports.createFactory = createFactory;
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var gameAudio = exports.gameAudio = {
-    //gameSourceObj.audioList.jumpAll
-    smallJump: {
-        startTime: 0.5,
-        endTime: 2
-    },
-    bigJump: {
-        startTime: 3.2,
-        endTime: 4
-    },
-    eatMushroom: {
-        startTime: 5,
-        endTime: 7
-    },
-    intoPipe: {
-        startTime: 8,
-        endTime: 9
-
-    },
-    monsterDie: {
-        endTime: 11
-    },
-    GameOver: {
-        startTime: 0,
-        endTime: 5
-    },
-    //gameSourceObj.audioList.collision
-    eatMoney: {
-        startTime: 7,
-        endTime: 7.5
-    },
-    flowerup: {
-        startTime: 9.8,
-        endTime: 11.5
-    },
-    fire: {
-        startTime: 11.3,
-        endTime: 11.6
-    },
-    downflag: {
-        startTime: 9,
-        endTime: 11.5
-    },
-    gameSuccess: {
-        startTime: 0,
-        endTime: 7
-    },
-
-    //长大
-    growup: {
-        startTime: 5.5,
-        endTime: 7
-    },
-    //变小
-    changeSmall: {
-        startTime: 8.5,
-        endTime: 9.5
-    },
-    hitwall: {
-        startTime: 4.9,
-        endTime: 5
-    },
-    wallbreak: {
-        startTime: 3.4,
-        endTime: 3.9
-    },
-    WD: {
-        startTime: 0,
-        endTime: 20
-    },
-    die: {
-        startTime: 0.5,
-        endTime: 4
-    },
-    monsterdie: {
-        startTime: 0.5,
-        endTime: 1
-    },
-    monsterShootDie: {
-        startTime: 2.6,
-        endTime: 3
-    }
-};
-
-//audioControl
-var audioControl = exports.audioControl = {
-    //如果isplay不传，则总是播放，如果传了则只播放一次，例如人物死亡
-    audioPlay: function audioPlay(audioObj, videoConfig) {
-        audioObj.currentTime = videoConfig.startTime;
-        audioObj.endTime = videoConfig.endTime;
-        audioObj.play();
-    },
-    BGMPlay: function BGMPlay(audioObj) {
-        audioObj.loop = true;
-        audioObj.volume = 0.2;
-        audioObj.play();
-    },
-    BGMPause: function BGMPause(audioObj) {
-        audioObj.pause();
-    },
-    timeupdateAddEventListener: function timeupdateAddEventListener(audioObj) {
-        audioObj.addEventListener('timeupdate', function () {
-            if (this.currentTime > this.endTime) {
-                this.pause();
-            }
-        }, false);
-    }
-};
-
-/***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2153,13 +2157,13 @@ var _public = __webpack_require__(1);
 
 var _sprite = __webpack_require__(14);
 
-var _gameProgress = __webpack_require__(2);
+var _gameProgress = __webpack_require__(3);
 
 var _config = __webpack_require__(0);
 
 var _behaviorList = __webpack_require__(15);
 
-var _audioControl = __webpack_require__(3);
+var _audioControl = __webpack_require__(2);
 
 var _gameSource = __webpack_require__(5);
 
@@ -2811,7 +2815,7 @@ var Shell = function (_Sprite5) {
         _this9.initvelocityX = 0;
         _this9.positionmile = _this9.left + _gameProgress.progressObj.createSpriteMileNum;
         _this9.translateLeft = 0;
-        console.log('translateLeft' + _this9.translateLeft);
+        // console.log('translateLeft' + this.translateLeft);
         _this9.GRAVITY_FORCE = _config.publicConfig.GRAVITY_FORCE; //重力
         _this9.isJump = false; //是否在跳中
         // this.initvelocityX = 70;
@@ -3920,11 +3924,11 @@ var _collisionDetection = __webpack_require__(11);
 
 var _config = __webpack_require__(0);
 
-var _gameProgress = __webpack_require__(2);
+var _gameProgress = __webpack_require__(3);
 
 var _public = __webpack_require__(1);
 
-var _audioControl = __webpack_require__(3);
+var _audioControl = __webpack_require__(2);
 
 var _clip = __webpack_require__(19);
 
@@ -3934,12 +3938,14 @@ var _gameSource2 = _interopRequireDefault(_gameSource);
 
 var _gameSprite = __webpack_require__(4);
 
+__webpack_require__(21);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //绘制进度条
-window.gameControl = new _gameEngine.Game('game', _config.element.mycanvas);
-//绘制进度条
 
+//绘制进度条
+window.gameControl = new _gameEngine.Game('game', _config.element.mycanvas);
 //绘制进度条
 
 gameControl.speed = 1;
@@ -4046,52 +4052,10 @@ window.game = {
 
         // drawSpriteList.createAnimationSpriteList.push(new Shell({left:300}));
         var self = this;
-        document.querySelector('#smallBtn').addEventListener('click', function () {
-            drawSpriteList.arrayOthersA.forEach(function (item) {
-                if (item.name == 'flag') {
-                    item.down();
-                }
-            });
-        }, false);
-        document.querySelector('#flower').addEventListener('click', function () {
-            drawSpriteList.mario.laqi();
-            //createFactory.createUpMoney(100, 100);
-        }, false);
-        document.querySelector('#flower1').addEventListener('click', function () {
 
-            _gameProgress.createFactory.createBullet(100, 100);
-        }, false);
-        document.querySelector('#createStar').addEventListener('click', function () {
-            // drawSpriteList.mario.rise(WH.mario.smallstatus.height,1);
-            _gameProgress.createFactory.createStar(100, 100);
-        }, false);
-        document.querySelector('#bigBtn').addEventListener('click', function () {
-            drawSpriteList.mario.laqi();
-            gameControl.gamePause = true;
-        }, false);
-        document.querySelector('#fire').addEventListener('click', function () {
-            // drawSpriteList.mario.rise(WH.mario.height * 0.5);
-            //  createFactory.createBullet(100, 30);
-            _gameProgress.createFactory.createBullet(_gameProgress.progressObj.createSpriteMileNum + drawSpriteList.mario.left + drawSpriteList.mario.width, 30);
-        }, false);
-
-        document.querySelector('#monster').addEventListener('click', function () {
-            _gameProgress.createFactory.createBadflower(300, 0);
-        }, false);
-
-        document.querySelector('#monsterdie').addEventListener('click', function () {
-            drawSpriteList.createAnimationSpriteList.forEach(function (item) {
-                if (item.name == 'shell') {
-                    item.shoot(100);
-                }
-            });
-        }, false);
-        document.querySelector('#mariodie').addEventListener('click', function () {
-            drawSpriteList.mario.collisiondie();
-        }, false);
-        document.querySelector('#gamePause').addEventListener('click', function () {
-            gameControl.gamePause = true;
-        }, false);
+        setInterval(function () {
+            _gameProgress.createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
+        }, 1000);
 
         // Key Listeners..............................................
         gameControl.addKeyListener({
@@ -4177,6 +4141,7 @@ window.game = {
         gameControl.addKeyListener({
             key: 'right',
             listener: function listener(status) {
+                // console.log(2);
                 if (status == 1) {
                     self.mapKey['right'] = true;
                 } else {
@@ -4188,6 +4153,7 @@ window.game = {
         gameControl.addKeyListener({
             key: 'left',
             listener: function listener(status) {
+                // console.log(1);
                 if (status == 1) {
                     self.mapKey['left'] = true;
                 } else {
@@ -4338,7 +4304,7 @@ window.SpriteAnimatorEndCallbackList = {
         if (sprite.isDie == true) {
             _public.lib.removeByValue(drawSpriteList.createAnimationSpriteList, 'id', sprite.id);
             sprite = null;
-            console.log('移除怪兽');
+            // console.log('移除怪兽');
         }
     }
 };
@@ -5132,9 +5098,9 @@ var _config = __webpack_require__(0);
 
 var _public = __webpack_require__(1);
 
-var _audioControl = __webpack_require__(3);
+var _audioControl = __webpack_require__(2);
 
-var _gameProgress = __webpack_require__(2);
+var _gameProgress = __webpack_require__(3);
 
 var _gameSprite = __webpack_require__(4);
 
@@ -5602,7 +5568,7 @@ var CD = exports.CD = {
                 return;
             }
             var leftfun = function leftfun() {
-                console.log('马里奥从壳的右侧碰撞');
+                //  console.log('马里奥从壳的右侧碰撞');
                 if (shell.status == 0) {
                     mario.left = shell.left + shell.width;
                     shell.shoot(_config.gameConfig.shellSpeed);
@@ -5611,7 +5577,7 @@ var CD = exports.CD = {
                 }
             };
             var rightfun = function rightfun() {
-                console.log('马里奥从壳的左侧碰撞');
+                //  console.log('马里奥从壳的左侧碰撞');
                 if (shell.status == 0) {
 
                     mario.left = shell.left - mario.width;
@@ -6146,7 +6112,7 @@ exports.behaviorList = undefined;
 
 var _public = __webpack_require__(1);
 
-var _gameProgress = __webpack_require__(2);
+var _gameProgress = __webpack_require__(3);
 
 //所有行为
 //游戏所有元素的动作对象
@@ -6753,6 +6719,14 @@ var clipObj = exports.clipObj = {
         //this.context.clearRect(0, 0, canvas.width, canvas.height);
     }
 }; //绘制进度条
+
+/***/ }),
+/* 20 */,
+/* 21 */
+/***/ (function(module, exports) {
+
+"use strict";
+throw new Error("Module build failed: SyntaxError: E:/mygit/back2/muyake.github.io/canvas/games/mario-es6/public/js/adaptation.js: Unexpected token, expected ( (78:17)\n\n  76 | }\n  77 | \n> 78 | function addMeta {\n     |                  ^\n  79 |     var divIframe = document.createDocumentFragment;\n  80 |     divIframe.innerHTML = `<meta charset=\"UTF-8\">\n  81 |     <meta content=\"telephone=no,email=no\" name=\"format-detection\">\n");
 
 /***/ })
 /******/ ]);
