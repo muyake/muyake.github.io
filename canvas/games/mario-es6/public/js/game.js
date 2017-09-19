@@ -78,12 +78,21 @@ import {
     Brick,
     BG
 } from './gameSprite';
-
+import {
+    judgeMobile
+} from './judgeMobile';
 
 import './adaptation';
-
+import {
+    controler
+} from './control.js';
 window.gameControl = new Game('game', element.mycanvas);
 gameControl.speed = 1;
+let isMobile = judgeMobile();
+if (isMobile) {
+    document.getElementsByTagName("body")[0].style.opacity = 1;
+}
+
 let sourceLoadObj = {
     sourceNum: 0,
     currentNum: 0,
@@ -184,6 +193,17 @@ window.game = {
         drawSpriteList.mario.reset();
         drawSpriteList.statusArr.life.minuteLife(drawSpriteList.mario.lifeNum);
     },
+    setScreenPress: function(obj1, obj2, obj3) {
+        var self = this;
+        obj1['right'] = obj2['right'].isPress;
+        obj1['left'] = obj2['left'].isPress;
+        obj1['s'] = obj2['A'].isPress;
+        obj1['w'] = obj2['X'].isPress;
+        obj1['d'] = obj2['B'].isPress;
+        obj1['e'] = obj2['Y'].isPress;
+        obj1['p'] = obj3.isPress;
+        self.activeEventCallback();
+    },
     bindEvent: function() {
         //createFactory.createBadflower(300, 0);
         this.reset(0);
@@ -195,7 +215,50 @@ window.game = {
             createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
         }, 1000);
 
+        
+        if (isMobile) {
 
+            var isMove = true;
+            var clearTime = null;
+            var bindEventInterval = setInterval(function() {
+                self.thrustersCanvas = document.getElementById('controlCanvas');
+                if (!!self.thrustersCanvas) {
+                    clearInterval(bindEventInterval);
+                    console.log("绑定手机事件");
+                    self.thrustersCanvas.addEventListener('touchstart', function(e) {
+                        controler.result.innerHTML = e.targetTouches.length;
+                        e.preventDefault(); // prevent cursor change  
+                        controler.drawPressDown(e.targetTouches);
+                        controler.draw();
+                        self.setScreenPress(self.mapKey, controler.arrowArr, controler.pause);
+                    });
+                    self.thrustersCanvas.addEventListener('touchend', function(e) {
+                        controler.result.innerHTML = e.targetTouches.length;
+                        e.preventDefault();
+                        controler.drawPressDown(e.targetTouches);
+                        controler.draw();
+                        self.setScreenPress(self.mapKey, controler.arrowArr, controler.pause);
+                        isMove = false;
+                        if (clearTime) {
+                            clearTimeout(clearTime);
+                        }
+                    });
+                    self.thrustersCanvas.addEventListener('touchmove', function(e) {
+                        e.preventDefault();
+                        if (isMove) {
+                            clearTime = setTimeout(function() {
+                                self.drawPressDown(e.targetTouches);
+                                self.draw();
+                                self.setScreenPress(self.mapKey, controler.arrowArr, controler.pause);
+                                isMove = true;
+                            }, 100);
+                        }
+                        isMove = false;
+                    });
+                }
+            }, 1000);
+
+        }
         // Key Listeners..............................................
         gameControl.addKeyListener({
             key: 'p',

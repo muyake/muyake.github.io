@@ -1,5 +1,6 @@
-var path = require('path');
+const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 module.exports = {
     entry: {
         game: './public/js/game.js',
@@ -18,6 +19,11 @@ module.exports = {
         }]
     },
     plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
         new htmlWebpackPlugin({
             title: "",
             filename: '../html/index.html',

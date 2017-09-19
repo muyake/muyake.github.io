@@ -14,6 +14,15 @@ let lib = {
             }
         }
     },
+    removeElement: function(_element) {
+        if(!_element){
+            return;
+        }
+        var _parentElement = _element.parentNode;
+        if (_parentElement) {
+            _parentElement.removeChild(_element);
+        }
+    },
     sort: function(arr, attributeName, status) { //status=0位正序，1为倒序
         let s = status || 0;
 

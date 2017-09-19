@@ -4,7 +4,9 @@ html,
         margin: 0;
         padding: 0;
     }
-
+body{
+    opacity: 0;
+}
     .load {
         width: 200px;
         height: 20px;
@@ -27,7 +29,7 @@ html,
     .loadDiv {
         width: 666px;
         height: 364px;
-        background: url('./images/welcome.png') no-repeat center/100% 100%;
+        background: url('../html/images/welcome.png') no-repeat center/100% 100%;
         display: block;
     }
 

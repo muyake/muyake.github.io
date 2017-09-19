@@ -2,6 +2,12 @@ import {
     judgeMobile
 } from './judgeMobile';
 
+import {
+    lib
+} from './public.js';
+import {
+    controler
+} from './control.js';
 var isMobile = judgeMobile();
 if (isMobile) {
     window.onresize = r;
@@ -55,17 +61,19 @@ function requestFullScreen(element) {
     }
 }
 
-function renderDiv() {
-    var mobileHTML = `<canvas id="mycanvas" width="666" height="364"></canvas>
-        <div class="loadDiv">
-            <div id="load" class="load">
-            </div>
-        </div>
-        <div class="result">asdfasf</div>
-        <canvas id='controlCanvas' width="666" height="364">
-            Canvas not supported
-        </canvas>`;
-    document.querySelector('.main').innerHTML = mobileHTML;
+function renderDiv() {   
+        lib.removeElement(document.querySelector('.butList'));
+lib.removeElement(document.querySelector('.tip'));
+var resultDiv=document.createElement("DIV");
+resultDiv.className='result';
+
+var controlCanvas=document.createElement("canvas");
+controlCanvas.setAttribute("id", "controlCanvas");
+controlCanvas.setAttribute("width", "666");
+controlCanvas.setAttribute("height", "364");
+    document.querySelector('.main').appendChild(resultDiv);
+     document.querySelector('.main').appendChild(controlCanvas);
+controler.init();
 }
 
 function init() {
@@ -75,15 +83,16 @@ function init() {
     addMobile = false;
 }
 
-function addMeta {
-    var divIframe = document.createDocumentFragment;
-    divIframe.innerHTML = `<meta charset="UTF-8">
+function addMeta() {
+    var str = `<meta charset="UTF-8">
     <meta content="telephone=no,email=no" name="format-detection">
     <meta name="applicable-device" content="mobile">
     <meta name="x5-orientation" content="portrait">
     <meta name="browsermode" content="application">
     <meta name="full-screen" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <link rel="icon" href="./images/ico/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./images/ico/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/mobile.css">`;
-    document.getElementsByTagName('head')[0].appendChild(divIframe);
+    document.getElementsByTagName('head')[0].innerHTML=str;
 }

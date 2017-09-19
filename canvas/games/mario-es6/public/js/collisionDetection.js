@@ -565,7 +565,7 @@ export let CD = {
             };
             let downfun = function() {
 
-                console.log('downfun');
+                //console.log('downfun');
 
                 shell.pause();
                 mario.upColliding = shell;
