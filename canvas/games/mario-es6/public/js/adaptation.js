@@ -77,22 +77,31 @@ controler.init();
 }
 
 function init() {
-    addMeta();
+  
     renderDiv();
     setRotate();
     addMobile = false;
 }
-
-function addMeta() {
-    var str = `<meta charset="UTF-8">
+function renderHeader() {
+    let isMobile = judgeMobile();
+    if (!isMobile) {
+        var title = document.createElement('title');
+        title.innerHTML = '超级马里奥'
+        document.getElementsByTagName("head")[0].appendChild(title);
+        document.getElementsByTagName("body")[0].style.opacity = 1;
+    } else {
+        var gamecss= document.getElementsByTagName('head')[0].innerHTML;
+        var str = `<meta charset="UTF-8">
     <meta content="telephone=no,email=no" name="format-detection">
     <meta name="applicable-device" content="mobile">
     <meta name="x5-orientation" content="portrait">
     <meta name="browsermode" content="application">
     <meta name="full-screen" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+       <title>超级马里奥</title>
         <link rel="icon" href="./images/ico/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="./images/ico/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/mobile.css">`;
-    document.getElementsByTagName('head')[0].innerHTML=str;
+    <link rel="shortcut icon" href="./images/ico/favicon.ico" type="image/x-icon">`+gamecss;   
+        document.getElementsByTagName('head')[0].innerHTML = str;
+    }
 }
+renderHeader();

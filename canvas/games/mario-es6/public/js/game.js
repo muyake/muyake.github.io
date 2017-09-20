@@ -90,17 +90,9 @@ import {
 } from './control.js';
 window.gameControl = new Game('game', element.mycanvas);
 gameControl.speed = 1;
-let isMobile = judgeMobile();
-if (!isMobile) {
-    document.getElementsByTagName("head")[0].innerHTML = `<meta charset="UTF-8">
-    <title>
-        超级马里奥
-    </title>
-    <link rel="icon" href=${gameSourceUrl.ico} type="image/x-icon" />
-    <link rel="shortcut icon" href=${gameSourceUrl.ico} type="image/x-icon" />`;
-    //require('../css/pc.css');
-    document.getElementsByTagName("body")[0].style.opacity = 1;
-}
+//根据不同客户端，区分手机还是pc样式。
+
+
 
 let sourceLoadObj = {
     sourceNum: 0,
@@ -225,7 +217,7 @@ window.game = {
             createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
         }, 1000);
 
-
+        let isMobile = judgeMobile();
         if (isMobile) {
 
             var isMove = true;

@@ -595,13 +595,7 @@ let totalProgressSprite = {
 
     ],
     //mushroom: [],
-    tortoise: [{
-            isAdd: false, //判断是否加入过数组
-            isMonster: true,
-            isVisible: true,
-            id: lib.newGuid(),
-            positionmile: 600,
-        }, {
+    tortoise: [ {
             isAdd: false, //判断是否加入过数组
             isMonster: true,
             isVisible: true,

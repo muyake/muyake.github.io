@@ -1,13 +1,9 @@
-html,
-    body,
-    div,p {
-        margin: 0;
-        padding: 0;
-    }
+
 body{
     opacity: 0;
 }
-    .load {
+@media only screen and (min-width: 1029px) {
+.load {
         width: 200px;
         height: 20px;
         position: absolute;
@@ -36,3 +32,7 @@ body{
     .tip {
         display: none;
     }
+
+}
+
+    
