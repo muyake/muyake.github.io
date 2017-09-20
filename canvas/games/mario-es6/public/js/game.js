@@ -1,3 +1,5 @@
+require('../css/mobile.css');
+require('../css/pc.css');
 import {
     Game
 } from './libs/gameEngine';
@@ -89,7 +91,14 @@ import {
 window.gameControl = new Game('game', element.mycanvas);
 gameControl.speed = 1;
 let isMobile = judgeMobile();
-if (isMobile) {
+if (!isMobile) {
+    document.getElementsByTagName("head")[0].innerHTML = `<meta charset="UTF-8">
+    <title>
+        超级马里奥
+    </title>
+    <link rel="icon" href=${gameSourceUrl.ico} type="image/x-icon" />
+    <link rel="shortcut icon" href=${gameSourceUrl.ico} type="image/x-icon" />`;
+    //require('../css/pc.css');
     document.getElementsByTagName("body")[0].style.opacity = 1;
 }
 
@@ -111,8 +120,6 @@ let sourceLoadObj = {
         element.progressBox.style.display = 'none';
         //加载图片完成后执行。
         createFactory.init();
-
-
         createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
         gameControl.start();
         progressObj.countDownStart();
@@ -158,6 +165,7 @@ window.game = {
         "w": false,
         "d": false,
         "space": false,
+        "p": false,
     },
     over: function() {
         audioControl.audioPlay(gameSourceObj.audioList.GameOver, gameAudio.GameOver);
@@ -201,21 +209,23 @@ window.game = {
         obj1['w'] = obj2['X'].isPress;
         obj1['d'] = obj2['B'].isPress;
         obj1['e'] = obj2['Y'].isPress;
-        obj1['p'] = obj3.isPress;
+        if (obj1['p'] != obj3.isPress) {
+            self.pause();
+            obj1['p'] = obj3.isPress;
+        }
+
+
         self.activeEventCallback();
     },
     bindEvent: function() {
         //createFactory.createBadflower(300, 0);
         this.reset(0);
-
-        // drawSpriteList.createAnimationSpriteList.push(new Shell({left:300}));
         let self = this;
-
         setInterval(function() {
             createFactory.insertDrawSpriteList(0, drawSpriteList.arrayOthersA);
         }, 1000);
 
-        
+
         if (isMobile) {
 
             var isMove = true;
@@ -265,31 +275,29 @@ window.game = {
             listener: (function() {
                 let flag = true; //按下抬起算一次。
                 return function(status) {
-                    // alert(key);
                     if (status == 1 && flag) {
-                        if (drawSpriteList.mario.status == 4) {
-                            //背景是无敌音乐
-                            if (gameSourceObj.audioList.WD.paused) {
-                                gameSourceObj.audioList.WD.play();
-                                //audioControl.BGMPlay(gameSourceObj.audioList.BGM);
-                            } else {
-                                gameSourceObj.audioList.WD.pause();
-                                //audioControl.BGMPause(gameSourceObj.audioList.BGM);
-                            }
-                        } else {
-                            if (gameSourceObj.audioList.BGM.paused) {
-                                audioControl.BGMPlay(gameSourceObj.audioList.BGM);
-                            } else {
-                                audioControl.BGMPause(gameSourceObj.audioList.BGM);
-                            }
-                        }
+                        // if (drawSpriteList.mario.status == 4) {
+                        //     //背景是无敌音乐
+                        //     if (gameSourceObj.audioList.WD.paused) {
+                        //         gameSourceObj.audioList.WD.play();
+                        //     } else {
+                        //         gameSourceObj.audioList.WD.pause();
+                        //     }
+                        // } else {
+                        //     if (gameSourceObj.audioList.BGM.paused) {
+                        //         audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+                        //     } else {
+                        //         audioControl.BGMPause(gameSourceObj.audioList.BGM);
+                        //     }
+                        // }
 
-                        gameControl.togglePaused();
-                        if (progressObj.countDownWatch.isRunning()) {
-                            progressObj.countDownPause();
-                        } else {
-                            progressObj.countDownStart();
-                        }
+                        // gameControl.togglePaused();
+                        // if (progressObj.countDownWatch.isRunning()) {
+                        //     progressObj.countDownPause();
+                        // } else {
+                        //     progressObj.countDownStart();
+                        // }
+                        self.pause();
                         flag = false;
                     } else if (status == 0) {
                         flag = true;
@@ -365,6 +373,29 @@ window.game = {
                 self.activeEventCallback();
             }
         });
+    },
+    pause: function() {
+        if (drawSpriteList.mario.status == 4) {
+            //背景是无敌音乐
+            if (gameSourceObj.audioList.WD.paused) {
+                gameSourceObj.audioList.WD.play();
+            } else {
+                gameSourceObj.audioList.WD.pause();
+            }
+        } else {
+            if (gameSourceObj.audioList.BGM.paused) {
+                audioControl.BGMPlay(gameSourceObj.audioList.BGM);
+            } else {
+                audioControl.BGMPause(gameSourceObj.audioList.BGM);
+            }
+        }
+
+        gameControl.togglePaused();
+        if (progressObj.countDownWatch.isRunning()) {
+            progressObj.countDownPause();
+        } else {
+            progressObj.countDownStart();
+        }
     },
     activeEventCallback: function() {
         // if(gameControl.gamePause==true){
