@@ -1,7 +1,7 @@
 # 穆亚克的git空间
 作者：穆亚克3
 
-欢迎来玩![image](https://muyake.github.io/canvas/games/mario/images/ico/favicon.ico) [超级玛丽](https://muyake.github.io/canvas/games/mario/game.html)
+欢迎来玩![image](https://muyake.github.io/canvas/games/mario/images/ico/favicon.ico) [超级玛丽](https://muyake.github.io/mario/dist/index.html)
 ## 成功目录
 ### 1.canvas
 + 动画
@@ -15,7 +15,7 @@
 + 游戏
     * [小人跑动](https://muyake.github.io/canvas/games/game1/game.html)(电脑版)（背景横向移动，体现远近距离视差，左右键控制角色的走动,空格键为跳跃）
     * [放地雷](https://muyake.github.io/canvas/games/html/game7.html)(电脑版)（鼠标点击，产生一个💣，带重力加速度，引信点完，产生爆炸效果）
-    * [超级玛丽](https://muyake.github.io/canvas/games/mario/game.html)(电脑版，自制canvas小游戏)。
+    * [超级玛丽](https://muyake.github.io/mario/dist/index.html)。
 ### 2.js特效
 + [字幕滚动](https://muyake.github.io/js/example1/index.html)（模拟每2s产生1-4条数据）
 + [瀑布流](https://muyake.github.io/web/pubuliu/a.html)（方g法2 [瀑布流](https://muyake.github.io/web/pubuliu/b.html)）
