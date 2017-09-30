@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+    </title>
+    <style>
+    .container {
+        width: 600px;
+        height: 150px;
+        margin: 150px;
+        font-size: 0px;
+        background:rgb(242,243,245); 
+    }
+    .container>div{
+
+        display: inline-block;
+    }
+   .demo {
+        width: 150px;
+        height: 150px;
+        background:no-repeat/ cover ;
+    }
+   .demo1 {
+        background-image: url(qrcode1-t.jpg);
+    }
+
+    .demo2 {
+        background-image: url(phone1-t.jpg);
+    }
+
+    .demo3 {
+        background-image: url(pad1-t.jpg);
+    }
+     .demo4 {
+        background-image: url(other1-t.jpg);
+    }
+    .active {
+        -moz-animation: movedown 500ms steps(12) forwards;
+        -webkit-animation: movedown 500ms steps(12) forwards;
+    }
+
+    .unactive {
+        -moz-animation: moveup 300ms steps(7) forwards;
+        -webkit-animation: moveup 300ms steps(7) forwards;
+    }
+
+    @-webkit-keyframes moveup {
+        0% {
+            background-position: 0 -1800px;
+        }
+
+        100% {
+            background-position: 0 -2850px;
+        }
+    } 
+
+    @-webkit-keyframes movedown {
+        0% {
+            background-position: 0 0px;
+        }
+
+        100% {
+            background-position: 0 -1800px;
+        }
+    }
+    </style>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <div class="container">
+        <div class="demo1 demo">
+        </div>
+        <div class="demo2 demo">
+        </div>
+        <div class="demo3 demo">
+        </div>
+        <div class="demo4 demo">
+        </div>
+    </div>
+    <script>
+        function setActive(){
+           var className= this.className; 
+           if(className.indexOf('unactive')>=0){
+                className=className.replace('unactive',' active');
+           }else{
+             className=className.concat(' active');
+           }
+          
+           this.className=className;
+        };
+         function setunActive(){
+           var className= this.className; 
+           className=className.replace(' active',' unactive');
+           this.className=className;
+        };
+
+        document.querySelector('.container').addEventListener('mouseover',function (e) {
+            if(e.target.className.indexOf('demo')>=0){                
+                setActive.bind(e.target)();
+            }
+           
+        });
+         document.querySelector('.container').addEventListener('mouseout',function (e) {         
+            if(e.target.className.indexOf('demo')>=0){
+                 setunActive.bind(e.target)();
+            }
+        });
+        
+    </script>
+</body>
+
+</html>
