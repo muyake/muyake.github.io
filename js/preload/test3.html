@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>原生js</title>
+    <style>
+    .progress-box {
+        height: 20px;
+        width: 200px;
+        border: 1px solid red;
+    }
+
+    .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: green;
+    }
+    </style>
+    <script src="lib/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <div class="progress-box">
+        <div class="progress-bar">
+        </div>
+    </div>
+    <script>
+    //参考文献http://www.cnblogs.com/sker/p/5520392.html
+    //参考文献http://www.cnblogs.com/zouyanzhi/p/5283059.html
+    var preLoadObj = {
+        imgUrlArr: [],
+        //这里可以改正map对象http://www.cnblogs.com/sker/p/5520392.html
+        imgObjList: {},
+        progressCallback: function() {},
+        progressOverCallback: function() {},
+        setProgress: function() {
+            var length = this.imgUrlArr.length;
+            var count = 0;
+            var self = this;
+            var dfdList = []; //第一步
+            this.imgUrlArr.forEach(function(item) {
+                dfdList.push(function() {
+                    var img = new Image();
+                    img.src = item;
+                    var dfditem = $.Deferred();
+                  //  dfdList.push(dfditem); //第一步      
+                    img.onload = function() {
+                        count++;
+                        self.imgObjList[item] = img;
+                        var progress = count / length;
+                        dfditem.notify(progress); //第二步
+                        dfditem.resolve();
+                        totalProgress();
+                    };
+                    dfditem.progress(function(progress) { self.progressCallback(progress); });
+                    return dfditem.promise();
+                }())
+            });
+            //判断所有图片是否加载完成。
+               function totalProgress() {
+                var totalProgressDfd = $.Deferred();
+                var isOver = dfdList.every(function(item) {
+                  return  item.state()=='resolved';
+                });
+                if(isOver){                    
+                    totalProgressDfd.resolve();
+                }
+                 totalProgressDfd.resolve();
+                return totalProgressDfd.promise();
+            };
+
+            $.when(totalProgress()).done(function() {
+                console.log('完成');
+            });
+        },
+        init: function(option) {
+            if (typeof option.imgUrlArr != 'undefined') {
+                this.imgUrlArr = option.imgUrlArr;
+            }
+            if (typeof option.progressCallback != 'undefined') {
+                this.progressCallback = option.progressCallback;
+            }
+            if (typeof option.progressOverCallback != 'undefined') {
+                this.progressOverCallback = option.progressOverCallback;
+            }
+            this.setProgress();
+        },
+    }
+    var option = {
+        imgUrlArr: ['http://www.muyake.site/web/pubuliu/1.jpg', 'http://www.muyake.site/web/pubuliu/2.jpg', 'http://www.muyake.site/web/pubuliu/3.jpg', 'http://www.muyake.site/web/pubuliu/4.jpg', 'http://www.muyake.site/web/pubuliu/5.jpg', 'http://www.muyake.site/web/pubuliu/6.jpg'],
+        progressCallback: function(progress) {
+            var barSelector = document.querySelector('.progress-bar');
+            barSelector.style.width = (progress * 100) + '%';
+        },
+        progressOverCallback: function() {
+            console.log(preLoadObj.imgObjList['http://www.muyake.site/web/pubuliu/1.jpg'].src);
+            alert('完成加载');
+        },
+    }
+    preLoadObj.init(option);
+    </script>
+</body>
+
+</html>
