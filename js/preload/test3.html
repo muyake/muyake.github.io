@@ -44,29 +44,32 @@
                     var img = new Image();
                     img.src = item;
                     var dfditem = $.Deferred();
-                  //  dfdList.push(dfditem); //第一步      
+                    //  dfdList.push(dfditem); //第一步      
                     img.onload = function() {
                         count++;
                         self.imgObjList[item] = img;
                         var progress = count / length;
                         dfditem.notify(progress); //第二步
+                         
                         dfditem.resolve();
                         totalProgress();
+                       
                     };
                     dfditem.progress(function(progress) { self.progressCallback(progress); });
                     return dfditem.promise();
                 }())
             });
             //判断所有图片是否加载完成。
-               function totalProgress() {
+            function totalProgress() {
                 var totalProgressDfd = $.Deferred();
                 var isOver = dfdList.every(function(item) {
-                  return  item.state()=='resolved';
+                    console.log(item.state());
+                    return item.state() == 'resolved';
                 });
-                if(isOver){                    
+                if (isOver) {
                     totalProgressDfd.resolve();
                 }
-                 totalProgressDfd.resolve();
+               
                 return totalProgressDfd.promise();
             };
 

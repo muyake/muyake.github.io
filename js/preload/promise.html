@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+    .progress-box {
+        height: 20px;
+        width: 200px;
+        border: 1px solid red;
+    }
+
+    .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: green;
+    }
+    </style>
+</head>
+<body>
+	<div class="progress-box">
+        <div class="progress-bar">
+        </div>
+    </div>
+    <script>
+    	var imgUrlArr = ['http://www.muyake.site/web/pubuliu/1.jpg', 'http://www.muyake.site/web/pubuliu/2.jpg', 'http://www.muyake.site/web/pubuliu/3.jpg', 'http://www.muyake.site/web/pubuliu/4.jpg', 'http://www.muyake.site/web/pubuliu/5.jpg', 'http://www.muyake.site/web/pubuliu/6.jpg'];
+    	function lazyLoad(src) {
+    		return new Promise((resolve, reject) => {
+    			var img = new Image;
+	    		img.onload = () => {
+	    			addProgress();
+	    			resolve();
+	    		}
+	    		img.onerror = () => {
+	    			reject();
+	    		}
+	    		img.src = src;
+    		});
+    	}
+    	var addProgress = (function () {
+    		var i = 0,
+    			l = imgUrlArr.length,
+    			barSelector = document.querySelector('.progress-bar');
+    		return function () {
+    			++i;
+    			barSelector.style.width = (i / l * 100) + '%';
+    		}
+    	})();
+    	var arr = [];
+    	for (var i=0, l=imgUrlArr.length; i < l; i++) {
+    		arr.push(lazyLoad(imgUrlArr[i]));
+    	}
+    	Promise.all(arr).then(function () {
+    		alert('ok');
+    	}).catch(function () {
+    		alert('fail');
+    	});
+    </script>
+</body>
+</html>
