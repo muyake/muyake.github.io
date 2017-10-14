@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="applicable-device" content="mobile">
+    <!-- 禁止横屏 -->
+    <!-- uc强制竖屏 -->
+    <!-- <meta name="screen-orientation" content="portrait"> -->
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- 设置全屏 -->
+<!--     <meta name="browsermode" content="application">
+    <meta name="full-screen" content="yes"> -->
+    <!-- 禁止缩放 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>
+        横屏设置
+    </title>
+    <style>
+    body,
+    div,
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        overflow: hidden;
+    }
+
+    body {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        background-color: red;
+        overflow: hidden;
+    }
+
+    #main {
+        position: absolute;
+        background-color: yellow;
+        font-size: 0.24rem;
+    }
+
+
+    #main p {
+        margin: auto;
+        margin-top: 20px;
+        text-align: left;
+    }
+    </style>
+</head>
+
+<body class="webpBack">
+    <div id="main">
+        <p>lol</p>
+        <input type="text">
+        <p>我是横屏</p>
+    </div>
+    <script>
+    // 参考文献http://blog.csdn.net/u012011360/article/details/51189006
+    //判断是横屏还是竖屏
+    var screenLandscape = {
+        element: null,
+        callback: function() {},
+        //判断是横屏还是竖屏
+        judgeScreen: function() {
+            if (window.orientation) {
+                return window.orientation; //0代表竖屏，180代表倒立，90代表逆时针转，-90代表顺时针转。
+            } else {
+                var width = document.documentElement.clientWidth;
+                var height = document.documentElement.clientHeight;
+                if (width < height) {
+                    return 0; //默认竖屏
+                } else {
+                    return 90 //默认逆时针转
+                }
+            }
+        },
+        //根据横屏或竖屏设置不同的样式。
+        setStatus: function() {
+            var main = this.element;
+            var status = this.judgeScreen();
+            var width = document.documentElement.clientWidth;
+            var height = document.documentElement.clientHeight;
+            if (status == 0 || status == 180) {
+                //竖屏
+                main.style.width = height + 'px';
+                main.style.height = width + 'px';
+                main.style.top = (height - width) / 2 + 'px';
+                main.style.left = (-(height - width) / 2) + 'px';
+                main.style.transform = 'rotate(90deg)';
+                main.style.transformOrigin = '50% 50%';
+            } else {
+                //横屏
+                main.style.width = width + 'px';
+                main.style.height = height + 'px';
+                main.style.top = 0 + 'px';
+                main.style.left = 0 + 'px';
+                main.style.transform = 'none';
+            }
+            this.callback();
+        },
+        //样式改变事件，及设置适配rem
+        r: function(resizeNum) {
+            //核心适配代码
+            var winW;
+            var slef = this;
+            var status = this.judgeScreen();
+            if (status == 0 || status == 180) {
+                winW = window.innerHeight;
+            } else {
+                winW = window.innerWidth;
+            }
+            document.getElementsByTagName("html")[0].style.fontSize = winW * 0.15625 + "px";
+            //核心适配代码   
+            //window.innerWidth不包括菜单栏、工具栏以及滚动条等的高度。
+            // window.screen.width屏幕浏览器的宽度
+            //如果包含纵向滚动条，则重新计算rem值，直到纵向滚动条消失。                  
+            if (resizeNum <= 2 && (((status == 0 || status == 180) && winW > window.screen.availHeight) || ((status == 90 || status == -90) && winW > window.screen.width))) {
+                setTimeout(function() {
+                    slef.r(++resizeNum);
+                }, 100);
+            } else {
+                this.setStatus();
+                document.getElementsByTagName("body")[0].style.opacity = 1;
+            }
+            if (status == 0 || status == 180) {
+                document.querySelector('#main input').value = status + ":" + winW + ":" + window.screen.availHeight;
+            } else {
+                document.querySelector('#main input').value = status + ":" + winW + ":" + window.screen.width;
+            }
+           // document.querySelector('#main input').value=winW+":"+window.innerHeight;
+        },
+        bindEvent: function() {
+            var evt = "onorientationchange" in window ? "orientationchange" : "resize";
+            //当旋转屏幕时触发事件但是这时还没有实现resize，因此这是计算width和height不是最终版。所以可以采用resize事件触发。
+            var self = this;
+            window.addEventListener(evt, function() {
+                setTimeout(function() {
+                    self.r(0)
+                }, 100);
+            }, false);
+            window.onresize = function() {
+                console.log(12);
+                self.r.bind(self);
+            }
+        },
+        init: function(element, callback) {
+            var self = this;
+            self.bindEvent();
+            self.element = element;
+            self.callback = callback;
+            setTimeout(function() {
+                self.r(0)
+            }, 100);
+        }
+    }
+
+    screenLandscape.init(document.querySelector('#main'), function() {
+        var height = window.getComputedStyle(document.querySelector('body'), null).height;
+        //document.querySelector('#main input').value = document.documentElement.clientWidth;
+        // document.querySelector('#main input').value = height + document.documentElement.clientHeight;
+    });
+    </script>
+</body>
+
+</html>

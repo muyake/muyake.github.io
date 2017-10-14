@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>
+        orientationchange状态角度
+    </title>
+    <style>
+   @media screen and (orientation: portrait) {
+  /*竖屏 css*/
+} 
+@media screen and (orientation: landscape) {
+  /*横屏 css*/
+}
+    </style>
+</head>
+
+<body class="webpBack">
+    <div id="print">
+        <p>lol</p>
+    </div>
+    <script>        
+   //判断手机横竖屏状态：
+   document.querySelector('#print').innerHTML='竖屏状态！'+window.orientation;
+   //orientationchange只限于移动端
+window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
+
+        if (window.orientation === 180 || window.orientation === 0) {
+            
+            document.querySelector('#print').innerHTML='竖屏状态！'+window.orientation;
+        }
+        if (window.orientation === 90 || window.orientation === -90 ){
+             document.querySelector('#print').innerHTML='横屏状态！'+window.orientation;
+        } 
+    }, false);
+//移动端的浏览器一般都支持window.orientation这个参数，通过这个参数可以判断出手机是处在横屏还是竖屏状态
+    </script>
+</body>
+
+</html>

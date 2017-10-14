@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>梦幻雪冰、独行冰海</title>
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <link rel="stylesheet" href="../css/reset.css">
+    <script src="../js/jquery-1.8.3.min.js" charset="utf-8" type="text/javascript"></script>
+    <style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    .wrap {
+        height: 100%;
+        background: yellow;
+        font-size: 2em;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="con">梦幻雪冰、独行冰海</div>
+    <script>
+    var con = document.getElementById("con");
+
+    (function() {
+        // 监听运动传感事件，查看是否支持硬件运动
+        if (window.DeviceMotionEvent) {
+            window.addEventListener('devicemotion', deviceMotionHandler, false);
+        } else {
+            alert("您的设备不支持硬件调用");
+        }
+
+        // 变量初始化
+        var x = 0,
+            y = 0,
+            z = 0,
+            lastX = 0,
+            lastY = 0,
+            lastZ = 0,
+            curTime = 0,
+            lastTime = 0,
+            diffTime = 0,
+            speed = 0;
+
+        // 设置一个阀值
+        var SHAKE_THRESHOLD = 800; // 设定摇晃的阈值为800 运行相应操作
+
+        /*
+         * @功能：测算三个方向重力加速度，达到一定值进行相应操作
+         * @author：陈能堡
+         *
+         */
+        function deviceMotionHandler(eventData) {
+            var acceleration = eventData.accelerationIncludingGravity;
+
+            // 获取当前时间
+            curTime = new Date().getTime();
+
+            // 计算时间差，当这个差值大于一定值执行计算三个方向的速度
+            if ((curTime - lastTime) > 100) {
+                // 记录上一次的时间
+                diffTime = curTime - lastTime;
+                lastTime = curTime;
+
+                // 获取当前三个方向的值
+                x = acceleration.x;
+                y = acceleration.y;
+                z = acceleration.z;
+
+                // 计算速度，为了防止出现负数，进行绝对值
+                speed = Math.abs((x + y + z - lastX - lastY - lastZ) / diffTime * 8000);
+
+                if (speed > SHAKE_THRESHOLD) {
+                    alert("我实现摇一摇了");
+                };
+
+                // 记录上一次三个方向的值
+                lastX = x;
+                lastY = y;
+                lastZ = z;
+            };
+        }
+    })();
+    </script>
+</body>
+
+</html>
