@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    .div1,
+    .div2 {
+        width: 200px;
+        height: 133.5px;
+        background: url(4.jpg) no-repeat top center/cover;
+    }
+
+    .div2 {
+        background:red url(4.jpg) no-repeat bottom center/cover;
+        position: absolute;
+        transform: rotateX(70deg);
+         transform-origin: top;          
+
+    }
+    .container{
+        margin: 200px;
+        perspective: 600px;
+        perspective-origin: right;
+      
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="div1">
+        </div>
+        <div class="div2">
+        </div>
+    </div>
+</body>
+
+</html>
