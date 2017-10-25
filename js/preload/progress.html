@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>原生js</title>
+    <style>
+    .progress-box {
+        height: 20px;
+        width: 200px;
+        border: 1px solid red;
+    }
+
+    .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: green;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="progress-box">
+        <div class="progress-bar">
+        </div>
+    </div>
+    <script>
+    var preLoadObj = {
+        imgUrlArr: [],
+        //这里可以改正map对象http://www.cnblogs.com/sker/p/5520392.html
+        imgObjList: {},
+        progressCallback: function() {},
+        progressOverCallback: function() {},
+        setProgress: function() {
+            var length = this.imgUrlArr.length;
+            var count = 0;
+            var self = this;
+            this.imgUrlArr.forEach(function(item) {
+                //这里的this指的是window
+                //var self=this;
+                var img = new Image();
+                img.src = item;
+                img.onload = function() {
+                    count++;
+                    self.imgObjList[item] = img;
+                    var progress = count / length;
+                    //这里不能用this，因为this指的是img对象
+                    self.progressCallback(progress);
+                    if (count == length) {
+                        self.progressOverCallback();
+                    }
+                };
+                //图片加载失败
+                img.onerror = function() {
+                    count++;
+                    self.imgObjList[item] = img;
+                    var progress = count / length;
+                    //这里不能用this，因为this指的是img对象
+                    self.progressCallback(progress);
+                    if (count == length) {
+                        self.progressOverCallback();
+                    }
+                };
+            })
+        },
+        init: function(option) {
+            if (typeof option.imgUrlArr != 'undefined') {
+                this.imgUrlArr = option.imgUrlArr;
+            }
+            if (typeof option.progressCallback != 'undefined') {
+                this.progressCallback = option.progressCallback;
+            }
+            if (typeof option.progressOverCallback != 'undefined') {
+                this.progressOverCallback = option.progressOverCallback;
+            }
+            this.setProgress();
+        },
+    }
+    var option = {
+        imgUrlArr: ['http://www.muyake.site/web/pubuliu/1.jpg', 'http://www.muyake.site/web/pubuliu/2.jpg', 'http://www.muyake.site/web/pubuliu/3.jpg', 'http://www.muyake.site/web/pubuliu/4.jpg', 'http://www.muyake.site/web/pubuliu/5.jpg', 'http://www.muyake.site/web/pubuliu/6.jpg'],
+        progressCallback: function(progress) {
+            var barSelector = document.querySelector('.progress-bar');
+            barSelector.style.width = (progress * 100) + '%';
+        },
+        progressOverCallback: function() {
+            console.log(preLoadObj.imgObjList['http://www.muyake.site/web/pubuliu/1.jpg'].src);
+            alert('完成加载');
+        },
+    }
+    var xhr = new XMLHttpRequest();　　
+    xhr.open('GET', 'http://www.muyake.site/web/pubuliu/1.jpg');　　
+    xhr.responseType = 'blob';
+    xhr.onprogress = updateProgress;
+    xhr.load = function() {
+        console.log('完成');
+    };
+
+    function updateProgress(event) {　　
+        　　 if (event.lengthComputable) {　
+            　　　　　 var percentComplete = event.loaded / event.total;　
+        　　　 }　　
+         }
+    // preLoadObj.init(option);
+    </script>
+</body>
+
+</html>

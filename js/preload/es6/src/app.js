@@ -37,7 +37,7 @@ var preLoadObj = {
         Promise.all(promises).then(function(posts) {
             self.progressOverCallback();
         }).catch(function(reason) {
-            console.log('图片加载错误')；
+            console.log('图片加载错误');
         });
     },
     init: function(option) {

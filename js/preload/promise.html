@@ -23,7 +23,10 @@
         </div>
     </div>
     <script>
-    	var imgUrlArr = ['http://www.muyake.site/web/pubuliu/1.jpg', 'http://www.muyake.site/web/pubuliu/2.jpg', 'http://www.muyake.site/web/pubuliu/3.jpg', 'http://www.muyake.site/web/pubuliu/4.jpg', 'http://www.muyake.site/web/pubuliu/5.jpg', 'http://www.muyake.site/web/pubuliu/6.jpg'];
+    	var imgUrlArr ;
+        for(var i=1;i<100;i++){
+            imgUrlArr.push('http://www.muyake.site/web/pubuliu/'+i+'.jpg');
+        }
     	function lazyLoad(src) {
     		return new Promise((resolve, reject) => {
     			var img = new Image;
