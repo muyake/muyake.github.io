@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="x5-orientation" content="portrait">
+
+    <title>svg字体适配方案</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        .contain{
+            width: 5rem;
+            height: 0.5rem;
+            border:1px solid red;
+        }
+         text {
+               
+                    text-anchor: inherit;
+                      dominant-baseline: hanging;
+            }
+    </style>
+</head>
+
+<body>
+   <div class="contain">
+       
+   </div>
+    <script>
+    window.onresize = r;
+
+    function r(resizeNum) {
+        //核心适配代码
+        var winW = window.innerWidth;
+        document.getElementsByTagName("html")[0].style.fontSize = winW * 0.15625 + "px";
+        //核心适配代码
+        if (winW > window.screen.width && resizeNum <= 10) {
+            setTimeout(function() {
+                r(++resizeNum)
+            }, 100);
+        } else {
+            insertSVG(1200);
+            document.getElementsByTagName("body")[0].style.opacity = 1;
+        }
+    }
+    setTimeout(function() {
+        r(0)
+    }, 100);
+function insertSVG(num) {
+        var width = window.getComputedStyle(document.querySelector('.contain'), null).width;
+        width = parseInt(width);
+        var word1 = '关注后回复';
+        var word2 = new String(num);
+        var word3 = '更精彩';
+        var left1 = 0;
+        var length = word1.length + parseInt(word2.length / 2) + word3.length;
+        var fontSize = parseInt((width - left1) / length);
+        document.querySelector('.contain').style.fontSize = fontSize + 'px';
+        var left2 = word1.length * fontSize + left1;
+        var left3 = left1 + word1.length * fontSize + (word2.length / 2) * fontSize + 2;
+        var str = '';
+        str += "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='100%' height='100%' viewBox='0 0 " + (width) + " " + (fontSize+5) + "'>";
+        str += "<text x='" + left1 + "' y='0' fill='black'>" + word1 + "</text>";
+        str += " <text x='" + (left2+2) + "'  y='0' fill='red'>" + word2 + "</text>";
+        str += "<text x='" + (left3+6) + "'  y='0' fill='black'>" + word3 + "</text>";
+        str += '</svg>'
+        document.querySelector('.contain').innerHTML = str;
+    }
+    </script>
+   
+</body>
+
+</html>

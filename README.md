@@ -29,7 +29,9 @@
 + [冰龙帧动画](https://muyake.github.io/css/iceDragon/a.html)（冰龙是雪碧图）
 + [文字走光效果](https://muyake.github.io/css/iphonestart/index.html)
 + [图片翻折效果](https://muyake.github.io/css/fanzhuan/a.html)
-### 3.活动（手机）
+### 3.svg特效
++ [svg动态字体](https://muyake.github.io/widget/redbag/shake.html)
+### 4.活动（手机）
 + [618银河聚会](https://muyake.github.io/pages/618/main.html)（[3d小盒子](https://muyake.github.io/pages/618/box.html)-  [获奖记录](https://muyake.github.io/pages/618/Record.html)）
 + [冰龙特效](https://muyake.github.io/pages/IceDragon/IceDragon.html)（冰龙是gif动画）
 + [抽奖大转盘](https://muyake.github.io/pages/Luckdraw/index.html)

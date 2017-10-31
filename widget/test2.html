@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" style='font-size: 58.5938px;'>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: #ededef;
+        color: #000;
+    }
+
+    .bookFixed {}
+
+    .bookFixed .bookfloat {
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 100px;
+        height: 150px;
+        border: 1px solid red;
+        transition: opacity 0.5s;
+        opacity: 0;
+        z-index: 1;
+    }
+
+    .bookFixed .currentItem {
+        display: inline-block;
+        transition: opacity 0.5s;
+        opacity: 1;
+        z-index: 2;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="bookFixed">
+        <ul>
+            <li class="bookfloat">1</li>
+            <li class="bookfloat">2</li>
+            <li class="bookfloat">3</li>
+            <li class="bookfloat">4</li>
+            <li class="bookfloat">5</li>
+            <li class="bookfloat">6</li>
+        </ul>
+    </div>
+    <script>
+    var bookfloat = function() {
+        var bookFixedList = document.querySelectorAll('.bookfloat');
+        var length = bookFixedList.length;
+        var index = 0;
+        function changeStatus() {
+            setTimeout(function() {
+                if (document.querySelector('.currentItem')) {
+                    document.querySelector('.currentItem').className = 'bookfloat';
+                }
+                bookFixedList[index].className = 'bookfloat currentItem';
+                index++;
+                if (index == length) {
+                    index = 0;
+                }
+                changeStatus();
+            }, 2000);
+        }
+        for (var i = 0; i < length; i++) {
+            bookFixedList[i].addEventListener('click', function(e) {
+                if (this.className.indexOf('currentItem') >= 0) {
+                    e.stopPropagation();
+                    console.log(e.target.innerHTML);
+                }
+            }, false);
+        }
+        changeStatus();
+    }()
+    </script>
+</body>
+
+</html>
