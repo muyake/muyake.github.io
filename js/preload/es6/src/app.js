@@ -66,6 +66,7 @@ var option = {
     imgUrlArr: ['http://www.muyake.site/web/pubuliu/1.jpg', 'http://www.muyake.site/web/pubuliu/2.jpg', 'http://www.muyake.site/web/pubuliu/3.jpg', 'http://www.muyake.site/web/pubuliu/4.jpg', 'http://www.muyake.site/web/pubuliu/5.jpg', 'http://www.muyake.site/web/pubuliu/6.jpg'],
     progressCallback: function(progress) {
         var barSelector = document.querySelector('.progress-bar');
+        document.querySelector('.result').innerHTML = (progress * 100) + '%';
         barSelector.style.width = (progress * 100) + '%';
     },
     progressOverCallback: function() {

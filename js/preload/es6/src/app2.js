@@ -1,5 +1,5 @@
     var imgUrlArr = [];
-    for (var i = 1; i < 50; i++) {
+    for (var i = 6; i < 11; i++) {
         imgUrlArr.push('http://www.muyake.site/web/pubuliu/' + i + '.jpg');
     }
 
@@ -60,13 +60,22 @@
                 percent += arrObj[item];
             }
             console.log(percent / totalSize);
+
             barSelector.style.width = (percent / totalSize * 100) + '%';
+            document.querySelector('.result').innerHTML = (percent / totalSize * 100) + '%';
         }
     })();
     var arr = [];
     var arrObj = {};
     for (var i = 0, l = imgUrlArr.length; i < l; i++) {
-        arr.push(loadImage(imgUrlArr[i], function() {}));
+        arr.push(loadImage(imgUrlArr[i], function(url) {
+            var img = new Image();
+            img.src = url;
+            img.style.width = "80px";
+            img.style.height = "80px";
+            // 插入预览图片
+            document.querySelector(".imgcontainer").appendChild(img);
+        }));
         arrObj[imgUrlArr[i]] = 0;
     }
     var totalSize = 0;

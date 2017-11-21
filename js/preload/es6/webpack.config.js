@@ -1,5 +1,5 @@
 module.exports = {
-    entry: './src/app.js',
+    entry: './src/app3.js',
     output: {
         path: __dirname,
         filename: './bin/app.nw.js',

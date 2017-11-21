@@ -86,14 +86,29 @@ function draw() {
     }
 }
 
-function fourstar(protress, starttime, endtime, scale, stararray, itemnum) {
-    if (protress > starttime && protress < endtime) {
+/**
+ * @progress  游戏进程
+ * @starttime  动画开始时间
+ * @endtime  动画结束时间
+ * @scale  缩放比例
+ * @stararray 绘制四角星的数组
+ * @itemnum  绘制四角星的Index
+ * @return {[type]}
+ */
+function drawfourStar(progress, starttime, endtime, scale, stararray, itemNum) {
+    if (progress > starttime && progress < endtime) {
         ctx.save();
-        ctx.globalAlpha = Math.abs(curveFunction.sineEaseOut(protress - starttime, 0, 1, 50));
-        ctx.drawImage(images.wangzheng, stararray[itemnum].imgx, stararray[itemnum].imgy, stararray[itemnum].width, stararray[itemnum].height, stararray[itemnum].x, stararray[itemnum].y, stararray[itemnum].width * stararray[itemnum].scale, stararray[itemnum].height * stararray[itemnum].scale);
+        //画布透明度变化
+        ctx.globalAlpha = Math.abs(curveFunction.sineEaseOut(progress - starttime, 0, 1, 50));
+        ctx.drawImage(images.wangzheng, stararray[itemNum].imgx, stararray[itemNum].imgy,
+            stararray[itemNum].width, stararray[itemNum].height,
+            stararray[itemNum].x, stararray[itemNum].y,
+            stararray[itemNum].width * stararray[itemNum].scale,
+            stararray[itemNum].height * stararray[itemNum].scale);
         ctx.restore();
     }
 };
+
 var people = {
     drawbody: function() {
         ctx.drawImage(images.wangzheng, spriteimg.body.imgx, spriteimg.body.imgy, spriteimg.body.width, spriteimg.body.height, spriteimg.body.x, spriteimg.body.y, spriteimg.body.width, spriteimg.body.height);
@@ -180,7 +195,7 @@ var drawstar = {
         if (this.progress > 65) {
             var interval = 10;
             for (var i = 0; i < 5; i++) {
-                fourstar(this.progress, 65 + i * interval, 265 + i * interval, 1, stararray, i);
+                drawfourStar(this.progress, 65 + i * interval, 265 + i * interval, 1, stararray, i);
             }
             this.scale = curveFunction.linear(this.progress - 67, 0.7, 0.3, 103);
             fivestar(this.anglechange, this.rotaterate, this.progress, 67, 170, this.scale, stararray, 5);
@@ -191,22 +206,22 @@ var drawstar = {
     }
 }
 
-function fivestar(anglechange, rotaterate, protress, starttime, endtime, scale, stararray, itemnum) {
-    if (protress > starttime && protress < endtime) {
+function fivestar(anglechange, rotaterate, progress, starttime, endtime, scale, stararray, itemnum) {
+    if (progress > starttime && progress < endtime) {
         ctx.save();
         var ex = 200 * (1 - Math.cos(anglechange / 180 * Math.PI));
         var ey = -200 * Math.sin(anglechange / 180 * Math.PI);
         ctx.translate(ex, ey);
         ctx.rotate((rotaterate) * Math.PI / 180);
         ctx.scale(scale, scale);
-        var five = 5;
+        var five = itemnum;
         var img = images.wangzheng;
-        if (protress > endtime - 40) {
-            ctx.globalAlpha = curveFunction.linear(endtime - protress, 0, 1, 40);
+        if (progress > endtime - 40) {
+            ctx.globalAlpha = curveFunction.linear(endtime - progress, 0, 1, 40);
         }
         ctx.drawImage(img, stararray[five].imgx, stararray[five].imgy, stararray[five].width, stararray[five].height, -stararray[five].width / 2, -stararray[five].height / 2, stararray[five].width, stararray[five].height);
         ctx.restore();
-        if (protress > starttime + 20) {
+        if (progress > starttime + 20) {
             ctx.save();
             var ex = 200 * (1 - Math.cos(anglechange / 180 * Math.PI));
             var ey = -200 * Math.sin(anglechange / 180 * Math.PI);
@@ -215,9 +230,9 @@ function fivestar(anglechange, rotaterate, protress, starttime, endtime, scale, 
             ctx.scale(scale * 0.5, scale * 0.5);
             var five = 5;
             var img = images.wangzheng;
-            if (protress < endtime - 20 && protress >= endtime - 40) {
-                ctx.globalAlpha = curveFunction.linear(endtime - 20 - protress, 0, 1, 20);
-            } else if (protress >= endtime - 20) {
+            if (progress < endtime - 20 && progress >= endtime - 40) {
+                ctx.globalAlpha = curveFunction.linear(endtime - 20 - progress, 0, 1, 20);
+            } else if (progress >= endtime - 20) {
                 ctx.globalAlpha = 0;
             }
             ctx.drawImage(img, stararray[five].imgx, stararray[five].imgy, stararray[five].width, stararray[five].height, -stararray[five].width / 2, -stararray[five].height / 2, stararray[five].width, stararray[five].height);
