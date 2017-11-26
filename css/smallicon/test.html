@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="x5-orientation" content="portrait">
+    <title>感恩相遇 为你打call</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        opacity: 0;
+    }
+
+    .container {
+        
+        height: 100px;
+        margin: 50px;
+        font-size: 0.2rem;
+        vertical-align: middle;
+    }
+    /************************标准写法************************/
+  .icon-b {
+        width: 0.512rem; /* 需要修改的地方*/
+        height: 0.273rem; /* 需要修改的地方*/
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: middle;
+        font-size: 0.16rem; /* 需要修改的地方*/
+    }
+
+    .div1 {
+        display: inline-block;
+        width: 195%;
+        height: 195%;
+        font-size: 199%;
+        line-height: 0.546rem;    /* 需要修改的地方*/
+        color: #fff;
+        border-radius: 100.01rem;
+        -webkit-transform: scale(0.5);
+        -ms-transform: scale(0.5);
+        -o-transform: scale(0.5);
+        transform: scale(0.5);
+        font-weight: bold;
+        transform-origin: left top;
+        vertical-align: middle;
+        background:  no-repeat left center;
+        background-color:rgba(246, 35, 94, 1);/* 需要修改的地方*/
+        background-image:url(sun1.png); /* 需要修改的地方*/
+        background-size: contain;
+        box-sizing: border-box;
+        padding-left: 100%;
+        padding-right: 30%;
+        text-align: center;
+    }
+/************************结束标准写法************************/
+  /************************普通写法************************/
+    .div2 {
+        display: inline-block;
+        width: 0.512rem;
+        height: 0.273rem;
+        line-height: 0.273rem;
+        background: rgba(246, 35, 94, 1);
+        border-radius: 0.51rem;
+        font-size: 0.16rem;
+        color: #fff;
+        text-indent: 0.2rem;
+        background: rgba(246, 35, 94, 1) url(sun1.png) no-repeat left center/contain;
+    }
+  /************************结束普通写法************************/
+    
+  /************************paddding写法************************/
+    .div5 {
+        margin: 150px;
+        width: 0.512rem;
+        padding: 0.05rem 0;
+        background: rgba(246, 35, 94, 1);
+        border-radius: 0.51rem;
+        font-size: 0.16rem;
+        color: #FFF;
+        text-indent: 0.2rem;
+        line-height: 1.1em;        
+        box-sizing: border-box;
+    }
+      /************************结束padding写法************************/
+    .box{
+        border:1px solid green;
+        width: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        asfd
+        <div class="icon-b">
+            <div class="div1">12</div>
+        </div>asfd
+        <div class="icon-b">
+            <div class="div1">2</div>
+        </div>
+        <div class="box">
+            
+        </div>
+    </div>
+    <div class="container">
+        asfd
+        <div class="div2">
+            12
+        </div>asfd
+    </div>
+    <div class="div4">
+        14
+    </div>
+    <div class="div5">
+        15
+    </div>
+    <script>
+    </script>
+    <script>
+    window.onresize = r;
+
+    function r(resizeNum) {
+        //核心适配代码
+        var winW = window.innerWidth;
+        document.getElementsByTagName("html")[0].style.fontSize = winW * 0.15625 + "px";
+        //核心适配代码
+        if (winW > window.screen.width && resizeNum <= 10) {
+            setTimeout(function() {
+                r(++resizeNum)
+            }, 100);
+        } else {
+            document.getElementsByTagName("body")[0].style.opacity = 1;
+        }
+    }
+    setTimeout(function() {
+        r(0)
+    }, 100);
+    </script>
+</body>
+
+</html>
