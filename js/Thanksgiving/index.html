@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="x5-orientation" content="portrait">
+    <link rel="stylesheet" href="css/index.css">
+    <title>感恩相遇 为你打call</title>
+</head>
+
+<body> 
+    <section class="popup">       
+       <div class="sendT-b">
+            <div class="sendInfo">
+                <div class="toptip">
+                    为<span>粉丝昵称</span>投出<img src="./images/ticket.png" alt="">:
+                </div>
+                <div class="send-b">
+                    <div class="minus">                       
+                    </div>
+                    <div class="sentCount"> 
+                       <input type="number" class="sendText"  value="13">
+                    </div>
+                    <div class="add">                       
+                    </div>
+                </div>
+                <div class="downTip">
+                    当前可用票数<span>88</span>张
+                </div>
+                <div class="sendBtn">
+                    
+                </div>
+            </div>
+            <div class="close">                
+            </div> 
+       </div>
+    </section>
+    <script>
+    window.onresize = r;
+    function r(resizeNum) {
+        //核心适配代码
+        var winW = window.innerWidth;
+        document.getElementsByTagName("html")[0].style.fontSize = winW * 0.15625 + "px";
+        //核心适配代码
+        if (winW > window.screen.width && resizeNum <= 10) {
+            setTimeout(function() {
+                r(++resizeNum)
+            }, 100);
+        } else {
+            document.getElementsByTagName("body")[0].style.opacity = 1;
+        }
+    }
+    setTimeout(function() {
+        r(0)
+    }, 100);
+    </script>
+    <script>
+      var  playerRestVote =88;
+    </script>
+    <script src="js/index.js">        
+    </script>
+</body>
+
+</html>

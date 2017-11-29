@@ -40,6 +40,7 @@
 + [言情小说](https://muyake.github.io/widget/环形轮播/2.html)（[jquery插件版](https://muyake.github.io/widget/环形轮播/jquey版/carousel_demo.html)）
 +  [导航栏](https://muyake.github.io/widget/widget/nav.html)
 + [人人翻转](https://muyake.github.io/widget/renrenfanzhuan/fanzhuan.html)
++ [价格输入或长按增长](https://muyake.github.io/js/Thanksgiving/index.html)（手机版）
 ## 知识点目录
 + css
     + [媒体查询](https://muyake.github.io/web/media/index.html)
