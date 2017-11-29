@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Throttle</title>
+    <style>
+    .div1 {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="div1">
+    	结果在console中展示，一共三种方法。
+    </div>
+    <script>
+ function resizehandler() {
+        var n = 0;
+        return function() {
+            console.log(Date.now());
+            console.log(++n);
+        }
+    }
+    var func=resizehandler();
+	// //当resize停止后，500毫秒会执行结果
+ //    function throttle(method, delay) {
+ //        clearTimeout(method.tId);
+ //        method.tId = setTimeout(function() {
+ //            method();
+ //            method.tId=null;//清除缓存
+ //        }, delay);
+ //    }
+ //     window.onresize=function(){
+ //     	throttle(func,500);
+ //     }
+
+// //当resize停止后，500毫秒会执行结果和上面执行效果一致
+    // function throttle(method,delay){
+    // 	var timer=null;//代替method.tId
+    // 	return function(){    		
+    // 		clearTimeout(timer);
+    // 		timer=setTimeout(function(){
+    // 			method();
+    // 			timer=null;//清除缓存
+    // 		},delay);
+    // 	}
+    // }
+    //  window.onresize=throttle(func,500);
+    // //当resize过程中，每1500ms执行一次，停止后，2000毫秒会执行一次
+    function throttle(method,delay,duration){
+              var timer=null, begin=new Date();
+              return function(){
+                  var current=new Date();;
+                  clearTimeout(timer);
+                  if(current-begin>=duration){
+                  	console.log('每'+duration+'ms执行一次');
+                       method();
+                       begin=current;
+                  }else{
+                      timer=setTimeout(function(){
+                      	console.log('结束后'+delay+'ms执行一次');
+                          method();
+                      },delay);
+                  }
+              }
+    }
+window.onresize=throttle(func,2000,1500);
+
+   
+    
+    </script>
+</body>
+
+</html>
