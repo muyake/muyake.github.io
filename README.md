@@ -46,6 +46,7 @@
 + css
     + [媒体查询](https://muyake.github.io/web/media/index.html)
     + [background](https://muyake.github.io/css/background/background.html)
+    + [counter-reset](https://muyake.github.io/js/rank/index.htm)（counter-reset用法及排行榜插入效率最高方法）
     + [contenteditable](https://muyake.github.io/css/contenteditable/contenteditable.html)（div模拟input，包括富文本编辑器）
 + js
 ## 个人博客

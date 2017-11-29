@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    li,
+    ul {
+        list-style: none;
+    }
+
+    .container {
+        margin: 300px;
+    }
+
+    .rankList ul {
+        counter-reset: liindex;
+    }
+
+    .rankList .rankNum:after {
+        content: counter(liindex);
+        counter-increment: liindex;
+    }
+    </style>
+</head>
+
+<body>
+	<input type="button" id='btn1' value="增加5条">
+    <div class="container rankList">
+        <ul>
+            <li>
+            	<div class="rankNum">            		
+            	</div>
+            </li>
+            <li>
+            	<div class="rankNum">            		
+            	</div>
+            </li>
+            <li>
+            	<div class="rankNum">            		
+            	</div>
+            </li>
+        </ul>
+    </div>
+    <script>
+    	function add1(){
+    		var str1=document.querySelector('.rankList ul').innerHTML;
+  			var str2='';
+    		for(var i=0;i<5;i++){    		
+    			str2+='<li><div class="rankNum"></div></li>';    			
+    		}
+    		document.querySelector('.rankList ul').innerHTML=str1+str2;
+    	}
+    	//用createDocumentFragment效率大大优于innerHTML
+    	function add2(){
+    		var fragment=document.createDocumentFragment();
+    		for(var i=0;i<5;i++){
+    			var li=document.createElement('LI');
+    			li.innerHTML='<div class="rankNum"></div>';
+    			fragment.appendChild(li);
+    		}
+    		document.querySelector('.rankList ul').appendChild(fragment);
+    	}
+    	document.querySelector('#btn1').addEventListener('click',function () {
+	    	console.time("test");
+	    	for(var i=1;i<100;i++){
+	    		add1();
+	    	}
+			console.timeEnd("test");  	
+			console.time("test2");
+	    	for(var i=1;i<100;i++){
+	    		add2();
+	    	}
+			console.timeEnd("test2");  			
+    	})
+    
+    </script>
+</body>
+
+</html>
