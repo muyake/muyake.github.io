@@ -36,6 +36,13 @@
             background-color: #dedede;
         }
 /*不换行*/
+.nws:empty::before {
+        content: attr(data-placeloader);
+        color: #aaa;
+    }
+     .nws:focus::before {
+            content: none;           
+        }
             .nws {
             outline: none;
             white-space: nowrap;
