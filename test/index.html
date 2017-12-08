@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .main{
+            width: 500px;
+            height: 1000px;
+            border:1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+<div class="main">
+</div>
+<script type="text/javascript">
+
+if (sessionStorage.hassession) {
+
+} else {
+sessionStorage.setItem("hassession", 1);
+
+var authcode = '';
+    
+var paypopupURL='https://s.click.taobao.com/BWc9mWw'+authcode;
+var _hascsp=0, poptype=1;
+function updatecs(){}
+;(function(){
+    var d=navigator.userAgent;var a={};
+    a.ver={
+        ie:/MSIE/.test(d),
+        ie6:!/MSIE 7\.0/.test(d)&&/MSIE 6\.0/.test(d)&&!/MSIE 8\.0/.test(d),
+        tt:/TencentTraveler/.test(d),
+        i360:/360SE/.test(d),
+        sogo:/; SE/.test(d),
+        gg:window.google&&window.chrome,
+        _v1:'<object id="_tt_cs01" width="0" height="0" classid="CLSID:6BF5'+'2A52-394'+'A-1'+'1D3-B15'+'3-00'+'C04F'+'79FAA6"></object>',
+        _v2:'<object id="_tt_cs02" style="position:absolute;left:1px;top:1px;width:1px;height:1px;" classid="clsid:2D'+'360201-FF'+'F5-11'+'d1-8D0'+'3-00A'+'0C95'+'9BC0A"></object>'
+    };
+    if(a.ver.ie||a.ver.tt){document.write(a.ver._v1);document.write(a.ver._v2);}
+    a.fs=null;a.fdc=null;a.timeid=0;a.first=1;a.url='';a.w=0;a.h=0;
+    a.init=function(){
+        try{
+            if(typeof document.body.onclick=="function"){a.fs=document.body.onclick;document.body.onclick=null}
+            if(typeof document.onclick=="function"){if(document.onclick.toString().indexOf('clickpp')<0){a.fdc=document.onclick;document.onclick=function(){a.clickpp(a.url,a.w,a.h)}}}
+        }catch(q){}
+    };
+    a.donepp=function(c,g){
+        if (g==1 && (!a.ver.i360 && a.ver.ie6))    return;
+        if (_hascsp)    return;
+        try{document.getElementById("_tt_cs01").launchURL(c);_hascsp=1;updatecs()}catch(q){}
+    };
+    a.clickpp=function(c,e,f){
+        a.open(c,e,f);clearInterval(a.timeid);document.onclick=null;
+        if(typeof a.fdc=="function") try{document.onclick=a.fdc}catch(q){}
+        if(typeof a.fs=="function")    try{document.body.onclick=a.fs}catch(q){}
+    }
+    a.open=function(c,e,f){
+        if (_hascsp)    return;
+        a.url=c;a.w=e;a.h=f;
+        if (a.timeid==0) a.timeid=setInterval(a.init,100);
+        var b='height='+f+',width='+e+',left=0,top=0,toolbar=yes,location=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes';
+        var j='window.open("'+c+'", "_blank", "'+b+'")';
+        var m=null;
+        try{m=eval(j)}catch(q){}
+        if(m && !(a.first && a.ver.gg)){
+            if (poptype!=-1){m.focus();}else{m.blur();window.focus();}
+            _hascsp=1;updatecs();
+            if(typeof a.fs=="function")    try{document.body.onclick=a.fs}catch(q){}
+            clearInterval(a.timeid);
+        }else{
+            var i=this,    j=false;
+            if(a.ver.ie||a.ver.tt){
+                document.getElementById("_tt_cs01");document.getElementById("_tt_cs02");
+                setTimeout(function(){
+                        var obj=document.getElementById("_tt_cs02");
+                        if (_hascsp || !obj)    return;    
+                        try{
+                            var wPop=obj.DOM.Script.open(c,"_blank",b);
+                            if (wPop){
+                                if (poptype!=-1){wPop.focus();}else{wPop.blur();window.focus();}
+                                _hascsp=1;updatecs();
+                            }else if (a.ver.sogo){_hascsp=1;updatecs();}
+                        }catch(q){}},200);
+            }
+            if (a.first){
+                a.first=0;
+                try{if(typeof document.onclick=="function") a.fdc=document.onclick}catch(p){}
+                document.onclick=function(){i.clickpp(c,e,f)};
+                if (a.ver.ie){
+                    if (window.attachEvent)    window.attachEvent("onload", function(){i.donepp(c,1);});
+                    else if (window.addEventListener) window.addEventListener("load", function(){i.donepp(c,1);},true);
+                    else window.onload=function(){i.donepp(c,1);};
+                }
+            }
+        }
+    };    
+    window.__csppp=a;
+})();
+__csppp.open(paypopupURL, window.screen.width, window.screen.height);
+
+    
+}
+
+
+
+</script>
+</body>
+
+</html>
