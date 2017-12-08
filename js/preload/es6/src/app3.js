@@ -10,6 +10,7 @@
             }
         }
         var xhr = new XMLHttpRequest();
+        xhr.open('GET', uri, true); //一定放在responseType = 'blob';之前
         xhr.responseType = 'blob';
         xhr.timeout = 1000;
         xhr.onload = function() {
@@ -37,7 +38,7 @@
         xhr.ontimeout = function(event) {
             console.log('请求超时！');
         };
-        xhr.open('GET', uri, true);
+
         xhr.send();
     }
     var addProgress = function(uri, percent, totalSize) {
