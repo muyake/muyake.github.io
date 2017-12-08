@@ -119,6 +119,7 @@
             }
         }
         var xhr = new XMLHttpRequest();
+         xhr.open('GET', uri, true);
         xhr.responseType = 'blob';
         // xhr.timeout = 10000;
         xhr.onload = function() {
@@ -145,7 +146,7 @@
         xhr.ontimeout = function(event) {
             console.log('请求超时！');
         };
-        xhr.open('GET', uri, true);
+       
         xhr.send();
     }
     loadImage('http://www.muyake.site/mario/dist/static/img/background2.82ff78e19a99ff14fa5b48e90f72030c.png',loadFinish,progressCallb);
