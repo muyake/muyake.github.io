@@ -34,6 +34,8 @@
 + [圆形进度条svg](https://muyake.github.io/css/circle/svg.htm)
 + [九宫格自适应css+js](https://muyake.github.io/css/jiugongge/test1.htm)
 + [九宫格自适应css纯](https://muyake.github.io/css/jiugongge/test2.htm)
++ [锤子科技鼠标3d效果展示](https://muyake.github.io/css/csssimple/html5.htm)
++ [人人直播3d旋转效果展示](https://muyake.github.io/css/csssimple/html6.htm)
 ### 3.svg特效
 + [svg动态字体](https://muyake.github.io/svg/font/2.html)
 ### 4.活动（手机）

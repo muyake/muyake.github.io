@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <style>
+    body,html{
+        margin:0;
+        padding: 0;
+    }
+        .divcontent{
+            width: 500px;
+            height: 500px;
+            perspective: 1200px;
+            position: relative;
+        }
+        .divcontent div{
+             width: 500px;
+            height: 500px;
+            font-size: 40px;
+            text-align: center;
+            color:white;
+            line-height: 500px;
+            position: absolute;
+        }
+        .div1{
+            background: url('./image/10.jpg');
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="divcontent">
+        <div class="div1">
+
+        </div>
+        <div class="div2">
+            锤子科技
+        </div>
+    </div>
+    <script>
+    document.querySelector('.div2').addEventListener('mousemove', function(ev) {
+        var x = ev.x || ev.pageX;
+        var y = ev.y || ev.pageY;
+        x = x - 250;
+        y = y - 250;
+        var rotateX=-y*4/250;
+        var rotateY=x*4/250;
+
+        var traslateX=-x*5/250+'px';
+        var traslateY=-y*5/250+'px';
+
+        document.querySelector('.div2').style = 'transition: transform 0s; transform: translate('+traslateX+','+traslateY+');'
+        document.querySelector('.div1').style = 'transition: transform 0s; transform: rotateX('+rotateX+'deg) rotateY('+rotateY+'deg);'
+    }, true);
+     document.querySelector('.div2').addEventListener('mouseout', function(ev) {
+       var traslateX='0px';
+        var traslateY='0px';
+
+        document.querySelector('.div2').style = 'transition: transform 1s; transform: translate('+traslateX+','+traslateY+');'
+        document.querySelector('.div1').style = 'transition: transform 1s; transform: rotateX('+0+'deg) rotateY('+0+'deg);'
+    }, true)
+    </script>
+</body>
+
+</html>
