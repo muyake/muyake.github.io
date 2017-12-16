@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        border: 1px solid salmon;
+        vertical-align: middle;
+        box-sizing: border-box;
+    }
+
+    li img {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    #oul {
+        width: 800px;
+        border: 1px solid green;
+        cursor: pointer;
+        background: yellow;
+    }
+
+    .container {
+        border: 4px solid blue;
+        width: 500px;
+        margin: 100px;
+        overflow: hidden;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul id="oul" data-translateX="0">
+        </ul>
+    </div>
+</body>
+<script src="loadimg.js"></script>
+<script>
+//解决嵌套DIV多次触发mouseout的问题
+(function(w) {
+    var dqMouse = function(obj) {
+        // 函数体
+        return new dqMouse.fn.init(obj);
+    }
+    dqMouse.fn = dqMouse.prototype = {
+        // 扩展原型对象
+        obj: null,
+        dqMouse: "1.0.0",
+        init: function(obj) {
+            this.obj = obj;
+            return this;
+        },
+        contains: function(a, b) {
+            return a.contains ? a != b && a.contains(b) : !!(a.compareDocumentPosition(b) & 16);
+        },
+        getRelated: function(e) {
+            var related;
+            var type = e.type.toLowerCase(); //这里获取事件名字
+            if (type == 'mouseover') {
+                related = e.relatedTarget || e.fromElement
+            } else if (type = 'mouseout') {
+                related = e.relatedTarget || e.toElement
+            }
+            return related;
+        },
+        over: function(fn) {
+            var obj = this.obj;
+            var _self = this;
+            obj.onmouseover = function(e) {
+                var related = _self.getRelated(e);
+                if (this != related && !_self.contains(this, related)) {
+                    fn(e);
+                }
+            }
+            return _self;
+        },
+        out: function(fn) {
+            var obj = this.obj;
+            var _self = this;
+            obj.onmouseout = function(e) {
+                var related = _self.getRelated(e);
+                if (obj != related && !_self.contains(obj, related)) {
+                    fn(e);
+                }
+            }
+            return _self;
+        }
+    }
+    dqMouse.fn.init.prototype = dqMouse.fn;
+    window.dqMouse = window.$$ = dqMouse;
+})(window);
+var stopDefaultEvent = function(evt) {
+    if (evt && evt.preventDefault)
+        //阻止默认浏览器动作(W3C) 
+        evt.preventDefault();
+    else
+        //IE中阻止函数器默认动作的方式 
+        window.event.returnValue = false;
+}
+
+var dragNav = {
+    setTransform: function(element, value, key) {
+        key = key || "Transform";
+        try {
+            ["moz", "o", "ms", "webkit", ""].forEach(function(prefix) {
+                // console.log(prefix + key);
+                element.style[prefix + key] = value;
+            });
+
+        } catch (e) {
+            console.log(e);
+        }
+        return element;
+    },
+    stopDefaultEvent: function(evt) {
+        if (evt && evt.preventDefault)
+            //阻止默认浏览器动作(W3C) 
+            evt.preventDefault();
+        else
+            //IE中阻止函数器默认动作的方式 
+            window.event.returnValue = false;
+    },
+    bindEvent: function() {
+        var _this = this;
+        var translateX = 0;
+        var selectorWidth = 0;
+        var parentWidth = 0;
+        this.selector.addEventListener('mousedown', function(evt) {
+            _this.stopDefaultEvent(evt);
+            _this.flag = true;
+            _this.startX = evt.clientX;
+            translateX = parseInt(_this.selector.getAttribute("data-translateX"));
+
+            selectorWidth = parseInt(window.getComputedStyle(_this.selector, null).width);
+            parentWidth = parseInt(window.getComputedStyle(_this.selector.parentNode, null).width);
+            console.log(selectorWidth, parentWidth);
+        });
+        this.selector.addEventListener('mousemove', function(evt) {
+            _this.stopDefaultEvent(evt);
+
+            if (_this.flag) {
+                var num = evt.clientX - _this.startX;
+                var transformNum = (translateX + num);
+                if (transformNum < 0 && transformNum > (parentWidth - selectorWidth)) {
+                    _this.setTransform(_this.selector, "translate3d(" + transformNum + "px, 0, 0)", "transform");
+                    _this.selector.setAttribute("data-translateX", transformNum);
+                } else {
+                    if (transformNum >= 0) {
+                        _this.selector.setAttribute("data-translateX", 0);
+                        _this.setTransform(_this.selector, "translate3d(" + 0 + "px, 0, 0)", "transform");
+                    } else if (transformNum <= (parentWidth - selectorWidth)) {
+                        _this.setTransform(_this.selector, "translate3d(" + (parentWidth - selectorWidth) + "px, 0, 0)", "transform");
+                        _this.selector.setAttribute("data-translateX", parentWidth - selectorWidth);
+                    }
+                }
+            }
+        });
+        this.selector.addEventListener('mouseup', function(evt) {
+            _this.stopDefaultEvent(evt);
+            _this.flag = false;
+        });
+        //mouseout会多次触发，所以对其进行了封装      
+        $$(this.selector).out(function(evt) {
+            _this.stopDefaultEvent(evt);
+            _this.flag = false;         
+        });
+    },
+    init: function() {
+        this.selector = document.querySelector('#oul');
+        this.flag = false;
+        this.translateX = 0;
+        this.bindEvent();
+    }
+}
+dragNav.init();
+</script>
+
+</html>

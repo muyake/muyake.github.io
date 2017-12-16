@@ -19,6 +19,7 @@
 ### 2.js特效
 + [字幕滚动](https://muyake.github.io/js/example1/index.html)（模拟每2s产生1-4条数据）
 + [图片加载且顺序呈现](https://muyake.github.io/js/imgload/test-load.html)（图片同时加载，但是顺序显示）
++ [鼠标拖动图片滚动](https://muyake.github.io/js/scroll/test-load.html)（利用translate来实现）
 + [节流](https://muyake.github.io/js/jieliu/test1.html)（每1.5s执行一次，结束后2s执行一次，不同的节流需求）
 + [瀑布流](https://muyake.github.io/web/pubuliu/a.html)（方g法2 [瀑布流](https://muyake.github.io/web/pubuliu/b.html)）
 ### 2.css特效
