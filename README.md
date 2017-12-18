@@ -38,8 +38,8 @@
 + [文字走光效果](https://muyake.github.io/css/iphonestart/index.html)
 + [图片翻折效果](https://muyake.github.io/css/fanzhuan/a.html)
 + [圆形进度条css](https://muyake.github.io/css/circle/css3.html)
-+ [圆形进度条svg](https://muyake.github.io/css/circle/svg.htm)
-+ [九宫格自适应css+js](https://muyake.github.io/css/jiugongge/test1.htm)
++ [圆形进度条svg](https://muyake.github.io/css/circle/svg.html)
++ [九宫格自适应css+js](https://muyake.github.io/css/jiugongge/test1.htm)（改变窗口大小，自适应）
 + [九宫格自适应css纯](https://muyake.github.io/css/jiugongge/test2.htm)
 + [锤子科技鼠标3d效果展示](https://muyake.github.io/css/csssimple/html5.htm)
 + [人人直播3d旋转效果展示](https://muyake.github.io/css/csssimple/html6.htm)
