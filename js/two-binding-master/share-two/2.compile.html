@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数据初始化绑定</title>
+</head>
+<body>
+	<p>通过documentFragment的处理，实现了数据的初始化绑定</p>
+	<div id="app">
+		<input type="text" id="a" z-model="myname">{{myname}}
+	</div>
+</body>
+<script>
+	// 处理被劫持的dom
+	function compile(node,zm) {
+		var reg = /\{\{(.*)\}\}/;
+		//节点类型为元素
+		if (node.nodeType === 1) {
+			var attr = node.attributes;
+			console.log("child-attr:",node,attr)
+			//解析属性
+			for (var i = 0; i < attr.length; i++) {
+				if (attr[i].nodeName == 'z-model') {
+					var name = attr[i].nodeValue;
+					node.value = zm.data[name];
+					node.removeAttribute('z-model');
+				}
+			};
+		}
+		// 节点类型为字符
+		if (node.nodeType === 3) {
+			if (reg.test(node.nodeValue)) {
+				var name = RegExp.$1;
+				console.log(name);
+				name = name.trim();
+				node.nodeValue = zm.data[name];
+			}
+		}
+	}
+
+	// 劫持欲处理的DOM
+	function nodeToFragment(node,zm) {
+		var flag = document.createDocumentFragment();
+		var child;
+		while(child = node.firstChild){
+			compile(child,zm);
+			console.log("child:",child,zm);
+			flag.appendChild(child);
+		}
+		return flag;
+	}
+
+	function Zue(options) {
+		this.data = options.data;
+		var id = options.el;
+		var dom = nodeToFragment(document.getElementById(id),this);
+		//处理完成后，将dom返回到app中
+		document.getElementById(id).appendChild(dom);
+	}
+
+	var zm = new Zue({
+		el:"app",
+		data:{
+			myname:"zhang"
+		}
+	})
+</script>
+</html>

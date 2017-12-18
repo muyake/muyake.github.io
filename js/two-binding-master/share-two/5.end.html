@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>最终实现</title>
+</head>
+
+<body>
+    <p>通过四个知识点的结合，实现了类vue效果的数据双向绑定</p>
+    <div id="app">
+        <input type="text" id="a" z-model="myname"> 
+        <span>我的名字是：{{myname}}</span>
+    </div>
+</body>
+<script src="z-model.js"></script>
+<script>
+var zm = new Zue({
+    el: "#app",
+    data: {
+        myname: "zhang"
+    }
+})
+</script>
+</html>

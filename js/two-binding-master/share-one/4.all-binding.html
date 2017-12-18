@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>双向绑定模拟</title>
+</head>
+<body>
+	<!-- 
+		1.通过 Object.defineProperty() 进行数据劫持，来实现监听数据变动的目的
+		2.通过composition事件 ，来解决中文输入时的问题
+		3.通过Object.keys()来遍历对象。Object.keys() 方法会返回一个表示给定对象的所有可枚举属性的字符串数组。。
+	 -->
+<input type="text" id="aa" data-key="age"/>
+<span id="bb"></span>
+</body>
+<script>
+	var node = document.getElementById('aa');
+	var otxt = document.getElementById("bb");
+	var cpLock=false;
+
+	var data = {name:"zhang",age:15};
+	// 监控data数据
+	observe(data);
+
+	node.addEventListener('compositionstart',function() {
+		cpLock = true;
+		console.log("=====触发compositionstart=====");
+	})
+
+	node.addEventListener('compositionend',function() {
+		cpLock = false;
+		console.log("=====触发compositionend======");
+		inputend(this);
+	})
+
+	node.addEventListener('input',function() {
+		console.log("====触发input====")
+		inputend(this);
+	})
+
+	function inputend(_this) {
+		var key = _this.dataset.key;
+		if (!cpLock) {
+			console.log(_this.value);
+			data[key] =  _this.value;
+		}
+	}
+
+
+	function observe(data) {
+		if (!data || typeof data !== 'object') {
+			return;
+		}
+		//遍历，取出所有属性
+		console.log(Object.keys(data))
+		Object.keys(data).forEach(function(key) {
+			defineReactive(data,key,data[key]);
+		})
+	}
+
+	function defineReactive(data,key,val) {
+		observe(val);//监听子属性
+		Object.defineProperty(data,key,{
+			enumberable:true,
+			configurable:false,
+			get:function () {
+				return val;
+			},
+			set:function(newVal) {
+				if(val === newVal) return;
+				console.log("已监听到值的变化",val,"---->",newVal);
+				val = newVal;
+				otxt.innerHTML = val;
+				node.value = val;
+			}
+		})
+	}
+</script>
+</html>

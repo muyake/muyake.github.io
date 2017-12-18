@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>composition</title>
+</head>
+<body>
+	<p>复合事件（composition event）是DOM3级事件中新添加的一类事件，用于处理IME的输入序列。IME（Input Method Editor，输入法编辑器）可以让用户输入在<strong style="color: red">物理键盘上找不到的字符 
+（例如中文）</strong>。复合事件就是针对检测和处理这种输入而设计的。 </p>
+<ul>
+	<li>compositionstart：在IME的文本复合系统打开时触发，表示要开始输入了.</li>
+	<li>compositionupdate：在向输入字段中插入新字符时触发.</li>
+	<li>compositionend：在IME的文本复合系统关闭时触发，表示返回正常键盘的输入状态.</li>
+</ul>
+ <pre style="display: inline-block;vertical-align: top;"><code class="javascript">
+ 	var obj = {};
+	var stxt = document.getElementById("aaa");	
+	var node = document.getElementById('person');
+	var cpLock = false;
+
+    Object.defineProperty(obj,'hello',{
+        set:function(val){
+        	this._hello = val;
+        	stxt.innerHTML = val;
+        },
+        get:function() {
+        	return this._hello
+        }
+    });
+
+	node.addEventListener('compositionstart',function() {
+		cpLock = true;
+		console.log("=====触发compositionstart=====")
+	})
+
+	node.addEventListener('compositionend',function() {
+		cpLock = false;
+		console.log("=====触发compositionend======");
+		inputend(this);
+	})
+
+	node.addEventListener('input',function() {
+		console.log("====触发input====")
+		inputend(this);
+	})
+
+	function inputend(_this) {
+		if (!cpLock) {
+			console.log(_this.value);
+			obj.hello =  _this.value;
+		}
+	}
+ </code>
+ 
+ </pre>
+
+<div style="display: inline-block;">
+	<input type="text" id="person">
+	<span id="aaa"></span>
+</div>
+
+</body>
+<link rel="stylesheet"
+      href="http://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/default.min.css">
+<script src="http://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+	var obj = {};
+
+	var stxt = document.getElementById("aaa");
+	
+	var node = document.getElementById('person');
+
+	var cpLock = false;
+
+    Object.defineProperty(obj,'hello',{
+        set:function(val){
+        	this._hello = val;
+        	stxt.innerHTML = val;
+        },
+        get:function() {
+        	return this._hello
+        }
+    });
+
+	node.addEventListener('compositionstart',function() {
+		cpLock = true;
+		console.log("=====触发compositionstart=====")
+	})
+
+	node.addEventListener('compositionend',function() {
+		cpLock = false;
+		console.log("=====触发compositionend======");
+		inputend(this);
+	})
+
+	node.addEventListener('input',function() {
+		console.log("====触发input====")
+		inputend(this);
+	})
+
+	function inputend(_this) {
+		if (!cpLock) {
+			console.log(_this.value);
+			obj.hello =  _this.value;
+		}
+	}
+</script>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简易的</title>
+    <link rel="stylesheet"
+      href="http://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/default.min.css">
+<script src="http://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<p>·通过 Object.defineProperty() 进行数据劫持，来实现监听数据变动的目的</p>
+<input type="text" id="aa"/>
+<span id="bb"></span>
+<pre><code class="javascript">
+    var obj = {};
+    var node = document.getElementById('aa');
+    var otxt = document.getElementById('bb');   
+    
+    Object.defineProperty(obj,'hello',{
+        set:function(val){
+            this._hello = val;
+            node.value = val;
+            otxt.innerHTML = val;
+
+        },
+        get:function() {
+            return this._hello
+        }
+    });
+
+    node.addEventListener("input",function() {
+        obj.hello = this.value;
+    })
+    
+</code></pre>
+<script>
+    var obj = {};
+    var node = document.getElementById('aa');
+
+    var otxt = document.getElementById('bb');   
+    
+    Object.defineProperty(obj,'hello',{
+        set:function(val){
+        	this._hello = val;
+            node.value = val;
+            otxt.innerHTML = val;
+
+        },
+        get:function() {
+        	return this._hello
+        }
+    });
+
+    node.addEventListener("input",function() {
+        obj.hello = this.value;
+    })
+    
+
+</script>
+</body>
+</html>
