@@ -1,21 +1,24 @@
 # 穆亚克的git空间
 作者：穆亚克
 
-欢迎来玩![image](https://muyake.github.io/canvas/games/mario/images/ico/favicon.ico) [超级玛丽](https://muyake.github.io/mario/dist/index.html)
+欢迎来玩!
+[image](https://muyake.github.io/mario/dist/favicon.ico) [超级玛丽](https://muyake.github.io/mario/dist/index.html)
+[image](http://www.muyake.site/flappybird/dist/flappybird.ico) [flappy bird](http://www.muyake.site/flappybird/dist/index.html)
 ## 成功目录
 ### 1.canvas
 + 动画
     + [晚安宝宝](https://muyake.github.io/canvas/animation/baobao/index.html)(手机版)
     + [表白星球](https://muyake.github.io/canvas/animation/biaobai/1.html)(手机版)
     + [晚安星球](https://muyake.github.io/canvas/animation/nightstar/html/index.html)(手机版)
-    + [银河系](https://muyake.github.io/canvas/animation/moonandsun/f.html)(手机版)
+    + [银河系](https://muyake.github.io/canvas/animation/moonandsun/f.html)(电脑版，参考)
     + [动画曲线图](https://muyake.github.io/canvas/animation/quxiantu/example.html)(电脑版)
     + [抽奖转盘](https://muyake.github.io/canvas/animation/zhuanpan/lottery.html)(电脑版)
      + [刮刮乐](https://muyake.github.io/canvas/games/draw/shoushi.html)(手机版)
 + 游戏
     * [小人跑动](https://muyake.github.io/canvas/games/game1/game.html)(电脑版)（背景横向移动，体现远近距离视差，左右键控制角色的走动,空格键为跳跃）
     * [放地雷](https://muyake.github.io/canvas/games/html/game7.html)(电脑版)（鼠标点击，产生一个💣，带重力加速度，引信点完，产生爆炸效果）
-    * [超级玛丽](https://muyake.github.io/mario/dist/index.html)。
+    * [超级玛丽](https://muyake.github.io/mario/dist/index.html)
+    * [flappy bird](http://www.muyake.site/flappybird/dist/index.html)(手机版)
 ### 2.js特效
 + [字幕滚动](https://muyake.github.io/js/example1/index.html)（模拟每2s产生1-4条数据）
 + [图片加载且顺序呈现](https://muyake.github.io/js/imgload/test-load.html)（图片同时加载，但是顺序显示）
