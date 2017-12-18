@@ -40,11 +40,11 @@
 + [圆形进度条css](https://muyake.github.io/css/circle/css3.html)
 + [圆形进度条svg](https://muyake.github.io/css/circle/svg.html)
 + [九宫格自适应css+js](https://muyake.github.io/css/jiugongge/test1.htm)（改变窗口大小，自适应）
-+ [九宫格自适应css纯](https://muyake.github.io/css/jiugongge/test2.htm)
++ [九宫格自适应css纯](https://muyake.github.io/css/jiugongge/test2.html)(padding-top相对应父元素宽度)
 + [锤子科技鼠标3d效果展示](https://muyake.github.io/css/csssimple/html5.htm)
 + [人人直播3d旋转效果展示](https://muyake.github.io/css/csssimple/html6.htm)
 ### 3.svg特效
-+ [svg动态字体](https://muyake.github.io/svg/font/2.html)
++ [svg动态字体](https://muyake.github.io/svg/font/2.html)（手机版，自适应文字大小）
 ### 4.活动（手机）
 + [618银河聚会](https://muyake.github.io/pages/618/main.html)（[3d小盒子](https://muyake.github.io/pages/618/box.html)-  [获奖记录](https://muyake.github.io/pages/618/Record.html)）
 + [冰龙特效](https://muyake.github.io/pages/IceDragon/IceDragon.html)（冰龙是gif动画）
