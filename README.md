@@ -41,6 +41,7 @@
 + [圆形进度条svg](https://muyake.github.io/css/circle/svg.html)
 + [九宫格自适应css+js](https://muyake.github.io/css/jiugongge/test1.html)（改变窗口大小，自适应）
 + [九宫格自适应css纯](https://muyake.github.io/css/jiugongge/test2.html)(padding-top相对应父元素宽度)
++ [手机端显示小于12px的文字](https://muyake.github.io/css/smallicon/test.html)（改变窗口大小，自适应）
 + [锤子科技鼠标3d效果展示](https://muyake.github.io/css/csssimple/html5.html)
 + [人人直播3d旋转效果展示](https://muyake.github.io/css/csssimple/html6.html)
 ### 3.svg特效
@@ -52,7 +53,7 @@
 ### 5.小效果
 + [武侠小说](https://muyake.github.io/widget/xuanzhuanwuxia2.html)（css3 3d旋转和js控制）
 + [言情小说](https://muyake.github.io/widget/环形轮播/2.html)（[jquery插件版](https://muyake.github.io/widget/环形轮播/jquey版/carousel_demo.html)）
-+  [导航栏](https://muyake.github.io/widget/widget/nav.html)
++  [导航栏](https://muyake.github.io/widget/nav.html)
 + [人人翻转](https://muyake.github.io/widget/renrenfanzhuan/fanzhuan.html)
 + [价格输入或长按增长](https://muyake.github.io/js/Thanksgiving/index.html)（手机版）
 ## 知识点目录
