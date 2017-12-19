@@ -24,7 +24,7 @@
 + [图片加载且顺序呈现](https://muyake.github.io/js/imgload/test-load.html)（图片同时加载，但是顺序显示）
 + [鼠标拖动图片滚动](https://muyake.github.io/js/scroll/test-load.html)（利用translate来实现）
 + [js复制粘贴功能](https://muyake.github.io/js/copy/index.html)
-+ [模拟vue双向绑定](https://muyake.github.io/js/two-binding-master/v-model.html)
++ [模拟vue双向绑定](https://muyake.github.io/js/simple5/composition.html)
 + [节流](https://muyake.github.io/js/jieliu/test1.html)（每1.5s执行一次，结束后2s执行一次，不同的节流需求）
 + [瀑布流](https://muyake.github.io/web/pubuliu/a.html)（方法2 [瀑布流](https://muyake.github.io/web/pubuliu/b.html)）
 ### 2.css特效
