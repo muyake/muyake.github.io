@@ -67,5 +67,9 @@
     + [图片预加载(原生)](https://muyake.github.io/js/preload/native.html)
     + [图片预加载(jquery deferred)](https://muyake.github.io/js/preload/native.html)
     + [图片预加载(promise)](https://muyake.github.io/js/preload/es6/index.html)
+    + [强制手机设置成横屏状态](https://muyake.github.io/pages/scrollscreen/test5.html)
+    + [倒计时](https://muyake.github.io/js/countdown/test.html)
 ## 个人博客
-    + [地址](http://www.muyake.site/blog/)
+    [个人博客](http://www.muyake.site/blog/)   
+## 开源代码
+    [物理管理系统](http://wl.woshuone.com/login)
