@@ -64,5 +64,8 @@
     + [contenteditable](https://muyake.github.io/css/contenteditable/contenteditable.html)（div模拟input，包括富文本编辑器）
 
 + js
+    + [图片预加载(原生)](https://muyake.github.io/js/preload/native.html)
+    + [图片预加载(jquery deferred)](https://muyake.github.io/js/preload/native.html)
+    + [图片预加载(promise)](https://muyake.github.io/js/preload/es6/index.html)
 ## 个人博客
     + [地址](http://www.muyake.site/blog/)
