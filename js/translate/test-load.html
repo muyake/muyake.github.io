@@ -17,7 +17,7 @@
         display: inline-block;
         width: 100px;
         height: 100px;
-        border: 1px solid salmon;
+        border: 10px solid transparent;
         vertical-align: middle;
         box-sizing: border-box;
     }
@@ -30,9 +30,10 @@
 
     #oul {
         width: 1100px;
-        border: 1px solid green;
+        border: 10px solid green;
         cursor: pointer;
-        background: yellow;        
+        background: yellow; 
+        position: relative;       
     }
 
 .transitionP {
@@ -43,12 +44,18 @@
 
     .container {
         border: 4px solid blue;
-        width: 500px;
+      /*  width: 500px;*/
         margin: 100px;
         overflow: hidden;
     }
     .current{
-        border:3px solid green;
+        /*border:3px solid green;*/
+    }
+    .border{
+        position: absolute;
+        border:10px solid red;
+        left:0px;
+        top:0px;
     }
     </style>
 </head>
@@ -164,11 +171,21 @@ var dragNav = {
             //IE中阻止函数器默认动作的方式 
             window.event.returnValue = false;
     },
+    setBorderP:function(index){
+    },
     bindEvent: function() {
         var _this = this;
         var translateX = 0;
         var selectorWidth = 0;
         var parentWidth = 0;
+        this.selector.addEventListener('click',function(e){
+           var target=e.target;
+           var width=  target.clientWidth; 
+           var borderWidth=window.getComputedStyle(target,null).borderWidth;
+           console.log(borderWidth);          
+           var index=target.getAttribute("data-index");  
+
+        });
         this.selector.addEventListener('mousedown', function(evt) {
             _this.stopDefaultEvent(evt);
             _this.flag = true;

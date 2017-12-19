@@ -2,8 +2,8 @@
 作者：穆亚克
 
 欢迎来玩!
-[image](https://muyake.github.io/mario/dist/favicon.ico) [超级玛丽](https://muyake.github.io/mario/dist/index.html)
-[image](http://www.muyake.site/flappybird/dist/flappybird.ico) [flappy bird](http://www.muyake.site/flappybird/dist/index.html)
+![image](https://muyake.github.io/mario/dist/favicon.ico) [超级玛丽](https://muyake.github.io/mario/dist/index.html)
+![image](http://www.muyake.site/flappybird/dist/flappybird.ico) [flappy bird](http://www.muyake.site/flappybird/dist/index.html)
 ## 成功目录
 ### 1.canvas
 + 动画
@@ -39,17 +39,17 @@
 + [图片翻折效果](https://muyake.github.io/css/fanzhuan/a.html)
 + [圆形进度条css](https://muyake.github.io/css/circle/css3.html)
 + [圆形进度条svg](https://muyake.github.io/css/circle/svg.html)
-+ [九宫格自适应css+js](https://muyake.github.io/css/jiugongge/test1.htm)（改变窗口大小，自适应）
++ [九宫格自适应css+js](https://muyake.github.io/css/jiugongge/test1.html)（改变窗口大小，自适应）
 + [九宫格自适应css纯](https://muyake.github.io/css/jiugongge/test2.html)(padding-top相对应父元素宽度)
-+ [锤子科技鼠标3d效果展示](https://muyake.github.io/css/csssimple/html5.htm)
-+ [人人直播3d旋转效果展示](https://muyake.github.io/css/csssimple/html6.htm)
++ [锤子科技鼠标3d效果展示](https://muyake.github.io/css/csssimple/html5.html)
++ [人人直播3d旋转效果展示](https://muyake.github.io/css/csssimple/html6.html)
 ### 3.svg特效
 + [svg动态字体](https://muyake.github.io/svg/font/2.html)（手机版，自适应文字大小）
 ### 4.活动（手机）
 + [618银河聚会](https://muyake.github.io/pages/618/main.html)（[3d小盒子](https://muyake.github.io/pages/618/box.html)-  [获奖记录](https://muyake.github.io/pages/618/Record.html)）
 + [冰龙特效](https://muyake.github.io/pages/IceDragon/IceDragon.html)（冰龙是gif动画）
 + [抽奖大转盘](https://muyake.github.io/pages/Luckdraw/index.html)
-### 4.小效果
+### 5.小效果
 + [武侠小说](https://muyake.github.io/widget/xuanzhuanwuxia2.html)（css3 3d旋转和js控制）
 + [言情小说](https://muyake.github.io/widget/环形轮播/2.html)（[jquery插件版](https://muyake.github.io/widget/环形轮播/jquey版/carousel_demo.html)）
 +  [导航栏](https://muyake.github.io/widget/widget/nav.html)
@@ -59,7 +59,7 @@
 + css
     + [媒体查询](https://muyake.github.io/web/media/index.html)
     + [background](https://muyake.github.io/css/background/background.html)
-    + [counter-reset](https://muyake.github.io/js/rank/index.htm)（counter-reset用法及排行榜插入效率最高方法）
+    + [counter-reset](https://muyake.github.io/js/rank/index.html)（counter-reset用法及排行榜插入效率最高方法）
     + [contenteditable](https://muyake.github.io/css/contenteditable/contenteditable.html)（div模拟input，包括富文本编辑器）
 
 + js
