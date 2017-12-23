@@ -1,0 +1,34 @@
+
+.nav-top{
+	width: 100%;
+}
+.nav-top{
+	height: 1.0rem;
+	border-bottom:1px solid #dfe0e5;
+	font-size: 0;
+}
+.nav-top .nav-l,.nav-top .nav-r{
+	display: inline-block;
+	height: 100%;
+	vertical-align: top;
+}
+.nav-top .nav-l{
+	width: 73.2%;
+	background-color: red;
+}
+.nav-top .nav-r{
+	width: 26.8%;
+	background-color: green;
+	text-align: center;
+	line-height: 1rem;
+}
+.nav-top .nav-r .load-btn{
+	width: 1rem;
+	height: 0.5rem;
+	outline: none;
+	border: none;
+	color: #fff;
+	border: 0.5rem;
+	font-size: 0.2rem;
+	background-color: #3b9df1;
+}

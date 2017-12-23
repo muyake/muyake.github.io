@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .contain {
+        width: 300px;
+        height: 200px;
+        border: 1px solid red;
+        margin: 0 auto;
+        margin-top: 300px;
+        position: relative;
+    }
+
+    .contain ul {
+        cursor: pointer;
+    }
+
+    .contain ul,
+    .contain li {
+        width: 100%;
+        height: 100%;
+        /*border: 1px solid green;*/
+        list-style: none;
+    }
+
+    .contain li {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: no-repeat center/cover;
+    }
+
+    li img {
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    .mainImg {
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    .transitionP {
+        -webkit-transition: transform 0.3s, opacity 0.3s;
+        -o-transition: transform 0.3s, opacity 0.3s;
+        transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .otherImg {
+        /*-webkit-transform: translate3d(100%, 0, 0);
+        -ms-transform: translate3d(100%, 0, 0);
+        -o-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);*/
+    }
+
+    li.leftLi {
+        opacity: 0.5;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        -ms-transform: translate3d(-100%, 0, 0);
+        -o-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    li.middleLi {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    li.rightLi {
+        opacity: 0.5;
+        -webkit-transform: translate3d(100%, 0, 0);
+        -ms-transform: translate3d(100%, 0, 0);
+        -o-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="contain">
+        <ul>
+            <img src="http://upload-images.jianshu.io/upload_images/9472808-64165b9c86278f7d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="">
+        </ul>
+    </div>
+    <script>
+    var mainArr = ['http://upload-images.jianshu.io/upload_images/9472808-64165b9c86278f7d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700',
+        'http://upload-images.jianshu.io/upload_images/3812307-d1849b94d6ce0ae3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700',
+        'http://upload-images.jianshu.io/upload_images/3888445-b19e5de2f6e8ad3b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700',
+        'http://upload-images.jianshu.io/upload_images/3888445-cb101354c9f627bf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700'
+    ];
+    var str = '';
+    // mainArr.forEach(function (item) {
+    str = '<li class="mainImg middleLi"><img src="' + mainArr[0] + '" alt=""></li><li class="otherImg rightLi"><img src="' + mainArr[1] + '" alt=""></li>';
+    // });
+    document.querySelector('.contain ul').innerHTML = str;
+
+
+    var lib = {
+        hasClass: function(elements, cName) {
+            return !!elements.className.match(new RegExp("(\\s|^)" + cName + "(\\s|$)"));
+        },
+        addClass: function(elements, cName) {
+            if (!this.hasClass(elements, cName)) {
+                elements.className += " " + cName;
+            };
+        },
+        removeClass: function(elements, cName) {
+            if (this.hasClass(elements, cName)) {
+                elements.className = elements.className.replace(new RegExp("(\\s|^)" + cName + "(\\s|$)"), " ");
+            };
+        }
+    }
+
+    function Drag(selector) {
+        this.disX = 0;
+        this.startX = 0;
+        var _this = this;
+        this.flag = false;
+        this.screenWidht = 0;
+        this.selector = selector;
+        selector.addEventListener('mousedown', function(evt) {
+            _this.stopDefaultEvent(evt);
+            _this.flag = true;
+            _this.screenWidht = parseInt(window.getComputedStyle(selector).width);
+            _this.mainImg = _this.selector.querySelector('.mainImg');
+            _this.otherImg = _this.selector.querySelector('.otherImg');
+            _this.getStartX(evt);
+        });
+        selector.addEventListener('mousemove', function(evt) {
+            _this.stopDefaultEvent(evt);
+
+            if (_this.flag) {
+                _this.setPosition(evt);
+            }
+        });
+        selector.addEventListener('mouseup', function(evt) {
+            _this.stopDefaultEvent(evt);
+            if (_this.flag) {
+                _this.initStart(evt);
+            }
+        });
+
+        selector.addEventListener('mouseout', function(evt) {
+        	 _this.stopDefaultEvent(evt);
+            if (_this.flag) {
+                var x = event.clientX;
+                var y = event.clientY;
+                var divx1 = this.offsetLeft;
+                var divy1 = this.offsetTop;
+                var divx2 = this.offsetLeft + this.offsetWidth;
+                var divy2 = this.offsetTop + this.offsetHeight;
+                if (x < divx1 || x > divx2 || y < divy1 || y > divy2) {
+                    _this.initStart(evt);
+                }
+            }
+
+        });
+
+    }
+    Drag.prototype.stopDefaultEvent = function(evt) {
+        if (evt && evt.preventDefault)
+            //阻止默认浏览器动作(W3C) 
+            evt.preventDefault();
+        else
+            //IE中阻止函数器默认动作的方式 
+            window.event.returnValue = false;
+    }
+    Drag.prototype.setTransform = function(element, value, key) {
+        key = key || "Transform";
+        try {
+            ["moz", "o", "ms", "webkit", ""].forEach(function(prefix) {
+                // console.log(prefix + key);
+                element.style[prefix + key] = value;
+            });
+
+        } catch (e) {
+            console.log(e);
+        }
+
+        return element;
+    }
+    Drag.prototype.getStartX = function(evt) {
+        this.startX = evt.clientX;
+    }
+    Drag.prototype.setPosition = function(evt) {
+        var num = evt.clientX - this.startX;
+        var abs = Math.abs(num);
+        if (abs > this.screenWidht / 2) {
+            lib.addClass(this.mainImg, 'transitionP');
+            lib.addClass(this.otherImg, 'transitionP');
+            if (num > 0) {
+                this.finishT("right");
+            } else {
+                this.finishT("left");
+            }
+        } else {
+            lib.removeClass(this.mainImg, 'transitionP');
+            lib.removeClass(this.otherImg, 'transitionP');
+            this.setTransform(this.mainImg, "translate3d(" + num + "px, 0, 0)", "transform");
+            if (lib.hasClass(this.otherImg, 'rightLi')) {
+                this.setTransform(this.otherImg, "translate3d(" + (this.screenWidht + num) + "px, 0, 0)", "transform");
+            } else {
+                this.setTransform(this.otherImg, "translate3d(-" + (this.screenWidht - num) + "px, 0, 0)", "transform");
+            }
+
+        }
+    }
+    Drag.prototype.finishT = function(status) {
+        this.setTransform(this.mainImg, "", "transform");
+        this.setTransform(this.otherImg, "", "transform");
+        if (status == 'left') {
+            lib.removeClass(this.mainImg, 'mainImg');
+            lib.removeClass(this.mainImg, 'middleLi');
+            lib.addClass(this.mainImg, 'leftLi');
+            lib.addClass(this.mainImg, 'otherImg');
+            lib.removeClass(this.otherImg, 'otherImg');
+            lib.removeClass(this.otherImg, 'rightLi');
+            lib.addClass(this.otherImg, 'middleLi');
+            lib.addClass(this.otherImg, 'mainImg');
+        } else {
+            lib.removeClass(this.mainImg, 'mainImg');
+            lib.removeClass(this.mainImg, 'middleLi');
+            lib.addClass(this.mainImg, 'rightLi');
+            lib.addClass(this.mainImg, 'otherImg');
+            lib.removeClass(this.otherImg, 'otherImg');
+            lib.removeClass(this.otherImg, 'leftLi');
+            lib.addClass(this.otherImg, 'middleLi');
+            lib.addClass(this.otherImg, 'mainImg');
+        }
+        this.flag = false;
+    };
+    Drag.prototype.initStart = function(evt) {
+        this.flag = false;
+        this.startX = 0;
+        lib.addClass(this.mainImg, 'transitionP');
+        lib.addClass(this.otherImg, 'transitionP');
+        this.setTransform(this.mainImg, "", "transform");
+        this.setTransform(this.otherImg, "", "transform");
+    }
+    window.onload = function() {
+        new Drag(document.querySelector('.contain ul'));
+    }
+    </script>
+    }
+</body>
+
+</html>

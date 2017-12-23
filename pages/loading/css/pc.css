@@ -1,0 +1,857 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    background: #fafafa;
+    font-family: SF UI Text, Helvetica, Arial, sans-serif !important;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+li,
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none
+}
+
+.loadapp {
+    cursor: pointer;
+}
+
+.popup {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Chrome/Safari/Opera */
+    -khtml-user-select: none;
+    /* Konqueror */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+not supported by any browser */
+}
+
+.nav {
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #c6c8d1;
+    background: #fefefe;
+    overflow: hidden;
+}
+
+.nav-b {
+    margin: 0 auto;
+    margin-top: 10px;
+    font-size: 18px;
+    max-width: 1000px;
+    min-width: 375px;
+    line-height: 1em;
+}
+
+.nav-b:after {
+    content: '\0020';
+    display: block;
+    clear: both;
+    height: 0;
+}
+
+.nav-l {
+    float: left;
+    margin-left: 32px;
+}
+
+.sub-title {
+    margin-top: 3px;
+    color: #202437;
+    font-size: 14px;
+}
+
+.nav-r {
+    float: right;
+    margin-top: 5px;
+    margin-right: 32px;
+}
+
+.getLink {
+    width: 60px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    background-color: rgb(59, 157, 241);
+    border-radius: 60px;
+}
+
+
+/*-------------------主体内容--------------------*/
+
+.main {
+    margin: 0 auto;
+    margin-top: 30px;
+    max-width: 1000px;
+    min-width: 375px;
+    background-color: #fff;
+    border: 1px solid rgb(235, 236, 241);
+    font-size: 0px;
+    overflow: hidden;
+    position: relative;
+    /*window的100%减去main的margin-top减去head的height减去三个1px的border（head的border-bottom,main的top及bottom）*/
+    /*min-height: calc(100% - 30px - 64px);*/
+}
+
+
+/*.main::after {
+    content: '\0020';
+    display: block;
+    clear: both;
+    height: 0;
+}
+*/
+
+.article-b {
+    width: 60%;
+    height: 100%;
+    border-right: 1px solid rgb(235, 236, 241);
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    /*background: red;*/
+    /*为了实现两边div等高*/
+    margin-bottom: -100000px;
+    /*数值随便设置,越大越好,也就是(-padding-bottom值)*/
+    padding-bottom: 100000px;
+    /*数值随便设置,越大越好*/
+}
+
+.article-b .my-comment,
+.article-b .others-comment {
+    /* border-bottom: 1px solid rgb(235, 236, 241);*/
+    padding: 20px;
+}
+.article-b .others-comment {
+padding-bottom: 78px;
+}
+.article-b .others-comment {
+    border-top: 1px solid rgb(235, 236, 241);
+}
+
+.article-b li:last-child {
+    border-bottom: none;
+}
+
+.article-h {
+    display: inline-block;
+    height: 50px;
+    width: 80%;
+    font-size: 0px;
+}
+
+.head {
+    float: left;
+    border-radius: 40px;
+    width: 40px;
+    height: 40px;
+    background: gray url(http://hdn.xnimg.cn/photos/hdn421/20171109/1035/h_tiny_GxZe_a69d00070419195a.jpg) no-repeat center/cover;
+}
+
+.article-b .headinfo-b {
+    margin-left: 50px;
+}
+
+.others-comment .headinfo-b {
+    margin-left: 34px;
+}
+
+.comment-b .headinfo-b {
+    display: inline-block;
+    margin-left: 10px;
+    /*min-width: 250px;*/
+}
+
+.headinfo-b .username {
+    color: rgb(32, 36, 55);
+    font-size: 16px;
+    line-height: 20px;
+    /*display: inline-block;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+        font-weight: bold;
+}
+
+.headinfo-b .location {
+    color: rgb(121, 126, 139);
+    font-size: 12px;
+    line-height: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.comment-b .article-h {
+    width: 100%;
+}
+
+.comment-b .headinfo-b {
+    display: block;
+}
+
+.comment-b .headinfo-b {
+    margin-left: 50px;
+}
+
+.article-h .head {
+    float: left;
+}
+
+.headinfo-b .time {
+    color: rgb(121, 126, 139);
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.share-i {
+    width: 16px;
+    height: 16px;
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/real-estate/img/listMore-3x.png) no-repeat center/cover;
+    float: right;
+    margin-top: 10px;
+}
+
+.article-txt {
+    width: 100%;
+    font-size: 14px;
+    margin-top: 15px;
+    text-align: left;
+    line-height: 20px;
+    color: rgb(32, 36, 55);
+}
+
+.img-b {
+    width: 100%;
+    cursor: pointer;
+}
+
+.img-b li .liimg-b {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: no-repeat center/cover;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+.img-b.three li {
+    width: 33.3%;
+    height: 33.3%;
+}
+
+.img-b {
+    font-size: 0px;
+    margin-top: 10px;
+}
+
+.img-b li {
+    position: relative;
+    display: inline-block;
+    width: 33%;
+    height: 183px;
+    border-radius: 4px;
+}
+
+.img-b.one {}
+
+.img-b.one li {
+    width: 100%;
+    height: 300px;
+    background: rgb(215, 215, 215) no-repeat center/cover;
+}
+
+.img-b.two li,
+.img-b.four li {
+    width: 90%;
+    width: calc((100% - (6px*2))/2);
+    height: 277px;
+    background: rgb(215, 215, 215) no-repeat center/cover;
+}
+
+.img-b.two li:nth-child(2n),
+.img-b.four li:nth-child(2n) {
+    margin-left: 5px;
+}
+
+.img-b.four li:nth-child(n+2) {
+    margin-top: 5px;
+}
+
+.img-b.three li {
+    position: relative;
+    width: 90%;
+    overflow: hidden;
+    width: calc((100% - (6px*2))/3);
+    height: 183px;
+    background: rgb(215, 215, 215) no-repeat center/cover;
+}
+
+.img-b.three .more {
+    font-size: 30px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    background: rgba(36, 146, 252, 0.3);
+}
+
+.img-b.three li:nth-child(n+3) {
+    margin-top: 5px;
+}
+
+.img-b.three li:nth-child(3n+2) {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.likeshare {
+    margin-top: 20px;
+    font-size: 0;
+}
+
+.likeshare span {
+    line-height: 20px;
+    color: rgb(121, 126, 139);
+    font-size: 14px;
+}
+
+.likeshare .linkNum,
+.likeshare .sharesNum {
+    color: rgb(0, 0, 0);
+    margin: 0 3px;
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.likeshare .sharesNum {
+    margin-left: 7px;
+}
+
+.others-comment {
+    position: relative;
+}
+
+.others-comment:after {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-top: none;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 5px solid rgb(235, 236, 241);
+    position: absolute;
+    top: -5px;
+    left: 28px;
+}
+
+.others-comment:before {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-top: none;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 4px solid #fff;
+    position: absolute;
+    top: -3px;
+    left: 29px;
+    z-index: 1;
+}
+
+
+.others-comment .head {
+    width: 24px;
+    height: 24px;
+}
+
+.others-comment .article-h {
+    height: 40px;
+}
+
+.others-comment .article-txt {
+    margin-top: 8px;
+}
+
+
+
+
+
+/*-------------------结束主体内容--------------------*/
+
+.right-b {
+    font-size: 14px;
+    width: 40%;
+    line-height: 20px;
+    display: inline-block;
+    padding-top: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+    /*background: blue;*/
+    margin-bottom: -100000px;
+    /*数值随便设置,越大越好,也就是(-padding-bottom值)*/
+    padding-bottom: 100000px;
+    /*数值随便设置,越大越好*/
+}
+
+.right-b h3 {
+    color: rgb(32, 36, 55);
+    font-size: 18px;
+    line-height: 18px;
+    padding: 0 20px;
+}
+
+.comment-b {
+    margin-top: 10px;
+    padding: 0 20px;
+    margin-bottom: 60px;
+    /*background:blue;*/
+}
+
+.comment-b li {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(235, 236, 241);
+}
+
+.comment-b li:last-child {
+    border-bottom: none;
+}
+
+.comment-b .article-txt {
+    margin-top: 8px;
+}
+
+
+
+
+
+/*评论部分*/
+
+.commit-b {
+    border-top: 1px solid rgb(235, 236, 241);
+    width: 100%;
+    height: 60px;
+    font-size: 0px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40%;
+}
+
+.com-input {
+    margin-top: 15px;
+    /*min-width: 100px;*/
+    /*width: 100%;*/
+    position: relative;
+    margin-left: 20px;
+    margin-right: 115px;
+}
+
+.com-input input {
+    width: 100%;
+    background: rgb(246, 247 ,251);
+    height: 30px;
+    cursor: pointer;
+    border-radius: 265px;
+    outline: none;
+    border: none;
+    padding-left: 15px;
+    box-sizing: border-box;
+    padding-right: 30px;
+    color:rgb(169,177,210);
+        /*border: 1px solid red;*/
+}
+
+.i-emoji {
+    top: 5px;
+    right: 5px;
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("http://a.xnimg.cn/wap/mobile/2017activity/real-estate/img/enterIconEmoticon1.png") no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.com-icon {
+    float: right;
+    width: 106px;
+    height: 30px;
+    margin-top: 15px;
+   /* margin-right: 5px;*/
+    overflow: hidden;
+    /*border:1px solid green;*/
+    vertical-align: middle;
+    text-align: justify;
+}
+
+.i-good,
+.i-share {
+
+    /*border:1px solid red;*/
+    display: inline-block;
+    /*width: 47px;*/
+    width: 23px;
+    margin: 0 11px;
+    margin-top: 5px;
+    height: 20px;
+    background: url("http://a.xnimg.cn/wap/mobile/2017activity/real-estate/img/enterIconEmoticon1.png") no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.i-good {
+    background-image: url("http://a.xnimg.cn/wap/mobile/2017activity/real-estate/img/enterIconThumbUp1.png")
+}
+
+.i-share {
+    background-image: url("http://a.xnimg.cn/wap/mobile/2017activity/real-estate/img/navShare1.png")
+}
+
+
+
+
+/*结束评论部分*/
+
+
+/*弹框部分*/
+
+.popup {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 100;
+    /*display: none;*/
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -ms-align-items: center;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: center;
+}
+
+.leftR {
+    cursor: pointer;
+    position: absolute;
+    left: 20px;
+    top: 30px;
+    width: 24px;
+    height: 24px;
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/real-estate/img/navArrowBack1-2x.png) no-repeat center/contain;
+}
+
+.leftArrow {
+    cursor: pointer;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    width: 40px;
+    height: 40px;
+    z-index: 2;
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/real-estate/img/feedWebL1-2x.png) no-repeat center/contain;
+}
+
+
+
+.rightArrow {
+    z-index: 2;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    width: 40px;
+    height: 40px;
+    background: url(http://a.xnimg.cn/wap/mobile/2017activity/real-estate/img/feedWebR1-2x.png) no-repeat center/contain;
+}
+
+
+.imgList {
+    /*防止与左右箭头重合*/
+    margin:0 70px;
+    width: 930px;
+    /*width: 700px;*/
+    height: 483px;
+}
+
+.imgList .img-ul {
+    width: 100%;
+    height: 100%;
+    /*border:1px solid green;*/
+    font-size: 0;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.imgList .img-ul,
+.imgList li {
+    box-sizing: border-box;
+}
+
+.transitionP {
+    -webkit-transition: transform 0.3s, opacity 0.3s;
+    -o-transition: transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+}
+.transitionNavP {
+    -webkit-transition: transform 0.3s;
+    -o-transition: transform 0.3s;
+    transition: transform 0.3s;
+}
+
+.imgList li {
+    font-size: 0;
+    vertical-align: middle;
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;    
+    /*border:1px solid blue;*/
+    position: absolute;
+}
+
+.imgList li.leftLi {
+    opacity: 0.1;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    -ms-transform: translate3d(-100%, 0, 0);
+    -o-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+.imgList li.rightLi {
+    opacity: 0.1;
+    -webkit-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate3d(100%, 0, 0);
+    -o-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+}
+li.middleLi {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+.imgList li.mainImg {
+    /* opacity: 1;
+   -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);*/
+}
+
+.imgList .scanImg {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 1;
+}
+
+.navList {
+    max-width: 930px;
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    height: 100px;
+    text-align: center;
+    /*border:1px solid green;*/
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    top: calc((50% + (483px/2) + 30px));
+    font-size: 0;
+    /*overflow: auto;*/
+}
+
+.nav-u {
+    /*width: 930px;*/
+    display: inline-block;
+    /*height: 100%;*/
+    text-align: center;
+    /*border:1px solid red;*/
+}
+
+.nav-u li {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 6px;
+    box-sizing: border-box;
+    background: rgb(215, 215, 215) no-repeat center/cover;
+    background-clip: content-box;
+    border: 1px solid transparent;
+     -webkit-transition: transform 0.3s;
+    -o-transition: transform 0.3s;
+    transition: transform 0.3s;
+}
+
+.nav-u .currentNav {
+    /*border: 10px solid red;*/
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+
+
+}
+
+.iconList {
+    width: 132px;
+    position: absolute;
+    left: 50%;
+    height: 24px;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    top: calc((50% + (450px/2) + 166px));
+    font-size: 0;
+}
+
+.loading-b {
+    position: absolute;
+}
+
+.iconList .emoji,
+.iconList .good,
+.iconList .share {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: no-repeat center/contain;
+}
+
+.iconList .good {
+    margin: 0 24px;
+    background-image: url(http://a.xnimg.cn/wap/mobile/2017activity/real-estate/img/enterIconThumbUp-2x.png);
+}
+
+.iconList .emoji {
+    background-image: url(http://a.xnimg.cn/wap/mobile/2017activity/real-estate/img/feedWebComment-2x.png);
+}
+
+.iconList .share {
+    background-image: url(http://a.xnimg.cn/wap/mobile/2017activity/real-estate/img/navShare2-2x.png);
+}
+
+.article-txt a:before {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: url("http://a.xnimg.cn/wap/mobile/2017activity/real-estate/img/hyperlink-2x.png") no-repeat center/contain
+}
+
+.article-txt a {
+    text-decoration: none;
+    color: #3b9df1;
+}
+
+
+
+/*结束弹框部分*/
+
+@media screen and (max-width: 600px) {
+    body {
+        /*background-color:red;*/
+    }
+    /* .article-b .my-comment .article-b .others-comment{
+             border-bottom: 1px solid rgb(235, 236, 241); 
+    }*/
+    .main {
+        margin-top: 0px;
+        border: none;
+        background: rgb(235, 236, 241);
+    }
+    .article-b {
+        width: 100%;
+        background: #fff;
+        /*border-bottom: 1px solid rgb(235, 236, 241); */
+        border-right: none;
+        /*恢复原来的bottom*/
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
+   .article-b .others-comment{
+        padding-bottom: 10px;
+    }
+    .right-b {
+        background: #fff;
+        width: 100%;
+        margin-top: 8px;
+        /*恢复原来的bottom*/
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
+    .commit-b {
+        width: 100%;
+        background: #fff;
+    }
+  /*  .com-input {
+        width: 350px;
+    }*/
+  /*  .com-icon {
+        position: absolute;
+      right: 0px;
+          width: 90px;
+    }*/
+}
+
+.isHiden {
+    display: none;
+}

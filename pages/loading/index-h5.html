@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>h5-demo</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="x5-orientation" content="portrait">
+    <script>
+        window.onresize = r;
+
+        function r(resizeNum) {
+            //核心适配代码
+            var winW = window.innerWidth;
+            document.getElementsByTagName("html")[0].style.fontSize = winW * 0.15625 + "px";
+            //核心适配代码
+            if (winW > window.screen.width && resizeNum <= 10) {
+                setTimeout(function() {
+                    r(++resizeNum)
+                }, 100);
+            } else {
+                document.getElementsByTagName("body")[0].style.opacity = 1;
+            }
+        }
+        setTimeout(function() {
+            r(0)
+        }, 100);
+    </script>
+    <link rel="stylesheet" href="http://s.xnimg.cn/a91023/wap/mobile/2017activity/dati/css/reset.css">
+    <link rel="stylesheet" href="http://s.xnimg.cn/a91769/wap/mobile/2017activity/real-estate/css/h5-zl.css">
+</head>
+
+<body>
+    <nav class="nav-top">
+        <div class="nav-l">
+            <h5>Eagle</h5>
+            <p>Find it free on the App Store</p>
+        </div>
+        <div class="nav-r">
+            <button class="load-btn download">GET</button>
+        </div>
+    </nav>
+    <section class="sec-box">
+        <div class="my-box">
+            <div class="head-img"></div>
+            <div class="desc">
+                <strong>Judith Watson</strong>
+                <p>Inman Coast to Coast / personnel</p>
+                <span>7:38 AM</span>
+            </div>
+            <div class="more download"></div>
+        </div>
+        <article class="text-comment">
+            <!-- The real estate marketplace is changing, and quickly. What were once outstanding ideas may have outgrown their usefulness. But how do you know? -->
+            The real estate marketplace <a href="#">https://dribbble.com/shots/3980988-star-program</a>
+        </article>
+        <article class="my-img-com img-comment">
+
+        </article>
+        <div class="other-article">
+            <div class="my-box">
+                <div class="head-img"></div>
+                <div class="desc">
+                    <strong>Judith Watson</strong>
+                    <p>Inman Coast to Coast / personnel</p>
+                </div>
+            </div>
+            <article class="text-comment">
+                The real estate marketplace is changing, and quickly. What were once outstanding ideas may have outgrown their usefulness. But how do you know?
+            </article>
+            <article class="other-img-com img-comment">
+
+            </article>
+        </div>
+        <div class="like-share">
+            <p><span class="like-num">19</span>Likes</p>
+            <p><span class="like-share">220</span>Shares</p>
+        </div>
+    </section>
+    <div class="comment-list">
+        <p class="no-comment">Be the first person to comment this.</p>
+        <p class="list-num">All 2 comments</p>
+        <ul class="comments-ul">
+            <li class="com-item">
+                <div class="my-box">
+                    <div class="head-img"></div>
+                    <div class="desc">
+                        <strong>Judith Watson</strong>
+                        <p>Inman Coast to Coast / personnel</p>
+                        <span>7:38 AM</span>
+                    </div>
+                </div>
+                <div class="com-text">
+                    Have you ever had a client ask you to discount your commission?
+                </div>
+            </li>
+            <li class="com-item">
+                <div class="my-box">
+                    <div class="head-img"></div>
+                    <div class="desc">
+                        <strong>Judith Watson</strong>
+                        <p>Inman Coast to Coast / personnel</p>
+                        <span>7:38 AM</span>
+                    </div>
+                </div>
+                <div class="com-text">
+                    reply to <a href="#" class="download">Alice Murray</a>: Have you ever had a client ask you to discount your commission?
+                </div>
+            </li>
+        </ul>
+    </div>
+    <footer class="footer">
+        <div class="com-input">
+            <input type="text" value="Write a comment:" disabled class="download">
+            <span class="i-emoji download"></span>
+        </div>
+        <div class="com-icon">
+            <span class="i-good download"></span>
+            <span class="i-share download"></span>
+        </div>
+    </footer>
+
+    <div class="mask-box">
+
+        <span class="img-nums">1/9</span>
+        <div class="show-img">
+            <ul class="slider-box">
+
+            </ul>
+        </div>
+        <div class="img-nav-box">
+
+        </div>
+
+        <footer class="footer">
+            <div class="com-input">
+                <input type="text" value="Write a comment:" disabled class=" download">
+                <span class="i-emoji  download"></span>
+            </div>
+            <div class="com-icon">
+                <span class="i-good download"></span>
+                <span class="i-share download"></span>
+            </div>
+        </footer>
+
+    </div>
+</body>
+<script src="http://s.xnimg.cn/a91738/wap/mobile/2017activity/real-estate/js/scrollreveal.min.js"></script>
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
+        window.sr = ScrollReveal();
+        sr.reveal('.sec-box');
+        sr.reveal('.comment-list');
+    })
+</script>
+<script src="http://s.xnimg.cn/a91738/wap/mobile/2017activity/real-estate/js/bscroll.min.js"></script>
+<script src="http://s.xnimg.cn/a91739/wap/mobile/2017activity/real-estate/js/util.js"></script>
+<script src="http://s.xnimg.cn/a91765/wap/mobile/2017activity/real-estate/js/forshow.js"></script>
+<script src="http://s.xnimg.cn/a91765/wap/mobile/2017activity/real-estate/js/loadimg.js"></script>
+<script src="http://s.xnimg.cn/a91769/wap/mobile/2017activity/real-estate/js/h5-zl.js"></script>
+
+</html>
