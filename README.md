@@ -73,3 +73,8 @@
     [个人博客](http://www.muyake.site/blog/)   
 ## 开源代码
     [物理管理系统](http://wl.woshuone.com/login)
+    [超级玛丽](https://github.com/muyake/mario)
+    [flappybird](https://github.com/muyake/flappybird)
+    [hexo博客系统](https://github.com/muyake/blogSystem)
+    [物流管理系统](https://github.com/muyake/mywebsite/tree/master/simple2/server/myblog)
+    [前端单元测试探究](https://github.com/muyake/testdemo)
