@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>copy example</title>
+</head>
+<body>
+  <div>div3</div>
+<iframe name="uploadframe" src="http://www.renren.com/ajaxProxy.html" style="display: none;"></iframe>
+<form id="zipForm" action="http://upload.renren.com/upload.fcgi" method="post" enctype="multipart/form-data" target="uploadframe">
+    <input type="file" name="file" class="upload-img"/>
+    <input type="hidden" name="pagetype" value="clientDecal">
+    <input type="hidden" name="tick" value="ugc.renren.com_bd76abd76ce5df8b67b2">
+    <input type="hidden" name="hostid" value="172860266">
+    <input type="hidden" name="uploadid" value="1411281455">
+    <input type="hidden" name="callback"  value="parent.uploadCallback">
+</form>
+<img src="" id="img1" alt="">
+
+<script type="text/javascript">
+   document.domain = 'renren.com';
+   function uploadCallback(e) {
+      document.querySelector("#img1").src='http://fmn.rrimg.com/'+e.files[0].url;        
+        console.log(e);
+    }
+    document.querySelector('input[type="file"]').addEventListener('change', function(){
+         document.querySelector('#zipForm').submit();
+    })
+
+</script>
+
+  
+</body>
+</html>

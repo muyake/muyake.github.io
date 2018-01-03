@@ -1,0 +1,82 @@
+	
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>copy example</title>
+</head>
+<body>
+  <div>div3</div>
+<!-- <iframe name="uploadframe" src="http://www.renren.com/ajaxProxy.html" style="display: none;"></iframe>
+<form id="zipForm" action="http://upload.renren.com/upload.fcgi" method="post" enctype="multipart/form-data" target="uploadframe">
+    <input type="file" name="file" class="upload-img"/>
+    <input type="hidden" name="pagetype" value="clientDecal">
+    <input type="hidden" name="tick" value="ugc.renren.com_bd76abd76ce5df8b67b2">
+    <input type="hidden" name="hostid" value="172860266">
+    <input type="hidden" name="uploadid" value="1411281455">
+    <input type="hidden" name="callback"  value="parent.uploadCallback">
+</form>
+<img src="" id="img1" alt="">
+
+<script type="text/javascript">
+   document.domain = 'renren.com';
+   function uploadCallback(e) {
+      document.querySelector("#img1").src='http://fmn.rrimg.com/'+e.files[0].url;        
+        console.log(e);
+    }
+    document.querySelector('input[type="file"]').addEventListener('change', function(){
+         document.querySelector('#zipForm').submit();
+    })
+
+
+ -->
+ <script type="text/javascript">
+ function $(selector){
+ 	return document.querySelector(selector);
+ }
+ function ajaxFuncStatus(type, url, data, success) {
+	    var returnXHR = null;
+	    document.domain = 'renren.com';//因为document.domain与ajaxproxy.html一致
+	    var params = typeof data == 'string' ? data : Object.keys(data).map(
+	        function(k) { return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
+	    ).join('&');
+
+	    if (type === 'get') {
+	        url = url + '?' + params;
+	    }
+	    if (!$('.ajaxProxyIframe')) {
+
+	        var iframe = document.createElement('iframe');
+	        iframe.classList.add('ajaxProxyIframe');
+	        iframe.src = 'http://' + url.split('?')[0].split('/')[2] + '/ajaxproxy.html';
+	        iframe.style.cssText = 'width:0;height:0;display:none;';
+	        document.body.appendChild(iframe);
+	        iframe.addEventListener('load', getXhr.bind('', iframe));
+	    } else {
+	        getXhr($('.ajaxProxyIframe'));
+	    }
+
+	    function getXhr(iframe) {
+	    	//从ajaxproxy.html中获取xhr对象，让这个xhr对象发送请求，则解决跨域问题。
+	        var xhr = iframe.contentWindow.getTransport();
+	        xhr.open(type, url);
+	        xhr.onreadystatechange = function() {
+	            if (xhr.readyState > 3 && xhr.status >= 200 && xhr.status < 300) {
+	                success(xhr.responseText, xhr);
+	            }
+	        };
+	        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+	        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	        xhr.send(params);
+	        returnXHR = xhr;
+	        return returnXHR = xhr;
+	    }
+
+	    return returnXHR;
+	}
+  </script>
+</body>
+</html>
+
+
+	
