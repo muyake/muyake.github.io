@@ -7,9 +7,9 @@
 ## 成功目录
 ### 1.canvas
 + 动画
-    + [晚安宝宝](https://muyake.github.io/canvas/animation/baobao/index.html)(手机版)
-    + [表白星球](https://muyake.github.io/canvas/animation/biaobai/1.html)(手机版)
-    + [晚安星球](https://muyake.github.io/canvas/animation/nightstar/html/index.html)(手机版)
+    <!-- + [晚安宝宝](https://muyake.github.io/canvas/animation/baobao/index.html)(手机版) -->
+    <!-- + [表白星球](https://muyake.github.io/canvas/animation/biaobai/1.html)(手机版) -->
+    <!-- + [晚安星球](https://muyake.github.io/canvas/animation/nightstar/html/index.html)(手机版) -->
     + [银河系](https://muyake.github.io/canvas/animation/moonandsun/f.html)(电脑版，参考)
     + [动画曲线图](https://muyake.github.io/canvas/animation/quxiantu/example.html)(电脑版)
     + [抽奖转盘](https://muyake.github.io/canvas/animation/zhuanpan/lottery.html)(电脑版)
@@ -47,8 +47,8 @@
 ### 3.svg特效
 + [svg动态字体](https://muyake.github.io/svg/font/2.html)（手机版，自适应文字大小）
 ### 4.活动（手机）
-+ [618银河聚会](https://muyake.github.io/pages/618/main.html)（[3d小盒子](https://muyake.github.io/pages/618/box.html)-  [获奖记录](https://muyake.github.io/pages/618/Record.html)）
-+ [冰龙特效](https://muyake.github.io/pages/IceDragon/IceDragon.html)（冰龙是gif动画）
+<!-- + [618银河聚会](https://muyake.github.io/pages/618/main.html)（[3d小盒子](https://muyake.github.io/pages/618/box.html)-  [获奖记录](https://muyake.github.io/pages/618/Record.html)） -->
+<!-- + [冰龙特效](https://muyake.github.io/pages/IceDragon/IceDragon.html)（冰龙是gif动画） -->
 + [抽奖大转盘](https://muyake.github.io/pages/Luckdraw/index.html)
 ### 5.小效果
 + [武侠小说](https://muyake.github.io/widget/xuanzhuanwuxia2.html)（css3 3d旋转和js控制）
