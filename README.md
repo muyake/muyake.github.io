@@ -33,8 +33,8 @@
 + [吃豆人](https://muyake.github.io/widget/chidouren.html)
 + [立方体](https://muyake.github.io/widget/curb/a.html)
 + [水浪](https://muyake.github.io/widget/wave.html)
-+ [人人登录动画](https://muyake.github.io/css/demo01/a.html)
-+ [冰龙帧动画](https://muyake.github.io/css/iceDragon/a.html)（冰龙是雪碧图）
+<!-- + [人人登录动画](https://muyake.github.io/css/demo01/a.html) -->
+<!-- + [冰龙帧动画](https://muyake.github.io/css/iceDragon/a.html)（冰龙是雪碧图） -->
 + [文字走光效果](https://muyake.github.io/css/iphonestart/index.html)
 + [图片翻折效果](https://muyake.github.io/css/fanzhuan/a.html)
 + [圆形进度条css](https://muyake.github.io/css/circle/css3.html)
@@ -43,7 +43,7 @@
 + [九宫格自适应css纯](https://muyake.github.io/css/jiugongge/test2.html)(padding-top相对应父元素宽度)
 + [手机端显示小于12px的文字](https://muyake.github.io/css/smallicon/test.html)（改变窗口大小，自适应）
 + [锤子科技鼠标3d效果展示](https://muyake.github.io/css/csssimple/html5.html)
-+ [人人直播3d旋转效果展示](https://muyake.github.io/css/csssimple/html6.html)
+<!-- + [人人直播3d旋转效果展示](https://muyake.github.io/css/csssimple/html6.html) -->
 ### 3.svg特效
 + [svg动态字体](https://muyake.github.io/svg/font/2.html)（手机版，自适应文字大小）
 ### 4.活动（手机）
@@ -54,7 +54,7 @@
 + [武侠小说](https://muyake.github.io/widget/xuanzhuanwuxia2.html)（css3 3d旋转和js控制）
 + [言情小说](https://muyake.github.io/widget/环形轮播/2.html)（[jquery插件版](https://muyake.github.io/widget/环形轮播/jquey版/carousel_demo.html)）
 +  [导航栏](https://muyake.github.io/widget/nav.html)
-+ [人人翻转](https://muyake.github.io/widget/renrenfanzhuan/fanzhuan.html)
+<!-- + [人人翻转](https://muyake.github.io/widget/renrenfanzhuan/fanzhuan.html) -->
 + [价格输入或长按增长](https://muyake.github.io/js/Thanksgiving/index.html)（手机版）
 ## 知识点目录
 + css
