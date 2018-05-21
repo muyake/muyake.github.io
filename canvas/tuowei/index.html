@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="cosmos_canvas.js" type="text/javascript" charset="utf-8"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="starts">该浏览器不支持canvas</canvas>
+    <script>
+        //canvas的id名，星星颜色(hsla的hue色调)，星星数量，星星半径比，星星移动范围(值越大范围越小)，星星移动速度(值越大速度越慢),星星拖尾效果(0~1值越小拖尾越明显)  
+        canvas("starts", 230, 1000, 60, 2, 50000, 0.5);
+    </script>
+</body>
+
+</html>
